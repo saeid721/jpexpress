@@ -51,10 +51,13 @@ if ('IntersectionObserver' in window && !reduced) {
 /* ---------- Navbar state + floating side (single rAF scroll handler) ---------- */
 const navbar = document.querySelector('.jp-navbar');
 const fabSide = document.getElementById('fabSide');
+const topBar = document.getElementById('topBar');
 let ticking = false;
+
 function onScroll() {
   const y = window.scrollY;
   navbar.classList.toggle('is-scrolled', y > 12);
+  topBar.classList.toggle('tb-hide', y > 60);
   fabSide.classList.toggle('show', y > 560);
   ticking = false;
 }
