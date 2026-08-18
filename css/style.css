@@ -16,6 +16,9 @@
   --section-pad:clamp(4.25rem,8vw,6.75rem);
   --reveal-y:28px;
 }
+html,body{
+  overflow-x:hidden;
+}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{font-family:var(--font-body);color:var(--ink);background:var(--surface);line-height:1.65;font-size:1rem;-webkit-font-smoothing:antialiased}
 h1,h2,h3,h4,h5,.font-display{font-family:var(--font-display);letter-spacing:-.02em}
@@ -636,10 +639,12 @@ header{position:sticky;top:0;left:0;width:100%;z-index:1050}
     .contact-form-wrap{padding:1.1rem;border-radius:14px}
   .contact-form-wrap h3{font-size:.92rem;margin-bottom:.9rem!important}
 
-  #contactForm .row.g-3{
+    #contactForm .row.g-3{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:.6rem;
+    margin-left:0;
+    margin-right:0;
   }
   #contactForm .row.g-3 > div{width:auto;max-width:none;flex:none;padding:0}
   #contactForm .row.g-3 > .col-12{grid-column:1/-1}
