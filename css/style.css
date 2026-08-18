@@ -770,3 +770,23 @@ header{position:sticky;top:0;left:0;width:100%;z-index:1050}
 }
 
 
+/* ============ FINAL CTA MOBILE COMPACT ============ */
+@media (max-width:767px){
+  .final-cta{padding:2.4rem 0}
+  .final-cta [style*="letter-spacing:.2em"]{font-size:.62rem!important;margin-bottom:.6rem!important}
+  .final-cta h2{font-size:1.55rem;line-height:1.22;margin-bottom:.5rem}
+  .final-cta .sec-lead{font-size:.82rem;line-height:1.55;margin-bottom:0!important}
+  .final-cta .d-flex.flex-wrap.justify-content-center.gap-3{
+    flex-direction:column;
+    align-items:stretch;
+    gap:.6rem!important;
+    margin-top:1.2rem!important;
+  }
+  .final-cta .btn-jp{width:100%;justify-content:center;padding:.7rem 1rem;font-size:.85rem}
+}
+@media (max-width:480px){
+  .final-cta{padding:2rem 0}
+  .final-cta h2{font-size:1.32rem}
+  .final-cta .sec-lead{font-size:.78rem}
+  .final-cta .btn-jp{padding:.62rem .9rem;font-size:.8rem}
+}
