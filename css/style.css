@@ -685,10 +685,12 @@ header{position:relative;width:100%}
 .contact-card .c-ico{width:38px;height:38px;flex:0 0 auto;border-radius:11px;background:var(--navy);color:#FF7B81;display:grid;place-items:center;font-size:.98rem}
 .contact-card h3{font-size:.92rem;font-weight:700;margin-bottom:.2rem}
 .contact-card p{font-size:.83rem;color:var(--muted);margin:0}
-.map-placeholder{border-radius:var(--radius);overflow:hidden;position:relative;height:220px;border:1px solid var(--border)}
-.map-placeholder img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(.9)}
-.map-placeholder .pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);color:var(--red);font-size:2rem;filter:drop-shadow(0 6px 8px rgba(0,0,0,.3))}
-.map-placeholder .pin-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,10px);background:#fff;border-radius:8px;padding:.3rem .8rem;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;box-shadow:var(--shadow-sm);white-space:nowrap}
+.map-placeholder{border-radius:var(--radius);overflow:hidden;position:relative;height:260px;border:1px solid var(--border);box-shadow:var(--shadow-sm);background:var(--bg)}
+.map-placeholder iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;filter:grayscale(.15) contrast(1.02)}
+.map-placeholder .pin-lbl{position:absolute;top:.9rem;left:.9rem;display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.96);backdrop-filter:blur(4px);border-radius:100px;padding:.45rem .9rem;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.06em;color:var(--navy);font-weight:600;box-shadow:var(--shadow-sm);pointer-events:none}
+.map-placeholder .pin-lbl .bi{color:var(--red);font-size:.8rem}
+.map-open-btn{position:absolute;top:.9rem;right:.9rem;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:1rem;box-shadow:var(--shadow-sm);transition:transform .3s,background .3s}
+.map-open-btn:hover{background:var(--red);transform:translateY(-2px) scale(1.05);color:#fff}
 .contact-form-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:clamp(1.6rem,3vw,2.6rem);box-shadow:var(--shadow-md)}
 .contact-btn-row{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
 .contact-btn-row .btn-jp{flex:1 1 0;justify-content:center;white-space:nowrap}
@@ -713,9 +715,10 @@ header{position:relative;width:100%}
   .contact-card h3{grid-column:2;grid-row:1;margin:0;font-size:.8rem;line-height:1.25}
   .contact-card p{grid-column:1/-1;grid-row:2;margin:0;font-size:.72rem;line-height:1.4;word-break:break-word;overflow-wrap:anywhere}
 
-  .map-placeholder{height:140px;border-radius:12px}
-  .map-placeholder .pin{font-size:1.4rem}
-  .map-placeholder .pin-lbl{font-size:.56rem;padding:.22rem .6rem}
+    .map-placeholder{height:200px;border-radius:12px}
+  .map-placeholder .pin-lbl{font-size:.6rem;padding:.35rem .7rem;top:.6rem;left:.6rem;gap:.3rem}
+  .map-placeholder .pin-lbl .bi{font-size:.7rem}
+  .map-open-btn{width:30px;height:30px;font-size:.85rem;top:.6rem;right:.6rem}
     .contact-btn-row{gap:.4rem!important;margin-top:.7rem!important}
   .contact-btn-row .btn-jp-sm{padding:.5rem .6rem;font-size:.7rem}
 
@@ -743,7 +746,7 @@ header{position:relative;width:100%}
   .contact-card .c-ico{width:26px;height:26px;font-size:.72rem}
   .contact-card h3{font-size:.76rem}
   .contact-card p{font-size:.68rem}
-  .map-placeholder{height:120px}
+    .map-placeholder{height:180px}
     .contact-form-wrap{padding:.9rem;border-radius:13px}
   .contact-form-wrap h3{font-size:.86rem;margin-bottom:.75rem!important}
   #contactForm .row.g-3{gap:.5rem}
