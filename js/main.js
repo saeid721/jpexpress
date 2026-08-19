@@ -8,6 +8,17 @@ const finePointer = window.matchMedia('(pointer: fine)').matches;
 window.addEventListener('load', () => document.body.classList.add('loaded'));
 setTimeout(() => document.body.classList.add('loaded'), 900); /* fallback */
 
+/* ---------- Fixed header height sync (prevents content jump) ---------- */
+const siteHeader = document.getElementById('siteHeader');
+function setHeaderHeight() {
+  document.documentElement.style.setProperty('--jp-header-h', siteHeader.offsetHeight + 'px');
+}
+setHeaderHeight();
+window.addEventListener('resize', setHeaderHeight);
+document.getElementById('topBar').addEventListener('transitionend', e => {
+  if (e.propertyName === 'max-height') setHeaderHeight();
+});
+
 /* ---------- Scroll reveal (IntersectionObserver) ---------- */
 const revealEls = document.querySelectorAll('[data-reveal]');
 if (reduced || !('IntersectionObserver' in window)) {
