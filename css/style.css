@@ -17,6 +17,8 @@
   --reveal-y:28px;
 }
 html,body{
+  margin:0;
+  padding:0;
   overflow-x:hidden;
 }
 html{scroll-behavior:smooth;scroll-padding-top:90px}
@@ -67,7 +69,7 @@ img{max-width:100%}
 @media (max-width:991px){:root{--reveal-y:16px}.js [data-reveal]{transition-duration:.5s}.js [data-reveal="left"],.js [data-reveal="right"]{transform:translateY(16px)}}
 
 /* ============ TOP UTILITY BAR ============ */
-.topbar{background:var(--navy);color:#B9C4D6;font-size:.8rem;border-bottom:1px solid var(--border-dark);max-height:44px;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1),opacity .35s ease,padding .45s cubic-bezier(.4,0,.2,1),border-color .45s ease;will-change:max-height,opacity}
+.topbar{background:var(--navy);color:#B9C4D6;font-size:.8rem;border-bottom:1px solid var(--border-dark);max-height:44px;overflow:hidden;margin:0;transition:max-height .45s cubic-bezier(.4,0,.2,1),opacity .35s ease,padding .45s cubic-bezier(.4,0,.2,1),border-color .45s ease;will-change:max-height,opacity}
 .topbar.tb-hide{max-height:0;opacity:0;padding-top:0!important;padding-bottom:0!important;border-bottom-color:transparent}
 .topbar a{color:#B9C4D6;transition:color .25s}
 .topbar a:hover{color:#fff}
@@ -78,7 +80,7 @@ img{max-width:100%}
 .topbar .social a:hover{background:var(--red);color:#fff}
 
 /* ============ NAVBAR ============ */
-.site-header{position:fixed;top:0;left:0;width:100%;z-index:1055;will-change:transform}
+.site-header{position:fixed;top:0;left:0;right:0;margin:0;width:100%;z-index:1055;will-change:transform;transform:translateZ(0)}
 header{position:relative;width:100%}
 .jp-navbar{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);position:relative;transition:box-shadow .35s,background .35s;border-bottom:1px solid var(--border)}
 .jp-navbar .navbar-inner{padding-block:.5rem;transition:padding .35s ease}
