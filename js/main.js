@@ -106,6 +106,15 @@ if (mapPanel && 'IntersectionObserver' in window && !reduced) {
   mio.observe(mapPanel);
 } else if (mapPanel) mapPanel.classList.add('revealed');
 
+/* ---------- Duo network line reveal ---------- */
+const duoNetwork = document.getElementById('duoNetwork');
+if (duoNetwork && 'IntersectionObserver' in window && !reduced) {
+  const dio = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { duoNetwork.classList.add('in-view'); dio.disconnect(); }
+  }), { threshold: 0.4 });
+  dio.observe(duoNetwork);
+} else if (duoNetwork) duoNetwork.classList.add('in-view');
+
 /* ---------- How-it-works timeline progress ---------- */
 const steps = Array.from(document.querySelectorAll('.step'));
 const fill = document.getElementById('stepsFill');

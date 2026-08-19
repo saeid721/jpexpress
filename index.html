@@ -238,7 +238,7 @@
 <section class="section bg-soft" aria-labelledby="whyTitle">
   <div class="container">
     <div class="row align-items-end mb-5 g-3">
-      <div class="col-lg-7" data-reveal><span class="eyebrow">Why JP Express</span><h2 class="sec-title mb-0" id="whyTitle">Why Businesses Trust JP Express</h2></div>
+      <div class="col-lg-7" data-reveal><span class="eyebrow">Why JP Express</span><h2 class="sec-title mb-0" id="whyTitle">Why Businesses Trust <span class="hl-red">JP Express</span></h2></div>
       <div class="col-lg-5" data-reveal style="--d:120ms"><p class="sec-lead mb-0">Reliable logistics solutions designed to move your shipments safely, efficiently and on time.</p></div>
     </div>
     <div class="row g-4">
@@ -257,7 +257,7 @@
   <div class="container">
     <div class="text-center mx-auto mb-5" data-reveal>
       <span class="eyebrow justify-content-center">Our Services</span>
-      <h2 class="sec-title" id="svcTitle">International & Domestic Logistics Solutions</h2>
+      <h2 class="sec-title" id="svcTitle">International & Domestic <span class="hl-red">Logistics Solutions</span></h2>
       <p class="sec-lead mx-auto">From a single document to full-scale commercial freight, JP Express provides end-to-end logistics support.</p>
     </div>
     <div class="row g-3 g-lg-4">
@@ -276,45 +276,101 @@
 </section>
 
 <!-- ============ INTERNATIONAL vs DOMESTIC ============ -->
-<section class="section bg-soft" aria-labelledby="duoTitle">
-  <div class="container">
-    <div class="mb-5" data-reveal><span class="eyebrow">Choose Your Lane</span><h2 class="sec-title mb-0" id="duoTitle">Courier Built for Every Distance</h2></div>
-    <div class="row g-4">
-      <div class="col-lg-6" data-reveal="left">
-        <article class="duo-card">
-          <div class="duo-img"><img src="https://picsum.photos/seed/international-shipping/860/460" alt="International shipping containers and cargo aircraft" loading="lazy"><span class="duo-flag">GLOBAL</span></div>
-          <div class="duo-body">
-            <h3>International Courier</h3>
-            <ul class="duo-list">
-              <li><i class="bi bi-check-circle-fill"></i>220+ countries</li>
-              <li><i class="bi bi-check-circle-fill"></i>Express documents</li>
-              <li><i class="bi bi-check-circle-fill"></i>Parcel shipping</li>
-              <li><i class="bi bi-check-circle-fill"></i>Commercial samples</li>
-              <li><i class="bi bi-check-circle-fill"></i>Export shipments</li>
-              <li><i class="bi bi-check-circle-fill"></i>Door-to-door delivery</li>
-              <li><i class="bi bi-check-circle-fill"></i>Tracking</li>
-            </ul>
+<section class="section duo-section bg-soft" aria-labelledby="duoTitle">
+  <div class="duo-bgfx" aria-hidden="true"></div>
+  <div class="container position-relative">
+
+    <div class="duo-head">
+      <span class="eyebrow" data-reveal>Choose Your Delivery</span>
+      <h2 class="sec-title" id="duoTitle" data-reveal style="--d:80ms">Courier Solutions for <span class="hl-red">Every Destination</span></h2>
+      <p class="sec-lead" data-reveal style="--d:160ms">From international documents and parcels to nationwide deliveries, JP Express gives you reliable courier solutions wherever you need to send.</p>
+    </div>
+
+    <div class="duo-network" id="duoNetwork" data-reveal style="--d:240ms">
+      <svg class="duo-network-svg" viewBox="0 0 1000 40" preserveAspectRatio="none" aria-hidden="true">
+        <line class="net-line" x1="20" y1="20" x2="980" y2="20"/>
+        <circle class="net-dot dot-intl" cx="120" cy="20" r="5"/>
+        <circle class="net-dot dot-hq" cx="500" cy="20" r="7"/>
+        <circle class="net-dot dot-dom" cx="880" cy="20" r="5"/>
+      </svg>
+      <div class="duo-network-labels">
+        <span><i class="bi bi-airplane"></i> Worldwide</span>
+        <span class="hq-lbl">JP EXPRESS · DHAKA HQ</span>
+        <span><i class="bi bi-truck"></i> Nationwide</span>
+      </div>
+    </div>
+
+    <div class="duo-grid">
+
+      <article class="duo-panel duo-panel-intl" data-reveal="left">
+        <div class="duo-media">
+          <img src="assets/international-01.jpg" alt="Cargo aircraft and shipping containers at an international freight terminal" loading="lazy">
+          <!-- <div class="duo-media-veil"></div> -->
+          <svg class="duo-route-svg" viewBox="0 0 420 300" preserveAspectRatio="none" aria-hidden="true">
+            <path class="route-path" d="M50 250 Q 190 120 380 55"/>
+            <circle class="route-pin pin-origin" cx="50" cy="250" r="5"/>
+            <circle class="route-pin pin-dest" cx="380" cy="55" r="5"/>
+          </svg>
+          <span class="duo-badge">220+ COUNTRIES</span>
+          <div class="duo-media-info">
+            <span class="duo-tag tag-red">International</span>
+            <span class="duo-route-caption">Bangladesh <i class="bi bi-arrow-right"></i> World</span>
+          </div>
+        </div>
+        <div class="duo-body">
+          <h3>Ship Beyond Borders</h3>
+          <p>Reliable international courier solutions for documents, parcels, samples and commercial shipments from Bangladesh to destinations worldwide.</p>
+          <ul class="duo-feats">
+            <li data-reveal style="--d:0ms"><i class="bi bi-check-circle-fill"></i>220+ Countries</li>
+            <li data-reveal style="--d:40ms"><i class="bi bi-check-circle-fill"></i>Express Documents</li>
+            <li data-reveal style="--d:80ms"><i class="bi bi-check-circle-fill"></i>Parcel Shipping</li>
+            <li data-reveal style="--d:120ms"><i class="bi bi-check-circle-fill"></i>Commercial Samples</li>
+            <li data-reveal style="--d:160ms"><i class="bi bi-check-circle-fill"></i>Export Shipments</li>
+            <li data-reveal style="--d:200ms"><i class="bi bi-check-circle-fill"></i>Door-to-Door Delivery</li>
+            <li data-reveal style="--d:240ms"><i class="bi bi-check-circle-fill"></i>Shipment Tracking</li>
+          </ul>
+          <div class="duo-foot">
             <a href="#" class="btn-jp btn-jp-primary btn-jp-sm">Explore International Shipping <i class="bi bi-arrow-right"></i></a>
+            <span class="duo-foot-note">Worldwide delivery from Bangladesh</span>
           </div>
-        </article>
-      </div>
-      <div class="col-lg-6" data-reveal="right">
-        <article class="duo-card">
-          <div class="duo-img"><img src="https://picsum.photos/seed/domestic-courier-bd/860/460" alt="Delivery rider handling domestic parcels in Bangladesh" loading="lazy"><span class="duo-flag navy">NATIONWIDE</span></div>
-          <div class="duo-body">
-            <h3>Domestic Courier</h3>
-            <ul class="duo-list">
-              <li><i class="bi bi-check-circle-fill"></i>Nationwide delivery</li>
-              <li><i class="bi bi-check-circle-fill"></i>Business parcel delivery</li>
-              <li><i class="bi bi-check-circle-fill"></i>E-commerce delivery</li>
-              <li><i class="bi bi-check-circle-fill"></i>Documents</li>
-              <li><i class="bi bi-check-circle-fill"></i>Pickup service</li>
-              <li><i class="bi bi-check-circle-fill"></i>Tracking</li>
-            </ul>
+        </div>
+      </article>
+
+      <article class="duo-panel duo-panel-dom" data-reveal="right">
+        <div class="duo-media">
+          <img src="assets/domestic-02.jpg" alt="Courier delivery rider with parcels in a Bangladesh city street" loading="lazy">
+          <!-- <div class="duo-media-veil dark"></div> -->
+          <svg class="duo-route-svg" viewBox="0 0 420 300" preserveAspectRatio="none" aria-hidden="true">
+            <path class="route-path route-path-dom" d="M50 60 Q 140 140 130 200 T 370 250"/>
+            <circle class="route-pin pin-navy" cx="50" cy="60" r="5"/>
+            <circle class="route-pin pin-navy" cx="130" cy="200" r="4"/>
+            <circle class="route-pin pin-navy" cx="240" cy="230" r="4"/>
+            <circle class="route-pin pin-navy pin-dest" cx="370" cy="250" r="5"/>
+          </svg>
+          <span class="duo-badge badge-navy">NATIONWIDE</span>
+          <div class="duo-media-info">
+            <span class="duo-tag tag-navy">Domestic</span>
+            <span class="duo-route-caption">Dhaka <i class="bi bi-arrow-right"></i> Everywhere in BD</span>
+          </div>
+        </div>
+        <div class="duo-body">
+          <h3>Deliver Across Bangladesh</h3>
+          <p>Fast and dependable domestic courier services for individuals, e-commerce businesses and organizations across Bangladesh.</p>
+          <ul class="duo-feats">
+            <li data-reveal style="--d:0ms"><i class="bi bi-check-circle-fill"></i>Nationwide Delivery</li>
+            <li data-reveal style="--d:40ms"><i class="bi bi-check-circle-fill"></i>Business Parcel Delivery</li>
+            <li data-reveal style="--d:80ms"><i class="bi bi-check-circle-fill"></i>E-commerce Delivery</li>
+            <li data-reveal style="--d:120ms"><i class="bi bi-check-circle-fill"></i>Document Delivery</li>
+            <li data-reveal style="--d:160ms"><i class="bi bi-check-circle-fill"></i>Pickup Service</li>
+            <li data-reveal style="--d:200ms"><i class="bi bi-check-circle-fill"></i>Shipment Tracking</li>
+          </ul>
+          <div class="duo-foot">
             <a href="#" class="btn-jp btn-jp-outline-dark btn-jp-sm">Explore Domestic Courier <i class="bi bi-arrow-right"></i></a>
+            <span class="duo-foot-note">Reliable delivery across Bangladesh</span>
           </div>
-        </article>
-      </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -323,7 +379,7 @@
 <section class="section" id="industries" aria-labelledby="indTitle">
   <div class="container">
     <div class="row align-items-end g-3 mb-5">
-      <div class="col-lg-7" data-reveal><span class="eyebrow">Industries</span><h2 class="sec-title mb-0" id="indTitle">Logistics Solutions for Every Industry</h2></div>
+      <div class="col-lg-7" data-reveal><span class="eyebrow">Industries</span><h2 class="sec-title mb-0" id="indTitle">Logistics Solutions for <span class="hl-red">Every Industry</span></h2></div>
       <div class="col-lg-5" data-reveal style="--d:120ms"><p class="sec-lead mb-0">Built around the way your business ships.</p></div>
     </div>
     <div class="row g-3">
@@ -348,7 +404,7 @@
 <section class="section map-section on-dark" id="countries" aria-labelledby="mapTitle">
   <div class="container position-relative">
     <div class="row align-items-end g-3 mb-5">
-      <div class="col-lg-7" data-reveal><span class="eyebrow on-dark">Global Network</span><h2 class="sec-title mb-0" id="mapTitle">Delivering to 220+ Countries</h2></div>
+      <div class="col-lg-7" data-reveal><span class="eyebrow on-dark">Global Network</span><h2 class="sec-title mb-0" id="mapTitle">Delivering to <span class="hl-light">220+ Countries</span></h2></div>
       <div class="col-lg-5 text-lg-end" data-reveal style="--d:120ms"><a href="#" class="btn-jp btn-jp-light btn-jp-sm">View All Destinations <i class="bi bi-arrow-right"></i></a></div>
     </div>
             <div class="row g-4 g-lg-5 align-items-center map-row">
@@ -390,9 +446,9 @@
 <!-- ============ HOW IT WORKS ============ -->
 <section class="section" aria-labelledby="stepsTitle">
   <div class="container">
-    <div class="text-center mx-auto mb-2" style="max-width:640px" data-reveal>
+    <div class="text-center mx-auto mb-2" data-reveal>
       <span class="eyebrow justify-content-center">Process</span>
-      <h2 class="sec-title" id="stepsTitle">Ship Internationally in 4 Easy Steps</h2>
+      <h2 class="sec-title" id="stepsTitle">Ship Internationally in <span class="hl-red">4 Easy Steps</span></h2>
     </div>
     <div class="steps-wrap" id="stepsWrap">
       <div class="steps-line" aria-hidden="true"><span class="fill" id="stepsFill"></span></div>
@@ -418,7 +474,7 @@
       </div>
       <div class="col-lg-6" data-reveal>
         <span class="eyebrow">For Business</span>
-        <h2 class="sec-title" id="bizTitle">Simplify Logistics. Grow Your Business.</h2>
+        <h2 class="sec-title" id="bizTitle">Simplify Logistics. <span class="hl-red">Grow Your Business.</span></h2>
         <p class="sec-lead">Reliable shipping and logistics support for exporters, manufacturers, e-commerce brands, SMEs and corporate organizations.</p>
         <div class="biz-chips">
           <span class="biz-chip">Exporters</span><span class="biz-chip">Manufacturers</span><span class="biz-chip">Buying Houses</span><span class="biz-chip">E-commerce Brands</span><span class="biz-chip">SMEs</span><span class="biz-chip">Corporate Organizations</span>
@@ -443,7 +499,7 @@
   <div class="container">
     <div class="text-center mx-auto mb-5" style="max-width:680px" data-reveal>
       <span class="eyebrow justify-content-center">Testimonials</span>
-      <h2 class="sec-title" id="tstTitle">What Our Customers Say</h2>
+      <h2 class="sec-title" id="tstTitle">What Our <span class="hl-red">Customers Say</span></h2>
       <p class="sec-lead mx-auto">Trusted by businesses across Bangladesh and beyond.</p>
     </div>
     <div class="tst-marquee" data-reveal aria-label="Customer testimonials (auto-scrolling)">
@@ -490,7 +546,7 @@
   <div class="container">
     <div class="text-center mx-auto mb-5" style="max-width:700px" data-reveal>
       <span class="eyebrow justify-content-center">Global Partners</span>
-      <h2 class="sec-title" id="prtTitle">Trusted Logistics Network</h2>
+      <h2 class="sec-title" id="prtTitle">Trusted <span class="hl-red">Logistics Network</span></h2>
       <p class="sec-lead mx-auto">Working with global logistics, airline, freight and delivery partners to connect Bangladesh with the world.</p>
     </div>
   </div>
@@ -517,7 +573,7 @@
 <section class="section" id="resources" aria-labelledby="blogTitle">
   <div class="container">
     <div class="row align-items-end g-3 mb-5">
-      <div class="col-lg-7" data-reveal><span class="eyebrow">Knowledge Center</span><h2 class="sec-title mb-0" id="blogTitle">Export & Shipping Knowledge Center</h2></div>
+      <div class="col-lg-7" data-reveal><span class="eyebrow">Knowledge Center</span><h2 class="sec-title mb-0" id="blogTitle">Export & Shipping <span class="hl-red">Knowledge Center</span></h2></div>
       <div class="col-lg-5 text-lg-end" data-reveal style="--d:120ms"><a href="#" class="btn-jp btn-jp-outline-dark btn-jp-sm">View All Resources <i class="bi bi-arrow-right"></i></a></div>
     </div>
     <div class="row g-4">
@@ -572,9 +628,9 @@
 <!-- ============ FAQ ============ -->
 <section class="section bg-soft" aria-labelledby="faqTitle">
   <div class="container">
-    <div class="row g-5">
+        <div class="row g-5 align-items-start">
       <div class="col-lg-7">
-        <div data-reveal><span class="eyebrow">FAQ</span><h2 class="sec-title" id="faqTitle">Frequently Asked Questions</h2></div>
+        <div data-reveal><span class="eyebrow">FAQ</span><h2 class="sec-title" id="faqTitle">Frequently Asked <span class="hl-red">Questions</span></h2></div>
         <div class="accordion accordion-jp" id="faqAcc">
           <div class="accordion-item" data-reveal style="--d:0ms"><h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">How long does international shipping take?</button></h3><div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc"><div class="accordion-body">Transit time depends on the destination and service level. Express courier is typically the fastest option, while air and sea freight vary by route. You'll receive an estimated timeline when you request a quote.</div></div></div>
           <div class="accordion-item" data-reveal style="--d:60ms"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">How do I calculate shipping costs?</button></h3><div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAcc"><div class="accordion-body">Use the shipping calculator on this page for an instant indicative estimate, or contact our team for an exact quote based on weight, dimensions, destination and service type.</div></div></div>
@@ -588,15 +644,20 @@
           <div class="accordion-item" data-reveal style="--d:540ms"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q10">Can businesses get customized logistics solutions?</button></h3><div id="q10" class="accordion-collapse collapse" data-bs-parent="#faqAcc"><div class="accordion-body">Absolutely. We build tailored logistics plans with dedicated account support for exporters, manufacturers, e-commerce brands and corporate organizations.</div></div></div>
         </div>
       </div>
-      <div class="col-lg-5" data-reveal style="--d:150ms">
+            <div class="col-lg-5" data-reveal style="--d:150ms">
         <div class="help-card">
-          <i class="bi bi-headset fs-1" style="color:#FF7B81"></i>
+          <div class="help-ico"><i class="bi bi-headset"></i></div>
           <h3 class="mt-3">Still have questions?</h3>
           <p>Our logistics team is available 24/7 to help you choose the right shipping solution.</p>
           <div class="d-grid gap-2 position-relative">
             <a href="#" class="btn-jp btn-jp-primary"><i class="bi bi-whatsapp"></i> Chat on WhatsApp</a>
-            <a href="tel:+8801XXXXXXXXX" class="btn-jp btn-jp-outline"><i class="bi bi-telephone"></i> Call Support</a>
+            <a href="tel:+8801681637836" class="btn-jp btn-jp-outline"><i class="bi bi-telephone"></i> Call Support</a>
           </div>
+          <ul class="help-meta">
+            <li><i class="bi bi-clock-history"></i><div><strong>Avg. response</strong><span>Under 15 minutes</span></div></li>
+            <li><i class="bi bi-calendar-check"></i><div><strong>Support hours</strong><span>Sat–Thu, 9:00–19:00 · 24/7 online</span></div></li>
+            <li><i class="bi bi-envelope"></i><div><strong>Email us</strong><span>support@jpexpress.com</span></div></li>
+          </ul>
         </div>
       </div>
     </div>
@@ -606,7 +667,7 @@
 <!-- ============ CONTACT ============ -->
 <section class="section" id="contact" aria-labelledby="contactTitle">
   <div class="container">
-    <div class="mb-5" data-reveal><span class="eyebrow">Contact</span><h2 class="sec-title" id="contactTitle">Need Help with Your Shipment?</h2><p class="sec-lead">Our logistics team is ready to help you choose the right shipping solution.</p></div>
+    <div class="mb-5" data-reveal><span class="eyebrow">Contact</span><h2 class="sec-title" id="contactTitle">Need Help with <span class="hl-red">Your Shipment?</span></h2><p class="sec-lead">Our logistics team is ready to help you choose the right shipping solution.</p></div>
     
     <div class="row g-4">
       <div class="col-lg-5" data-reveal="left">
@@ -659,7 +720,7 @@
   </svg>
   <div class="container position-relative text-center">
     <span class="font-mono d-inline-block mb-3" style="color:#9FE2F2;letter-spacing:.2em;font-size:.72rem" data-reveal>DAC → THE WORLD</span>
-    <h2 id="ctaTitle" data-reveal style="--d:100ms">Ready to Ship Worldwide?</h2>
+    <h2 id="ctaTitle" data-reveal style="--d:100ms">Ready to Ship <span class="hl-light">Worldwide?</span></h2>
     <p class="sec-lead mx-auto on-dark" style="color:#B9C6DA!important" data-reveal>Start your international or domestic shipment with JP Express today. Get a fast quote, schedule a pickup and track your shipment with confidence.</p>
     <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
       <a href="#tools" class="btn-jp btn-jp-primary" data-reveal style="--d:200ms">Get a Free Quote <i class="bi bi-arrow-right"></i></a>
