@@ -202,9 +202,8 @@
       <div class="row align-items-center g-5">
         <div class="col-lg-6">
           <span class="hero-badge" data-reveal><span class="dot"></span> International & Domestic Courier — Bangladesh</span>
-          <h1 class="hero-title" id="heroTitle">
-            <span class="line"><span class="line-inner">Ship Worldwide</span></span>
-            <span class="line"><span class="line-inner">with <span class="hl">Confidence.<svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M3 11 Q 60 3 110 8 T 197 6"/></svg></span></span></span>
+          <h1 class="hero-title hero-title-type" id="heroTitle">
+            <span class="type-line"><span class="type-text" id="typeText"></span><span class="type-cursor" aria-hidden="true"></span></span>
           </h1>
           <p class="hero-lead" data-reveal style="--d:250ms"><strong class="text-white">International & Domestic Courier, Freight and Logistics Solutions from Bangladesh to the World.</strong> From documents and parcels to export-import shipments and freight, JP Express simplifies your logistics with reliable delivery, real-time tracking and dedicated support.</p>
           <div class="hero-ctas" data-reveal style="--d:380ms">
@@ -222,12 +221,14 @@
             <div class="hero-img-wrap">
               <img src="assets/hero-banner.jpg" width="920" alt="Cargo aircraft being loaded with international shipments at dusk" fetchpriority="high">
             </div>
-            <div class="float-card tracking" role="img" aria-label="Sample shipment card: Dhaka to New York, in transit">
-              <span class="mono">SHIPMENT #JPE123456789</span>
-              <div class="route-line">DAC <i class="bi bi-airplane-fill"></i> JFK</div>
-              <div class="track-progress"><span></span></div>
-              <div class="d-flex justify-content-between mt-2">
-                <span class="mono">IN TRANSIT</span><span class="mono" style="color:var(--green)">ETA 2 DAYS</span>
+            <div class="float-card tracking" id="heroShipCard" role="img" aria-label="Live sample shipment tracker">
+              <div class="ship-card-fade" id="shipCardFade">
+                <span class="mono ship-id" id="shipId">SHIPMENT #JPE123456789</span>
+                <div class="route-line"><span id="shipOrigin">DAC</span> <i class="bi bi-airplane-fill"></i> <span id="shipDest">JFK</span></div>
+                <div class="track-progress"><span id="shipProgress"></span></div>
+                <div class="d-flex justify-content-between mt-2">
+                  <span class="mono" id="shipStatus">IN TRANSIT</span><span class="mono" style="color:var(--green)" id="shipEta">ETA 2 DAYS</span>
+                </div>
               </div>
             </div>
             <div class="float-card delivered d-none d-md-block">
@@ -326,7 +327,7 @@
   </section>
 
 <!-- ============ QUICK ACTIONS ============ -->
-<section class="section pt-4" aria-label="Quick actions">
+<section class="section" aria-label="Quick actions">
   <div class="container">
     <div class="row g-3 g-lg-4">
       <div class="col-12 col-md-6 col-xl-3" data-reveal style="--d:0ms"><a href="#tools" class="qa-card"><span class="qa-ico"><i class="bi bi-geo-alt"></i></span><span><h3>Track Shipment</h3><p>Follow your parcel in real time, anywhere in the world.</p></span><i class="bi bi-arrow-right qa-arrow"></i></a></div>

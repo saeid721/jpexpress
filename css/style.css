@@ -122,6 +122,16 @@ header{position:relative;width:100%}
 .hero-title .hl svg{position:absolute;left:0;right:0;bottom:-.14em;width:100%;height:.22em}
 .hero-title .hl path{stroke:var(--cyan);stroke-width:3;fill:none;stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 1.2s ease .8s}
 .js .loaded .hero-title .hl path{stroke-dashoffset:0}
+
+/* ============ HERO TYPEWRITER TITLE ============ */
+.hero-title-type{min-height:1.2em;display:block}
+.type-line{display:inline}
+.type-text{color:#fff}
+.type-cursor{display:inline-block;width:3px;height:.85em;background:var(--cyan);margin-left:4px;vertical-align:-0.08em;animation:caretBlink .9s steps(1) infinite}
+@keyframes caretBlink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.type-cursor{animation:none;opacity:1}}
+@media (max-width:480px){.type-cursor{height:.8em}}
+
 .hero-lead{color:#B9C6DA;font-size:clamp(.76rem,1.9dvh,1.13rem);max-width:54ch;line-height:1.5}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:clamp(.7rem,2dvh,1.4rem)}
 .hero-wa{display:inline-flex;align-items:center;gap:.5rem;color:#7EE7A8;font-weight:600;font-size:.92rem;padding:.8rem .4rem}
@@ -134,12 +144,16 @@ header{position:relative;width:100%}
 .hero-img-wrap:hover img{transform:scale(1.05)}
 .kenburns img{animation:breathe 16s ease-in-out infinite alternate;transform-origin:50% 40%}
 @keyframes breathe{from{transform:scale(1)}to{transform:scale(1.07)}}
-.float-card{position:absolute;z-index:3;background:rgba(255,255,255,.97);color:var(--ink);border-radius:14px;box-shadow:var(--shadow-lg);padding:.95rem 1.1rem;font-size:.8rem;animation:floaty 6s ease-in-out infinite}
-.float-card.tracking{top:8%;right:-4%;width:250px;border-top:3px solid var(--red);z-index:4}
+.float-card{position:absolute;z-index:3;background:rgba(255,255,255,.97);color:var(--ink);border-radius:14px;box-shadow:var(--shadow-lg);padding:.65rem .85rem;font-size:.78rem;animation:floaty 6s ease-in-out infinite}
+.float-card.tracking{top:8%;right:-4%;width:228px;border-top:3px solid var(--red);z-index:4}
 .float-card.delivered{bottom:9%;left:-5%;animation-delay:1.4s;border-left:3px solid var(--green);z-index:5}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 .float-card .mono{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);letter-spacing:.06em}
-.float-card .route-line{font-family:var(--font-mono);font-weight:600;font-size:.95rem;color:var(--navy);display:flex;align-items:center;gap:.5rem;margin:.3rem 0 .55rem}
+.float-card .route-line{font-family:var(--font-mono);font-weight:600;font-size:.86rem;color:var(--navy);display:flex;align-items:center;gap:.4rem;margin:.22rem 0 .4rem}
+.ship-id{font-size:.62rem}
+.ship-card-fade{transition:opacity .35s ease}
+.ship-card-fade.fading{opacity:0}
+#shipProgress{animation:none!important;transition:width 1s ease}
 .float-card .route-line .bi{color:var(--red);font-size:.8rem}
 .track-progress{height:5px;background:#EDF0F4;border-radius:99px;overflow:hidden}
 .track-progress span{display:block;height:100%;width:62%;background:linear-gradient(90deg,var(--red),var(--cyan));border-radius:99px;animation:progressGrow 3.2s ease-in-out infinite alternate}

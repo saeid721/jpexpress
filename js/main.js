@@ -177,11 +177,14 @@ document.getElementById('contactForm').addEventListener('submit', e => {
   document.getElementById('formSuccess').classList.remove('d-none');
   e.target.reset();
 });
-document.getElementById('newsForm').addEventListener('submit', e => {
-  e.preventDefault();
-  document.getElementById('newsOk').classList.remove('d-none');
-  e.target.reset();
-});
+const newsForm = document.getElementById('newsForm');
+if (newsForm) {
+  newsForm.addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('newsOk').classList.remove('d-none');
+    e.target.reset();
+  });
+}
 
 /* ---------- Language toggle (visual placeholder) ---------- */
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => {
@@ -194,4 +197,74 @@ document.querySelectorAll('#jpMenu .nav-link').forEach(a => a.addEventListener('
   const oc = bootstrap.Offcanvas.getInstance(document.getElementById('jpMenu'));
   if (oc) oc.hide();
 }));
+
+/* ---------- Hero typewriter (3 rotating titles) ---------- */
+const typeTextEl = document.getElementById('typeText');
+if (typeTextEl) {
+  const titles = [
+    'Ship Worldwide with Confidence.',
+    'Fast International Delivery.',
+    'Reliable Courier, Every Time.'
+  ];
+  if (reduced) {
+    typeTextEl.textContent = titles[0];
+  } else {
+    let ti = 0, ci = 0, deleting = false;
+    const TYPE_SPEED = 55, DELETE_SPEED = 30, HOLD = 1800, GAP = 400;
+    function tick() {
+      const full = titles[ti];
+      if (!deleting) {
+        ci++;
+        typeTextEl.textContent = full.slice(0, ci);
+        if (ci === full.length) { setTimeout(() => { deleting = true; tick(); }, HOLD); return; }
+        setTimeout(tick, TYPE_SPEED);
+      } else {
+        ci--;
+        typeTextEl.textContent = full.slice(0, ci);
+        if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; setTimeout(tick, GAP); return; }
+        setTimeout(tick, DELETE_SPEED);
+      }
+    }
+    setTimeout(tick, 700);
+  }
+}
+
+/* ---------- Hero shipment card rotator ---------- */
+const shipCardFade = document.getElementById('shipCardFade');
+if (shipCardFade) {
+  const shipments = [
+    { id: 'JPE123456789', origin: 'DAC', dest: 'JFK', status: 'IN TRANSIT',       eta: 'ETA 2 DAYS',  progress: 62 },
+    { id: 'JPE998877665', origin: 'DAC', dest: 'LHR', status: 'CUSTOMS',          eta: 'ETA 1 DAY',   progress: 78 },
+    { id: 'JPE554433221', origin: 'DAC', dest: 'DXB', status: 'OUT FOR DELIVERY', eta: 'ETA TODAY',   progress: 92 }
+  ];
+  let si = 0;
+  const shipId       = document.getElementById('shipId');
+  const shipOrigin   = document.getElementById('shipOrigin');
+  const shipDest     = document.getElementById('shipDest');
+  const shipStatus   = document.getElementById('shipStatus');
+  const shipEta      = document.getElementById('shipEta');
+  const shipProgress = document.getElementById('shipProgress');
+
+  function renderShipment(s) {
+    shipId.textContent = 'SHIPMENT #' + s.id;
+    shipOrigin.textContent = s.origin;
+    shipDest.textContent = s.dest;
+    shipStatus.textContent = s.status;
+    shipEta.textContent = s.eta;
+    if (shipProgress) shipProgress.style.width = s.progress + '%';
+  }
+  renderShipment(shipments[0]);
+
+  if (!reduced) {
+    setInterval(() => {
+      shipCardFade.classList.add('fading');
+      setTimeout(() => {
+        si = (si + 1) % shipments.length;
+        renderShipment(shipments[si]);
+        shipCardFade.classList.remove('fading');
+      }, 350);
+    }, 3200);
+  }
+}
+
 })();
