@@ -276,4 +276,18 @@ if (shipCardFade) {
   }
 }
 
+/* ---------- WhatsApp smart-link: skip landing page on desktop ---------- */
+const WA_PHONE = '8801681637836';
+const isMobileDevice = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+document.querySelectorAll('.wa-link').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const msg = encodeURIComponent(a.getAttribute('data-wa-text') || '');
+    const url = isMobileDevice
+      ? 'https://wa.me/' + WA_PHONE + '?text=' + msg
+      : 'https://web.whatsapp.com/send?phone=' + WA_PHONE + '&text=' + msg;
+    window.open(url, '_blank', 'noopener');
+  });
+});
+
 })();
