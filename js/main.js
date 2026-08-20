@@ -198,6 +198,15 @@ document.querySelectorAll('#jpMenu .nav-link').forEach(a => a.addEventListener('
   if (oc) oc.hide();
 }));
 
+/* ---------- Quote/Track buttons open the matching #tools tab ---------- */
+document.querySelectorAll('[data-open-tab]').forEach(el => {
+  el.addEventListener('click', () => {
+    const wantsCalc = el.getAttribute('data-open-tab') === 'calc';
+    const triggerEl = document.getElementById(wantsCalc ? 'tab-calc' : 'tab-track');
+    if (triggerEl) bootstrap.Tab.getOrCreateInstance(triggerEl).show();
+  });
+});
+
 /* ---------- Hero typewriter (3 rotating titles) ---------- */
 const typeTextEl = document.getElementById('typeText');
 if (typeTextEl) {

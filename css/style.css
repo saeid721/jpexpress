@@ -225,6 +225,13 @@ header{position:relative;width:100%}
 .calc-result .amt{font-family:var(--font-display);font-weight:800;font-size:1.25rem;color:#fff}
 .calc-result .amt small{font-size:.72rem;color:#9FE2F2;font-weight:600}
 .demo-note{font-family:var(--font-mono);font-size:.6rem;color:var(--muted);letter-spacing:.04em}
+.track-result-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.9rem}
+.track-result-foot .demo-note{flex:1 1 240px}
+.track-view-btn{flex:0 0 auto;white-space:nowrap}
+@media (max-width:767px){
+  .track-result-foot{flex-direction:column;align-items:stretch;gap:.7rem}
+  .track-view-btn{width:100%;justify-content:center}
+}
 /* tracking timeline */
 .track-timeline{list-style:none;margin:0;padding:0;position:relative;display:flex;justify-content:space-between;gap:.35rem}
 .track-timeline::before{content:"";position:absolute;top:12px;left:3%;right:3%;height:2.5px;background:var(--border);border-radius:99px}
