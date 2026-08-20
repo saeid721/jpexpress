@@ -20,106 +20,87 @@
     <link rel="stylesheet" href="css/services.css">
 </head>
 <body>
-    <!-- Skip to main content -->
-    <a href="#main" class="skip-link">Skip to main content</a>
-    
-    <!-- Top Bar -->
-    <div id="topBar" class="topbar">
-        <div class="container d-flex justify-content-between align-items-center py-2">
-            <div class="d-flex align-items-center gap-4">
-                <span class="d-flex align-items-center gap-2">
-                    <i class="bi bi-clock"></i>
-                    24/7 Customer Support
-                </span>
-                <a href="tel:+8801681637836" class="d-flex align-items-center gap-2">
-                    <i class="bi bi-telephone"></i>
-                    +88 01681637836
-                </a>
-                <a href="mailto:jpexpress09@gmail.com" class="d-flex align-items-center gap-2">
-                    <i class="bi bi-envelope"></i>
-                    support@jpexpress.com
-                </a>
-            </div>
-            <div class="d-flex align-items-center gap-3">
-                <button class="lang-btn active" aria-pressed="true">EN</button>
-                <button class="lang-btn" aria-pressed="false">বাংলা</button>
-                <div class="social">
-                    <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
-                </div>
-            </div>
-        </div>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="site-header" id="siteHeader">
+<div class="topbar py-1" id="topBar">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+      <span class="d-none d-md-inline"><i class="bi bi-headset me-1"></i> 24/7 Customer Support</span>
+      <a href="tel:+8801681637836"><i class="bi bi-telephone me-1"></i> +88 01681637836</a>
+      <a href="mailto:jpexpress09@gmail.com" class="d-none d-sm-inline email-link" data-email-to="jpexpress09@gmail.com" data-email-subject="About JP Express" aria-label="Email us"><i class="bi bi-envelope me-1"></i> support@jpexpress.com</a>
     </div>
-
-    <!-- Header -->
-    <header id="siteHeader" class="site-header">
-        <nav class="jp-navbar">
-            <div class="container navbar-inner">
-                <div class="d-flex align-items-center justify-content-between">
-                    <a href="index.html" class="brand">
-                        <div class="brand-mark">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect fill='%23E62229' width='44' height='44' rx='8'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Plus Jakarta Sans' font-weight='800' font-size='20'%3EJP%3C/text%3E%3C/svg%3E" alt="JP Express" class="brand-logo">
-                        </div>
-                        <div>
-                            <div class="brand-name">JP <em>EXPRESS</em></div>
-                            <div class="brand-tag">Logistics Solutions</div>
-                        </div>
-                    </a>
-                    
-                    <div class="d-none d-lg-flex align-items-center gap-1">
-                        <a href="index.html" class="nav-link">Home</a>
-                        <a href="about.html" class="nav-link">About Us</a>
-                        <a href="services.html" class="nav-link active">Services</a>
-                        <a href="countries.html" class="nav-link">Countries</a>
-                        <a href="industries.html" class="nav-link">Industries</a>
-                        <a href="pricing.html" class="nav-link">Pricing</a>
-                        <a href="track-shipment.html" class="nav-link">Track Shipment</a>
-                        <a href="resources.html" class="nav-link">Resources</a>
-                        <a href="blog.html" class="nav-link">Blog</a>
-                        <a href="contact.html" class="nav-link">Contact</a>
-                    </div>
-                    
-                    <div class="d-none d-lg-flex align-items-center gap-3 navbar-cta">
-                        <a href="#contact" class="btn-jp btn-jp-outline-dark btn-jp-sm">Book Pickup</a>
-                        <a href="#tools" class="btn-jp btn-jp-primary btn-jp-sm">Get a Quote</a>
-                    </div>
-                    
-                    <button class="d-lg-none btn btn-link text-dark p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Toggle navigation">
-                        <i class="bi bi-list fs-3"></i>
-                    </button>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Mobile Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
-        <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title" id="jpMenuLabel">Menu</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body p-0">
-            <nav class="nav flex-column">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About Us</a>
-                <a href="services.html" class="nav-link active">Services</a>
-                <a href="countries.html" class="nav-link">Countries</a>
-                <a href="industries.html" class="nav-link">Industries</a>
-                <a href="pricing.html" class="nav-link">Pricing</a>
-                <a href="track-shipment.html" class="nav-link">Track Shipment</a>
-                <a href="resources.html" class="nav-link">Resources</a>
-                <a href="blog.html" class="nav-link">Blog</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </nav>
-            <div class="p-3 border-top mt-3">
-                <a href="#tools" class="btn-jp btn-jp-primary w-100 mb-2">Get a Quote</a>
-                <a href="#contact" class="btn-jp btn-jp-outline-dark w-100">Book Pickup</a>
-            </div>
-        </div>
+    <div class="d-flex align-items-center">
+      <button class="lang-btn active" type="button" aria-pressed="true">EN</button>
+      <button class="lang-btn" type="button" aria-pressed="false">বাংলা</button>
+      <div class="social d-none d-md-flex align-items-center ms-2">
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
     </div>
+  </div>
+</div>
 
-    <main id="main">
+
+<!-- ============ NAVBAR ============ -->
+<header>
+<nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
+  <div class="container navbar-inner d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="#top" aria-label="JP Express home">
+    <img src="assets/logo.png" alt="JP Express" class="brand-logo">
+  </a>
+    <ul class="navbar-nav flex-row d-none d-xl-flex align-items-center">
+      <li class="nav-item" style="--i:0"><a class="nav-link active" href="">Home</a></li>
+      <li class="nav-item" style="--i:1"><a class="nav-link" href="about.html">About Us</a></li>
+      <li class="nav-item" style="--i:2"><a class="nav-link" href="services.html">Services</a></li>
+      <li class="nav-item" style="--i:3"><a class="nav-link" href="countries.html">Countries</a></li>
+      <li class="nav-item" style="--i:4"><a class="nav-link" href="industries.html">Industries</a></li>
+      <li class="nav-item" style="--i:5"><a class="nav-link" href="pricing.html">Pricing</a></li>
+      <li class="nav-item" style="--i:6"><a class="nav-link" href="track-shipment.html">Track Shipment</a></li>
+      <li class="nav-item" style="--i:7"><a class="nav-link" href="resources.html">Resources</a></li>
+      <li class="nav-item" style="--i:8"><a class="nav-link" href="blog.html">Blog</a></li>
+      <li class="nav-item" style="--i:9"><a class="nav-link" href="contact.html">Contact</a></li>
+    </ul>
+        <div class="d-none d-xl-flex align-items-center gap-2 navbar-cta">
+      <a href="#contact" class="btn-jp btn-jp-outline-dark btn-jp-sm"><i class="bi bi-box-seam"></i> Book Pickup</a>
+      <a href="#tools" class="btn-jp btn-jp-primary btn-jp-sm" data-open-tab="calc">Get a Quote <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <button class="navbar-toggler border-0 d-xl-none fs-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+</nav>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
+  <div class="offcanvas-header border-bottom">
+    <img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+      <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+      <li class="nav-item"><a class="nav-link" href="#countries">Countries</a></li>
+      <li class="nav-item"><a class="nav-link" href="#industries">Industries</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
+      <li class="nav-item"><a class="nav-link" href="track-shipment.html">Track Shipment</a></li>
+      <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+      <li class="nav-item"><a class="nav-link" href="#resources">Blog</a></li>
+      <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+    </ul>
+        <div class="d-grid gap-2 mt-4">
+      <a href="#tools" class="btn-jp btn-jp-primary" data-bs-dismiss="offcanvas" data-open-tab="calc">Get a Quote</a>
+      <a href="#contact" class="btn-jp btn-jp-outline-dark" data-bs-dismiss="offcanvas">Book Pickup</a>
+    </div>
+    <p class="font-mono mt-4 mb-0" style="font-size:.72rem;color:var(--muted)">24/7 SUPPORT<br>+88 01681637836</p>
+  </div>
+</div>
+</header>
+</div>
+
+<main id="main">
         <!-- Hero Section -->
         <section class="svc-hero" data-reveal>
             <div class="container position-relative z-2">
