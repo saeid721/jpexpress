@@ -13,7 +13,7 @@
 .abt-breadcrumb a:hover{color:#fff}
 .abt-breadcrumb span{color:#FF9BA0}
 .abt-breadcrumb .bi{font-size:.6rem}
-.abt-hero-body{max-width:680px}
+.abt-hero-body{}
 .abt-hero-body h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.15;margin-bottom:.9rem}
 .abt-hero-body h1 .hl{color:#FF7B81}
 .abt-hero-body p{color:#B9C6DA;font-size:clamp(.9rem,1.5vw,1.08rem);line-height:1.6}
