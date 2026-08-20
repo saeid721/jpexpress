@@ -290,4 +290,18 @@ document.querySelectorAll('.wa-link').forEach(a => {
   });
 });
 
+/* ---------- Email smart-link: open Gmail compose directly on desktop ---------- */
+document.querySelectorAll('.email-link').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const to = a.getAttribute('data-email-to') || 'jpexpress09@gmail.com';
+    const subject = encodeURIComponent(a.getAttribute('data-email-subject') || '');
+    if (isMobileDevice) {
+      window.location.href = 'mailto:' + to + '?subject=' + subject;
+    } else {
+      window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to) + '&su=' + subject, '_blank', 'noopener');
+    }
+  });
+});
+
 })();
