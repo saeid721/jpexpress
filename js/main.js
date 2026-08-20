@@ -69,7 +69,7 @@ function onScroll() {
   const y = window.scrollY;
   navbar.classList.toggle('is-scrolled', y > 12);
   topBar.classList.toggle('tb-hide', y > 60);
-  fabSide.classList.toggle('show', y > 560);
+  if (fabSide) fabSide.classList.toggle('show', y > 560);
   ticking = false;
 }
 window.addEventListener('scroll', () => {
@@ -134,6 +134,8 @@ if (steps.length && fill && 'IntersectionObserver' in window) {
 }
 
 /* ---------- Shipping calculator (demo only) ---------- */
+const calcForm = document.getElementById('calcForm');
+const calcResult = document.getElementById('calcResult');
 if (calcForm) calcForm.addEventListener('submit', e => {
   e.preventDefault();
   const w = Math.max(parseFloat(document.getElementById('cWeight').value) || 1, 0.5);
