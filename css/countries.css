@@ -1,0 +1,75 @@
+/* ============ COUNTRIES LISTING ============ */
+.ctr-hero{background:var(--navy);color:#fff;position:relative;padding:clamp(2.4rem,6vw,4rem) 0 clamp(3.2rem,7vw,5rem);overflow:clip}
+.ctr-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 90% 80% at 50% 0%,#000 30%,transparent 75%)}
+.ctr-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 320px at 10% 0%,rgba(230,34,41,.22),transparent 65%),radial-gradient(700px 380px at 95% 100%,rgba(18,165,198,.16),transparent 65%);pointer-events:none}
+.ctr-hero .container{position:relative;z-index:2}
+.ctr-hero-head{text-align:center;max-width:680px;margin:0 auto clamp(1.4rem,3vw,2rem)}
+.ctr-hero-head h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.7rem,3.6vw,2.7rem);margin-bottom:.6rem}
+.ctr-hero-head p{color:#B9C6DA;font-size:clamp(.86rem,1.4vw,1.02rem);margin:0}
+.ctr-search-card{background:var(--surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:clamp(1rem,2.2vw,1.4rem);max-width:640px;margin:0 auto}
+.ctr-search-card input{width:100%}
+
+.ctr-filter-row{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin:0 0 2rem}
+.ctr-filter-btn{font-family:var(--font-display);font-weight:700;font-size:.8rem;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);border-radius:100px;padding:.5rem 1.1rem;transition:all .25s}
+.ctr-filter-btn:hover{color:var(--navy)}
+.ctr-filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.ctr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1.1rem}
+.ctr-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.3rem;display:flex;flex-direction:column;gap:.6rem;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.ctr-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(230,34,41,.25)}
+.ctr-card-top{display:flex;align-items:center;gap:.8rem;min-width:0}
+.ctr-flag{display:block;flex:0 0 2.1rem;width:2.1rem;height:1.45rem;object-fit:cover;border-radius:2px}
+.ctr-card-country{min-width:0}
+.ctr-card h3{font-size:1.02rem;font-weight:800;color:var(--navy);margin:0}
+.ctr-card .region{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ctr-card-meta{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.72rem;color:var(--muted)}
+.ctr-card-meta i{color:var(--cyan)}
+.ctr-card-more{margin-top:auto;font-family:var(--font-display);font-weight:700;font-size:.82rem;color:var(--red);display:inline-flex;align-items:center;gap:.4rem}
+.ctr-card:hover .ctr-card-more i{transform:translateX(3px)}
+.ctr-card-more i{transition:transform .3s}
+.ctr-no-results{grid-column:1/-1;text-align:center;padding:2.5rem 1rem;color:var(--muted)}
+
+.ctr-request-card{margin-top:2.5rem;background:linear-gradient(155deg,var(--navy),var(--navy-2));border-radius:var(--radius-lg);padding:1.8rem;color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem;justify-content:space-between}
+.ctr-request-card h3{font-size:1.05rem;font-weight:800;margin-bottom:.25rem}
+.ctr-request-card p{color:#A9B6CA;font-size:.86rem;margin:0}
+
+/* ============ COUNTRY DETAILS ============ */
+.cd-hero{background:var(--navy);color:#fff;position:relative;padding:clamp(2rem,5vw,3.2rem) 0 clamp(2.6rem,6vw,4rem);overflow:clip}
+.cd-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 90% 80% at 50% 0%,#000 30%,transparent 75%)}
+.cd-hero .container{position:relative;z-index:2}
+.cd-breadcrumb{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#9FB0C8;margin-bottom:1rem}
+.cd-breadcrumb a{color:#9FB0C8}
+.cd-breadcrumb a:hover{color:#fff}
+.cd-breadcrumb span{color:#FF9BA0}
+.cd-head{display:flex;align-items:center;gap:1.1rem;flex-wrap:wrap}
+.cd-flag{display:inline-flex;align-items:center;justify-content:center;flex:0 0 4.2rem;width:4.2rem;height:2.8rem}
+.cd-flag img{display:block;width:100%;height:100%;object-fit:cover;border-radius:3px}
+.cd-head h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.7rem,3.6vw,2.6rem);margin:0}
+.cd-head .region{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#9FE2F2}
+.cd-quickstats{margin-top:1.6rem}
+
+.cd-section{padding-block:clamp(2rem,4vw,3rem)}
+.cd-section h2{font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:1rem;display:flex;align-items:center;gap:.55rem}
+.cd-section h2 .bi{color:var(--red)}
+.cd-list{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.cd-list li{display:flex;align-items:flex-start;gap:.6rem;font-size:.9rem;color:var(--ink);background:var(--bg);border-radius:10px;padding:.7rem .9rem}
+.cd-list li i{color:var(--green);margin-top:.15rem;flex:0 0 auto}
+.cd-list.cd-restrict li i{color:var(--amber)}
+.cd-price-table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.cd-price-table th,.cd-price-table td{padding:.85rem 1.1rem;text-align:left;font-size:.88rem}
+.cd-price-table th{background:var(--navy);color:#fff;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase}
+.cd-price-table td{border-top:1px solid var(--border);color:var(--ink)}
+.cd-price-table td:last-child{font-weight:700;color:var(--navy)}
+.cd-price-note{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);margin-top:.6rem}
+
+@media (max-width:767px){
+  .ctr-hero,.cd-hero{padding-block:1.6rem}
+  .ctr-hero-head h1,.cd-head h1{font-size:1.4rem}
+  .ctr-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.7rem}
+  .ctr-card{padding:1rem}
+  .ctr-flag{font-size:1.6rem}
+  .ctr-card h3{font-size:.88rem}
+  .cd-flag{flex-basis:3.2rem;width:3.2rem;height:2.15rem}
+  .cd-section h2{font-size:1.05rem}
+  .cd-price-table th,.cd-price-table td{padding:.6rem .7rem;font-size:.78rem}
+}

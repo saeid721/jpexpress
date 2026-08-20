@@ -1,0 +1,71 @@
+/* ============ INDUSTRIES PAGE ============ */
+/* Reuses tokens + shared classes from css/style.css (stats-card, why-card, final-cta,
+   country-chip, etc.) — only new, page-specific layouts are defined here. */
+
+/* ---------- HERO ---------- */
+.inp-hero{background:var(--navy);color:#fff;position:relative;padding:clamp(2.4rem,6vw,4rem) 0 clamp(3.6rem,8vw,5.5rem);overflow:clip}
+.inp-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 90% 80% at 50% 0%,#000 30%,transparent 75%)}
+.inp-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 320px at 10% 0%,rgba(230,34,41,.22),transparent 65%),radial-gradient(700px 380px at 95% 100%,rgba(18,165,198,.16),transparent 65%);pointer-events:none}
+.inp-hero .container{position:relative;z-index:2}
+.inp-breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#9FB0C8;margin-bottom:1.2rem}
+.inp-breadcrumb a{color:#9FB0C8}
+.inp-breadcrumb a:hover{color:#fff}
+.inp-breadcrumb span{color:#FF9BA0}
+.inp-breadcrumb .bi{font-size:.6rem}
+.inp-hero-body{}
+.inp-hero-body h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.15;margin-bottom:.9rem}
+.inp-hero-body h1 .hl{color:#FF7B81}
+.inp-hero-body p{color:#B9C6DA;font-size:clamp(.9rem,1.5vw,1.08rem);line-height:1.6}
+.inp-hero-stats{margin-top:clamp(1.6rem,4vw,2.6rem);position:relative;z-index:5}
+
+/* ---------- INDUSTRY FILTER CHIPS ---------- */
+.indf-row{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:2.2rem}
+.indf-btn{font-family:var(--font-display);font-weight:700;font-size:.8rem;color:var(--muted);background:var(--surface);border:1.5px solid var(--border);border-radius:100px;padding:.5rem 1.1rem;transition:all .25s}
+.indf-btn:hover{color:var(--navy);border-color:var(--navy)}
+.indf-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ---------- INDUSTRY GRID ---------- */
+.indg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1.1rem}
+.indg-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.7rem 1.6rem;height:100%;display:flex;flex-direction:column;transition:transform .35s ease,box-shadow .35s ease,border-color .35s;position:relative;overflow:hidden}
+.indg-card::after{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--red);transform:scaleX(0);transition:transform .35s;transform-origin:left}
+.indg-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:transparent}
+.indg-card:hover::after{transform:scaleX(1)}
+.indg-ico{width:52px;height:52px;border-radius:14px;background:var(--red-soft);color:var(--red);display:grid;place-items:center;font-size:1.35rem;margin-bottom:1.15rem;transition:transform .35s,background .35s,color .35s}
+.indg-card:hover .indg-ico{background:var(--red);color:#fff;transform:translateY(-2px) scale(1.05)}
+.indg-card h3{font-size:1.04rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
+.indg-card p{font-size:.86rem;color:var(--muted);margin-bottom:1.1rem;flex:1}
+.indg-more{font-family:var(--font-display);font-weight:700;font-size:.8rem;color:var(--red);display:inline-flex;align-items:center;gap:.35rem}
+.indg-more .bi{transition:transform .3s}
+.indg-card:hover .indg-more .bi{transform:translateX(4px)}
+
+/* ---------- WHY-FIT STRIP ---------- */
+.indw-grid{display:grid;grid-template-columns:1fr;gap:1.4rem}
+@media (min-width:768px){.indw-grid{grid-template-columns:repeat(3,1fr)}}
+.indw-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.9rem;text-align:center;height:100%;transition:transform .35s,box-shadow .35s}
+.indw-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.indw-ico{width:58px;height:58px;margin:0 auto 1.1rem;border-radius:16px;background:var(--navy);color:#FF7B81;display:grid;place-items:center;font-size:1.5rem}
+.indw-card h3{font-size:1.02rem;font-weight:700;margin-bottom:.5rem;color:var(--navy)}
+.indw-card p{font-size:.86rem;color:var(--muted);margin:0}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:767px){
+  .inp-hero{padding:1.6rem 0 2.2rem}
+  .inp-hero-body h1{font-size:1.55rem}
+  .inp-hero-body p{font-size:.82rem}
+  .indf-row{gap:.4rem;margin-bottom:1.4rem}
+  .indf-btn{font-size:.7rem;padding:.4rem .85rem}
+  .indg-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
+  .indg-card{padding:1.1rem 1rem;border-radius:13px}
+  .indg-ico{width:40px;height:40px;font-size:1.05rem;border-radius:11px;margin-bottom:.7rem}
+  .indg-card h3{font-size:.86rem;margin-bottom:.3rem}
+  .indg-card p{font-size:.72rem;line-height:1.4;margin-bottom:.7rem}
+  .indg-more{font-size:.7rem}
+  .indw-card{padding:1.3rem}
+  .indw-ico{width:46px;height:46px;font-size:1.2rem;margin-bottom:.8rem}
+  .indw-card h3{font-size:.92rem}
+  .indw-card p{font-size:.8rem}
+}
+@media (max-width:480px){
+  .inp-hero-body h1{font-size:1.35rem}
+  .indg-grid{grid-template-columns:1fr}
+}
