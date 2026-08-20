@@ -134,9 +134,7 @@ if (steps.length && fill && 'IntersectionObserver' in window) {
 }
 
 /* ---------- Shipping calculator (demo only) ---------- */
-const calcForm = document.getElementById('calcForm');
-const calcResult = document.getElementById('calcResult');
-calcForm.addEventListener('submit', e => {
+if (calcForm) calcForm.addEventListener('submit', e => {
   e.preventDefault();
   const w = Math.max(parseFloat(document.getElementById('cWeight').value) || 1, 0.5);
   const vol = ((+document.getElementById('cL').value || 0) * (+document.getElementById('cW').value || 0) * (+document.getElementById('cH').value || 0)) / 5000;
@@ -155,11 +153,19 @@ calcForm.addEventListener('submit', e => {
 });
 
 /* ---------- Tracking demo ---------- */
-document.getElementById('fillDemo').addEventListener('click', () => { document.getElementById('trackInput').value = 'JPE123456789'; });
-document.getElementById('trackForm').addEventListener('submit', e => {
+const fillDemoBtn = document.getElementById('fillDemo');
+if (fillDemoBtn) fillDemoBtn.addEventListener('click', () => { document.getElementById('trackInput').value = 'JPE123456789'; });
+
+const trackForm = document.getElementById('trackForm');
+if (trackForm) trackForm.addEventListener('submit', e => {
   e.preventDefault();
   const val = document.getElementById('trackInput').value.trim();
   if (!val) { document.getElementById('trackInput').focus(); return; }
+
+  /* Route "View Details" to the new Track Shipment page with this number */
+  const viewBtn = document.querySelector('.track-view-btn');
+  if (viewBtn) viewBtn.href = 'track-shipment.html?tracking=' + encodeURIComponent(val);
+
   const box = document.getElementById('trackResult');
   const tl = document.getElementById('trackTimeline');
   const items = tl.querySelectorAll('li');
@@ -172,7 +178,8 @@ document.getElementById('trackForm').addEventListener('submit', e => {
 });
 
 /* ---------- Demo forms ---------- */
-document.getElementById('contactForm').addEventListener('submit', e => {
+const contactForm = document.getElementById('contactForm');
+if (contactForm) contactForm.addEventListener('submit', e => {
   e.preventDefault();
   document.getElementById('formSuccess').classList.remove('d-none');
   e.target.reset();

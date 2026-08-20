@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Track Your Shipment | JP Express</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta name="description" content="Track your JP Express shipment in real time — tracking history, live status and delivery updates from Bangladesh to 220+ countries.">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0A1B33">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tracking.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="site-header" id="siteHeader">
+<div class="topbar py-1" id="topBar">
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+      <span class="d-none d-md-inline"><i class="bi bi-headset me-1"></i> 24/7 Customer Support</span>
+      <a href="tel:+8801681637836"><i class="bi bi-telephone me-1"></i> +88 01681637836</a>
+      <a href="mailto:jpexpress09@gmail.com" class="d-none d-sm-inline email-link" data-email-to="jpexpress09@gmail.com" data-email-subject="Shipment Inquiry" aria-label="Email us"><i class="bi bi-envelope me-1"></i> support@jpexpress.com</a>
+    </div>
+    <div class="d-flex align-items-center">
+      <button class="lang-btn active" type="button" aria-pressed="true">EN</button>
+      <button class="lang-btn" type="button" aria-pressed="false">বাংলা</button>
+      <div class="social d-none d-md-flex align-items-center ms-2">
+        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header>
+<nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
+  <div class="container navbar-inner d-flex align-items-center justify-content-between gap-3">
+    <a class="brand" href="index.html" aria-label="JP Express home">
+      <img src="assets/logo.png" alt="JP Express" class="brand-logo">
+    </a>
+    <ul class="navbar-nav flex-row d-none d-xl-flex align-items-center">
+      <li class="nav-item" style="--i:0"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item" style="--i:1"><a class="nav-link" href="index.html#">About Us</a></li>
+      <li class="nav-item" style="--i:2"><a class="nav-link" href="index.html#services">Services</a></li>
+      <li class="nav-item" style="--i:3"><a class="nav-link" href="index.html#countries">Countries</a></li>
+      <li class="nav-item" style="--i:4"><a class="nav-link" href="index.html#industries">Industries</a></li>
+      <li class="nav-item" style="--i:5"><a class="nav-link" href="index.html#">Pricing</a></li>
+      <li class="nav-item" style="--i:6"><a class="nav-link active" href="track-shipment.html">Track Shipment</a></li>
+      <li class="nav-item" style="--i:7"><a class="nav-link" href="index.html#resources">Resources</a></li>
+      <li class="nav-item" style="--i:8"><a class="nav-link" href="index.html#resources">Blog</a></li>
+      <li class="nav-item" style="--i:9"><a class="nav-link" href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="d-none d-xl-flex align-items-center gap-2 navbar-cta">
+      <a href="index.html#contact" class="btn-jp btn-jp-outline-dark btn-jp-sm"><i class="bi bi-box-seam"></i> Book Pickup</a>
+      <a href="index.html#tools" class="btn-jp btn-jp-primary btn-jp-sm">Get a Quote <i class="bi bi-arrow-right"></i></a>
+    </div>
+    <button class="navbar-toggler border-0 d-xl-none fs-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu">
+      <i class="bi bi-list"></i>
+    </button>
+  </div>
+</nav>
+<div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
+  <div class="offcanvas-header border-bottom">
+    <img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+      <li class="nav-item"><a class="nav-link" href="index.html#services">Services</a></li>
+      <li class="nav-item"><a class="nav-link" href="index.html#countries">Countries</a></li>
+      <li class="nav-item"><a class="nav-link" href="index.html#industries">Industries</a></li>
+      <li class="nav-item"><a class="nav-link active" href="track-shipment.html">Track Shipment</a></li>
+      <li class="nav-item"><a class="nav-link" href="index.html#resources">Resources</a></li>
+      <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="d-grid gap-2 mt-4">
+      <a href="index.html#tools" class="btn-jp btn-jp-primary" data-bs-dismiss="offcanvas">Get a Quote</a>
+      <a href="index.html#contact" class="btn-jp btn-jp-outline-dark" data-bs-dismiss="offcanvas">Book Pickup</a>
+    </div>
+    <p class="font-mono mt-4 mb-0" style="font-size:.72rem;color:var(--muted)">24/7 SUPPORT<br>+88 01681637836</p>
+  </div>
+</div>
+</header>
+</div>
+
+<main id="main">
+
+  <!-- ============ TRACKING HERO / SEARCH ============ -->
+  <section class="trk-hero" aria-labelledby="trkHeroTitle">
+    <div class="container">
+      <div class="trk-hero-head">
+        <span class="hero-badge" style="margin-bottom:1rem"><span class="dot"></span> Live Shipment Tracking</span>
+        <h1 id="trkHeroTitle">Track Your Shipment</h1>
+        <p>Enter your tracking number below to see the latest status, location and delivery history.</p>
+      </div>
+      <div class="trk-search-card">
+        <form id="trkSearchForm" novalidate>
+          <label class="visually-hidden" for="trkInput">Tracking number</label>
+          <input type="text" id="trkInput" class="form-control-jp font-mono" placeholder="Enter Tracking Number, e.g. JPE123456789" autocomplete="off">
+          <button type="submit" class="btn-jp btn-jp-primary">Track Now <i class="bi bi-arrow-right"></i></button>
+        </form>
+        <p class="trk-search-note">TRY A DEMO ID —
+          <button type="button" data-demo="JPE123456789">JPE123456789</button> ·
+          <button type="button" data-demo="JPE998877665">JPE998877665</button> ·
+          <button type="button" data-demo="JPE554433221">JPE554433221</button>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRACKING RESULTS ============ -->
+  <section class="section trk-body" id="trkBody" aria-label="Tracking results">
+    <div class="container">
+
+      <!-- Empty / not-found state -->
+      <div id="trkEmpty" class="trk-empty d-none">
+        <i class="bi bi-box-seam"></i>
+        <h2>No Tracking Number Entered</h2>
+        <p>Enter a tracking number above to see live shipment status, history and delivery details.</p>
+        <a href="index.html#contact" class="btn-jp btn-jp-outline-dark btn-jp-sm">Contact Support <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <!-- Result content -->
+      <div id="trkContent" class="d-none">
+        <div class="row g-4">
+          <div class="col-lg-8">
+
+            <!-- Status summary + stage stepper -->
+            <div class="trk-status-card" data-reveal>
+              <div class="trk-status-top">
+                <div class="trk-parcel-id">Parcel ID<strong id="trkParcelId">—</strong></div>
+                <span class="trk-badge st-transit" id="trkBadge"><span class="dot"></span> <span id="trkBadgeText">—</span></span>
+                <div class="trk-eta"><span>Estimated Delivery</span><strong id="trkEta">—</strong></div>
+              </div>
+              <h3 class="trk-substage-title"><i class="bi bi-signpost-split-fill"></i> Delivery Timeline</h3>
+              <ol class="track-timeline" id="trkStageList">
+                <span class="tl-fill" id="trkStageFill" aria-hidden="true"></span>
+              </ol>
+            </div>
+
+            <!-- Detailed history -->
+            <div class="trk-history-card" data-reveal style="--d:80ms">
+              <h2><i class="bi bi-clock-history"></i> Shipment History <span class="count" id="trkHistCount">0</span></h2>
+              <ol class="trk-hist" id="trkHistList"></ol>
+            </div>
+
+            <!-- Delivery proof -->
+            <div class="trk-history-card trk-proof-card" data-reveal style="--d:120ms">
+              <h2><i class="bi bi-file-earmark-check"></i> Delivery Proof</h2>
+              <div id="trkProofBody"></div>
+            </div>
+
+          </div>
+
+          <div class="col-lg-4">
+
+            <!-- Customer / shipment info -->
+            <div class="trk-side-card" data-reveal style="--d:80ms">
+              <h3><i class="bi bi-person-lines-fill"></i> Shipment Information</h3>
+              <ul class="trk-info-list" id="trkInfoList"></ul>
+            </div>
+
+            <!-- Notifications -->
+            <div class="trk-side-card" data-reveal style="--d:160ms">
+              <h3><i class="bi bi-bell-fill"></i> Notifications</h3>
+              <ul class="trk-notif-list" id="trkNotifList"></ul>
+            </div>
+
+            <!-- Support -->
+            <div class="trk-support-card" data-reveal style="--d:240ms">
+              <h3><i class="bi bi-headset"></i> Need Help?</h3>
+              <p>Our logistics team is available 24/7 for anything about your shipment.</p>
+              <div class="d-grid">
+                <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%20have%20a%20question%20about%20my%20shipment." target="_blank" rel="noopener" class="btn-jp btn-jp-primary wa-link" data-wa-text="Hi JP Express, I have a question about my shipment."><i class="bi bi-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="tel:+8801681637836" class="btn-jp btn-jp-outline"><i class="bi bi-telephone"></i> Call Support</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer pt-5">
+  <div class="container">
+    <div class="row g-4 g-lg-5 pb-5">
+      <div class="col-lg-4">
+        <a class="brand mb-3 d-inline-flex" href="index.html">
+          <img src="assets/logo.png" alt="JP Express" class="footer-logo">
+        </a>
+        <p class="mt-3" style="max-width:34ch">From courier and freight to customs clearance and warehousing, JP Express simplifies logistics needs — from Bangladesh to the world.</p>
+        <div class="footer-social mt-3">
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <h3>Company</h3>
+        <ul class="list-unstyled"><li><a href="index.html#">About Us</a></li><li><a href="index.html#">Careers</a></li><li><a href="index.html#">News</a></li><li><a href="index.html#contact">Contact</a></li></ul>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <h3>Services</h3>
+        <ul class="list-unstyled"><li><a href="index.html#services">International Courier</a></li><li><a href="index.html#services">Air Freight</a></li><li><a href="index.html#services">Sea Freight</a></li><li><a href="index.html#services">Customs Clearance</a></li></ul>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <h3>Resources</h3>
+        <ul class="list-unstyled"><li><a href="index.html#resources">Blog</a></li><li><a href="track-shipment.html">Track Shipment</a></li><li><a href="index.html#tools">Shipping Calculator</a></li><li><a href="index.html#">FAQs</a></li></ul>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <h3>Legal</h3>
+        <ul class="list-unstyled"><li><a href="index.html#">Privacy Policy</a></li><li><a href="index.html#">Terms & Conditions</a></li><li><a href="index.html#">Refund Policy</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom py-4 d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>© 2026 JP EXPRESS. ALL RIGHTS RESERVED.</span>
+      <span>DHAKA • BANGLADESH → 220+ COUNTRIES</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ACTIONS ============ -->
+<div class="fab-side" id="fabSide" aria-label="Quick contact actions">
+  <a href="#top" data-tip="TOP" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+  <a href="index.html#tools" class="fab-quote" data-tip="QUOTE" aria-label="Get a quote"><i class="bi bi-calculator"></i></a>
+  <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="fab-wa wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WHATSAPP" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+  <a href="tel:+8801681637836" data-tip="CALL" aria-label="Call us"><i class="bi bi-telephone"></i></a>
+</div>
+<nav class="fab-bar" aria-label="Mobile quick actions">
+  <a href="index.html"><i class="bi bi-house"></i>Home</a>
+  <a href="index.html#tools" class="bar-quote"><i class="bi bi-calculator"></i>Quote</a>
+  <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="fab-wa wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i>Chat</a>
+  <a href="tel:+8801681637836"><i class="bi bi-telephone"></i>Call</a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/tracking.js"></script>
+<script>
+  document.querySelectorAll('[data-demo]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.getElementById('trkInput').value = b.getAttribute('data-demo');
+      document.getElementById('trkSearchForm').requestSubmit();
+    });
+  });
+</script>
+</body>
+</html>
