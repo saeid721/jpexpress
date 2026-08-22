@@ -1,13 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing | JP Express — Rate Calculators &amp; Country-wise Rates</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
-<title>Shipping Pricing & Rate Calculators | JP Express</title>
-<meta name="description" content="Calculate indicative shipping rates, transit times, volumetric weight and fuel surcharge for JP Express shipments from Bangladesh.">
+<meta name="description" content="Calculate JP Express shipping costs, transit time and volumetric weight. See country-wise courier & freight rates, current fuel surcharge, and download our full rate card.">
+<link rel="canonical" href="https://www.jpexpress.com/pricing.html">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#0A1B33">
+<meta name="author" content="JP Express">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="JP Express">
+<meta property="og:title" content="Pricing | JP Express">
+<meta property="og:description" content="Shipping rate, transit time & volumetric weight calculators, country-wise rates, fuel surcharge info and a downloadable rate card.">
+<meta property="og:url" content="https://www.jpexpress.com/pricing.html">
+<meta property="og:image" content="https://www.jpexpress.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pricing | JP Express">
+<meta name="twitter:description" content="Rate calculators, country-wise pricing, fuel surcharge and downloadable rate card.">
+<meta name="twitter:image" content="https://www.jpexpress.com/assets/og-image.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -15,6 +36,29 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/pricing.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://www.jpexpress.com/"},
+    {"@type":"ListItem","position":2,"name":"Pricing","item":"https://www.jpexpress.com/pricing.html"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How is my shipping cost calculated?","acceptedAnswer":{"@type":"Answer","text":"Cost is based on chargeable weight (the higher of actual and volumetric weight), destination, service type and current fuel surcharge."}},
+    {"@type":"Question","name":"What is volumetric weight?","acceptedAnswer":{"@type":"Answer","text":"Volumetric weight is calculated from a package's dimensions (length x width x height divided by a volumetric divisor) and is used when a package is large but light."}},
+    {"@type":"Question","name":"What is fuel surcharge?","acceptedAnswer":{"@type":"Answer","text":"Fuel surcharge is a variable percentage added to freight cost to account for fluctuating fuel prices, and differs by service type."}},
+    {"@type":"Question","name":"Can I get an exact quote instead of an estimate?","acceptedAnswer":{"@type":"Answer","text":"Yes. Contact our team with your shipment details for an exact, confirmed quote."}}
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -25,7 +69,7 @@
     <div class="d-flex align-items-center gap-3 flex-wrap">
       <span class="d-none d-md-inline"><i class="bi bi-headset me-1"></i> 24/7 Customer Support</span>
       <a href="tel:+8801681637836"><i class="bi bi-telephone me-1"></i> +88 01681637836</a>
-      <a href="mailto:jpexpress09@gmail.com" class="d-none d-sm-inline email-link" data-email-to="jpexpress09@gmail.com" data-email-subject="About JP Express" aria-label="Email us"><i class="bi bi-envelope me-1"></i> support@jpexpress.com</a>
+      <a href="mailto:jpexpress09@gmail.com" class="d-none d-sm-inline email-link" data-email-to="jpexpress09@gmail.com" data-email-subject="Pricing Inquiry" aria-label="Email us"><i class="bi bi-envelope me-1"></i> support@jpexpress.com</a>
     </div>
     <div class="d-flex align-items-center">
       <button class="lang-btn active" type="button" aria-pressed="true">EN</button>
@@ -40,29 +84,27 @@
   </div>
 </div>
 
-
-<!-- ============ NAVBAR ============ -->
 <header>
 <nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
   <div class="container navbar-inner d-flex align-items-center justify-content-between gap-3">
-    <a class="brand" href="#top" aria-label="JP Express home">
-    <img src="assets/logo.png" alt="JP Express" class="brand-logo">
-  </a>
+    <a class="brand" href="index.html" aria-label="JP Express home">
+      <img src="assets/logo.png" alt="JP Express" class="brand-logo">
+    </a>
     <ul class="navbar-nav flex-row d-none d-xl-flex align-items-center">
-      <li class="nav-item" style="--i:0"><a class="nav-link active" href="index.html">Home</a></li>
+      <li class="nav-item" style="--i:0"><a class="nav-link" href="index.html">Home</a></li>
       <li class="nav-item" style="--i:1"><a class="nav-link" href="about.html">About Us</a></li>
       <li class="nav-item" style="--i:2"><a class="nav-link" href="services.html">Services</a></li>
       <li class="nav-item" style="--i:3"><a class="nav-link" href="countries.html">Countries</a></li>
       <li class="nav-item" style="--i:4"><a class="nav-link" href="industries.html">Industries</a></li>
-      <li class="nav-item" style="--i:5"><a class="nav-link" href="pricing.html">Pricing</a></li>
+      <li class="nav-item" style="--i:5"><a class="nav-link active" href="pricing.html">Pricing</a></li>
       <li class="nav-item" style="--i:6"><a class="nav-link" href="track-shipment.html">Track Shipment</a></li>
       <li class="nav-item" style="--i:7"><a class="nav-link" href="resources.html">Resources</a></li>
       <li class="nav-item" style="--i:8"><a class="nav-link" href="blog.html">Blog</a></li>
       <li class="nav-item" style="--i:9"><a class="nav-link" href="contact.html">Contact</a></li>
     </ul>
-        <div class="d-none d-xl-flex align-items-center gap-2 navbar-cta">
-      <a href="#contact" class="btn-jp btn-jp-outline-dark btn-jp-sm"><i class="bi bi-box-seam"></i> Book Pickup</a>
-      <a href="#tools" class="btn-jp btn-jp-primary btn-jp-sm" data-open-tab="calc">Get a Quote <i class="bi bi-arrow-right"></i></a>
+    <div class="d-none d-xl-flex align-items-center gap-2 navbar-cta">
+      <a href="index.html#contact" class="btn-jp btn-jp-outline-dark btn-jp-sm"><i class="bi bi-box-seam"></i> Book Pickup</a>
+      <a href="#rate-calculator" class="btn-jp btn-jp-primary btn-jp-sm">Get a Quote <i class="bi bi-arrow-right"></i></a>
     </div>
     <button class="navbar-toggler border-0 d-xl-none fs-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu">
       <i class="bi bi-list"></i>
@@ -78,34 +120,307 @@
     <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
       <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-      <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-      <li class="nav-item"><a class="nav-link" href="#countries">Countries</a></li>
-      <li class="nav-item"><a class="nav-link" href="#industries">Industries</a></li>
-      <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+      <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+      <li class="nav-item"><a class="nav-link" href="countries.html">Countries</a></li>
+      <li class="nav-item"><a class="nav-link" href="industries.html">Industries</a></li>
+      <li class="nav-item"><a class="nav-link active" href="pricing.html">Pricing</a></li>
       <li class="nav-item"><a class="nav-link" href="track-shipment.html">Track Shipment</a></li>
-      <li class="nav-item"><a class="nav-link" href="#resources">Resources</a></li>
+      <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
       <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-      <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
     </ul>
-        <div class="d-grid gap-2 mt-4">
-      <a href="#tools" class="btn-jp btn-jp-primary" data-bs-dismiss="offcanvas" data-open-tab="calc">Get a Quote</a>
-      <a href="#contact" class="btn-jp btn-jp-outline-dark" data-bs-dismiss="offcanvas">Book Pickup</a>
+    <div class="d-grid gap-2 mt-4">
+      <a href="#rate-calculator" class="btn-jp btn-jp-primary" data-bs-dismiss="offcanvas">Get a Quote</a>
+      <a href="index.html#contact" class="btn-jp btn-jp-outline-dark" data-bs-dismiss="offcanvas">Book Pickup</a>
     </div>
-    <a class="offcanvas-whatsapp" href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i><span><strong>Chat on WhatsApp</strong><small>24/7 online support</small></span></a>
+    <p class="font-mono mt-4 mb-0" style="font-size:.72rem;color:var(--muted)">24/7 SUPPORT<br>+88 01681637836</p>
   </div>
 </div>
 </header>
 </div>
 
 <main id="main">
-<section class="pricing-hero"><div class="pricing-orbit orbit-one"></div><div class="pricing-orbit orbit-two"></div><div class="container position-relative"><div class="row align-items-center g-5"><div class="col-lg-7"><span class="hero-badge"><span class="dot"></span> Clear rates. Smarter shipping.</span><h1>Know Your Shipping Cost <span class="price-highlight">Before You Ship.</span></h1><p>Estimate your rate, compare delivery options and understand the details behind your shipment price, all in one place.</p><div class="d-flex flex-wrap gap-3"><a href="#calculator" class="btn-jp btn-jp-primary">Calculate Shipping <i class="bi bi-arrow-down"></i></a><a href="index.html#contact" class="btn-jp btn-jp-outline">Talk to an Expert</a></div></div><div class="col-lg-5"><div class="price-hero-panel"><div class="panel-kicker">RATE SNAPSHOT</div><div class="panel-route"><span>DAC</span><i class="bi bi-arrow-right"></i><span>LHR</span></div><div class="panel-price">$42<span> indicative</span></div><div class="panel-meta"><span><i class="bi bi-box-seam"></i> 2 kg parcel</span><span><i class="bi bi-stopwatch"></i> 3-5 days</span></div><div class="panel-line"><span></span><span></span><span></span></div><small>Express courier estimate</small></div></div></div></div></section>
-<section class="pricing-tools section" id="calculator"><div class="container"><div class="section-heading"><span class="eyebrow">TOOLS FOR EVERY SHIPMENT</span><h2 class="sec-title">Calculate With <span class="hl-red">Confidence</span></h2><p class="sec-lead">Use the right tool for the question you need answered. Estimates are indicative and confirmed by our logistics team.</p></div><div class="row g-4"><div class="col-lg-8"><div class="pricing-calculator"><div class="tool-tabs" role="tablist"><button class="tool-tab active" data-tool="rate" type="button"><i class="bi bi-calculator"></i><span>Shipping Rate</span></button><button class="tool-tab" data-tool="transit" type="button"><i class="bi bi-stopwatch"></i><span>Transit Time</span></button><button class="tool-tab" data-tool="volume" type="button"><i class="bi bi-boxes"></i><span>Volumetric Weight</span></button></div><div class="tool-pane active" id="rateTool"><form id="pricingRateForm"><div class="row g-3"><div class="col-sm-6"><label for="priceDestination">Destination</label><select id="priceDestination" class="form-select-jp"><option value="usa">United States</option><option value="uk">United Kingdom</option><option value="canada">Canada</option><option value="australia">Australia</option><option value="germany">Germany</option><option value="uae">United Arab Emirates</option><option value="japan">Japan</option><option value="singapore">Singapore</option></select></div><div class="col-sm-6"><label for="priceMethod">Service</label><select id="priceMethod" class="form-select-jp"><option value="courier">International Courier</option><option value="air">Air Freight</option><option value="sea">Sea Freight</option></select></div><div class="col-sm-6"><label for="priceWeight">Chargeable weight (kg)</label><input id="priceWeight" class="form-control-jp" type="number" min="0.5" step="0.5" value="2"></div><div class="col-sm-6"><label for="pricePromo">Shipment type</label><select id="pricePromo" class="form-select-jp"><option>Documents</option><option>Parcel</option><option>Commercial shipment</option><option>Sample / gift</option></select></div></div><button class="btn-jp btn-jp-primary mt-4" type="submit">Calculate Rate <i class="bi bi-arrow-right"></i></button></form><div class="tool-result" id="rateResult" aria-live="polite">Select your details to see an indicative rate.</div></div><div class="tool-pane" id="transitTool"><form id="transitForm"><div class="row g-3"><div class="col-sm-6"><label for="transitDestination">Destination</label><select id="transitDestination" class="form-select-jp"><option>United States</option><option>United Kingdom</option><option>Canada</option><option>Australia</option><option>Germany</option><option>United Arab Emirates</option><option>Japan</option><option>Singapore</option></select></div><div class="col-sm-6"><label for="transitService">Service</label><select id="transitService" class="form-select-jp"><option>International Courier</option><option>Air Freight</option><option>Sea Freight</option></select></div></div><button class="btn-jp btn-jp-primary mt-4" type="submit">Check Transit Time <i class="bi bi-arrow-right"></i></button></form><div class="tool-result" id="transitResult" aria-live="polite">Choose a destination and service to see the usual delivery window.</div></div><div class="tool-pane" id="volumeTool"><form id="volumeForm"><div class="row g-3"><div class="col-4"><label for="boxLength">Length (cm)</label><input id="boxLength" class="form-control-jp" type="number" min="1" value="30"></div><div class="col-4"><label for="boxWidth">Width (cm)</label><input id="boxWidth" class="form-control-jp" type="number" min="1" value="20"></div><div class="col-4"><label for="boxHeight">Height (cm)</label><input id="boxHeight" class="form-control-jp" type="number" min="1" value="10"></div></div><button class="btn-jp btn-jp-primary mt-4" type="submit">Calculate Volumetric Weight <i class="bi bi-arrow-right"></i></button></form><div class="tool-result" id="volumeResult" aria-live="polite">Formula: length x width x height / 5000.</div></div></div></div><div class="col-lg-4"><div class="surcharge-card"><span class="card-icon"><i class="bi bi-fuel-pump"></i></span><span class="eyebrow">MONTHLY ADJUSTMENT</span><h3>Fuel Surcharge</h3><p>Fuel adjustments can change with global fuel markets and apply to selected services.</p><div class="surcharge-number">12.5<small>%</small></div><div class="surcharge-row"><span>Current reference</span><strong>August 2026</strong></div><a href="#rate-notes" class="text-link">See how pricing works <i class="bi bi-arrow-right"></i></a></div></div></div></div></section>
-<section class="rate-section bg-soft section" id="rate-notes"><div class="container"><div class="section-heading compact"><span class="eyebrow">POPULAR DESTINATIONS</span><h2 class="sec-title">Country-wise <span class="hl-red">Rate Guide</span></h2><p class="sec-lead">Starting estimates for common 2 kg parcels from Dhaka. Duties, taxes and special handling are not included.</p></div><div class="rate-table-wrap"><table class="rate-table"><thead><tr><th>Destination</th><th>Courier</th><th>Air freight</th><th>Typical transit</th><th></th></tr></thead><tbody><tr><td><strong>United States</strong><span>North America</span></td><td>$35-55</td><td>$58-75</td><td>3-5 days</td><td><a href="country.html?c=usa" aria-label="View United States details"><i class="bi bi-arrow-up-right"></i></a></td></tr><tr><td><strong>United Kingdom</strong><span>Europe</span></td><td>$28-42</td><td>$48-65</td><td>3-5 days</td><td><a href="country.html?c=uk" aria-label="View United Kingdom details"><i class="bi bi-arrow-up-right"></i></a></td></tr><tr><td><strong>Canada</strong><span>North America</span></td><td>$38-58</td><td>$60-78</td><td>4-6 days</td><td><a href="country.html?c=canada" aria-label="View Canada details"><i class="bi bi-arrow-up-right"></i></a></td></tr><tr><td><strong>United Arab Emirates</strong><span>Middle East</span></td><td>$25-38</td><td>$42-58</td><td>2-3 days</td><td><a href="country.html?c=uae" aria-label="View United Arab Emirates details"><i class="bi bi-arrow-up-right"></i></a></td></tr><tr><td><strong>Japan</strong><span>East Asia</span></td><td>$34-50</td><td>$52-70</td><td>3-5 days</td><td><a href="country.html?c=japan" aria-label="View Japan details"><i class="bi bi-arrow-up-right"></i></a></td></tr></tbody></table></div><div class="rate-notes"><div><i class="bi bi-info-circle"></i><span>Final rates depend on chargeable weight, dimensions, destination postcode, contents and service level.</span></div><a href="assets/jp-express-rate-card.txt" download class="btn-jp btn-jp-outline-dark btn-jp-sm"><i class="bi bi-download"></i> Download Rate Card</a></div></div></section>
-<section class="pricing-benefits section"><div class="container"><div class="section-heading compact"><span class="eyebrow">WHAT IS INCLUDED</span><h2 class="sec-title">A Price That Makes <span class="hl-red">Sense</span></h2></div><div class="row g-3 g-lg-4"><div class="col-md-6 col-lg-3"><article class="pricing-benefit"><i class="bi bi-receipt"></i><h3>Clear estimates</h3><p>See the main cost drivers before you hand over a shipment.</p></article></div><div class="col-md-6 col-lg-3"><article class="pricing-benefit"><i class="bi bi-shield-check"></i><h3>Secure handling</h3><p>Reliable documentation and professional shipment care.</p></article></div><div class="col-md-6 col-lg-3"><article class="pricing-benefit"><i class="bi bi-headset"></i><h3>Human support</h3><p>Our team checks complex shipments and special requirements.</p></article></div><div class="col-md-6 col-lg-3"><article class="pricing-benefit"><i class="bi bi-graph-up-arrow"></i><h3>Smart options</h3><p>Compare speed and cost across courier, air and sea freight.</p></article></div></div></div></section>
-<section class="pricing-faq bg-soft section"><div class="container"><div class="section-heading compact"><span class="eyebrow">PRICING NOTES</span><h2 class="sec-title">Questions, <span class="hl-red">Answered</span></h2></div><div class="accordion accordion-jp" id="pricingFaq"><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pf1">What is chargeable weight?</button></h3><div id="pf1" class="accordion-collapse collapse show" data-bs-parent="#pricingFaq"><div class="accordion-body">Chargeable weight is the higher of actual weight and volumetric weight. It ensures large, lightweight parcels are priced fairly for the space they use.</div></div></div><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pf2">Are duties and taxes included?</button></h3><div id="pf2" class="accordion-collapse collapse" data-bs-parent="#pricingFaq"><div class="accordion-body">Displayed estimates generally cover transportation only. Import duties, VAT, customs fees and destination charges may apply separately.</div></div></div><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pf3">How do I get an exact quote?</button></h3><div id="pf3" class="accordion-collapse collapse" data-bs-parent="#pricingFaq"><div class="accordion-body">Send us the origin, destination, contents, weight, dimensions and preferred service. Our team will confirm the final rate and delivery window.</div></div></div></div></div></section>
-<section class="final-cta pricing-cta"><div class="container position-relative text-center"><span class="eyebrow on-dark">READY WHEN YOU ARE</span><h2>Have a Shipment in Mind?</h2><p class="sec-lead mx-auto on-dark">Get a precise quote from a logistics specialist who understands your route.</p><div class="d-flex flex-wrap justify-content-center gap-3"><a href="index.html#contact" class="btn-jp btn-jp-primary">Request Exact Quote <i class="bi bi-arrow-right"></i></a><a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20a%20shipping%20quote." class="btn-jp btn-jp-outline" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp Team</a></div></div></section>
-</main>
 
+  <!-- ============ HERO ============ -->
+  <section class="prc-hero" aria-labelledby="prcHeroTitle">
+    <div class="container">
+        <span class="hero-badge" style="margin-bottom:1rem"><span class="dot"></span> Pricing of JP Express</span>
+      <div class="prc-hero-body" data-reveal>
+        <h1 id="prcHeroTitle">Transparent <span class="hl">Shipping Pricing</span></h1>
+        <p>Calculate your shipping cost, transit time and volumetric weight instantly. Check country-wise rates, current fuel surcharge, or download our full rate card.</p>
+      </div>
+
+      <div class="prc-hero-stats" data-reveal style="--d:150ms">
+        <div class="stats-card">
+          <div class="row g-0">
+            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-globe-americas"></i></span><span class="stat-num"><span data-counter="220">0</span><span class="sfx">+</span></span></div><div class="stat-label">Countries Priced</div></div>
+            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-calculator"></i></span><span class="stat-num"><span data-counter="4">0</span></span></div><div class="stat-label">Live Calculators</div></div>
+            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-cash-coin"></i></span><span class="stat-num"><span data-counter="0">0</span><span class="sfx">%</span></span></div><div class="stat-label">Hidden Fees</div></div>
+            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-stopwatch"></i></span><span class="stat-num"><span data-counter="98">0</span><span class="sfx">%</span></span></div><div class="stat-label">On-Time Delivery</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STICKY CATEGORY NAV ============ -->
+  <div class="prc-catnav">
+    <div class="container">
+      <div class="prc-catnav-inner">
+        <a href="#rate-calculator" class="prc-catlink active"><i class="bi bi-calculator"></i> Shipping Rate Calculator</a>
+        <a href="#transit-calculator" class="prc-catlink"><i class="bi bi-stopwatch"></i> Transit Time Calculator</a>
+        <a href="#volumetric-calculator" class="prc-catlink"><i class="bi bi-bounding-box"></i> Volumetric Weight Calculator</a>
+        <a href="#fuel-surcharge" class="prc-catlink"><i class="bi bi-fuel-pump"></i> Fuel Surcharge</a>
+        <a href="#country-rates" class="prc-catlink"><i class="bi bi-globe-americas"></i> Country-wise Rates</a>
+        <a href="#rate-card" class="prc-catlink"><i class="bi bi-file-earmark-arrow-down"></i> Download Rate Card</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SHIPPING RATE CALCULATOR ============ -->
+  <section class="section prc-cat" id="rate-calculator" aria-labelledby="rateTitle">
+    <div class="container">
+      <div class="prc-cat-head" data-reveal>
+        <span class="prc-cat-ico"><i class="bi bi-calculator"></i></span>
+        <div>
+          <h2 id="rateTitle">Shipping Rate Calculator</h2>
+          <p>Get an instant, indicative cost estimate including fuel surcharge based on weight, dimensions, destination and service.</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="prc-calc-card" data-reveal style="--d:80ms">
+            <div class="card-top"></div>
+            <form id="prcRateForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6 col-lg-3"><label class="form-label-jp" for="prcFrom">From</label><select class="form-select-jp" id="prcFrom"><option>Bangladesh — Dhaka</option><option>Bangladesh — Chattogram</option><option>Bangladesh — Sylhet</option></select></div>
+                <div class="col-md-6 col-lg-3"><label class="form-label-jp" for="prcTo">Destination Country</label><select class="form-select-jp" id="prcTo"><option>United States</option><option>United Kingdom</option><option>Canada</option><option>Australia</option><option>Germany</option><option>UAE</option><option>Saudi Arabia</option><option>Japan</option><option>Singapore</option><option>India</option></select></div>
+                <div class="col-md-6 col-lg-3"><label class="form-label-jp" for="prcMethod">Shipping Method</label><select class="form-select-jp" id="prcMethod"><option>International Courier</option><option>Domestic Courier</option><option>Air Freight</option><option>Sea Freight</option></select></div>
+                <div class="col-md-6 col-lg-3"><label class="form-label-jp" for="prcWeight">Weight (kg)</label><input type="number" min="0.5" step="0.5" value="2" class="form-control-jp" id="prcWeight"></div>
+                <div class="col-6 col-lg-4"><label class="form-label-jp" for="prcL">Length (cm)</label><input type="number" min="1" value="30" class="form-control-jp" id="prcL"></div>
+                <div class="col-6 col-lg-4"><label class="form-label-jp" for="prcW">Width (cm)</label><input type="number" min="1" value="20" class="form-control-jp" id="prcW"></div>
+                <div class="col-12 col-lg-4"><label class="form-label-jp" for="prcH">Height (cm)</label><input type="number" min="1" value="10" class="form-control-jp" id="prcH"></div>
+                <div class="col-12 mt-2"><button type="submit" class="btn-jp btn-jp-primary">Calculate Shipping Cost <i class="bi bi-arrow-right"></i></button></div>
+              </div>
+            </form>
+            <div id="prcRateResult" class="prc-calc-result d-none" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRANSIT TIME CALCULATOR ============ -->
+  <section class="section bg-soft prc-cat" id="transit-calculator" aria-labelledby="transitTitle">
+    <div class="container">
+      <div class="prc-cat-head" data-reveal>
+        <span class="prc-cat-ico"><i class="bi bi-stopwatch"></i></span>
+        <div>
+          <h2 id="transitTitle">Transit Time Calculator</h2>
+          <p>See the typical delivery window for your chosen destination and service type.</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="prc-calc-card" data-reveal style="--d:80ms">
+            <div class="card-top"></div>
+            <form id="prcTransitForm" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label-jp" for="prcTDest">Destination Country</label><select class="form-select-jp" id="prcTDest"></select></div>
+                <div class="col-md-6"><label class="form-label-jp" for="prcTMethod">Shipping Method</label><select class="form-select-jp" id="prcTMethod"><option>International Courier</option><option>Air Freight</option><option>Sea Freight</option><option>Domestic Courier</option></select></div>
+                <div class="col-12 mt-2"><button type="submit" class="btn-jp btn-jp-primary">Check Transit Time <i class="bi bi-arrow-right"></i></button></div>
+              </div>
+            </form>
+            <div id="prcTransitResult" class="prc-calc-result d-none" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VOLUMETRIC WEIGHT CALCULATOR ============ -->
+  <section class="section prc-cat" id="volumetric-calculator" aria-labelledby="volTitle">
+    <div class="container">
+      <div class="prc-cat-head" data-reveal>
+        <span class="prc-cat-ico"><i class="bi bi-bounding-box"></i></span>
+        <div>
+          <h2 id="volTitle">Volumetric Weight Calculator</h2>
+          <p>Large, light packages are often charged by volume rather than actual weight. Compare both to see your chargeable weight.</p>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <div class="prc-calc-card" data-reveal style="--d:80ms">
+            <div class="card-top"></div>
+            <div class="prc-vol-visual">
+              <span class="prc-vol-box"><i class="bi bi-box-seam"></i></span>
+              <p class="prc-vol-formula mb-0">Volumetric Weight = (L × W × H in cm) ÷ <strong>Divisor</strong></p>
+            </div>
+            <form id="prcVolForm" novalidate>
+              <div class="row g-3">
+                <div class="col-6 col-lg-3"><label class="form-label-jp" for="prcVL">Length (cm)</label><input type="number" min="1" value="40" class="form-control-jp" id="prcVL"></div>
+                <div class="col-6 col-lg-3"><label class="form-label-jp" for="prcVW">Width (cm)</label><input type="number" min="1" value="30" class="form-control-jp" id="prcVW"></div>
+                <div class="col-6 col-lg-3"><label class="form-label-jp" for="prcVH">Height (cm)</label><input type="number" min="1" value="25" class="form-control-jp" id="prcVH"></div>
+                <div class="col-6 col-lg-3"><label class="form-label-jp" for="prcVActual">Actual Weight (kg)</label><input type="number" min="0" step="0.1" value="3" class="form-control-jp" id="prcVActual"></div>
+                <div class="col-12"><label class="form-label-jp" for="prcVDivisor">Service Divisor</label>
+                  <select class="form-select-jp" id="prcVDivisor">
+                    <option value="5000">International Courier / Domestic Courier (÷5000)</option>
+                    <option value="6000">Air Freight (÷6000)</option>
+                  </select>
+                </div>
+                <div class="col-12 mt-2"><button type="submit" class="btn-jp btn-jp-primary">Calculate Volumetric Weight <i class="bi bi-arrow-right"></i></button></div>
+              </div>
+            </form>
+            <div id="prcVolResult" class="prc-calc-result d-none" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FUEL SURCHARGE ============ -->
+  <section class="section bg-soft prc-cat" id="fuel-surcharge" aria-labelledby="fuelTitle">
+    <div class="container">
+      <div class="prc-cat-head" data-reveal>
+        <span class="prc-cat-ico"><i class="bi bi-fuel-pump"></i></span>
+        <div>
+          <h2 id="fuelTitle">Fuel Surcharge</h2>
+          <p>A variable percentage added to freight cost to account for fluctuating fuel prices, reviewed monthly.</p>
+        </div>
+      </div>
+      <div class="prc-fuel-grid">
+        <div class="prc-fuel-card" data-reveal="left">
+          <span class="prc-fuel-ico"><i class="bi bi-info-circle"></i></span>
+          <h3>How Fuel Surcharge Works</h3>
+          <p>Fuel surcharge is calculated as a percentage of your base freight cost and is applied automatically at checkout. Rates are reviewed monthly based on regional fuel price movements and may change without prior notice.</p>
+          <div class="prc-fuel-formula">Surcharge = Base Freight Cost × Surcharge %</div>
+        </div>
+        <div class="prc-fuel-tablewrap" data-reveal="right">
+          <table class="prc-fuel-table">
+            <thead><tr><th>Service</th><th>Current Surcharge</th></tr></thead>
+            <tbody>
+              <tr><td>International Courier</td><td>12%</td></tr>
+              <tr><td>Air Freight</td><td>15%</td></tr>
+              <tr><td>Sea Freight</td><td>5%</td></tr>
+              <tr><td>Domestic Courier</td><td>0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COUNTRY-WISE RATES ============ -->
+  <section class="section prc-cat" id="country-rates" aria-labelledby="countryTitle">
+    <div class="container">
+      <div class="prc-cat-head" data-reveal>
+        <span class="prc-cat-ico"><i class="bi bi-globe-americas"></i></span>
+        <div>
+          <h2 id="countryTitle">Country-wise Rates</h2>
+          <p>Indicative per-kg rates and typical transit times for our most-shipped destinations.</p>
+        </div>
+      </div>
+
+      <div class="prc-rates-toolbar" data-reveal style="--d:80ms">
+        <div class="prc-search-wrap">
+          <i class="bi bi-search"></i>
+          <input type="text" class="form-control-jp" id="prcRatesSearch" placeholder="Search a country…">
+        </div>
+        <span class="prc-rates-note">RATES SHOWN ARE PER KG AFTER THE FIRST 0.5 KG</span>
+      </div>
+
+      <div class="prc-tablewrap" data-reveal style="--d:120ms">
+        <div class="prc-table-scroll">
+          <table class="prc-rates-table">
+            <thead>
+              <tr><th>Country</th><th>Courier Rate</th><th>Freight Rate</th><th>Typical Transit</th></tr>
+            </thead>
+            <tbody id="prcRatesBody"></tbody>
+          </table>
+        </div>
+        <p class="prc-rates-empty" id="prcRatesEmpty">No countries match your search.</p>
+      </div>
+      <p class="prc-faq-note">DON'T SEE YOUR COUNTRY? <a href="index.html#contact" style="color:var(--red)">CONTACT OUR TEAM</a> FOR A RATE.</p>
+    </div>
+  </section>
+
+  <!-- ============ DOWNLOAD RATE CARD ============ -->
+  <section class="section bg-soft prc-cat" id="rate-card" aria-labelledby="rateCardTitle">
+    <div class="container">
+      <div class="prc-cat-head" data-reveal>
+        <span class="prc-cat-ico"><i class="bi bi-file-earmark-arrow-down"></i></span>
+        <div>
+          <h2 id="rateCardTitle">Download Rate Card</h2>
+          <p>Get our complete, printable rate card for offline reference or sharing with your team.</p>
+        </div>
+      </div>
+      <div class="prc-download" data-reveal>
+        <span class="prc-download-ico"><i class="bi bi-file-earmark-pdf"></i></span>
+        <div class="prc-download-body">
+          <h3>JP Express Rate Card 2026</h3>
+          <p>All courier, freight and additional service rates in one PDF — including fuel surcharge and country-wise pricing for 220+ destinations.</p>
+        </div>
+        <div class="prc-download-actions">
+          <a href="assets/JP-Express-Rate-Card-2026.pdf" download class="btn-jp btn-jp-light"><i class="bi bi-download"></i> Download PDF</a>
+          <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20could%20you%20send%20me%20the%20latest%20rate%20card%3F" target="_blank" rel="noopener" class="btn-jp btn-jp-outline wa-link" data-wa-text="Hi JP Express, could you send me the latest rate card?"><i class="bi bi-whatsapp"></i> Request via WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRICING FAQ ============ -->
+  <section class="section" aria-labelledby="prcFaqTitle">
+    <div class="container">
+      <div class="row g-5 align-items-start">
+        <div class="col-lg-7">
+          <div data-reveal><span class="eyebrow">FAQ</span><h2 class="sec-title" id="prcFaqTitle">Pricing <span class="hl-red">Questions</span></h2></div>
+          <div class="accordion accordion-jp" id="prcFaqAcc">
+            <div class="accordion-item" data-reveal style="--d:0ms"><h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pq1">How is my shipping cost calculated?</button></h3><div id="pq1" class="accordion-collapse collapse show" data-bs-parent="#prcFaqAcc"><div class="accordion-body">Cost is based on chargeable weight (the higher of actual and volumetric weight), destination, service type and the current fuel surcharge.</div></div></div>
+            <div class="accordion-item" data-reveal style="--d:60ms"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pq2">What is volumetric weight?</button></h3><div id="pq2" class="accordion-collapse collapse" data-bs-parent="#prcFaqAcc"><div class="accordion-body">Volumetric weight is calculated from a package's dimensions (length × width × height ÷ a service-specific divisor) and applies when a package is large but light.</div></div></div>
+            <div class="accordion-item" data-reveal style="--d:120ms"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pq3">What is fuel surcharge?</button></h3><div id="pq3" class="accordion-collapse collapse" data-bs-parent="#prcFaqAcc"><div class="accordion-body">Fuel surcharge is a variable percentage added to freight cost to account for fluctuating fuel prices. It differs by service type and is reviewed monthly.</div></div></div>
+            <div class="accordion-item" data-reveal style="--d:180ms"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pq4">Can I get an exact quote instead of an estimate?</button></h3><div id="pq4" class="accordion-collapse collapse" data-bs-parent="#prcFaqAcc"><div class="accordion-body">Yes. Contact our team with your shipment details — weight, dimensions, destination and service — for an exact, confirmed quote.</div></div></div>
+            <div class="accordion-item" data-reveal style="--d:240ms"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pq5">Do rates change without notice?</button></h3><div id="pq5" class="accordion-collapse collapse" data-bs-parent="#prcFaqAcc"><div class="accordion-body">Base rates are reviewed periodically and fuel surcharge is reviewed monthly. Confirmed quotes are honored for the timeframe stated at booking.</div></div></div>
+          </div>
+        </div>
+        <div class="col-lg-5" data-reveal style="--d:150ms">
+          <div class="help-card">
+            <div class="help-ico"><i class="bi bi-headset"></i></div>
+            <h3 class="mt-3">Need an exact quote?</h3>
+            <p>Our logistics team is available 24/7 to confirm exact pricing for your shipment.</p>
+            <div class="d-grid gap-2 position-relative">
+              <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20an%20exact%20shipping%20quote." target="_blank" rel="noopener" class="btn-jp btn-jp-primary wa-link" data-wa-text="Hi JP Express, I'd like an exact shipping quote."><i class="bi bi-whatsapp"></i> Chat on WhatsApp</a>
+              <a href="tel:+8801681637836" class="btn-jp btn-jp-outline"><i class="bi bi-telephone"></i> Call Support</a>
+            </div>
+            <ul class="help-meta">
+              <li><i class="bi bi-clock-history"></i><div><strong>Avg. response</strong><span>Under 15 minutes</span></div></li>
+              <li><i class="bi bi-calendar-check"></i><div><strong>Support hours</strong><span>Sat–Thu, 9:00–19:00 · 24/7 online</span></div></li>
+              <li><i class="bi bi-envelope"></i><div><strong>Email us</strong><span>support@jpexpress.com</span></div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final-cta" aria-labelledby="prcCtaTitle">
+    <div class="glow"></div>
+    <svg class="cta-routes" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M-20 320 Q 300 60 640 180 T 1240 90"/>
+      <path d="M-20 120 Q 400 320 800 200 T 1240 300"/>
+    </svg>
+    <div class="container position-relative text-center">
+      <span class="font-mono d-inline-block mb-3" style="color:#9FE2F2;letter-spacing:.2em;font-size:.72rem" data-reveal>NO HIDDEN FEES · EVER</span>
+      <h2 id="prcCtaTitle" data-reveal style="--d:100ms">Ready to See <span class="hl-light">Your Price?</span></h2>
+      <p class="sec-lead mx-auto on-dark" style="color:#B9C6DA!important" data-reveal>Use the calculator above, or talk to our team for an exact, confirmed quote.</p>
+      <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+        <a href="#rate-calculator" class="btn-jp btn-jp-primary" data-reveal style="--d:200ms">Calculate Shipping Cost <i class="bi bi-arrow-right"></i></a>
+        <a href="index.html#contact" class="btn-jp btn-jp-light" data-reveal style="--d:300ms"><i class="bi bi-headset"></i> Talk to Our Team</a>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer pt-5">
@@ -130,15 +445,15 @@
       </div>
       <div class="col-6 col-md-4 col-lg-2">
         <h3>Services</h3>
-        <ul class="list-unstyled"><li><a href="index.html#services">International Courier</a></li><li><a href="index.html#services">Air Freight</a></li><li><a href="index.html#services">Sea Freight</a></li><li><a href="index.html#services">Customs Clearance</a></li></ul>
+        <ul class="list-unstyled"><li><a href="services.html#intl-courier">International Courier</a></li><li><a href="services.html#freight">Air &amp; Sea Freight</a></li><li><a href="services.html#export">Export Logistics</a></li><li><a href="services.html#import">Customs Clearance</a></li></ul>
       </div>
       <div class="col-6 col-md-4 col-lg-2">
-        <h3>Resources</h3>
-        <ul class="list-unstyled"><li><a href="index.html#resources">Blog</a></li><li><a href="track-shipment.html">Track Shipment</a></li><li><a href="index.html#tools">Shipping Calculator</a></li><li><a href="index.html#">FAQs</a></li></ul>
+        <h3>Pricing</h3>
+        <ul class="list-unstyled"><li><a href="pricing.html#rate-calculator">Rate Calculator</a></li><li><a href="pricing.html#country-rates">Country-wise Rates</a></li><li><a href="pricing.html#fuel-surcharge">Fuel Surcharge</a></li><li><a href="pricing.html#rate-card">Download Rate Card</a></li></ul>
       </div>
       <div class="col-6 col-md-4 col-lg-2">
         <h3>Legal</h3>
-        <ul class="list-unstyled"><li><a href="index.html#">Privacy Policy</a></li><li><a href="index.html#">Terms & Conditions</a></li><li><a href="index.html#">Refund Policy</a></li></ul>
+        <ul class="list-unstyled"><li><a href="index.html#">Privacy Policy</a></li><li><a href="index.html#">Terms &amp; Conditions</a></li><li><a href="index.html#">Refund Policy</a></li></ul>
       </div>
     </div>
     <div class="footer-bottom py-4 d-flex flex-column flex-md-row justify-content-between gap-2">
@@ -147,6 +462,23 @@
     </div>
   </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="js/pricing.js"></script><script src="js/main.js"></script>
+
+<!-- ============ FLOATING ACTIONS ============ -->
+<div class="fab-side" id="fabSide" aria-label="Quick contact actions">
+  <a href="track-shipment.html" data-tip="TRACK" aria-label="Track shipment"><i class="bi bi-geo-alt"></i></a>
+  <a href="#rate-calculator" class="fab-quote" data-tip="QUOTE" aria-label="Get a quote"><i class="bi bi-calculator"></i></a>
+  <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="fab-wa wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WHATSAPP" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+  <a href="tel:+8801681637836" data-tip="CALL" aria-label="Call us"><i class="bi bi-telephone"></i></a>
+</div>
+<nav class="fab-bar" aria-label="Mobile quick actions">
+  <a href="track-shipment.html"><i class="bi bi-geo-alt"></i>Track</a>
+  <a href="#rate-calculator" class="bar-quote"><i class="bi bi-calculator"></i>Quote</a>
+  <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="fab-wa wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+  <a href="tel:+8801681637836"><i class="bi bi-telephone"></i>Call</a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/pricing.js"></script>
 </body>
 </html>

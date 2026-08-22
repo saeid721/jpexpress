@@ -1,31 +1,54 @@
-(() => {
-  const search = document.getElementById('resourceSearch');
-  const buttons = [...document.querySelectorAll('.filter-btn')];
-  const cards = [...document.querySelectorAll('.resource-card')];
-  const empty = document.getElementById('resourceEmpty');
-  const count = document.getElementById('resourceCount');
-  let activeFilter = 'all';
-  const update = () => {
-    const query = (search.value || '').trim().toLowerCase();
-    let visible = 0;
-    cards.forEach(card => {
-      const matchesFilter = activeFilter === 'all' || card.dataset.category === activeFilter;
-      const matchesSearch = !query || (card.dataset.search || '').includes(query) || card.querySelector('h3').textContent.toLowerCase().includes(query);
-      const show = matchesFilter && matchesSearch;
-      card.style.display = show ? '' : 'none';
-      if (show) visible++;
+(function () {
+"use strict";
+
+/* ---------- Sticky category nav: smooth scroll + scrollspy ---------- */
+var catlinks = Array.from(document.querySelectorAll('.res-catlink'));
+var sections = catlinks
+  .map(function (l) { return document.querySelector(l.getAttribute('href')); })
+  .filter(Boolean);
+
+if (catlinks.length && sections.length && 'IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var id = '#' + entry.target.id;
+        catlinks.forEach(function (l) {
+          l.classList.toggle('active', l.getAttribute('href') === id);
+        });
+      }
     });
-    empty.style.display = visible ? 'none' : 'block';
-    count.textContent = visible;
-  };
-  buttons.forEach(button => button.addEventListener('click', () => {
-    buttons.forEach(item => item.classList.toggle('active', item === button));
-    activeFilter = button.dataset.filter;
-    update();
-  }));
-  search.addEventListener('input', update);
-  document.addEventListener('keydown', event => {
-    if (event.key === '/' && document.activeElement !== search && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) { event.preventDefault(); search.focus(); }
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function (s) { io.observe(s); });
+}
+
+/* ---------- Hero search: filters guide/article cards by title ---------- */
+var heroSearch = document.getElementById('resHeroSearch');
+if (heroSearch) {
+  heroSearch.addEventListener('input', function () {
+    var q = heroSearch.value.trim().toLowerCase();
+    document.querySelectorAll('.res-card[data-title]').forEach(function (card) {
+      var match = !q || card.getAttribute('data-title').toLowerCase().indexOf(q) !== -1;
+      card.style.display = match ? '' : 'none';
+    });
   });
-  update();
+}
+
+/* ---------- Transit time table search ---------- */
+var tableSearch = document.getElementById('resTransitSearch');
+var tableBody = document.getElementById('resTransitBody');
+var tableEmpty = document.getElementById('resTransitEmpty');
+if (tableSearch && tableBody) {
+  tableSearch.addEventListener('input', function () {
+    var q = tableSearch.value.trim().toLowerCase();
+    var rows = Array.from(tableBody.querySelectorAll('tr'));
+    var visible = 0;
+    rows.forEach(function (row) {
+      var match = !q || row.textContent.toLowerCase().indexOf(q) !== -1;
+      row.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (tableEmpty) tableEmpty.style.display = visible ? 'none' : 'block';
+  });
+}
+
 })();

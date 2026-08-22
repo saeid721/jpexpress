@@ -1,13 +1,147 @@
 /* ============ PRICING PAGE ============ */
-.pricing-hero{position:relative;overflow:hidden;background:var(--navy);color:#fff;padding:clamp(4rem,9vw,7rem) 0 clamp(3.5rem,7vw,5.5rem)}
-.pricing-hero:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 90% 80% at 50% 0%,#000 20%,transparent 80%)}
-.pricing-hero:after{content:"";position:absolute;inset:0;background:radial-gradient(600px 360px at 5% 20%,rgba(230,34,41,.25),transparent 68%),radial-gradient(650px 380px at 95% 85%,rgba(18,165,198,.2),transparent 68%);pointer-events:none}
-.pricing-hero .container{z-index:2}.hero-badge{display:inline-flex;align-items:center;gap:.5rem;color:#9FE2F2;font:600 .68rem var(--font-mono);letter-spacing:.1em;text-transform:uppercase}.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 5px rgba(230,34,41,.18)}
-.pricing-hero h1{font:800 clamp(2.2rem,5.5vw,4.3rem)/1.06 var(--font-display);max-width:720px;margin:1.15rem 0}.price-highlight{color:#FF8B90}.pricing-hero p{color:#B9C6DA;max-width:57ch;font-size:clamp(.92rem,1.5vw,1.08rem);line-height:1.7;margin-bottom:1.7rem}
-.pricing-orbit{position:absolute;border:1px solid rgba(159,226,242,.2);border-radius:50%;width:420px;height:420px;right:-140px;top:-170px;transform:rotate(25deg)}.orbit-two{width:270px;height:270px;right:95px;top:20px;border-color:rgba(255,123,129,.25)}
-.price-hero-panel{position:relative;background:rgba(255,255,255,.96);color:var(--navy);border:1px solid rgba(255,255,255,.5);border-radius:18px;padding:1.7rem;box-shadow:0 22px 55px rgba(0,0,0,.25);transform:rotate(2deg)}.panel-kicker,.card-kicker{font:600 .66rem var(--font-mono);letter-spacing:.15em;color:var(--muted)}.panel-route{display:flex;align-items:center;gap:1rem;margin:1.4rem 0 .6rem;font:800 1.3rem var(--font-mono)}.panel-route i{color:var(--red);font-size:1rem}.panel-price{font:800 3rem var(--font-display);color:var(--red)}.panel-price span{font:500 .72rem var(--font-mono);color:var(--muted)}.panel-meta{display:flex;flex-wrap:wrap;gap:1rem;color:var(--muted);font:.7rem var(--font-mono)}.panel-meta i{color:var(--cyan)}.panel-line{display:flex;gap:4px;margin:1.5rem 0 .55rem}.panel-line span{height:4px;border-radius:4px;background:var(--red);flex:1}.panel-line span:nth-child(2){background:var(--cyan);flex:1.6}.panel-line span:nth-child(3){background:var(--border);flex:2}.price-hero-panel small{color:var(--muted);font:500 .68rem var(--font-mono)}
-.section-heading{text-align:center;max-width:680px;margin:0 auto 2.5rem}.section-heading.compact{margin-bottom:1.8rem}.section-heading .eyebrow{display:block}.section-heading .sec-title{margin:.5rem 0 .65rem}.section-heading .sec-lead{margin:0 auto;font-size:.92rem}
-.pricing-tools{background:var(--surface)}.pricing-calculator{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow-md);overflow:hidden}.tool-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border);background:#F7F9FC}.tool-tab{flex:1;min-width:145px;border:0;background:transparent;padding:1rem .8rem;color:var(--muted);font:700 .77rem var(--font-display);display:flex;align-items:center;justify-content:center;gap:.45rem;white-space:nowrap;border-bottom:2px solid transparent}.tool-tab i{font-size:1rem}.tool-tab.active{color:var(--navy);background:#fff;border-bottom-color:var(--red)}.tool-pane{display:none;padding:clamp(1.2rem,3vw,2rem)}.tool-pane.active{display:block}.tool-pane label{display:block;color:var(--navy);font:700 .72rem var(--font-display);margin-bottom:.4rem}.tool-pane .form-control-jp,.tool-pane .form-select-jp{background:#fff}.tool-result{margin-top:1.5rem;padding:1rem 1.1rem;border-radius:10px;background:var(--navy);color:#D9E4F3;min-height:58px;font:.74rem var(--font-mono);line-height:1.7}.tool-result strong{color:#fff;font-size:1.25rem}.tool-result .result-accent{color:#9FE2F2}
-.surcharge-card{height:100%;background:linear-gradient(150deg,var(--navy),#122C4B);color:#fff;border-radius:16px;padding:1.7rem;position:relative;overflow:hidden}.surcharge-card:after{content:"";position:absolute;width:190px;height:190px;border:1px solid rgba(159,226,242,.18);border-radius:50%;right:-70px;bottom:-75px}.card-icon{display:grid;place-items:center;width:46px;height:46px;border-radius:12px;background:rgba(230,34,41,.18);color:#FF8B90;font-size:1.35rem;margin-bottom:1.3rem}.surcharge-card .eyebrow{color:#9FE2F2;font-size:.64rem}.surcharge-card h3{font-size:1.5rem;margin:.45rem 0 .55rem}.surcharge-card p{color:#B9C6DA;font-size:.83rem;line-height:1.6}.surcharge-number{font:800 3.2rem var(--font-display);color:#fff;margin:1.3rem 0 .7rem}.surcharge-number small{font-size:1.4rem;color:#FF8B90}.surcharge-row{border-top:1px solid rgba(255,255,255,.15);padding-top:.75rem;display:flex;justify-content:space-between;font:.67rem var(--font-mono);color:#A9B6CA}.surcharge-row strong{color:#fff}.text-link{display:inline-flex;gap:.4rem;align-items:center;color:#9FE2F2;font:700 .76rem var(--font-display);margin-top:1.2rem}.text-link:hover{color:#fff}
-.rate-section{background:#F4F7FA}.rate-table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--border);border-radius:14px}.rate-table{width:100%;min-width:680px;border-collapse:collapse}.rate-table th{padding:1rem 1.1rem;text-align:left;background:var(--navy);color:#C9D6E8;font:600 .66rem var(--font-mono);letter-spacing:.08em;text-transform:uppercase}.rate-table td{padding:1rem 1.1rem;border-bottom:1px solid var(--border);font:.84rem var(--font-mono);color:var(--ink)}.rate-table tr:last-child td{border-bottom:0}.rate-table td:first-child{font-family:var(--font-display)}.rate-table td:first-child strong,.rate-table td:first-child span{display:block}.rate-table td:first-child span{font:500 .62rem var(--font-mono);color:var(--muted);margin-top:.25rem;text-transform:uppercase;letter-spacing:.06em}.rate-table td:nth-child(2),.rate-table td:nth-child(3){font-weight:700;color:var(--navy)}.rate-table td:last-child{text-align:right}.rate-table a{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:#FDE8E9;color:var(--red);margin-left:auto}.rate-notes{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem}.rate-notes>div{display:flex;gap:.55rem;align-items:flex-start;color:var(--muted);font-size:.75rem;line-height:1.5}.rate-notes i{color:var(--cyan);font-size:1rem}.pricing-benefit{height:100%;border:1px solid var(--border);border-radius:12px;padding:1.35rem;background:var(--surface);transition:transform .25s,box-shadow .25s}.pricing-benefit:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}.pricing-benefit>i{display:grid;place-items:center;width:40px;height:40px;border-radius:10px;background:#E6F7FA;color:var(--cyan);font-size:1.1rem}.pricing-benefit h3{font-size:1rem;margin:1rem 0 .4rem}.pricing-benefit p{color:var(--muted);font-size:.8rem;line-height:1.55;margin:0}.pricing-cta{position:relative;overflow:hidden}.pricing-cta:before{content:"";position:absolute;inset:0;background:radial-gradient(500px 240px at 80% 20%,rgba(18,165,198,.18),transparent 70%)}
-@media(max-width:767px){.pricing-hero{padding-top:3rem}.pricing-hero h1{font-size:2.35rem}.price-hero-panel{transform:none}.tool-tab{min-width:125px;font-size:.7rem;padding:.8rem .5rem}.tool-tab span{display:none}.rate-notes{align-items:stretch;flex-direction:column}.rate-notes .btn-jp{align-self:flex-start}.pricing-benefit{padding:1.1rem}.surcharge-card{min-height:0}}
+/* Reuses tokens + shared classes from css/style.css (stats-card, form-control-jp,
+   form-select-jp, calc-result, country-chip, final-cta, etc.) — only new,
+   page-specific layouts are defined here. */
+
+/* ---------- HERO ---------- */
+.prc-hero{background:var(--navy);color:#fff;position:relative;padding:clamp(2.4rem,6vw,4rem) 0 clamp(3.6rem,8vw,5.5rem);overflow:clip}
+.prc-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 90% 80% at 50% 0%,#000 30%,transparent 75%)}
+.prc-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 320px at 10% 0%,rgba(230,34,41,.22),transparent 65%),radial-gradient(700px 380px at 95% 100%,rgba(18,165,198,.16),transparent 65%);pointer-events:none}
+.prc-hero .container{position:relative;z-index:2}
+.prc-breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#9FB0C8;margin-bottom:1.2rem}
+.prc-breadcrumb a{color:#9FB0C8}
+.prc-breadcrumb a:hover{color:#fff}
+.prc-breadcrumb span{color:#FF9BA0}
+.prc-breadcrumb .bi{font-size:.6rem}
+.prc-hero-body{}
+.prc-hero-body h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.15;margin-bottom:.9rem}
+.prc-hero-body h1 .hl{color:#FF7B81}
+.prc-hero-body p{color:#B9C6DA;font-size:clamp(.9rem,1.5vw,1.08rem);line-height:1.6}
+.prc-hero-stats{margin-top:clamp(1.6rem,4vw,2.6rem);position:relative;z-index:5}
+
+/* ---------- STICKY CATEGORY NAV ---------- */
+.prc-catnav{position:sticky;top:var(--jp-header-h,86px);z-index:20;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm)}
+.prc-catnav-inner{display:flex;gap:.4rem;overflow-x:auto;padding:.85rem 0;scrollbar-width:none}
+.prc-catnav-inner::-webkit-scrollbar{display:none}
+.prc-catlink{flex:0 0 auto;font-family:var(--font-display);font-weight:700;font-size:.8rem;color:var(--muted);background:var(--bg);border:1.5px solid var(--border);border-radius:100px;padding:.5rem 1.05rem;display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap;transition:all .25s}
+.prc-catlink .bi{font-size:.85rem}
+.prc-catlink:hover{color:var(--navy);border-color:var(--navy)}
+.prc-catlink.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* ---------- CATEGORY SECTION ---------- */
+.prc-cat{scroll-margin-top:calc(var(--jp-header-h,86px) + 64px)}
+.prc-cat-head{display:flex;align-items:flex-start;gap:1.1rem;margin-bottom:2.2rem}
+.prc-cat-ico{width:60px;height:60px;flex:0 0 auto;border-radius:16px;background:var(--navy);color:#FF7B81;display:grid;place-items:center;font-size:1.6rem}
+.prc-cat-head h2{font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;margin-bottom:.3rem;color:var(--navy)}
+.prc-cat-head p{color:var(--muted);font-size:.92rem;margin:0;max-width:64ch}
+
+/* ---------- CALCULATOR CARD ---------- */
+.prc-calc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:clamp(1.3rem,2.6vw,2rem);overflow:hidden;position:relative}
+.prc-calc-card .card-top{position:absolute;left:0;top:0;right:0;height:3px;background:linear-gradient(90deg,var(--red) 0 30%,var(--navy) 30% 65%,var(--cyan) 65%)}
+.prc-calc-card .row.g-3{--bs-gutter-y:.9rem}
+.prc-calc-result{margin-top:1.4rem}
+
+/* ---------- VOLUMETRIC VISUAL ---------- */
+.prc-vol-visual{display:flex;align-items:center;justify-content:center;gap:1.4rem;background:var(--bg);border:1px dashed var(--border);border-radius:14px;padding:1.6rem 1rem;margin-bottom:1.4rem;flex-wrap:wrap;text-align:center}
+.prc-vol-box{width:74px;height:74px;border:2.5px solid var(--cyan);border-radius:12px;background:var(--cyan-soft);display:grid;place-items:center;font-size:1.6rem;color:#0B7C96;flex:0 0 auto}
+.prc-vol-formula{font-family:var(--font-mono);font-size:.82rem;color:var(--navy);letter-spacing:.02em}
+.prc-vol-formula strong{color:var(--red)}
+
+/* ---------- COMPARISON RESULT ROW ---------- */
+.prc-compare{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-top:1.2rem}
+.prc-compare-item{background:var(--bg);border-radius:12px;padding:1rem 1.1rem;text-align:center}
+.prc-compare-item.is-chargeable{background:var(--navy);color:#fff}
+.prc-compare-item .lbl{display:block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.prc-compare-item.is-chargeable .lbl{color:#9FE2F2}
+.prc-compare-item .val{font-family:var(--font-display);font-weight:800;font-size:1.35rem;color:var(--navy)}
+.prc-compare-item.is-chargeable .val{color:#fff}
+@media (max-width:480px){.prc-compare{grid-template-columns:1fr}}
+
+/* ---------- FUEL SURCHARGE ---------- */
+.prc-fuel-grid{display:grid;grid-template-columns:1fr;gap:1.4rem}
+@media (min-width:992px){.prc-fuel-grid{grid-template-columns:.95fr 1.05fr}}
+.prc-fuel-card{background:linear-gradient(155deg,var(--navy),var(--navy-2));border-radius:var(--radius-lg);padding:clamp(1.5rem,3vw,2.2rem);color:#fff;position:relative;overflow:hidden}
+.prc-fuel-card::before{content:"";position:absolute;inset:0;background:radial-gradient(320px 220px at 90% 0%,rgba(230,34,41,.3),transparent 65%)}
+.prc-fuel-card > *{position:relative}
+.prc-fuel-ico{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:1.5rem;margin-bottom:1.2rem}
+.prc-fuel-card h3{font-size:1.2rem;font-weight:800;margin-bottom:.7rem}
+.prc-fuel-card p{font-size:.9rem;line-height:1.65;color:#C4D0E2;margin-bottom:1.2rem}
+.prc-fuel-formula{font-family:var(--font-mono);font-size:.82rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:.9rem 1.1rem;color:#9FE2F2}
+.prc-fuel-table{width:100%;border-collapse:collapse}
+.prc-fuel-table th,.prc-fuel-table td{padding:.9rem 1rem;text-align:left;font-size:.86rem;border-bottom:1px solid var(--border)}
+.prc-fuel-table th{font-family:var(--font-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+.prc-fuel-table td:last-child,.prc-fuel-table th:last-child{text-align:right;font-family:var(--font-display);font-weight:700;color:var(--red)}
+.prc-fuel-table tr:last-child td{border-bottom:none}
+.prc-fuel-tablewrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+
+/* ---------- COUNTRY RATES TABLE ---------- */
+.prc-rates-toolbar{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;justify-content:space-between;margin-bottom:1.2rem}
+.prc-search-wrap{position:relative;flex:1 1 260px;max-width:360px}
+.prc-search-wrap .bi{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--muted)}
+.prc-search-wrap input{padding-left:2.4rem}
+.prc-rates-note{font-family:var(--font-mono);font-size:.66rem;color:var(--muted);letter-spacing:.04em}
+.prc-tablewrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+.prc-table-scroll{overflow-x:auto}
+.prc-rates-table{width:100%;border-collapse:collapse;min-width:640px}
+.prc-rates-table th,.prc-rates-table td{padding:.95rem 1.15rem;text-align:left;font-size:.86rem;border-bottom:1px solid var(--border);white-space:nowrap}
+.prc-rates-table th{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:var(--bg);position:sticky;top:0}
+.prc-rates-table tr:last-child td{border-bottom:none}
+.prc-rates-table tr:hover td{background:var(--bg)}
+.prc-rates-table td.country{font-family:var(--font-display);font-weight:700;color:var(--navy);display:flex;align-items:center;gap:.6rem}
+.prc-rates-table .zone-badge{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;background:var(--cyan-soft);color:#0B7C96;border-radius:100px;padding:.2rem .6rem;text-transform:uppercase}
+.prc-rates-table .rate{font-family:var(--font-display);font-weight:700;color:var(--red)}
+.prc-rates-empty{padding:2.2rem 1rem;text-align:center;color:var(--muted);font-size:.86rem;display:none}
+
+/* ---------- DOWNLOAD RATE CARD ---------- */
+.prc-download{background:linear-gradient(155deg,var(--navy),var(--navy-2));border-radius:var(--radius-lg);padding:clamp(1.8rem,4vw,2.8rem);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:1.8rem;position:relative;overflow:hidden}
+.prc-download::before{content:"";position:absolute;inset:0;background:radial-gradient(360px 240px at 95% 0%,rgba(230,34,41,.3),transparent 65%)}
+.prc-download > *{position:relative}
+.prc-download-ico{width:76px;height:76px;flex:0 0 auto;border-radius:20px;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:2rem;color:#FF9BA0}
+.prc-download-body{flex:1 1 280px}
+.prc-download-body h3{font-size:1.35rem;font-weight:800;margin-bottom:.5rem}
+.prc-download-body p{color:#B9C6DA;font-size:.92rem;margin:0;max-width:56ch}
+.prc-download-actions{display:flex;flex-wrap:wrap;gap:.7rem}
+
+/* ---------- FAQ (reuses accordion-jp) ---------- */
+.prc-faq-note{font-family:var(--font-mono);font-size:.7rem;color:var(--muted);letter-spacing:.04em;margin-top:.6rem}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:767px){
+  .prc-hero{padding:1.6rem 0 2.2rem}
+  .prc-hero-body h1{font-size:1.55rem}
+  .prc-hero-body p{font-size:.82rem}
+
+  .prc-catnav{top:var(--jp-header-h,64px)}
+  .prc-catnav-inner{padding:.65rem 0;gap:.3rem}
+  .prc-catlink{font-size:.7rem;padding:.4rem .8rem}
+
+  .prc-cat{scroll-margin-top:calc(var(--jp-header-h,64px) + 54px)}
+  .prc-cat-head{gap:.7rem;margin-bottom:1.3rem}
+  .prc-cat-ico{width:44px;height:44px;font-size:1.15rem;border-radius:12px}
+  .prc-cat-head h2{font-size:1.15rem}
+  .prc-cat-head p{font-size:.78rem}
+
+  .prc-calc-card{padding:1.1rem}
+  .prc-vol-visual{padding:1.1rem .8rem;gap:.9rem}
+  .prc-vol-box{width:58px;height:58px;font-size:1.3rem}
+  .prc-vol-formula{font-size:.72rem}
+  .prc-compare-item .val{font-size:1.1rem}
+
+  .prc-fuel-card{padding:1.3rem}
+  .prc-fuel-table th,.prc-fuel-table td{padding:.7rem .8rem;font-size:.76rem}
+
+  .prc-rates-toolbar{flex-direction:column;align-items:stretch}
+  .prc-search-wrap{max-width:none}
+  .prc-rates-table th,.prc-rates-table td{padding:.75rem .9rem;font-size:.76rem}
+
+  .prc-download{padding:1.4rem;gap:1.1rem;text-align:center;justify-content:center}
+  .prc-download-ico{width:58px;height:58px;font-size:1.5rem;margin:0 auto}
+  .prc-download-body h3{font-size:1.05rem}
+  .prc-download-body p{font-size:.8rem}
+  .prc-download-actions{justify-content:center;width:100%}
+  .prc-download-actions .btn-jp{flex:1 1 auto;justify-content:center}
+}
+@media (max-width:480px){
+  .prc-hero-body h1{font-size:1.35rem}
+  .prc-download-actions{flex-direction:column}
+}

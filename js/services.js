@@ -1,12 +1,32 @@
-(() => {
-	const links = document.querySelectorAll('.service-nav a');
-	const sections = [...links].map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
-	const setActive = id => links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-	if ('IntersectionObserver' in window) {
-		const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-			if (entry.isIntersecting) setActive(entry.target.id);
-		}), { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-		sections.forEach(section => observer.observe(section));
-	}
-	links.forEach(link => link.addEventListener('click', () => setActive(link.getAttribute('href').slice(1))));
+(function () {
+"use strict";
+
+/* ---------- Category nav: highlight active link on scroll ---------- */
+var links = document.querySelectorAll('.svp-catlink');
+var sections = document.querySelectorAll('.svp-cat');
+if (links.length && sections.length && 'IntersectionObserver' in window) {
+  var byId = {};
+  links.forEach(function (l) { byId[l.getAttribute('href').replace('#', '')] = l; });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        links.forEach(function (l) { l.classList.remove('active'); });
+        var link = byId[entry.target.id];
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(function (s) { io.observe(s); });
+}
+
+/* ---------- Category nav: click sets active immediately (snappier feel) ---------- */
+links.forEach(function (l) {
+  l.addEventListener('click', function () {
+    links.forEach(function (x) { x.classList.remove('active'); });
+    l.classList.add('active');
+  });
+});
+
 })();
