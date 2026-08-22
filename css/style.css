@@ -20,6 +20,7 @@ html,body{
   margin:0;
   padding:0;
   overflow-x:hidden;
+  max-width:100%;
 }
 html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{font-family:var(--font-body);color:var(--ink);background:var(--surface);line-height:1.65;font-size:1rem;-webkit-font-smoothing:antialiased;padding-top:var(--jp-header-h,86px)}
@@ -590,7 +591,10 @@ header{position:relative;width:100%}
 }
 
 /* ============ TESTIMONIALS ============ */
-.tst-marquee{overflow:hidden;position:relative;margin:0 calc(-50vw + 50%);padding:.5rem 0}
+.tst-marquee{overflow:hidden;position:relative;margin:0 calc(-50vw + 50%);padding:.5rem 0;max-width:100vw}
+@media (max-width:991px){
+  .tst-marquee{margin:0;max-width:100%}
+}
 .tst-marquee::before,.tst-marquee::after{content:"";position:absolute;top:0;bottom:0;width:min(120px,10vw);z-index:2;pointer-events:none}
 .tst-marquee::before{left:0;background:linear-gradient(90deg,var(--surface),transparent)}
 .tst-marquee::after{right:0;background:linear-gradient(-90deg,var(--surface),transparent)}
