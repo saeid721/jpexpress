@@ -3044,3 +3044,140 @@ button:focus-visible,
     padding: 0 10px;
   }
 }
+
+/* Country dropdown with flags */
+.tool-card.quote-card {
+  overflow: visible;
+}
+
+.country-select {
+  position: relative;
+}
+
+.country-select.open {
+  z-index: 30;
+}
+
+.cs-btn {
+  width: 100%;
+  min-height: 44px;
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--jp-white);
+  border: 1px solid #dbe5f0;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--jp-text-dark);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.cs-btn:hover,
+.country-select.open .cs-btn {
+  border-color: #f6b99c;
+}
+
+.country-select.open .cs-btn {
+  box-shadow: 0 0 0 3px rgba(242, 99, 35, .12);
+}
+
+.cs-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cs-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cs-text.is-placeholder {
+  color: var(--jp-text-muted-dark);
+}
+
+.cs-flag,
+.cs-list li img {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.cs-btn .fa-chevron-down {
+  font-size: 12px;
+  color: var(--jp-text-muted);
+  transition: transform .2s ease;
+}
+
+.country-select.open .cs-btn .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.cs-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  overflow-y: auto;
+  background: var(--jp-white);
+  border: 1px solid #e3ebf5;
+  border-radius: 10px;
+  box-shadow: 0 14px 30px rgba(30, 42, 107, .18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+}
+
+.country-select.open .cs-list {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.cs-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--jp-navy);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+
+.cs-list li:hover,
+.cs-list li:focus,
+.cs-list li.is-selected {
+  background: #fff3ec;
+  color: var(--jp-red);
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  .cs-btn {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+  .cs-flag,
+  .cs-list li img {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+}

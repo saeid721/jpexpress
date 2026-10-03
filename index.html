@@ -239,21 +239,50 @@
               <form id="calcForm" class="quote-form" novalidate>
                 <div class="row g-3">
                   <div class="col-6">
-                    <label for="cFrom">From</label>
-                    <select id="cFrom" class="form-select">
-                      <option>🇧🇩 Bangladesh</option>
-                    </select>
+                    <label for="cFromBtn">From</label>
+                    <div class="country-select">
+                      <input type="hidden" id="cFrom" value="Bangladesh">
+                      <button type="button" class="cs-btn" id="cFromBtn" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="cs-value">
+                          <img class="cs-flag" src="https://flagcdn.com/w80/bd.png" alt="" width="26" height="26">
+                          <span class="cs-text">Bangladesh</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <ul class="cs-list" role="listbox">
+                        <li role="option" tabindex="0" data-value="Bangladesh" data-flag="bd">
+                          <img src="https://flagcdn.com/w80/bd.png" alt="" width="24" height="24"><span>Bangladesh</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
+
                   <div class="col-6">
-                    <label for="cTo">To</label>
-                    <select id="cTo" class="form-select">
-                      <option>Select Country</option>
-                      <option>🇺🇸 United States</option>
-                      <option>🇬🇧 United Kingdom</option>
-                      <option>🇨🇦 Canada</option>
-                      <option>🇦🇺 Australia</option>
-                      <option>🇦🇪 UAE</option>
-                    </select>
+                    <label for="cToBtn">To</label>
+                    <div class="country-select">
+                      <input type="hidden" id="cTo" value="">
+                      <button type="button" class="cs-btn" id="cToBtn" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="cs-value">
+                          <img class="cs-flag" src="" alt="" width="26" height="26" hidden>
+                          <span class="cs-text is-placeholder">Select Country</span>
+                        </span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <ul class="cs-list" role="listbox">
+                        <li role="option" tabindex="0" data-value="United States" data-flag="us"><img src="https://flagcdn.com/w80/us.png" alt="" width="24" height="24"><span>United States</span></li>
+                        <li role="option" tabindex="0" data-value="United Kingdom" data-flag="gb"><img src="https://flagcdn.com/w80/gb.png" alt="" width="24" height="24"><span>United Kingdom</span></li>
+                        <li role="option" tabindex="0" data-value="Canada" data-flag="ca"><img src="https://flagcdn.com/w80/ca.png" alt="" width="24" height="24"><span>Canada</span></li>
+                        <li role="option" tabindex="0" data-value="Australia" data-flag="au"><img src="https://flagcdn.com/w80/au.png" alt="" width="24" height="24"><span>Australia</span></li>
+                        <li role="option" tabindex="0" data-value="UAE" data-flag="ae"><img src="https://flagcdn.com/w80/ae.png" alt="" width="24" height="24"><span>UAE</span></li>
+                        <li role="option" tabindex="0" data-value="Germany" data-flag="de"><img src="https://flagcdn.com/w80/de.png" alt="" width="24" height="24"><span>Germany</span></li>
+                        <li role="option" tabindex="0" data-value="Saudi Arabia" data-flag="sa"><img src="https://flagcdn.com/w80/sa.png" alt="" width="24" height="24"><span>Saudi Arabia</span></li>
+                        <li role="option" tabindex="0" data-value="Singapore" data-flag="sg"><img src="https://flagcdn.com/w80/sg.png" alt="" width="24" height="24"><span>Singapore</span></li>
+                        <li role="option" tabindex="0" data-value="Malaysia" data-flag="my"><img src="https://flagcdn.com/w80/my.png" alt="" width="24" height="24"><span>Malaysia</span></li>
+                        <li role="option" tabindex="0" data-value="India" data-flag="in"><img src="https://flagcdn.com/w80/in.png" alt="" width="24" height="24"><span>India</span></li>
+                        <li role="option" tabindex="0" data-value="France" data-flag="fr"><img src="https://flagcdn.com/w80/fr.png" alt="" width="24" height="24"><span>France</span></li>
+                        <li role="option" tabindex="0" data-value="Italy" data-flag="it"><img src="https://flagcdn.com/w80/it.png" alt="" width="24" height="24"><span>Italy</span></li>
+                      </ul>
+                    </div>
                   </div>
                   <div class="col-6">
                     <label for="cType">Shipment Type</label>
@@ -1172,6 +1201,67 @@
       track.addEventListener('scroll', updateButtons, { passive: true });
       window.addEventListener('resize', updateButtons);
       updateButtons();
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const boxes = document.querySelectorAll('.country-select');
+
+      const closeAll = except => {
+        boxes.forEach(b => {
+          if (b !== except) {
+            b.classList.remove('open');
+            b.querySelector('.cs-btn').setAttribute('aria-expanded', 'false');
+          }
+        });
+      };
+
+      boxes.forEach(box => {
+        const btn = box.querySelector('.cs-btn');
+        const input = box.querySelector('input[type="hidden"]');
+        const flag = box.querySelector('.cs-flag');
+        const text = box.querySelector('.cs-text');
+        const items = box.querySelectorAll('.cs-list li');
+
+        btn.addEventListener('click', () => {
+          const open = !box.classList.contains('open');
+          closeAll(box);
+          box.classList.toggle('open', open);
+          btn.setAttribute('aria-expanded', open);
+        });
+
+        const choose = li => {
+          input.value = li.dataset.value;
+          flag.src = 'https://flagcdn.com/w80/' + li.dataset.flag + '.png';
+          flag.hidden = false;
+          text.textContent = li.dataset.value;
+          text.classList.remove('is-placeholder');
+          items.forEach(i => i.classList.remove('is-selected'));
+          li.classList.add('is-selected');
+          box.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+          btn.focus();
+        };
+
+        items.forEach(li => {
+          li.addEventListener('click', () => choose(li));
+          li.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              choose(li);
+            }
+          });
+        });
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.country-select')) closeAll();
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeAll();
+      });
     })();
   </script>
 </body>
