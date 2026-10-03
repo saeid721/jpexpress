@@ -809,20 +809,21 @@
     <!-- Partners Section -->
     <section class="home-section partners-section" aria-labelledby="partnerTitle">
       <div class="container-fluid">
-        <div class="section-heading">
-          <div>
+        <div class="partners-grid">
+
+          <div class="partners-copy">
             <span class="eyebrow">GLOBAL PARTNERS</span>
             <h2 id="partnerTitle">Our Logistics Network</h2>
             <p>Working with trusted global partners to deliver your shipments worldwide.</p>
           </div>
-        </div>
-        <div class="partners-layout">
+
           <div class="partner-map">
             <img src="assets/world-map.png" alt="Global logistics network map" loading="lazy">
             <span class="map-pin p1"></span>
             <span class="map-pin p2"></span>
             <span class="map-pin p3"></span>
           </div>
+
           <div class="partner-logos">
             <span><img src="assets/airlines/dhl.png" alt="DHL" loading="lazy"></span>
             <span><img src="assets/airlines/FedEx.png" alt="FedEx" loading="lazy"></span>
@@ -831,6 +832,7 @@
             <span><img src="assets/airlines/qatar.png" alt="Qatar Airways" loading="lazy"></span>
             <span><img src="assets/airlines/turkish-airlines.png" alt="Turkish Airlines" loading="lazy"></span>
           </div>
+
         </div>
       </div>
     </section>
@@ -853,11 +855,11 @@
             <div class="accordion" id="faqLeft">
               <div class="accordion-item">
                 <h3 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="false">
                     How can I get a shipping quote?
                   </button>
                 </h3>
-                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqLeft">
+                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqLeft">
                   <div class="accordion-body">
                     Use the shipping estimate form above or contact our logistics team for a confirmed quote.
                   </div>
@@ -982,15 +984,18 @@
     </section>
 
     <!-- Final CTA Section -->
-    <section class="final-cta">
+    <section class="final-cta" aria-labelledby="ctaTitle">
+      <img class="final-cta-art" src="assets/Airliner-Orbiting-a-Glowing-Earth.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+
       <div class="container-fluid">
-        <img class="final-cta-art" src="assets/airlines/Airliner-Orbiting-a-Glowing-Earth.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
-        <div class="row align-items-center g-3">
-          <div class="col-lg-5">
-            <h2>Ready to Ship Worldwide?</h2>
+        <div class="cta-inner">
+
+          <div class="cta-copy">
+            <h2 id="ctaTitle">Ready to Ship Worldwide?</h2>
             <p>Get a free quote or book a pickup today and experience reliable global shipping with JP Express.</p>
           </div>
-          <div class="col-lg-4 d-flex flex-wrap gap-2 justify-content-lg-end">
+
+          <div class="cta-actions">
             <a class="btn-main btn-white" href="#quote">
               Get a Quote <i class="fa-solid fa-arrow-right"></i>
             </a>
@@ -998,6 +1003,7 @@
               Book a Pickup
             </a>
           </div>
+
         </div>
       </div>
     </section>
@@ -1012,7 +1018,7 @@
       <div class="row g-4 py-5">
         
         <!-- Brand Column -->
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <img src="assets/logo.png" alt="JP Express" class="footer-logo">
           <p>International courier, export logistics and global shipping platform from Bangladesh.</p>
           <div class="footer-social">
@@ -1054,7 +1060,7 @@
         </div>
 
         <!-- Contact Info -->
-        <div class="col-6 col-lg-2">
+        <div class="col-6 col-lg-3 footer-contact">
           <h3>Contact</h3>
           <a href="tel:+8801681637836">
             <i class="fa-solid fa-phone"></i> +880 1681 637836
@@ -1075,7 +1081,11 @@
       <!-- Footer Bottom -->
       <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3">
         <span>© 2024 JP Express. All rights reserved.</span>
-        <span>Terms of Service &nbsp;|&nbsp; Privacy Policy &nbsp;|&nbsp; Sitemap</span>
+        <div class="footer-legal">
+          <a href="#">Terms of Service</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Sitemap</a>
+        </div>
       </div>
     </div>
   </footer>
