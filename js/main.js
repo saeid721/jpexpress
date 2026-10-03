@@ -43,11 +43,11 @@ if (reduced || !('IntersectionObserver' in window)) {
 const counters = document.querySelectorAll('[data-counter]');
 const runCounter = el => {
   const target = parseInt(el.dataset.counter, 10);
-  if (reduced) { el.textContent = target; return; }
+  if (reduced) { el.textContent = target.toLocaleString('en-US'); return; }
   const dur = 1600, t0 = performance.now();
   const tick = now => {
     const p = Math.min((now - t0) / dur, 1);
-    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString('en-US');
     if (p < 1) requestAnimationFrame(tick);
   };
   requestAnimationFrame(tick);
