@@ -6,225 +6,1076 @@
   <title>JP Express | International Courier & Export Shipping from Bangladesh</title>
   <meta name="description" content="JP Express provides international courier, air freight, sea freight, export logistics, customs support and shipment tracking from Bangladesh to 220+ countries.">
   <meta name="theme-color" content="#062f70">
+  
   <link rel="icon" type="image/png" href="assets/favicon.png">
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/home.css">
+  
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org","@type":"Organization","name":"JP Express","url":"https://www.jpexpress.com/","logo":"https://www.jpexpress.com/assets/logo.png","telephone":"+8801681637836","areaServed":"Worldwide"
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "JP Express",
+    "url": "https://www.jpexpress.com/",
+    "logo": "https://www.jpexpress.com/assets/logo.png",
+    "telephone": "+8801681637836",
+    "areaServed": "Worldwide"
   }
   </script>
 </head>
+
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="site-header" id="siteHeader">
-  <div class="topbar" id="topBar">
-    <div class="container-xxl d-flex justify-content-between align-items-center gap-3">
-      <div class="topbar-left">
-        <a href="tel:+8801681637836"><i class="bi bi-telephone-fill"></i> +880 1681 637836</a>
-        <a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp</a>
-        <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com"><i class="bi bi-envelope-fill"></i> info@jpexpress.com.bd</a>
-      </div>
-      <div class="topbar-right">
-        <button class="lang-btn active" type="button">English</button><span>|</span><button class="lang-btn" type="button">বাংলা</button>
-        <a class="d-none d-md-inline" href="#contact"><i class="bi bi-person-circle"></i> Customer Login <i class="bi bi-arrow-right-short"></i></a>
+  <!-- =========================================
+       HEADER & NAVIGATION
+       ========================================= -->
+  <header class="site-header" id="siteHeader">
+    
+    <!-- Top Bar -->
+    <div class="topbar" id="topBar">
+      <div class="container-fluid d-flex justify-content-between align-items-center gap-3">
+        <div class="topbar-left">
+          <a href="tel:+8801681637836">
+            <i class="fa-solid fa-phone"></i> +880 1681 637836
+          </a>
+          <a href="https://wa.me/8801681637836" target="_blank" rel="noopener">
+            <i class="bi bi-whatsapp"></i> WhatsApp
+          </a>
+          <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com">
+            <i class="fa-solid fa-envelope"></i> info@jpexpress.com.bd
+          </a>
+        </div>
+        <div class="topbar-right">
+          <button class="lang-btn active" type="button">English</button>
+          <span>|</span>
+          <button class="lang-btn" type="button">বাংলা</button>
+          <a class="d-none d-md-inline" href="#contact">
+            <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
-    <div class="container-xxl">
-      <a class="navbar-brand p-0" href="index.html" aria-label="JP Express home"><img src="assets/logo.png" alt="JP Express" class="brand-logo"></a>
-      <div class="d-flex align-items-center gap-2 ms-auto order-xl-3">
-        <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">Track Shipment</a>
-        <a href="#quote" class="btn-header btn-header-red">Get a Quote <i class="bi bi-arrow-right"></i></a>
-        <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu"><i class="bi bi-list"></i></button>
+    <!-- Main Navbar -->
+    <nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
+      <div class="container-fluid">
+        <a class="navbar-brand p-0" href="index.html" aria-label="JP Express home">
+          <img src="assets/logo.png" alt="JP Express" class="brand-logo">
+        </a>
+        
+        <div class="d-flex align-items-center gap-2 ms-auto order-xl-3">
+          <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">
+            Track Shipment
+          </a>
+          <a href="#quote" class="btn-header btn-header-red">
+            Get a Quote <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button 
+            class="navbar-toggler border-0 shadow-none ms-1" 
+            type="button" 
+            data-bs-toggle="offcanvas" 
+            data-bs-target="#jpMenu" 
+            aria-controls="jpMenu" 
+            aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services <i class="fa-solid fa-chevron-down"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="countries.html">Destinations <i class="fa-solid fa-chevron-down"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="industries.html">Industries <i class="fa-solid fa-chevron-down"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Business <i class="fa-solid fa-chevron-down"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="resources.html">Resources <i class="fa-solid fa-chevron-down"></i></a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
       </div>
-      <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
-        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="services.html">Services <i class="bi bi-chevron-down"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="countries.html">Destinations <i class="bi bi-chevron-down"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="industries.html">Industries <i class="bi bi-chevron-down"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="pricing.html">Business <i class="bi bi-chevron-down"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="resources.html">Resources <i class="bi bi-chevron-down"></i></a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    </nav>
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
-    <div class="offcanvas-header"><img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel"><button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
-    <div class="offcanvas-body">
-      <ul class="navbar-nav gap-1">
-        <li><a class="nav-link active" href="index.html">Home</a></li><li><a class="nav-link" href="services.html">Services</a></li><li><a class="nav-link" href="countries.html">Destinations</a></li><li><a class="nav-link" href="industries.html">Industries</a></li><li><a class="nav-link" href="pricing.html">Business</a></li><li><a class="nav-link" href="resources.html">Resources</a></li><li><a class="nav-link" href="about.html">About</a></li><li><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
-      <div class="d-grid gap-2 mt-4"><a class="btn-header btn-header-red justify-content-center" href="#quote" data-bs-dismiss="offcanvas">Get a Quote</a><a class="btn-header btn-header-outline justify-content-center" href="track-shipment.html" data-bs-dismiss="offcanvas">Track Shipment</a></div>
+    <!-- Mobile Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
+      <div class="offcanvas-header">
+        <img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav gap-1">
+          <li><a class="nav-link active" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="services.html">Services</a></li>
+          <li><a class="nav-link" href="countries.html">Destinations</a></li>
+          <li><a class="nav-link" href="industries.html">Industries</a></li>
+          <li><a class="nav-link" href="pricing.html">Business</a></li>
+          <li><a class="nav-link" href="resources.html">Resources</a></li>
+          <li><a class="nav-link" href="about.html">About</a></li>
+          <li><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-grid gap-2 mt-4">
+          <a class="btn-header btn-header-red justify-content-center" href="#quote" data-bs-dismiss="offcanvas">
+            Get a Quote
+          </a>
+          <a class="btn-header btn-header-outline justify-content-center" href="track-shipment.html" data-bs-dismiss="offcanvas">
+            Track Shipment
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<main id="main">
-  <section class="hero" aria-labelledby="heroTitle">
-    <div class="hero-bg"></div>
-    <div class="container-xxl position-relative">
-      <div class="row align-items-center g-4 g-xl-5">
-        <div class="col-lg-6">
-          <div class="hero-copy" data-reveal>
-            <div class="hero-kicker">INTERNATIONAL SHIPPING FROM <span>BANGLADESH</span></div>
-            <h1 id="heroTitle">International Courier &amp;<br>Export Shipping from <span>Bangladesh</span></h1>
-            <p>Ship parcels, documents, commercial cargo and export shipments to global destinations with professional logistics support.</p>
-            <div class="hero-actions">
-              <a href="#quote" class="btn-main btn-red">Get a Shipping Quote <i class="bi bi-arrow-right"></i></a>
-              <a href="track-shipment.html" class="btn-main btn-dark-outline">Track Shipment <i class="bi bi-arrow-right"></i></a>
+  <!-- =========================================
+       MAIN CONTENT
+       ========================================= -->
+  <main id="main">
+    
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center g-4 g-xl-5">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <div class="hero-kicker">
+                INTERNATIONAL SHIPPING FROM <span>BANGLADESH</span>
+              </div>
+              <h1 id="heroTitle">
+                International Courier &amp;<br>Export Shipping from <span>Bangladesh</span>
+              </h1>
+              <p>
+                Ship parcels, documents, commercial cargo and export shipments to global destinations with professional logistics support.
+              </p>
+              <div class="hero-actions">
+                <a href="#quote" class="btn-main btn-red">
+                  Get a Shipping Quote <i class="bi bi-arrow-right"></i>
+                </a>
+                <a href="track-shipment.html" class="btn-main btn-dark-outline">
+                  Track Shipment <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+              <div class="hero-links">
+                <a href="#quote"><i class="bi bi-box-seam"></i> Book a Pickup</a>
+                <a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp Us</a>
+                <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> Call Us</a>
+              </div>
             </div>
-            <div class="hero-links"><a href="#quote"><i class="bi bi-box-seam"></i> Book a Pickup</a><a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp Us</a><a href="tel:+8801681637836"><i class="bi bi-telephone"></i> Call Us</a></div>
+          </div>
+        </div>
+        
+        <div class="hero-feature-stack" aria-label="Shipping highlights">
+          <div>
+            <i class="fa-solid fa-globe"></i>
+            <strong>215+<small>Countries</small></strong>
+          </div>
+          <div>
+            <i class="fa-solid fa-ship"></i>
+            <strong>Air &amp; Sea<small>Freight</small></strong>
+          </div>
+          <div>
+            <i class="fa-solid fa-shield-halved"></i>
+            <strong>Customs<small>Support</small></strong>
+          </div>
+          <div>
+            <i class="fa-solid fa-building"></i>
+            <strong>Business<small>Solutions</small></strong>
           </div>
         </div>
       </div>
-      <div class="hero-feature-stack" aria-label="Shipping highlights">
-        <div><i class="bi bi-globe2"></i><strong>215+<small>Countries</small></strong></div>
-        <div><i class="bi bi-box-seam"></i><strong>Air &amp; Sea<small>Freight</small></strong></div>
-        <div><i class="bi bi-shield-check"></i><strong>Customs<small>Support</small></strong></div>
-        <div><i class="bi bi-buildings"></i><strong>Business<small>Solutions</small></strong></div>
+    </section>
+
+    <!-- Quick Services Strip -->
+    <section class="quick-services" aria-label="Primary services">
+      <div class="container-fluid">
+        <div class="row g-0">
+          <a class="quick-item col-6 col-md-3 col-xl" href="services.html">
+            <i class="fa-solid fa-plane"></i>
+            <span>International<br>Courier</span>
+          </a>
+          <a class="quick-item col-6 col-md-3 col-xl" href="services.html">
+            <i class="fa-solid fa-box"></i>
+            <span>Export<br>Logistics</span>
+          </a>
+          <a class="quick-item col-6 col-md-3 col-xl" href="services.html">
+            <i class="fa-solid fa-paper-plane"></i>
+            <span>Air &amp; Sea<br>Freight</span>
+          </a>
+          <a class="quick-item col-6 col-md-3 col-xl" href="services.html">
+            <i class="fa-solid fa-buildings"></i>
+            <span>Business<br>Shipping</span>
+          </a>
+          <a class="quick-item col-6 col-md-3 col-xl" href="services.html">
+            <i class="fa-solid fa-shield-check"></i>
+            <span>Customs<br>Support</span>
+          </a>
+          <a class="quick-item col-6 col-md-3 col-xl" href="countries.html">
+            <i class="fa-solid fa-globe-americas"></i>
+            <span>Global<br>Delivery</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools Section (Quote & Track) -->
+    <section class="tools-section" id="quote" aria-label="Quote and shipment tracking">
+      <div class="container-fluid">
+        <div class="row g-3 g-lg-4">
+          
+          <!-- Quote Card -->
+          <div class="col-lg-6">
+            <div class="tool-card quote-card" data-reveal>
+              <div class="tool-head">
+                <span class="tool-icon red"><i class="fa-solid fa-calculator"></i></span>
+                <div>
+                  <h2>Get a Shipping Estimate</h2>
+                  <p>Tell us about your shipment to find the appropriate shipping option.</p>
+                </div>
+              </div>
+              <form id="calcForm" class="quote-form" novalidate>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label for="cFrom">From</label>
+                    <select id="cFrom" class="form-select">
+                      <option>🇧🇩 Bangladesh</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label for="cTo">To</label>
+                    <select id="cTo" class="form-select">
+                      <option>Select Country</option>
+                      <option>🇺🇸 United States</option>
+                      <option>🇬🇧 United Kingdom</option>
+                      <option>🇨🇦 Canada</option>
+                      <option>🇦🇺 Australia</option>
+                      <option>🇦🇪 UAE</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label for="cType">Shipment Type</label>
+                    <select id="cType" class="form-select">
+                      <option>Document</option>
+                      <option>Parcel</option>
+                      <option>Commercial Cargo</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <label for="cWeight">Weight (KG)</label>
+                    <div class="input-group">
+                      <input id="cWeight" class="form-control" type="number" min="0.5" step="0.5" value="1">
+                      <span class="input-group-text">kg</span>
+                    </div>
+                  </div>
+                  <input type="hidden" id="cL" value="30">
+                  <input type="hidden" id="cW" value="20">
+                  <input type="hidden" id="cH" value="10">
+                  <input type="hidden" id="cMethod" value="International Courier">
+                </div>
+                <button type="submit" class="btn-main btn-red w-100 mt-2">
+                  Get Shipping Estimate <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <a class="more-link" href="pricing.html">
+                  <i class="fa-solid fa-plus-circle"></i> More Shipment Details
+                </a>
+              </form>
+              <div id="calcResult" class="calc-result d-none" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Track Card -->
+          <div class="col-lg-6">
+            <div class="tool-card track-card" data-reveal>
+              <img class="track-bg" src="assets/container-ship.png" alt="" aria-hidden="true">
+              <div class="tool-head">
+                <span class="tool-icon red"><i class="fa-solid fa-search"></i></span>
+                <div>
+                  <h2>Track Your Shipment</h2>
+                  <p>Enter your tracking number to get real-time updates.</p>
+                </div>
+              </div>
+              <form id="trackForm" class="track-form" novalidate>
+                <input id="trackInput" class="form-control" type="text" placeholder="Enter Tracking Number" autocomplete="off">
+                <button type="submit" class="btn-main btn-red">
+                  Track Shipment <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </form>
+              <a class="more-link light" href="track-shipment.html">
+                <i class="fa-solid fa-plus-circle"></i> Track Multiple Shipments
+              </a>
+              <div id="trackResult" class="track-result d-none">
+                <strong>Shipment tracking preview</strong>
+                <p class="mb-0">Your tracking number has been received. View detailed status on the tracking page.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust Strip -->
+    <section class="trust-strip">
+      <div class="container-fluid">
+        <div class="row g-0">
+          <div class="trust-item col-6 col-md-3">
+            <i class="fa-solid fa-award"></i>
+            <strong><span data-counter="8">0</span>+</strong>
+            <small>Years of Experience</small>
+          </div>
+          <div class="trust-item col-6 col-md-3">
+            <i class="fa-solid fa-globe-americas"></i>
+            <strong><span data-counter="215">0</span>+</strong>
+            <small>Countries Worldwide</small>
+          </div>
+          <div class="trust-item col-6 col-md-4 col-xl-2">
+            <i class="fa-solid fa-boxes"></i>
+            <strong><span data-counter="10000">0</span>+</strong>
+            <small>Successful Shipments</small>
+          </div>
+          <div class="trust-item col-6 col-md-4 col-xl-2">
+            <i class="fa-solid fa-people-fill"></i>
+            <strong><span data-counter="25">0</span>+</strong>
+            <small>Team Members</small>
+          </div>
+          <div class="trust-item col-6 col-md-4 col-xl-2">
+            <i class="fa-solid fa-heart-fill"></i>
+            <strong><span data-counter="6">0</span>+</strong>
+            <small>Logistics Partners</small>
+          </div>
+          <div class="trust-item col-6 col-md-4 col-xl-2">
+            <i class="fa-solid fa-headset"></i>
+            <strong><span data-counter="100">0</span>%</strong>
+            <small>Customer Support</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="home-section" aria-labelledby="whyTitle">
+      <div class="container-fluid">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">WHY CHOOSE JP EXPRESS</span>
+            <h2 id="whyTitle">Reliable Shipping Solutions for a Global World</h2>
+            <p>We provide secure, efficient and cost-effective international shipping and export logistics solutions from Bangladesh.</p>
+          </div>
+          <a href="about.html" class="section-link">
+            More About Us <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="row g-2 g-md-3 why-grid">
+          <div class="col-6 col-lg-4 col-xl-2">
+            <article class="mini-card">
+              <i class="fa-solid fa-plane"></i>
+              <h3>International Shipping</h3>
+              <p>Support for international courier and logistics requirements.</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-4 col-xl-2">
+            <article class="mini-card">
+              <i class="fa-solid fa-users"></i>
+              <h3>Business-Focused Solutions</h3>
+              <p>Solutions for exporters and commercial businesses.</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-4 col-xl-2">
+            <article class="mini-card">
+              <i class="fa-solid fa-eye"></i>
+              <h3>Shipment Visibility</h3>
+              <p>Tracking and shipment status information.</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-4 col-xl-2">
+            <article class="mini-card">
+              <i class="fa-solid fa-gears"></i>
+              <h3>Logistics Support</h3>
+              <p>Support throughout shipping and documentation.</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-4 col-xl-2">
+            <article class="mini-card">
+              <i class="fa-solid fa-layer-group"></i>
+              <h3>Flexible Shipping Options</h3>
+              <p>Courier, freight and export solutions.</p>
+            </article>
+          </div>
+          <div class="col-6 col-lg-4 col-xl-2">
+            <article class="mini-card">
+              <i class="fa-solid fa-headset"></i>
+              <h3>Customer Support</h3>
+              <p>Accessible support when you need assistance.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="home-section services-section" aria-labelledby="servicesTitle">
+      <div class="container-fluid">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">OUR SERVICES</span>
+            <h2 id="servicesTitle">International Shipping Services</h2>
+          </div>
+          <a href="services.html" class="section-link">
+            View All Services <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="row g-3">
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="image-card">
+              <img src="assets/international-01.jpg" alt="International courier shipment" loading="lazy">
+              <div>
+                <h3>International Courier</h3>
+                <p>Documents, parcels and express international shipments.</p>
+                <a href="services.html">Explore Courier <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="image-card">
+              <img src="assets/hero-banner2.jpg" alt="Air freight aircraft" loading="lazy">
+              <div>
+                <h3>Air Freight</h3>
+                <p>For commercial and heavier international shipments.</p>
+                <a href="services.html">Explore Air Freight <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="image-card">
+              <img src="assets/domestic-02.jpg" alt="Sea freight and cargo logistics" loading="lazy">
+              <div>
+                <h3>Sea Freight</h3>
+                <p>For larger commercial cargo and international freight.</p>
+                <a href="services.html">Explore Sea Freight <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-12 col-sm-6 col-lg-3">
+            <article class="image-card">
+              <img src="assets/business-solution.jpg" alt="Export logistics" loading="lazy">
+              <div>
+                <h3>Export Logistics</h3>
+                <p>Export shipping, documentation and logistics support.</p>
+                <a href="services.html">Explore Export <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Needs Section -->
+    <section class="home-section needs-section" aria-labelledby="needsTitle">
+      <div class="container-fluid">
+        <div class="section-heading compact">
+          <div>
+            <span class="eyebrow">WHAT ARE YOU SHIPPING?</span>
+            <h2 id="needsTitle">Find the right shipping solution based on your needs.</h2>
+          </div>
+        </div>
+        <div class="row g-2 g-md-3">
+          <div class="col-6 col-md-4 col-xl-2">
+            <a class="need-card" href="services.html">
+              <i class="fa-solid fa-file-earmark-text"></i>
+              <span>Documents</span>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <a class="need-card" href="services.html">
+              <i class="fa-solid fa-gift"></i>
+              <span>Personal Parcels</span>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <a class="need-card" href="services.html">
+              <i class="fa-solid fa-cart-check"></i>
+              <span>E-commerce Orders</span>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <a class="need-card" href="services.html">
+              <i class="fa-solid fa-boxes"></i>
+              <span>Product Samples</span>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <a class="need-card" href="services.html">
+              <i class="fa-solid fa-box"></i>
+              <span>Commercial Cargo</span>
+            </a>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <a class="need-card" href="services.html">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Export Shipments</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section class="destination-section" aria-labelledby="destTitle">
+      <div class="container-fluid">
+        <div class="section-heading on-blue">
+          <div>
+            <span class="eyebrow">SHIP TO 200+ COUNTRIES</span>
+            <h2 id="destTitle">Popular Destinations</h2>
+            <p>We deliver to major destinations worldwide from Bangladesh.</p>
+          </div>
+          <a href="countries.html" class="section-link">
+            View All Destinations <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="destination-row">
+          <a class="destination-card" href="country.html?country=usa">
+            <img src="assets/stroy.jpg" alt="USA destination" loading="lazy">
+            <span>🇺🇸 <b>USA</b></span>
+          </a>
+          <a class="destination-card" href="country.html?country=uk">
+            <img src="assets/business-solution.jpg" alt="United Kingdom destination" loading="lazy">
+            <span>🇬🇧 <b>United Kingdom</b></span>
+          </a>
+          <a class="destination-card" href="country.html?country=canada">
+            <img src="assets/hero-banner2.jpg" alt="Canada destination" loading="lazy">
+            <span>🇨🇦 <b>Canada</b></span>
+          </a>
+          <a class="destination-card" href="country.html?country=australia">
+            <img src="assets/international-01.jpg" alt="Australia destination" loading="lazy">
+            <span>🇦🇺 <b>Australia</b></span>
+          </a>
+          <a class="destination-card" href="country.html?country=uae">
+            <img src="assets/domestic-02.jpg" alt="UAE destination" loading="lazy">
+            <span>🇦🇪 <b>UAE</b></span>
+          </a>
+          <a class="destination-card" href="country.html?country=germany">
+            <img src="assets/stroy.jpg" alt="Germany destination" loading="lazy">
+            <span>🇩🇪 <b>Germany</b></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="home-section process-section" aria-labelledby="processTitle">
+      <div class="container-fluid">
+        <div class="section-heading compact">
+          <div>
+            <span class="eyebrow">HOW IT WORKS</span>
+            <h2 id="processTitle">A Simple Shipping Process</h2>
+            <p>From pickup to delivery, we make international shipping simple and hassle-free.</p>
+          </div>
+        </div>
+        <div class="process-row">
+          <div class="process-step">
+            <span>1</span>
+            <div>
+              <h3>Get a Quote</h3>
+              <p>Tell us about your shipment.</p>
+            </div>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <span>2</span>
+            <div>
+              <h3>Book Shipment</h3>
+              <p>Confirm your shipping request.</p>
+            </div>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <span>3</span>
+            <div>
+              <h3>Pickup</h3>
+              <p>Shipment is collected.</p>
+            </div>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <span>4</span>
+            <div>
+              <h3>Processing</h3>
+              <p>Documentation and shipment processing.</p>
+            </div>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <span>5</span>
+            <div>
+              <h3>International Transit</h3>
+              <p>Shipment moves toward destination.</p>
+            </div>
+          </div>
+          <div class="process-line"></div>
+          <div class="process-step">
+            <span>6</span>
+            <div>
+              <h3>Delivery</h3>
+              <p>Shipment reaches recipient.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="home-section industries-section" aria-labelledby="industryTitle">
+      <div class="container-fluid">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">INDUSTRIES WE SERVE</span>
+            <h2 id="industryTitle">Industry-Specific Shipping Solutions</h2>
+            <p>A simple process from pickup to delivery.</p>
+          </div>
+          <a href="industries.html" class="section-link">
+            View All Industries <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="row g-3">
+          <div class="col-6 col-md-4 col-xl-2">
+            <article class="industry-card">
+              <img src="assets/international-01.jpg" alt="Garments and textiles" loading="lazy">
+              <strong>Garments &amp; Textiles</strong>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <article class="industry-card">
+              <img src="assets/stroy.jpg" alt="Jute products" loading="lazy">
+              <strong>Jute Products</strong>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <article class="industry-card">
+              <img src="assets/business-solution.jpg" alt="Leather products" loading="lazy">
+              <strong>Leather Products</strong>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <article class="industry-card">
+              <img src="assets/domestic-02.jpg" alt="E-commerce" loading="lazy">
+              <strong>E-commerce</strong>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <article class="industry-card">
+              <img src="assets/hero-banner2.jpg" alt="Manufacturing" loading="lazy">
+              <strong>Manufacturing</strong>
+            </article>
+          </div>
+          <div class="col-6 col-md-4 col-xl-2">
+            <article class="industry-card">
+              <img src="assets/business-solution.jpg" alt="Buying houses" loading="lazy">
+              <strong>Buying Houses</strong>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution / Case Study Section -->
+    <section class="solution-section" aria-labelledby="solutionTitle">
+      <div class="container-fluid">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-7">
+            <div class="solution-media">
+              <img src="assets/container-ship.png" alt="Real shipping solutions" loading="lazy">
+              <div class="solution-caption">
+                <span>REAL SHIPPING SOLUTIONS</span>
+                <h2 id="solutionTitle">Real Shipping Solutions</h2>
+                <p>See how we help businesses and customers solve real shipping challenges.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="case-list">
+              <article>
+                <i class="fa-solid fa-building"></i>
+                <div>
+                  <b>Bangladesh → USA</b>
+                  <strong>Garments Commercial Shipment</strong>
+                  <p>Helping a Bangladesh manufacturer ship garments to the USA with end-to-end logistics support.</p>
+                  <a href="resources.html">View Case Study <i class="bi bi-arrow-right"></i></a>
+                </div>
+              </article>
+              <article>
+                <i class="fa-solid fa-box"></i>
+                <div>
+                  <b>International Export</b>
+                  <strong>Reliable Commercial Logistics</strong>
+                  <p>Flexible courier, freight and documentation support for growing exporters.</p>
+                  <a href="resources.html">View Case Study <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section" aria-labelledby="testimonialTitle">
+      <div class="container-fluid">
+        <div class="row align-items-center g-4">
+          <div class="col-lg-5">
+            <span class="eyebrow">CUSTOMER REVIEWS</span>
+            <h2 id="testimonialTitle">What Our Customers Say</h2>
+            <p>Trusted by individuals and businesses across the world.</p>
+          </div>
+          <div class="col-lg-7">
+            <article class="testimonial-card">
+              <div class="testimonial-avatar">
+                <img src="assets/teams/founder.jpg" alt="Customer representative" loading="lazy">
+              </div>
+              <div>
+                <p>“Reliable service and excellent support. JP Express made our export process smooth and easy. Highly recommended.”</p>
+                <strong>Tanvir Ahmed</strong>
+                <small>Managing Director, Dhaka, Bangladesh</small>
+                <div class="stars" aria-label="Five star review">★★★★★</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="home-section partners-section" aria-labelledby="partnerTitle">
+      <div class="container-fluid">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">GLOBAL PARTNERS</span>
+            <h2 id="partnerTitle">Our Logistics Network</h2>
+            <p>Working with trusted global partners to deliver your shipments worldwide.</p>
+          </div>
+        </div>
+        <div class="partners-layout">
+          <div class="partner-map">
+            <img src="assets/world-map.png" alt="Global logistics network map" loading="lazy">
+            <span class="map-pin p1"></span>
+            <span class="map-pin p2"></span>
+            <span class="map-pin p3"></span>
+          </div>
+          <div class="partner-logos">
+            <span><img src="assets/airlines/dhl.png" alt="DHL" loading="lazy"></span>
+            <span><img src="assets/airlines/FedEx.png" alt="FedEx" loading="lazy"></span>
+            <span><img src="assets/airlines/ups.png" alt="UPS" loading="lazy"></span>
+            <span><img src="assets/airlines/Emirates.png" alt="Emirates" loading="lazy"></span>
+            <span><img src="assets/airlines/qatar.png" alt="Qatar Airways" loading="lazy"></span>
+            <span><img src="assets/airlines/turkish-airlines.png" alt="Turkish Airlines" loading="lazy"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="home-section faq-section" aria-labelledby="faqTitle">
+      <div class="container-fluid">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">FREQUENTLY ASKED QUESTIONS</span>
+            <h2 id="faqTitle">Common Questions About Shipping</h2>
+            <p>Find quick answers to the most common shipping questions.</p>
+          </div>
+          <a href="resources.html" class="section-link">
+            View All FAQs <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="row g-2 g-lg-3">
+          <div class="col-lg-6">
+            <div class="accordion" id="faqLeft">
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                    How can I get a shipping quote?
+                  </button>
+                </h3>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqLeft">
+                  <div class="accordion-body">
+                    Use the shipping estimate form above or contact our logistics team for a confirmed quote.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                    How long does international shipping take?
+                  </button>
+                </h3>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqLeft">
+                  <div class="accordion-body">
+                    Transit time depends on destination, service type and customs processing.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                    What items can be shipped?
+                  </button>
+                </h3>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqLeft">
+                  <div class="accordion-body">
+                    Documents, parcels and commercial shipments are accepted subject to destination and carrier restrictions.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="accordion" id="faqRight">
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                    How can I track my shipment?
+                  </button>
+                </h3>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqRight">
+                  <div class="accordion-body">
+                    Use your tracking number on the tracking page to view the shipment status.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                    What documents are required?
+                  </button>
+                </h3>
+                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqRight">
+                  <div class="accordion-body">
+                    Requirements vary by shipment type and destination; our team can guide you through the required paperwork.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">
+                    Do you handle customs clearance?
+                  </button>
+                </h3>
+                <div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqRight">
+                  <div class="accordion-body">
+                    Customs support is available for eligible international shipments.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="home-section resources-section" aria-labelledby="resourceTitle">
+      <div class="container-fluid">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">SHIPPING RESOURCES</span>
+            <h2 id="resourceTitle">Shipping &amp; Export Knowledge Center</h2>
+            <p>Helpful guides and resources for international shipping.</p>
+          </div>
+          <a href="resources.html" class="section-link">
+            View All Guides <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <article class="resource-card">
+              <img src="assets/international-01.jpg" alt="Shipping guide" loading="lazy">
+              <div>
+                <small>SHIPPING GUIDE</small>
+                <h3>How to Ship Commercial Products from Bangladesh to the USA</h3>
+                <a href="resources.html">Read Guide <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="resource-card">
+              <img src="assets/business-solution.jpg" alt="Export documentation" loading="lazy">
+              <div>
+                <small>EXPORT GUIDE</small>
+                <h3>Export Documentation from Bangladesh</h3>
+                <a href="resources.html">Read Guide <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="resource-card">
+              <img src="assets/stroy.jpg" alt="Customs clearance" loading="lazy">
+              <div>
+                <small>CUSTOMS</small>
+                <h3>Understanding Customs Clearance Process</h3>
+                <a href="resources.html">Read Guide <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+      <div class="container-fluid">
+        <img class="final-cta-art" src="assets/airlines/Airliner-Orbiting-a-Glowing-Earth.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-5">
+            <h2>Ready to Ship Worldwide?</h2>
+            <p>Get a free quote or book a pickup today and experience reliable global shipping with JP Express.</p>
+          </div>
+          <div class="col-lg-4 d-flex flex-wrap gap-2 justify-content-lg-end">
+            <a class="btn-main btn-white" href="#quote">
+              Get a Quote <i class="bi bi-arrow-right"></i>
+            </a>
+            <a class="btn-main btn-white-outline" href="#quote">
+              Book a Pickup
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================
+       FOOTER
+       ========================================= -->
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row g-4 py-5">
+        
+        <!-- Brand Column -->
+        <div class="col-lg-4">
+          <img src="assets/logo.png" alt="JP Express" class="footer-logo">
+          <p>International courier, export logistics and global shipping platform from Bangladesh.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <!-- About Links -->
+        <div class="col-6 col-lg-2">
+          <h3>About</h3>
+          <a href="about.html">About Us</a>
+          <a href="about.html">Our Story</a>
+          <a href="about.html">Leadership</a>
+          <a href="contact.html">Careers</a>
+          <a href="contact.html">Contact</a>
+        </div>
+
+        <!-- Services Links -->
+        <div class="col-6 col-lg-2">
+          <h3>Services</h3>
+          <a href="services.html">International Courier</a>
+          <a href="services.html">Air Freight</a>
+          <a href="services.html">Sea Freight</a>
+          <a href="services.html">Export Logistics</a>
+          <a href="services.html">Import Solutions</a>
+        </div>
+
+        <!-- Resources Links -->
+        <div class="col-6 col-lg-2">
+          <h3>Resources</h3>
+          <a href="resources.html">Shipping Guides</a>
+          <a href="blog.html">Blog / Insights</a>
+          <a href="resources.html">FAQ</a>
+          <a href="resources.html">Media Center</a>
+          <a href="resources.html">Legal / Policies</a>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-6 col-lg-2">
+          <h3>Contact</h3>
+          <a href="tel:+8801681637836">
+            <i class="bi bi-telephone"></i> +880 1681 637836
+          </a>
+          <a href="mailto:jpexpress09@gmail.com">
+            <i class="fa-solid fa-envelope"></i> info@jpexpress.com.bd
+          </a>
+          <a href="contact.html">
+            <i class="fa-solid fa-location-dot"></i> Dhaka, Bangladesh
+          </a>
+          <a href="https://wa.me/8801681637836" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3">
+        <span>© 2024 JP Express. All rights reserved.</span>
+        <span>Terms of Service &nbsp;|&nbsp; Privacy Policy &nbsp;|&nbsp; Sitemap</span>
       </div>
     </div>
-  </section>
+  </footer>
+  
+<nav class="fab-bar" aria-label="Mobile quick actions">
+  <a href="index.html" class="bar-quote"><i class="fa-solid fa-house-door"></i>Home</a>
+  <a href="track-shipment.html"><i class="fa-solid fa-geo-alt"></i>Track</a>
+  <a href="#quote"><i class="fa-solid fa-calculator"></i>Quote</a>
+  <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
+  <a href="tel:+8801681637836"><i class="fa-solid fa-telephone"></i>Call</a>
+</nav>
 
-  <section class="quick-services" aria-label="Primary services">
-    <div class="container-xxl"><div class="row g-0">
-      <a class="quick-item col-6 col-md-3 col-xl" href="services.html"><i class="bi bi-airplane-fill"></i><span>International<br>Courier</span></a>
-      <a class="quick-item col-6 col-md-3 col-xl" href="services.html"><i class="bi bi-box-seam-fill"></i><span>Export<br>Logistics</span></a>
-      <a class="quick-item col-6 col-md-3 col-xl" href="services.html"><i class="bi bi-send-fill"></i><span>Air &amp; Sea<br>Freight</span></a>
-      <a class="quick-item col-6 col-md-3 col-xl" href="services.html"><i class="bi bi-buildings-fill"></i><span>Business<br>Shipping</span></a>
-      <a class="quick-item col-6 col-md-3 col-xl" href="services.html"><i class="bi bi-shield-fill-check"></i><span>Customs<br>Support</span></a>
-      <a class="quick-item col-6 col-md-3 col-xl" href="countries.html"><i class="bi bi-globe-americas"></i><span>Global<br>Delivery</span></a>
-    </div></div>
-  </section>
+  <!-- =========================================
+       SCRIPTS
+       ========================================= -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    (() => {
+      // Shipping Estimate Calculator
+      const form = document.getElementById('calcForm');
+      const result = document.getElementById('calcResult');
+      
+      if (form && result) {
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          
+          const weight = Math.max(parseFloat(document.getElementById('cWeight').value) || 1, 0.5);
+          const type = document.getElementById('cType').value;
+          const method = type === 'Commercial Cargo' ? 'Commercial Cargo' : 'International Courier';
+          
+          const low = Math.round(12 + weight * (method === 'Commercial Cargo' ? 7 : 9));
+          const high = Math.round(low * 1.18);
+          
+          result.classList.remove('d-none');
+          result.innerHTML = `
+            <strong>Estimated shipping range: $${low} – $${high}</strong>
+            <small>Indicative demo estimate. Final pricing is confirmed by our logistics team.</small>
+          `;
+        });
+      }
 
-  <section class="tools-section" id="quote" aria-label="Quote and shipment tracking">
-    <div class="container-xxl"><div class="row g-3 g-lg-4">
-      <div class="col-lg-6"><div class="tool-card quote-card" data-reveal>
-        <div class="tool-head"><span class="tool-icon red"><i class="bi bi-calculator"></i></span><div><h2>Get a Shipping Estimate</h2><p>Tell us about your shipment to find the appropriate shipping option.</p></div></div>
-        <form id="calcForm" class="quote-form" novalidate><div class="row g-2">
-          <div class="col-6"><label for="cFrom">From</label><select id="cFrom" class="form-select"><option>🇧🇩 Bangladesh</option></select></div>
-          <div class="col-6"><label for="cTo">To</label><select id="cTo" class="form-select"><option>Select Country</option><option>🇺🇸 United States</option><option>🇬🇧 United Kingdom</option><option>🇨🇦 Canada</option><option>🇦🇺 Australia</option><option>🇦🇪 UAE</option></select></div>
-          <div class="col-6"><label for="cType">Shipment Type</label><select id="cType" class="form-select"><option>Document</option><option>Parcel</option><option>Commercial Cargo</option></select></div>
-          <div class="col-6"><label for="cWeight">Weight (KG)</label><div class="input-group"><input id="cWeight" class="form-control" type="number" min="0.5" step="0.5" value="1"><span class="input-group-text">kg</span></div></div>
-          <input type="hidden" id="cL" value="30"><input type="hidden" id="cW" value="20"><input type="hidden" id="cH" value="10"><input type="hidden" id="cMethod" value="International Courier">
-        </div><button type="submit" class="btn-main btn-red w-100 mt-2">Get Shipping Estimate <i class="bi bi-arrow-right"></i></button><a class="more-link" href="pricing.html"><i class="bi bi-plus-circle"></i> More Shipment Details</a></form><div id="calcResult" class="calc-result d-none" aria-live="polite"></div>
-      </div></div>
-      <div class="col-lg-6"><div class="tool-card track-card" data-reveal>
-        <img class="track-bg" src="assets/hero-banner.jpg" alt="" aria-hidden="true">
-        <div class="tool-head"><span class="tool-icon red"><i class="bi bi-search"></i></span><div><h2>Track Your Shipment</h2><p>Enter your tracking number to get real-time updates.</p></div></div>
-        <form id="trackForm" class="track-form" novalidate><input id="trackInput" class="form-control" type="text" placeholder="Enter Tracking Number" autocomplete="off"><button type="submit" class="btn-main btn-red">Track Shipment <i class="bi bi-arrow-right"></i></button></form>
-        <a class="more-link light" href="track-shipment.html"><i class="bi bi-plus-circle"></i> Track Multiple Shipments</a><div id="trackResult" class="track-result d-none"><strong>Shipment tracking preview</strong><p class="mb-0">Your tracking number has been received. View detailed status on the tracking page.</p></div>
-      </div></div>
-    </div></div>
-  </section>
-
-  <section class="trust-strip"><div class="container-xxl"><div class="row g-0">
-    <div class="trust-item col-6 col-md-3"><i class="bi bi-award-fill"></i><strong><span data-counter="8">0</span>+</strong><small>Years of Experience</small></div>
-    <div class="trust-item col-6 col-md-3"><i class="bi bi-globe2"></i><strong><span data-counter="215">0</span>+</strong><small>Countries Worldwide</small></div>
-    <div class="trust-item col-6 col-md-4 col-xl-2"><i class="bi bi-boxes"></i><strong><span data-counter="10000">0</span>+</strong><small>Successful Shipments</small></div>
-    <div class="trust-item col-6 col-md-4 col-xl-2"><i class="bi bi-people-fill"></i><strong><span data-counter="25">0</span>+</strong><small>Team Members</small></div>
-    <div class="trust-item col-6 col-md-4 col-xl-2"><i class="bi bi-heart-fill"></i><strong><span data-counter="6">0</span>+</strong><small>Logistics Partners</small></div>
-    <div class="trust-item col-6 col-md-4 col-xl-2"><i class="bi bi-headset"></i><strong><span data-counter="100">0</span>%</strong><small>Customer Support</small></div>
-  </div></div></section>
-
-  <section class="home-section" aria-labelledby="whyTitle"><div class="container-xxl">
-    <div class="section-heading"><div><span class="eyebrow">WHY CHOOSE JP EXPRESS</span><h2 id="whyTitle">Reliable Shipping Solutions for a Global World</h2><p>We provide secure, efficient and cost-effective international shipping and export logistics solutions from Bangladesh.</p></div><a href="about.html" class="section-link">More About Us <i class="bi bi-arrow-right"></i></a></div>
-    <div class="row g-2 g-md-3 why-grid">
-      <div class="col-6 col-lg-4 col-xl-2"><article class="mini-card"><i class="bi bi-airplane"></i><h3>International Shipping</h3><p>Support for international courier and logistics requirements.</p></article></div>
-      <div class="col-6 col-lg-4 col-xl-2"><article class="mini-card"><i class="bi bi-people-fill"></i><h3>Business-Focused Solutions</h3><p>Solutions for exporters and commercial businesses.</p></article></div>
-      <div class="col-6 col-lg-4 col-xl-2"><article class="mini-card"><i class="bi bi-shield-lock-fill"></i><h3>Shipment Visibility</h3><p>Tracking and shipment status information.</p></article></div>
-      <div class="col-6 col-lg-4 col-xl-2"><article class="mini-card"><i class="bi bi-gear-fill"></i><h3>Logistics Support</h3><p>Support throughout shipping and documentation.</p></article></div>
-      <div class="col-6 col-lg-4 col-xl-2"><article class="mini-card"><i class="bi bi-arrows-angle-expand"></i><h3>Flexible Shipping Options</h3><p>Courier, freight and export solutions.</p></article></div>
-      <div class="col-6 col-lg-4 col-xl-2"><article class="mini-card"><i class="bi bi-headset"></i><h3>Customer Support</h3><p>Accessible support when you need assistance.</p></article></div>
-    </div>
-  </div></section>
-
-  <section class="home-section services-section" aria-labelledby="servicesTitle"><div class="container-xxl">
-    <div class="section-heading"><div><span class="eyebrow">OUR SERVICES</span><h2 id="servicesTitle">International Shipping Services</h2></div><a href="services.html" class="section-link">View All Services <i class="bi bi-arrow-right"></i></a></div>
-    <div class="row g-3">
-      <div class="col-12 col-sm-6 col-lg-3"><article class="image-card"><img src="assets/international-01.jpg" alt="International courier shipment" loading="lazy"><div><h3>International Courier</h3><p>Documents, parcels and express international shipments.</p><a href="services.html">Explore Courier <i class="bi bi-arrow-right"></i></a></div></article></div>
-      <div class="col-12 col-sm-6 col-lg-3"><article class="image-card"><img src="assets/hero-banner.jpg" alt="Air freight aircraft" loading="lazy"><div><h3>Air Freight</h3><p>For commercial and heavier international shipments.</p><a href="services.html">Explore Air Freight <i class="bi bi-arrow-right"></i></a></div></article></div>
-      <div class="col-12 col-sm-6 col-lg-3"><article class="image-card"><img src="assets/domestic-02.jpg" alt="Sea freight and cargo logistics" loading="lazy"><div><h3>Sea Freight</h3><p>For larger commercial cargo and international freight.</p><a href="services.html">Explore Sea Freight <i class="bi bi-arrow-right"></i></a></div></article></div>
-      <div class="col-12 col-sm-6 col-lg-3"><article class="image-card"><img src="assets/business-solution.jpg" alt="Export logistics" loading="lazy"><div><h3>Export Logistics</h3><p>Export shipping, documentation and logistics support.</p><a href="services.html">Explore Export <i class="bi bi-arrow-right"></i></a></div></article></div>
-    </div>
-  </div></section>
-
-  <section class="home-section needs-section" aria-labelledby="needsTitle"><div class="container-xxl">
-    <div class="section-heading compact"><div><span class="eyebrow">WHAT ARE YOU SHIPPING?</span><h2 id="needsTitle">Find the right shipping solution based on your needs.</h2></div></div>
-    <div class="row g-2 g-md-3">
-      <div class="col-6 col-md-4 col-xl-2"><a class="need-card" href="services.html"><i class="bi bi-file-earmark-text"></i><span>Documents</span></a></div><div class="col-6 col-md-4 col-xl-2"><a class="need-card" href="services.html"><i class="bi bi-gift"></i><span>Personal Parcels</span></a></div><div class="col-6 col-md-4 col-xl-2"><a class="need-card" href="services.html"><i class="bi bi-cart-check"></i><span>E-commerce Orders</span></a></div><div class="col-6 col-md-4 col-xl-2"><a class="need-card" href="services.html"><i class="bi bi-boxes"></i><span>Product Samples</span></a></div><div class="col-6 col-md-4 col-xl-2"><a class="need-card" href="services.html"><i class="bi bi-box-seam"></i><span>Commercial Cargo</span></a></div><div class="col-6 col-md-4 col-xl-2"><a class="need-card" href="services.html"><i class="bi bi-send"></i><span>Export Shipments</span></a></div>
-    </div>
-  </div></section>
-
-  <section class="destination-section" aria-labelledby="destTitle"><div class="container-xxl"><div class="section-heading on-blue"><div><span class="eyebrow">SHIP TO 200+ COUNTRIES</span><h2 id="destTitle">Popular Destinations</h2><p>We deliver to major destinations worldwide from Bangladesh.</p></div><a href="countries.html" class="section-link">View All Destinations <i class="bi bi-arrow-right"></i></a></div>
-    <div class="destination-row">
-      <a class="destination-card" href="country.html?country=usa"><img src="assets/stroy.jpg" alt="USA destination" loading="lazy"><span>🇺🇸 <b>USA</b></span></a><a class="destination-card" href="country.html?country=uk"><img src="assets/business-solution.jpg" alt="United Kingdom destination" loading="lazy"><span>🇬🇧 <b>United Kingdom</b></span></a><a class="destination-card" href="country.html?country=canada"><img src="assets/hero-banner.jpg" alt="Canada destination" loading="lazy"><span>🇨🇦 <b>Canada</b></span></a><a class="destination-card" href="country.html?country=australia"><img src="assets/international-01.jpg" alt="Australia destination" loading="lazy"><span>🇦🇺 <b>Australia</b></span></a><a class="destination-card" href="country.html?country=uae"><img src="assets/domestic-02.jpg" alt="UAE destination" loading="lazy"><span>🇦🇪 <b>UAE</b></span></a><a class="destination-card" href="country.html?country=germany"><img src="assets/stroy.jpg" alt="Germany destination" loading="lazy"><span>🇩🇪 <b>Germany</b></span></a>
-    </div>
-  </div></section>
-
-  <section class="home-section process-section" aria-labelledby="processTitle"><div class="container-xxl"><div class="section-heading compact"><div><span class="eyebrow">HOW IT WORKS</span><h2 id="processTitle">A Simple Shipping Process</h2><p>From pickup to delivery, we make international shipping simple and hassle-free.</p></div></div>
-    <div class="process-row">
-      <div class="process-step"><span>1</span><div><h3>Get a Quote</h3><p>Tell us about your shipment.</p></div></div><div class="process-line"></div><div class="process-step"><span>2</span><div><h3>Book Shipment</h3><p>Confirm your shipping request.</p></div></div><div class="process-line"></div><div class="process-step"><span>3</span><div><h3>Pickup</h3><p>Shipment is collected.</p></div></div><div class="process-line"></div><div class="process-step"><span>4</span><div><h3>Processing</h3><p>Documentation and shipment processing.</p></div></div><div class="process-line"></div><div class="process-step"><span>5</span><div><h3>International Transit</h3><p>Shipment moves toward destination.</p></div></div><div class="process-line"></div><div class="process-step"><span>6</span><div><h3>Delivery</h3><p>Shipment reaches recipient.</p></div></div>
-    </div>
-  </div></section>
-
-  <section class="home-section industries-section" aria-labelledby="industryTitle"><div class="container-xxl"><div class="section-heading"><div><span class="eyebrow">INDUSTRIES WE SERVE</span><h2 id="industryTitle">Industry-Specific Shipping Solutions</h2><p>A simple process from pickup to delivery.</p></div><a href="industries.html" class="section-link">View All Industries <i class="bi bi-arrow-right"></i></a></div>
-    <div class="row g-3">
-      <div class="col-6 col-md-4 col-xl-2"><article class="industry-card"><img src="assets/international-01.jpg" alt="Garments and textiles" loading="lazy"><strong>Garments &amp; Textiles</strong></article></div><div class="col-6 col-md-4 col-xl-2"><article class="industry-card"><img src="assets/stroy.jpg" alt="Jute products" loading="lazy"><strong>Jute Products</strong></article></div><div class="col-6 col-md-4 col-xl-2"><article class="industry-card"><img src="assets/business-solution.jpg" alt="Leather products" loading="lazy"><strong>Leather Products</strong></article></div><div class="col-6 col-md-4 col-xl-2"><article class="industry-card"><img src="assets/domestic-02.jpg" alt="E-commerce" loading="lazy"><strong>E-commerce</strong></article></div><div class="col-6 col-md-4 col-xl-2"><article class="industry-card"><img src="assets/hero-banner.jpg" alt="Manufacturing" loading="lazy"><strong>Manufacturing</strong></article></div><div class="col-6 col-md-4 col-xl-2"><article class="industry-card"><img src="assets/business-solution.jpg" alt="Buying houses" loading="lazy"><strong>Buying Houses</strong></article></div>
-    </div>
-  </div></section>
-
-  <section class="solution-section" aria-labelledby="solutionTitle"><div class="container-xxl"><div class="row align-items-center g-4"><div class="col-lg-7"><div class="solution-media"><img src="assets/international-01.jpg" alt="Real shipping solutions" loading="lazy"><div class="solution-caption"><span>REAL SHIPPING SOLUTIONS</span><h2 id="solutionTitle">Real Shipping Solutions</h2><p>See how we help businesses and customers solve real shipping challenges.</p></div></div></div><div class="col-lg-5"><div class="case-list"><article><i class="bi bi-building"></i><div><b>Bangladesh → USA</b><strong>Garments Commercial Shipment</strong><p>Helping a Bangladesh manufacturer ship garments to the USA with end-to-end logistics support.</p><a href="resources.html">View Case Study <i class="bi bi-arrow-right"></i></a></div></article><article><i class="bi bi-box-seam"></i><div><b>International Export</b><strong>Reliable Commercial Logistics</strong><p>Flexible courier, freight and documentation support for growing exporters.</p><a href="resources.html">View Case Study <i class="bi bi-arrow-right"></i></a></div></article></div></div></div></div></section>
-
-  <section class="testimonial-section" aria-labelledby="testimonialTitle"><div class="container-xxl"><div class="row align-items-center g-4"><div class="col-lg-5"><span class="eyebrow">CUSTOMER REVIEWS</span><h2 id="testimonialTitle">What Our Customers Say</h2><p>Trusted by individuals and businesses across the world.</p></div><div class="col-lg-7"><article class="testimonial-card"><div class="testimonial-avatar"><img src="assets/teams/founder.jpg" alt="Customer representative" loading="lazy"></div><div><p>“Reliable service and excellent support. JP Express made our export process smooth and easy. Highly recommended.”</p><strong>Tanvir Ahmed</strong><small>Managing Director, Dhaka, Bangladesh</small><div class="stars" aria-label="Five star review">★★★★★</div></div></article></div></div></div></section>
-
-  <section class="home-section partners-section" aria-labelledby="partnerTitle"><div class="container-xxl"><div class="section-heading"><div><span class="eyebrow">GLOBAL PARTNERS</span><h2 id="partnerTitle">Our Logistics Network</h2><p>Working with trusted global partners to deliver your shipments worldwide.</p></div></div><div class="partners-layout"><div class="partner-map"><img src="assets/world-map.png" alt="Global logistics network map" loading="lazy"><span class="map-pin p1"></span><span class="map-pin p2"></span><span class="map-pin p3"></span></div><div class="partner-logos">
-  <span><img src="assets/airlines/dhl.png" alt="DHL" loading="lazy"></span>
-  <span><img src="assets/airlines/FedEx.png" alt="FedEx" loading="lazy"></span>
-  <span><img src="assets/airlines/ups.png" alt="UPS" loading="lazy"></span>
-  <span><img src="assets/airlines/Emirates.png" alt="Emirates" loading="lazy"></span>
-  <span><img src="assets/airlines/qatar.png" alt="Qatar Airways" loading="lazy"></span>
-  <span><img src="assets/airlines/turkish-airlines.png" alt="Turkish Airlines" loading="lazy"></span>
-</div></div></div></section>
-
-  <section class="home-section faq-section" aria-labelledby="faqTitle"><div class="container-xxl"><div class="section-heading"><div><span class="eyebrow">FREQUENTLY ASKED QUESTIONS</span><h2 id="faqTitle">Common Questions About Shipping</h2><p>Find quick answers to the most common shipping questions.</p></div><a href="resources.html" class="section-link">View All FAQs <i class="bi bi-arrow-right"></i></a></div><div class="row g-2 g-lg-3"><div class="col-lg-6"><div class="accordion" id="faqLeft"><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">How can I get a shipping quote?</button></h3><div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqLeft"><div class="accordion-body">Use the shipping estimate form above or contact our logistics team for a confirmed quote.</div></div></div><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">How long does international shipping take?</button></h3><div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqLeft"><div class="accordion-body">Transit time depends on destination, service type and customs processing.</div></div></div><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">What items can be shipped?</button></h3><div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqLeft"><div class="accordion-body">Documents, parcels and commercial shipments are accepted subject to destination and carrier restrictions.</div></div></div></div></div><div class="col-lg-6"><div class="accordion" id="faqRight"><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">How can I track my shipment?</button></h3><div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqRight"><div class="accordion-body">Use your tracking number on the tracking page to view the shipment status.</div></div></div><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">What documents are required?</button></h3><div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqRight"><div class="accordion-body">Requirements vary by shipment type and destination; our team can guide you through the required paperwork.</div></div></div><div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq6">Do you handle customs clearance?</button></h3><div id="faq6" class="accordion-collapse collapse" data-bs-parent="#faqRight"><div class="accordion-body">Customs support is available for eligible international shipments.</div></div></div></div></div></div></div></section>
-
-  <section class="home-section resources-section" aria-labelledby="resourceTitle"><div class="container-xxl"><div class="section-heading"><div><span class="eyebrow">SHIPPING RESOURCES</span><h2 id="resourceTitle">Shipping &amp; Export Knowledge Center</h2><p>Helpful guides and resources for international shipping.</p></div><a href="resources.html" class="section-link">View All Guides <i class="bi bi-arrow-right"></i></a></div><div class="row g-3"><div class="col-md-4"><article class="resource-card"><img src="assets/international-01.jpg" alt="Shipping guide" loading="lazy"><div><small>SHIPPING GUIDE</small><h3>How to Ship Commercial Products from Bangladesh to the USA</h3><a href="resources.html">Read Guide <i class="bi bi-arrow-right"></i></a></div></article></div><div class="col-md-4"><article class="resource-card"><img src="assets/business-solution.jpg" alt="Export documentation" loading="lazy"><div><small>EXPORT GUIDE</small><h3>Export Documentation from Bangladesh</h3><a href="resources.html">Read Guide <i class="bi bi-arrow-right"></i></a></div></article></div><div class="col-md-4"><article class="resource-card"><img src="assets/stroy.jpg" alt="Customs clearance" loading="lazy"><div><small>CUSTOMS</small><h3>Understanding Customs Clearance Process</h3><a href="resources.html">Read Guide <i class="bi bi-arrow-right"></i></a></div></article></div></div></div></section>
-
-  <section class="final-cta"><div class="container-xxl"><img class="final-cta-art" src="assets/airlines/Airliner-Orbiting-a-Glowing-Earth.png" alt="" aria-hidden="true" loading="lazy" decoding="async"><div class="row align-items-center g-3"><div class="col-lg-5"><h2>Ready to Ship Worldwide?</h2><p>Get a free quote or book a pickup today and experience reliable global shipping with JP Express.</p></div><div class="col-lg-4 d-flex flex-wrap gap-2 justify-content-lg-end"><a class="btn-main btn-white" href="#quote">Get a Quote <i class="bi bi-arrow-right"></i></a><a class="btn-main btn-white-outline" href="#quote">Book a Pickup</a></div></div></div></section>
-</main>
-
-<footer class="footer"><div class="container-xxl"><div class="row g-4 py-5"><div class="col-lg-4"><img src="assets/logo.png" alt="JP Express" class="footer-logo"><p>International courier, export logistics and global shipping platform from Bangladesh.</p><div class="footer-social"><a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a></div></div><div class="col-6 col-lg-2"><h3>About</h3><a href="about.html">About Us</a><a href="about.html">Our Story</a><a href="about.html">Leadership</a><a href="contact.html">Careers</a><a href="contact.html">Contact</a></div><div class="col-6 col-lg-2"><h3>Services</h3><a href="services.html">International Courier</a><a href="services.html">Air Freight</a><a href="services.html">Sea Freight</a><a href="services.html">Export Logistics</a><a href="services.html">Import Solutions</a></div><div class="col-6 col-lg-2"><h3>Resources</h3><a href="resources.html">Shipping Guides</a><a href="blog.html">Blog / Insights</a><a href="resources.html">FAQ</a><a href="resources.html">Media Center</a><a href="resources.html">Legal / Policies</a></div><div class="col-6 col-lg-2"><h3>Contact</h3><a href="tel:+8801681637836"><i class="bi bi-telephone"></i> +880 1681 637836</a><a href="mailto:jpexpress09@gmail.com"><i class="bi bi-envelope"></i> info@jpexpress.com.bd</a><a href="contact.html"><i class="bi bi-geo-alt"></i> Dhaka, Bangladesh</a><a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp</a></div></div><div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3"><span>© 2024 JP Express. All rights reserved.</span><span>Terms of Service &nbsp;|&nbsp; Privacy Policy &nbsp;|&nbsp; Sitemap</span></div></div></footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-(() => {
-  const form = document.getElementById('calcForm');
-  const result = document.getElementById('calcResult');
-  if (form && result) form.addEventListener('submit', e => {
-    e.preventDefault();
-    const w = Math.max(parseFloat(document.getElementById('cWeight').value) || 1, .5);
-    const method = document.getElementById('cType').value === 'Commercial Cargo' ? 'Commercial Cargo' : 'International Courier';
-    const low = Math.round(12 + w * (method === 'Commercial Cargo' ? 7 : 9));
-    const high = Math.round(low * 1.18);
-    result.classList.remove('d-none');
-    result.innerHTML = `<strong>Estimated shipping range: $${low} – $${high}</strong><small>Indicative demo estimate. Final pricing is confirmed by our logistics team.</small>`;
-  });
-  const track = document.getElementById('trackForm');
-  const trackResult = document.getElementById('trackResult');
-  if (track && trackResult) track.addEventListener('submit', e => { e.preventDefault(); if (!document.getElementById('trackInput').value.trim()) return document.getElementById('trackInput').focus(); trackResult.classList.remove('d-none'); });
-})();
-</script>
+      // Shipment Tracking Preview
+      const track = document.getElementById('trackForm');
+      const trackResult = document.getElementById('trackResult');
+      
+      if (track && trackResult) {
+        track.addEventListener('submit', e => {
+          e.preventDefault();
+          
+          const input = document.getElementById('trackInput');
+          if (!input.value.trim()) {
+            return input.focus();
+          }
+          
+          trackResult.classList.remove('d-none');
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
