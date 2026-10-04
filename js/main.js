@@ -68,7 +68,8 @@ let ticking = false;
 function onScroll() {
   const y = window.scrollY;
   navbar.classList.toggle('is-scrolled', y > 12);
-  topBar.classList.toggle('tb-hide', y > 60);
+  if (y > 90) topBar.classList.add('tb-hide');
+  else if (y < 30) topBar.classList.remove('tb-hide');
   if (fabSide) fabSide.classList.toggle('show', y > 560);
   ticking = false;
 }

@@ -295,10 +295,28 @@ button:focus-visible,
 }
 
 .topbar {
-  height: var(--sp-34);
+  display: flex;
+  align-items: center;
+  height: 38px;
+  max-height: 38px;
+  overflow: hidden;
   background: var(--jp-navy-dark);
   color: var(--jp-white);
   font-size: var(--fs-base-sm);
+  line-height: 1;
+  transition: max-height .35s ease, height .35s ease,
+              padding .35s ease, opacity .25s ease;
+}
+
+/* Hidden state (added by main.js on scroll) */
+.topbar.tb-hide {
+  height: 0;
+  max-height: 0;
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .topbar-left,
@@ -311,6 +329,16 @@ button:focus-visible,
 .topbar a {
   color: var(--jp-white);
   opacity: .92;
+  line-height: 1;
+  transition: opacity .2s ease;
+}
+
+.topbar a:hover {
+  opacity: 1;
+}
+
+.topbar .lang-btn {
+  line-height: 1;
 }
 
 .topbar i {
@@ -333,6 +361,13 @@ button:focus-visible,
   min-height: var(--sp-58);
   background: var(--jp-white);
   border-bottom: var(--sp-1) solid #e8eef6;
+}
+.jp-navbar {
+  transition: box-shadow .3s ease;
+}
+
+.jp-navbar.is-scrolled {
+  box-shadow: 0 6px 18px rgba(30, 42, 107, .10);
 }
 
 .brand-logo {
