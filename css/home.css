@@ -1316,7 +1316,6 @@ button:focus-visible,
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   color: var(--jp-navy);
   transition: transform .25s ease;
 }
@@ -1327,7 +1326,7 @@ button:focus-visible,
 
 .destination-thumb {
   aspect-ratio: 4 / 3.4;
-  border-radius: 10px;
+  border-radius: 8px 8px 0 0;
   overflow: hidden;
   background: var(--jp-navy-dark);
   box-shadow: 0 6px 16px rgba(0, 0, 0, .22);
@@ -1351,7 +1350,7 @@ button:focus-visible,
   min-height: 46px;
   padding: 7px 12px;
   background: var(--jp-white);
-  border-radius: 8px;
+  border-radius:  0 0  8px 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
   font-size: 14px;
   color: var(--jp-navy);
