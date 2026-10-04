@@ -687,7 +687,7 @@ button:focus-visible,
 
 .hero-feature-stack {
   position: absolute;
-  right: 0;
+  right: clamp(16px, 4vw, 48px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 4;
@@ -2526,9 +2526,6 @@ button:focus-visible,
    RESPONSIVE - LARGE SCREENS (max 1199px)
    ========================================= */
 @media (max-width: 1199px) {
-  .hero-feature-stack {
-    right: var(--sp-8);
-  }
   .jp-navbar .navbar-brand {
     margin-right: 0;
   }
