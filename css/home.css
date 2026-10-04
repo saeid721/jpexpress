@@ -177,7 +177,7 @@
   --pad-section-sm: var(--sp-9) 0 var(--sp-10);
   --pad-section-md: var(--sp-13) 0;
   --pad-section-lg: var(--sp-17) 0;
-  --pad-section-xl: var(--sp-22) 0;
+  --pad-section-xl: var(--sp-38) 0;
   --pad-section-dest: var(--sp-18) 0 var(--sp-21);
   --pad-section-test: var(--sp-19) 0;
   --pad-section-sol: var(--sp-20) 0;
@@ -1158,7 +1158,7 @@ button:focus-visible,
    SERVICES & NEEDS
    ========================================= */
 .services-section {
-  padding-top: var(--sp-17);
+  padding: var(--sp-38);
 }
 
 .image-card {
@@ -1211,8 +1211,8 @@ button:focus-visible,
 }
 
 .home-section.needs-section {
-  padding-top: 8px;
-  padding-bottom: 28px;
+
+  padding: var(--sp-38);
   background: var(--jp-white);
 }
 
@@ -1273,7 +1273,7 @@ button:focus-visible,
 .destination-section {
   background: var(--jp-navy-bg);
   color: var(--jp-white);
-  padding: var(--pad-section-dest);
+  padding: var(--sp-38);
 }
 
 .destination-section .section-heading {
@@ -1421,8 +1421,7 @@ button:focus-visible,
    PROCESS SECTION
    ========================================= */
 .home-section.process-section {
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding: var(--sp-38);
 }
 
 .process-row {
@@ -1489,8 +1488,7 @@ button:focus-visible,
    INDUSTRIES SECTION
    ========================================= */
 .home-section.industries-section {
-  padding-top: 14px;
-  padding-bottom: 22px;
+  padding: var(--sp-38);
 }
 
 .industry-card {
@@ -1668,7 +1666,7 @@ button:focus-visible,
 TESTIMONIAL SECTION
 ========================================= */
 .testimonial-section {
-  padding: 40px 0 44px;
+  padding: var(--sp-38);
   background: var(--jp-bg-muted);
 }
 .testimonial-grid {
@@ -1934,8 +1932,7 @@ TESTIMONIAL – RESPONSIVE
    PARTNERS SECTION
    ========================================= */
 .home-section.partners-section {
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding: var(--sp-38);
 }
 
 .partners-grid {
@@ -2038,8 +2035,7 @@ TESTIMONIAL – RESPONSIVE
    FAQ SECTION
    ========================================= */
 .home-section.faq-section {
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding: var(--sp-38);
 }
 
 .accordion {
@@ -2108,8 +2104,7 @@ TESTIMONIAL – RESPONSIVE
    RESOURCE CARD
    ========================================= */
 .home-section.resources-section {
-  padding-top: 22px;
-  padding-bottom: 28px;
+  padding: var(--sp-38);
 }
 
 .resource-card {
