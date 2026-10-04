@@ -3751,3 +3751,291 @@ button:focus-visible,
     translate: none !important;
   }
 }
+
+
+/* =========================================
+   MOBILE – HERO FEATURE CARDS (icon + text on one line)
+   ========================================= */
+@media (max-width: 767px) {
+  .hero-feature-stack {
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .hero-feature-stack > div {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 6px;
+    min-width: 0;
+    min-height: 58px;
+    padding: 10px 8px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .hero-feature-stack i {
+    flex: 0 0 28px;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(43, 57, 144, .08);
+    font-size: 13px;
+  }
+
+  .hero-feature-stack strong {
+    display: block;
+    min-width: 0;
+    white-space: nowrap;
+    text-align: left;
+    font-size: clamp(9.5px, 2.8vw, 13px);
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -.01em;
+  }
+
+  .hero-feature-stack small {
+    display: inline;
+    margin: 0 0 0 .25em;
+    font-size: inherit;
+    font-weight: 800;
+  }
+}
+
+/* Small phones (360px and below) */
+@media (max-width: 380px) {
+  .hero-feature-stack > div {
+    gap: 5px;
+    padding: 10px 6px;
+  }
+
+  .hero-feature-stack i {
+    flex-basis: 24px;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
+/* Very small phones (340px and below) */
+@media (max-width: 340px) {
+  .hero-feature-stack > div {
+    gap: 4px;
+    padding: 10px 5px;
+  }
+
+  .hero-feature-stack i {
+    flex-basis: 16px;
+    width: 16px;
+    height: 16px;
+    background: none;
+    font-size: 13px;
+  }
+}
+
+
+/* =========================================
+   MOBILE – HERO COMPACT SPACING
+   ========================================= */
+@media (max-width: 767px) {
+  .hero {
+    padding: 18px 0 16px;
+  }
+
+  .hero .hero-kicker {
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    line-height: 1.35;
+    margin-bottom: 6px;
+  }
+
+  .hero h1,
+  .hero h1.hero-title {
+    font-size: clamp(1.55rem, 7vw, 1.9rem);
+    line-height: 1.12;
+    margin: 0 0 8px;
+  }
+
+  .hero p {
+    font-size: 13.5px;
+    line-height: 1.45;
+    margin-bottom: 14px;
+  }
+
+  .hero-actions {
+    gap: 8px;
+  }
+
+  .hero-actions .btn-main {
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 14.5px;
+    border-radius: 8px;
+  }
+
+  .hero-links {
+    gap: 8px 14px;
+    margin-top: 12px;
+    font-size: 12.5px;
+  }
+
+  .hero-links i {
+    font-size: 14px;
+  }
+
+  .hero-links a {
+    gap: 6px;
+  }
+
+  .hero-feature-stack {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .hero-feature-stack > div {
+    min-height: 48px;
+    padding: 8px 6px;
+    border-radius: 10px;
+  }
+
+  .hero-feature-stack i {
+    flex-basis: 24px;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================
+   MOBILE – HIDE HERO ACTION BUTTONS & LINKS
+   ========================================= */
+@media (max-width: 767px) {
+  .hero-actions,
+  .hero-links {
+    display: none;
+  }
+
+  .hero p {
+    margin-bottom: 0;
+  }
+
+  .hero-feature-stack {
+    margin-top: 16px;
+  }
+}
+
+
+/* =========================================
+   MOBILE – HERO TEXT CENTER ALIGN
+   ========================================= */
+@media (max-width: 767px) {
+  .hero-copy {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero .hero-kicker {
+    text-align: center;
+  }
+
+  .hero h1,
+  .hero h1.hero-title {
+    text-align: center;
+  }
+
+  .hero h1 .ht-slide {
+    text-align: center;
+  }
+
+  .hero p {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
+
+/* =========================================
+   MOBILE – HERO TITLE FONT SIZE (smaller)
+   ========================================= */
+@media (max-width: 767px) {
+  .hero h1,
+  .hero h1.hero-title {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 0 0 8px;
+  }
+}
+
+/* Small phones (380px and below) */
+@media (max-width: 380px) {
+  .hero h1,
+  .hero h1.hero-title {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+}
+
+
+/* =========================================
+   MOBILE – QUICK SERVICES (icon + text on one line)
+   ========================================= */
+@media (max-width: 767px) {
+  .quick-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    min-width: 0;
+    min-height: 52px;
+    padding: 10px 8px 10px 14px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--jp-border-light);
+  }
+
+  .quick-item i {
+    flex: 0 0 20px;
+    width: 20px;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .quick-item span {
+    display: block;
+    min-width: 0;
+    white-space: nowrap;
+    text-align: left;
+    font-size: clamp(10px, 3vw, 12.5px);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+
+  .quick-item .qs-br {
+    display: none;
+  }
+}
+
+/* Small phones (380px and below) */
+@media (max-width: 380px) {
+  .quick-item {
+    gap: 6px;
+    padding: 10px 6px 10px 10px;
+  }
+
+  .quick-item i {
+    flex-basis: 16px;
+    width: 16px;
+    font-size: 13px;
+  }
+
+  .quick-item span {
+    font-size: clamp(9.5px, 2.9vw, 11px);
+  }
+}
