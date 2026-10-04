@@ -1661,78 +1661,95 @@ button:focus-visible,
 TESTIMONIAL SECTION
 ========================================= */
 .testimonial-section {
-  padding: 26px 0;
+  padding: 40px 0 44px;
   background: var(--jp-bg-muted);
 }
 .testimonial-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 170px minmax(0, 1.8fr) auto;
-  gap: 22px;
+  gap: 24px;
   align-items: center;
 }
 .testimonial-copy .eyebrow {
   display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  color: var(--jp-text-accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
 .testimonial-copy h2 {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: var(--fs-6xl);
-  line-height: 1.15;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  line-height: 1.2;
   font-weight: 800;
   color: #1550c0;
-  margin: 4px 0 8px;
+  margin: 0 0 8px;
 }
 .testimonial-copy p {
-  font-size: 15px;
+  font-size: 14.5px;
   line-height: 1.55;
   color: var(--jp-text-muted-dark);
-  max-width: 360px;
+  max-width: 340px;
   margin: 0;
 }
+
+/* ---- Avatar with light-blue badge ---- */
 .testimonial-avatar {
   width: 170px;
   height: 170px;
   border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(180deg, #cfe4ff, #8fc0ff);
+  background: #cfe4ff;
   border: 4px solid var(--jp-white);
-  box-shadow: 0 10px 24px rgba(30, 42, 107, .18);
+  box-shadow: 0 10px 28px rgba(30, 42, 107, .18);
+  display: grid;
+  place-items: center;
   transition: transform .5s ease, box-shadow .5s ease;
+  justify-self: center;
 }
 .testimonial-avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  border-radius: 50%;
   transition: opacity .45s ease;
 }
 .testimonial-avatar.is-changing img {
   opacity: 0;
 }
+
+/* ---- Card with speech-bubble tail ---- */
 .testimonial-card {
   position: relative;
-  padding: 22px 26px 18px;
+  padding: 26px 28px 22px;
   background: var(--jp-white);
   border: 1px solid #e3ebf5;
-  border-radius: 12px;
-  box-shadow: 0 8px 22px rgba(43, 57, 144, .08);
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(43, 57, 144, .08);
   transition: box-shadow .3s ease, transform .3s ease;
+  min-height: 150px;
 }
+/* Speech-bubble tail pointing LEFT toward avatar */
 .testimonial-card::before {
   content: "";
   position: absolute;
-  left: -9px;
+  left: -10px;
   top: 50%;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   background: var(--jp-white);
   border-left: 1px solid #e3ebf5;
   border-bottom: 1px solid #e3ebf5;
   transform: translateY(-50%) rotate(45deg);
+  z-index: 1;
 }
 .testimonial-card blockquote {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   font-size: 15.5px;
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 500;
   color: var(--jp-navy);
   transition: opacity .4s ease, transform .4s ease;
@@ -1767,13 +1784,13 @@ TESTIMONIAL SECTION
 }
 .stars {
   color: var(--jp-red);
-  font-size: 20px;
+  font-size: 18px;
   letter-spacing: 2px;
   line-height: 1;
   white-space: nowrap;
 }
 
-/* ---- Progress dots ---- */
+/* ---- Progress dots (top-right inside card) ---- */
 .testimonial-dots {
   position: absolute;
   top: 14px;
@@ -1783,8 +1800,8 @@ TESTIMONIAL SECTION
   z-index: 2;
 }
 .testimonial-dots span {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #d7e0ef;
   transition: background .3s ease, width .3s ease, transform .3s ease;
@@ -1792,18 +1809,16 @@ TESTIMONIAL SECTION
 }
 .testimonial-dots span.is-active {
   background: var(--jp-red);
-  width: 22px;
+  width: 20px;
   border-radius: 99px;
-  transform: scaleX(1);
 }
 
-/* ---- Nav buttons ---- */
+/* ---- Nav buttons (outside card, right side) ---- */
 .testimonial-nav {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
   display: flex;
+  flex-direction: column;
   gap: 10px;
+  justify-self: center;
 }
 .testimonial-nav button {
   width: 42px;
@@ -1840,35 +1855,53 @@ TESTIMONIAL – RESPONSIVE
 }
 @media (max-width: 991px) {
   .testimonial-grid {
-    grid-template-columns: 130px minmax(0, 1fr);
+    grid-template-columns: 130px minmax(0, 1fr) auto;
     gap: 18px 20px;
+    align-items: center;
   }
   .testimonial-copy {
     grid-column: 1 / -1;
+    grid-row: 1;
   }
   .testimonial-avatar {
     width: 130px;
     height: 130px;
+    grid-row: 2;
+  }
+  .testimonial-card {
+    grid-row: 2;
   }
   .testimonial-nav {
-    grid-column: 1 / -1;
-    justify-content: flex-end;
+    grid-row: 2;
+    flex-direction: row;
+    justify-self: end;
+    align-self: center;
   }
 }
 @media (max-width: 575px) {
   .testimonial-grid {
     grid-template-columns: 1fr;
     justify-items: stretch;
+    gap: 18px;
+  }
+  .testimonial-copy {
+    grid-row: auto;
+    text-align: center;
+  }
+  .testimonial-copy p {
+    margin: 0 auto;
   }
   .testimonial-avatar {
     margin: 0 auto;
+    grid-row: auto;
   }
   .testimonial-card {
-    padding: 18px 18px 16px;
+    padding: 20px 20px 18px;
+    grid-row: auto;
   }
   .testimonial-card::before {
     left: 50%;
-    top: -9px;
+    top: -10px;
     border: 0;
     border-left: 1px solid #e3ebf5;
     border-top: 1px solid #e3ebf5;
@@ -1879,7 +1912,10 @@ TESTIMONIAL – RESPONSIVE
     align-items: flex-start;
   }
   .testimonial-nav {
+    grid-row: auto;
+    flex-direction: row;
     justify-content: center;
+    justify-self: center;
   }
   .testimonial-dots {
     top: 12px;
