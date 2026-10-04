@@ -28,6 +28,13 @@
     "areaServed": "Worldwide"
   }
   </script>
+
+  <script>
+    document.documentElement.classList.add('typing-js');
+    setTimeout(function () {
+      document.documentElement.classList.remove('typing-js');
+    }, 3000);
+  </script>
 </head>
 
 <body>
@@ -145,8 +152,11 @@
               <div class="hero-kicker">
                 <span>INTERNATIONAL SHIPPING</span> FROM <span>BANGLADESH</span>
               </div>
-              <h1 id="heroTitle">
-                International Courier &amp;<br>Export Shipping from <span>Bangladesh</span>
+              <h1 id="heroTitle" class="hero-title">
+                <span class="ht-slide">International Courier &amp; Export Shipping from <span class="accent">Bangladesh</span></span>
+                <span class="ht-slide">Ship Worldwide with <span class="accent">Confidence</span></span>
+                <span class="ht-slide">Fast &amp; Secure Air and Sea <span class="accent">Freight Solutions</span></span>
+                <span class="ht-slide">Export Logistics Made <span class="accent">Simple</span></span>
               </h1>
               <p>
                 Ship parcels, documents, commercial cargo and export shipments to global destinations with professional logistics support.
@@ -1118,7 +1128,23 @@
       </div>
     </div>
   </footer>
-  
+
+  <!-- ============ FLOATING ACTIONS ============ -->
+<div class="fab-side" id="fabSide" aria-label="Quick contact actions">
+  <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+  </a>
+  <a href="#quote" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote">
+    <i class="fa-solid fa-calculator" aria-hidden="true"></i>
+  </a>
+  <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="fab-wa wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WhatsApp" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+  </a>
+  <a href="tel:+8801681637836" class="fab-call" data-tip="Call us" aria-label="Call us">
+    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+  </a>
+</div>
+
 <nav class="fab-bar" aria-label="Mobile quick actions">
   <a href="index.html" class="bar-quote"><i class="fa-solid fa-house"></i>Home</a>
   <a href="track-shipment.html"><i class="fa-solid fa-location-dot"></i>Track</a>
@@ -1262,6 +1288,111 @@
       document.addEventListener('keydown', e => {
         if (e.key === 'Escape') closeAll();
       });
+    })();
+  </script>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const title = document.getElementById('heroTitle');
+      const finish = () => root.classList.remove('typing-js');
+
+      if (!title) return finish();
+
+      const slides = Array.from(title.querySelectorAll('.ht-slide'));
+      if (!slides.length) return finish();
+
+      /* ---------- Settings ---------- */
+      const SPEED = 45;    // ms per letter
+      const DELAY = 350;   // ms before the first title starts
+      const HOLD  = 2200;  // ms the finished title stays on screen
+      const FADE  = 450;   // ms fade-out before the next title
+      const RESPECT_REDUCED_MOTION = false;
+
+      // Screen readers read the first title once
+      title.setAttribute('aria-label', slides[0].textContent.replace(/\s+/g, ' ').trim());
+
+      // Reduced motion (optional): show the first title instantly
+      if (RESPECT_REDUCED_MOTION &&
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        slides[0].classList.add('active');
+        title.classList.add('is-ready');
+        return finish();
+      }
+
+      /* ---------- Wrap words (no mid-word breaks) and letters ---------- */
+      const wrap = (node, chars) => {
+        Array.from(node.childNodes).forEach(child => {
+          if (child.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            child.textContent.split(/(\s+)/).forEach(part => {
+              if (!part) return;
+              if (/^\s+$/.test(part)) {
+                frag.appendChild(document.createTextNode(' '));
+                return;
+              }
+              const word = document.createElement('span');
+              word.className = 'tword';
+              Array.from(part).forEach(ch => {
+                const s = document.createElement('span');
+                s.className = 'tchar';
+                s.textContent = ch;
+                word.appendChild(s);
+                chars.push(s);
+              });
+              frag.appendChild(word);
+            });
+            child.replaceWith(frag);
+          } else if (child.nodeType === 1) {
+            wrap(child, chars);
+          }
+        });
+      };
+
+      slides.forEach(slide => {
+        slide.setAttribute('aria-hidden', 'true');
+        slide.chars = [];
+        wrap(slide, slide.chars);
+      });
+
+      /* ---------- Typing + rotation ---------- */
+      let idx = 0;
+      let timer = null;
+
+      const typeSlide = i => {
+        const chars = slides[idx].chars;
+        if (i < chars.length) {
+          if (i > 0) chars[i - 1].classList.remove('is-caret');
+          chars[i].classList.add('on', 'is-caret');
+          timer = setTimeout(() => typeSlide(i + 1), SPEED);
+        } else if (slides.length === 1) {
+          // Only one title: type once, then stop
+          timer = setTimeout(() => chars[chars.length - 1].classList.remove('is-caret'), 1500);
+        } else {
+          // Hold, fade out, then show the next title
+          timer = setTimeout(() => {
+            slides[idx].classList.add('out');
+            timer = setTimeout(() => show((idx + 1) % slides.length), FADE);
+          }, HOLD);
+        }
+      };
+
+      const show = n => {
+        clearTimeout(timer);
+        idx = n;
+        slides.forEach((slide, k) => {
+          slide.classList.toggle('active', k === n);
+          slide.classList.remove('out');
+          slide.chars.forEach(c => c.classList.remove('on', 'is-caret'));
+        });
+        typeSlide(0);
+      };
+
+      // Start
+      title.classList.add('is-ready');
+      finish();
+      slides[0].classList.add('active');
+      timer = setTimeout(() => typeSlide(0), DELAY);
     })();
   </script>
 </body>
