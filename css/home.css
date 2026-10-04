@@ -3400,3 +3400,357 @@ button:focus-visible,
     flex-basis: 22px;
   }
 }
+
+
+
+
+
+
+/* =========================================
+   PREMIUM SCROLL INTERACTION
+   (append at the very END of css/home.css)
+   Nothing above this block is modified.
+   All rules are gated by classes that js/main.js adds only when
+   motion is allowed (html.sfx / html.sfx-depth), so reduced-motion
+   users and unsupported browsers see the page exactly as before.
+   ========================================= */
+
+/* ---- 1. Scroll progress indicator ---- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 1050;
+  pointer-events: none;
+  background: rgba(43, 57, 144, .04);
+}
+
+.scroll-progress > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--jp-red);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--scroll-progress, 0));
+  will-change: transform;
+}
+
+/* ---- 2. Content-aware reveal (all animation uses translate / scale / opacity) ---- */
+.sfx {
+  --sr-ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+.sfx .sr {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity .7s var(--sr-ease) var(--sr-d, 0ms),
+              translate .7s var(--sr-ease) var(--sr-d, 0ms),
+              scale .8s var(--sr-ease) var(--sr-d, 0ms);
+}
+
+.sfx .sr[data-sr="card"] {
+  translate: 0 30px;
+  scale: .985;
+}
+
+.sfx .sr[data-sr="visual"] {
+  translate: 0 12px;
+  scale: 1.025;
+  transition-duration: .9s;
+}
+
+.sfx .sr.is-in[data-sr] {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+}
+
+/* Touch / small screens: lighter reveal only (no scale, shorter travel) */
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
+  .sfx .sr,
+  .sfx .sr[data-sr="card"],
+  .sfx .sr[data-sr="visual"] {
+    translate: 0 16px;
+    scale: 1;
+    transition-duration: .55s;
+  }
+}
+
+/* ---- 3. Scroll depth (desktop + fine pointer only: html.sfx-depth) ---- */
+.sfx-depth [data-scroll-depth] {
+  translate: 0 var(--parallax-y, 0px);
+  will-change: translate;
+}
+
+/* small image bleed so the moving image never exposes its clipped edges */
+.sfx-depth [data-scroll-bleed] {
+  scale: 1.1;
+}
+
+/* ---- 4. Hero scroll + mouse depth ---- */
+.sfx-depth .hero-bg {
+  inset: -16px;               /* room for max 10px mouse / scroll travel */
+  will-change: translate;
+}
+
+.sfx-depth .hero-copy,
+.sfx-depth .hero-feature-stack {
+  will-change: translate, scale;
+}
+
+.sfx-depth .hero > .container-fluid {
+  will-change: opacity;
+}
+
+/* ---- 5. Section edge transitions (pseudo-elements, opacity only) ---- */
+.sfx-depth [data-scroll-edge] {
+  position: relative;
+}
+
+.sfx-depth [data-scroll-edge]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  opacity: var(--edge, 0);
+}
+
+/* white -> navy (slightly stronger) */
+.sfx-depth .destination-section::before {
+  bottom: 100%;
+  height: 22px;
+  background: linear-gradient(to bottom, rgba(43, 57, 144, 0), rgba(43, 57, 144, .16));
+}
+
+/* navy -> white */
+.sfx-depth .process-section::before {
+  top: 0;
+  height: 22px;
+  background: linear-gradient(to bottom, rgba(43, 57, 144, .09), rgba(43, 57, 144, 0));
+}
+
+/* white -> light blue */
+.sfx-depth .solution-section::before {
+  bottom: 100%;
+  height: 22px;
+  background: linear-gradient(to bottom, rgba(246, 250, 255, 0), rgba(246, 250, 255, .9));
+}
+
+/* light blue -> white */
+.sfx-depth .partners-section::before {
+  top: 0;
+  height: 18px;
+  background: linear-gradient(to bottom, rgba(242, 248, 253, .9), rgba(242, 248, 253, 0));
+}
+
+/* white -> accent */
+.sfx-depth .final-cta::before {
+  bottom: 100%;
+  height: 24px;
+  background: linear-gradient(to bottom, rgba(242, 99, 35, 0), rgba(242, 99, 35, .12));
+}
+
+/* ---- 6. Header: smoother state change, no layout shift ---- */
+.jp-navbar .brand-logo {
+  transform-origin: left center;
+  transition: transform .3s ease;
+}
+
+.jp-navbar.is-scrolled .brand-logo {
+  transform: scale(.94);
+}
+
+/* ---- Safety net: reduced motion = everything visible, nothing moves ---- */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
+  }
+  .sfx .sr {
+    opacity: 1 !important;
+    translate: none !important;
+    scale: none !important;
+    transition: none !important;
+  }
+  [data-scroll-depth],
+  [data-scroll-bleed] {
+    translate: none !important;
+    scale: none !important;
+  }
+}
+
+
+/* =========================================
+   SCROLL CUE + EXTRA SCROLL MOTION
+   (append at the very END of css/home.css)
+   ========================================= */
+
+/* ---- 1. Mouse scroll cue (hero, desktop only) ---- */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--jp-white);
+  transform: translateX(-50%);
+  opacity: .92;
+  transition: opacity .35s ease, translate .35s ease;
+}
+
+.scroll-cue.is-hidden {
+  opacity: 0;
+  translate: 0 10px;
+  pointer-events: none;
+}
+
+.scroll-cue__mouse {
+  position: relative;
+  width: 24px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, .85);
+  border-radius: 14px;
+  transition: border-color .25s ease;
+}
+
+.scroll-cue__mouse i {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 3px;
+  height: 8px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--jp-red);
+  animation: cueWheel 1.7s cubic-bezier(.65, 0, .35, 1) infinite;
+}
+
+.scroll-cue__text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .8);
+}
+
+.scroll-cue:hover .scroll-cue__mouse {
+  border-color: var(--jp-orange-accent);
+}
+
+@keyframes cueWheel {
+  0%   { opacity: 0; transform: translateY(0); }
+  25%  { opacity: 1; }
+  75%  { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+
+/* mobile/tablet already has the bottom quick bar */
+@media (max-width: 991px) {
+  .scroll-cue {
+    display: none;
+  }
+}
+
+/* ---- 2. Hero copy: staggered load sequence ---- */
+.js .hero-copy > * {
+  opacity: 0;
+  translate: 0 18px;
+  transition: opacity .7s ease, translate .7s cubic-bezier(.22, .61, .36, 1);
+}
+
+.loaded .hero-copy > * {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.loaded .hero-copy > :nth-child(2) { transition-delay: .10s; }
+.loaded .hero-copy > :nth-child(3) { transition-delay: .20s; }
+.loaded .hero-copy > :nth-child(4) { transition-delay: .30s; }
+.loaded .hero-copy > :nth-child(5) { transition-delay: .40s; }
+
+/* ---- 3. Directional reveals ---- */
+.sfx .sr[data-sr="left"]  { translate: -36px 0; }
+.sfx .sr[data-sr="right"] { translate: 36px 0; }
+.sfx .sr[data-sr="step"]  { translate: -22px 0; }
+
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
+  .sfx .sr[data-sr="left"],
+  .sfx .sr[data-sr="right"],
+  .sfx .sr[data-sr="step"] {
+    translate: 0 18px;
+  }
+}
+
+/* ---- 4. Progress bar: slightly thicker + gradient ---- */
+.scroll-progress {
+  height: 3px;
+}
+
+.scroll-progress > span {
+  background: linear-gradient(90deg, var(--jp-red), var(--jp-orange-accent));
+}
+
+/* ---- Reduced motion: everything visible, nothing moves ---- */
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-copy > * {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+  .scroll-cue__mouse i {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+
+/* =========================================
+   SECTION-WISE SCROLL MOTION (EXTRA)
+   (append at the very END of css/home.css)
+   ========================================= */
+
+/* ---- A. Quote / Track cards slide in from the sides ---- */
+.js [data-reveal="left"]  { transform: translateX(-36px); }
+.js [data-reveal="right"] { transform: translateX(36px); }
+
+@media (max-width: 991px) {
+  .js [data-reveal="left"],
+  .js [data-reveal="right"] {
+    transform: translateY(16px);
+  }
+}
+
+/* ---- B. Hero feature stack: slides in from the right after load ---- */
+.js .hero-feature-stack > div {
+  opacity: 0;
+  translate: 36px 0;
+  transition: opacity .7s ease, translate .7s cubic-bezier(.22, .61, .36, 1);
+}
+
+@media (max-width: 991px) {
+  .js .hero-feature-stack > div {
+    translate: 0 20px;
+  }
+}
+
+.loaded .hero-feature-stack > div {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.loaded .hero-feature-stack > div:nth-child(1) { transition-delay: .35s; }
+.loaded .hero-feature-stack > div:nth-child(2) { transition-delay: .45s; }
+.loaded .hero-feature-stack > div:nth-child(3) { transition-delay: .55s; }
+.loaded .hero-feature-stack > div:nth-child(4) { transition-delay: .65s; }
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-feature-stack > div {
+    opacity: 1 !important;
+    translate: none !important;
+  }
+}

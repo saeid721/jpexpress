@@ -63,7 +63,16 @@ if ('IntersectionObserver' in window && !reduced) {
 const navbar = document.querySelector('.jp-navbar');
 const fabSide = document.getElementById('fabSide');
 const topBar = document.getElementById('topBar');
+const scrollCue = document.getElementById('scrollCue');
 let ticking = false;
+/* Assigned by the "Premium scroll interaction" block below. It runs inside
+   this same rAF pass, so there is still ONE scroll listener and ONE rAF loop.
+   It returns true when it needs another frame (mouse easing). */
+let premiumFrame = null;
+
+function requestTick() {
+  if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+}
 
 function onScroll() {
   const y = window.scrollY;
@@ -71,11 +80,11 @@ function onScroll() {
   if (y > 90) topBar.classList.add('tb-hide');
   else if (y < 30) topBar.classList.remove('tb-hide');
   if (fabSide) fabSide.classList.toggle('show', y > 560);
+  if (scrollCue) scrollCue.classList.toggle('is-hidden', y > 80);
   ticking = false;
+  if (premiumFrame && premiumFrame(y)) requestTick();
 }
-window.addEventListener('scroll', () => {
-  if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
-}, { passive: true });
+window.addEventListener('scroll', requestTick, { passive: true });
 onScroll();
 
 /* ---------- Hero parallax (desktop only) ---------- */
@@ -96,6 +105,241 @@ if (hero && finePointer && window.innerWidth >= 992 && !reduced) {
     });
   });
   hero.addEventListener('mouseleave', () => layers.forEach(l => l.style.translate = '0px 0px'));
+}
+
+/* ---------- Premium scroll interaction ---------- */
+/* Native scrolling is never touched: no wheel listener, no preventDefault,
+   no snapping. The scroll position is only read as a visual input, inside
+   the single rAF pass above. Only transform-family properties, opacity and
+   CSS variables are animated. Individual `translate` / `scale` properties are
+   used so nothing collides with existing `transform` hover/reveal rules.
+   Reduced motion or missing browser support => nothing here runs and all
+   content stays visible. */
+const sfxSupported = !reduced &&
+  'IntersectionObserver' in window &&
+  !!(window.CSS && CSS.supports && CSS.supports('translate', '0 0') && CSS.supports('scale', '1'));
+
+if (sfxSupported) {
+  const html = document.documentElement;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  html.classList.add('sfx');
+
+  /* ----- 1. Scroll progress bar (created once, no HTML change) ----- */
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  bar.innerHTML = '<span></span>';
+  document.body.appendChild(bar);
+  const barFill = bar.firstChild;
+  let lastProgress = -1;
+
+  /* ----- 2. Content-aware reveal (extends, does not replace, data-reveal) ----- */
+  const SR_GROUPS = [
+    ['fade',   '.testimonial-nav'],
+    ['left',   '.section-heading > div, .solution-copy, .testimonial-copy, .partners-copy, .cta-copy, #faqLeft .accordion-item, .resources-section .col-md-4:first-child .resource-card, .footer .row > div:first-child'],
+    ['right',  '.section-heading > .section-link, .solution-cases, .testimonial-card, .cta-actions, #faqRight .accordion-item, .resources-section .col-md-4:last-child .resource-card, .footer-contact'],
+    ['card',   '.quick-item, .trust-item, .mini-card, .image-card, .need-card, .industry-card, .partner-logos span, .resources-section .col-md-4:nth-child(2) .resource-card, .footer .row > .col-lg-2'],
+    ['step',   '.process-step'],
+    ['visual', '.solution-media, .destination-carousel, .testimonial-avatar, .partner-map img, .map-pin']
+  ];
+  const vh0 = window.innerHeight;
+  const candidates = [];
+  SR_GROUPS.forEach(g => document.querySelectorAll(g[1]).forEach(el => {
+    if (el.hasAttribute('data-reveal') || el.closest('[data-reveal]')) return;
+    candidates.push({ el: el, type: g[0] });
+  }));
+  /* read all rects first, write afterwards (no layout thrash) */
+  candidates.forEach(c => { c.r = c.el.getBoundingClientRect(); });
+  const srEls = [];
+  candidates.forEach(c => {
+    /* anything already on screen at load is left alone => no flash */
+    if (c.r.top < vh0 * 0.92 && c.r.bottom > 0) return;
+    c.el.classList.add('sr');
+    c.el.setAttribute('data-sr', c.type);
+    srEls.push(c.el);
+  });
+  const srIO = new IntersectionObserver(entries => {
+    let n = 0;
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      srIO.unobserve(el);
+      const delay = el.getAttribute('data-sr') === 'fade' ? 0 : Math.min(n++, 6) * 60;
+      el.style.setProperty('--sr-d', delay + 'ms');
+      el.classList.add('is-in');
+      /* hand the element back to its original CSS once the reveal is done */
+      setTimeout(() => {
+        el.classList.remove('sr', 'is-in');
+        el.removeAttribute('data-sr');
+        el.style.removeProperty('--sr-d');
+      }, delay + 1200);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+  srEls.forEach(el => srIO.observe(el));
+
+  /* ----- 3. Scroll depth targets (desktop, fine pointer only) ----- */
+  const DEPTH_MAX = { 1: 8, 2: 9, 3: 28 };            /* max px travel per depth level */
+  const DEPTH_TARGETS = [                              /* selector, depth, needs image bleed */
+    ['.track-card .track-bg',   1, true],
+    ['.destination-thumb img',  1, true],
+    ['.solution-media img',     2, true],
+    ['.partner-map',            3, false]
+  ];
+  const depthItems = [];
+  DEPTH_TARGETS.forEach(t => document.querySelectorAll(t[0]).forEach(el => {
+    el.setAttribute('data-scroll-depth', t[1]);
+    if (t[2]) el.setAttribute('data-scroll-bleed', '');
+    depthItems.push({ el: el, max: DEPTH_MAX[t[1]], c: 0, h: 0, last: null });
+  }));
+
+  /* ----- 4. Section edge transitions (pseudo-elements, opacity only) ----- */
+  const edgeItems = [];
+  ['.destination-section', '.process-section', '.solution-section', '.partners-section', '.final-cta']
+    .forEach(sel => document.querySelectorAll(sel).forEach(el => {
+      el.setAttribute('data-scroll-edge', '');
+      edgeItems.push({ el: el, t: 0, last: null });
+    }));
+
+  /* ----- 5. Hero depth ----- */
+  const heroBg    = hero && hero.querySelector('.hero-bg');
+  const heroCopy  = hero && hero.querySelector('.hero-copy');
+  const heroStack = hero && hero.querySelector('.hero-feature-stack');
+  const heroWrap  = hero && hero.querySelector('.container-fluid');
+  const heroOk    = !!(heroBg && heroCopy && heroStack && heroWrap);
+  let tx = 0, ty = 0, mx = 0, my = 0, lastP = -1;
+
+  /* ----- cached geometry (re-measured only on resize / layout change) ----- */
+  let vh = window.innerHeight, maxScroll = 1, heroH = 1, heroTop = 0;
+  function measure() {
+    const sy = window.scrollY;
+    vh = window.innerHeight;
+    maxScroll = Math.max(1, document.documentElement.scrollHeight - vh);
+    if (hero) {
+      const hr = hero.getBoundingClientRect();
+      heroH = Math.max(1, hr.height);
+      heroTop = hr.top + sy;
+    }
+    depthItems.forEach(it => {
+      const r = it.el.getBoundingClientRect();
+      it.h = r.height;
+      it.c = r.top + sy + r.height / 2;
+    });
+    edgeItems.forEach(it => { it.t = it.el.getBoundingClientRect().top + sy; });
+  }
+  let mTimer = 0;
+  function scheduleMeasure() {
+    clearTimeout(mTimer);
+    mTimer = setTimeout(() => { measure(); requestTick(); }, 120);
+  }
+  window.addEventListener('resize', scheduleMeasure);
+  window.addEventListener('load', scheduleMeasure);
+  if ('ResizeObserver' in window) new ResizeObserver(scheduleMeasure).observe(document.body);
+
+  /* ----- desktop / fine-pointer mode switch (reuses `finePointer`) ----- */
+  const mqWide = window.matchMedia('(min-width: 992px)');
+  let depthOn = false;
+  function resetDepth() {
+    depthItems.forEach(it => { it.el.style.removeProperty('--parallax-y'); it.last = null; });
+    edgeItems.forEach(it => { it.el.style.removeProperty('--edge'); it.last = null; });
+    if (heroOk) {
+      heroBg.style.translate = '';
+      heroCopy.style.translate = '';
+      heroStack.style.scale = '';
+      heroWrap.style.opacity = '';
+    }
+    lastP = -1; tx = ty = mx = my = 0;
+  }
+  function applyMode() {
+    const on = finePointer && mqWide.matches;
+    if (on === depthOn) return;
+    depthOn = on;
+    html.classList.toggle('sfx-depth', on);
+    if (!on) resetDepth();
+    measure();
+    requestTick();
+  }
+  if (mqWide.addEventListener) mqWide.addEventListener('change', applyMode);
+  else if (mqWide.addListener) mqWide.addListener(applyMode);
+
+  /* mouse depth: hero background only (never text, buttons, forms or nav) */
+  if (hero && finePointer) {
+    hero.addEventListener('mousemove', e => {
+      if (!depthOn) return;
+      tx = clamp((e.clientX / window.innerWidth - 0.5) * 2, -1, 1);
+      ty = clamp(((e.clientY + window.scrollY - heroTop) / heroH - 0.5) * 2, -1, 1);
+      requestTick();
+    }, { passive: true });
+    hero.addEventListener('mouseleave', () => { tx = 0; ty = 0; requestTick(); });
+  }
+
+  /* ----- the per-frame update, called from the shared onScroll rAF pass ----- */
+  premiumFrame = function (y) {
+    let more = false;
+
+    /* progress bar */
+    const prog = Math.round(clamp(y / maxScroll, 0, 1) * 1000) / 1000;
+    if (prog !== lastProgress) {
+      lastProgress = prog;
+      barFill.style.setProperty('--scroll-progress', prog);
+    }
+
+    if (!depthOn) return false;
+
+    /* hero: copy rises, background lags, panel eases down, slight fade */
+    if (heroOk) {
+      mx += (tx - mx) * 0.08;
+      my += (ty - my) * 0.08;
+      if (Math.abs(tx - mx) > 0.002 || Math.abs(ty - my) > 0.002) more = true;
+      else { mx = tx; my = ty; }
+
+      const p = clamp(y / heroH, 0, 1);
+      if (y < heroH + 40 || lastP !== 1) {
+        heroBg.style.translate = (-mx * 10).toFixed(2) + 'px ' + (p * 10 - my * 6).toFixed(2) + 'px';
+        heroCopy.style.translate = '0 ' + (-p * 20).toFixed(2) + 'px';
+        heroStack.style.scale = (1 - p * 0.025).toFixed(4);
+        heroWrap.style.opacity = (1 - p * 0.08).toFixed(3);
+        lastP = p;
+      }
+    }
+
+    /* depth items: only those near the viewport are touched */
+    const mid = y + vh / 2;
+    for (let i = 0; i < depthItems.length; i++) {
+      const it = depthItems[i];
+      const half = vh / 2 + it.h / 2;
+      const off = it.c - mid;
+      if (off > half + 80 || off < -half - 80) continue;
+      const v = Math.round(clamp(-off / half, -1, 1) * it.max * 10) / 10;
+      if (v !== it.last) {
+        it.last = v;
+        it.el.style.setProperty('--parallax-y', v + 'px');
+      }
+    }
+
+    /* section edges: opacity of a pseudo-element, driven by section position */
+    for (let j = 0; j < edgeItems.length; j++) {
+      const ed = edgeItems[j];
+      const v = Math.round(clamp((vh * 0.92 - (ed.t - y)) / (vh * 0.5), 0, 1) * 100) / 100;
+      if (v !== ed.last) {
+        ed.last = v;
+        ed.el.style.setProperty('--edge', v);
+      }
+    }
+    return more;
+  };
+
+  /* ----- 6. Mobile quick bar: mark "Quote" while the quote tools are dominant ----- */
+  const quoteSec = document.getElementById('quote');
+  const quoteLink = document.querySelector('.fab-bar a[href="#quote"]');
+  if (quoteSec && quoteLink) {
+    new IntersectionObserver(es => es.forEach(e => {
+      quoteLink.classList.toggle('is-active', e.isIntersecting);
+    }), { rootMargin: '-35% 0px -35% 0px' }).observe(quoteSec);
+  }
+
+  applyMode();
+  measure();
+  requestTick();
 }
 
 /* ---------- Map reveal ---------- */
