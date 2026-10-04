@@ -559,3 +559,140 @@ document.querySelectorAll('.email-link').forEach(a => {
 });
 
 })();
+
+
+/* ---------- Testimonials auto-rotator ---------- */
+const testimonialsData = [
+  {
+    name: 'Tanvir Ahmed',
+    role: 'Managing Director, Dhaka, Bangladesh',
+    quote: '“Reliable service and excellent support. JP Express made our export process smooth and easy. Highly recommended.”',
+    stars: '★★★★★',
+    avatar: 'assets/teams/founder02.jpg'
+  },
+  {
+    name: 'Sarah Mitchell',
+    role: 'E-commerce Owner, London, UK',
+    quote: '“Fast, secure and transparent. My parcels always reach on time and the tracking updates are spot-on.”',
+    stars: '★★★★★',
+    avatar: 'assets/teams/02.jpg'
+  },
+  {
+    name: 'Mohammad Rahman',
+    role: 'Export Manager, Chittagong',
+    quote: '“Best logistics partner for our garment exports. Customs handling is seamless and pricing is fair.”',
+    stars: '★★★★★',
+    avatar: 'assets/teams/03.jpg'
+  },
+  {
+    name: 'Emily Carter',
+    role: 'Small Business, Toronto, Canada',
+    quote: '“JP Express handles our international shipments professionally. Customer support is always responsive.”',
+    stars: '★★★★☆',
+    avatar: 'assets/teams/08.jpg'
+  },
+  {
+    name: 'Fatima Noor',
+    role: 'Freelancer, Dubai, UAE',
+    quote: '“Affordable rates and reliable delivery. I trust JP Express for all my document and parcel shipments.”',
+    stars: '★★★★★',
+    avatar: 'assets/teams/07.jpg'
+  }
+];
+
+const testimonialCard = document.getElementById('testimonialCard');
+const testimonialAvatar = document.getElementById('testimonialAvatar');
+const testimonialQuote = document.getElementById('testimonialQuote');
+const testimonialName = document.getElementById('testimonialName');
+const testimonialRole = document.getElementById('testimonialRole');
+const testimonialStars = document.getElementById('testimonialStars');
+const testimonialDots = document.getElementById('testimonialDots');
+const testimonialPrev = document.getElementById('testimonialPrev');
+const testimonialNext = document.getElementById('testimonialNext');
+
+if (testimonialCard && testimonialsData.length > 1) {
+  let currentIndex = 0;
+  let autoTimer = null;
+  const INTERVAL = 3000;
+
+  // Build dots
+  testimonialsData.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.setAttribute('role', 'button');
+    dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
+    if (i === 0) dot.classList.add('is-active');
+    dot.addEventListener('click', () => goToReview(i));
+    testimonialDots.appendChild(dot);
+  });
+
+  function updateDots() {
+    const dots = testimonialDots.querySelectorAll('span');
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === currentIndex));
+  }
+
+  function goToReview(index) {
+    if (index === currentIndex) return;
+    currentIndex = index;
+    renderReview(true);
+    resetAuto();
+  }
+
+  function nextReview() {
+    currentIndex = (currentIndex + 1) % testimonialsData.length;
+    renderReview(true);
+  }
+
+  function prevReview() {
+    currentIndex = (currentIndex - 1 + testimonialsData.length) % testimonialsData.length;
+    renderReview(true);
+  }
+
+  function renderReview(animate) {
+    const data = testimonialsData[currentIndex];
+
+    if (animate) {
+      testimonialCard.classList.add('is-changing');
+      testimonialAvatar.classList.add('is-changing');
+      setTimeout(() => {
+        applyData(data);
+        testimonialCard.classList.remove('is-changing');
+        testimonialAvatar.classList.remove('is-changing');
+      }, 350);
+    } else {
+      applyData(data);
+    }
+    updateDots();
+  }
+
+  function applyData(data) {
+    testimonialQuote.textContent = data.quote;
+    testimonialName.textContent = data.name;
+    testimonialRole.textContent = data.role;
+    testimonialStars.textContent = data.stars;
+    testimonialAvatar.src = data.avatar;
+    testimonialAvatar.alt = data.name;
+  }
+
+  function startAuto() {
+    if (autoTimer) return;
+    autoTimer = setInterval(nextReview, INTERVAL);
+  }
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = null;
+    startAuto();
+  }
+
+  // Pause on hover
+  testimonialCard.addEventListener('mouseenter', () => clearInterval(autoTimer));
+  testimonialCard.addEventListener('mouseleave', startAuto);
+
+  // Manual nav
+  if (testimonialNext) testimonialNext.addEventListener('click', nextReview);
+  if (testimonialPrev) testimonialPrev.addEventListener('click', prevReview);
+
+  // Init
+  renderReview(false);
+  startAuto();
+}

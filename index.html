@@ -814,41 +814,55 @@
     </section>
 
     <!-- Testimonial Section -->
-    <section class="testimonial-section" aria-labelledby="testimonialTitle">
-      <div class="container-fluid">
-        <div class="testimonial-grid">
+  <section class="testimonial-section" id="testimonials">
+  <div class="container-fluid">
+    <div class="testimonial-grid">
 
-          <div class="testimonial-copy">
-            <span class="eyebrow">CUSTOMER REVIEWS</span>
-            <h2 id="testimonialTitle">What Our Customers Say</h2>
-            <p>Trusted by individuals and businesses across the world.</p>
+      <!-- LEFT: Copy -->
+      <div class="testimonial-copy">
+        <span class="eyebrow">Customer Reviews</span>
+        <h2>What Our Customers Say</h2>
+        <p>Trusted by individuals and businesses across the world.</p>
+      </div>
+
+      <!-- CENTER: Avatar (changes with review) -->
+      <div class="testimonial-avatar">
+        <img id="testimonialAvatar" src="assets/teams/founder02.jpg" alt="Customer photo">
+      </div>
+
+      <!-- RIGHT: Review Card (content changes) -->
+      <div class="testimonial-card" id="testimonialCard">
+
+        <!-- Progress dots -->
+        <div class="testimonial-dots" id="testimonialDots"></div>
+
+        <!-- Review content -->
+        <blockquote id="testimonialQuote">
+          “Reliable service and excellent support. JP Express made our export process smooth and easy. Highly recommended.”
+        </blockquote>
+
+        <div class="testimonial-meta">
+          <div>
+            <strong id="testimonialName">Tanvir Ahmed</strong>
+            <small id="testimonialRole">Managing Director, Dhaka, Bangladesh</small>
           </div>
+          <div class="stars" id="testimonialStars">★★★★★</div>
+        </div>
 
-          <div class="testimonial-avatar">
-            <img src="assets/teams/founder.jpg" alt="Tanvir Ahmed" loading="lazy">
-          </div>
-
-          <article class="testimonial-card">
-            <blockquote>
-              “Reliable service and excellent support. JP Express made our export process smooth and easy. Highly recommended.”
-            </blockquote>
-            <div class="testimonial-meta">
-              <div>
-                <strong>Tanvir Ahmed</strong>
-                <small>Managing Director, Dhaka, Bangladesh</small>
-              </div>
-              <div class="stars" aria-label="Five star review">★★★★★</div>
-            </div>
-          </article>
-
-          <div class="testimonial-nav">
-            <button type="button" aria-label="Previous review"><i class="fa-solid fa-chevron-left"></i></button>
-            <button type="button" aria-label="Next review"><i class="fa-solid fa-chevron-right"></i></button>
-          </div>
-
+        <!-- Nav arrows -->
+        <div class="testimonial-nav">
+          <button type="button" id="testimonialPrev" aria-label="Previous review">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button type="button" id="testimonialNext" aria-label="Next review">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
       </div>
-    </section>
+
+    </div>
+  </div>
+</section>
 
     <!-- Partners Section -->
     <section class="home-section partners-section" aria-labelledby="partnerTitle">
