@@ -2721,9 +2721,6 @@ TESTIMONIAL – RESPONSIVE
     font-size: var(--fs-6xl);
   }
 
-  .solution-media {
-    min-height: var(--sp-210);
-  }
   .solution-media img {
     height: var(--sp-210);
   }
@@ -4762,5 +4759,500 @@ TESTIMONIAL – RESPONSIVE
   .industries-section .section-heading,
   .services-section .section-heading {
     margin-bottom: var(--sp-15);
+  }
+}
+
+
+
+/* =========================================
+   MOBILE – FOOTER (professional layout)
+   Brand full width | About + Services side by side
+   Resources 2-col grid | Contact as tap-friendly cards
+   (keep this block at the very END of the file)
+   ========================================= */
+@media (max-width: 767px) {
+
+  /* ---- Container + row spacing ---- */
+  .footer > .container-fluid {
+    padding-left: var(--sp-15);
+    padding-right: var(--sp-15);
+  }
+
+  .footer .row.py-5 {
+    --bs-gutter-x: 16px;
+    --bs-gutter-y: 22px;
+    padding-top: var(--sp-24) !important;
+    padding-bottom: var(--sp-20) !important;
+  }
+
+  /* ---- 1. Brand block (full width) ---- */
+  .footer .row > div:nth-child(1) {
+    width: 100%;
+  }
+
+  .footer-logo {
+    height: 40px;
+  }
+
+  .footer p {
+    max-width: 100%;
+    margin: 12px 0 16px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .footer-social {
+    gap: 10px;
+  }
+
+  .footer-social a {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, .06);
+    font-size: 15px;
+  }
+
+  /* ---- 2. Headings with small accent line ---- */
+  .footer h3 {
+    position: relative;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    font-size: 15px;
+    letter-spacing: .02em;
+  }
+
+  .footer h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 28px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--jp-red);
+  }
+
+  /* ---- 3. Link columns (About + Services) ---- */
+  .footer .row > div:nth-child(2) a,
+  .footer .row > div:nth-child(3) a,
+  .footer .row > div:nth-child(4) a {
+    padding: 8px 0;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  .footer .row > div:nth-child(2) a:hover,
+  .footer .row > div:nth-child(3) a:hover,
+  .footer .row > div:nth-child(4) a:hover {
+    transform: none;
+  }
+
+  /* ---- 4. Resources: full width, links in 2 columns ---- */
+  .footer .row > div:nth-child(4) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    padding-top: var(--sp-20);
+    border-top: 1px solid rgba(255, 255, 255, .12);
+  }
+
+  .footer .row > div:nth-child(4) h3 {
+    grid-column: 1 / -1;
+  }
+
+  /* ---- 5. Contact: full width cards ---- */
+  .footer .row > div:nth-child(5) {
+    width: 100%;
+    padding-top: var(--sp-20);
+    border-top: 1px solid rgba(255, 255, 255, .12);
+  }
+
+  /* ---- 6. Footer bottom (copyright + legal) ---- */
+  .footer-bottom {
+    gap: 8px !important;
+    padding-top: var(--sp-15) !important;
+    padding-bottom: var(--sp-20) !important;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .footer-legal {
+    justify-content: center;
+    row-gap: 6px;
+  }
+
+  .footer .footer-legal a {
+    padding: 4px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Small phones (380px and below) */
+@media (max-width: 380px) {
+  .footer .row.py-5 {
+    --bs-gutter-x: 12px;
+  }
+
+  .footer .row > div:nth-child(4) {
+    column-gap: 12px;
+  }
+
+  .footer .footer-contact a {
+    padding: 9px 10px;
+    font-size: 13.5px;
+    gap: 10px;
+  }
+
+  .footer .footer-contact a i {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+  }
+
+  .footer .footer-legal a {
+    padding: 4px 9px;
+    font-size: 12.5px;
+  }
+}
+
+
+
+
+/* =========================================
+   MOBILE – FOOTER COMPACT (reduced spacing)
+   Overrides the previous mobile footer block
+   (keep this block at the very END of the file)
+   ========================================= */
+@media (max-width: 767px) {
+
+  /* ---- Row becomes a clean 2-column grid (dividers now align with text) ---- */
+  .footer .row.py-5 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+    margin: 0;
+    padding-top: var(--sp-20) !important;
+    padding-bottom: var(--sp-12) !important;
+  }
+
+  .footer .row.py-5 > div {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Brand, Resources and Contact take the full width */
+  .footer .row > div:nth-child(1),
+  .footer .row > div:nth-child(4),
+  .footer .row > div:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+
+  /* ---- Brand block ---- */
+  .footer-logo {
+    height: 34px;
+  }
+
+  .footer p {
+    margin: 8px 0 12px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .footer-social {
+    gap: 8px;
+  }
+
+  .footer-social a {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  /* ---- Headings ---- */
+  .footer h3 {
+    margin: 0 0 8px;
+    padding-bottom: 7px;
+    font-size: 14.5px;
+  }
+
+  .footer h3::after {
+    width: 24px;
+    height: 2px;
+  }
+
+  /* ---- Link columns ---- */
+  .footer .row > div:nth-child(2) a,
+  .footer .row > div:nth-child(3) a,
+  .footer .row > div:nth-child(4) a {
+    padding: 5px 0;
+    font-size: 13.5px;
+    line-height: 1.3;
+  }
+
+  /* ---- Resources ---- */
+  .footer .row > div:nth-child(4) {
+    column-gap: 16px;
+    padding-top: var(--sp-12);
+  }
+
+  /* ---- Contact ---- */
+  .footer .row > div:nth-child(5) {
+    padding-top: var(--sp-12);
+  }
+
+  .footer .footer-contact a {
+    gap: 10px;
+    margin-bottom: 6px;
+    padding: 6px 10px;
+    min-height: 44px;
+    border-radius: 10px;
+    font-size: 13.5px;
+  }
+
+  .footer .footer-contact a i {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    font-size: 12.5px;
+  }
+
+  /* ---- Bottom bar ---- */
+  .footer-bottom {
+    gap: 4px !important;
+    padding-top: var(--sp-10) !important;
+    padding-bottom: var(--sp-12) !important;
+    font-size: 12.5px;
+  }
+
+  .footer .footer-legal a {
+    padding: 2px 10px;
+    font-size: 12.5px;
+  }
+}
+
+/* Small phones (380px and below) */
+@media (max-width: 380px) {
+  .footer .row.py-5 {
+    gap: 12px 12px;
+  }
+
+  .footer .row > div:nth-child(4) {
+    column-gap: 12px;
+  }
+
+  .footer .footer-contact a {
+    padding: 5px 9px;
+    min-height: 42px;
+    font-size: 13px;
+  }
+
+  .footer .footer-contact a i {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+  }
+
+  .footer .footer-legal a {
+    padding: 2px 8px;
+    font-size: 12px;
+  }
+}
+
+
+
+/* =========================================
+   MOBILE – FOOTER (Services hidden, About | Resources)
+   Overrides the previous mobile footer blocks
+   (keep this block at the very END of the file)
+   ========================================= */
+@media (max-width: 767px) {
+
+  /* ---- Tighter grid ---- */
+  .footer .row.py-5 {
+    gap: 12px 14px;
+    padding-top: var(--sp-15) !important;
+    padding-bottom: var(--sp-8) !important;
+  }
+
+  /* ---- 1. Hide the Services column ---- */
+  .footer .row > div:nth-child(3) {
+    display: none;
+  }
+
+  /* ---- 2. About (left) | Resources (right) ---- */
+  .footer .row > div:nth-child(4) {
+    grid-column: auto;
+    display: block;
+    padding-top: 0;
+    padding-left: var(--sp-14);
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, .22);
+  }
+
+  .footer .row > div:nth-child(2) a,
+  .footer .row > div:nth-child(4) a {
+    padding: 4px 0;
+    font-size: 13.5px;
+    line-height: 1.3;
+  }
+
+  /* ---- Brand block ---- */
+  .footer p {
+    margin: 6px 0 10px;
+  }
+
+  /* ---- Headings ---- */
+  .footer h3 {
+    margin: 0 0 6px;
+    padding-bottom: 6px;
+  }
+
+  /* ---- Contact cards ---- */
+  .footer .row > div:nth-child(5) {
+    padding-top: var(--sp-10);
+  }
+
+  .footer .footer-contact a {
+    gap: 10px;
+    margin-bottom: 5px;
+    padding: 4px 10px;
+    min-height: 40px;
+  }
+
+  .footer .footer-contact a i {
+    width: 28px;
+    height: 28px;
+    flex: 0 0 28px;
+    font-size: 12px;
+  }
+
+  /* ---- Bottom bar ---- */
+  .footer-bottom {
+    gap: 2px !important;
+    padding-top: var(--sp-8) !important;
+    padding-bottom: var(--sp-8) !important;
+  }
+
+  .footer .footer-legal a {
+    padding: 2px 10px;
+  }
+}
+
+/* Small phones (380px and below) */
+@media (max-width: 380px) {
+  .footer .row > div:nth-child(4) {
+    padding-left: var(--sp-10);
+  }
+
+  .footer .row > div:nth-child(2) a,
+  .footer .row > div:nth-child(4) a {
+    font-size: 13px;
+  }
+
+  .footer .footer-contact a {
+    min-height: 38px;
+    padding: 4px 9px;
+  }
+}
+
+
+
+/* =========================================
+   MOBILE – FOOTER BRAND CENTERED + COMPACT
+   Logo, text and social icons centered
+   Overrides the previous mobile footer blocks
+   (keep this block at the very END of the file)
+   ========================================= */
+@media (max-width: 767px) {
+
+  /* ---- Tighter footer rows ---- */
+  .footer .row.py-5 {
+    gap: 10px 14px;
+    padding-top: var(--sp-15) !important;
+    padding-bottom: var(--sp-5) !important;
+  }
+
+  /* ---- Brand block: center everything ---- */
+  .footer .row > div:nth-child(1) {
+    text-align: center;
+  }
+
+  .footer-logo {
+    height: 34px;
+    margin: 0 auto;
+  }
+
+  .footer .row > div:nth-child(1) p {
+    max-width: 320px;
+    margin: 6px auto 10px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .footer-social a {
+    width: 34px;
+    height: 34px;
+    font-size: 13.5px;
+  }
+
+  /* ---- Smaller gaps in link columns ---- */
+  .footer h3 {
+    margin: 0 0 4px;
+    padding-bottom: 5px;
+  }
+
+  .footer .row > div:nth-child(2) a,
+  .footer .row > div:nth-child(4) a {
+    padding: 3px 0;
+  }
+
+  /* ---- Contact cards: tighter ---- */
+  .footer .row > div:nth-child(5) {
+    padding-top: var(--sp-8);
+  }
+
+  .footer .footer-contact a {
+    margin-bottom: 4px;
+    padding: 3px 10px;
+    min-height: 38px;
+  }
+
+  .footer .footer-contact a i {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    font-size: 11.5px;
+  }
+
+  /* ---- Bottom bar ---- */
+  .footer-bottom {
+    padding-top: var(--sp-6) !important;
+    padding-bottom: var(--sp-6) !important;
+  }
+}
+
+/* Small phones (380px and below) */
+@media (max-width: 380px) {
+  .footer .row > div:nth-child(1) p {
+    max-width: 280px;
+    font-size: 13px;
+  }
+
+  .footer-social a {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footer .footer-contact a {
+    min-height: 36px;
   }
 }
