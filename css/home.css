@@ -1211,8 +1211,6 @@ button:focus-visible,
 }
 
 .home-section.needs-section {
-
-  padding: var(--sp-38);
   background: var(--jp-white);
 }
 
@@ -2901,6 +2899,10 @@ TESTIMONIAL – RESPONSIVE
   .trust-item small {
     font-size: 11.5px;
   }
+  
+  .destination-section {
+  padding: var(--sp-12);
+}
   .section-heading h2,
   .destination-section h2,
   .testimonial-section h2 {
@@ -4320,8 +4322,7 @@ TESTIMONIAL – RESPONSIVE
    ========================================= */
 @media (max-width: 767px) {
   .home-section.process-section {
-    padding-top: 14px;
-    padding-bottom: 14px;
+  padding: var(--sp-12);
   }
 
   .process-section .section-heading.compact {
@@ -4443,9 +4444,18 @@ TESTIMONIAL – RESPONSIVE
    MOBILE – INDUSTRIES SECTION (reduce spacing)
    ========================================= */
 @media (max-width: 767px) {
+  .home-section.partners-section {
+  padding: var(--sp-12);
+}
+.home-section.faq-section {
+  padding: var(--sp-12);
+}
+.home-section.resources-section {
+  padding: var(--sp-12);
+}
+
   .home-section.industries-section {
-    padding-top: 12px;
-    padding-bottom: 14px;
+  padding: var(--sp-12);
   }
 
   .industries-section .section-heading {
@@ -4496,7 +4506,7 @@ TESTIMONIAL – RESPONSIVE
    ========================================= */
 @media (max-width: 767px) {
   .solution-section {
-    padding: 16px 0 18px;
+  padding: var(--sp-12);
   }
 
   .solution-grid {
@@ -4706,5 +4716,51 @@ TESTIMONIAL – RESPONSIVE
 
   .need-card i {
     font-size: 22px;
+  }
+}
+
+
+
+/* =========================================
+   MOBILE – GLOBAL SECTION SPACING
+   Left/Right = 15px (--sp-15)
+   Top/Bottom = 24px (--sp-24)
+   (keep this block at the very END of the file)
+   ========================================= */
+@media (max-width: 767px) {
+
+
+  /* 2. Top-bottom space for every section (24px),
+        side padding on the section itself = 0 (no double spacing) */
+  .hero,
+  .tools-section,
+  .trust-strip,
+  .home-section,
+  .home-section.services-section,
+  .home-section.needs-section,
+  .home-section.process-section,
+  .home-section.industries-section,
+  .home-section.partners-section,
+  .home-section.faq-section,
+  .home-section.resources-section,
+  .destination-section,
+  .solution-section,
+  .testimonial-section,
+  .final-cta {
+    padding-top: var(--sp-24);
+    padding-bottom: var(--sp-24);
+    padding-left: var(--sp-12);
+    padding-right: var(--sp-12);
+  }
+
+  /* 3. Consistent gap between section heading and content */
+  .section-heading,
+  .section-heading.compact,
+  .destination-section .section-heading,
+  .needs-section .section-heading.compact,
+  .process-section .section-heading.compact,
+  .industries-section .section-heading,
+  .services-section .section-heading {
+    margin-bottom: var(--sp-15);
   }
 }
