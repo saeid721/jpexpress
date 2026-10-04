@@ -696,3 +696,71 @@ if (testimonialCard && testimonialsData.length > 1) {
   renderReview(false);
   startAuto();
 }
+
+/* ---------- Destinations auto-scroll (right → left, non-stop) ---------- */
+(function () {
+  const destRow = document.querySelector('.destination-row');
+  if (!destRow) return;
+
+  const cards = Array.from(destRow.querySelectorAll('.destination-card'));
+  if (cards.length === 0) return;
+
+  // Clone cards for a seamless infinite loop (2x set)
+  cards.forEach(c => destRow.appendChild(c.cloneNode(true)));
+  destRow.classList.add('is-auto');
+
+  const SPEED = 45;          // px per second (tune for feel)
+  const NAV_JUMP = 280;      // px per nav-button click
+  const NAV_PAUSE_MS = 2500; // how long nav keeps auto paused
+
+  let paused = false;
+  let raf = null;
+  let lastTime = 0;
+
+  function tick(time) {
+    if (!lastTime) lastTime = time;
+    // Cap delta so a background tab doesn't cause a huge jump
+    const delta = Math.min(time - lastTime, 50);
+    lastTime = time;
+
+    if (!paused) {
+      destRow.scrollLeft += (SPEED * delta) / 1000;
+      const halfWidth = destRow.scrollWidth / 2;
+      // Seamless reset when we've scrolled one full set
+      if (destRow.scrollLeft >= halfWidth) {
+        destRow.scrollLeft -= halfWidth;
+      }
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  // Pause on hover (desktop)
+  destRow.addEventListener('mouseenter', () => paused = true);
+  destRow.addEventListener('mouseleave', () => { paused = false; lastTime = 0; });
+
+  // Pause on touch (mobile)
+  destRow.addEventListener('touchstart', () => paused = true, { passive: true });
+  destRow.addEventListener('touchend',   () => { paused = false; lastTime = 0; });
+  destRow.addEventListener('touchcancel',() => { paused = false; lastTime = 0; });
+
+  // Manual nav buttons — pause auto, smooth-scroll, then resume
+  const prevBtn = document.querySelector('.dest-prev');
+  const nextBtn = document.querySelector('.dest-next');
+
+  function handleNav(direction) {
+    paused = true;
+    destRow.classList.remove('is-auto'); // allow snap to engage at end
+    destRow.scrollBy({ left: direction * NAV_JUMP, behavior: 'smooth' });
+    setTimeout(() => {
+      destRow.classList.add('is-auto');
+      paused = false;
+      lastTime = 0;
+    }, NAV_PAUSE_MS);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => handleNav(-1));
+  if (nextBtn) nextBtn.addEventListener('click', () => handleNav( 1));
+
+  // Start the loop
+  raf = requestAnimationFrame(tick);
+})();
