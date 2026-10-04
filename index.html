@@ -1189,12 +1189,12 @@
           const type = document.getElementById('cType').value;
           const method = type === 'Commercial Cargo' ? 'Commercial Cargo' : 'International Courier';
           
-          const low = Math.round(12 + weight * (method === 'Commercial Cargo' ? 7 : 9));
+          const low = Math.round(50 + weight * (method === 'Commercial Cargo' ? 7 : 9));
           const high = Math.round(low * 1.18);
           
           result.classList.remove('d-none');
           result.innerHTML = `
-            <strong>Estimated shipping range: $${low} – $${high}</strong>
+            <strong>Estimated shipping range: ৳${low} – ৳${high}</strong>
             <small>Indicative demo estimate. Final pricing is confirmed by our logistics team.</small>
           `;
         });
