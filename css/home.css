@@ -4900,7 +4900,7 @@ TESTIMONIAL – RESPONSIVE
 
   .footer .footer-contact a {
     padding: 9px 10px;
-    font-size: 13.5px;
+    font-size: 13px;
     gap: 10px;
   }
 
@@ -5009,7 +5009,7 @@ TESTIMONIAL – RESPONSIVE
     padding: 6px 10px;
     min-height: 44px;
     border-radius: 10px;
-    font-size: 13.5px;
+    font-size: 13px;
   }
 
   .footer .footer-contact a i {
@@ -5186,7 +5186,6 @@ TESTIMONIAL – RESPONSIVE
   }
 
   .footer .row > div:nth-child(1) p {
-    max-width: 320px;
     margin: 6px auto 10px;
     font-size: 13.5px;
     line-height: 1.5;
@@ -5196,12 +5195,13 @@ TESTIMONIAL – RESPONSIVE
   .footer-social {
     justify-content: center;
     gap: 8px;
+    margin-bottom: 10px;
   }
 
   .footer-social a {
     width: 34px;
     height: 34px;
-    font-size: 13.5px;
+    font-size: 14px;
   }
 
   /* ---- Smaller gaps in link columns ---- */
