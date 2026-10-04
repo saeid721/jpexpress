@@ -241,8 +241,8 @@ img {
   max-width: 1520px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(16px, 4vw, 48px);
-  padding-right: clamp(16px, 4vw, 48px);
+  padding-left: clamp(12px, 4vw, 48px);
+  padding-right: clamp(12px, 4vw, 48px);
 }
 
 /* Font Awesome icon alignment */
@@ -5251,8 +5251,39 @@ TESTIMONIAL – RESPONSIVE
     width: 32px;
     height: 32px;
   }
+}
 
-  .footer .footer-contact a {
-    min-height: 36px;
+/* =========================================
+   MOBILE – SAME LEFT/RIGHT SPACE EVERYWHERE
+   Header, top bar, all sections and footer = 15px
+   (keep this block at the very END of the file)
+   ========================================= */
+@media (max-width: 767px) {
+
+  /* 1. One side padding for header, top bar, sections, footer */
+  .container-fluid,
+  .footer > .container-fluid {
+    padding-left: var(--sp-10);
+    padding-right: var(--sp-10);
+  }
+
+  /* 2. Sections add NO extra side padding (no double spacing) */
+  .hero,
+  .tools-section,
+  .trust-strip,
+  .home-section,
+  .home-section.services-section,
+  .home-section.needs-section,
+  .home-section.process-section,
+  .home-section.industries-section,
+  .home-section.partners-section,
+  .home-section.faq-section,
+  .home-section.resources-section,
+  .destination-section,
+  .solution-section,
+  .testimonial-section,
+  .final-cta {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
