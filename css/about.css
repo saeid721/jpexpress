@@ -1,7 +1,4 @@
 /* ============ ABOUT US PAGE ============ */
-/* Reuses tokens + shared classes from css/style.css (why-card, svc-card, stats-card,
-   calc-tab, country-chip, final-cta, blog-card, help-card, etc.) — only new,
-   page-specific layouts are defined here. */
 
 /* ---------- HERO ---------- */
 .abt-hero{background:var(--navy);color:#fff;position:relative;padding:clamp(2.4rem,6vw,4rem) 0 clamp(3.6rem,8vw,5.5rem);overflow:clip}
