@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,18 +8,18 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
   
-  <meta name="description" content="Learn about JP Express — our story, mission, vision, leadership team and global logistics network connecting Bangladesh to 220+ countries.">
+  <meta name="description" content="Learn about JP Express — our story, mission, vision, leadership team and global logistics network connecting Bangladesh to 200+ countries.">
   <meta name="theme-color" content="#2B3990">
   <meta name="author" content="JP Express">
-  <link rel="canonical" href="https://www.jpexpress.com/services.html">
+  <link rel="canonical" href="https://www.jpexpress.com/about.html">
   <meta name="robots" content="index, follow, max-image-preview:large">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="JP Express">
-  <meta property="og:title" content="Services | JP Express">
-  <meta property="og:description" content="International courier, air & sea freight, export logistics, import & customs clearance, packaging and warehousing — all from Bangladesh to 220+ countries.">
-  <meta property="og:url" content="https://www.jpexpress.com/services.html">
+  <meta property="og:title" content="About Us | JP Express">
+  <meta property="og:description" content="International courier, air & sea freight, export logistics, import & customs clearance, packaging and warehousing — all from Bangladesh to 200+ countries.">
+  <meta property="og:url" content="https://www.jpexpress.com/about.html">
   <meta property="og:image" content="https://www.jpexpress.com/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -27,7 +27,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Services | JP Express">
+  <meta name="twitter:title" content="About Us | JP Express">
   <meta name="twitter:description" content="International courier, freight, export/import logistics, customs clearance, packaging and warehousing.">
   <meta name="twitter:image" content="https://www.jpexpress.com/assets/og-image.jpg">
   
@@ -37,10 +37,9 @@
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/about.css">
-  <link rel="stylesheet" href="css/home.css">
-  
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/about.css">
+   
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -59,6 +58,27 @@
       document.documentElement.classList.remove('typing-js');
     }, 3000);
   </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "JP Express",
+    "url": "https://www.jpexpress.com/",
+    "logo": "https://www.jpexpress.com/assets/logo.png",
+    "telephone": "+8801681637836",
+    "email": "info@jpex.com.bd",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "House B-125 (Ground Floor), Road 21, Mohakhali DOHS",
+      "addressLocality": "Dhaka",
+      "postalCode": "1206",
+      "addressCountry": "BD"
+    },
+    "areaServed": "Worldwide"
+  }
+  </script>
+
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -104,7 +124,7 @@
           <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">
             Track Shipment
           </a>
-          <a href="#quote" class="btn-header btn-header-red">
+          <a href="index.html#quote" class="btn-header btn-header-red">
             Get a Quote <i class="fa-solid fa-arrow-right"></i>
           </a>
           <button 
@@ -119,8 +139,8 @@
         </div>
 
         <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html" aria-current="page">About</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="countries.html">Destinations</a></li>
           <li class="nav-item"><a class="nav-link" href="industries.html">Industries</a></li>
@@ -139,8 +159,8 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav gap-1">
-          <li><a class="nav-link active" href="index.html">Home</a></li>
-          <li><a class="nav-link" href="about.html">About</a></li>
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link active" href="about.html" aria-current="page">About</a></li>
           <li><a class="nav-link" href="services.html">Services</a></li>
           <li><a class="nav-link" href="countries.html">Destinations</a></li>
           <li><a class="nav-link" href="industries.html">Industries</a></li>
@@ -149,7 +169,7 @@
           <li><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
         <div class="d-grid gap-2 mt-4">
-          <a class="btn-header btn-header-red justify-content-center" href="#quote" data-bs-dismiss="offcanvas">
+          <a class="btn-header btn-header-red justify-content-center" href="index.html#quote" data-bs-dismiss="offcanvas">
             Get a Quote
           </a>
           <a class="btn-header btn-header-outline justify-content-center" href="track-shipment.html" data-bs-dismiss="offcanvas">
@@ -163,318 +183,245 @@
 <main id="main">
 
   <!-- ============ HERO ============ -->
-  <section class="abt-hero" aria-labelledby="abtHeroTitle">
-    <div class="container">
-      <div class="abt-hero-body" data-reveal>
-        <span class="hero-badge" style="margin-bottom:1rem"><span class="dot"></span> About JP Express</span>
-        <h1 id="abtHeroTitle">Delivering Trust, <span class="hl">Connecting the World.</span></h1>
-        <p>From a single Dhaka office to a logistics network spanning 220+ countries, JP Express has spent over a decade helping businesses and individuals in Bangladesh ship with confidence — reliably, transparently and on time.</p>
-      </div>
-      <div class="abt-hero-stats" data-reveal style="--d:120ms">
-        <div class="stats-card">
-          <div class="row g-0">
-            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-calendar-check"></i></span><span class="stat-num"><span data-counter="12">0</span><span class="sfx">+</span></span></div><div class="stat-label">Years of Service</div></div>
-            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-globe-americas"></i></span><span class="stat-num"><span data-counter="220">0</span><span class="sfx">+</span></span></div><div class="stat-label">Countries Served</div></div>
-            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-people"></i></span><span class="stat-num"><span data-counter="150">0</span><span class="sfx">+</span></span></div><div class="stat-label">Team Members</div></div>
-            <div class="col-6 col-md-3 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-box-seam"></i></span><span class="stat-num"><span data-counter="50">0</span><span class="sfx">K+</span></span></div><div class="stat-label">Shipments Delivered</div></div>
-          </div>
+  <section class="hero abt-hero" aria-labelledby="abtTitle">
+    <div class="hero-bg"></div>
+    <div class="container-fluid position-relative">
+      <div class="hero-copy" data-reveal>
+        <nav class="abt-crumb" aria-label="Breadcrumb">
+          <a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><span>About Us</span>
+        </nav>
+        <div class="hero-kicker"><span>ABOUT</span> JP EXPRESS</div>
+        <h1 id="abtTitle">Your Trusted Partner for International Shipping from <span class="accent">Bangladesh</span></h1>
+        <p>JP Express helps individuals, online sellers, exporters and businesses ship documents, parcels and commercial cargo worldwide, with clear communication and professional logistics support at every step.</p>
+        <div class="hero-actions">
+          <a href="index.html#quote" class="btn-main btn-red">Get a Shipping Quote <i class="fa-solid fa-arrow-right"></i></a>
+          <a href="contact.html" class="btn-main btn-dark-outline">Contact Us</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST STRIP ============ -->
+  <section class="trust-strip abt-trust" aria-label="JP Express at a glance">
+    <div class="container-fluid">
+      <div class="row g-0">
+        <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-award"></i><strong><span data-counter="8">0</span>+</strong><small>Years of Experience</small></div>
+        <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-earth-americas"></i><strong><span data-counter="215">0</span>+</strong><small>Countries Worldwide</small></div>
+        <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-boxes-stacked"></i><strong><span data-counter="10000">0</span>+</strong><small>Successful Shipments</small></div>
+        <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-users"></i><strong><span data-counter="25">0</span>+</strong><small>Team Members</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPANY OVERVIEW ============ -->
+  <section class="home-section abt-plain" id="overview" aria-labelledby="ovTitle">
+    <div class="container-fluid">
+      <div class="abt-split">
+        <div class="abt-copy" data-reveal>
+          <span class="eyebrow">Company Overview</span>
+          <h2 id="ovTitle">A Bangladesh-Based Logistics Partner for a Global World</h2>
+          <p>JP Express is an international courier and export logistics company based in Dhaka, Bangladesh. We make global shipping simple for people and businesses that need to send documents, personal parcels, product samples, e-commerce orders and commercial cargo overseas.</p>
+          <p>From booking and pickup to documentation, customs support and shipment tracking, one dedicated team keeps your shipment moving and keeps you informed.</p>
+        </div>
+        <dl class="abt-glance" data-reveal style="transition-delay:.1s">
+          <div><dt>Company</dt><dd>JP Express</dd></div>
+          <div><dt>Based in</dt><dd>Dhaka, Bangladesh</dd></div>
+          <div><dt>Office</dt><dd>House B-125 (Ground Floor), Road 21, Mohakhali DOHS, Dhaka 1206</dd></div>
+          <div><dt>We serve</dt><dd>Individuals, online sellers, exporters and businesses</dd></div>
+          <div><dt>Hotline</dt><dd><a href="tel:+8801681637836">+880 1681 637836</a> (9am to 11pm)</dd></div>
+          <div><dt>Email</dt><dd><a href="mailto:info@jpex.com.bd">info@jpex.com.bd</a></dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
   <!-- ============ OUR STORY ============ -->
-  <section class="section" aria-labelledby="storyTitle">
-    <div class="container">
-      <div class="abt-story-grid">
-        <div class="abt-story-img" data-reveal="left">
-          <img src="assets/stroy.jpg" alt="JP Express team at the Dhaka logistics facility" loading="lazy">
-          <div class="abt-story-badge">Est. 2014<span>Dhaka, Bangladesh</span></div>
-        </div>
-        <div data-reveal="right">
+  <section class="home-section abt-alt" id="story" aria-labelledby="storyTitle">
+    <div class="container-fluid">
+      <div class="abt-split">
+        <figure class="abt-photo m-0" data-reveal>
+          <img src="assets/stroy.jpg" alt="JP Express logistics operations in Bangladesh" loading="lazy" width="800" height="550">
+        </figure>
+        <div class="abt-copy" data-reveal style="transition-delay:.1s">
           <span class="eyebrow">Our Story</span>
-          <h2 class="sec-title" id="storyTitle">Built on Reliability, <span class="hl-red">Grown by Trust</span></h2>
-          <p class="sec-lead">JP Express began as a small courier desk in Gulshan, Dhaka, with a simple promise: deliver every shipment on time, every time. That promise has taken us from a single city route to a logistics network connecting Bangladeshi exporters, e-commerce brands and individuals to over 220 countries worldwide.</p>
-          <ol class="abt-milestones">
-            <li><span class="yr">2014</span><strong>Founded in Dhaka</strong><p>Started as a domestic courier service for local businesses.</p></li>
-            <li><span class="yr">2017</span><strong>Launched International Courier</strong><p>Expanded into express document & parcel delivery worldwide.</p></li>
-            <li><span class="yr">2020</span><strong>Air & Sea Freight Added</strong><p>Introduced full freight and export logistics solutions.</p></li>
-            <li><span class="yr">Today</span><strong>220+ Countries, 50K+ Shipments</strong><p>A trusted logistics partner for businesses across Bangladesh.</p></li>
-          </ol>
+          <h2 id="storyTitle">Built Around What Our Customers Need to Ship</h2>
+          <p>JP Express started with international courier for documents and parcels. As customers asked for more, our services grew to cover air freight, sea freight, export logistics and customs support, so businesses in Bangladesh can reach global markets through a single partner.</p>
+          <p>Today we continue to expand our destinations and services around one principle: reliable shipping, honest communication and support you can reach when it matters.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ MISSION & VISION ============ -->
-  <section class="section bg-soft" aria-labelledby="mvTitle">
-    <div class="container">
-      <div class="text-center mx-auto mb-5" style="max-width:680px" data-reveal>
-        <span class="eyebrow justify-content-center">Purpose</span>
-        <h2 class="sec-title" id="mvTitle">Our Mission <span class="hl-red">& Vision</span></h2>
+  <!-- ============ MISSION, VISION & VALUES ============ -->
+  <section class="home-section abt-plain" aria-labelledby="mvTitle">
+    <div class="container-fluid">
+      <div class="abt-head" data-reveal>
+        <span class="eyebrow">Our Direction</span>
+        <h2 id="mvTitle">Mission, Vision &amp; Values</h2>
       </div>
-      <div class="abt-mv-grid">
-        <div class="abt-mv-card mv-mission" data-reveal="left">
-          <span class="mv-ico"><i class="bi bi-bullseye"></i></span>
+      <div class="abt-mv">
+        <article class="abt-mv-card m" data-reveal>
+          <i class="fa-solid fa-bullseye"></i>
           <h3>Our Mission</h3>
-          <p>To simplify logistics for every business and individual in Bangladesh by delivering fast, reliable and transparent courier, freight and customs solutions — backed by real-time tracking and dedicated support at every step.</p>
-        </div>
-        <div class="abt-mv-card mv-vision" data-reveal="right">
-          <span class="mv-ico"><i class="bi bi-eye"></i></span>
+          <p>To make international shipping from Bangladesh simple, secure and transparent for every individual and business, with dependable service and clear communication from pickup to delivery.</p>
+        </article>
+        <article class="abt-mv-card v" data-reveal style="transition-delay:.1s">
+          <i class="fa-solid fa-eye"></i>
           <h3>Our Vision</h3>
-          <p>To become Bangladesh's most trusted logistics partner, recognized worldwide for connecting local businesses to global markets with the same care, speed and integrity, shipment after shipment.</p>
-        </div>
+          <p>To be a trusted gateway connecting Bangladeshi businesses and people to the world through professional, customer-focused logistics.</p>
+        </article>
+      </div>
+      <div class="row g-3 g-lg-4 mt-1">
+        <div class="col-6 col-lg-3" data-reveal><div class="mini-card"><i class="fa-solid fa-shield-halved"></i><h3>Reliability</h3><p>Careful handling and dependable service on every shipment.</p></div></div>
+        <div class="col-6 col-lg-3" data-reveal style="transition-delay:.06s"><div class="mini-card"><i class="fa-solid fa-eye"></i><h3>Transparency</h3><p>Clear information on services, documents and shipment status.</p></div></div>
+        <div class="col-6 col-lg-3" data-reveal style="transition-delay:.12s"><div class="mini-card"><i class="fa-solid fa-handshake"></i><h3>Customer Focus</h3><p>Support that listens and helps you choose the right option.</p></div></div>
+        <div class="col-6 col-lg-3" data-reveal style="transition-delay:.18s"><div class="mini-card"><i class="fa-solid fa-clipboard-check"></i><h3>Compliance</h3><p>Proper documentation and respect for shipping regulations.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ CORE VALUES ============ -->
-  <section class="section" aria-labelledby="valTitle">
-    <div class="container">
-      <div class="text-center mx-auto mb-5" style="max-width:680px" data-reveal>
-        <span class="eyebrow justify-content-center">What Drives Us</span>
-        <h2 class="sec-title" id="valTitle">Our Core <span class="hl-red">Values</span></h2>
-        <p class="sec-lead mx-auto">The principles that guide every shipment we handle.</p>
+  <!-- ============ WHY JP EXPRESS ============ -->
+  <section class="home-section abt-alt" aria-labelledby="whyTitle">
+    <div class="container-fluid">
+      <div class="abt-head" data-reveal>
+        <span class="eyebrow">Why JP Express</span>
+        <h2 id="whyTitle">Reliable Shipping Solutions for a Global World</h2>
+        <p>Secure, efficient and cost-effective international shipping and export logistics from Bangladesh.</p>
       </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-4" data-reveal style="--d:0ms"><div class="why-card featured"><div class="w-head"><span class="w-ico"><i class="bi bi-shield-check"></i></span><h3>Integrity</h3></div><p>We do what we say — honest pricing, honest timelines, no surprises.</p></div></div>
-        <div class="col-md-6 col-lg-4" data-reveal style="--d:100ms"><div class="why-card"><div class="w-head"><span class="w-ico"><i class="bi bi-stopwatch"></i></span><h3>Reliability</h3></div><p>Consistent, on-time delivery your business can plan around.</p></div></div>
-        <div class="col-md-6 col-lg-4" data-reveal style="--d:200ms"><div class="why-card"><div class="w-head"><span class="w-ico"><i class="bi bi-heart"></i></span><h3>Customer Focus</h3></div><p>Every decision starts with what's best for the people we serve.</p></div></div>
-        <div class="col-md-6 col-lg-4" data-reveal style="--d:0ms"><div class="why-card"><div class="w-head"><span class="w-ico"><i class="bi bi-lightbulb"></i></span><h3>Innovation</h3></div><p>Continuously improving tracking, tools and delivery speed.</p></div></div>
-        <div class="col-md-6 col-lg-4" data-reveal style="--d:100ms"><div class="why-card"><div class="w-head"><span class="w-ico"><i class="bi bi-people"></i></span><h3>Teamwork</h3></div><p>One coordinated team from pickup to final-mile delivery.</p></div></div>
-        <div class="col-md-6 col-lg-4" data-reveal style="--d:200ms"><div class="why-card"><div class="w-head"><span class="w-ico"><i class="bi bi-award"></i></span><h3>Excellence</h3></div><p>Holding every shipment to the same high standard, at any scale.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ COMPANY PROFILE ============ -->
-  <section class="section bg-soft" aria-labelledby="profTitle">
-    <div class="container">
-      <div class="row align-items-end g-3 mb-5">
-        <div class="col-lg-7" data-reveal><span class="eyebrow">Snapshot</span><h2 class="sec-title mb-0" id="profTitle">Company <span class="hl-red">Profile</span></h2></div>
-        <div class="col-lg-5" data-reveal style="--d:120ms"><p class="sec-lead mb-0">Key facts about JP Express at a glance.</p></div>
-      </div>
-      <div class="abt-profile-grid" data-reveal>
-        <div class="abt-profile-item"><i class="bi bi-calendar-event"></i><span class="lbl">Founded</span><span class="val">2014</span></div>
-        <div class="abt-profile-item"><i class="bi bi-geo-alt"></i><span class="lbl">Headquarters</span><span class="val">Gulshan-1, Dhaka</span></div>
-        <div class="abt-profile-item"><i class="bi bi-person-badge"></i><span class="lbl">Founder & Managing Director</span><span class="val">Md. Masud Parvez</span></div>
-        <div class="abt-profile-item"><i class="bi bi-people"></i><span class="lbl">Employees</span><span class="val">150+</span></div>
-        <div class="abt-profile-item"><i class="bi bi-globe-americas"></i><span class="lbl">Countries Served</span><span class="val">220+</span></div>
-        <div class="abt-profile-item"><i class="bi bi-box-seam"></i><span class="lbl">Annual Shipments</span><span class="val">50,000+</span></div>
-        <div class="abt-profile-item"><i class="bi bi-patch-check"></i><span class="lbl">Certifications</span><span class="val">IATA · ISO 9001</span></div>
-        <div class="abt-profile-item"><i class="bi bi-truck"></i><span class="lbl">Service Lines</span><span class="val">Courier · Freight</span></div>
+      <div class="row g-3 g-lg-4">
+        <div class="col-6 col-lg-4" data-reveal><div class="mini-card"><i class="fa-solid fa-plane"></i><h3>International Shipping</h3><p>Courier, freight and export solutions for global destinations.</p></div></div>
+        <div class="col-6 col-lg-4" data-reveal style="transition-delay:.06s"><div class="mini-card"><i class="fa-solid fa-people-group"></i><h3>Business-Focused</h3><p>Solutions for exporters, sellers and commercial shipments.</p></div></div>
+        <div class="col-6 col-lg-4" data-reveal style="transition-delay:.12s"><div class="mini-card"><i class="fa-solid fa-location-crosshairs"></i><h3>Shipment Visibility</h3><p>Track your shipment status and stay informed.</p></div></div>
+        <div class="col-6 col-lg-4" data-reveal><div class="mini-card"><i class="fa-solid fa-file-lines"></i><h3>Documentation Support</h3><p>Guidance on shipping and customs paperwork.</p></div></div>
+        <div class="col-6 col-lg-4" data-reveal style="transition-delay:.06s"><div class="mini-card"><i class="fa-solid fa-route"></i><h3>Flexible Options</h3><p>Courier, air freight and sea freight to match your needs.</p></div></div>
+        <div class="col-6 col-lg-4" data-reveal style="transition-delay:.12s"><div class="mini-card"><i class="fa-solid fa-headset"></i><h3>Customer Support</h3><p>Accessible help by phone, WhatsApp and email.</p></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ============ CEO MESSAGE ============ -->
-  <section class="section" aria-labelledby="ceoTitle">
-    <div class="container">
-      <div class="text-center mx-auto mb-5" style="max-width:680px" data-reveal>
-        <span class="eyebrow justify-content-center">A Message From Our Founder</span>
-        <h2 class="sec-title" id="ceoTitle">CEO <span class="hl-red">Message</span></h2>
+  <!-- ============ SERVICES ============ -->
+  <section class="home-section abt-plain" aria-labelledby="svcTitle">
+    <div class="container-fluid">
+      <div class="abt-head" data-reveal>
+        <span class="eyebrow">What We Do</span>
+        <h2 id="svcTitle">Our Shipping Services</h2>
+        <p>One partner for every stage of your international shipment.</p>
       </div>
-      <div class="abt-ceo" data-reveal>
-        <div class="abt-ceo-photo"><img src="assets/teams/founder.jpg" alt="Md. Masud Parvez, Founder & Managing Director of JP Express"></div>
-        <div class="abt-ceo-quote">
-          <i class="bi bi-quote"></i>
-          <p>""When we started JP Express, our goal was never just to move parcels — it was to move trust. Every exporter, every small business and every family sending a gift abroad is trusting us with something that matters to them. That responsibility still drives every decision we make, from the routes we choose to the people we hire. Thank you for shipping with us.</p>
-          <strong>Md. Masud Parvez</strong>
-          <span>Founder & Managing Director</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ WHY CHOOSE US ============ -->
-  <section class="section bg-soft" aria-labelledby="whyChooseTitle">
-    <div class="container">
-      <div class="row align-items-end mb-5 g-3">
-        <div class="col-lg-7" data-reveal><span class="eyebrow">Why JP Express</span><h2 class="sec-title mb-0" id="whyChooseTitle">Why Businesses <span class="hl-red">Choose Us</span></h2></div>
-        <div class="col-lg-5" data-reveal style="--d:120ms"><p class="sec-lead mb-0">What sets JP Express apart in Bangladesh's logistics industry.</p></div>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-6 col-lg-3" data-reveal style="--d:0ms"><div class="svc-card"><span class="svc-ico"><i class="bi bi-lightning-charge"></i></span><div><h3>Fast Delivery</h3><p>Optimized routes and reliable transit for every shipment.</p></div></div></div>
-        <div class="col-md-6 col-lg-3" data-reveal style="--d:80ms"><div class="svc-card"><span class="svc-ico"><i class="bi bi-radar"></i></span><div><h3>Real-Time Tracking</h3><p>Follow every shipment from pickup to final delivery.</p></div></div></div>
-        <div class="col-md-6 col-lg-3" data-reveal style="--d:160ms"><div class="svc-card"><span class="svc-ico"><i class="bi bi-shield-check"></i></span><div><h3>Secure Handling</h3><p>Export-grade packaging and careful handling, every time.</p></div></div></div>
-        <div class="col-md-6 col-lg-3" data-reveal style="--d:240ms"><div class="svc-card"><span class="svc-ico"><i class="bi bi-headset"></i></span><div><h3>Dedicated Support</h3><p>A responsive team available around the clock.</p></div></div></div>
+      <div class="row g-3 g-lg-4">
+        <div class="col-md-6 col-xl-3" data-reveal><a class="abt-link-card" href="services.html"><i class="fa-solid fa-box-open"></i><div><h3>International Courier</h3><p>Documents, parcels and express international shipments.</p><span>Explore <i class="fa-solid fa-arrow-right"></i></span></div></a></div>
+        <div class="col-md-6 col-xl-3" data-reveal style="transition-delay:.06s"><a class="abt-link-card" href="services.html"><i class="fa-solid fa-plane-departure"></i><div><h3>Air Freight</h3><p>Commercial and heavier international shipments.</p><span>Explore <i class="fa-solid fa-arrow-right"></i></span></div></a></div>
+        <div class="col-md-6 col-xl-3" data-reveal style="transition-delay:.12s"><a class="abt-link-card" href="services.html"><i class="fa-solid fa-ship"></i><div><h3>Sea Freight</h3><p>Larger commercial cargo and international freight.</p><span>Explore <i class="fa-solid fa-arrow-right"></i></span></div></a></div>
+        <div class="col-md-6 col-xl-3" data-reveal style="transition-delay:.18s"><a class="abt-link-card" href="services.html"><i class="fa-solid fa-file-export"></i><div><h3>Export Logistics</h3><p>Export shipping, documentation and logistics support.</p><span>Explore <i class="fa-solid fa-arrow-right"></i></span></div></a></div>
       </div>
     </div>
   </section>
 
   <!-- ============ GLOBAL NETWORK ============ -->
-  <section class="section abt-net on-dark" id="network" aria-labelledby="netTitle">
-    <div class="container position-relative">
-      <div class="row align-items-center g-4">
-        <div class="col-lg-6" data-reveal="left">
-          <span class="eyebrow on-dark">Global Network</span>
-          <h2 class="sec-title" id="netTitle">A Network Built for <span class="hl-light">Global Reach</span></h2>
-          <p class="sec-lead on-dark">JP Express partners with trusted airlines, freight carriers and last-mile couriers across six continents, giving Bangladeshi businesses direct routes into every major market.</p>
-          <div class="abt-net-chips">
-            <span class="country-chip"><i></i>North America</span><span class="country-chip"><i></i>Europe</span><span class="country-chip"><i></i>Middle East</span><span class="country-chip"><i></i>East Asia</span><span class="country-chip"><i></i>Southeast Asia</span><span class="country-chip"><i></i>South Asia</span><span class="country-chip"><i></i>Oceania</span>
+  <section class="home-section abt-net" id="network" aria-labelledby="netTitle">
+    <div class="container-fluid">
+      <div class="abt-split">
+        <div class="abt-copy" data-reveal>
+          <span class="eyebrow">Global Network</span>
+          <h2 id="netTitle">Shipping to 200+ Countries</h2>
+          <p>We work with trusted global partners to deliver your shipments worldwide, giving Bangladeshi senders access to major destinations across every region.</p>
+          <div class="abt-chips">
+            <span>Asia</span><span>Middle East</span><span>Europe</span><span>North America</span><span>Oceania</span><span>Africa</span>
           </div>
         </div>
-        <div class="col-lg-6" data-reveal="right">
-          <div class="stats-card">
-            <div class="row g-0">
-              <div class="col-6 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-airplane"></i></span><span class="stat-num"><span data-counter="35">0</span><span class="sfx">+</span></span></div><div class="stat-label">Airline Partners</div></div>
-              <div class="col-6 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-building"></i></span><span class="stat-num"><span data-counter="12">0</span></span></div><div class="stat-label">Regional Hubs</div></div>
-              <div class="col-6 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-truck"></i></span><span class="stat-num"><span data-counter="60">0</span><span class="sfx">+</span></span></div><div class="stat-label">Delivery Partners</div></div>
-              <div class="col-6 stat-item"><div class="stat-row"><span class="stat-ico"><i class="bi bi-box-seam"></i></span><span class="stat-num"><span data-counter="8">0</span></span></div><div class="stat-label">Bonded Warehouses</div></div>
-            </div>
+        <div class="abt-map" data-reveal style="transition-delay:.1s">
+          <img src="assets/world-map.png" alt="World map showing JP Express shipping coverage" loading="lazy">
+          <div class="abt-logos">
+            <span><img src="assets/airlines/dhl.png" alt="DHL" loading="lazy"></span>
+            <span><img src="assets/airlines/FedEx.png" alt="FedEx" loading="lazy"></span>
+            <span><img src="assets/airlines/ups.png" alt="UPS" loading="lazy"></span>
+            <span><img src="assets/airlines/Emirates.png" alt="Emirates" loading="lazy"></span>
+            <span><img src="assets/airlines/qatar.png" alt="Qatar Airways" loading="lazy"></span>
+            <span><img src="assets/airlines/turkish-airlines.png" alt="Turkish Airlines" loading="lazy"></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SERVICE COVERAGE ============ -->
-  <section class="section" aria-labelledby="covTitle">
-    <div class="container">
-      <div class="text-center mx-auto mb-5" style="max-width:680px" data-reveal>
-        <span class="eyebrow justify-content-center">Coverage</span>
-        <h2 class="sec-title" id="covTitle">Service <span class="hl-red">Coverage</span></h2>
-        <p class="sec-lead mx-auto">One partner for every leg of your shipment's journey.</p>
+  <!-- ============ LEADERSHIP & TEAMS ============ -->
+  <section class="home-section abt-alt" id="team" aria-labelledby="teamTitle">
+    <div class="container-fluid">
+      <div class="abt-head" data-reveal>
+        <span class="eyebrow">Our People</span>
+        <h2 id="teamTitle">Leadership &amp; Teams Behind Every Shipment</h2>
+        <p>Dedicated departments work together from your first enquiry to final delivery.</p>
       </div>
       <div class="row g-3 g-lg-4">
-        <div class="col-md-6" data-reveal style="--d:0ms"><article class="svc-card"><span class="svc-ico"><i class="bi bi-airplane"></i></span><div><h3>International Courier</h3><p>Door-to-door document & parcel delivery to 220+ countries.</p><a href="index.html#services" class="svc-more">Learn More <i class="bi bi-arrow-right"></i></a></div></article></div>
-        <div class="col-md-6" data-reveal style="--d:0ms"><article class="svc-card"><span class="svc-ico"><i class="bi bi-truck"></i></span><div><h3>Domestic Courier</h3><p>Nationwide delivery across all 64 districts of Bangladesh.</p><a href="index.html#services" class="svc-more">Learn More <i class="bi bi-arrow-right"></i></a></div></article></div>
-        <div class="col-md-6" data-reveal style="--d:80ms"><article class="svc-card"><span class="svc-ico"><i class="bi bi-send"></i></span><div><h3>Air & Sea Freight</h3><p>Scheduled air cargo and FCL/LCL ocean freight for commercial shipments.</p><a href="index.html#services" class="svc-more">Learn More <i class="bi bi-arrow-right"></i></a></div></article></div>
-        <div class="col-md-6" data-reveal style="--d:80ms"><article class="svc-card"><span class="svc-ico"><i class="bi bi-clipboard-check"></i></span><div><h3>Customs & Export Support</h3><p>End-to-end documentation and customs clearance handling.</p><a href="index.html#services" class="svc-more">Learn More <i class="bi bi-arrow-right"></i></a></div></article></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CERTIFICATIONS ============ -->
-  <section class="section bg-soft" aria-labelledby="certTitle">
-    <div class="container">
-      <div class="text-center mx-auto mb-5" style="max-width:680px" data-reveal>
-        <span class="eyebrow justify-content-center">Trust & Compliance</span>
-        <h2 class="sec-title" id="certTitle">Certifications</h2>
-      </div>
-      <div class="row g-3 g-lg-4">
-        <div class="col-6 col-lg-3" data-reveal style="--d:0ms"><div class="abt-cert-card"><i class="bi bi-patch-check-fill"></i><h3>IATA Certified</h3><p>Accredited air cargo agent</p></div></div>
-        <div class="col-6 col-lg-3" data-reveal style="--d:80ms"><div class="abt-cert-card"><i class="bi bi-award-fill"></i><h3>ISO 9001:2015</h3><p>Quality management certified</p></div></div>
-        <div class="col-6 col-lg-3" data-reveal style="--d:160ms"><div class="abt-cert-card"><i class="bi bi-bank2"></i><h3>Bangladesh Customs</h3><p>Registered clearing & forwarding agent</p></div></div>
-        <div class="col-6 col-lg-3" data-reveal style="--d:240ms"><div class="abt-cert-card"><i class="bi bi-briefcase-fill"></i><h3>Chamber Member</h3><p>Dhaka Chamber of Commerce & Industry</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ AWARDS & RECOGNITION ============ -->
-  <section class="section" aria-labelledby="awardTitle">
-    <div class="container">
-      <div class="row align-items-end g-3 mb-5">
-        <div class="col-lg-7" data-reveal><span class="eyebrow">Recognition</span><h2 class="sec-title mb-0" id="awardTitle">Awards & <span class="hl-red">Recognition</span></h2></div>
-        <div class="col-lg-5" data-reveal style="--d:120ms"><p class="sec-lead mb-0">Milestones our team is proud of.</p></div>
-      </div>
-      <ul class="abt-award-list">
-        <li class="abt-award-item" data-reveal style="--d:0ms"><span class="abt-award-yr">2025</span><div><h3>Best Logistics Startup — Bangladesh Logistics Awards</h3><p>Recognized for reliability and export logistics innovation.</p></div></li>
-        <li class="abt-award-item" data-reveal style="--d:80ms"><span class="abt-award-yr">2023</span><div><h3>E-commerce Delivery Partner of the Year</h3><p>Awarded by a leading Bangladesh e-commerce association.</p></div></li>
-        <li class="abt-award-item" data-reveal style="--d:160ms"><span class="abt-award-yr">2021</span><div><h3>50,000 Shipments Milestone</h3><p>Celebrated crossing 50K successful international deliveries.</p></div></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ TEAM ============ -->
-  <section class="section bg-soft" id="team" aria-labelledby="teamTitle">
-    <div class="container">
-      <div class="text-center mx-auto mb-4" style="max-width:680px" data-reveal>
-        <span class="eyebrow justify-content-center">Our People</span>
-        <h2 class="sec-title" id="teamTitle">Meet Our <span class="hl-red">Team</span></h2>
-        <p class="sec-lead mx-auto">The people behind every shipment we deliver.</p>
-      </div>
-      <div class="text-center mb-5" data-reveal style="--d:100ms">
-        <div class="abt-team-tabs" role="tablist">
-          <button class="abt-team-tab active" type="button" data-team-tab="leadership">Leadership Team</button>
-          <button class="abt-team-tab" type="button" data-team-tab="operations">Operations Team</button>
-          <button class="abt-team-tab" type="button" data-team-tab="support">Customer Support</button>
-        </div>
-      </div>
-
-      <div class="abt-team-panel row g-4" data-team-panel="leadership">
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:0ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/founder.jpg" alt="Jahangir Parvez"></div><div class="abt-team-body"><h3>Jahangir Parvez</h3><span class="abt-team-role">Founder & CEO</span><p>Leads company strategy and global partnerships.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:80ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/02.jpg" alt="Farhana Islam"></div><div class="abt-team-body"><h3>Farhana Islam</h3><span class="abt-team-role">Chief Operating Officer</span><p>Oversees daily operations and service quality.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:160ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/01.jpg" alt="Kamrul Hasan"></div><div class="abt-team-body"><h3>Kamrul Hasan</h3><span class="abt-team-role">Chief Financial Officer</span><p>Manages finance, pricing and business growth.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:240ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/07.jpg" alt="Nusrat Jahan"></div><div class="abt-team-body"><h3>Nusrat Jahan</h3><span class="abt-team-role">Head of International Sales</span><p>Builds partnerships with exporters and freight partners.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-      </div>
-
-      <div class="abt-team-panel row g-4 d-none" data-team-panel="operations">
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:0ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/03.jpg" alt="Rezaul Karim"></div><div class="abt-team-body"><h3>Rezaul Karim</h3><span class="abt-team-role">Warehouse Manager</span><p>Runs day-to-day warehouse and sorting operations.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:80ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/04.jpg" alt="Sabbir Ahmed"></div><div class="abt-team-body"><h3>Sabbir Ahmed</h3><span class="abt-team-role">Fleet & Logistics Manager</span><p>Coordinates pickup, transit and delivery routes.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:160ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/08.jpg" alt="Tania Rahman"></div><div class="abt-team-body"><h3>Tania Rahman</h3><span class="abt-team-role">Customs & Documentation Lead</span><p>Ensures smooth, compliant customs clearance.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:240ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/05.jpg" alt="Imran Chowdhury"></div><div class="abt-team-body"><h3>Imran Chowdhury</h3><span class="abt-team-role">Regional Hub Coordinator</span><p>Manages regional pickup and delivery hubs.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-      </div>
-
-      <div class="abt-team-panel row g-4 d-none" data-team-panel="support">
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:0ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/06.jpg" alt="Mahin Chowdhury"></div><div class="abt-team-body"><h3>Mahin Chowdhury</h3><span class="abt-team-role">Customer Support Lead</span><p>Leads the 24/7 customer support desk.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:80ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/09.jpg" alt="Ruma Begum"></div><div class="abt-team-body"><h3>Ruma Begum</h3><span class="abt-team-role">Client Relations Manager</span><p>Manages key accounts and business clients.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
-        <div class="col-sm-6 col-lg-3" data-reveal style="--d:160ms"><div class="abt-team-card"><div class="abt-team-photo"><img src="assets/teams/01.jpg" alt="Nayeem Islam"></div><div class="abt-team-body"><h3>Nayeem Islam</h3><span class="abt-team-role">24/7 Helpdesk Coordinator</span><p>Handles live chat, calls and WhatsApp support.</p><div class="abt-team-social"><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a><a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a></div></div></div></div>
+        <div class="col-md-6 col-xl-3" data-reveal><div class="abt-link-card"><i class="fa-solid fa-headset"></i><div><h3>Customer Support</h3><p>Answers your questions, quotes and tracking requests.</p></div></div></div>
+        <div class="col-md-6 col-xl-3" data-reveal style="transition-delay:.06s"><div class="abt-link-card"><i class="fa-solid fa-truck-fast"></i><div><h3>Pickup &amp; Operations</h3><p>Coordinates pickup, handling and shipment movement.</p></div></div></div>
+        <div class="col-md-6 col-xl-3" data-reveal style="transition-delay:.12s"><div class="abt-link-card"><i class="fa-solid fa-file-shield"></i><div><h3>Documentation &amp; Customs</h3><p>Helps prepare shipping and customs documents.</p></div></div></div>
+        <div class="col-md-6 col-xl-3" data-reveal style="transition-delay:.18s"><div class="abt-link-card"><i class="fa-solid fa-briefcase"></i><div><h3>Business &amp; Export Desk</h3><p>Supports exporters and commercial shippers.</p></div></div></div>
       </div>
     </div>
   </section>
 
   <!-- ============ CAREERS ============ -->
-  <section class="section" id="careers" aria-labelledby="careersTitle">
-    <div class="container">
-      <div class="text-center mx-auto mb-5" style="max-width:680px" data-reveal>
-        <span class="eyebrow justify-content-center">Careers</span>
-        <h2 class="sec-title" id="careersTitle">Join The <span class="hl-red">JP Express Team</span></h2>
-        <p class="sec-lead mx-auto">We're always looking for reliable, driven people to help us move the world forward.</p>
+  <section class="home-section abt-plain" id="careers" aria-labelledby="careerTitle">
+    <div class="container-fluid">
+      <div class="abt-head" data-reveal>
+        <span class="eyebrow">Careers</span>
+        <h2 id="careerTitle">Build Your Career in Global Logistics</h2>
+        <p>We value reliable, curious people who care about customers and take ownership of their work.</p>
       </div>
-
-      <div class="abt-careers-stats" data-reveal>
-        <div class="abt-careers-stat"><strong>12</strong><span>Open Positions</span></div>
-        <div class="abt-careers-stat"><strong>150+</strong><span>Team Members</span></div>
-        <div class="abt-careers-stat"><strong>4</strong><span>Office Locations</span></div>
+      <ol class="abt-steps" data-reveal>
+        <li><strong>Send Your CV</strong><small>Email your CV and the role you are interested in.</small></li>
+        <li><strong>Review</strong><small>Our team reviews your profile against current needs.</small></li>
+        <li><strong>Conversation</strong><small>Shortlisted candidates are contacted for an interview.</small></li>
+        <li><strong>Join the Team</strong><small>Selected candidates are onboarded by their department.</small></li>
+      </ol>
+      <div class="abt-apply" data-reveal>
+        <p>Interested in working with JP Express? Send your CV and we will keep it on file for suitable openings.</p>
+        <a class="btn-main btn-red" href="mailto:jpexpress09@gmail.com?subject=Career%20Application%20-%20JP%20Express">Send Your CV <i class="fa-solid fa-paper-plane"></i></a>
       </div>
+    </div>
+  </section>
 
-      <h3 class="h5 fw-bold mb-3" data-reveal>Job Openings</h3>
-      <ul class="abt-job-list">
-        <li class="abt-job-card" data-reveal style="--d:0ms">
-          <div><h3>Logistics Operations Executive</h3><div class="abt-job-meta"><span><i class="bi bi-building"></i>Operations</span><span><i class="bi bi-geo-alt"></i>Dhaka</span><span><i class="bi bi-clock"></i>Full-time</span></div></div>
-          <a href="mailto:jpexpress09@gmail.com?subject=Application%20-%20Logistics%20Operations%20Executive" class="btn-jp btn-jp-outline-dark btn-jp-sm">Apply Now <i class="bi bi-arrow-right"></i></a>
-        </li>
-        <li class="abt-job-card" data-reveal style="--d:80ms">
-          <div><h3>Customs Documentation Officer</h3><div class="abt-job-meta"><span><i class="bi bi-building"></i>Customs</span><span><i class="bi bi-geo-alt"></i>Chattogram</span><span><i class="bi bi-clock"></i>Full-time</span></div></div>
-          <a href="mailto:jpexpress09@gmail.com?subject=Application%20-%20Customs%20Documentation%20Officer" class="btn-jp btn-jp-outline-dark btn-jp-sm">Apply Now <i class="bi bi-arrow-right"></i></a>
-        </li>
-        <li class="abt-job-card" data-reveal style="--d:160ms">
-          <div><h3>Customer Support Executive</h3><div class="abt-job-meta"><span><i class="bi bi-building"></i>Customer Support</span><span><i class="bi bi-geo-alt"></i>Dhaka</span><span><i class="bi bi-clock"></i>Full-time</span></div></div>
-          <a href="mailto:jpexpress09@gmail.com?subject=Application%20-%20Customer%20Support%20Executive" class="btn-jp btn-jp-outline-dark btn-jp-sm">Apply Now <i class="bi bi-arrow-right"></i></a>
-        </li>
-        <li class="abt-job-card" data-reveal style="--d:240ms">
-          <div><h3>Delivery Rider (Nationwide)</h3><div class="abt-job-meta"><span><i class="bi bi-building"></i>Fleet</span><span><i class="bi bi-geo-alt"></i>Multiple Cities</span><span><i class="bi bi-clock"></i>Full-time</span></div></div>
-          <a href="mailto:jpexpress09@gmail.com?subject=Application%20-%20Delivery%20Rider" class="btn-jp btn-jp-outline-dark btn-jp-sm">Apply Now <i class="bi bi-arrow-right"></i></a>
-        </li>
-      </ul>
-
-      <div class="abt-intern-card" data-reveal>
-        <i class="bi bi-mortarboard-fill"></i>
-        <div>
-          <h3>Internship Program</h3>
-          <p>A 3-month paid internship for students interested in logistics, operations or customer experience — with mentorship from our leadership team.</p>
+  <!-- ============ FAQ ============ -->
+  <section class="home-section abt-alt" aria-labelledby="faqTitle">
+    <div class="container-fluid">
+      <div class="abt-head" data-reveal>
+        <span class="eyebrow">About JP Express</span>
+        <h2 id="faqTitle">Frequently Asked Questions</h2>
+      </div>
+      <div class="accordion mx-auto" id="abtFaq" style="max-width:860px" data-reveal>
+        <div class="accordion-item">
+          <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f1" aria-expanded="false" aria-controls="f1">What is JP Express?</button></h3>
+          <div id="f1" class="accordion-collapse collapse" data-bs-parent="#abtFaq"><div class="accordion-body">JP Express is a Dhaka-based international courier and export logistics company offering courier, air freight, sea freight and export support.</div></div>
         </div>
-        <a href="mailto:jpexpress09@gmail.com?subject=Internship%20Application" class="btn-jp btn-jp-primary btn-jp-sm ms-auto">Apply for Internship <i class="bi bi-arrow-right"></i></a>
+        <div class="accordion-item">
+          <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2" aria-expanded="false" aria-controls="f2">Who can ship with JP Express?</button></h3>
+          <div id="f2" class="accordion-collapse collapse" data-bs-parent="#abtFaq"><div class="accordion-body">Individuals, online sellers, exporters and businesses sending documents, parcels, samples or commercial cargo.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3" aria-expanded="false" aria-controls="f3">Where is your office located?</button></h3>
+          <div id="f3" class="accordion-collapse collapse" data-bs-parent="#abtFaq"><div class="accordion-body">House B-125 (Ground Floor), Road 21, Mohakhali DOHS, Dhaka 1206, Bangladesh.</div></div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4" aria-expanded="false" aria-controls="f4">How can I contact JP Express?</button></h3>
+          <div id="f4" class="accordion-collapse collapse" data-bs-parent="#abtFaq"><div class="accordion-body">Call or WhatsApp +880 1681 637836 (9am to 11pm) or email info@jpex.com.bd.</div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ FINAL CTA ============ -->
-  <section class="final-cta" aria-labelledby="abtCtaTitle">
-    <div class="glow"></div>
-    <svg class="cta-routes" viewBox="0 0 1200 400" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M-20 320 Q 300 60 640 180 T 1240 90"/>
-      <path d="M-20 120 Q 400 320 800 200 T 1240 300"/>
-    </svg>
-    <div class="container position-relative text-center">
-      <span class="font-mono d-inline-block mb-3" style="color:#9FE2F2;letter-spacing:.2em;font-size:.72rem" data-reveal>JOIN OUR JOURNEY</span>
-      <h2 id="abtCtaTitle" data-reveal style="--d:100ms">Let's Move Your Business <span class="hl-light">Forward.</span></h2>
-      <p class="sec-lead mx-auto on-dark" style="color:#B9C6DA!important" data-reveal>Whether you want to ship with us or join our team, we'd love to hear from you.</p>
-      <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
-        <a href="index.html#tools" class="btn-jp btn-jp-primary" data-reveal style="--d:200ms">Get a Free Quote <i class="bi bi-arrow-right"></i></a>
-        <a href="#careers" class="btn-jp btn-jp-light" data-reveal style="--d:300ms"><i class="bi bi-briefcase"></i> View Openings</a>
-        <a href="index.html#contact" class="btn-jp btn-jp-outline" data-reveal style="--d:400ms"><i class="bi bi-envelope"></i> Contact Us</a>
+  <section class="final-cta" aria-labelledby="ctaTitle">
+    <img class="final-cta-art" src="assets/Airliner-Orbiting-a-Glowing-Earth.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+    <div class="container-fluid">
+      <div class="cta-inner">
+        <div class="cta-copy">
+          <h2 id="ctaTitle">Ready to Ship Worldwide?</h2>
+          <p>Get a free quote or talk to our team and ship with confidence.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn-main btn-white" href="index.html#quote">Get a Quote <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="btn-main btn-white-outline" href="contact.html">Contact Us</a>
+        </div>
       </div>
     </div>
   </section>
@@ -505,9 +452,9 @@
         <div class="col-6 col-lg-2">
           <h3>About</h3>
           <a href="about.html">About Us</a>
-          <a href="about.html">Our Story</a>
-          <a href="about.html">Leadership</a>
-          <a href="contact.html">Careers</a>
+          <a href="about.html#story">Our Story</a>
+          <a href="about.html#team">Leadership</a>
+          <a href="about.html#careers">Careers</a>
           <a href="contact.html">Contact</a>
         </div>
 
@@ -564,7 +511,7 @@
   <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top">
     <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
   </a>
-  <a href="#quote" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote">
+  <a href="index.html#quote" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote">
     <i class="fa-solid fa-calculator" aria-hidden="true"></i>
   </a>
   <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="fab-wa wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WhatsApp" aria-label="Chat on WhatsApp">
@@ -578,7 +525,7 @@
 <nav class="fab-bar" aria-label="Mobile quick actions">
   <a href="index.html" class="bar-quote"><i class="fa-solid fa-house"></i>Home</a>
   <a href="track-shipment.html"><i class="fa-solid fa-location-dot"></i>Track</a>
-  <a href="#quote"><i class="fa-solid fa-calculator"></i>Quote</a>
+  <a href="index.html#quote"><i class="fa-solid fa-calculator"></i>Quote</a>
   <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment." target="_blank" rel="noopener" class="wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>
   <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i>Call</a>
 </nav>
@@ -586,254 +533,5 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/main.js"></script>
-<script>
-  document.querySelectorAll('[data-team-tab]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      document.querySelectorAll('[data-team-tab]').forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      var key = btn.getAttribute('data-team-tab');
-      document.querySelectorAll('[data-team-panel]').forEach(function (panel) {
-        panel.classList.toggle('d-none', panel.getAttribute('data-team-panel') !== key);
-      });
-    });
-  });
-</script>
-  
-  <script>
-    (() => {
-      // Shipping Estimate Calculator
-      const form = document.getElementById('calcForm');
-      const result = document.getElementById('calcResult');
-      
-      if (form && result) {
-        form.addEventListener('submit', e => {
-          e.preventDefault();
-          
-          const weight = Math.max(parseFloat(document.getElementById('cWeight').value) || 1, 0.5);
-          const type = document.getElementById('cType').value;
-          const method = type === 'Commercial Cargo' ? 'Commercial Cargo' : 'International Courier';
-          
-          const low = Math.round(50 + weight * (method === 'Commercial Cargo' ? 7 : 9));
-          const high = Math.round(low * 1.18);
-          
-          result.classList.remove('d-none');
-          result.innerHTML = `
-            <strong>Estimated shipping range: ৳${low} – ৳${high}</strong>
-            <small>Indicative demo estimate. Final pricing is confirmed by our logistics team.</small>
-          `;
-        });
-      }
-
-      // Shipment Tracking Preview
-      const track = document.getElementById('trackForm');
-      const trackResult = document.getElementById('trackResult');
-      
-      if (track && trackResult) {
-        track.addEventListener('submit', e => {
-          e.preventDefault();
-          
-          const input = document.getElementById('trackInput');
-          if (!input.value.trim()) {
-            return input.focus();
-          }
-          
-          trackResult.classList.remove('d-none');
-        });
-      }
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const track = document.getElementById('destTrack');
-      const prev = document.getElementById('destPrev');
-      const next = document.getElementById('destNext');
-      if (!track || !prev || !next) return;
-
-      const stepSize = () => {
-        const card = track.querySelector('.destination-card');
-        const gap = parseFloat(getComputedStyle(track).columnGap) || 14;
-        return card ? card.getBoundingClientRect().width + gap : 200;
-      };
-
-      const updateButtons = () => {
-        const max = track.scrollWidth - track.clientWidth - 2;
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max;
-      };
-
-      prev.addEventListener('click', () => track.scrollBy({ left: -stepSize(), behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left: stepSize(), behavior: 'smooth' }));
-      track.addEventListener('scroll', updateButtons, { passive: true });
-      window.addEventListener('resize', updateButtons);
-      updateButtons();
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const boxes = document.querySelectorAll('.country-select');
-
-      const closeAll = except => {
-        boxes.forEach(b => {
-          if (b !== except) {
-            b.classList.remove('open');
-            b.querySelector('.cs-btn').setAttribute('aria-expanded', 'false');
-          }
-        });
-      };
-
-      boxes.forEach(box => {
-        const btn = box.querySelector('.cs-btn');
-        const input = box.querySelector('input[type="hidden"]');
-        const flag = box.querySelector('.cs-flag');
-        const text = box.querySelector('.cs-text');
-        const items = box.querySelectorAll('.cs-list li');
-
-        btn.addEventListener('click', () => {
-          const open = !box.classList.contains('open');
-          closeAll(box);
-          box.classList.toggle('open', open);
-          btn.setAttribute('aria-expanded', open);
-        });
-
-        const choose = li => {
-          input.value = li.dataset.value;
-          flag.src = 'https://flagcdn.com/w80/' + li.dataset.flag + '.png';
-          flag.hidden = false;
-          text.textContent = li.dataset.value;
-          text.classList.remove('is-placeholder');
-          items.forEach(i => i.classList.remove('is-selected'));
-          li.classList.add('is-selected');
-          box.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-          btn.focus();
-        };
-
-        items.forEach(li => {
-          li.addEventListener('click', () => choose(li));
-          li.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              choose(li);
-            }
-          });
-        });
-      });
-
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.country-select')) closeAll();
-      });
-
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeAll();
-      });
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const root = document.documentElement;
-      const title = document.getElementById('heroTitle');
-      const finish = () => root.classList.remove('typing-js');
-
-      if (!title) return finish();
-
-      const slides = Array.from(title.querySelectorAll('.ht-slide'));
-      if (!slides.length) return finish();
-
-      /* ---------- Settings ---------- */
-      const SPEED = 45;    // ms per letter
-      const DELAY = 350;   // ms before the first title starts
-      const HOLD  = 2200;  // ms the finished title stays on screen
-      const FADE  = 450;   // ms fade-out before the next title
-      const RESPECT_REDUCED_MOTION = false;
-
-      // Screen readers read the first title once
-      title.setAttribute('aria-label', slides[0].textContent.replace(/\s+/g, ' ').trim());
-
-      // Reduced motion (optional): show the first title instantly
-      if (RESPECT_REDUCED_MOTION &&
-          window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        slides[0].classList.add('active');
-        title.classList.add('is-ready');
-        return finish();
-      }
-
-      /* ---------- Wrap words (no mid-word breaks) and letters ---------- */
-      const wrap = (node, chars) => {
-        Array.from(node.childNodes).forEach(child => {
-          if (child.nodeType === 3) {
-            const frag = document.createDocumentFragment();
-            child.textContent.split(/(\s+)/).forEach(part => {
-              if (!part) return;
-              if (/^\s+$/.test(part)) {
-                frag.appendChild(document.createTextNode(' '));
-                return;
-              }
-              const word = document.createElement('span');
-              word.className = 'tword';
-              Array.from(part).forEach(ch => {
-                const s = document.createElement('span');
-                s.className = 'tchar';
-                s.textContent = ch;
-                word.appendChild(s);
-                chars.push(s);
-              });
-              frag.appendChild(word);
-            });
-            child.replaceWith(frag);
-          } else if (child.nodeType === 1) {
-            wrap(child, chars);
-          }
-        });
-      };
-
-      slides.forEach(slide => {
-        slide.setAttribute('aria-hidden', 'true');
-        slide.chars = [];
-        wrap(slide, slide.chars);
-      });
-
-      /* ---------- Typing + rotation ---------- */
-      let idx = 0;
-      let timer = null;
-
-      const typeSlide = i => {
-        const chars = slides[idx].chars;
-        if (i < chars.length) {
-          if (i > 0) chars[i - 1].classList.remove('is-caret');
-          chars[i].classList.add('on', 'is-caret');
-          timer = setTimeout(() => typeSlide(i + 1), SPEED);
-        } else if (slides.length === 1) {
-          // Only one title: type once, then stop
-          timer = setTimeout(() => chars[chars.length - 1].classList.remove('is-caret'), 1500);
-        } else {
-          // Hold, fade out, then show the next title
-          timer = setTimeout(() => {
-            slides[idx].classList.add('out');
-            timer = setTimeout(() => show((idx + 1) % slides.length), FADE);
-          }, HOLD);
-        }
-      };
-
-      const show = n => {
-        clearTimeout(timer);
-        idx = n;
-        slides.forEach((slide, k) => {
-          slide.classList.toggle('active', k === n);
-          slide.classList.remove('out');
-          slide.chars.forEach(c => c.classList.remove('on', 'is-caret'));
-        });
-        typeSlide(0);
-      };
-
-      // Start
-      title.classList.add('is-ready');
-      finish();
-      slides[0].classList.add('active');
-      timer = setTimeout(() => typeSlide(0), DELAY);
-    })();
-  </script>
 </body>
 </html>

@@ -1,146 +1,187 @@
-/* ============ ABOUT US PAGE ============ */
-
-/* ---------- HERO ---------- */
-.abt-hero{background:var(--navy);color:#fff;position:relative;padding:clamp(2.4rem,6vw,4rem) 0 clamp(3.6rem,8vw,5.5rem);overflow:clip}
-.abt-hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 90% 80% at 50% 0%,#000 30%,transparent 75%)}
-.abt-hero::after{content:"";position:absolute;inset:0;background:radial-gradient(600px 320px at 10% 0%,rgba(230,34,41,.22),transparent 65%),radial-gradient(700px 380px at 95% 100%,rgba(18,165,198,.16),transparent 65%);pointer-events:none}
-.abt-hero .container{position:relative;z-index:2}
-.abt-breadcrumb{display:flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:#9FB0C8;margin-bottom:1.2rem}
-.abt-breadcrumb a{color:#9FB0C8}
-.abt-breadcrumb a:hover{color:#fff}
-.abt-breadcrumb span{color:#FF9BA0}
-.abt-breadcrumb .bi{font-size:.6rem}
-.abt-hero-body{}
-.abt-hero-body h1{font-family:var(--font-display);font-weight:800;font-size:clamp(1.9rem,4.2vw,3.1rem);line-height:1.15;margin-bottom:.9rem}
-.abt-hero-body h1 .hl{color:#FF7B81}
-.abt-hero-body p{color:#B9C6DA;font-size:clamp(.9rem,1.5vw,1.08rem);line-height:1.6}
-.abt-hero-stats{margin-top:clamp(1.6rem,4vw,2.6rem);position:relative;z-index:5}
-
-/* ---------- OUR STORY ---------- */
-.abt-story-grid{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
-@media (min-width:992px){.abt-story-grid{grid-template-columns:0.9fr 1.1fr;gap:3rem}}
-.abt-story-img{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);position:relative}
-.abt-story-img img{width:100%;display:block;aspect-ratio:4/5;object-fit:cover}
-.abt-story-badge{position:absolute;left:1.1rem;bottom:1.1rem;background:rgba(255,255,255,.96);border-radius:12px;padding:.7rem 1rem;box-shadow:var(--shadow-sm);font-family:var(--font-display);font-weight:800;color:var(--navy)}
-.abt-story-badge span{display:block;font-family:var(--font-mono);font-weight:600;font-size:.62rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
-.abt-milestones{list-style:none;margin:1.5rem 0 0;padding:0;position:relative}
-.abt-milestones::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--border)}
-.abt-milestones li{position:relative;padding:0 0 1.3rem 2.1rem}
-.abt-milestones li:last-child{padding-bottom:0}
-.abt-milestones li::before{content:"";position:absolute;left:2px;top:3px;width:16px;height:16px;border-radius:50%;background:var(--red);border:3px solid var(--red-soft)}
-.abt-milestones .yr{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;color:var(--red);font-weight:700}
-.abt-milestones strong{display:block;font-family:var(--font-display);font-size:.94rem;color:var(--navy);margin:.15rem 0 .2rem}
-.abt-milestones p{margin:0;font-size:.85rem;color:var(--muted)}
-
-/* ---------- MISSION & VISION ---------- */
-.abt-mv-grid{display:grid;grid-template-columns:1fr;gap:1.4rem}
-@media (min-width:768px){.abt-mv-grid{grid-template-columns:1fr 1fr}}
-.abt-mv-card{border-radius:var(--radius-lg);padding:2rem;color:#fff;position:relative;overflow:hidden;box-shadow:var(--shadow-md)}
-.abt-mv-card.mv-mission{background:linear-gradient(155deg,var(--navy),var(--navy-2))}
-.abt-mv-card.mv-vision{background:linear-gradient(155deg,var(--red-dark),var(--red))}
-.abt-mv-card .mv-ico{width:56px;height:56px;border-radius:16px;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:1.5rem;margin-bottom:1.2rem}
-.abt-mv-card h3{font-size:1.2rem;font-weight:800;margin-bottom:.6rem}
-.abt-mv-card p{font-size:.92rem;line-height:1.65;margin:0;opacity:.92}
-
-/* ---------- COMPANY PROFILE ---------- */
-.abt-profile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-@media (min-width:768px){.abt-profile-grid{grid-template-columns:repeat(4,1fr)}}
-.abt-profile-item{background:var(--surface);padding:1.5rem 1.3rem}
-.abt-profile-item .bi{color:var(--red);font-size:1.2rem;margin-bottom:.6rem;display:block}
-.abt-profile-item .lbl{display:block;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
-.abt-profile-item .val{font-family:var(--font-display);font-weight:800;font-size:1.05rem;color:var(--navy)}
-
-/* ---------- CEO MESSAGE ---------- */
-.abt-ceo{background:linear-gradient(155deg,var(--navy),var(--navy-2));border-radius:var(--radius-lg);padding:clamp(1.6rem,4vw,2.8rem);color:#fff;display:grid;grid-template-columns:1fr;gap:1.6rem;align-items:center;position:relative;overflow:hidden}
-@media (min-width:768px){.abt-ceo{grid-template-columns:auto 1fr}}
-.abt-ceo::before{content:"";position:absolute;inset:0;background:radial-gradient(360px 240px at 95% 0%,rgba(230,34,41,.3),transparent 65%)}
-.abt-ceo > *{position:relative}
-.abt-ceo-photo{width:120px;height:120px;border-radius:50%;overflow:hidden;border:3px solid rgba(255,255,255,.25);flex:0 0 auto;margin:0 auto}
-.abt-ceo-photo img{width:100%;height:100%;object-fit:cover}
-.abt-ceo-quote .bi-quote{color:#FF7B81;font-size:1.6rem;margin-bottom:.5rem;display:block}
-.abt-ceo-quote p{font-size:clamp(.92rem,1.6vw,1.08rem);line-height:1.7;color:#EAF0F8;margin-bottom:1.1rem}
-.abt-ceo-quote strong{display:block;font-family:var(--font-display);font-size:1rem}
-.abt-ceo-quote span{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;color:#9FE2F2;text-transform:uppercase;margin-top:.15rem}
-
-/* ---------- GLOBAL NETWORK ---------- */
-.abt-net{background:var(--navy);position:relative;overflow:clip}
-.abt-net::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:24px 24px}
-.abt-net-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
-
-/* ---------- CERTIFICATIONS ---------- */
-.abt-cert-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem 1.2rem;text-align:center;height:100%;transition:transform .3s,box-shadow .3s}
-.abt-cert-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.abt-cert-card .bi{font-size:1.8rem;color:var(--cyan);margin-bottom:.8rem;display:block}
-.abt-cert-card h3{font-size:.9rem;font-weight:700;margin-bottom:.3rem;color:var(--navy)}
-.abt-cert-card p{font-size:.76rem;color:var(--muted);margin:0}
-
-/* ---------- AWARDS ---------- */
-.abt-award-list{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
-.abt-award-item{display:flex;align-items:center;gap:1.1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.3rem;transition:transform .3s,box-shadow .3s}
-.abt-award-item:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
-.abt-award-yr{flex:0 0 auto;width:64px;height:64px;border-radius:14px;background:var(--red-soft);color:var(--red);display:grid;place-items:center;font-family:var(--font-display);font-weight:800;font-size:.92rem;text-align:center}
-.abt-award-item h3{font-size:.94rem;font-weight:700;margin-bottom:.15rem;color:var(--navy)}
-.abt-award-item p{font-size:.8rem;color:var(--muted);margin:0}
-
-/* ---------- TEAM ---------- */
-.abt-team-tabs{display:inline-flex;gap:.4rem;background:var(--bg);border:1px solid var(--border);border-radius:100px;padding:.35rem;flex-wrap:wrap;justify-content:center}
-.abt-team-tab{font-family:var(--font-display);font-weight:700;font-size:.82rem;color:var(--muted);background:transparent;border:0;border-radius:100px;padding:.55rem 1.2rem;transition:all .25s}
-.abt-team-tab:hover{color:var(--navy)}
-.abt-team-tab.active{background:var(--navy);color:#fff}
-.abt-team-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;height:100%;transition:transform .35s,box-shadow .35s}
-.abt-team-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.abt-team-photo{aspect-ratio:1/1;overflow:hidden}
-.abt-team-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
-.abt-team-card:hover .abt-team-photo img{transform:scale(1.05)}
-.abt-team-body{padding:1.2rem 1.3rem}
-.abt-team-body h3{font-size:1rem;font-weight:800;color:var(--navy);margin-bottom:.15rem}
-.abt-team-role{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;color:var(--red);text-transform:uppercase;margin-bottom:.6rem;display:block}
-.abt-team-body p{font-size:.82rem;color:var(--muted);margin-bottom:.8rem}
-.abt-team-social{display:flex;gap:.5rem}
-.abt-team-social a{width:32px;height:32px;border-radius:9px;background:var(--bg);display:grid;place-items:center;color:var(--navy);font-size:.85rem;transition:background .25s,color .25s}
-.abt-team-social a:hover{background:var(--red);color:#fff}
-
-/* ---------- CAREERS ---------- */
-.abt-careers-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
-.abt-careers-stat{text-align:center;background:var(--bg);border-radius:var(--radius);padding:1.2rem .8rem}
-.abt-careers-stat strong{display:block;font-family:var(--font-display);font-weight:800;font-size:1.4rem;color:var(--navy)}
-.abt-careers-stat span{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.abt-job-list{list-style:none;margin:0 0 2rem;padding:0;display:grid;gap:.9rem}
-.abt-job-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem 1.4rem;transition:transform .3s,box-shadow .3s}
-.abt-job-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm);border-color:rgba(230,34,41,.3)}
-.abt-job-card h3{font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
-.abt-job-meta{display:flex;flex-wrap:wrap;gap:.9rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.04em;color:var(--muted);text-transform:uppercase}
-.abt-job-meta span{display:inline-flex;align-items:center;gap:.35rem}
-.abt-job-meta .bi{color:var(--cyan)}
-.abt-intern-card{display:flex;flex-wrap:wrap;align-items:center;gap:1.4rem;background:var(--cyan-soft);border:1px solid rgba(18,165,198,.25);border-radius:var(--radius-lg);padding:1.6rem 1.8rem}
-.abt-intern-card .bi{font-size:2.2rem;color:#0B7C96;flex:0 0 auto}
-.abt-intern-card h3{font-size:1.02rem;font-weight:800;color:var(--navy);margin-bottom:.3rem}
-.abt-intern-card p{font-size:.85rem;color:var(--muted);margin:0}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:767px){
-  .abt-hero{padding:1.6rem 0 2.2rem}
-  .abt-hero-body h1{font-size:1.55rem}
-  .abt-hero-body p{font-size:.82rem}
-  .abt-story-img img{aspect-ratio:16/11}
-  .abt-milestones li{padding-bottom:1rem;padding-left:1.8rem}
-  .abt-mv-card{padding:1.4rem}
-  .abt-profile-item{padding:1.1rem .9rem}
-  .abt-profile-item .val{font-size:.92rem}
-  .abt-ceo{padding:1.4rem;text-align:center}
-  .abt-ceo-photo{width:92px;height:92px}
-  .abt-cert-card{padding:1.1rem .9rem}
-  .abt-award-item{padding:.9rem 1rem;gap:.8rem}
-  .abt-award-yr{width:50px;height:50px;font-size:.76rem;border-radius:11px}
-  .abt-team-tab{font-size:.72rem;padding:.45rem .85rem}
-  .abt-careers-stats{gap:.6rem}
-  .abt-careers-stat{padding:.9rem .5rem}
-  .abt-careers-stat strong{font-size:1.1rem}
-  .abt-job-card{padding:1rem 1.1rem}
-  .abt-intern-card{padding:1.2rem 1.3rem;text-align:center;justify-content:center}
+/* =========================================
+   ABOUT PAGE  (loads AFTER home.css)
+   ========================================= */
+.home-section.abt-plain { background: var(--jp-white); }
+.home-section.abt-alt   { background: var(--jp-bg-light); }
+.abt-head { text-align: center; max-width: 720px; margin: 0 auto 28px; }
+.abt-head p { margin: 6px auto 0; color: var(--jp-text-muted); font-size: 15px; }
+.abt-head h2, .abt-copy h2 {
+  font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800;
+  font-size: clamp(1.45rem, 3.4vw, 2rem); line-height: 1.15;
+  color: var(--jp-heading-color); margin: 4px 0 0;
 }
-@media (max-width:480px){
-  .abt-hero-body h1{font-size:1.35rem}
-  .abt-profile-grid{grid-template-columns:1fr}
-  .abt-careers-stats{grid-template-columns:1fr}
+.abt-copy p { color: var(--jp-text-muted); font-size: 15px; line-height: 1.7; margin: 12px 0 0; }
+.abt-copy .accent, .abt-hero h1 .accent { color: var(--jp-orange-accent); }
+
+/* ---------- Hero ---------- */
+.abt-hero { min-height: 0; padding: clamp(36px, 7vw, 76px) 0; }
+.abt-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px;
+  font-size: 12.5px; font-weight: 600; color: var(--jp-blue-light); }
+.abt-crumb a:hover { color: var(--jp-white); }
+.abt-crumb i { font-size: 9px; opacity: .7; }
+.abt-hero h1 { font-size: clamp(1.8rem, 5vw, 3rem); max-width: 760px; }
+.abt-hero p { max-width: 640px; }
+
+/* ---------- Trust strip tweaks ---------- */
+.abt-trust { position: relative; z-index: 3; }
+
+/* ---------- Overview + at-a-glance ---------- */
+.abt-split { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: center; }
+.abt-photo { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--jp-shadow-lg); }
+.abt-photo img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; }
+.abt-glance { background: var(--jp-white); border: 1px solid var(--jp-border-muted); border-radius: 16px;
+  padding: 6px 20px; box-shadow: var(--jp-shadow-lg); margin: 0; }
+.abt-glance div { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--jp-border-light); }
+.abt-glance div:last-child { border-bottom: 0; }
+.abt-glance dt { flex: 0 0 112px; font-size: 11.5px; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--jp-orange); padding-top: 2px; }
+.abt-glance dd { margin: 0; font-size: 14px; line-height: 1.5; color: var(--jp-ink); font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+.abt-glance dd a:hover { color: var(--jp-orange); }
+
+/* ---------- Mission / Vision ---------- */
+.abt-mv { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.abt-mv-card { position: relative; overflow: hidden; border-radius: 16px; padding: 26px 22px; color: var(--jp-white);
+  box-shadow: var(--jp-shadow-lg); }
+.abt-mv-card.m { background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy)); }
+.abt-mv-card.v { background: linear-gradient(150deg, var(--jp-red), var(--jp-orange-accent)); }
+.abt-mv-card::after { content: ""; position: absolute; right: -40px; top: -40px; width: 140px; height: 140px;
+  border-radius: 50%; background: rgba(255, 255, 255, .1); }
+.abt-mv-card i { width: 50px; height: 50px; display: grid; place-items: center; font-size: 22px;
+  border-radius: 14px; background: rgba(255, 255, 255, .16); margin-bottom: 14px; }
+.abt-mv-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.2rem; margin: 0 0 8px; }
+.abt-mv-card p { margin: 0; font-size: 14.5px; line-height: 1.65; color: rgba(255, 255, 255, .92); position: relative; z-index: 1; }
+
+/* ---------- Service links ---------- */
+.abt-link-card { display: flex; align-items: flex-start; gap: 14px; height: 100%; padding: 18px;
+  background: var(--jp-white); border: 1px solid var(--jp-border-muted); border-radius: 14px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.abt-link-card:hover { transform: translateY(-3px); box-shadow: var(--jp-shadow-lg); border-color: var(--jp-orange); }
+.abt-link-card > i { flex: 0 0 46px; height: 46px; display: grid; place-items: center; border-radius: 12px;
+  background: rgba(242, 99, 35, .1); color: var(--jp-orange); font-size: 19px; }
+.abt-link-card h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--jp-navy); margin: 0 0 4px; }
+.abt-link-card p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--jp-text-subtle); }
+.abt-link-card span { display: inline-block; margin-top: 8px; font-size: 13px; font-weight: 800; color: var(--jp-orange); }
+
+/* ---------- Network ---------- */
+.home-section.abt-net {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--jp-white);
+  padding: clamp(40px, 7vw, 72px) 0;
+  background:
+    radial-gradient(520px 300px at 8% 0%, rgba(242, 99, 35, .22), transparent 65%),
+    radial-gradient(620px 360px at 100% 100%, rgba(255, 255, 255, .08), transparent 65%),
+    linear-gradient(135deg, var(--jp-navy-dark), var(--jp-navy));
+}
+.abt-net::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+  pointer-events: none;
+}
+.abt-net .abt-copy h2 { color: var(--jp-white); }
+.abt-net .abt-copy p { color: var(--jp-text-light-blue-2); }
+.abt-net .eyebrow { color: var(--jp-orange-light); }
+
+.abt-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.abt-chips span {
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jp-white);
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .25);
+  backdrop-filter: blur(4px);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.abt-chips span:hover {
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+  transform: translateY(-2px);
+}
+
+.abt-map {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 18px;
+  padding: clamp(12px, 2.5vw, 20px);
+  box-shadow: 0 18px 40px rgba(10, 16, 60, .35);
+}
+.abt-map img {
+  width: 100%;
+  height: auto;
+  opacity: .9;
+  filter: brightness(2) saturate(.5);
+}
+.abt-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+.abt-logos span {
+  display: grid;
+  place-items: center;
+  height: 58px;
+  padding: 8px 10px;
+  background: var(--jp-white);
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.abt-logos span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .22);
+}
+.abt-logos img { max-height: 30px; width: auto; max-width: 100%; object-fit: contain; }
+
+/* ---------- Careers ---------- */
+.abt-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 12px; counter-reset: s; }
+.abt-steps li { counter-increment: s; position: relative; background: var(--jp-white); border: 1px solid var(--jp-border-muted);
+  border-radius: 14px; padding: 18px 18px 18px 64px; }
+.abt-steps li::before { content: counter(s); position: absolute; left: 16px; top: 16px; width: 34px; height: 34px;
+  display: grid; place-items: center; border-radius: 50%; background: var(--jp-orange); color: var(--jp-white);
+  font-weight: 800; font-size: 15px; }
+.abt-steps strong { display: block; font-family: 'Plus Jakarta Sans', sans-serif; color: var(--jp-navy); font-size: 15px; }
+.abt-steps small { display: block; margin-top: 2px; font-size: 13px; color: var(--jp-text-subtle); line-height: 1.5; }
+.abt-apply { margin-top: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 20px; border-radius: 16px; background: var(--jp-bg-soft); border: 1px dashed var(--jp-border-hover-2); }
+.abt-apply p { margin: 0; font-size: 14.5px; color: var(--jp-ink); font-weight: 600; flex: 1 1 260px; }
+.abt-apply .btn-main { width: auto; }
+
+/* ---------- Breakpoints ---------- */
+@media (min-width: 768px) {
+  .abt-mv { grid-template-columns: 1fr 1fr; }
+  .abt-steps { grid-template-columns: repeat(2, 1fr); }
+  .abt-mv-card { padding: 32px 28px; }
+}
+@media (min-width: 992px) {
+  .abt-split { grid-template-columns: 1.05fr .95fr; gap: 48px; }
+  .abt-steps { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 575px) {
+  .abt-head { text-align: left; margin-bottom: 20px; }
+  .abt-glance { padding: 4px 16px; }
+  .abt-glance div { flex-direction: column; gap: 4px; padding: 12px 0; }
+  .abt-glance dt { flex: none; }
+  .abt-apply .btn-main { width: 100%; justify-content: center; }
+  .abt-hero .hero-actions .btn-main { width: 100%; justify-content: center; }
+
+  .abt-chips { gap: 6px; }
+  .abt-chips span { padding: 7px 12px; font-size: 12.5px; }
+  .abt-logos { gap: 8px; }
+  .abt-logos span { height: 50px; padding: 6px 8px; }
+  .abt-logos img { max-height: 24px; }
+}
+
+  .abt-hero .hero-actions .btn-main { width: 100%; justify-content: center; }
+  
+@media (max-width: 360px) {
+  .abt-logos { grid-template-columns: repeat(2, 1fr); }
 }
