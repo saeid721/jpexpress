@@ -1,169 +1,197 @@
+/* =========================================================
+   JP EXPRESS: PRICING / SHIPPING CALCULATOR
+   Calculates actual, volumetric and chargeable weight.
+   A price is shown ONLY when real rates are added to
+   CONFIG.rates below. Until then the result is "Quote Required".
+   ========================================================= */
 (function () {
-"use strict";
+  "use strict";
 
-/* ============ SHARED RATE DATA (demo — replace with live API when available) ============ */
-var METHOD_RATES = {
-  'International Courier': { base: 25, per: 9.5, transit: '4–7 days', divisor: 5000 },
-  'Domestic Courier':      { base: 2,  per: 1.2, transit: '1–3 days', divisor: 5000 },
-  'Air Freight':           { base: 45, per: 6.8, transit: '5–10 days', divisor: 6000 },
-  'Sea Freight':           { base: 65, per: 1.6, transit: '25–40 days', divisor: null }
-};
+  /* ---------------- BUSINESS RULES (edit these) ---------------- */
+  var CONFIG = {
+    currency: "৳",
+    ratesNote: "",          // e.g. "Rates effective 1 Nov 2026, valid for 30 days"
+    roundStep: 0,           // chargeable-weight rounding in kg (0 = no rounding, 0.5 = nearest 0.5 kg up)
+    maxCourierKg: 70,       // above this, manual quote
+    maxSideCm: 120,         // any side above this, manual quote
+    /* CONFIRM these divisors with JP Express / the carrier. Common industry values shown. */
+    divisors: { courier: 5000, air: 6000 },
 
-var FUEL_SURCHARGE = {
-  'International Courier': 12,
-  'Domestic Courier': 0,
-  'Air Freight': 15,
-  'Sea Freight': 5
-};
+    /* Add real rates to switch estimates on. Keys are lowercase.
+       Example:
+       rates: {
+         courier: {
+           "united states": { base: 0, perKg: 0, fuelPct: 0, transit: "4–6 business days" }
+         }
+       }
+    */
+    rates: null
+  };
 
-var COUNTRY_RATES = [
-  { country: 'United States', zone: 'Zone A', courier: 11.5, freight: 6.2, transit: '4–6 days' },
-  { country: 'United Kingdom', zone: 'Zone A', courier: 10.8, freight: 5.9, transit: '3–5 days' },
-  { country: 'Canada', zone: 'Zone A', courier: 12.2, freight: 6.5, transit: '4–7 days' },
-  { country: 'Germany', zone: 'Zone A', courier: 10.2, freight: 5.6, transit: '3–5 days' },
-  { country: 'France', zone: 'Zone A', courier: 10.4, freight: 5.7, transit: '3–5 days' },
-  { country: 'Italy', zone: 'Zone A', courier: 10.6, freight: 5.8, transit: '4–6 days' },
-  { country: 'Australia', zone: 'Zone B', courier: 13.5, freight: 7.1, transit: '5–8 days' },
-  { country: 'UAE', zone: 'Zone C', courier: 7.8, freight: 3.9, transit: '2–4 days' },
-  { country: 'Saudi Arabia', zone: 'Zone C', courier: 8.1, freight: 4.1, transit: '2–4 days' },
-  { country: 'Japan', zone: 'Zone B', courier: 9.9, freight: 5.2, transit: '4–6 days' },
-  { country: 'South Korea', zone: 'Zone B', courier: 9.6, freight: 5.0, transit: '4–6 days' },
-  { country: 'Malaysia', zone: 'Zone C', courier: 7.2, freight: 3.6, transit: '2–4 days' },
-  { country: 'Singapore', zone: 'Zone C', courier: 7.0, freight: 3.5, transit: '2–3 days' },
-  { country: 'India', zone: 'Zone C', courier: 6.4, freight: 3.1, transit: '2–3 days' }
-];
+  var SERVICES = {
+    courier: "International Courier",
+    air: "Air Freight",
+    sea: "Sea Freight"
+  };
+  var MODES = {
+    document:   { label: "Document",   services: ["courier"],               dims: false, quote: false, hint: "For letters and paperwork. Dimensions are not needed." },
+    parcel:     { label: "Parcel",     services: ["courier", "air"],        dims: true,  quote: false, hint: "For personal parcels and gifts." },
+    commercial: { label: "Commercial", services: ["courier", "air", "sea"], dims: true,  quote: true,  hint: "Commercial shipments are normally priced by quote." },
+    freight:    { label: "Freight",    services: ["air", "sea"],            dims: true,  quote: true,  hint: "Larger cargo is priced by quote." }
+  };
 
-/* ============ SHIPPING RATE CALCULATOR ============ */
-var rateForm = document.getElementById('prcRateForm');
-if (rateForm) {
-  rateForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var w = Math.max(parseFloat(document.getElementById('prcWeight').value) || 1, 0.5);
-    var l = +document.getElementById('prcL').value || 0;
-    var wd = +document.getElementById('prcW').value || 0;
-    var h = +document.getElementById('prcH').value || 0;
-    var method = document.getElementById('prcMethod').value;
-    var rate = METHOD_RATES[method];
-    var vol = rate.divisor ? (l * wd * h) / rate.divisor : 0;
-    var cw = Math.max(w, vol);
-    var mid = rate.base + cw * rate.per;
-    var fuelPct = FUEL_SURCHARGE[method] || 0;
-    var fuel = mid * (fuelPct / 100);
-    var total = mid + fuel;
-    var lo = Math.round(total * 0.92), hi = Math.round(total * 1.1);
+  /* ---------------- helpers ---------------- */
+  var $ = function (id) { return document.getElementById(id); };
+  var form = $("prcForm");
+  if (!form) return;
 
-    var box = document.getElementById('prcRateResult');
-    box.classList.remove('d-none');
-    box.innerHTML =
-      '<div class="calc-result"><div class="position-relative"><div class="d-flex flex-wrap justify-content-between gap-3 align-items-center">' +
-      '<div><div class="font-mono" style="font-size:.66rem;letter-spacing:.14em;color:#9FE2F2">ESTIMATED COST</div>' +
-      '<div class="amt">$' + lo + ' – $' + hi + ' <small>USD</small></div></div>' +
-      '<div class="font-mono" style="font-size:.72rem;line-height:1.9">CHARGEABLE WT: ' + cw.toFixed(1) + ' KG<br>FUEL SURCHARGE: ' + fuelPct + '%<br>TYPICAL TRANSIT: ' + rate.transit + '</div></div>' +
-      '<p class="demo-note mt-3 mb-0" style="color:#8FA1BC">INDICATIVE ESTIMATE INCLUDING FUEL SURCHARGE — FINAL PRICING CONFIRMED BY OUR LOGISTICS TEAM.</p></div></div>';
-  });
-}
+  var els = {
+    to: $("prcTo"), service: $("prcService"), weight: $("prcWeight"),
+    l: $("prcL"), w: $("prcW"), h: $("prcH"), pcs: $("prcPcs"),
+    dims: $("prcDims"), hint: $("prcHint"), err: $("prcError"), result: $("prcResult")
+  };
+  var placeholder = els.result.innerHTML;
+  var calculated = false;
 
-/* ============ TRANSIT TIME CALCULATOR ============ */
-var transitForm = document.getElementById('prcTransitForm');
-if (transitForm) {
-  transitForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var method = document.getElementById('prcTMethod').value;
-    var destName = document.getElementById('prcTDest').value;
-    var found = COUNTRY_RATES.filter(function (c) { return c.country === destName; })[0];
-    var base = METHOD_RATES[method].transit;
-    var box = document.getElementById('prcTransitResult');
-    box.classList.remove('d-none');
-    box.innerHTML =
-      '<div class="calc-result"><div class="position-relative">' +
-      '<div class="font-mono" style="font-size:.66rem;letter-spacing:.14em;color:#9FE2F2">ESTIMATED TRANSIT TIME</div>' +
-      '<div class="amt">' + (found ? found.transit : base) + '</div>' +
-      '<p class="demo-note mt-3 mb-0" style="color:#8FA1BC">DHAKA → ' + destName.toUpperCase() + ' VIA ' + method.toUpperCase() + ' — SUBJECT TO CUSTOMS AND WEATHER DELAYS.</p>' +
-      '</div></div>';
-  });
-}
-
-/* ============ VOLUMETRIC WEIGHT CALCULATOR ============ */
-var volForm = document.getElementById('prcVolForm');
-if (volForm) {
-  volForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var l = +document.getElementById('prcVL').value || 0;
-    var w = +document.getElementById('prcVW').value || 0;
-    var h = +document.getElementById('prcVH').value || 0;
-    var actual = Math.max(parseFloat(document.getElementById('prcVActual').value) || 0, 0);
-    var divisor = +document.getElementById('prcVDivisor').value || 5000;
-    var volumetric = (l * w * h) / divisor;
-    var chargeable = Math.max(actual, volumetric);
-
-    var box = document.getElementById('prcVolResult');
-    box.classList.remove('d-none');
-    box.innerHTML =
-      '<div class="prc-compare">' +
-      '<div class="prc-compare-item"><span class="lbl">Actual Weight</span><span class="val">' + actual.toFixed(2) + ' kg</span></div>' +
-      '<div class="prc-compare-item"><span class="lbl">Volumetric Weight</span><span class="val">' + volumetric.toFixed(2) + ' kg</span></div>' +
-      '</div>' +
-      '<div class="prc-compare" style="margin-top:.7rem"><div class="prc-compare-item is-chargeable" style="grid-column:1/-1"><span class="lbl">Chargeable Weight (Higher of the Two)</span><span class="val">' + chargeable.toFixed(2) + ' kg</span></div></div>' +
-      '<p class="demo-note mt-3 mb-0">FORMULA: (LENGTH × WIDTH × HEIGHT IN CM) ÷ ' + divisor + ' — DIVISOR VARIES BY SERVICE.</p>';
-  });
-}
-
-/* ============ COUNTRY-WISE RATES TABLE ============ */
-var ratesBody = document.getElementById('prcRatesBody');
-if (ratesBody) {
-  function renderRates(list) {
-    ratesBody.innerHTML = list.map(function (r) {
-      return '<tr>' +
-        '<td class="country"><span class="zone-badge">' + r.zone + '</span> ' + r.country + '</td>' +
-        '<td class="rate">$' + r.courier.toFixed(1) + '<span class="text-muted-jp" style="font-weight:500"> /kg</span></td>' +
-        '<td class="rate">$' + r.freight.toFixed(1) + '<span class="text-muted-jp" style="font-weight:500"> /kg</span></td>' +
-        '<td>' + r.transit + '</td>' +
-      '</tr>';
-    }).join('');
-    var empty = document.getElementById('prcRatesEmpty');
-    if (empty) empty.style.display = list.length ? 'none' : 'block';
-  }
-  renderRates(COUNTRY_RATES);
-
-  var search = document.getElementById('prcRatesSearch');
-  if (search) {
-    search.addEventListener('input', function () {
-      var q = search.value.trim().toLowerCase();
-      renderRates(COUNTRY_RATES.filter(function (r) { return r.country.toLowerCase().indexOf(q) !== -1; }));
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+  function kg(n) { return (Math.round(n * 100) / 100).toLocaleString("en-US", { maximumFractionDigits: 2 }) + " kg"; }
+  function money(n) { return CONFIG.currency + " " + Math.round(n).toLocaleString("en-US"); }
+  function mode() { return MODES[form.elements.mode.value]; }
 
-  /* Populate transit-calculator destination select from the same data */
-  var tDest = document.getElementById('prcTDest');
-  if (tDest) {
-    tDest.innerHTML = COUNTRY_RATES.map(function (r) { return '<option>' + r.country + '</option>'; }).join('');
+  /* ---------------- mode handling ---------------- */
+  function applyMode() {
+    var m = mode();
+    var prev = els.service.value;
+    els.service.innerHTML = m.services.map(function (k) {
+      return '<option value="' + k + '">' + SERVICES[k] + "</option>";
+    }).join("");
+    if (m.services.indexOf(prev) > -1) els.service.value = prev;
+    els.dims.hidden = !m.dims;
+    els.hint.textContent = m.hint;
+    els.err.hidden = true;
+    if (calculated) run();
   }
-}
 
-/* ============ STICKY CATEGORY NAV — SCROLLSPY ============ */
-var links = document.querySelectorAll('.prc-catlink');
-var sections = document.querySelectorAll('.prc-cat');
-if (links.length && sections.length && 'IntersectionObserver' in window) {
-  var byId = {};
-  links.forEach(function (l) { byId[l.getAttribute('href').replace('#', '')] = l; });
+  /* ---------------- calculation ---------------- */
+  function read() {
+    var num = function (el) { var v = parseFloat(el.value); return isNaN(v) ? 0 : v; };
+    return {
+      mode: form.elements.mode.value, svc: els.service.value, dest: els.to.value.trim(),
+      weight: num(els.weight), l: num(els.l), w: num(els.w), h: num(els.h),
+      pcs: Math.max(parseInt(els.pcs.value, 10) || 1, 1)
+    };
+  }
 
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        links.forEach(function (l) { l.classList.remove('active'); });
-        var link = byId[entry.target.id];
-        if (link) link.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  function validate(d) {
+    var m = MODES[d.mode];
+    if (!d.dest) return "Please enter the destination country.";
+    if (!(d.weight > 0)) return "Please enter the shipment weight in kg.";
+    if (m.dims) {
+      var filled = [d.l, d.w, d.h].filter(function (x) { return x > 0; }).length;
+      if (filled > 0 && filled < 3) return "Enter length, width and height together, or leave all three empty.";
+      if (d.svc === "sea" && filled < 3) return "Sea freight needs dimensions so we can work out volume (CBM).";
+    }
+    return "";
+  }
 
-  sections.forEach(function (s) { io.observe(s); });
-}
-links.forEach(function (l) {
-  l.addEventListener('click', function () {
-    links.forEach(function (x) { x.classList.remove('active'); });
-    l.classList.add('active');
+  function compute(d) {
+    var m = MODES[d.mode];
+    var hasDims = m.dims && d.l > 0 && d.w > 0 && d.h > 0;
+    var cm3 = hasDims ? d.l * d.w * d.h * d.pcs : 0;
+    var divisor = CONFIG.divisors[d.svc];
+    var vol = hasDims && divisor ? cm3 / divisor : 0;
+    var cw = Math.max(d.weight, vol);
+    if (CONFIG.roundStep > 0) cw = Math.ceil(cw / CONFIG.roundStep) * CONFIG.roundStep;
+
+    var reasons = [];
+    if (m.quote) reasons.push("Commercial and freight shipments are priced by quote.");
+    if (d.svc === "sea") reasons.push("Sea freight is priced by volume and route, so a quote is needed.");
+    if (d.svc === "courier" && cw > CONFIG.maxCourierKg) reasons.push("Shipments over " + CONFIG.maxCourierKg + " kg need a manual review.");
+    if (hasDims && Math.max(d.l, d.w, d.h) > CONFIG.maxSideCm) reasons.push("Large dimensions need a manual review.");
+
+    var rate = null;
+    if (!reasons.length && CONFIG.rates && CONFIG.rates[d.svc]) {
+      rate = CONFIG.rates[d.svc][d.dest.toLowerCase()] || null;
+    }
+    if (!reasons.length && !rate) reasons.push("We need to review your shipment details to provide an accurate quote.");
+
+    var out = { d: d, vol: vol, cw: cw, cbm: cm3 / 1000000, hasDims: hasDims, reasons: reasons, rate: rate };
+    if (rate && !reasons.length) {
+      var sub = (rate.base || 0) + (rate.perKg || 0) * cw;
+      var fuel = sub * ((rate.fuelPct || 0) / 100);
+      out.base = rate.base || 0; out.weightCharge = (rate.perKg || 0) * cw;
+      out.fuelPct = rate.fuelPct || 0; out.fuel = fuel; out.total = sub + fuel;
+    }
+    return out;
+  }
+
+  /* ---------------- render ---------------- */
+  function row(label, value) {
+    return '<div class="prc-kv"><span>' + label + "</span><strong>" + value + "</strong></div>";
+  }
+
+  function render(r) {
+    var d = r.d, estimated = r.total !== undefined;
+    var wa = "Hello JP Express, I'd like a shipping quote.\n" +
+      "Shipment type: " + MODES[d.mode].label + "\nService: " + SERVICES[d.svc] + "\nDestination: " + d.dest +
+      "\nActual weight: " + kg(d.weight) + "\nChargeable weight: " + kg(r.cw) +
+      (r.hasDims ? "\nSize: " + d.l + " x " + d.w + " x " + d.h + " cm x " + d.pcs + " pc" : "");
+
+    var head = estimated
+      ? '<span class="prc-badge is-est">Estimated</span><div class="prc-price">' + money(r.total) + '</div><p class="prc-sub">Estimated shipping cost. Final price is confirmed in your quote.</p>'
+      : '<span class="prc-badge is-quote">Quote Required</span><div class="prc-price prc-price--quote">Request a Quote</div><p class="prc-sub">' + esc(r.reasons[0]) + "</p>";
+
+    var rows = row("Service", esc(SERVICES[d.svc])) + row("Destination", esc(d.dest)) +
+      row("Actual weight", kg(d.weight)) +
+      (r.hasDims ? (d.svc === "sea" ? row("Volume", (Math.round(r.cbm * 1000) / 1000) + " CBM") : row("Volumetric weight", kg(r.vol))) : "") +
+      row("Chargeable weight", kg(r.cw)) +
+      row("Estimated transit", r.rate && r.rate.transit ? esc(r.rate.transit) : "Confirmed in quote");
+
+    var breakdown = estimated
+      ? '<div class="prc-break"><h4>Breakdown</h4>' + row("Base charge", money(r.base)) + row("Weight charge", money(r.weightCharge)) +
+        (r.fuelPct ? row("Fuel surcharge (" + r.fuelPct + "%)", money(r.fuel)) : "") + row("Total (estimate)", money(r.total)) + "</div>"
+      : "";
+
+    els.result.innerHTML =
+      '<div class="prc-res">' + head + '<div class="prc-kvs">' + rows + "</div>" + breakdown +
+      '<p class="prc-fine"><i class="fa-solid fa-circle-info"></i> Duties, taxes, customs charges and extra services are not included unless stated in your quote.' +
+      (CONFIG.ratesNote ? " " + esc(CONFIG.ratesNote) : "") + "</p>" +
+      '<div class="prc-cta">' +
+      '<a class="btn-main btn-red" href="index.html#quote">Request a Quote <i class="fa-solid fa-arrow-right"></i></a>' +
+      '<a class="btn-main btn-dark-outline prc-wa" target="_blank" rel="noopener" href="https://wa.me/8801681637836?text=' + encodeURIComponent(wa) + '"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
+      '<a class="prc-call" href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> Call us</a></div></div>';
+  }
+
+  function run() {
+    var d = read();
+    var msg = validate(d);
+    els.err.hidden = !msg;
+    els.err.textContent = msg;
+    if (msg) return false;
+    render(compute(d));
+    calculated = true;
+    return true;
+  }
+
+  /* ---------------- events ---------------- */
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (run() && window.matchMedia("(max-width: 991px)").matches) {
+      els.result.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }
   });
-});
+  form.addEventListener("reset", function () {
+    calculated = false;
+    setTimeout(function () { els.result.innerHTML = placeholder; applyMode(); }, 0);
+  });
+  form.addEventListener("change", function (e) {
+    if (e.target.name === "mode") applyMode(); else if (calculated) run();
+  });
+  form.addEventListener("input", function () { if (calculated) run(); });
 
+  applyMode();
 })();

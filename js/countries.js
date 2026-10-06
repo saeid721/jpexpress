@@ -1,53 +1,64 @@
 (function () {
+  'use strict';
   const grid = document.getElementById('ctrGrid');
-  if (!grid) return;
-  const searchInput = document.getElementById('ctrSearch');
-  const filterBtns = document.querySelectorAll('.ctr-filter-btn');
-  let activeRegion = 'all';
+  if (!grid || typeof COUNTRY_DATA === 'undefined') return;
 
-  function flagCode(flag) {
-    return Array.from(flag).map(character =>
-      String.fromCharCode(character.codePointAt(0) - 0x1F1E6 + 97)
-    ).join('');
-  }
+  const $ = id => document.getElementById(id);
+  const search = $('ctrSearch'), clearBtn = $('ctrClear'), count = $('ctrCount'),
+        empty = $('ctrEmpty'), sortSel = $('ctrSort'), filters = $('ctrFilters');
+  const list = Object.keys(COUNTRY_DATA).map(s => Object.assign({ s: s }, COUNTRY_DATA[s]));
+  let region = 'All';
 
-  function cardHTML(slug, c) {
-    const code = flagCode(c.flag);
-    return '<a class="ctr-card" href="country.html?c=' + slug + '" data-slug="' + slug + '">' +
-      '<div class="ctr-card-top"><img class="ctr-flag" src="https://flagcdn.com/w40/' + code + '.png" alt="" aria-hidden="true"><div class="ctr-card-country"><h3>' + c.name + '</h3><span class="region">' + c.region + '</span></div></div>' +
-      '<div class="ctr-card-meta"><i class="bi bi-stopwatch"></i>' + c.transit + ' Transit</div>' +
-      '<span class="ctr-card-more">View Details <i class="bi bi-arrow-right"></i></span>' +
-    '</a>';
-  }
+  const card = c => {
+    const names = c.v.split('').map(k => SERVICES[k].n);
+    return '<a class="ctr-card" href="country.html?c=' + c.s + '" aria-label="Shipping guide: Bangladesh to ' + c.n + '">' +
+      '<span class="ctr-card-top"><img src="https://flagcdn.com/w80/' + c.c + '.png" width="44" height="44" alt="" loading="lazy">' +
+      '<span><strong>' + c.n + '</strong><small>' + c.r + '</small></span></span>' +
+      '<span class="ctr-card-meta"><span><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + c.t + '</span>' +
+      '<span><i class="fa-solid fa-layer-group" aria-hidden="true"></i> ' + names.length + ' services</span></span>' +
+      '<span class="ctr-tags">' + names.slice(0, 3).map(n => '<em>' + n + '</em>').join('') + '</span>' +
+      '<span class="ctr-card-go">View shipping guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a>';
+  };
+
+  // Popular destinations
+  const pop = $('ctrPopular');
+  if (pop) pop.innerHTML = list.filter(c => c.pop).map(card).join('');
+
+  // Region filter chips
+  filters.innerHTML = ['All'].concat(REGIONS).map((r, i) =>
+    '<button type="button" class="ctr-chip' + (i ? '' : ' active') + '" data-r="' + r + '" aria-pressed="' + (i ? 'false' : 'true') + '">' +
+    r + ' <b>' + (i ? list.filter(c => c.r === r).length : list.length) + '</b></button>').join('');
 
   function render() {
-    const q = (searchInput.value || '').trim().toLowerCase();
-    let html = '';
-    let count = 0;
-    Object.keys(COUNTRY_DATA).forEach(slug => {
-      const c = COUNTRY_DATA[slug];
-      const matchesRegion = activeRegion === 'all' || c.region === activeRegion;
-      const matchesSearch = !q || c.name.toLowerCase().includes(q);
-      if (matchesRegion && matchesSearch) { html += cardHTML(slug, c); count++; }
-    });
-    grid.innerHTML = count ? html : '<div class="ctr-no-results"><i class="bi bi-search" style="font-size:1.8rem;display:block;margin-bottom:.6rem"></i>No countries match your search.</div>';
-    grid.querySelectorAll('.ctr-card').forEach(a => a.addEventListener('click', onCardClick));
+    const q = search.value.trim().toLowerCase();
+    let out = list.filter(c => (region === 'All' || c.r === region) &&
+      (!q || (c.n + ' ' + c.cap + ' ' + c.r + ' ' + c.cur + ' ' + c.ci).toLowerCase().includes(q)));
+    if (sortSel.value === 'az') out.sort((a, b) => a.n.localeCompare(b.n));
+    else if (sortSel.value === 'fast') out.sort((a, b) => parseInt(a.t) - parseInt(b.t) || a.n.localeCompare(b.n));
+    else out.sort((a, b) => (b.pop || 0) - (a.pop || 0) || a.n.localeCompare(b.n));
+    grid.innerHTML = out.map(card).join('');
+    empty.hidden = out.length > 0;
+    clearBtn.hidden = !q;
+    count.textContent = out.length + (out.length === 1 ? ' destination' : ' destinations') + (region !== 'All' ? ' in ' + region : '');
+    const fb = $('ctrNoneQ'); if (fb) fb.textContent = q ? '“' + search.value.trim() + '”' : 'that destination';
   }
 
-  function onCardClick(e) {
-    e.preventDefault();
-    const slug = e.currentTarget.getAttribute('data-slug');
-    window.history.pushState({}, '', 'country.html?c=' + slug);
-    window.location.href = 'country.html?c=' + slug;
-  }
-
-  searchInput.addEventListener('input', render);
-  filterBtns.forEach(btn => btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeRegion = btn.getAttribute('data-region');
+  search.addEventListener('input', render);
+  sortSel.addEventListener('change', render);
+  clearBtn.addEventListener('click', () => { search.value = ''; render(); search.focus(); });
+  filters.addEventListener('click', e => {
+    const b = e.target.closest('.ctr-chip'); if (!b) return;
+    region = b.dataset.r;
+    filters.querySelectorAll('.ctr-chip').forEach(x => { const on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-pressed', on); });
     render();
+  });
+  // Quick search buttons in hero
+  document.querySelectorAll('[data-q]').forEach(b => b.addEventListener('click', () => {
+    search.value = b.dataset.q; render();
+    $('directory').scrollIntoView({ behavior: 'smooth' });
   }));
-
+  // Allow /countries.html?q=uk
+  const qp = new URLSearchParams(location.search).get('q');
+  if (qp) search.value = qp;
   render();
 })();
