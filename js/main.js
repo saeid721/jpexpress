@@ -756,125 +756,130 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   }, 3000);
 })();
 
-/* ---------- HOME PAGE: hero title typing/rotation ----------
-   Initialized before other page modules so a page-specific error elsewhere
-   can never prevent the primary hero heading from rendering. */
-(function initHomeHeroTitle() {
-  var root = document.documentElement;
-  var title = document.getElementById('heroTitle');
+/* JP Express - Hero title typing animation (index.html only) */
+(function () {
+  "use strict";
+
+  var title = document.getElementById("heroTitle");
   if (!title) return;
 
-  var slides = Array.prototype.slice.call(title.querySelectorAll('.ht-slide'));
+  var slides = Array.prototype.slice.call(title.querySelectorAll(".ht-slide"));
   if (!slides.length) return;
 
-  var SPEED = 45;
-  var DELAY = 350;
-  var HOLD = 2200;
-  var FADE = 450;
-  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var TYPE_MS = 42;    /* typing speed per character */
+  var ERASE_MS = 14;   /* backspace speed per character */
+  var HOLD_MS = 2400;  /* time the finished headline stays visible */
+  var GAP_MS = 320;    /* pause before the next headline starts */
+
   var original = title.innerHTML;
+  var idx = 0, timer = 0, started = false;
 
-  title.setAttribute('aria-label', slides[0].textContent.replace(/\s+/g, ' ').trim());
-
-  var restoreVisibleTitle = function () {
-    title.innerHTML = original;
-    slides = Array.prototype.slice.call(title.querySelectorAll('.ht-slide'));
-    slides.forEach(function (slide, index) {
-      slide.classList.toggle('active', index === 0);
-      slide.classList.remove('out');
-      slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+  /* split text into words > characters (keeps the .accent span styling) */
+  function wrap(node, list) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+      if (child.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        child.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
+          var word = document.createElement("span");
+          word.className = "tword";
+          Array.prototype.forEach.call(part, function (ch) {
+            var c = document.createElement("span");
+            c.className = "tchar";
+            c.textContent = ch;
+            word.appendChild(c);
+            list.push(c);
+          });
+          frag.appendChild(word);
+        });
+        child.replaceWith(frag);
+      } else if (child.nodeType === 1) {
+        wrap(child, list);
+      }
     });
-    title.classList.add('is-ready');
-    root.classList.remove('typing-js');
-  };
+  }
+
+  function setActive(n) {
+    idx = n;
+    slides.forEach(function (s, k) {
+      s.classList.toggle("active", k === n);
+      s.setAttribute("aria-hidden", k === n ? "false" : "true");
+    });
+  }
+
+  function typeIn(i) {
+    var c = slides[idx]._c;
+    if (i < c.length) {
+      if (i > 0) c[i - 1].classList.remove("is-caret");
+      c[i].classList.add("on", "is-caret");
+      timer = setTimeout(function () { typeIn(i + 1); }, TYPE_MS + Math.random() * 28);
+    } else {
+      timer = setTimeout(function () { eraseOut(c.length); }, HOLD_MS);
+    }
+  }
+
+  function eraseOut(n) {
+    var c = slides[idx]._c;
+    if (n > 0) {
+      c[n - 1].classList.remove("on", "is-caret");
+      if (n > 1) c[n - 2].classList.add("is-caret");
+      timer = setTimeout(function () { eraseOut(n - 1); }, ERASE_MS);
+    } else {
+      setActive((idx + 1) % slides.length);
+      timer = setTimeout(function () { typeIn(0); }, GAP_MS);
+    }
+  }
+
+  function begin() {
+    if (started) return;
+    started = true;
+    timer = setTimeout(function () { typeIn(0); }, 450);
+  }
 
   try {
-    var wrap = function (node, chars) {
-      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-        if (child.nodeType === 3) {
-          var frag = document.createDocumentFragment();
-          child.textContent.split(/(\s+)/).forEach(function (part) {
-            if (!part) return;
-            if (/^\s+$/.test(part)) {
-              frag.appendChild(document.createTextNode(' '));
-              return;
-            }
-            var word = document.createElement('span');
-            word.className = 'tword';
-            Array.prototype.forEach.call(part, function (ch) {
-              var span = document.createElement('span');
-              span.className = 'tchar';
-              span.textContent = ch;
-              word.appendChild(span);
-              chars.push(span);
-            });
-            frag.appendChild(word);
-          });
-          child.replaceWith(frag);
-        } else if (child.nodeType === 1) {
-          wrap(child, chars);
-        }
-      });
-    };
-
-    slides.forEach(function (slide) {
-      slide.setAttribute('aria-hidden', 'true');
-      slide.chars = [];
-      wrap(slide, slide.chars);
+    slides.forEach(function (s) {
+      s._c = [];
+      wrap(s, s._c);
+      s.setAttribute("aria-hidden", "true");
     });
 
-    title.classList.add('is-ready');
-    root.classList.remove('typing-js');
+    title.classList.add("is-ready");
+    root.classList.remove("typing-js");
+    setActive(0);
 
     if (reduced) {
-      slides[0].classList.add('active');
-      slides[0].chars.forEach(function (char) { char.classList.add('on'); });
-      slides[0].setAttribute('aria-hidden', 'false');
-      return;
-    }
+      slides[0]._c.forEach(function (c) { c.classList.add("on"); });
+    } else {
+      /* start after page load (hero fade-in finished) */
+      if (document.readyState === "complete") begin();
+      else { window.addEventListener("load", begin); setTimeout(begin, 800); }
 
-    var idx = 0;
-    var timer = null;
-
-    var typeSlide = function (i) {
-      var chars = slides[idx].chars || [];
-      if (i < chars.length) {
-        if (i > 0) chars[i - 1].classList.remove('is-caret');
-        chars[i].classList.add('on', 'is-caret');
-        timer = setTimeout(function () { typeSlide(i + 1); }, SPEED);
-      } else {
-        if (chars.length) chars[chars.length - 1].classList.remove('is-caret');
-        timer = setTimeout(function () {
-          slides[idx].classList.add('out');
-          timer = setTimeout(function () { show((idx + 1) % slides.length); }, FADE);
-        }, HOLD);
-      }
-    };
-
-    var show = function (n) {
-      clearTimeout(timer);
-      idx = n;
-      slides.forEach(function (slide, k) {
-        slide.classList.toggle('active', k === n);
-        slide.classList.remove('out');
-        slide.setAttribute('aria-hidden', k === n ? 'false' : 'true');
-        slide.chars.forEach(function (char) {
-          char.classList.remove('on', 'is-caret');
-        });
+      /* pause when tab is hidden, resume cleanly when visible */
+      document.addEventListener("visibilitychange", function () {
+        if (!started) return;
+        clearTimeout(timer);
+        if (document.hidden) return;
+        var c = slides[idx]._c;
+        c.forEach(function (x) { x.classList.remove("is-caret"); x.classList.add("on"); });
+        c[c.length - 1].classList.add("is-caret");
+        timer = setTimeout(function () { eraseOut(c.length); }, HOLD_MS);
       });
-      typeSlide(0);
-    };
-
-    slides[0].classList.add('active');
-    slides[0].setAttribute('aria-hidden', 'false');
-    timer = setTimeout(function () { typeSlide(0); }, DELAY);
-  } catch (error) {
-    console.warn('Hero title animation fallback:', error);
-    restoreVisibleTitle();
+    }
+  } catch (err) {
+    console.warn("Hero typing fallback:", err);
+    clearTimeout(timer);
+    title.innerHTML = original;
+    var first = title.querySelector(".ht-slide");
+    if (first) first.classList.add("active");
+    title.classList.add("is-ready");
   }
 })();
 
-/* ---------- HOME PAGE: calculator + tracking preview ----------
+/* ---------- HOME PAGE: calculator + tracking preview ---------- */
 (function initHomeTools() {
   var calcForm = document.getElementById('calcForm');
   var calcResult = document.getElementById('calcResult');
@@ -1223,7 +1228,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
 
   const $ = id => document.getElementById(id);
   const search = $('ctrSearch'), clearBtn = $('ctrClear'), count = $('ctrCount'),
-        empty = $('ctrEmpty'), sortSel = $('ctrSort'), filters = $('ctrFilters');
+    empty = $('ctrEmpty'), sortSel = $('ctrSort'), filters = $('ctrFilters');
   const list = Object.keys(COUNTRY_DATA).map(s => Object.assign({ s: s }, COUNTRY_DATA[s]));
   let region = 'All';
 
@@ -1474,7 +1479,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
 
   const $ = id => document.getElementById(id);
   const search = $('blSearch'), clear = $('blClear'), sortSel = $('blSort'), chips = $('blChips'),
-        count = $('blCount'), more = $('blMore'), empty = $('blEmpty'), featWrap = $('blFeatWrap');
+    count = $('blCount'), more = $('blMore'), empty = $('blEmpty'), featWrap = $('blFeatWrap');
   const PAGE = 6;
   const params = new URLSearchParams(location.search);
   let cat = BLOG_CATS[params.get('cat')] ? params.get('cat') : 'all';
@@ -1541,9 +1546,11 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
 
   // Blog structured data
   const s = document.createElement('script'); s.type = 'application/ld+json';
-  s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Blog', name: 'JP Express Shipping & Logistics Blog', url: 'https://www.jpex.com.bd/blog.html',
+  s.textContent = JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'Blog', name: 'JP Express Shipping & Logistics Blog', url: 'https://www.jpex.com.bd/blog.html',
     publisher: { '@type': 'Organization', name: 'JP Express' },
-    blogPost: BLOG_POSTS.map(p => ({ '@type': 'BlogPosting', headline: p.t, description: p.x, datePublished: p.d, articleSection: BLOG_CATS[p.c], author: { '@type': 'Organization', name: 'JP Express' } })) });
+    blogPost: BLOG_POSTS.map(p => ({ '@type': 'BlogPosting', headline: p.t, description: p.x, datePublished: p.d, articleSection: BLOG_CATS[p.c], author: { '@type': 'Organization', name: 'JP Express' } }))
+  });
   document.head.appendChild(s);
 
   render();
@@ -1563,10 +1570,10 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   "use strict";
 
   /* ---------------- BUSINESS RULES (edit these) ---------------- */
-;
+  ;
 
-;
-;
+  ;
+  ;
 
   /* ---------------- helpers ---------------- */
   var $ = function (id) { return document.getElementById(id); };
@@ -1681,7 +1688,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
 
     var breakdown = estimated
       ? '<div class="prc-break"><h4>Breakdown</h4>' + row("Base charge", money(r.base)) + row("Weight charge", money(r.weightCharge)) +
-        (r.fuelPct ? row("Fuel surcharge (" + r.fuelPct + "%)", money(r.fuel)) : "") + row("Total (estimate)", money(r.total)) + "</div>"
+      (r.fuelPct ? row("Fuel surcharge (" + r.fuelPct + "%)", money(r.fuel)) : "") + row("Total (estimate)", money(r.total)) + "</div>"
       : "";
 
     els.result.innerHTML =
@@ -1729,312 +1736,312 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
    CONSOLIDATED MODULE: contact.js
    ========================================================= */
 (function () {
-"use strict";
+  "use strict";
 
-/* =========================================================
-   JP EXPRESS - CONTACT PAGE LOGIC
-   Load AFTER js/main.js
-   ========================================================= */
+  /* =========================================================
+     JP EXPRESS - CONTACT PAGE LOGIC
+     Load AFTER js/main.js
+     ========================================================= */
 
 
-var $ = function (s, r) { return (r || document).querySelector(s); };
-var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-/* ---------- Live support hours (Asia/Dhaka) ---------- */
-function dhakaNow() {
-  try {
-    var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Dhaka', hour: 'numeric', minute: 'numeric', weekday: 'short', hourCycle: 'h23' }).formatToParts(new Date());
-    var o = {};
-    parts.forEach(function (p) { o[p.type] = p.value; });
-    return { h: parseInt(o.hour, 10) % 24, d: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(o.weekday) };
-  } catch (e) {
-    var n = new Date();
-    return { h: n.getHours(), d: n.getDay() };
+  /* ---------- Live support hours (Asia/Dhaka) ---------- */
+  function dhakaNow() {
+    try {
+      var parts = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Dhaka', hour: 'numeric', minute: 'numeric', weekday: 'short', hourCycle: 'h23' }).formatToParts(new Date());
+      var o = {};
+      parts.forEach(function (p) { o[p.type] = p.value; });
+      return { h: parseInt(o.hour, 10) % 24, d: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(o.weekday) };
+    } catch (e) {
+      var n = new Date();
+      return { h: n.getHours(), d: n.getDay() };
+    }
   }
-}
-function updateHours() {
-  var badge = $('#cntBadge'), text = $('#cntBadgeText'), msg = $('#cntLiveMsg');
-  if (!badge || !text || !msg) return;
-  var t = dhakaNow();
-  var open = JP_CONTACT_CONFIG.closedDays.indexOf(t.d) === -1 && t.h >= JP_CONTACT_CONFIG.openHour && t.h < JP_CONTACT_CONFIG.closeHour;
-  badge.className = 'cnt-badge ' + (open ? 'is-open' : 'is-closed');
-  text.textContent = open ? 'We are open now' : 'Currently closed';
-  msg.textContent = open
-    ? 'Our team is available now. Call, WhatsApp or send an inquiry below.'
-    : 'We are outside hotline hours. Send an inquiry or a WhatsApp message and we will reply when the team is back at 9:00 AM.';
-}
-updateHours();
-setInterval(updateHours, 60000);
+  function updateHours() {
+    var badge = $('#cntBadge'), text = $('#cntBadgeText'), msg = $('#cntLiveMsg');
+    if (!badge || !text || !msg) return;
+    var t = dhakaNow();
+    var open = JP_CONTACT_CONFIG.closedDays.indexOf(t.d) === -1 && t.h >= JP_CONTACT_CONFIG.openHour && t.h < JP_CONTACT_CONFIG.closeHour;
+    badge.className = 'cnt-badge ' + (open ? 'is-open' : 'is-closed');
+    text.textContent = open ? 'We are open now' : 'Currently closed';
+    msg.textContent = open
+      ? 'Our team is available now. Call, WhatsApp or send an inquiry below.'
+      : 'We are outside hotline hours. Send an inquiry or a WhatsApp message and we will reply when the team is back at 9:00 AM.';
+  }
+  updateHours();
+  setInterval(updateHours, 60000);
 
-/* ---------- Form ---------- */
-var form = $('#cntForm');
-if (!form) return;
+  /* ---------- Form ---------- */
+  var form = $('#cntForm');
+  if (!form) return;
 
-var hint = $('#cntHint'), msgField = $('#fMsg'), destLabel = $('#lDest');
-var submitBtn = $('#cntSubmit'), waBtn = $('#cntWaBtn'), statusEl = $('#cntStatus');
-var current = 'general';
+  var hint = $('#cntHint'), msgField = $('#fMsg'), destLabel = $('#lDest');
+  var submitBtn = $('#cntSubmit'), waBtn = $('#cntWaBtn'), statusEl = $('#cntStatus');
+  var current = 'general';
 
-function val(id) { var el = document.getElementById(id); return el && !el.closest('[hidden]') ? el.value.trim() : ''; }
+  function val(id) { var el = document.getElementById(id); return el && !el.closest('[hidden]') ? el.value.trim() : ''; }
 
-function applyIntent(key) {
-  if (!JP_CONTACT_INTENTS[key]) key = 'general';
-  current = key;
-  var cfg = JP_CONTACT_INTENTS[key];
-  hint.textContent = cfg.hint;
-  msgField.placeholder = cfg.ph;
-  destLabel.textContent = cfg.destLabel || 'Destination Country';
-  JP_CONTACT_FIELD_ORDER.forEach(function (f) {
-    var wrap = $('[data-field="' + f + '"]');
-    if (!wrap) return;
-    var on = cfg.show.indexOf(f) !== -1;
-    wrap.hidden = !on;
-    $$('input,select,textarea', wrap).forEach(function (el) { el.disabled = !on; });
-    if (!on) wrap.classList.remove('has-error');
+  function applyIntent(key) {
+    if (!JP_CONTACT_INTENTS[key]) key = 'general';
+    current = key;
+    var cfg = JP_CONTACT_INTENTS[key];
+    hint.textContent = cfg.hint;
+    msgField.placeholder = cfg.ph;
+    destLabel.textContent = cfg.destLabel || 'Destination Country';
+    JP_CONTACT_FIELD_ORDER.forEach(function (f) {
+      var wrap = $('[data-field="' + f + '"]');
+      if (!wrap) return;
+      var on = cfg.show.indexOf(f) !== -1;
+      wrap.hidden = !on;
+      $$('input,select,textarea', wrap).forEach(function (el) { el.disabled = !on; });
+      if (!on) wrap.classList.remove('has-error');
+    });
+    var r = $('input[name="intent"][value="' + key + '"]');
+    if (r) r.checked = true;
+  }
+  $$('input[name="intent"]').forEach(function (r) {
+    r.addEventListener('change', function () { applyIntent(r.value); });
   });
-  var r = $('input[name="intent"][value="' + key + '"]');
-  if (r) r.checked = true;
-}
-$$('input[name="intent"]').forEach(function (r) {
-  r.addEventListener('change', function () { applyIntent(r.value); });
-});
 
-/* Prefill from the link: contact.html?intent=quote&dest=Canada */
-(function prefill() {
-  var q = new URLSearchParams(window.location.search);
-  applyIntent(q.get('intent') || 'general');
-  if (q.get('dest') && $('#fDest')) $('#fDest').value = q.get('dest').slice(0, 60);
-  if (q.get('intent') && window.location.hash !== '#inquiry') {
-    var s = $('#inquiry');
-    if (s) setTimeout(function () { s.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 350);
-  }
-})();
+  /* Prefill from the link: contact.html?intent=quote&dest=Canada */
+  (function prefill() {
+    var q = new URLSearchParams(window.location.search);
+    applyIntent(q.get('intent') || 'general');
+    if (q.get('dest') && $('#fDest')) $('#fDest').value = q.get('dest').slice(0, 60);
+    if (q.get('intent') && window.location.hash !== '#inquiry') {
+      var s = $('#inquiry');
+      if (s) setTimeout(function () { s.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 350);
+    }
+  })();
 
-/* Primary button wording depends on whether a backend is connected */
-if (JP_CONTACT_CONFIG.endpoint) {
-  waBtn.hidden = false;
-} else {
-  $('.cnt-btn-label', submitBtn).textContent = 'Send via WhatsApp';
-  submitBtn.querySelector('i').className = 'fa-brands fa-whatsapp';
-}
-
-/* ---------- Validation ---------- */
-function setError(fieldKey, text) {
-  var wrap = $('[data-f="' + fieldKey + '"]');
-  if (!wrap) return;
-  var err = $('.cnt-err', wrap);
-  wrap.classList.toggle('has-error', !!text);
-  if (err) err.textContent = text || '';
-  $$('input,select,textarea', wrap).forEach(function (el) {
-    if (text) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
-  });
-}
-function setPickupError(text) {
-  var wrap = $('[data-field="pickup"]');
-  if (!wrap) return;
-  wrap.classList.toggle('has-error', !!text);
-  $('.cnt-err', wrap).textContent = text || '';
-}
-function validate() {
-  var cfg = JP_CONTACT_INTENTS[current], bad = [];
-  var name = $('#fName').value.trim(), phone = $('#fPhone').value.trim();
-  var email = $('#fEmail').value.trim(), msg = msgField.value.trim();
-  var weight = $('#fWeight').value;
-
-  setError('name',  name.length < 2 ? 'Please enter your name.' : '');
-  if (name.length < 2) bad.push('#fName');
-
-  var digits = phone.replace(/\D/g, '');
-  var phoneOk = /^[+0-9\s().-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
-  setError('phone', phoneOk ? '' : 'Enter a valid phone number, e.g. +880 1XXX XXXXXX.');
-  if (!phoneOk) bad.push('#fPhone');
-
-  var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-  setError('email', emailOk ? '' : 'Enter a valid email address.');
-  if (!emailOk) bad.push('#fEmail');
-
-  var wOk = !weight || (parseFloat(weight) > 0 && parseFloat(weight) < 100000);
-  var wWrap = $('[data-field="weight"]');
-  if (wWrap && !wWrap.hidden) {
-    wWrap.classList.toggle('has-error', !wOk);
-    $('.cnt-err', wWrap).textContent = wOk ? '' : 'Enter a weight above 0.';
-    if (!wOk) bad.push('#fWeight');
-  }
-
-  if (cfg.need && cfg.need.indexOf('pickup') !== -1) {
-    var pk = $('#fPickup').value.trim();
-    setPickupError(pk.length < 6 ? 'Please add the pickup address.' : '');
-    if (pk.length < 6) bad.push('#fPickup');
+  /* Primary button wording depends on whether a backend is connected */
+  if (JP_CONTACT_CONFIG.endpoint) {
+    waBtn.hidden = false;
   } else {
-    setPickupError('');
+    $('.cnt-btn-label', submitBtn).textContent = 'Send via WhatsApp';
+    submitBtn.querySelector('i').className = 'fa-brands fa-whatsapp';
   }
 
-  setError('message', msg.length < 10 ? 'Please write at least 10 characters.' : '');
-  if (msg.length < 10) bad.push('#fMsg');
-
-  var consent = $('#fConsent').checked;
-  setError('consent', consent ? '' : 'Please tick the box so we can contact you.');
-  if (!consent) bad.push('#fConsent');
-
-  /* focus the first invalid field in page order */
-  if (bad.length) {
-    var first = bad.map(function (s) { return $(s); }).sort(function (a, b) {
-      return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
-    })[0];
-    if (first) first.focus();
+  /* ---------- Validation ---------- */
+  function setError(fieldKey, text) {
+    var wrap = $('[data-f="' + fieldKey + '"]');
+    if (!wrap) return;
+    var err = $('.cnt-err', wrap);
+    wrap.classList.toggle('has-error', !!text);
+    if (err) err.textContent = text || '';
+    $$('input,select,textarea', wrap).forEach(function (el) {
+      if (text) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+    });
   }
-  return bad.length === 0;
-}
-/* clear an error as soon as the user fixes it */
-$$('.cnt-field input,.cnt-field textarea,.cnt-field select', form).forEach(function (el) {
-  var evt = el.type === 'checkbox' ? 'change' : 'input';
-  el.addEventListener(evt, function () {
-    var w = el.closest('.cnt-field');
-    if (w && w.classList.contains('has-error')) { w.classList.remove('has-error'); el.removeAttribute('aria-invalid'); }
+  function setPickupError(text) {
+    var wrap = $('[data-field="pickup"]');
+    if (!wrap) return;
+    wrap.classList.toggle('has-error', !!text);
+    $('.cnt-err', wrap).textContent = text || '';
+  }
+  function validate() {
+    var cfg = JP_CONTACT_INTENTS[current], bad = [];
+    var name = $('#fName').value.trim(), phone = $('#fPhone').value.trim();
+    var email = $('#fEmail').value.trim(), msg = msgField.value.trim();
+    var weight = $('#fWeight').value;
+
+    setError('name', name.length < 2 ? 'Please enter your name.' : '');
+    if (name.length < 2) bad.push('#fName');
+
+    var digits = phone.replace(/\D/g, '');
+    var phoneOk = /^[+0-9\s().-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
+    setError('phone', phoneOk ? '' : 'Enter a valid phone number, e.g. +880 1XXX XXXXXX.');
+    if (!phoneOk) bad.push('#fPhone');
+
+    var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    setError('email', emailOk ? '' : 'Enter a valid email address.');
+    if (!emailOk) bad.push('#fEmail');
+
+    var wOk = !weight || (parseFloat(weight) > 0 && parseFloat(weight) < 100000);
+    var wWrap = $('[data-field="weight"]');
+    if (wWrap && !wWrap.hidden) {
+      wWrap.classList.toggle('has-error', !wOk);
+      $('.cnt-err', wWrap).textContent = wOk ? '' : 'Enter a weight above 0.';
+      if (!wOk) bad.push('#fWeight');
+    }
+
+    if (cfg.need && cfg.need.indexOf('pickup') !== -1) {
+      var pk = $('#fPickup').value.trim();
+      setPickupError(pk.length < 6 ? 'Please add the pickup address.' : '');
+      if (pk.length < 6) bad.push('#fPickup');
+    } else {
+      setPickupError('');
+    }
+
+    setError('message', msg.length < 10 ? 'Please write at least 10 characters.' : '');
+    if (msg.length < 10) bad.push('#fMsg');
+
+    var consent = $('#fConsent').checked;
+    setError('consent', consent ? '' : 'Please tick the box so we can contact you.');
+    if (!consent) bad.push('#fConsent');
+
+    /* focus the first invalid field in page order */
+    if (bad.length) {
+      var first = bad.map(function (s) { return $(s); }).sort(function (a, b) {
+        return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+      })[0];
+      if (first) first.focus();
+    }
+    return bad.length === 0;
+  }
+  /* clear an error as soon as the user fixes it */
+  $$('.cnt-field input,.cnt-field textarea,.cnt-field select', form).forEach(function (el) {
+    var evt = el.type === 'checkbox' ? 'change' : 'input';
+    el.addEventListener(evt, function () {
+      var w = el.closest('.cnt-field');
+      if (w && w.classList.contains('has-error')) { w.classList.remove('has-error'); el.removeAttribute('aria-invalid'); }
+    });
   });
-});
 
-/* ---------- Build the message ---------- */
-function collect() {
-  return {
-    intent: JP_CONTACT_INTENTS[current].label,
-    name: $('#fName').value.trim(),
-    phone: $('#fPhone').value.trim(),
-    email: $('#fEmail').value.trim(),
-    company: val('fCompany'),
-    shipment_type: val('fShip'),
-    country: val('fDest'),
-    weight: val('fWeight'),
-    pickup_address: val('fPickup'),
-    tracking_number: val('fTrack'),
-    message: msgField.value.trim()
-  };
-}
-function buildText(d) {
-  var rows = [
-    ['Request', d.intent], ['Name', d.name], ['Phone', d.phone], ['Email', d.email], ['Company', d.company],
-    ['Shipment type', d.shipment_type], [current === 'import' ? 'Origin country' : 'Destination', d.country],
-    ['Weight', d.weight ? d.weight + ' kg' : ''], ['Pickup address', d.pickup_address],
-    ['Tracking no.', d.tracking_number], ['Message', d.message]
-  ];
-  return 'Hi JP Express, I would like to send an inquiry.\n' + rows.filter(function (r) { return r[1]; })
-    .map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
-}
-function openWhatsApp(text) {
-  var m = encodeURIComponent(text);
-  var url = isMobile ? 'https://wa.me/' + JP_CONTACT_CONFIG.waPhone + '?text=' + m
-                     : 'https://web.whatsapp.com/send?phone=' + JP_CONTACT_CONFIG.waPhone + '&text=' + m;
-  window.open(url, '_blank', 'noopener');
-}
+  /* ---------- Build the message ---------- */
+  function collect() {
+    return {
+      intent: JP_CONTACT_INTENTS[current].label,
+      name: $('#fName').value.trim(),
+      phone: $('#fPhone').value.trim(),
+      email: $('#fEmail').value.trim(),
+      company: val('fCompany'),
+      shipment_type: val('fShip'),
+      country: val('fDest'),
+      weight: val('fWeight'),
+      pickup_address: val('fPickup'),
+      tracking_number: val('fTrack'),
+      message: msgField.value.trim()
+    };
+  }
+  function buildText(d) {
+    var rows = [
+      ['Request', d.intent], ['Name', d.name], ['Phone', d.phone], ['Email', d.email], ['Company', d.company],
+      ['Shipment type', d.shipment_type], [current === 'import' ? 'Origin country' : 'Destination', d.country],
+      ['Weight', d.weight ? d.weight + ' kg' : ''], ['Pickup address', d.pickup_address],
+      ['Tracking no.', d.tracking_number], ['Message', d.message]
+    ];
+    return 'Hi JP Express, I would like to send an inquiry.\n' + rows.filter(function (r) { return r[1]; })
+      .map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
+  }
+  function openWhatsApp(text) {
+    var m = encodeURIComponent(text);
+    var url = isMobile ? 'https://wa.me/' + JP_CONTACT_CONFIG.waPhone + '?text=' + m
+      : 'https://web.whatsapp.com/send?phone=' + JP_CONTACT_CONFIG.waPhone + '&text=' + m;
+    window.open(url, '_blank', 'noopener');
+  }
 
-/* ---------- Status box ---------- */
-function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-function showStatus(type, title, body) {
-  statusEl.className = 'cnt-status is-' + type;
-  statusEl.setAttribute('role', type === 'error' ? 'alert' : 'status');
-  statusEl.innerHTML = '<strong></strong><span></span>';
-  statusEl.firstChild.textContent = title;
-  statusEl.lastChild.innerHTML = body;
-  statusEl.hidden = false;
-  statusEl.focus({ preventScroll: true });
-  statusEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-function track(intent) {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'contact_form_submit', form_id: 'contact', request_type: intent });
-}
-function setLoading(on) {
-  submitBtn.classList.toggle('is-loading', on);
-  submitBtn.disabled = on;
-}
-function resetForm() {
-  form.reset();
-  applyIntent('general');
-  $$('.cnt-field.has-error', form).forEach(function (w) { w.classList.remove('has-error'); });
-}
+  /* ---------- Status box ---------- */
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function showStatus(type, title, body) {
+    statusEl.className = 'cnt-status is-' + type;
+    statusEl.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    statusEl.innerHTML = '<strong></strong><span></span>';
+    statusEl.firstChild.textContent = title;
+    statusEl.lastChild.innerHTML = body;
+    statusEl.hidden = false;
+    statusEl.focus({ preventScroll: true });
+    statusEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  function track(intent) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'contact_form_submit', form_id: 'contact', request_type: intent });
+  }
+  function setLoading(on) {
+    submitBtn.classList.toggle('is-loading', on);
+    submitBtn.disabled = on;
+  }
+  function resetForm() {
+    form.reset();
+    applyIntent('general');
+    $$('.cnt-field.has-error', form).forEach(function (w) { w.classList.remove('has-error'); });
+  }
 
-/* ---------- Submit ---------- */
-function sendToServer(data) {
-  var fd = new FormData(form);
-  fd.set('intent', current);
-  var token = $('meta[name="csrf-token"]');
-  var headers = { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
-  if (token) headers['X-CSRF-TOKEN'] = token.getAttribute('content');
-  setLoading(true);
-  fetch(JP_CONTACT_CONFIG.endpoint, { method: 'POST', headers: headers, body: fd, credentials: 'same-origin' })
-    .then(function (res) {
-      return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, status: res.status, json: j }; });
-    })
-    .then(function (r) {
-      setLoading(false);
-      if (r.ok) {
-        track(data.intent);
-        if (r.json && r.json.redirect) { window.location.href = r.json.redirect; return; }
-        showStatus('success', 'Inquiry received', 'Thank you, ' + esc(data.name.split(' ')[0]) + '. Our team will contact you on ' + esc(data.phone) + '.');
-        resetForm();
-      } else if (r.status === 422 && r.json && r.json.errors) {
-        var first = Object.keys(r.json.errors)[0];
-        showStatus('error', 'Please check your details', r.json.errors[first][0]);
-      } else {
-        showStatus('error', 'We could not send your inquiry', 'Please try again, or <a href="#" id="cntRetryWa">send it on WhatsApp</a>.');
+  /* ---------- Submit ---------- */
+  function sendToServer(data) {
+    var fd = new FormData(form);
+    fd.set('intent', current);
+    var token = $('meta[name="csrf-token"]');
+    var headers = { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
+    if (token) headers['X-CSRF-TOKEN'] = token.getAttribute('content');
+    setLoading(true);
+    fetch(JP_CONTACT_CONFIG.endpoint, { method: 'POST', headers: headers, body: fd, credentials: 'same-origin' })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, status: res.status, json: j }; });
+      })
+      .then(function (r) {
+        setLoading(false);
+        if (r.ok) {
+          track(data.intent);
+          if (r.json && r.json.redirect) { window.location.href = r.json.redirect; return; }
+          showStatus('success', 'Inquiry received', 'Thank you, ' + esc(data.name.split(' ')[0]) + '. Our team will contact you on ' + esc(data.phone) + '.');
+          resetForm();
+        } else if (r.status === 422 && r.json && r.json.errors) {
+          var first = Object.keys(r.json.errors)[0];
+          showStatus('error', 'Please check your details', r.json.errors[first][0]);
+        } else {
+          showStatus('error', 'We could not send your inquiry', 'Please try again, or <a href="#" id="cntRetryWa">send it on WhatsApp</a>.');
+          var a = $('#cntRetryWa');
+          if (a) a.addEventListener('click', function (e) { e.preventDefault(); openWhatsApp(buildText(data)); });
+        }
+      })
+      .catch(function () {
+        setLoading(false);
+        showStatus('error', 'Connection problem', 'Check your internet and try again, or <a href="#" id="cntRetryWa">send it on WhatsApp</a>.');
         var a = $('#cntRetryWa');
         if (a) a.addEventListener('click', function (e) { e.preventDefault(); openWhatsApp(buildText(data)); });
-      }
-    })
-    .catch(function () {
-      setLoading(false);
-      showStatus('error', 'Connection problem', 'Check your internet and try again, or <a href="#" id="cntRetryWa">send it on WhatsApp</a>.');
-      var a = $('#cntRetryWa');
-      if (a) a.addEventListener('click', function (e) { e.preventDefault(); openWhatsApp(buildText(data)); });
-    });
-}
-
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
-  if ($('#fWeb').value) { /* spam bot filled the hidden field */
-    showStatus('success', 'Inquiry received', 'Thank you.');
-    return;
+      });
   }
-  if (!validate()) return;
-  var data = collect();
-  if (JP_CONTACT_CONFIG.endpoint) {
-    sendToServer(data);
-  } else {
-    openWhatsApp(buildText(data));
-    track(data.intent);
-    showStatus('info', 'Your inquiry is ready in WhatsApp',
-      'Press <b>Send</b> in WhatsApp to deliver it to our team. If WhatsApp did not open, call us on <a href="tel:+8801681637836">+880 1681 637836</a>.');
-  }
-});
-waBtn.addEventListener('click', function () {
-  if (!validate()) return;
-  var data = collect();
-  openWhatsApp(buildText(data));
-  track(data.intent);
-  showStatus('info', 'Your inquiry is ready in WhatsApp', 'Press <b>Send</b> in WhatsApp to deliver it to our team.');
-});
 
-/* ---------- Copy address ---------- */
-var copyBtn = $('#cntCopy');
-if (copyBtn) {
-  copyBtn.addEventListener('click', function () {
-    var text = copyBtn.getAttribute('data-copy'), label = $('span', copyBtn), old = label.textContent;
-    function done(ok) {
-      label.textContent = ok ? 'Address Copied' : 'Copy failed';
-      copyBtn.classList.toggle('is-done', ok);
-      setTimeout(function () { label.textContent = old; copyBtn.classList.remove('is-done'); }, 2000);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if ($('#fWeb').value) { /* spam bot filled the hidden field */
+      showStatus('success', 'Inquiry received', 'Thank you.');
+      return;
     }
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+    if (!validate()) return;
+    var data = collect();
+    if (JP_CONTACT_CONFIG.endpoint) {
+      sendToServer(data);
     } else {
-      var ta = document.createElement('textarea');
-      ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
-      document.body.appendChild(ta); ta.select();
-      var ok = false; try { ok = document.execCommand('copy'); } catch (err) {}
-      document.body.removeChild(ta); done(ok);
+      openWhatsApp(buildText(data));
+      track(data.intent);
+      showStatus('info', 'Your inquiry is ready in WhatsApp',
+        'Press <b>Send</b> in WhatsApp to deliver it to our team. If WhatsApp did not open, call us on <a href="tel:+8801681637836">+880 1681 637836</a>.');
     }
   });
-}
+  waBtn.addEventListener('click', function () {
+    if (!validate()) return;
+    var data = collect();
+    openWhatsApp(buildText(data));
+    track(data.intent);
+    showStatus('info', 'Your inquiry is ready in WhatsApp', 'Press <b>Send</b> in WhatsApp to deliver it to our team.');
+  });
+
+  /* ---------- Copy address ---------- */
+  var copyBtn = $('#cntCopy');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var text = copyBtn.getAttribute('data-copy'), label = $('span', copyBtn), old = label.textContent;
+      function done(ok) {
+        label.textContent = ok ? 'Address Copied' : 'Copy failed';
+        copyBtn.classList.toggle('is-done', ok);
+        setTimeout(function () { label.textContent = old; copyBtn.classList.remove('is-done'); }, 2000);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta); ta.select();
+        var ok = false; try { ok = document.execCommand('copy'); } catch (err) { }
+        document.body.removeChild(ta); done(ok);
+      }
+    });
+  }
 
 })();
 
@@ -2044,297 +2051,297 @@ if (copyBtn) {
    BUSINESS PAGE LOGIC
    ========================================================= */
 (function () {
-"use strict";
+  "use strict";
 
-/* =========================================================
-   JP EXPRESS - BUSINESS PAGE LOGIC
-   Load AFTER js/main.js
-   ========================================================= */
+  /* =========================================================
+     JP EXPRESS - BUSINESS PAGE LOGIC
+     Load AFTER js/main.js
+     ========================================================= */
 
-var $ = function (s, r) { return (r || document).querySelector(s); };
-var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-var behavior = reduced ? 'auto' : 'smooth';
-var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var behavior = reduced ? 'auto' : 'smooth';
+  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-/* ---------- Sticky section nav: active state + keep chip visible ---------- */
-(function catNav() {
-  var inner = $('.biz-catnav-inner');
-  var links = $$('.biz-catlink');
-  var byId = {};
-  links.forEach(function (l) { byId[l.getAttribute('href').slice(1)] = l; });
-  var sections = Object.keys(byId).map(function (id) { return document.getElementById(id); }).filter(Boolean);
-  var lockUntil = 0;
+  /* ---------- Sticky section nav: active state + keep chip visible ---------- */
+  (function catNav() {
+    var inner = $('.biz-catnav-inner');
+    var links = $$('.biz-catlink');
+    var byId = {};
+    links.forEach(function (l) { byId[l.getAttribute('href').slice(1)] = l; });
+    var sections = Object.keys(byId).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    var lockUntil = 0;
 
-  function setActive(link) {
-    if (!link) return;
-    links.forEach(function (l) {
-      var on = l === link;
-      l.classList.toggle('active', on);
-      if (on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
-    });
-    if (inner && inner.scrollWidth > inner.clientWidth) {
-      var left = link.offsetLeft - (inner.clientWidth - link.offsetWidth) / 2;
-      inner.scrollTo({ left: Math.max(0, left), behavior: behavior });
-    }
-  }
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (entries) {
-      if (Date.now() < lockUntil) return;
-      entries.forEach(function (e) { if (e.isIntersecting) setActive(byId[e.target.id]); });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-    sections.forEach(function (s) { io.observe(s); });
-  }
-  links.forEach(function (l) {
-    l.addEventListener('click', function () { lockUntil = Date.now() + 900; setActive(l); });
-  });
-})();
-
-/* ---------- Who we serve: tabs ---------- */
-(function tabs() {
-  var wrap = $('#bizAud');
-  if (!wrap) return;
-  var tabs = $$('.biz-tab', wrap);
-  var panels = tabs.map(function (t) { return document.getElementById('panel-' + t.getAttribute('data-key')); });
-  wrap.classList.add('is-js');
-
-  function show(key, focus) {
-    tabs.forEach(function (t, i) {
-      var on = t.getAttribute('data-key') === key;
-      t.classList.toggle('active', on);
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
-      t.tabIndex = on ? 0 : -1;
-      if (panels[i]) panels[i].hidden = !on;
-      if (on && focus) t.focus();
-    });
-    var act = $('.biz-tab.active', wrap);
-    var bar = $('#bizTabs');
-    if (act && bar && bar.scrollWidth > bar.clientWidth) {
-      bar.scrollTo({ left: Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2), behavior: behavior });
-    }
-  }
-  tabs.forEach(function (t, i) {
-    t.addEventListener('click', function () { show(t.getAttribute('data-key')); });
-    t.addEventListener('keydown', function (e) {
-      var n = null;
-      if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
-      else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
-      else if (e.key === 'Home') n = 0;
-      else if (e.key === 'End') n = tabs.length - 1;
-      if (n !== null) { e.preventDefault(); show(tabs[n].getAttribute('data-key'), true); }
-    });
-  });
-  show(tabs[0].getAttribute('data-key'));
-  window.bizShowTab = show;
-})();
-
-/* ---------- Quote form ---------- */
-var form = $('#bizForm');
-if (!form) return;
-var submitBtn = $('#bizSubmit'), waBtn = $('#bizWaBtn'), statusEl = $('#bizStatus');
-function setSelect(sel, v) {
-  if (!v) return;
-  for (var i = 0; i < sel.options.length; i++) {
-    if (sel.options[i].value === v) { sel.value = v; return; }
-  }
-}
-
-/* Cards and tab buttons pre-fill the form, then scroll to it */
-$$('[data-solution]').forEach(function (a) {
-  a.addEventListener('click', function (e) {
-    var sol = a.getAttribute('data-solution'), type = a.getAttribute('data-type');
-    setSelect($('#bSolution'), sol);
-    if (type) setSelect($('#bType'), type);
-    var target = $('#bizQuote');
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: behavior, block: 'start' });
-      if (history.replaceState) history.replaceState(null, '', '#bizQuote');
-      setTimeout(function () { var c = $('#bCompany'); if (c && !c.value) c.focus({ preventScroll: true }); }, reduced ? 0 : 600);
-    }
-  });
-});
-
-/* Prefill from the link: business.html?type=exporter&solution=export */
-(function prefill() {
-  var q = new URLSearchParams(window.location.search);
-  if (q.get('solution')) setSelect($('#bSolution'), q.get('solution'));
-  if (q.get('type')) {
-    setSelect($('#bType'), q.get('type'));
-    if (window.bizShowTab && $('#tab-' + q.get('type'))) window.bizShowTab(q.get('type'));
-  }
-  if (q.get('solution') || q.get('type')) {
-    setTimeout(function () { var s = $('#bizQuote'); if (s && !window.location.hash) s.scrollIntoView({ behavior: behavior, block: 'start' }); }, 350);
-  }
-})();
-
-if (JP_BUSINESS_CONFIG.endpoint) {
-  waBtn.hidden = false;
-} else {
-  $('.biz-btn-label', submitBtn).textContent = 'Send Quote Request via WhatsApp';
-  submitBtn.querySelector('i').className = 'fa-brands fa-whatsapp';
-}
-
-/* ---------- Validation ---------- */
-function setError(key, text) {
-  var wrap = $('[data-f="' + key + '"]', form);
-  if (!wrap) return;
-  wrap.classList.toggle('has-error', !!text);
-  var err = $('.biz-err', wrap);
-  if (err) err.textContent = text || '';
-  $$('input,select,textarea', wrap).forEach(function (el) {
-    if (text) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
-  });
-}
-function validate() {
-  var bad = [];
-  var company = $('#bCompany').value.trim(), person = $('#bPerson').value.trim();
-  var phone = $('#bPhone').value.trim(), email = $('#bEmail').value.trim();
-
-  setError('company', company.length < 2 ? 'Please enter your company name.' : '');
-  if (company.length < 2) bad.push('#bCompany');
-  setError('person', person.length < 2 ? 'Please enter a contact name.' : '');
-  if (person.length < 2) bad.push('#bPerson');
-
-  var digits = phone.replace(/\D/g, '');
-  var phoneOk = /^[+0-9\s().-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
-  setError('phone', phoneOk ? '' : 'Enter a valid phone number, e.g. +880 1XXX XXXXXX.');
-  if (!phoneOk) bad.push('#bPhone');
-
-  var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-  setError('email', emailOk ? '' : 'Enter a valid email address.');
-  if (!emailOk) bad.push('#bEmail');
-
-  var consent = $('#bConsent').checked;
-  setError('consent', consent ? '' : 'Please tick the box so we can contact you.');
-  if (!consent) bad.push('#bConsent');
-
-  if (bad.length) {
-    var first = bad.map(function (s) { return $(s); }).sort(function (a, b) {
-      return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
-    })[0];
-    if (first) first.focus();
-  }
-  return bad.length === 0;
-}
-$$('.biz-f input,.biz-f textarea,.biz-f select', form).forEach(function (el) {
-  el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', function () {
-    var w = el.closest('.biz-f');
-    if (w && w.classList.contains('has-error')) { w.classList.remove('has-error'); el.removeAttribute('aria-invalid'); }
-  });
-});
-
-/* ---------- Message ---------- */
-function opt(id) { var el = document.getElementById(id); return el ? el.options[el.selectedIndex].text : ''; }
-function collect() {
-  return {
-    company: $('#bCompany').value.trim(),
-    contact_person: $('#bPerson').value.trim(),
-    phone: $('#bPhone').value.trim(),
-    email: $('#bEmail').value.trim(),
-    business_type: $('#bType').value ? opt('bType') : '',
-    solution: JP_BUSINESS_SOLUTIONS[$('#bSolution').value] || '',
-    product: $('#bProduct').value.trim(),
-    countries: $('#bDest').value.trim(),
-    frequency: $('#bFreq').value,
-    volume: $('#bVolume').value.trim(),
-    message: $('#bMsg').value.trim()
-  };
-}
-function buildText(d) {
-  var rows = [
-    ['Company', d.company], ['Contact person', d.contact_person], ['Phone', d.phone], ['Email', d.email],
-    ['Business type', d.business_type], ['Need', d.solution], ['Product', d.product], ['Destinations', d.countries],
-    ['Frequency', d.frequency], ['Weight / quantity', d.volume], ['Requirements', d.message]
-  ];
-  return 'Hi JP Express, I would like a business quote.\n' + rows.filter(function (r) { return r[1]; })
-    .map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
-}
-function openWhatsApp(text) {
-  var m = encodeURIComponent(text);
-  var url = isMobile ? 'https://wa.me/' + JP_BUSINESS_CONFIG.waPhone + '?text=' + m
-                     : 'https://web.whatsapp.com/send?phone=' + JP_BUSINESS_CONFIG.waPhone + '&text=' + m;
-  window.open(url, '_blank', 'noopener');
-}
-function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
-
-function showStatus(type, title, body) {
-  statusEl.className = 'biz-status is-' + type;
-  statusEl.setAttribute('role', type === 'error' ? 'alert' : 'status');
-  statusEl.innerHTML = '<strong></strong><span></span>';
-  statusEl.firstChild.textContent = title;
-  statusEl.lastChild.innerHTML = body;
-  statusEl.hidden = false;
-  statusEl.focus({ preventScroll: true });
-  statusEl.scrollIntoView({ behavior: behavior, block: 'nearest' });
-}
-function track(solution) {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'business_quote_submit', form_id: 'business_quote', solution: solution });
-}
-function setLoading(on) { submitBtn.classList.toggle('is-loading', on); submitBtn.disabled = on; }
-function resetForm() {
-  form.reset();
-  $$('.biz-f.has-error', form).forEach(function (w) { w.classList.remove('has-error'); });
-}
-function retryLink(data) {
-  var a = $('#bizRetryWa');
-  if (a) a.addEventListener('click', function (e) { e.preventDefault(); openWhatsApp(buildText(data)); });
-}
-
-function sendToServer(data) {
-  var fd = new FormData(form);
-  var token = $('meta[name="csrf-token"]');
-  var headers = { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
-  if (token && token.getAttribute('content')) headers['X-CSRF-TOKEN'] = token.getAttribute('content');
-  setLoading(true);
-  fetch(JP_BUSINESS_CONFIG.endpoint, { method: 'POST', headers: headers, body: fd, credentials: 'same-origin' })
-    .then(function (res) {
-      return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, status: res.status, json: j }; });
-    })
-    .then(function (r) {
-      setLoading(false);
-      if (r.ok) {
-        track(data.solution);
-        if (r.json && r.json.redirect) { window.location.href = r.json.redirect; return; }
-        showStatus('success', 'Quote request received', 'Thank you, ' + esc(data.contact_person.split(' ')[0]) + '. Our business team will contact you on ' + esc(data.phone) + '.');
-        resetForm();
-      } else if (r.status === 422 && r.json && r.json.errors) {
-        var k = Object.keys(r.json.errors)[0];
-        showStatus('error', 'Please check your details', esc(r.json.errors[k][0]));
-      } else {
-        showStatus('error', 'We could not send your request', 'Please try again, or <a href="#" id="bizRetryWa">send it on WhatsApp</a>.');
-        retryLink(data);
+    function setActive(link) {
+      if (!link) return;
+      links.forEach(function (l) {
+        var on = l === link;
+        l.classList.toggle('active', on);
+        if (on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+      });
+      if (inner && inner.scrollWidth > inner.clientWidth) {
+        var left = link.offsetLeft - (inner.clientWidth - link.offsetWidth) / 2;
+        inner.scrollTo({ left: Math.max(0, left), behavior: behavior });
       }
-    })
-    .catch(function () {
-      setLoading(false);
-      showStatus('error', 'Connection problem', 'Check your internet and try again, or <a href="#" id="bizRetryWa">send it on WhatsApp</a>.');
-      retryLink(data);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (Date.now() < lockUntil) return;
+        entries.forEach(function (e) { if (e.isIntersecting) setActive(byId[e.target.id]); });
+      }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+      sections.forEach(function (s) { io.observe(s); });
+    }
+    links.forEach(function (l) {
+      l.addEventListener('click', function () { lockUntil = Date.now() + 900; setActive(l); });
     });
-}
+  })();
 
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
-  if ($('#bWeb').value) { showStatus('success', 'Quote request received', 'Thank you.'); return; } /* spam trap */
-  if (!validate()) return;
-  var data = collect();
+  /* ---------- Who we serve: tabs ---------- */
+  (function tabs() {
+    var wrap = $('#bizAud');
+    if (!wrap) return;
+    var tabs = $$('.biz-tab', wrap);
+    var panels = tabs.map(function (t) { return document.getElementById('panel-' + t.getAttribute('data-key')); });
+    wrap.classList.add('is-js');
+
+    function show(key, focus) {
+      tabs.forEach(function (t, i) {
+        var on = t.getAttribute('data-key') === key;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        if (panels[i]) panels[i].hidden = !on;
+        if (on && focus) t.focus();
+      });
+      var act = $('.biz-tab.active', wrap);
+      var bar = $('#bizTabs');
+      if (act && bar && bar.scrollWidth > bar.clientWidth) {
+        bar.scrollTo({ left: Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2), behavior: behavior });
+      }
+    }
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { show(t.getAttribute('data-key')); });
+      t.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') n = 0;
+        else if (e.key === 'End') n = tabs.length - 1;
+        if (n !== null) { e.preventDefault(); show(tabs[n].getAttribute('data-key'), true); }
+      });
+    });
+    show(tabs[0].getAttribute('data-key'));
+    window.bizShowTab = show;
+  })();
+
+  /* ---------- Quote form ---------- */
+  var form = $('#bizForm');
+  if (!form) return;
+  var submitBtn = $('#bizSubmit'), waBtn = $('#bizWaBtn'), statusEl = $('#bizStatus');
+  function setSelect(sel, v) {
+    if (!v) return;
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === v) { sel.value = v; return; }
+    }
+  }
+
+  /* Cards and tab buttons pre-fill the form, then scroll to it */
+  $$('[data-solution]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var sol = a.getAttribute('data-solution'), type = a.getAttribute('data-type');
+      setSelect($('#bSolution'), sol);
+      if (type) setSelect($('#bType'), type);
+      var target = $('#bizQuote');
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: behavior, block: 'start' });
+        if (history.replaceState) history.replaceState(null, '', '#bizQuote');
+        setTimeout(function () { var c = $('#bCompany'); if (c && !c.value) c.focus({ preventScroll: true }); }, reduced ? 0 : 600);
+      }
+    });
+  });
+
+  /* Prefill from the link: business.html?type=exporter&solution=export */
+  (function prefill() {
+    var q = new URLSearchParams(window.location.search);
+    if (q.get('solution')) setSelect($('#bSolution'), q.get('solution'));
+    if (q.get('type')) {
+      setSelect($('#bType'), q.get('type'));
+      if (window.bizShowTab && $('#tab-' + q.get('type'))) window.bizShowTab(q.get('type'));
+    }
+    if (q.get('solution') || q.get('type')) {
+      setTimeout(function () { var s = $('#bizQuote'); if (s && !window.location.hash) s.scrollIntoView({ behavior: behavior, block: 'start' }); }, 350);
+    }
+  })();
+
   if (JP_BUSINESS_CONFIG.endpoint) {
-    sendToServer(data);
+    waBtn.hidden = false;
   } else {
+    $('.biz-btn-label', submitBtn).textContent = 'Send Quote Request via WhatsApp';
+    submitBtn.querySelector('i').className = 'fa-brands fa-whatsapp';
+  }
+
+  /* ---------- Validation ---------- */
+  function setError(key, text) {
+    var wrap = $('[data-f="' + key + '"]', form);
+    if (!wrap) return;
+    wrap.classList.toggle('has-error', !!text);
+    var err = $('.biz-err', wrap);
+    if (err) err.textContent = text || '';
+    $$('input,select,textarea', wrap).forEach(function (el) {
+      if (text) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+    });
+  }
+  function validate() {
+    var bad = [];
+    var company = $('#bCompany').value.trim(), person = $('#bPerson').value.trim();
+    var phone = $('#bPhone').value.trim(), email = $('#bEmail').value.trim();
+
+    setError('company', company.length < 2 ? 'Please enter your company name.' : '');
+    if (company.length < 2) bad.push('#bCompany');
+    setError('person', person.length < 2 ? 'Please enter a contact name.' : '');
+    if (person.length < 2) bad.push('#bPerson');
+
+    var digits = phone.replace(/\D/g, '');
+    var phoneOk = /^[+0-9\s().-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
+    setError('phone', phoneOk ? '' : 'Enter a valid phone number, e.g. +880 1XXX XXXXXX.');
+    if (!phoneOk) bad.push('#bPhone');
+
+    var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    setError('email', emailOk ? '' : 'Enter a valid email address.');
+    if (!emailOk) bad.push('#bEmail');
+
+    var consent = $('#bConsent').checked;
+    setError('consent', consent ? '' : 'Please tick the box so we can contact you.');
+    if (!consent) bad.push('#bConsent');
+
+    if (bad.length) {
+      var first = bad.map(function (s) { return $(s); }).sort(function (a, b) {
+        return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+      })[0];
+      if (first) first.focus();
+    }
+    return bad.length === 0;
+  }
+  $$('.biz-f input,.biz-f textarea,.biz-f select', form).forEach(function (el) {
+    el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', function () {
+      var w = el.closest('.biz-f');
+      if (w && w.classList.contains('has-error')) { w.classList.remove('has-error'); el.removeAttribute('aria-invalid'); }
+    });
+  });
+
+  /* ---------- Message ---------- */
+  function opt(id) { var el = document.getElementById(id); return el ? el.options[el.selectedIndex].text : ''; }
+  function collect() {
+    return {
+      company: $('#bCompany').value.trim(),
+      contact_person: $('#bPerson').value.trim(),
+      phone: $('#bPhone').value.trim(),
+      email: $('#bEmail').value.trim(),
+      business_type: $('#bType').value ? opt('bType') : '',
+      solution: JP_BUSINESS_SOLUTIONS[$('#bSolution').value] || '',
+      product: $('#bProduct').value.trim(),
+      countries: $('#bDest').value.trim(),
+      frequency: $('#bFreq').value,
+      volume: $('#bVolume').value.trim(),
+      message: $('#bMsg').value.trim()
+    };
+  }
+  function buildText(d) {
+    var rows = [
+      ['Company', d.company], ['Contact person', d.contact_person], ['Phone', d.phone], ['Email', d.email],
+      ['Business type', d.business_type], ['Need', d.solution], ['Product', d.product], ['Destinations', d.countries],
+      ['Frequency', d.frequency], ['Weight / quantity', d.volume], ['Requirements', d.message]
+    ];
+    return 'Hi JP Express, I would like a business quote.\n' + rows.filter(function (r) { return r[1]; })
+      .map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
+  }
+  function openWhatsApp(text) {
+    var m = encodeURIComponent(text);
+    var url = isMobile ? 'https://wa.me/' + JP_BUSINESS_CONFIG.waPhone + '?text=' + m
+      : 'https://web.whatsapp.com/send?phone=' + JP_BUSINESS_CONFIG.waPhone + '&text=' + m;
+    window.open(url, '_blank', 'noopener');
+  }
+  function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  function showStatus(type, title, body) {
+    statusEl.className = 'biz-status is-' + type;
+    statusEl.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    statusEl.innerHTML = '<strong></strong><span></span>';
+    statusEl.firstChild.textContent = title;
+    statusEl.lastChild.innerHTML = body;
+    statusEl.hidden = false;
+    statusEl.focus({ preventScroll: true });
+    statusEl.scrollIntoView({ behavior: behavior, block: 'nearest' });
+  }
+  function track(solution) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'business_quote_submit', form_id: 'business_quote', solution: solution });
+  }
+  function setLoading(on) { submitBtn.classList.toggle('is-loading', on); submitBtn.disabled = on; }
+  function resetForm() {
+    form.reset();
+    $$('.biz-f.has-error', form).forEach(function (w) { w.classList.remove('has-error'); });
+  }
+  function retryLink(data) {
+    var a = $('#bizRetryWa');
+    if (a) a.addEventListener('click', function (e) { e.preventDefault(); openWhatsApp(buildText(data)); });
+  }
+
+  function sendToServer(data) {
+    var fd = new FormData(form);
+    var token = $('meta[name="csrf-token"]');
+    var headers = { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
+    if (token && token.getAttribute('content')) headers['X-CSRF-TOKEN'] = token.getAttribute('content');
+    setLoading(true);
+    fetch(JP_BUSINESS_CONFIG.endpoint, { method: 'POST', headers: headers, body: fd, credentials: 'same-origin' })
+      .then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, status: res.status, json: j }; });
+      })
+      .then(function (r) {
+        setLoading(false);
+        if (r.ok) {
+          track(data.solution);
+          if (r.json && r.json.redirect) { window.location.href = r.json.redirect; return; }
+          showStatus('success', 'Quote request received', 'Thank you, ' + esc(data.contact_person.split(' ')[0]) + '. Our business team will contact you on ' + esc(data.phone) + '.');
+          resetForm();
+        } else if (r.status === 422 && r.json && r.json.errors) {
+          var k = Object.keys(r.json.errors)[0];
+          showStatus('error', 'Please check your details', esc(r.json.errors[k][0]));
+        } else {
+          showStatus('error', 'We could not send your request', 'Please try again, or <a href="#" id="bizRetryWa">send it on WhatsApp</a>.');
+          retryLink(data);
+        }
+      })
+      .catch(function () {
+        setLoading(false);
+        showStatus('error', 'Connection problem', 'Check your internet and try again, or <a href="#" id="bizRetryWa">send it on WhatsApp</a>.');
+        retryLink(data);
+      });
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if ($('#bWeb').value) { showStatus('success', 'Quote request received', 'Thank you.'); return; } /* spam trap */
+    if (!validate()) return;
+    var data = collect();
+    if (JP_BUSINESS_CONFIG.endpoint) {
+      sendToServer(data);
+    } else {
+      openWhatsApp(buildText(data));
+      track(data.solution);
+      showStatus('info', 'Your request is ready in WhatsApp',
+        'Press <b>Send</b> in WhatsApp to deliver it to our business team. If WhatsApp did not open, call us on <a href="tel:+8801681637836">+880 1681 637836</a>.');
+    }
+  });
+  waBtn.addEventListener('click', function () {
+    if (!validate()) return;
+    var data = collect();
     openWhatsApp(buildText(data));
     track(data.solution);
-    showStatus('info', 'Your request is ready in WhatsApp',
-      'Press <b>Send</b> in WhatsApp to deliver it to our business team. If WhatsApp did not open, call us on <a href="tel:+8801681637836">+880 1681 637836</a>.');
-  }
-});
-waBtn.addEventListener('click', function () {
-  if (!validate()) return;
-  var data = collect();
-  openWhatsApp(buildText(data));
-  track(data.solution);
-  showStatus('info', 'Your request is ready in WhatsApp', 'Press <b>Send</b> in WhatsApp to deliver it to our business team.');
-});
+    showStatus('info', 'Your request is ready in WhatsApp', 'Press <b>Send</b> in WhatsApp to deliver it to our business team.');
+  });
 
 })();
 
@@ -2349,151 +2356,151 @@ waBtn.addEventListener('click', function () {
    latest articles (from BLOG_POSTS).
    ========================================================= */
 (function () {
-    "use strict";
-    if (!document.documentElement.classList.contains("page-resources")) return;
+  "use strict";
+  if (!document.documentElement.classList.contains("page-resources")) return;
 
-    var $ = function (id) { return document.getElementById(id); };
-    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var behavior = reduced ? "auto" : "smooth";
+  var $ = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var behavior = reduced ? "auto" : "smooth";
 
 
-    /* ---------- Settings: set `file` to a real path to turn a request into a download ---------- */
-        function esc(s) {
-        return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
-            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
-        });
-    }
-    function wa(text) { return "https://wa.me/" + JP_SITE_CONFIG.whatsapp + "?text=" + encodeURIComponent(text); }
+  /* ---------- Settings: set `file` to a real path to turn a request into a download ---------- */
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function wa(text) { return "https://wa.me/" + JP_SITE_CONFIG.whatsapp + "?text=" + encodeURIComponent(text); }
 
-    /* ---------- Sticky nav: scroll-spy ---------- */
-    var inner = document.querySelector(".res-catnav-inner");
-    var links = Array.prototype.slice.call(document.querySelectorAll(".res-catlink"));
-    var sections = links.map(function (l) { return document.querySelector(l.getAttribute("href")); }).filter(Boolean);
-    var lockUntil = 0;
+  /* ---------- Sticky nav: scroll-spy ---------- */
+  var inner = document.querySelector(".res-catnav-inner");
+  var links = Array.prototype.slice.call(document.querySelectorAll(".res-catlink"));
+  var sections = links.map(function (l) { return document.querySelector(l.getAttribute("href")); }).filter(Boolean);
+  var lockUntil = 0;
 
-    function setActive(link) {
-        if (!link) return;
-        links.forEach(function (l) {
-            var on = l === link;
-            l.classList.toggle("active", on);
-            if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
-        });
-        if (inner && inner.scrollWidth > inner.clientWidth) {
-            inner.scrollTo({ left: Math.max(0, link.offsetLeft - (inner.clientWidth - link.offsetWidth) / 2), behavior: behavior });
-        }
-    }
-    if (links.length && sections.length && "IntersectionObserver" in window) {
-        var spy = new IntersectionObserver(function (entries) {
-            if (Date.now() < lockUntil) return;
-            entries.forEach(function (en) {
-                if (en.isIntersecting) setActive(links.filter(function (l) { return l.getAttribute("href") === "#" + en.target.id; })[0]);
-            });
-        }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-        sections.forEach(function (s) { spy.observe(s); });
-    }
+  function setActive(link) {
+    if (!link) return;
     links.forEach(function (l) {
-        l.addEventListener("click", function () { lockUntil = Date.now() + 900; setActive(l); });
+      var on = l === link;
+      l.classList.toggle("active", on);
+      if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+    });
+    if (inner && inner.scrollWidth > inner.clientWidth) {
+      inner.scrollTo({ left: Math.max(0, link.offsetLeft - (inner.clientWidth - link.offsetWidth) / 2), behavior: behavior });
+    }
+  }
+  if (links.length && sections.length && "IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      if (Date.now() < lockUntil) return;
+      entries.forEach(function (en) {
+        if (en.isIntersecting) setActive(links.filter(function (l) { return l.getAttribute("href") === "#" + en.target.id; })[0]);
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    sections.forEach(function (s) { spy.observe(s); });
+  }
+  links.forEach(function (l) {
+    l.addEventListener("click", function () { lockUntil = Date.now() + 900; setActive(l); });
+  });
+
+  /* ---------- Guide library: search + topic filter ---------- */
+  var search = $("resSearch");
+  if (search) {
+    var clear = $("resClear"), count = $("resCount"), empty = $("resEmpty"), reset = $("resReset");
+    var guides = Array.prototype.slice.call(document.querySelectorAll(".res-guide"));
+    var chips = Array.prototype.slice.call(document.querySelectorAll(".res-chip"));
+    var state = { cat: "all", q: "" };
+    var qs = new URLSearchParams(window.location.search);
+    if (qs.get("q")) { state.q = qs.get("q").slice(0, 60); search.value = state.q; }
+    if (qs.get("cat") && chips.some(function (c) { return c.getAttribute("data-cat") === qs.get("cat"); })) state.cat = qs.get("cat");
+
+    guides.forEach(function (g) {
+      g._text = (g.textContent + " " + (g.getAttribute("data-tags") || "")).toLowerCase().replace(/\s+/g, " ");
     });
 
-    /* ---------- Guide library: search + topic filter ---------- */
-    var search = $("resSearch");
-    if (search) {
-        var clear = $("resClear"), count = $("resCount"), empty = $("resEmpty"), reset = $("resReset");
-        var guides = Array.prototype.slice.call(document.querySelectorAll(".res-guide"));
-        var chips = Array.prototype.slice.call(document.querySelectorAll(".res-chip"));
-        var state = { cat: "all", q: "" };
-        var qs = new URLSearchParams(window.location.search);
-        if (qs.get("q")) { state.q = qs.get("q").slice(0, 60); search.value = state.q; }
-        if (qs.get("cat") && chips.some(function (c) { return c.getAttribute("data-cat") === qs.get("cat"); })) state.cat = qs.get("cat");
+    var applyGuides = function () {
+      var terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+      var shown = 0;
+      guides.forEach(function (g) {
+        var ok = (state.cat === "all" || g.getAttribute("data-cat") === state.cat) &&
+          terms.every(function (t) { return g._text.indexOf(t) > -1; });
+        g.hidden = !ok;
+        if (ok) shown++;
+      });
+      if (terms.length && shown <= 2) guides.forEach(function (g) { if (!g.hidden) g.open = true; });
+      chips.forEach(function (c) {
+        var on = c.getAttribute("data-cat") === state.cat;
+        c.classList.toggle("active", on);
+        c.setAttribute("aria-pressed", on);
+      });
+      clear.hidden = !state.q;
+      empty.hidden = shown !== 0;
+      count.textContent = shown && (state.q || state.cat !== "all") ? "Showing " + shown + " of " + guides.length + " guides" : "";
+    };
 
-        guides.forEach(function (g) {
-            g._text = (g.textContent + " " + (g.getAttribute("data-tags") || "")).toLowerCase().replace(/\s+/g, " ");
-        });
+    search.addEventListener("input", function () { state.q = search.value.trim(); applyGuides(); });
+    clear.addEventListener("click", function () { search.value = ""; state.q = ""; applyGuides(); search.focus(); });
+    chips.forEach(function (c) {
+      c.addEventListener("click", function () { state.cat = c.getAttribute("data-cat"); applyGuides(); });
+    });
+    if (reset) reset.addEventListener("click", function () { state = { cat: "all", q: "" }; search.value = ""; applyGuides(); });
+    applyGuides();
+  }
 
-        var applyGuides = function () {
-            var terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
-            var shown = 0;
-            guides.forEach(function (g) {
-                var ok = (state.cat === "all" || g.getAttribute("data-cat") === state.cat) &&
-                    terms.every(function (t) { return g._text.indexOf(t) > -1; });
-                g.hidden = !ok;
-                if (ok) shown++;
-            });
-            if (terms.length && shown <= 2) guides.forEach(function (g) { if (!g.hidden) g.open = true; });
-            chips.forEach(function (c) {
-                var on = c.getAttribute("data-cat") === state.cat;
-                c.classList.toggle("active", on);
-                c.setAttribute("aria-pressed", on);
-            });
-            clear.hidden = !state.q;
-            empty.hidden = shown !== 0;
-            count.textContent = shown && (state.q || state.cat !== "all") ? "Showing " + shown + " of " + guides.length + " guides" : "";
-        };
+  /* ---------- Destination quick guide (data from COUNTRY_DATA) ---------- */
+  var destBody = $("resDestBody");
+  if (destBody && typeof COUNTRY_DATA !== "undefined") {
+    var dest = Object.keys(COUNTRY_DATA).map(function (s) {
+      var c = COUNTRY_DATA[s]; return { s: s, n: c.n, c: c.c, r: c.r, t: c.t };
+    }).sort(function (a, b) { return a.n.localeCompare(b.n); });
+    var dSearch = $("resDestSearch"), dEmpty = $("resDestEmpty"), dWrap = $("resDestWrap");
 
-        search.addEventListener("input", function () { state.q = search.value.trim(); applyGuides(); });
-        clear.addEventListener("click", function () { search.value = ""; state.q = ""; applyGuides(); search.focus(); });
-        chips.forEach(function (c) {
-            c.addEventListener("click", function () { state.cat = c.getAttribute("data-cat"); applyGuides(); });
-        });
-        if (reset) reset.addEventListener("click", function () { state = { cat: "all", q: "" }; search.value = ""; applyGuides(); });
-        applyGuides();
-    }
+    var renderDest = function () {
+      var q = dSearch ? dSearch.value.trim().toLowerCase() : "";
+      var out = dest.filter(function (d) { return !q || (d.n + " " + d.r).toLowerCase().indexOf(q) > -1; });
+      destBody.innerHTML = out.map(function (d) {
+        return '<tr><td data-label="Destination"><span class="res-dest"><img src="https://flagcdn.com/w80/' + esc(d.c) + '.png" width="28" height="28" alt="" loading="lazy">' + esc(d.n) + "</span></td>" +
+          '<td data-label="Region">' + esc(d.r) + '</td><td data-label="Express estimate">' + esc(d.t) + "</td>" +
+          '<td data-label=""><a class="res-g-link" href="country.html?c=' + encodeURIComponent(d.s) + '">View guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></td></tr>';
+      }).join("");
+      dEmpty.hidden = out.length > 0;
+      dWrap.hidden = out.length === 0;
+    };
+    if (dSearch) dSearch.addEventListener("input", renderDest);
+    renderDest();
+  } else if (destBody) {
+    var sec = $("destinations");
+    if (sec) sec.hidden = true;
+    var navLink = document.querySelector('.res-catlink[href="#destinations"]');
+    if (navLink) navLink.hidden = true;
+  }
 
-    /* ---------- Destination quick guide (data from COUNTRY_DATA) ---------- */
-    var destBody = $("resDestBody");
-    if (destBody && typeof COUNTRY_DATA !== "undefined") {
-        var dest = Object.keys(COUNTRY_DATA).map(function (s) {
-            var c = COUNTRY_DATA[s]; return { s: s, n: c.n, c: c.c, r: c.r, t: c.t };
-        }).sort(function (a, b) { return a.n.localeCompare(b.n); });
-        var dSearch = $("resDestSearch"), dEmpty = $("resDestEmpty"), dWrap = $("resDestWrap");
+  /* ---------- Download center ---------- */
+  var dl = $("resDownloads");
+  if (dl) {
+    dl.innerHTML = JP_RESOURCE_DOWNLOADS.map(function (d) {
+      var action = d.file
+        ? '<a class="btn-main btn-red" href="' + esc(d.file) + '" download><i class="fa-solid fa-download" aria-hidden="true"></i> Download</a>'
+        : '<a class="btn-main res-btn-line" target="_blank" rel="noopener" href="' + wa("Hello JP Express, please send me: " + d.title) + '"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Request on WhatsApp</a>';
+      return '<li><div class="res-card"><span class="res-ico"><i class="fa-solid ' + esc(d.icon) + '" aria-hidden="true"></i></span><h3>' + esc(d.title) + "</h3><p>" + esc(d.text) + "</p>" + action + "</div></li>";
+    }).join("");
+  }
 
-        var renderDest = function () {
-            var q = dSearch ? dSearch.value.trim().toLowerCase() : "";
-            var out = dest.filter(function (d) { return !q || (d.n + " " + d.r).toLowerCase().indexOf(q) > -1; });
-            destBody.innerHTML = out.map(function (d) {
-                return '<tr><td data-label="Destination"><span class="res-dest"><img src="https://flagcdn.com/w80/' + esc(d.c) + '.png" width="28" height="28" alt="" loading="lazy">' + esc(d.n) + "</span></td>" +
-                    '<td data-label="Region">' + esc(d.r) + '</td><td data-label="Express estimate">' + esc(d.t) + "</td>" +
-                    '<td data-label=""><a class="res-g-link" href="country.html?c=' + encodeURIComponent(d.s) + '">View guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></td></tr>';
-            }).join("");
-            dEmpty.hidden = out.length > 0;
-            dWrap.hidden = out.length === 0;
-        };
-        if (dSearch) dSearch.addEventListener("input", renderDest);
-        renderDest();
-    } else if (destBody) {
-        var sec = $("destinations");
-        if (sec) sec.hidden = true;
-        var navLink = document.querySelector('.res-catlink[href="#destinations"]');
-        if (navLink) navLink.hidden = true;
-    }
-
-    /* ---------- Download center ---------- */
-    var dl = $("resDownloads");
-    if (dl) {
-        dl.innerHTML = JP_RESOURCE_DOWNLOADS.map(function (d) {
-            var action = d.file
-                ? '<a class="btn-main btn-red" href="' + esc(d.file) + '" download><i class="fa-solid fa-download" aria-hidden="true"></i> Download</a>'
-                : '<a class="btn-main res-btn-line" target="_blank" rel="noopener" href="' + wa("Hello JP Express, please send me: " + d.title) + '"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Request on WhatsApp</a>';
-            return '<li><div class="res-card"><span class="res-ico"><i class="fa-solid ' + esc(d.icon) + '" aria-hidden="true"></i></span><h3>' + esc(d.title) + "</h3><p>" + esc(d.text) + "</p>" + action + "</div></li>";
-        }).join("");
-    }
-
-    /* ---------- Latest articles (data from BLOG_POSTS) ---------- */
-    var art = $("resArticles");
-    if (art && typeof BLOG_POSTS !== "undefined") {
-        var cats = typeof BLOG_CATS !== "undefined" ? BLOG_CATS : {};
-        var fmt = function (d) { return new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }); };
-        art.innerHTML = BLOG_POSTS.slice().sort(function (a, b) { return b.d.localeCompare(a.d); }).slice(0, 4).map(function (p) {
-            return '<li><a class="res-card" href="' + esc(p.h) + '"><span class="res-ico"><i class="fa-solid ' + esc(p.i) + '" aria-hidden="true"></i></span>' +
-                '<span class="res-card-tag">' + esc(cats[p.c] || "Article") + "</span><h3>" + esc(p.t) + "</h3><p>" + esc(p.x) + "</p>" +
-                '<span class="res-g-link">' + esc(fmt(p.d)) + " · " + esc(p.r) + ' min read <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>';
-        }).join("");
-    } else if (art) {
-        var aSec = $("articles");
-        if (aSec) aSec.hidden = true;
-        var aLink = document.querySelector('.res-catlink[href="#articles"]');
-        if (aLink) aLink.hidden = true;
-    }
+  /* ---------- Latest articles (data from BLOG_POSTS) ---------- */
+  var art = $("resArticles");
+  if (art && typeof BLOG_POSTS !== "undefined") {
+    var cats = typeof BLOG_CATS !== "undefined" ? BLOG_CATS : {};
+    var fmt = function (d) { return new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }); };
+    art.innerHTML = BLOG_POSTS.slice().sort(function (a, b) { return b.d.localeCompare(a.d); }).slice(0, 4).map(function (p) {
+      return '<li><a class="res-card" href="' + esc(p.h) + '"><span class="res-ico"><i class="fa-solid ' + esc(p.i) + '" aria-hidden="true"></i></span>' +
+        '<span class="res-card-tag">' + esc(cats[p.c] || "Article") + "</span><h3>" + esc(p.t) + "</h3><p>" + esc(p.x) + "</p>" +
+        '<span class="res-g-link">' + esc(fmt(p.d)) + " · " + esc(p.r) + ' min read <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>';
+    }).join("");
+  } else if (art) {
+    var aSec = $("articles");
+    if (aSec) aSec.hidden = true;
+    var aLink = document.querySelector('.res-catlink[href="#articles"]');
+    if (aLink) aLink.hidden = true;
+  }
 })();
 
 /* =========================================================
@@ -2503,7 +2510,7 @@ waBtn.addEventListener('click', function () {
 (function () {
   "use strict";
 
-    var params = new URLSearchParams(window.location.search);
+  var params = new URLSearchParams(window.location.search);
   var DEMO = params.get("demo") === "1";
 
   /* ---------------- sample data (demo mode only) ---------------- */
@@ -2584,9 +2591,9 @@ waBtn.addEventListener('click', function () {
     empty: function () {
       return '<div class="trk-guide">' +
         [["fa-hashtag", "Enter your number", "Type or paste your JP Express tracking number above."],
-         ["fa-magnifying-glass-location", "See your status", "View the latest update, timeline and shipment details."],
-         ["fa-headset", "Need help?", "Our team can help if something looks wrong."]]
-        .map(function (s, i) { return '<div class="trk-guide-item"><span class="trk-guide-ico">' + icon(s[0]) + "</span><h3>" + s[1] + "</h3><p>" + s[2] + "</p></div>"; }).join("") + "</div>";
+        ["fa-magnifying-glass-location", "See your status", "View the latest update, timeline and shipment details."],
+        ["fa-headset", "Need help?", "Our team can help if something looks wrong."]]
+          .map(function (s, i) { return '<div class="trk-guide-item"><span class="trk-guide-ico">' + icon(s[0]) + "</span><h3>" + s[1] + "</h3><p>" + s[2] + "</p></div>"; }).join("") + "</div>";
     },
     loading: function () {
       return '<div class="trk-skel" aria-hidden="true"><div class="sk sk-h"></div><div class="sk sk-l"></div><div class="sk sk-l sk-s"></div><div class="sk sk-b"></div></div><p class="visually-hidden">Loading tracking information</p>';
@@ -2735,8 +2742,8 @@ waBtn.addEventListener('click', function () {
     if (t.hasAttribute("data-copy")) {
       var v = t.getAttribute("data-copy"), label = t.querySelector("span");
       var done = function () { label.textContent = "Copied"; setTimeout(function () { label.textContent = "Copy"; }, 1600); };
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, function () {});
-      else { var ta = document.createElement("textarea"); ta.value = v; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (x) {} document.body.removeChild(ta); }
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, function () { });
+      else { var ta = document.createElement("textarea"); ta.value = v; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (x) { } document.body.removeChild(ta); }
     }
   });
 
