@@ -1,5 +1,7 @@
 (function () {
   "use strict";
+
+  /* PAGE: ALL PAGES - shared navigation, animation, accessibility and common UI behavior. */
   document.documentElement.classList.add('js');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(pointer: fine)').matches;
@@ -410,21 +412,17 @@
     });
   });
 
-  /* ---------- Hero typewriter (3 rotating titles) ---------- */
+  /* ---------- Hero typewriter (3 rotating JP_HOME_TITLES) ---------- */
   const typeTextEl = document.getElementById('typeText');
   if (typeTextEl) {
-    const titles = [
-      'Ship Worldwide with Confidence.',
-      'Fast International Delivery.',
-      'Reliable Courier, Every Time.'
-    ];
+    ;
     if (reduced) {
-      typeTextEl.textContent = titles[0];
+      typeTextEl.textContent = JP_HOME_TITLES[0];
     } else {
       let ti = 0, ci = 0, deleting = false;
       const TYPE_SPEED = 55, DELETE_SPEED = 30, HOLD = 1800, GAP = 400;
       function tick() {
-        const full = titles[ti];
+        const full = JP_HOME_TITLES[ti];
         if (!deleting) {
           ci++;
           typeTextEl.textContent = full.slice(0, ci);
@@ -433,7 +431,7 @@
         } else {
           ci--;
           typeTextEl.textContent = full.slice(0, ci);
-          if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; setTimeout(tick, GAP); return; }
+          if (ci === 0) { deleting = false; ti = (ti + 1) % JP_HOME_TITLES.length; setTimeout(tick, GAP); return; }
           setTimeout(tick, DELETE_SPEED);
         }
       }
@@ -444,11 +442,7 @@
   /* ---------- Hero shipment card rotator ---------- */
   const shipCardFade = document.getElementById('shipCardFade');
   if (shipCardFade) {
-    const shipments = [
-      { id: 'JPE123456789', origin: 'DAC', dest: 'JFK', status: 'IN TRANSIT', eta: 'ETA 2 DAYS', progress: 62 },
-      { id: 'JPE998877665', origin: 'DAC', dest: 'LHR', status: 'CUSTOMS', eta: 'ETA 1 DAY', progress: 78 },
-      { id: 'JPE554433221', origin: 'DAC', dest: 'DXB', status: 'OUT FOR DELIVERY', eta: 'ETA TODAY', progress: 92 }
-    ];
+    ;
     let si = 0;
     const shipId = document.getElementById('shipId');
     const shipOrigin = document.getElementById('shipOrigin');
@@ -465,14 +459,14 @@
       shipEta.textContent = s.eta;
       if (shipProgress) shipProgress.style.width = s.progress + '%';
     }
-    renderShipment(shipments[0]);
+    renderShipment(JP_HOME_SHIPMENTS[0]);
 
     if (!reduced) {
       setInterval(() => {
         shipCardFade.classList.add('fading');
         setTimeout(() => {
-          si = (si + 1) % shipments.length;
-          renderShipment(shipments[si]);
+          si = (si + 1) % JP_HOME_SHIPMENTS.length;
+          renderShipment(JP_HOME_SHIPMENTS[si]);
           shipCardFade.classList.remove('fading');
         }, 350);
       }, 3200);
@@ -480,7 +474,7 @@
   }
 
   /* ---------- WhatsApp smart-link: skip landing page on desktop ---------- */
-  const WA_PHONE = '8801681637836';
+  const WA_PHONE = JP_SITE_CONFIG.whatsapp;
   const isMobileDevice = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
   document.querySelectorAll('.wa-link').forEach(a => {
     a.addEventListener('click', e => {
@@ -511,43 +505,7 @@
 
 
 /* ---------- Testimonials auto-rotator ---------- */
-const testimonialsData = [
-  {
-    name: 'Tanvir Ahmed',
-    role: 'Managing Director, Dhaka, Bangladesh',
-    quote: '“Reliable service and excellent support. JP Express made our export process smooth and easy. Highly recommended.”',
-    stars: '★★★★★',
-    avatar: 'assets/teams/founder02.jpg'
-  },
-  {
-    name: 'Sarah Mitchell',
-    role: 'E-commerce Owner, London, UK',
-    quote: '“Fast, secure and transparent. My parcels always reach on time and the tracking updates are spot-on.”',
-    stars: '★★★★★',
-    avatar: 'assets/teams/02.jpg'
-  },
-  {
-    name: 'Mohammad Rahman',
-    role: 'Export Manager, Chittagong',
-    quote: '“Best logistics partner for our garment exports. Customs handling is seamless and pricing is fair.”',
-    stars: '★★★★★',
-    avatar: 'assets/teams/03.jpg'
-  },
-  {
-    name: 'Emily Carter',
-    role: 'Small Business, Toronto, Canada',
-    quote: '“JP Express handles our international shipments professionally. Customer support is always responsive.”',
-    stars: '★★★★☆',
-    avatar: 'assets/teams/08.jpg'
-  },
-  {
-    name: 'Fatima Noor',
-    role: 'Freelancer, Dubai, UAE',
-    quote: '“Affordable rates and reliable delivery. I trust JP Express for all my document and parcel shipments.”',
-    stars: '★★★★★',
-    avatar: 'assets/teams/07.jpg'
-  }
-];
+;
 
 const testimonialCard = document.getElementById('testimonialCard');
 const testimonialAvatar = document.getElementById('testimonialAvatar');
@@ -559,13 +517,13 @@ const testimonialDots = document.getElementById('testimonialDots');
 const testimonialPrev = document.getElementById('testimonialPrev');
 const testimonialNext = document.getElementById('testimonialNext');
 
-if (testimonialCard && testimonialsData.length > 1) {
+if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   let currentIndex = 0;
   let autoTimer = null;
   const INTERVAL = 3000;
 
   // Build dots
-  testimonialsData.forEach((_, i) => {
+  JP_HOME_TESTIMONIALSDATA.forEach((_, i) => {
     const dot = document.createElement('span');
     dot.setAttribute('role', 'button');
     dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
@@ -587,17 +545,17 @@ if (testimonialCard && testimonialsData.length > 1) {
   }
 
   function nextReview() {
-    currentIndex = (currentIndex + 1) % testimonialsData.length;
+    currentIndex = (currentIndex + 1) % JP_HOME_TESTIMONIALSDATA.length;
     renderReview(true);
   }
 
   function prevReview() {
-    currentIndex = (currentIndex - 1 + testimonialsData.length) % testimonialsData.length;
+    currentIndex = (currentIndex - 1 + JP_HOME_TESTIMONIALSDATA.length) % JP_HOME_TESTIMONIALSDATA.length;
     renderReview(true);
   }
 
   function renderReview(animate) {
-    const data = testimonialsData[currentIndex];
+    const data = JP_HOME_TESTIMONIALSDATA[currentIndex];
 
     if (animate) {
       testimonialCard.classList.add('is-changing');
@@ -798,7 +756,125 @@ if (testimonialCard && testimonialsData.length > 1) {
   }, 3000);
 })();
 
-/* ---------- HOME PAGE: calculator + tracking preview ---------- */
+/* ---------- HOME PAGE: hero title typing/rotation ----------
+   Initialized before other page modules so a page-specific error elsewhere
+   can never prevent the primary hero heading from rendering. */
+(function initHomeHeroTitle() {
+  var root = document.documentElement;
+  var title = document.getElementById('heroTitle');
+  if (!title) return;
+
+  var slides = Array.prototype.slice.call(title.querySelectorAll('.ht-slide'));
+  if (!slides.length) return;
+
+  var SPEED = 45;
+  var DELAY = 350;
+  var HOLD = 2200;
+  var FADE = 450;
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var original = title.innerHTML;
+
+  title.setAttribute('aria-label', slides[0].textContent.replace(/\s+/g, ' ').trim());
+
+  var restoreVisibleTitle = function () {
+    title.innerHTML = original;
+    slides = Array.prototype.slice.call(title.querySelectorAll('.ht-slide'));
+    slides.forEach(function (slide, index) {
+      slide.classList.toggle('active', index === 0);
+      slide.classList.remove('out');
+      slide.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+    });
+    title.classList.add('is-ready');
+    root.classList.remove('typing-js');
+  };
+
+  try {
+    var wrap = function (node, chars) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          child.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              frag.appendChild(document.createTextNode(' '));
+              return;
+            }
+            var word = document.createElement('span');
+            word.className = 'tword';
+            Array.prototype.forEach.call(part, function (ch) {
+              var span = document.createElement('span');
+              span.className = 'tchar';
+              span.textContent = ch;
+              word.appendChild(span);
+              chars.push(span);
+            });
+            frag.appendChild(word);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === 1) {
+          wrap(child, chars);
+        }
+      });
+    };
+
+    slides.forEach(function (slide) {
+      slide.setAttribute('aria-hidden', 'true');
+      slide.chars = [];
+      wrap(slide, slide.chars);
+    });
+
+    title.classList.add('is-ready');
+    root.classList.remove('typing-js');
+
+    if (reduced) {
+      slides[0].classList.add('active');
+      slides[0].chars.forEach(function (char) { char.classList.add('on'); });
+      slides[0].setAttribute('aria-hidden', 'false');
+      return;
+    }
+
+    var idx = 0;
+    var timer = null;
+
+    var typeSlide = function (i) {
+      var chars = slides[idx].chars || [];
+      if (i < chars.length) {
+        if (i > 0) chars[i - 1].classList.remove('is-caret');
+        chars[i].classList.add('on', 'is-caret');
+        timer = setTimeout(function () { typeSlide(i + 1); }, SPEED);
+      } else {
+        if (chars.length) chars[chars.length - 1].classList.remove('is-caret');
+        timer = setTimeout(function () {
+          slides[idx].classList.add('out');
+          timer = setTimeout(function () { show((idx + 1) % slides.length); }, FADE);
+        }, HOLD);
+      }
+    };
+
+    var show = function (n) {
+      clearTimeout(timer);
+      idx = n;
+      slides.forEach(function (slide, k) {
+        slide.classList.toggle('active', k === n);
+        slide.classList.remove('out');
+        slide.setAttribute('aria-hidden', k === n ? 'false' : 'true');
+        slide.chars.forEach(function (char) {
+          char.classList.remove('on', 'is-caret');
+        });
+      });
+      typeSlide(0);
+    };
+
+    slides[0].classList.add('active');
+    slides[0].setAttribute('aria-hidden', 'false');
+    timer = setTimeout(function () { typeSlide(0); }, DELAY);
+  } catch (error) {
+    console.warn('Hero title animation fallback:', error);
+    restoreVisibleTitle();
+  }
+})();
+
+/* ---------- HOME PAGE: calculator + tracking preview ----------
 (function initHomeTools() {
   var calcForm = document.getElementById('calcForm');
   var calcResult = document.getElementById('calcResult');
@@ -937,103 +1013,6 @@ if (testimonialCard && testimonialsData.length > 1) {
   });
 })();
 
-/* ---------- HOME PAGE: hero title typing/rotation ---------- */
-(function initHomeHeroTitle() {
-  var root = document.documentElement;
-  var title = document.getElementById('heroTitle');
-  if (!title) return;
-
-  var slides = Array.prototype.slice.call(title.querySelectorAll('.ht-slide'));
-  if (!slides.length) return;
-
-  var SPEED = 45;
-  var DELAY = 350;
-  var HOLD = 2200;
-  var FADE = 450;
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  title.setAttribute('aria-label', slides[0].textContent.replace(/\s+/g, ' ').trim());
-
-  var wrap = function (node, chars) {
-    Array.prototype.slice.call(node.childNodes).forEach(function (child) {
-      if (child.nodeType === 3) {
-        var frag = document.createDocumentFragment();
-        child.textContent.split(/(\s+)/).forEach(function (part) {
-          if (!part) return;
-          if (/^\s+$/.test(part)) {
-            frag.appendChild(document.createTextNode(' '));
-            return;
-          }
-          var word = document.createElement('span');
-          word.className = 'tword';
-          Array.prototype.forEach.call(part, function (ch) {
-            var span = document.createElement('span');
-            span.className = 'tchar';
-            span.textContent = ch;
-            word.appendChild(span);
-            chars.push(span);
-          });
-          frag.appendChild(word);
-        });
-        child.replaceWith(frag);
-      } else if (child.nodeType === 1) {
-        wrap(child, chars);
-      }
-    });
-  };
-
-  slides.forEach(function (slide) {
-    slide.setAttribute('aria-hidden', 'true');
-    slide.chars = [];
-    wrap(slide, slide.chars);
-  });
-
-  if (reduced) {
-    slides[0].classList.add('active');
-    title.classList.add('is-ready');
-    root.classList.remove('typing-js');
-    return;
-  }
-
-  var idx = 0;
-  var timer = null;
-
-  var typeSlide = function (i) {
-    var chars = slides[idx].chars;
-    if (i < chars.length) {
-      if (i > 0) chars[i - 1].classList.remove('is-caret');
-      chars[i].classList.add('on', 'is-caret');
-      timer = setTimeout(function () { typeSlide(i + 1); }, SPEED);
-    } else if (slides.length === 1) {
-      timer = setTimeout(function () {
-        if (chars.length) chars[chars.length - 1].classList.remove('is-caret');
-      }, 1500);
-    } else {
-      timer = setTimeout(function () {
-        slides[idx].classList.add('out');
-        timer = setTimeout(function () { show((idx + 1) % slides.length); }, FADE);
-      }, HOLD);
-    }
-  };
-
-  var show = function (n) {
-    clearTimeout(timer);
-    idx = n;
-    slides.forEach(function (slide, k) {
-      slide.classList.toggle('active', k === n);
-      slide.classList.remove('out');
-      slide.chars.forEach(function (char) {
-        char.classList.remove('on', 'is-caret');
-      });
-    });
-    typeSlide(0);
-  };
-
-  title.classList.add('is-ready');
-  root.classList.remove('typing-js');
-  slides[0].classList.add('active');
-  timer = setTimeout(function () { typeSlide(0); }, DELAY);
-})();
 
 
 /* =========================================================
@@ -1043,136 +1022,14 @@ if (testimonialCard && testimonialsData.length > 1) {
    c category | t title | x excerpt | fx long excerpt (featured) | d date (YYYY-MM-DD) | r read minutes
    i FontAwesome icon | k tone (red|blue|amber|navy|green|cyan) | h link | a link label | f featured | q search keywords
    When full article pages exist, set h to "blog/your-slug.html" (or /blog/your-slug/ on Laravel). */
-const BLOG_CATS = {
-  'export-tips': 'Export Tips', 'country-guide': 'Country Shipping Guides', 'packaging': 'Packaging',
-  'logistics': 'Logistics', 'customs': 'Customs', 'business-growth': 'Business Growth',
-  'courier-news': 'Courier News', 'international-trade': 'International Trade'
-};
-const BLOG_POSTS = [
-  { c: 'export-tips', t: 'How to prepare your first export shipment from Bangladesh', x: 'The essential steps before your goods leave Dhaka.',
-    fx: 'A clear, practical checklist for documents, packaging, customs and the decisions that make an international shipment run smoothly.',
-    d: '2026-08-18', r: 8, i: 'fa-box-open', k: 'red', h: 'services.html#export', a: 'Read the guide', f: 1, q: 'export shipment bangladesh documents checklist first export' },
-  { c: 'country-guide', t: 'Shipping to the USA: documents, duties and delivery times', x: 'What Bangladeshi shippers should know before booking.',
-    d: '2026-08-12', r: 6, i: 'fa-flag-usa', k: 'blue', h: 'country.html?c=usa', a: 'View country guide', q: 'shipping to usa united states country guide customs delivery' },
-  { c: 'packaging', t: '7 packaging mistakes that cause shipping damage', x: 'Protect fragile products and reduce avoidable delivery issues.',
-    d: '2026-08-08', r: 5, i: 'fa-box', k: 'amber', h: 'resources.html#packaging-guide', a: 'Read packaging guide', q: 'packaging fragile parcel box ecommerce shipping guide' },
-  { c: 'logistics', t: 'Air freight vs sea freight: which route fits your cargo?', x: 'A practical comparison of speed, cost and shipment volume.',
-    d: '2026-08-03', r: 7, i: 'fa-plane-departure', k: 'navy', h: 'services.html#freight', a: 'Compare services', q: 'air sea freight logistics compare cargo business' },
-  { c: 'customs', t: 'Commercial invoice basics for international shipments', x: 'The information customs teams need to clear your goods.',
-    d: '2026-07-28', r: 6, i: 'fa-file-invoice', k: 'green', h: 'resources.html#customs-info', a: 'Explore resources', q: 'customs commercial invoice clearance export import documents' },
-  { c: 'business-growth', t: 'How better delivery experiences help e-commerce brands grow', x: 'Turn shipping from a cost center into customer confidence.',
-    d: '2026-07-21', r: 4, i: 'fa-chart-line', k: 'cyan', h: 'services.html', a: 'Explore solutions', q: 'ecommerce business growth delivery customer experience shipping' },
-  { c: 'courier-news', t: 'What real-time shipment tracking should tell you', x: 'From pickup to delivery, understand every useful status.',
-    d: '2026-07-15', r: 3, i: 'fa-location-dot', k: 'red', h: 'track-shipment.html', a: 'Track a shipment', q: 'courier news express delivery tracking shipment update' },
-  { c: 'international-trade', t: 'Finding your next international market: a starter framework', x: 'Use demand, route and compliance signals to plan expansion.',
-    d: '2026-07-09', r: 9, i: 'fa-globe', k: 'blue', h: 'contact.html', a: 'Talk to an expert', q: 'international trade bangladesh market export buyer trade growth' }
-];
-
 /* =========================================================
    CONSOLIDATED MODULE: countries-data.js
    ========================================================= */
 /* JP Express – destinations dataset. Add a country = add one object.
    v: service letters (e express, o economy, d door-to-door, a air, s sea, x export, c customs)
    Transit = express estimate only. Verify rules before publishing. */
-const SERVICES = {
-  e: { n: 'Express Courier', i: 'fa-bolt', u: 'services.html#intl-courier', f: 'Time-sensitive documents and parcels', c: 'Speed vs. cost' },
-  o: { n: 'Economy Courier', i: 'fa-box', u: 'services.html#intl-courier', f: 'Less urgent parcels', c: 'Longer transit, lower cost' },
-  d: { n: 'Door-to-Door Delivery', i: 'fa-door-open', u: 'services.html#intl-courier', f: 'Pickup in Bangladesh to recipient address', c: 'Address accuracy' },
-  a: { n: 'Air Freight', i: 'fa-plane', u: 'services.html#freight', f: 'Commercial cargo', c: 'Weight / volume' },
-  s: { n: 'Sea Freight', i: 'fa-ship', u: 'services.html#freight', f: 'Large, non-urgent cargo', c: 'Transit time / volume' },
-  x: { n: 'Commercial Export', i: 'fa-file-export', u: 'services.html#export', f: 'Samples, B2B and export shipments', c: 'Export documents' },
-  c: { n: 'Customs Clearance', i: 'fa-stamp', u: 'services.html#import', f: 'Declarations and clearance support', c: 'Duties and taxes' }
-};
-const ALL = 'eodasxc';
-const COUNTRY_DATA = {
-  usa: { n: 'United States', c: 'us', r: 'North America', cap: 'Washington, D.C.', cur: 'USD', t: '3–5 days', pop: 1, v: ALL,
-    ov: 'One of our busiest routes, used by families sending gifts and documents as well as exporters sending samples and commercial cargo.',
-    cu: 'Personal and commercial shipments are handled differently, so declare contents and value accurately. Duties, taxes and importer details depend on the goods and current US import rules.',
-    rs: ['Food, plant and animal products', 'Medicines and supplements', 'Lithium batteries and liquids'],
-    ch: 'A complete street address, ZIP code and reachable phone number prevent most delays. Remote areas may need extra time.',
-    ind: ['Garments & Textile', 'E-commerce', 'Leather & Handicrafts'], ci: 'New York, Los Angeles, Chicago, Houston, Dallas' },
-  uk: { n: 'United Kingdom', c: 'gb', r: 'Europe', cap: 'London', cur: 'GBP', t: '3–5 days', pop: 1, v: ALL,
-    ov: 'A key destination for Bangladeshi families, students and online sellers, with regular document, parcel and commercial shipments.',
-    cu: 'Shipments need an accurate customs declaration. Import VAT and duty depend on value and goods; commercial importers may need an EORI number.',
-    rs: ['Meat, dairy and plant products', 'Medicines and cosmetics', 'Batteries and aerosols'],
-    ch: 'Recipients may be asked to pay import charges before delivery, so share their contact details early.',
-    ind: ['Garments & Textile', 'E-commerce', 'Buying Houses'], ci: 'London, Birmingham, Manchester, Leeds' },
-  canada: { n: 'Canada', c: 'ca', r: 'North America', cap: 'Ottawa', cur: 'CAD', t: '4–6 days', pop: 1, v: ALL,
-    ov: 'Popular with families and students sending personal parcels, plus small businesses shipping samples and stock.',
-    cu: 'Duties and taxes depend on declared value, goods and current Canadian import rules. A correct description and value avoid clearance delays.',
-    rs: ['Food and agricultural items', 'Medicines and health products', 'Firearms, weapons and replicas'],
-    ch: 'Winter weather and long rural distances can add time outside major cities.',
-    ind: ['E-commerce', 'Garments & Textile', 'SMEs'], ci: 'Toronto, Vancouver, Montreal, Calgary' },
-  australia: { n: 'Australia', c: 'au', r: 'Asia-Pacific', cap: 'Canberra', cur: 'AUD', t: '5–7 days', pop: 1, v: ALL,
-    ov: 'A strong route for personal parcels and gifts, with a growing number of business and sample shipments.',
-    cu: 'Biosecurity is strict: food, plant, seed and wooden items must be declared. Import GST and duty depend on value and goods.',
-    rs: ['Food, seeds and plant material', 'Wooden and bamboo items', 'Medicines and supplements'],
-    ch: 'Remote and regional addresses can take longer than capital cities.',
-    ind: ['Garments & Textile', 'Handicrafts', 'E-commerce'], ci: 'Sydney, Melbourne, Brisbane, Perth' },
-  uae: { n: 'United Arab Emirates', c: 'ae', r: 'Middle East', cap: 'Abu Dhabi', cur: 'AED', t: '2–3 days', pop: 1, v: ALL,
-    ov: 'Our fastest-moving Gulf route, widely used by expatriate families, freelancers and traders.',
-    cu: 'Customs may ask for recipient ID or company details, and a clear invoice for goods. Charges depend on goods and value.',
-    rs: ['Alcohol, pork and tobacco products', 'Medicines and supplements', 'Religious or restricted media'],
-    ch: 'Use a precise delivery location and a phone number the courier can reach; many addresses are landmark-based.',
-    ind: ['Garments & Textile', 'E-commerce', 'Food & Agro (subject to rules)'], ci: 'Dubai, Abu Dhabi, Sharjah' },
-  saudi: { n: 'Saudi Arabia', c: 'sa', r: 'Middle East', cap: 'Riyadh', cur: 'SAR', t: '3–4 days', pop: 1, v: ALL,
-    ov: 'A major destination for expatriate families and importers of apparel, household and consumer goods.',
-    cu: 'Some goods need conformity certification (such as SASO/SABER) and commercial invoices must be precise. Confirm before booking.',
-    rs: ['Alcohol, pork and religious items', 'Medicines and supplements', 'Electronics needing certification'],
-    ch: 'Recipient identification and a detailed national address make final delivery smoother.',
-    ind: ['Garments & Textile', 'Handicrafts', 'SMEs'], ci: 'Riyadh, Jeddah, Dammam' },
-  germany: { n: 'Germany', c: 'de', r: 'Europe', cap: 'Berlin', cur: 'EUR', t: '3–5 days', v: ALL,
-    ov: 'An important EU gateway for garment buyers, e-commerce sellers and families.',
-    cu: 'Imports into the EU involve customs declarations and import VAT. Commercial shipments may need an EORI number.',
-    rs: ['Food and animal products', 'Medicines and cosmetics', 'Batteries and liquids'],
-    ch: 'Clear recipient name and street details reduce redelivery attempts.',
-    ind: ['Garments & Textile', 'Leather', 'E-commerce'], ci: 'Berlin, Hamburg, Munich, Frankfurt' },
-  france: { n: 'France', c: 'fr', r: 'Europe', cap: 'Paris', cur: 'EUR', t: '3–5 days', v: ALL,
-    ov: 'A steady route for personal parcels, fashion samples and small commercial shipments.',
-    cu: 'EU customs declarations and import VAT apply. Commercial shipments may need an EORI number and a detailed invoice.',
-    rs: ['Food and animal products', 'Medicines and cosmetics', 'Batteries and liquids'],
-    ch: 'Share an apartment/door code where relevant so the courier can deliver first time.',
-    ind: ['Garments & Textile', 'Handicrafts', 'E-commerce'], ci: 'Paris, Lyon, Marseille' },
-  italy: { n: 'Italy', c: 'it', r: 'Europe', cap: 'Rome', cur: 'EUR', t: '4–6 days', v: ALL,
-    ov: 'A well-used European route with a large Bangladeshi community and active apparel trade.',
-    cu: 'EU customs declarations and import VAT apply; invoices should describe fabric and goods clearly.',
-    rs: ['Food and animal products', 'Medicines and cosmetics', 'Counterfeit-brand goods'],
-    ch: 'Southern regions and islands can add transit time.',
-    ind: ['Garments & Textile', 'Leather', 'Buying Houses'], ci: 'Rome, Milan, Naples' },
-  japan: { n: 'Japan', c: 'jp', r: 'Asia-Pacific', cap: 'Tokyo', cur: 'JPY', t: '3–5 days', v: ALL,
-    ov: 'Used for documents, student parcels and business samples to a quality-focused market.',
-    cu: 'Plant and food quarantine is strict, and customs expects accurate descriptions and values.',
-    rs: ['Food, plants and seeds', 'Medicines and supplements', 'Counterfeit or imitation goods'],
-    ch: 'Japanese-format addresses and a recipient phone number help delivery.',
-    ind: ['Garments & Textile', 'Jute Products', 'Handicrafts'], ci: 'Tokyo, Osaka, Nagoya' },
-  southkorea: { n: 'South Korea', c: 'kr', r: 'Asia-Pacific', cap: 'Seoul', cur: 'KRW', t: '3–5 days', v: ALL,
-    ov: 'A fast-growing route for students, workers and business samples.',
-    cu: 'Individual recipients may need a personal customs clearance code. Duties depend on goods and value.',
-    rs: ['Food and agricultural items', 'Medicines and supplements', 'Cosmetics in volume'],
-    ch: 'Keep the recipient’s Korean contact details ready for customs.',
-    ind: ['Garments & Textile', 'E-commerce', 'SMEs'], ci: 'Seoul, Busan, Incheon' },
-  china: { n: 'China', c: 'cn', r: 'Asia-Pacific', cap: 'Beijing', cur: 'CNY', t: '3–5 days', v: 'eodaxc', 
-    ov: 'A major sourcing and trade route, mostly business samples, documents and parcels.',
-    cu: 'Some commercial goods need import licences or certificates; confirm requirements before dispatch.',
-    rs: ['Restricted publications and media', 'Food and medicines', 'Goods needing import licences'],
-    ch: 'Provide recipient details in a format customs can verify; address language matters.',
-    ind: ['Buying Houses', 'Manufacturing', 'E-commerce'], ci: 'Guangzhou, Shanghai, Beijing' },
-  singapore: { n: 'Singapore', c: 'sg', r: 'Asia-Pacific', cap: 'Singapore', cur: 'SGD', t: '2–4 days', v: ALL,
-    ov: 'A fast regional hub for documents, parcels and business shipments.',
-    cu: 'GST and duty depend on goods and value; controlled items need permits.',
-    rs: ['Chewing gum and e-cigarettes', 'Medicines and supplements', 'Controlled or regulated goods'],
-    ch: 'Include unit/postcode details for apartments and offices.',
-    ind: ['E-commerce', 'SMEs', 'Garments & Textile'], ci: 'Singapore' },
-  malaysia: { n: 'Malaysia', c: 'my', r: 'Asia-Pacific', cap: 'Kuala Lumpur', cur: 'MYR', t: '3–5 days', v: ALL,
-    ov: 'A popular route for workers, students and traders with strong two-way links.',
-    cu: 'Duties and taxes depend on goods and value; certain goods need permits.',
-    rs: ['Pork and alcohol products', 'Medicines and supplements', 'Controlled or regulated goods'],
-    ch: 'Add postcode and a reachable mobile number for last-mile delivery.',
-    ind: ['Garments & Textile', 'E-commerce', 'SMEs'], ci: 'Kuala Lumpur, Penang, Johor Bahru' }
-};
-const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
-
 /* =========================================================
+   PAGE: services.html
    CONSOLIDATED MODULE: services.js
    ========================================================= */
 (function () {
@@ -1286,6 +1143,7 @@ const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
 })();
 
 /* =========================================================
+   PAGE: industries.html
    CONSOLIDATED MODULE: industries.js
    ========================================================= */
 (function () {
@@ -1355,6 +1213,7 @@ const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
 })();
 
 /* =========================================================
+   PAGE: countries.html
    CONSOLIDATED MODULE: countries.js
    ========================================================= */
 (function () {
@@ -1423,6 +1282,7 @@ const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
 })();
 
 /* =========================================================
+   PAGE: country.html
    CONSOLIDATED MODULE: country-details.js
    ========================================================= */
 (function () {
@@ -1604,6 +1464,7 @@ const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
 })();
 
 /* =========================================================
+   PAGE: blog.html
    CONSOLIDATED MODULE: blog.js
    ========================================================= */
 (function () {
@@ -1689,107 +1550,23 @@ const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
 })();
 
 /* =========================================================
-   CONSOLIDATED MODULE: resources.js
-   ========================================================= */
-(function () {
-"use strict";
-
-/* ---------- Sticky category nav: smooth scroll + scrollspy ---------- */
-var catlinks = Array.from(document.querySelectorAll('.res-catlink'));
-var sections = catlinks
-  .map(function (l) { return document.querySelector(l.getAttribute('href')); })
-  .filter(Boolean);
-
-if (catlinks.length && sections.length && 'IntersectionObserver' in window) {
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        var id = '#' + entry.target.id;
-        catlinks.forEach(function (l) {
-          l.classList.toggle('active', l.getAttribute('href') === id);
-        });
-      }
-    });
-  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-  sections.forEach(function (s) { io.observe(s); });
-}
-
-/* ---------- Hero search: filters guide/article cards by title ---------- */
-var heroSearch = document.getElementById('resHeroSearch');
-if (heroSearch) {
-  heroSearch.addEventListener('input', function () {
-    var q = heroSearch.value.trim().toLowerCase();
-    document.querySelectorAll('.res-card[data-title]').forEach(function (card) {
-      var match = !q || card.getAttribute('data-title').toLowerCase().indexOf(q) !== -1;
-      card.style.display = match ? '' : 'none';
-    });
-  });
-}
-
-/* ---------- Transit time table search ---------- */
-var tableSearch = document.getElementById('resTransitSearch');
-var tableBody = document.getElementById('resTransitBody');
-var tableEmpty = document.getElementById('resTransitEmpty');
-if (tableSearch && tableBody) {
-  tableSearch.addEventListener('input', function () {
-    var q = tableSearch.value.trim().toLowerCase();
-    var rows = Array.from(tableBody.querySelectorAll('tr'));
-    var visible = 0;
-    rows.forEach(function (row) {
-      var match = !q || row.textContent.toLowerCase().indexOf(q) !== -1;
-      row.style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
-    if (tableEmpty) tableEmpty.style.display = visible ? 'none' : 'block';
-  });
-}
-
-})();
-
-/* =========================================================
+   PAGE: quote.html
    CONSOLIDATED MODULE: pricing.js
    ========================================================= */
 /* =========================================================
    JP EXPRESS: PRICING / SHIPPING CALCULATOR
    Calculates actual, volumetric and chargeable weight.
    A price is shown ONLY when real rates are added to
-   CONFIG.rates below. Until then the result is "Quote Required".
+   JP_PRICING_CONFIG.rates below. Until then the result is "Quote Required".
    ========================================================= */
 (function () {
   "use strict";
 
   /* ---------------- BUSINESS RULES (edit these) ---------------- */
-  var CONFIG = {
-    currency: "৳",
-    ratesNote: "",          // e.g. "Rates effective 1 Nov 2026, valid for 30 days"
-    roundStep: 0,           // chargeable-weight rounding in kg (0 = no rounding, 0.5 = nearest 0.5 kg up)
-    maxCourierKg: 70,       // above this, manual quote
-    maxSideCm: 120,         // any side above this, manual quote
-    /* CONFIRM these divisors with JP Express / the carrier. Common industry values shown. */
-    divisors: { courier: 5000, air: 6000 },
+;
 
-    /* Add real rates to switch estimates on. Keys are lowercase.
-       Example:
-       rates: {
-         courier: {
-           "united states": { base: 0, perKg: 0, fuelPct: 0, transit: "4–6 business days" }
-         }
-       }
-    */
-    rates: null
-  };
-
-  var SERVICES = {
-    courier: "International Courier",
-    air: "Air Freight",
-    sea: "Sea Freight"
-  };
-  var MODES = {
-    document:   { label: "Document",   services: ["courier"],               dims: false, quote: false, hint: "For letters and paperwork. Dimensions are not needed." },
-    parcel:     { label: "Parcel",     services: ["courier", "air"],        dims: true,  quote: false, hint: "For personal parcels and gifts." },
-    commercial: { label: "Commercial", services: ["courier", "air", "sea"], dims: true,  quote: true,  hint: "Commercial shipments are normally priced by quote." },
-    freight:    { label: "Freight",    services: ["air", "sea"],            dims: true,  quote: true,  hint: "Larger cargo is priced by quote." }
-  };
+;
+;
 
   /* ---------------- helpers ---------------- */
   var $ = function (id) { return document.getElementById(id); };
@@ -1810,15 +1587,15 @@ if (tableSearch && tableBody) {
     });
   }
   function kg(n) { return (Math.round(n * 100) / 100).toLocaleString("en-US", { maximumFractionDigits: 2 }) + " kg"; }
-  function money(n) { return CONFIG.currency + " " + Math.round(n).toLocaleString("en-US"); }
-  function mode() { return MODES[form.elements.mode.value]; }
+  function money(n) { return JP_PRICING_CONFIG.currency + " " + Math.round(n).toLocaleString("en-US"); }
+  function mode() { return JP_PRICING_MODES[form.elements.mode.value]; }
 
   /* ---------------- mode handling ---------------- */
   function applyMode() {
     var m = mode();
     var prev = els.service.value;
     els.service.innerHTML = m.services.map(function (k) {
-      return '<option value="' + k + '">' + SERVICES[k] + "</option>";
+      return '<option value="' + k + '">' + JP_PRICING_SERVICES[k] + "</option>";
     }).join("");
     if (m.services.indexOf(prev) > -1) els.service.value = prev;
     els.dims.hidden = !m.dims;
@@ -1838,7 +1615,7 @@ if (tableSearch && tableBody) {
   }
 
   function validate(d) {
-    var m = MODES[d.mode];
+    var m = JP_PRICING_MODES[d.mode];
     if (!d.dest) return "Please enter the destination country.";
     if (!(d.weight > 0)) return "Please enter the shipment weight in kg.";
     if (m.dims) {
@@ -1850,23 +1627,23 @@ if (tableSearch && tableBody) {
   }
 
   function compute(d) {
-    var m = MODES[d.mode];
+    var m = JP_PRICING_MODES[d.mode];
     var hasDims = m.dims && d.l > 0 && d.w > 0 && d.h > 0;
     var cm3 = hasDims ? d.l * d.w * d.h * d.pcs : 0;
-    var divisor = CONFIG.divisors[d.svc];
+    var divisor = JP_PRICING_CONFIG.divisors[d.svc];
     var vol = hasDims && divisor ? cm3 / divisor : 0;
     var cw = Math.max(d.weight, vol);
-    if (CONFIG.roundStep > 0) cw = Math.ceil(cw / CONFIG.roundStep) * CONFIG.roundStep;
+    if (JP_PRICING_CONFIG.roundStep > 0) cw = Math.ceil(cw / JP_PRICING_CONFIG.roundStep) * JP_PRICING_CONFIG.roundStep;
 
     var reasons = [];
     if (m.quote) reasons.push("Commercial and freight shipments are priced by quote.");
     if (d.svc === "sea") reasons.push("Sea freight is priced by volume and route, so a quote is needed.");
-    if (d.svc === "courier" && cw > CONFIG.maxCourierKg) reasons.push("Shipments over " + CONFIG.maxCourierKg + " kg need a manual review.");
-    if (hasDims && Math.max(d.l, d.w, d.h) > CONFIG.maxSideCm) reasons.push("Large dimensions need a manual review.");
+    if (d.svc === "courier" && cw > JP_PRICING_CONFIG.maxCourierKg) reasons.push("Shipments over " + JP_PRICING_CONFIG.maxCourierKg + " kg need a manual review.");
+    if (hasDims && Math.max(d.l, d.w, d.h) > JP_PRICING_CONFIG.maxSideCm) reasons.push("Large dimensions need a manual review.");
 
     var rate = null;
-    if (!reasons.length && CONFIG.rates && CONFIG.rates[d.svc]) {
-      rate = CONFIG.rates[d.svc][d.dest.toLowerCase()] || null;
+    if (!reasons.length && JP_PRICING_CONFIG.rates && JP_PRICING_CONFIG.rates[d.svc]) {
+      rate = JP_PRICING_CONFIG.rates[d.svc][d.dest.toLowerCase()] || null;
     }
     if (!reasons.length && !rate) reasons.push("We need to review your shipment details to provide an accurate quote.");
 
@@ -1888,7 +1665,7 @@ if (tableSearch && tableBody) {
   function render(r) {
     var d = r.d, estimated = r.total !== undefined;
     var wa = "Hello JP Express, I'd like a shipping quote.\n" +
-      "Shipment type: " + MODES[d.mode].label + "\nService: " + SERVICES[d.svc] + "\nDestination: " + d.dest +
+      "Shipment type: " + JP_PRICING_MODES[d.mode].label + "\nService: " + JP_PRICING_SERVICES[d.svc] + "\nDestination: " + d.dest +
       "\nActual weight: " + kg(d.weight) + "\nChargeable weight: " + kg(r.cw) +
       (r.hasDims ? "\nSize: " + d.l + " x " + d.w + " x " + d.h + " cm x " + d.pcs + " pc" : "");
 
@@ -1896,7 +1673,7 @@ if (tableSearch && tableBody) {
       ? '<span class="prc-badge is-est">Estimated</span><div class="prc-price">' + money(r.total) + '</div><p class="prc-sub">Estimated shipping cost. Final price is confirmed in your quote.</p>'
       : '<span class="prc-badge is-quote">Quote Required</span><div class="prc-price prc-price--quote">Request a Quote</div><p class="prc-sub">' + esc(r.reasons[0]) + "</p>";
 
-    var rows = row("Service", esc(SERVICES[d.svc])) + row("Destination", esc(d.dest)) +
+    var rows = row("Service", esc(JP_PRICING_SERVICES[d.svc])) + row("Destination", esc(d.dest)) +
       row("Actual weight", kg(d.weight)) +
       (r.hasDims ? (d.svc === "sea" ? row("Volume", (Math.round(r.cbm * 1000) / 1000) + " CBM") : row("Volumetric weight", kg(r.vol))) : "") +
       row("Chargeable weight", kg(r.cw)) +
@@ -1910,7 +1687,7 @@ if (tableSearch && tableBody) {
     els.result.innerHTML =
       '<div class="prc-res">' + head + '<div class="prc-kvs">' + rows + "</div>" + breakdown +
       '<p class="prc-fine"><i class="fa-solid fa-circle-info"></i> Duties, taxes, customs charges and extra services are not included unless stated in your quote.' +
-      (CONFIG.ratesNote ? " " + esc(CONFIG.ratesNote) : "") + "</p>" +
+      (JP_PRICING_CONFIG.ratesNote ? " " + esc(JP_PRICING_CONFIG.ratesNote) : "") + "</p>" +
       '<div class="prc-cta">' +
       '<a class="btn-main btn-red" href="index.html#quote">Request a Quote <i class="fa-solid fa-arrow-right"></i></a>' +
       '<a class="btn-main btn-dark-outline prc-wa" target="_blank" rel="noopener" href="https://wa.me/8801681637836?text=' + encodeURIComponent(wa) + '"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
@@ -1948,243 +1725,7 @@ if (tableSearch && tableBody) {
 })();
 
 /* =========================================================
-   CONSOLIDATED MODULE: tracking.js
-   ========================================================= */
-(function () {
-"use strict";
-
-/* ============ DEMO DATA ============ */
-/* Replace this block with a real API call (fetch) once the backend endpoint exists.
-   Keying is uppercase tracking number -> shipment record. */
-const STAGES = ['Order Received', 'Picked Up', 'In Transit', 'Customs', 'Out for Delivery', 'Delivered'];
-
-const DEMO_SHIPMENTS = {
-  'JPE123456789': {
-    status: 'In Transit', badgeClass: 'st-transit', currentStage: 2,
-    sender: 'Anisur Rahman', receiver: 'Michael Carter',
-    origin: 'Bangladesh — Dhaka', destination: 'United States — New York',
-    service: 'International Courier', weight: '2.4 kg', booked: 'Aug 14, 2026', eta: 'Aug 24, 2026',
-    history: [
-      { title: 'In Transit', date: 'Aug 16, 2026 · 6:15 PM', location: 'Hazrat Shahjalal Intl Airport, Dhaka', note: 'Departed origin facility, en route to transit hub.' },
-      { title: 'Picked Up', date: 'Aug 15, 2026 · 9:40 AM', location: 'Gulshan-1, Dhaka', note: 'Parcel collected from sender address.' },
-      { title: 'Order Received', date: 'Aug 14, 2026 · 11:20 AM', location: 'Dhaka HQ', note: 'Shipment booked and confirmed.' }
-    ],
-    notifications: [
-      { tag: 'delivery_alert', alert: true, title: 'In Transit Update', text: 'Your shipment has left Dhaka and is en route to the transit hub.', time: 'Aug 16, 2026 · 6:20 PM' },
-      { tag: 'info', title: 'Pickup Confirmed', text: 'Our courier collected your parcel successfully.', time: 'Aug 15, 2026 · 9:45 AM' }
-    ],
-    proof: { delivered: false }
-  },
-  'JPE998877665': {
-    status: 'Customs', badgeClass: 'st-customs', currentStage: 3,
-    sender: 'Shirin Akter', receiver: 'Oliver Bennett',
-    origin: 'Bangladesh — Dhaka', destination: 'United Kingdom — London',
-    service: 'International Courier', weight: '1.1 kg', booked: 'Aug 12, 2026', eta: 'Aug 21, 2026',
-    history: [
-      { title: 'Customs', date: 'Aug 19, 2026 · 2:05 PM', location: 'London Gateway Customs', note: 'Shipment held for routine customs clearance.' },
-      { title: 'In Transit', date: 'Aug 17, 2026 · 8:30 AM', location: 'Dhaka → London', note: 'Departed origin facility.' },
-      { title: 'Picked Up', date: 'Aug 13, 2026 · 10:15 AM', location: 'Chattogram', note: 'Parcel collected from sender address.' },
-      { title: 'Order Received', date: 'Aug 12, 2026 · 4:50 PM', location: 'Dhaka HQ', note: 'Shipment booked and confirmed.' }
-    ],
-    notifications: [
-      { tag: 'delivery_alert', alert: true, title: 'Customs Hold', text: 'Your parcel is undergoing routine customs clearance.', time: 'Aug 19, 2026 · 2:10 PM' }
-    ],
-    proof: { delivered: false }
-  },
-  'JPE554433221': {
-    status: 'Delivered', badgeClass: 'st-delivered', currentStage: 5,
-    sender: 'Rahim Khan', receiver: 'Sara Al Marri',
-    origin: 'Bangladesh — Dhaka', destination: 'UAE — Dubai',
-    service: 'Air Freight', weight: '5.8 kg', booked: 'Aug 9, 2026', eta: 'Delivered Aug 17, 2026',
-    history: [
-      { title: 'Delivered', date: 'Aug 17, 2026 · 1:40 PM', location: 'Al Barsha, Dubai', note: 'Parcel delivered and signed for by receiver.' },
-      { title: 'Out for Delivery', date: 'Aug 17, 2026 · 9:00 AM', location: 'Dubai Local Hub', note: 'With courier for final delivery.' },
-      { title: 'Customs', date: 'Aug 15, 2026 · 3:20 PM', location: 'Dubai Customs', note: 'Cleared customs successfully.' },
-      { title: 'In Transit', date: 'Aug 11, 2026 · 7:00 AM', location: 'Dhaka → Dubai', note: 'Departed origin facility.' },
-      { title: 'Picked Up', date: 'Aug 9, 2026 · 2:30 PM', location: 'Sylhet', note: 'Parcel collected from sender address.' },
-      { title: 'Order Received', date: 'Aug 9, 2026 · 10:05 AM', location: 'Dhaka HQ', note: 'Shipment booked and confirmed.' }
-    ],
-    notifications: [
-      { tag: 'delivery_alert', alert: true, title: 'Delivered', text: 'Your parcel was delivered successfully. Thank you for shipping with JP Express!', time: 'Aug 17, 2026 · 1:45 PM' }
-    ],
-    proof: {
-      delivered: true,
-      receivedBy: 'Sara Al Marri',
-      deliveredAt: 'Aug 17, 2026 · 1:40 PM',
-      location: 'Al Barsha, Dubai',
-      note: 'Parcel left with receiver at front door. ID verified by courier.'
-    }
-  }
-};
-
-/* Deterministic fallback so ANY tracking number typed in the demo still renders a result. */
-function buildFallback(id) {
-  const seed = Array.from(id).reduce((a, c) => a + c.charCodeAt(0), 0);
-  const stageIdx = seed % 5; // 0..4, avoid always "Delivered"
-  const labels = ['st-pending', 'st-pending', 'st-transit', 'st-customs', 'st-transit'];
-  return {
-    status: STAGES[stageIdx], badgeClass: labels[stageIdx], currentStage: stageIdx,
-    sender: 'Demo Sender', receiver: 'Demo Receiver',
-    origin: 'Bangladesh — Dhaka', destination: 'Demo Destination Country',
-    service: 'International Courier', weight: '1.8 kg', booked: 'Aug 12, 2026', eta: 'Aug 22, 2026',
-    history: STAGES.slice(0, stageIdx + 1).reverse().map((s, i) => ({
-      title: s, date: 'Aug ' + (12 + stageIdx - i) + ', 2026 · 10:00 AM', location: 'Dhaka HQ', note: s + ' stage update.'
-    })),
-    notifications: [
-      { tag: 'info', title: 'Status Update', text: 'This is demo tracking data for an unrecognized ID.', time: 'Just now' }
-    ],
-    proof: { delivered: false }
-  };
-}
-
-/* ============ RENDER ============ */
-const els = {
-  input: document.getElementById('trkInput'),
-  form: document.getElementById('trkSearchForm'),
-  content: document.getElementById('trkContent'),
-  empty: document.getElementById('trkEmpty'),
-  parcelId: document.getElementById('trkParcelId'),
-  badge: document.getElementById('trkBadge'),
-  badgeText: document.getElementById('trkBadgeText'),
-  eta: document.getElementById('trkEta'),
-  stageList: document.getElementById('trkStageList'),
-  stageFill: document.getElementById('trkStageFill'),
-  histList: document.getElementById('trkHistList'),
-  histCount: document.getElementById('trkHistCount'),
-  proofBody: document.getElementById('trkProofBody'),
-  infoList: document.getElementById('trkInfoList'),
-  notifList: document.getElementById('trkNotifList')
-};
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
-}
-
-function renderStages(currentStage) {
-  els.stageList.innerHTML = STAGES.map((s, i) =>
-    '<li class="' + (i <= currentStage ? 'done' : '') + '"><span class="t-dot"><i class="bi bi-check"></i></span><span class="t-lbl">' + s + '</span></li>'
-  ).join('');
-  const pct = (currentStage / (STAGES.length - 1)) * 100;
-  const isMobile = window.innerWidth < 768;
-  if (els.stageFill) { isMobile ? els.stageFill.style.height = pct + '%' : els.stageFill.style.width = pct + '%'; }
-}
-
-function renderHistory(history, pendingStages) {
-  els.histCount.textContent = history.length + pendingStages.length;
-  const done = history.map((h, i) =>
-    '<li class="is-done' + (i === 0 ? ' is-current' : '') + '">' +
-      '<div class="trk-hist-title">' + escapeHtml(h.title) + '</div>' +
-      '<div class="trk-hist-meta"><span><i class="bi bi-calendar3"></i>' + escapeHtml(h.date) + '</span><span><i class="bi bi-geo-alt-fill"></i>' + escapeHtml(h.location) + '</span></div>' +
-      '<div class="trk-hist-note"><i class="bi bi-chat-left-text"></i>' + escapeHtml(h.note) + '</div>' +
-    '</li>'
-  ).join('');
-  const pending = pendingStages.map(s =>
-    '<li class="is-pending">' +
-      '<div class="trk-hist-title">' + escapeHtml(s) + '</div>' +
-      '<div class="trk-hist-meta"><span><i class="bi bi-hourglass-split"></i>Pending</span></div>' +
-    '</li>'
-  ).join('');
-  els.histList.innerHTML = done + pending;
-}
-
-function renderInfo(id, data) {
-  const rows = [
-    ['Parcel ID', id], ['Sender Name', data.sender], ['Receiver Name', data.receiver],
-    ['Origin', data.origin], ['Destination', data.destination],
-    ['Service', data.service], ['Weight', data.weight], ['Booked On', data.booked]
-  ];
-  els.infoList.innerHTML = rows.map(r => '<li><span class="lbl">' + r[0] + '</span><span class="val">' + escapeHtml(r[1]) + '</span></li>').join('');
-}
-
-function renderNotifications(list) {
-  els.notifList.innerHTML = list.map(n =>
-    '<li><span class="trk-notif-tag' + (n.alert ? ' tag-alert' : '') + '">' + escapeHtml(n.tag) + '</span>' +
-      '<strong>' + escapeHtml(n.title) + '</strong>' +
-      '<p>' + escapeHtml(n.text) + '</p>' +
-      '<time>' + escapeHtml(n.time) + '</time></li>'
-  ).join('');
-}
-
-function renderProof(data) {
-  if (!els.proofBody) return;
-  const p = data.proof;
-  if (p && p.delivered) {
-    els.proofBody.innerHTML =
-      '<div class="trk-proof-grid">' +
-        '<div class="trk-proof-tile"><i class="bi bi-camera-fill"></i><span>Delivery Photo Captured</span></div>' +
-        '<div class="trk-proof-tile"><i class="bi bi-pen-fill"></i><span>Signature Captured</span></div>' +
-      '</div>' +
-      '<ul class="trk-info-list">' +
-        '<li><span class="lbl">Received By</span><span class="val">' + escapeHtml(p.receivedBy) + '</span></li>' +
-        '<li><span class="lbl">Delivered On</span><span class="val">' + escapeHtml(p.deliveredAt) + '</span></li>' +
-        '<li><span class="lbl">Location</span><span class="val">' + escapeHtml(p.location) + '</span></li>' +
-      '</ul>' +
-      '<div class="trk-hist-note mt-2"><i class="bi bi-chat-left-text"></i>' + escapeHtml(p.note) + '</div>';
-  } else {
-    els.proofBody.innerHTML =
-      '<div class="trk-proof-empty"><i class="bi bi-hourglass-split"></i>' +
-      '<p>Delivery proof — photo &amp; signature — will appear here once this parcel is marked <strong>Delivered</strong>.</p></div>';
-  }
-}
-
-function badgeIcon(status) {
-  if (status === 'Delivered') return 'bi-patch-check-fill';
-  if (status === 'Customs') return 'bi-clipboard2-check';
-  if (status === 'Out for Delivery') return 'bi-truck';
-  return 'bi-geo-alt-fill';
-}
-
-function renderShipment(id, data) {
-  els.empty.classList.add('d-none');
-  els.content.classList.remove('d-none');
-  els.parcelId.textContent = id;
-  els.badge.className = 'trk-badge ' + data.badgeClass;
-  els.badge.innerHTML = '<span class="dot"></span> ' + escapeHtml(data.status.toUpperCase());
-  els.eta.textContent = data.eta;
-  renderStages(data.currentStage);
-  renderHistory(data.history, STAGES.slice(data.currentStage + 1));
-  renderProof(data);
-  renderInfo(id, data);
-  renderNotifications(data.notifications);
-}
-
-function showEmpty() {
-  els.content.classList.add('d-none');
-  els.empty.classList.remove('d-none');
-}
-
-function lookup(rawId) {
-  const id = rawId.trim().toUpperCase();
-  if (!id) { showEmpty(); return; }
-  const data = DEMO_SHIPMENTS[id] || buildFallback(id);
-  renderShipment(id, data);
-  const url = new URL(window.location);
-  url.searchParams.set('tracking', id);
-  window.history.replaceState({}, '', url);
-}
-
-/* ============ INIT ============ */
-const params = new URLSearchParams(window.location.search);
-const initial = params.get('tracking') || '';
-if (els.input) els.input.value = initial;
-if (initial) lookup(initial); else showEmpty();
-
-if (els.form) {
-  els.form.addEventListener('submit', e => {
-    e.preventDefault();
-    lookup(els.input.value);
-  });
-}
-
-window.addEventListener('resize', () => {
-  const id = (els.input && els.input.value) || initial;
-  const data = id ? (DEMO_SHIPMENTS[id.toUpperCase()] || buildFallback(id.toUpperCase())) : null;
-  if (data) renderStages(data.currentStage);
-});
-
-})();
-
-/* =========================================================
+   PAGE: contact.html
    CONSOLIDATED MODULE: contact.js
    ========================================================= */
 (function () {
@@ -2195,33 +1736,10 @@ window.addEventListener('resize', () => {
    Load AFTER js/main.js
    ========================================================= */
 
-/* ---------- Settings (edit here) ---------- */
-var CONFIG = {
-  /* Laravel route that stores the lead, e.g. '/contact'.
-     Leave '' until the backend exists: the form then sends the
-     inquiry to WhatsApp so no lead is lost. */
-  endpoint: '',
-  waPhone: '8801681637836',
-  openHour: 9,        /* Asia/Dhaka, from the footer: "9am to 11pm" */
-  closeHour: 23,
-  closedDays: []      /* 0=Sun ... 6=Sat, e.g. [5] if Friday is closed */
-};
 
 var $ = function (s, r) { return (r || document).querySelector(s); };
 var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-/* ---------- Request types ---------- */
-var INTENTS = {
-  general:  { label: 'General Inquiry',  hint: 'Ask us anything about JP Express services.',                                  ph: 'Tell us how we can help',                              show: [] },
-  quote:    { label: 'Get a Quote',      hint: 'Tell us what you are shipping and where, and we will prepare a quote.',        ph: 'What are you shipping? Add size or quantity if you know', show: ['company', 'ship', 'dest', 'weight'] },
-  pickup:   { label: 'Book Pickup',      hint: 'Add your pickup address and shipment details so we can confirm the pickup.',   ph: 'Preferred pickup date or time, and anything we should know', show: ['ship', 'dest', 'weight', 'pickup'], need: ['pickup'] },
-  business: { label: 'Business Inquiry', hint: 'For regular shippers, sellers and companies needing ongoing logistics support.', ph: 'Tell us about your business and shipping needs',      show: ['company', 'ship', 'dest'] },
-  export:   { label: 'Export Inquiry',   hint: 'Tell us what you export and where it is going.',                               ph: 'Product, destination and any documents you already have', show: ['company', 'ship', 'dest', 'weight'] },
-  import:   { label: 'Import Inquiry',   hint: 'Tell us what you want to import and where it ships from.',                     ph: 'Product, supplier country and quantity',               show: ['company', 'ship', 'dest', 'weight'], destLabel: 'Origin Country' },
-  support:  { label: 'Shipment Support', hint: 'Already shipping with us? Add your tracking number so we can find your shipment.', ph: 'What do you need help with?',                       show: ['track'] }
-};
-var FIELD_ORDER = ['company', 'ship', 'dest', 'weight', 'pickup', 'track'];
 
 /* ---------- Live support hours (Asia/Dhaka) ---------- */
 function dhakaNow() {
@@ -2239,7 +1757,7 @@ function updateHours() {
   var badge = $('#cntBadge'), text = $('#cntBadgeText'), msg = $('#cntLiveMsg');
   if (!badge || !text || !msg) return;
   var t = dhakaNow();
-  var open = CONFIG.closedDays.indexOf(t.d) === -1 && t.h >= CONFIG.openHour && t.h < CONFIG.closeHour;
+  var open = JP_CONTACT_CONFIG.closedDays.indexOf(t.d) === -1 && t.h >= JP_CONTACT_CONFIG.openHour && t.h < JP_CONTACT_CONFIG.closeHour;
   badge.className = 'cnt-badge ' + (open ? 'is-open' : 'is-closed');
   text.textContent = open ? 'We are open now' : 'Currently closed';
   msg.textContent = open
@@ -2260,13 +1778,13 @@ var current = 'general';
 function val(id) { var el = document.getElementById(id); return el && !el.closest('[hidden]') ? el.value.trim() : ''; }
 
 function applyIntent(key) {
-  if (!INTENTS[key]) key = 'general';
+  if (!JP_CONTACT_INTENTS[key]) key = 'general';
   current = key;
-  var cfg = INTENTS[key];
+  var cfg = JP_CONTACT_INTENTS[key];
   hint.textContent = cfg.hint;
   msgField.placeholder = cfg.ph;
   destLabel.textContent = cfg.destLabel || 'Destination Country';
-  FIELD_ORDER.forEach(function (f) {
+  JP_CONTACT_FIELD_ORDER.forEach(function (f) {
     var wrap = $('[data-field="' + f + '"]');
     if (!wrap) return;
     var on = cfg.show.indexOf(f) !== -1;
@@ -2293,7 +1811,7 @@ $$('input[name="intent"]').forEach(function (r) {
 })();
 
 /* Primary button wording depends on whether a backend is connected */
-if (CONFIG.endpoint) {
+if (JP_CONTACT_CONFIG.endpoint) {
   waBtn.hidden = false;
 } else {
   $('.cnt-btn-label', submitBtn).textContent = 'Send via WhatsApp';
@@ -2318,7 +1836,7 @@ function setPickupError(text) {
   $('.cnt-err', wrap).textContent = text || '';
 }
 function validate() {
-  var cfg = INTENTS[current], bad = [];
+  var cfg = JP_CONTACT_INTENTS[current], bad = [];
   var name = $('#fName').value.trim(), phone = $('#fPhone').value.trim();
   var email = $('#fEmail').value.trim(), msg = msgField.value.trim();
   var weight = $('#fWeight').value;
@@ -2379,7 +1897,7 @@ $$('.cnt-field input,.cnt-field textarea,.cnt-field select', form).forEach(funct
 /* ---------- Build the message ---------- */
 function collect() {
   return {
-    intent: INTENTS[current].label,
+    intent: JP_CONTACT_INTENTS[current].label,
     name: $('#fName').value.trim(),
     phone: $('#fPhone').value.trim(),
     email: $('#fEmail').value.trim(),
@@ -2404,8 +1922,8 @@ function buildText(d) {
 }
 function openWhatsApp(text) {
   var m = encodeURIComponent(text);
-  var url = isMobile ? 'https://wa.me/' + CONFIG.waPhone + '?text=' + m
-                     : 'https://web.whatsapp.com/send?phone=' + CONFIG.waPhone + '&text=' + m;
+  var url = isMobile ? 'https://wa.me/' + JP_CONTACT_CONFIG.waPhone + '?text=' + m
+                     : 'https://web.whatsapp.com/send?phone=' + JP_CONTACT_CONFIG.waPhone + '&text=' + m;
   window.open(url, '_blank', 'noopener');
 }
 
@@ -2443,7 +1961,7 @@ function sendToServer(data) {
   var headers = { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
   if (token) headers['X-CSRF-TOKEN'] = token.getAttribute('content');
   setLoading(true);
-  fetch(CONFIG.endpoint, { method: 'POST', headers: headers, body: fd, credentials: 'same-origin' })
+  fetch(JP_CONTACT_CONFIG.endpoint, { method: 'POST', headers: headers, body: fd, credentials: 'same-origin' })
     .then(function (res) {
       return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, status: res.status, json: j }; });
     })
@@ -2479,7 +1997,7 @@ form.addEventListener('submit', function (e) {
   }
   if (!validate()) return;
   var data = collect();
-  if (CONFIG.endpoint) {
+  if (JP_CONTACT_CONFIG.endpoint) {
     sendToServer(data);
   } else {
     openWhatsApp(buildText(data));
@@ -2520,3 +2038,711 @@ if (copyBtn) {
 
 })();
 
+
+/* =========================================================
+   PAGE: business.html
+   BUSINESS PAGE LOGIC
+   ========================================================= */
+(function () {
+"use strict";
+
+/* =========================================================
+   JP EXPRESS - BUSINESS PAGE LOGIC
+   Load AFTER js/main.js
+   ========================================================= */
+
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var behavior = reduced ? 'auto' : 'smooth';
+var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+/* ---------- Sticky section nav: active state + keep chip visible ---------- */
+(function catNav() {
+  var inner = $('.biz-catnav-inner');
+  var links = $$('.biz-catlink');
+  var byId = {};
+  links.forEach(function (l) { byId[l.getAttribute('href').slice(1)] = l; });
+  var sections = Object.keys(byId).map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var lockUntil = 0;
+
+  function setActive(link) {
+    if (!link) return;
+    links.forEach(function (l) {
+      var on = l === link;
+      l.classList.toggle('active', on);
+      if (on) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current');
+    });
+    if (inner && inner.scrollWidth > inner.clientWidth) {
+      var left = link.offsetLeft - (inner.clientWidth - link.offsetWidth) / 2;
+      inner.scrollTo({ left: Math.max(0, left), behavior: behavior });
+    }
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (Date.now() < lockUntil) return;
+      entries.forEach(function (e) { if (e.isIntersecting) setActive(byId[e.target.id]); });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+  links.forEach(function (l) {
+    l.addEventListener('click', function () { lockUntil = Date.now() + 900; setActive(l); });
+  });
+})();
+
+/* ---------- Who we serve: tabs ---------- */
+(function tabs() {
+  var wrap = $('#bizAud');
+  if (!wrap) return;
+  var tabs = $$('.biz-tab', wrap);
+  var panels = tabs.map(function (t) { return document.getElementById('panel-' + t.getAttribute('data-key')); });
+  wrap.classList.add('is-js');
+
+  function show(key, focus) {
+    tabs.forEach(function (t, i) {
+      var on = t.getAttribute('data-key') === key;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      if (panels[i]) panels[i].hidden = !on;
+      if (on && focus) t.focus();
+    });
+    var act = $('.biz-tab.active', wrap);
+    var bar = $('#bizTabs');
+    if (act && bar && bar.scrollWidth > bar.clientWidth) {
+      bar.scrollTo({ left: Math.max(0, act.offsetLeft - (bar.clientWidth - act.offsetWidth) / 2), behavior: behavior });
+    }
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { show(t.getAttribute('data-key')); });
+    t.addEventListener('keydown', function (e) {
+      var n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = tabs.length - 1;
+      if (n !== null) { e.preventDefault(); show(tabs[n].getAttribute('data-key'), true); }
+    });
+  });
+  show(tabs[0].getAttribute('data-key'));
+  window.bizShowTab = show;
+})();
+
+/* ---------- Quote form ---------- */
+var form = $('#bizForm');
+if (!form) return;
+var submitBtn = $('#bizSubmit'), waBtn = $('#bizWaBtn'), statusEl = $('#bizStatus');
+function setSelect(sel, v) {
+  if (!v) return;
+  for (var i = 0; i < sel.options.length; i++) {
+    if (sel.options[i].value === v) { sel.value = v; return; }
+  }
+}
+
+/* Cards and tab buttons pre-fill the form, then scroll to it */
+$$('[data-solution]').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    var sol = a.getAttribute('data-solution'), type = a.getAttribute('data-type');
+    setSelect($('#bSolution'), sol);
+    if (type) setSelect($('#bType'), type);
+    var target = $('#bizQuote');
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: behavior, block: 'start' });
+      if (history.replaceState) history.replaceState(null, '', '#bizQuote');
+      setTimeout(function () { var c = $('#bCompany'); if (c && !c.value) c.focus({ preventScroll: true }); }, reduced ? 0 : 600);
+    }
+  });
+});
+
+/* Prefill from the link: business.html?type=exporter&solution=export */
+(function prefill() {
+  var q = new URLSearchParams(window.location.search);
+  if (q.get('solution')) setSelect($('#bSolution'), q.get('solution'));
+  if (q.get('type')) {
+    setSelect($('#bType'), q.get('type'));
+    if (window.bizShowTab && $('#tab-' + q.get('type'))) window.bizShowTab(q.get('type'));
+  }
+  if (q.get('solution') || q.get('type')) {
+    setTimeout(function () { var s = $('#bizQuote'); if (s && !window.location.hash) s.scrollIntoView({ behavior: behavior, block: 'start' }); }, 350);
+  }
+})();
+
+if (JP_BUSINESS_CONFIG.endpoint) {
+  waBtn.hidden = false;
+} else {
+  $('.biz-btn-label', submitBtn).textContent = 'Send Quote Request via WhatsApp';
+  submitBtn.querySelector('i').className = 'fa-brands fa-whatsapp';
+}
+
+/* ---------- Validation ---------- */
+function setError(key, text) {
+  var wrap = $('[data-f="' + key + '"]', form);
+  if (!wrap) return;
+  wrap.classList.toggle('has-error', !!text);
+  var err = $('.biz-err', wrap);
+  if (err) err.textContent = text || '';
+  $$('input,select,textarea', wrap).forEach(function (el) {
+    if (text) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+  });
+}
+function validate() {
+  var bad = [];
+  var company = $('#bCompany').value.trim(), person = $('#bPerson').value.trim();
+  var phone = $('#bPhone').value.trim(), email = $('#bEmail').value.trim();
+
+  setError('company', company.length < 2 ? 'Please enter your company name.' : '');
+  if (company.length < 2) bad.push('#bCompany');
+  setError('person', person.length < 2 ? 'Please enter a contact name.' : '');
+  if (person.length < 2) bad.push('#bPerson');
+
+  var digits = phone.replace(/\D/g, '');
+  var phoneOk = /^[+0-9\s().-]+$/.test(phone) && digits.length >= 7 && digits.length <= 15;
+  setError('phone', phoneOk ? '' : 'Enter a valid phone number, e.g. +880 1XXX XXXXXX.');
+  if (!phoneOk) bad.push('#bPhone');
+
+  var emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  setError('email', emailOk ? '' : 'Enter a valid email address.');
+  if (!emailOk) bad.push('#bEmail');
+
+  var consent = $('#bConsent').checked;
+  setError('consent', consent ? '' : 'Please tick the box so we can contact you.');
+  if (!consent) bad.push('#bConsent');
+
+  if (bad.length) {
+    var first = bad.map(function (s) { return $(s); }).sort(function (a, b) {
+      return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+    })[0];
+    if (first) first.focus();
+  }
+  return bad.length === 0;
+}
+$$('.biz-f input,.biz-f textarea,.biz-f select', form).forEach(function (el) {
+  el.addEventListener(el.type === 'checkbox' || el.tagName === 'SELECT' ? 'change' : 'input', function () {
+    var w = el.closest('.biz-f');
+    if (w && w.classList.contains('has-error')) { w.classList.remove('has-error'); el.removeAttribute('aria-invalid'); }
+  });
+});
+
+/* ---------- Message ---------- */
+function opt(id) { var el = document.getElementById(id); return el ? el.options[el.selectedIndex].text : ''; }
+function collect() {
+  return {
+    company: $('#bCompany').value.trim(),
+    contact_person: $('#bPerson').value.trim(),
+    phone: $('#bPhone').value.trim(),
+    email: $('#bEmail').value.trim(),
+    business_type: $('#bType').value ? opt('bType') : '',
+    solution: JP_BUSINESS_SOLUTIONS[$('#bSolution').value] || '',
+    product: $('#bProduct').value.trim(),
+    countries: $('#bDest').value.trim(),
+    frequency: $('#bFreq').value,
+    volume: $('#bVolume').value.trim(),
+    message: $('#bMsg').value.trim()
+  };
+}
+function buildText(d) {
+  var rows = [
+    ['Company', d.company], ['Contact person', d.contact_person], ['Phone', d.phone], ['Email', d.email],
+    ['Business type', d.business_type], ['Need', d.solution], ['Product', d.product], ['Destinations', d.countries],
+    ['Frequency', d.frequency], ['Weight / quantity', d.volume], ['Requirements', d.message]
+  ];
+  return 'Hi JP Express, I would like a business quote.\n' + rows.filter(function (r) { return r[1]; })
+    .map(function (r) { return r[0] + ': ' + r[1]; }).join('\n');
+}
+function openWhatsApp(text) {
+  var m = encodeURIComponent(text);
+  var url = isMobile ? 'https://wa.me/' + JP_BUSINESS_CONFIG.waPhone + '?text=' + m
+                     : 'https://web.whatsapp.com/send?phone=' + JP_BUSINESS_CONFIG.waPhone + '&text=' + m;
+  window.open(url, '_blank', 'noopener');
+}
+function esc(t) { return String(t).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+function showStatus(type, title, body) {
+  statusEl.className = 'biz-status is-' + type;
+  statusEl.setAttribute('role', type === 'error' ? 'alert' : 'status');
+  statusEl.innerHTML = '<strong></strong><span></span>';
+  statusEl.firstChild.textContent = title;
+  statusEl.lastChild.innerHTML = body;
+  statusEl.hidden = false;
+  statusEl.focus({ preventScroll: true });
+  statusEl.scrollIntoView({ behavior: behavior, block: 'nearest' });
+}
+function track(solution) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'business_quote_submit', form_id: 'business_quote', solution: solution });
+}
+function setLoading(on) { submitBtn.classList.toggle('is-loading', on); submitBtn.disabled = on; }
+function resetForm() {
+  form.reset();
+  $$('.biz-f.has-error', form).forEach(function (w) { w.classList.remove('has-error'); });
+}
+function retryLink(data) {
+  var a = $('#bizRetryWa');
+  if (a) a.addEventListener('click', function (e) { e.preventDefault(); openWhatsApp(buildText(data)); });
+}
+
+function sendToServer(data) {
+  var fd = new FormData(form);
+  var token = $('meta[name="csrf-token"]');
+  var headers = { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' };
+  if (token && token.getAttribute('content')) headers['X-CSRF-TOKEN'] = token.getAttribute('content');
+  setLoading(true);
+  fetch(JP_BUSINESS_CONFIG.endpoint, { method: 'POST', headers: headers, body: fd, credentials: 'same-origin' })
+    .then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (j) { return { ok: res.ok, status: res.status, json: j }; });
+    })
+    .then(function (r) {
+      setLoading(false);
+      if (r.ok) {
+        track(data.solution);
+        if (r.json && r.json.redirect) { window.location.href = r.json.redirect; return; }
+        showStatus('success', 'Quote request received', 'Thank you, ' + esc(data.contact_person.split(' ')[0]) + '. Our business team will contact you on ' + esc(data.phone) + '.');
+        resetForm();
+      } else if (r.status === 422 && r.json && r.json.errors) {
+        var k = Object.keys(r.json.errors)[0];
+        showStatus('error', 'Please check your details', esc(r.json.errors[k][0]));
+      } else {
+        showStatus('error', 'We could not send your request', 'Please try again, or <a href="#" id="bizRetryWa">send it on WhatsApp</a>.');
+        retryLink(data);
+      }
+    })
+    .catch(function () {
+      setLoading(false);
+      showStatus('error', 'Connection problem', 'Check your internet and try again, or <a href="#" id="bizRetryWa">send it on WhatsApp</a>.');
+      retryLink(data);
+    });
+}
+
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  if ($('#bWeb').value) { showStatus('success', 'Quote request received', 'Thank you.'); return; } /* spam trap */
+  if (!validate()) return;
+  var data = collect();
+  if (JP_BUSINESS_CONFIG.endpoint) {
+    sendToServer(data);
+  } else {
+    openWhatsApp(buildText(data));
+    track(data.solution);
+    showStatus('info', 'Your request is ready in WhatsApp',
+      'Press <b>Send</b> in WhatsApp to deliver it to our business team. If WhatsApp did not open, call us on <a href="tel:+8801681637836">+880 1681 637836</a>.');
+  }
+});
+waBtn.addEventListener('click', function () {
+  if (!validate()) return;
+  var data = collect();
+  openWhatsApp(buildText(data));
+  track(data.solution);
+  showStatus('info', 'Your request is ready in WhatsApp', 'Press <b>Send</b> in WhatsApp to deliver it to our business team.');
+});
+
+})();
+
+/* =========================================================
+   PAGE: resources.html
+   RESOURCES PAGE LOGIC
+   ========================================================= */
+/* =========================================================
+   CONSOLIDATED MODULE: resources.js
+   Resources page: sticky section nav, guide search + topic filter,
+   destination quick guide (from COUNTRY_DATA), download center,
+   latest articles (from BLOG_POSTS).
+   ========================================================= */
+(function () {
+    "use strict";
+    if (!document.documentElement.classList.contains("page-resources")) return;
+
+    var $ = function (id) { return document.getElementById(id); };
+    var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var behavior = reduced ? "auto" : "smooth";
+
+
+    /* ---------- Settings: set `file` to a real path to turn a request into a download ---------- */
+        function esc(s) {
+        return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+    }
+    function wa(text) { return "https://wa.me/" + JP_SITE_CONFIG.whatsapp + "?text=" + encodeURIComponent(text); }
+
+    /* ---------- Sticky nav: scroll-spy ---------- */
+    var inner = document.querySelector(".res-catnav-inner");
+    var links = Array.prototype.slice.call(document.querySelectorAll(".res-catlink"));
+    var sections = links.map(function (l) { return document.querySelector(l.getAttribute("href")); }).filter(Boolean);
+    var lockUntil = 0;
+
+    function setActive(link) {
+        if (!link) return;
+        links.forEach(function (l) {
+            var on = l === link;
+            l.classList.toggle("active", on);
+            if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+        });
+        if (inner && inner.scrollWidth > inner.clientWidth) {
+            inner.scrollTo({ left: Math.max(0, link.offsetLeft - (inner.clientWidth - link.offsetWidth) / 2), behavior: behavior });
+        }
+    }
+    if (links.length && sections.length && "IntersectionObserver" in window) {
+        var spy = new IntersectionObserver(function (entries) {
+            if (Date.now() < lockUntil) return;
+            entries.forEach(function (en) {
+                if (en.isIntersecting) setActive(links.filter(function (l) { return l.getAttribute("href") === "#" + en.target.id; })[0]);
+            });
+        }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+        sections.forEach(function (s) { spy.observe(s); });
+    }
+    links.forEach(function (l) {
+        l.addEventListener("click", function () { lockUntil = Date.now() + 900; setActive(l); });
+    });
+
+    /* ---------- Guide library: search + topic filter ---------- */
+    var search = $("resSearch");
+    if (search) {
+        var clear = $("resClear"), count = $("resCount"), empty = $("resEmpty"), reset = $("resReset");
+        var guides = Array.prototype.slice.call(document.querySelectorAll(".res-guide"));
+        var chips = Array.prototype.slice.call(document.querySelectorAll(".res-chip"));
+        var state = { cat: "all", q: "" };
+        var qs = new URLSearchParams(window.location.search);
+        if (qs.get("q")) { state.q = qs.get("q").slice(0, 60); search.value = state.q; }
+        if (qs.get("cat") && chips.some(function (c) { return c.getAttribute("data-cat") === qs.get("cat"); })) state.cat = qs.get("cat");
+
+        guides.forEach(function (g) {
+            g._text = (g.textContent + " " + (g.getAttribute("data-tags") || "")).toLowerCase().replace(/\s+/g, " ");
+        });
+
+        var applyGuides = function () {
+            var terms = state.q.toLowerCase().split(/\s+/).filter(Boolean);
+            var shown = 0;
+            guides.forEach(function (g) {
+                var ok = (state.cat === "all" || g.getAttribute("data-cat") === state.cat) &&
+                    terms.every(function (t) { return g._text.indexOf(t) > -1; });
+                g.hidden = !ok;
+                if (ok) shown++;
+            });
+            if (terms.length && shown <= 2) guides.forEach(function (g) { if (!g.hidden) g.open = true; });
+            chips.forEach(function (c) {
+                var on = c.getAttribute("data-cat") === state.cat;
+                c.classList.toggle("active", on);
+                c.setAttribute("aria-pressed", on);
+            });
+            clear.hidden = !state.q;
+            empty.hidden = shown !== 0;
+            count.textContent = shown && (state.q || state.cat !== "all") ? "Showing " + shown + " of " + guides.length + " guides" : "";
+        };
+
+        search.addEventListener("input", function () { state.q = search.value.trim(); applyGuides(); });
+        clear.addEventListener("click", function () { search.value = ""; state.q = ""; applyGuides(); search.focus(); });
+        chips.forEach(function (c) {
+            c.addEventListener("click", function () { state.cat = c.getAttribute("data-cat"); applyGuides(); });
+        });
+        if (reset) reset.addEventListener("click", function () { state = { cat: "all", q: "" }; search.value = ""; applyGuides(); });
+        applyGuides();
+    }
+
+    /* ---------- Destination quick guide (data from COUNTRY_DATA) ---------- */
+    var destBody = $("resDestBody");
+    if (destBody && typeof COUNTRY_DATA !== "undefined") {
+        var dest = Object.keys(COUNTRY_DATA).map(function (s) {
+            var c = COUNTRY_DATA[s]; return { s: s, n: c.n, c: c.c, r: c.r, t: c.t };
+        }).sort(function (a, b) { return a.n.localeCompare(b.n); });
+        var dSearch = $("resDestSearch"), dEmpty = $("resDestEmpty"), dWrap = $("resDestWrap");
+
+        var renderDest = function () {
+            var q = dSearch ? dSearch.value.trim().toLowerCase() : "";
+            var out = dest.filter(function (d) { return !q || (d.n + " " + d.r).toLowerCase().indexOf(q) > -1; });
+            destBody.innerHTML = out.map(function (d) {
+                return '<tr><td data-label="Destination"><span class="res-dest"><img src="https://flagcdn.com/w80/' + esc(d.c) + '.png" width="28" height="28" alt="" loading="lazy">' + esc(d.n) + "</span></td>" +
+                    '<td data-label="Region">' + esc(d.r) + '</td><td data-label="Express estimate">' + esc(d.t) + "</td>" +
+                    '<td data-label=""><a class="res-g-link" href="country.html?c=' + encodeURIComponent(d.s) + '">View guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></td></tr>';
+            }).join("");
+            dEmpty.hidden = out.length > 0;
+            dWrap.hidden = out.length === 0;
+        };
+        if (dSearch) dSearch.addEventListener("input", renderDest);
+        renderDest();
+    } else if (destBody) {
+        var sec = $("destinations");
+        if (sec) sec.hidden = true;
+        var navLink = document.querySelector('.res-catlink[href="#destinations"]');
+        if (navLink) navLink.hidden = true;
+    }
+
+    /* ---------- Download center ---------- */
+    var dl = $("resDownloads");
+    if (dl) {
+        dl.innerHTML = JP_RESOURCE_DOWNLOADS.map(function (d) {
+            var action = d.file
+                ? '<a class="btn-main btn-red" href="' + esc(d.file) + '" download><i class="fa-solid fa-download" aria-hidden="true"></i> Download</a>'
+                : '<a class="btn-main res-btn-line" target="_blank" rel="noopener" href="' + wa("Hello JP Express, please send me: " + d.title) + '"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Request on WhatsApp</a>';
+            return '<li><div class="res-card"><span class="res-ico"><i class="fa-solid ' + esc(d.icon) + '" aria-hidden="true"></i></span><h3>' + esc(d.title) + "</h3><p>" + esc(d.text) + "</p>" + action + "</div></li>";
+        }).join("");
+    }
+
+    /* ---------- Latest articles (data from BLOG_POSTS) ---------- */
+    var art = $("resArticles");
+    if (art && typeof BLOG_POSTS !== "undefined") {
+        var cats = typeof BLOG_CATS !== "undefined" ? BLOG_CATS : {};
+        var fmt = function (d) { return new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" }); };
+        art.innerHTML = BLOG_POSTS.slice().sort(function (a, b) { return b.d.localeCompare(a.d); }).slice(0, 4).map(function (p) {
+            return '<li><a class="res-card" href="' + esc(p.h) + '"><span class="res-ico"><i class="fa-solid ' + esc(p.i) + '" aria-hidden="true"></i></span>' +
+                '<span class="res-card-tag">' + esc(cats[p.c] || "Article") + "</span><h3>" + esc(p.t) + "</h3><p>" + esc(p.x) + "</p>" +
+                '<span class="res-g-link">' + esc(fmt(p.d)) + " · " + esc(p.r) + ' min read <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>';
+        }).join("");
+    } else if (art) {
+        var aSec = $("articles");
+        if (aSec) aSec.hidden = true;
+        var aLink = document.querySelector('.res-catlink[href="#articles"]');
+        if (aLink) aLink.hidden = true;
+    }
+})();
+
+/* =========================================================
+   PAGE: track-shipment.html
+   TRACKING PAGE LOGIC
+   ========================================================= */
+(function () {
+  "use strict";
+
+    var params = new URLSearchParams(window.location.search);
+  var DEMO = params.get("demo") === "1";
+
+  /* ---------------- sample data (demo mode only) ---------------- */
+  /* ---------------- stage + status logic ---------------- */
+  function stageOf(s) {
+    s = String(s || "").toLowerCase();
+    if (/out for delivery/.test(s)) return 4;
+    if (/deliver/.test(s) && !/attempt|fail/.test(s)) return 5;
+    if (/custom/.test(s)) return 3;
+    if (/transit|depart|arriv|process|receiv|facility|hub|flight/.test(s)) return 2;
+    if (/pick/.test(s)) return 1;
+    if (/book|confirm|regist|schedul/.test(s)) return 0;
+    return -1;
+  }
+  function isProblem(s) { return /delay|hold|exception|attempt|return|cancel|fail/i.test(String(s || "")); }
+
+  /* ---------------- helpers ---------------- */
+  var $ = function (id) { return document.getElementById(id); };
+  var els = { form: $("trkForm"), input: $("trkInput"), btn: $("trkBtn"), err: $("trkError"), view: $("trkView"), demo: $("trkDemo") };
+  if (!els.form) return;
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function str(v) { return v == null ? "" : String(v); }
+  function wa(text) { return "https://wa.me/" + JP_TRACKING_CONFIG.whatsapp + "?text=" + encodeURIComponent(text); }
+  function waTrack(id) { return wa("Hello JP Express, I need an update on my shipment. Tracking number: " + id); }
+  function icon(c) { return '<i class="fa-solid ' + c + '" aria-hidden="true"></i>'; }
+
+  function normalize(j, id) {
+    var ev = Array.isArray(j.events) ? j.events : [];
+    return {
+      id: str(j.trackingNumber) || id, status: str(j.status), service: str(j.service), type: str(j.shipmentType),
+      origin: str(j.origin), destination: str(j.destination), booked: str(j.bookedOn), pickedUp: str(j.pickedUpOn),
+      weight: str(j.weight), pieces: j.pieces == null ? "" : str(j.pieces), eta: j.estimatedDelivery ? str(j.estimatedDelivery) : "",
+      updated: str(j.lastUpdated),
+      events: ev.map(function (e) {
+        return { status: str(e.status), date: str(e.date), time: str(e.time), location: str(e.location), note: str(e.description || e.note) };
+      }),
+      exception: j.exception && j.exception.title ? { title: str(j.exception.title), meaning: str(j.exception.meaning), action: str(j.exception.action) } : null,
+      pod: j.pod ? { on: str(j.pod.deliveredOn), location: str(j.pod.location), by: str(j.pod.receivedBy) } : null
+    };
+  }
+
+  function fetchOne(id) {
+    if (DEMO) {
+      return new Promise(function (res) {
+        setTimeout(function () { res(JP_TRACKING_DEMO_DATA[id] ? { state: "ok", data: normalize(JP_TRACKING_DEMO_DATA[id], id) } : { state: "notfound" }); }, 500);
+      });
+    }
+    if (!JP_TRACKING_CONFIG.apiUrl) return Promise.resolve({ state: "unconfigured" });
+    var ctrl = "AbortController" in window ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, JP_TRACKING_CONFIG.timeoutMs) : null;
+    var url = JP_TRACKING_CONFIG.apiUrl + (JP_TRACKING_CONFIG.apiUrl.indexOf("?") > -1 ? "&" : "?") + "tracking=" + encodeURIComponent(id);
+    return fetch(url, { headers: { Accept: "application/json" }, signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) {
+        if (r.status === 404) return { state: "notfound" };
+        if (!r.ok) throw new Error("bad");
+        return r.json().then(function (j) {
+          return j && j.found !== false ? { state: "ok", data: normalize(j, id) } : { state: "notfound" };
+        });
+      })
+      .catch(function () { return { state: "unavailable" }; })
+      .then(function (out) { if (timer) clearTimeout(timer); return out; });
+  }
+
+  /* ---------------- views ---------------- */
+  function supportBtns(id) {
+    return '<a class="btn-main btn-red" href="' + (id ? waTrack(id) : wa("Hello JP Express, I need help with tracking.")) + '" target="_blank" rel="noopener">' + '<i class="fa-brands fa-whatsapp" aria-hidden="true"></i>' + ' WhatsApp Support</a>' +
+      '<a class="btn-main btn-dark-outline trk-ghost" href="tel:' + JP_TRACKING_CONFIG.phone + '">' + icon("fa-phone") + " Call Us</a>";
+  }
+  function msgView(ic, title, text, extra) {
+    return '<div class="trk-state"><span class="trk-state-ico">' + icon(ic) + "</span><h2>" + title + "</h2><p>" + text + "</p>" + (extra || "") + "</div>";
+  }
+  var V = {
+    empty: function () {
+      return '<div class="trk-guide">' +
+        [["fa-hashtag", "Enter your number", "Type or paste your JP Express tracking number above."],
+         ["fa-magnifying-glass-location", "See your status", "View the latest update, timeline and shipment details."],
+         ["fa-headset", "Need help?", "Our team can help if something looks wrong."]]
+        .map(function (s, i) { return '<div class="trk-guide-item"><span class="trk-guide-ico">' + icon(s[0]) + "</span><h3>" + s[1] + "</h3><p>" + s[2] + "</p></div>"; }).join("") + "</div>";
+    },
+    loading: function () {
+      return '<div class="trk-skel" aria-hidden="true"><div class="sk sk-h"></div><div class="sk sk-l"></div><div class="sk sk-l sk-s"></div><div class="sk sk-b"></div></div><p class="visually-hidden">Loading tracking information</p>';
+    },
+    notfound: function (id) {
+      return msgView("fa-circle-question", "We couldn't find that shipment", "We couldn't find a shipment with the tracking number <strong>" + esc(id) + "</strong>.",
+        '<ul class="trk-tips"><li>' + icon("fa-check") + " Check the tracking number</li><li>" + icon("fa-check") + " Try again</li><li>" + icon("fa-check") + " Contact support if the problem continues</li></ul><div class=\"trk-actions\">" + supportBtns(id) + "</div>");
+    },
+    unavailable: function (id) {
+      return msgView("fa-triangle-exclamation", "Tracking is temporarily unavailable", "Tracking information is temporarily unavailable. Please try again later or contact support.",
+        '<div class="trk-actions"><button type="button" class="btn-main btn-red" data-retry>' + icon("fa-rotate-right") + " Try Again</button>" + supportBtns(id) + "</div>");
+    },
+    unconfigured: function (id) {
+      return msgView("fa-headset", "Online tracking is being set up", "For the latest status of <strong>" + esc(id) + "</strong>, please message or call our team and we will help you.",
+        '<div class="trk-actions">' + supportBtns(id) + "</div>");
+    }
+  };
+
+  function statusBadge(status) {
+    var cls = isProblem(status) ? "is-warn" : stageOf(status) === 5 ? "is-done" : "is-go";
+    return '<span class="trk-badge ' + cls + '"><span class="dot"></span>' + esc(status || "Status unavailable") + "</span>";
+  }
+
+  function stepper(current) {
+    return '<ol class="trk-steps" aria-label="Shipment progress">' + JP_TRACKING_STAGES.map(function (s, i) {
+      var c = i < current ? "done" : i === current ? "done current" : "";
+      return '<li class="' + c + '"' + (i === current ? ' aria-current="step"' : "") + '><span class="trk-dot">' + icon("fa-check") + '</span><span class="trk-step-l">' + s + "</span></li>";
+    }).join("") + "</ol>";
+  }
+
+  function kv(label, val) { return val ? '<li><span>' + label + "</span><strong>" + esc(val) + "</strong></li>" : ""; }
+
+  function resultView(d) {
+    var top = d.events[0];
+    var cur = Math.max(stageOf(d.status), d.events.reduce(function (m, e) { return Math.max(m, stageOf(e.status)); }, -1));
+    var problem = isProblem(d.status) || d.exception;
+    var explain = !problem && stageOf(d.status) > -1 ? JP_TRACKING_EXPLAIN[stageOf(d.status)] : "";
+    var scanned = d.events.length > 0;
+    var etaText = d.eta
+      ? '<strong>' + esc(d.eta) + '</strong><small>Estimated, not guaranteed</small>'
+      : "<strong>Not available</strong><small>Please contact JP Express for the latest delivery update.</small>";
+
+    var main = '<article class="trk-card trk-summary"><div class="trk-top"><div><span class="trk-lbl">Tracking number</span>' +
+      '<div class="trk-id"><strong id="trkId">' + esc(d.id) + '</strong><button type="button" class="trk-copy" data-copy="' + esc(d.id) + '" aria-label="Copy tracking number">' + icon("fa-copy") + "<span>Copy</span></button></div></div>" +
+      statusBadge(d.status) + "</div>" +
+      (explain ? '<p class="trk-explain">' + esc(explain) + "</p>" : "") +
+      '<div class="trk-facts"><div><span class="trk-lbl">Estimated delivery</span>' + etaText + "</div>" +
+      "<div><span class=\"trk-lbl\">Last updated</span><strong>" + esc(d.updated || (top ? (top.date + (top.time ? ", " + top.time : "")) : "Not available")) + "</strong></div></div>" +
+      (scanned && cur > -1 ? stepper(cur) : "") + "</article>";
+
+    if (!scanned) {
+      main += '<article class="trk-card trk-note">' + icon("fa-hourglass-half") + "<div><h3>Registered, no movement yet</h3><p>Your shipment has been registered, but the latest movement information is not yet available.</p></div></article>";
+    } else {
+      main += '<article class="trk-card trk-latest"><span class="trk-lbl">Latest update</span><h3>' + esc(top.status) + (top.location ? " · " + esc(top.location) : "") + "</h3>" +
+        '<p class="trk-when">' + icon("fa-clock") + " " + esc(top.date + (top.time ? ", " + top.time : "")) + "</p>" + (top.note ? "<p>" + esc(top.note) + "</p>" : "") + "</article>";
+    }
+    if (d.exception) {
+      main += '<article class="trk-card trk-exc" role="alert"><h3>' + icon("fa-triangle-exclamation") + " " + esc(d.exception.title) + "</h3>" +
+        (d.exception.meaning ? "<p><strong>What it means:</strong> " + esc(d.exception.meaning) + "</p>" : "") +
+        (d.exception.action ? "<p><strong>What to do:</strong> " + esc(d.exception.action) + "</p>" : "") +
+        '<a class="btn-main btn-red" href="' + waTrack(d.id) + '" target="_blank" rel="noopener">Contact Support</a></article>';
+    }
+    if (scanned) {
+      main += '<article class="trk-card"><h3 class="trk-h">' + icon("fa-clock-rotate-left") + " Shipment timeline <span class=\"trk-count\">" + d.events.length + '</span></h3><ol class="trk-tl">' +
+        d.events.map(function (e, i) {
+          return '<li class="' + (i === 0 ? "is-current" : "") + '"><strong>' + esc(e.status) + '</strong><span class="trk-meta">' + icon("fa-calendar") + " " + esc(e.date + (e.time ? ", " + e.time : "")) +
+            (e.location ? " &nbsp;" + icon("fa-location-dot") + " " + esc(e.location) : "") + "</span>" + (e.note ? "<p>" + esc(e.note) + "</p>" : "") + "</li>";
+        }).join("") + "</ol></article>";
+    }
+
+    var info = '<article class="trk-card"><h3 class="trk-h">' + icon("fa-box") + " Shipment details</h3><ul class=\"trk-kv\">" +
+      kv("Service", d.service) + kv("Shipment type", d.type) + kv("Origin", d.origin) + kv("Destination", d.destination) + kv("Booked on", d.booked) +
+      kv("Picked up", d.pickedUp) + kv("Weight", d.weight) + kv("Pieces", d.pieces) + "</ul></article>";
+    var pod = d.pod ? '<article class="trk-card"><h3 class="trk-h">' + icon("fa-circle-check") + " Proof of delivery</h3><ul class=\"trk-kv\">" + kv("Delivered", d.pod.on) + kv("Location", d.pod.location) + kv("Received by", d.pod.by) + "</ul></article>" : "";
+    var help = '<article class="trk-card trk-help"><h3 class="trk-h">' + icon("fa-headset") + " Need help?</h3><p>Share your tracking number with our team and we will check for you.</p><div class=\"trk-actions\">" + supportBtns(d.id) + "</div></article>";
+
+    return '<div class="trk-grid"><div class="trk-main">' + main + '</div><aside class="trk-side">' + info + pod + help + "</aside></div>";
+  }
+
+  function multiView(list) {
+    var rows = list.map(function (r) {
+      var d = r.data, top = d && d.events[0];
+      var status = r.state === "ok" ? statusBadge(d.status) : '<span class="trk-badge is-warn"><span class="dot"></span>' + (r.state === "notfound" ? "Not found" : "Unavailable") + "</span>";
+      return '<tr><td data-label="Tracking number"><strong>' + esc(r.id) + '</strong></td><td data-label="Status">' + status + '</td><td data-label="Destination">' + esc(d ? d.destination || "-" : "-") + '</td>' +
+        '<td data-label="Latest update">' + esc(top ? top.date + (top.location ? ", " + top.location : "") : "-") + '</td><td data-label="Est. delivery">' + esc(d && d.eta ? d.eta : "-") + '</td>' +
+        '<td data-label="">' + (r.state === "ok" ? '<button type="button" class="trk-view" data-view="' + esc(r.id) + '">View</button>' : "") + "</td></tr>";
+    }).join("");
+    return '<article class="trk-card"><h3 class="trk-h">' + icon("fa-list") + " " + list.length + ' shipments</h3><div class="trk-table-wrap"><table class="trk-table"><thead><tr><th>Tracking number</th><th>Status</th><th>Destination</th><th>Latest update</th><th>Est. delivery</th><th><span class="visually-hidden">Action</span></th></tr></thead><tbody>' + rows + "</tbody></table></div></article>";
+  }
+
+  /* ---------------- flow ---------------- */
+  var lastQuery = "";
+  function setView(html, scroll) {
+    els.view.innerHTML = html;
+    els.view.removeAttribute("aria-busy");
+    if (scroll && window.innerWidth < 992) {
+      els.view.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    }
+  }
+  function setBusy(on) {
+    els.btn.disabled = on;
+    els.btn.classList.toggle("is-loading", on);
+    if (on) { els.view.setAttribute("aria-busy", "true"); els.view.innerHTML = V.loading(); }
+  }
+  function showError(msg) { els.err.textContent = msg; els.err.hidden = !msg; els.input.setAttribute("aria-invalid", msg ? "true" : "false"); }
+
+  function parse(raw) {
+    var seen = {};
+    return raw.toUpperCase().split(/[\s,;]+/).filter(function (x) { if (!x || seen[x]) return false; seen[x] = 1; return true; });
+  }
+
+  function track(raw) {
+    var ids = parse(raw);
+    if (!ids.length) { showError("Enter your tracking number to check your shipment status."); setView(V.empty()); els.input.focus(); return; }
+    if (ids.length > JP_TRACKING_CONFIG.maxBatch) { showError("You can track up to " + JP_TRACKING_CONFIG.maxBatch + " shipments at a time."); return; }
+    var bad = ids.filter(function (x) { return !/^[A-Z0-9][A-Z0-9\-_]{3,39}$/.test(x); });
+    if (bad.length) { showError("Please check the tracking number. Use letters and numbers only."); els.input.focus(); return; }
+    showError("");
+    lastQuery = ids.join(", ");
+    els.input.value = lastQuery;
+    var u = new URL(window.location.href); u.searchParams.set("tracking", lastQuery); history.replaceState({}, "", u);
+
+    setBusy(true);
+    Promise.all(ids.map(function (id) { return fetchOne(id).then(function (r) { r.id = id; return r; }); })).then(function (rs) {
+      setBusy(false);
+      if (rs.length > 1) {
+        if (rs.every(function (r) { return r.state === "unconfigured"; })) return setView(V.unconfigured(lastQuery), true);
+        return setView(multiView(rs), true);
+      }
+      var r = rs[0];
+      if (r.state === "ok") return setView(resultView(r.data), true);
+      setView(V[r.state](r.id), true);
+    });
+  }
+
+  /* ---------------- events ---------------- */
+  els.form.addEventListener("submit", function (e) { e.preventDefault(); track(els.input.value); });
+  els.input.addEventListener("input", function () { if (!els.err.hidden) showError(""); });
+  els.input.addEventListener("paste", function () { setTimeout(function () { els.input.value = els.input.value.replace(/[^\w\s,;\-]/g, "").toUpperCase(); }, 0); });
+
+  els.view.addEventListener("click", function (e) {
+    var t = e.target.closest("button");
+    if (!t) return;
+    if (t.hasAttribute("data-retry")) track(lastQuery);
+    if (t.hasAttribute("data-view")) track(t.getAttribute("data-view"));
+    if (t.hasAttribute("data-copy")) {
+      var v = t.getAttribute("data-copy"), label = t.querySelector("span");
+      var done = function () { label.textContent = "Copied"; setTimeout(function () { label.textContent = "Copy"; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(v).then(done, function () {});
+      else { var ta = document.createElement("textarea"); ta.value = v; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (x) {} document.body.removeChild(ta); }
+    }
+  });
+
+  /* ---------------- init ---------------- */
+  if (DEMO && els.demo) els.demo.hidden = false;
+  var initial = (params.get("tracking") || "").trim();
+  setView(V.empty());
+  if (initial) { els.input.value = initial.toUpperCase(); track(initial); }
+})();
