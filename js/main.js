@@ -108,13 +108,6 @@
   }
 
   /* ---------- Premium scroll interaction ---------- */
-  /* Native scrolling is never touched: no wheel listener, no preventDefault,
-     no snapping. The scroll position is only read as a visual input, inside
-     the single rAF pass above. Only transform-family properties, opacity and
-     CSS variables are animated. Individual `translate` / `scale` properties are
-     used so nothing collides with existing `transform` hover/reveal rules.
-     Reduced motion or missing browser support => nothing here runs and all
-     content stays visible. */
   const sfxSupported = !reduced &&
     'IntersectionObserver' in window &&
     !!(window.CSS && CSS.supports && CSS.supports('translate', '0 0') && CSS.supports('scale', '1'));
@@ -379,8 +372,6 @@
   }
 
   /* ---------- Shipping calculator (demo only) ---------- */
-  /* Home page calculator/tracking are initialized in the dedicated Home section below.
-     This avoids duplicate handlers and preserves the existing Home UI behavior. */
 
   /* ---------- Demo forms ---------- */
   const contactForm = document.getElementById('contactForm');
@@ -796,11 +787,6 @@ if (testimonialCard && testimonialsData.length > 1) {
    - TRACK SHIPMENT (track-shipment.html): tracking lookup/demo
    - CONTACT (contact.html): inquiry form + WhatsApp fallback
    - CAREERS / LEGAL / RELATED PAGES: shared page interactions
-
-   Rules:
-   - Keep one implementation per feature.
-   - Prefer page guards so unused page code exits immediately.
-   - Do not add inline executable JavaScript to HTML.
    ========================================================= */
 
 /* ---------- Shared initialization: ALL PAGES ---------- */
