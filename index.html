@@ -4,10 +4,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JP Express | International Courier & Export Shipping from Bangladesh</title>
 
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <title>JP Express | International Courier & Export Shipping from Bangladesh</title>
 
   <meta name="description"
     content="JP Express provides international courier, air freight, sea freight, export logistics, customs support and shipment tracking from Bangladesh to 220+ countries.">
@@ -59,12 +60,7 @@
   }
   </script>
 
-  <script>
-    document.documentElement.classList.add('typing-js');
-    setTimeout(function () {
-      document.documentElement.classList.remove('typing-js');
-    }, 3000);
-  </script>
+
 </head>
 
 <body>
@@ -1139,10 +1135,10 @@
           <img src="assets/logo.png" alt="JP Express" class="footer-logo">
           <p>International courier, export logistics and global shipping platform from Bangladesh.</p>
           <div class="footer-social">
-            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
           </div>
         </div>
 
@@ -1150,9 +1146,9 @@
         <div class="col-6 col-lg-2">
           <h3>About</h3>
           <a href="about.html">About Us</a>
-          <a href="about.html">Our Story</a>
-          <a href="about.html">Leadership</a>
-          <a href="contact.html">Careers</a>
+          <a href="our-story.html">Our Story</a>
+          <a href="leadership.html">Leadership</a>
+          <a href="careers.html">Careers</a>
           <a href="contact.html">Contact</a>
         </div>
 
@@ -1236,245 +1232,18 @@
   <!-- =========================================
        SCRIPTS
        ========================================= -->
+
+
+
+
+
+
+
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/main.js"></script>
-
-  <script>
-    (() => {
-      // Shipping Estimate Calculator
-      const form = document.getElementById('calcForm');
-      const result = document.getElementById('calcResult');
-
-      if (form && result) {
-        form.addEventListener('submit', e => {
-          e.preventDefault();
-
-          const weight = Math.max(parseFloat(document.getElementById('cWeight').value) || 1, 0.5);
-          const type = document.getElementById('cType').value;
-          const method = type === 'Commercial Cargo' ? 'Commercial Cargo' : 'International Courier';
-
-          const low = Math.round(50 + weight * (method === 'Commercial Cargo' ? 7 : 9));
-          const high = Math.round(low * 1.18);
-
-          result.classList.remove('d-none');
-          result.innerHTML = `
-            <strong>Estimated shipping range: ৳${low} – ৳${high}</strong>
-            <small>Indicative demo estimate. Final pricing is confirmed by our logistics team.</small>
-          `;
-        });
-      }
-
-      // Shipment Tracking Preview
-      const track = document.getElementById('trackForm');
-      const trackResult = document.getElementById('trackResult');
-
-      if (track && trackResult) {
-        track.addEventListener('submit', e => {
-          e.preventDefault();
-
-          const input = document.getElementById('trackInput');
-          if (!input.value.trim()) {
-            return input.focus();
-          }
-
-          trackResult.classList.remove('d-none');
-        });
-      }
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const track = document.getElementById('destTrack');
-      const prev = document.getElementById('destPrev');
-      const next = document.getElementById('destNext');
-      if (!track || !prev || !next) return;
-
-      const stepSize = () => {
-        const card = track.querySelector('.destination-card');
-        const gap = parseFloat(getComputedStyle(track).columnGap) || 14;
-        return card ? card.getBoundingClientRect().width + gap : 200;
-      };
-
-      const updateButtons = () => {
-        const max = track.scrollWidth - track.clientWidth - 2;
-        prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max;
-      };
-
-      prev.addEventListener('click', () => track.scrollBy({ left: -stepSize(), behavior: 'smooth' }));
-      next.addEventListener('click', () => track.scrollBy({ left: stepSize(), behavior: 'smooth' }));
-      track.addEventListener('scroll', updateButtons, { passive: true });
-      window.addEventListener('resize', updateButtons);
-      updateButtons();
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const boxes = document.querySelectorAll('.country-select');
-
-      const closeAll = except => {
-        boxes.forEach(b => {
-          if (b !== except) {
-            b.classList.remove('open');
-            b.querySelector('.cs-btn').setAttribute('aria-expanded', 'false');
-          }
-        });
-      };
-
-      boxes.forEach(box => {
-        const btn = box.querySelector('.cs-btn');
-        const input = box.querySelector('input[type="hidden"]');
-        const flag = box.querySelector('.cs-flag');
-        const text = box.querySelector('.cs-text');
-        const items = box.querySelectorAll('.cs-list li');
-
-        btn.addEventListener('click', () => {
-          const open = !box.classList.contains('open');
-          closeAll(box);
-          box.classList.toggle('open', open);
-          btn.setAttribute('aria-expanded', open);
-        });
-
-        const choose = li => {
-          input.value = li.dataset.value;
-          flag.src = 'https://flagcdn.com/w80/' + li.dataset.flag + '.png';
-          flag.hidden = false;
-          text.textContent = li.dataset.value;
-          text.classList.remove('is-placeholder');
-          items.forEach(i => i.classList.remove('is-selected'));
-          li.classList.add('is-selected');
-          box.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-          btn.focus();
-        };
-
-        items.forEach(li => {
-          li.addEventListener('click', () => choose(li));
-          li.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              choose(li);
-            }
-          });
-        });
-      });
-
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.country-select')) closeAll();
-      });
-
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeAll();
-      });
-    })();
-  </script>
-
-  <script>
-    (() => {
-      const root = document.documentElement;
-      const title = document.getElementById('heroTitle');
-      const finish = () => root.classList.remove('typing-js');
-
-      if (!title) return finish();
-
-      const slides = Array.from(title.querySelectorAll('.ht-slide'));
-      if (!slides.length) return finish();
-
-      /* ---------- Settings ---------- */
-      const SPEED = 45;    // ms per letter
-      const DELAY = 350;   // ms before the first title starts
-      const HOLD = 2200;  // ms the finished title stays on screen
-      const FADE = 450;   // ms fade-out before the next title
-      const RESPECT_REDUCED_MOTION = false;
-
-      // Screen readers read the first title once
-      title.setAttribute('aria-label', slides[0].textContent.replace(/\s+/g, ' ').trim());
-
-      // Reduced motion (optional): show the first title instantly
-      if (RESPECT_REDUCED_MOTION &&
-        window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        slides[0].classList.add('active');
-        title.classList.add('is-ready');
-        return finish();
-      }
-
-      /* ---------- Wrap words (no mid-word breaks) and letters ---------- */
-      const wrap = (node, chars) => {
-        Array.from(node.childNodes).forEach(child => {
-          if (child.nodeType === 3) {
-            const frag = document.createDocumentFragment();
-            child.textContent.split(/(\s+)/).forEach(part => {
-              if (!part) return;
-              if (/^\s+$/.test(part)) {
-                frag.appendChild(document.createTextNode(' '));
-                return;
-              }
-              const word = document.createElement('span');
-              word.className = 'tword';
-              Array.from(part).forEach(ch => {
-                const s = document.createElement('span');
-                s.className = 'tchar';
-                s.textContent = ch;
-                word.appendChild(s);
-                chars.push(s);
-              });
-              frag.appendChild(word);
-            });
-            child.replaceWith(frag);
-          } else if (child.nodeType === 1) {
-            wrap(child, chars);
-          }
-        });
-      };
-
-      slides.forEach(slide => {
-        slide.setAttribute('aria-hidden', 'true');
-        slide.chars = [];
-        wrap(slide, slide.chars);
-      });
-
-      /* ---------- Typing + rotation ---------- */
-      let idx = 0;
-      let timer = null;
-
-      const typeSlide = i => {
-        const chars = slides[idx].chars;
-        if (i < chars.length) {
-          if (i > 0) chars[i - 1].classList.remove('is-caret');
-          chars[i].classList.add('on', 'is-caret');
-          timer = setTimeout(() => typeSlide(i + 1), SPEED);
-        } else if (slides.length === 1) {
-          // Only one title: type once, then stop
-          timer = setTimeout(() => chars[chars.length - 1].classList.remove('is-caret'), 1500);
-        } else {
-          // Hold, fade out, then show the next title
-          timer = setTimeout(() => {
-            slides[idx].classList.add('out');
-            timer = setTimeout(() => show((idx + 1) % slides.length), FADE);
-          }, HOLD);
-        }
-      };
-
-      const show = n => {
-        clearTimeout(timer);
-        idx = n;
-        slides.forEach((slide, k) => {
-          slide.classList.toggle('active', k === n);
-          slide.classList.remove('out');
-          slide.chars.forEach(c => c.classList.remove('on', 'is-caret'));
-        });
-        typeSlide(0);
-      };
-
-      // Start
-      title.classList.add('is-ready');
-      finish();
-      slides[0].classList.add('active');
-      timer = setTimeout(() => typeSlide(0), DELAY);
-    })();
-  </script>
 </body>
 
 </html>
