@@ -1,0 +1,42 @@
+/* ===============================================================
+   JP EXPRESS — LEGAL PAGE STYLES
+   Only selectors unique to legal.html are kept here.
+   Page isolation: html.page-legal
+   ===============================================================
+
+/* Used only by: legal */
+.page-legal .jp-legal-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+/* Used only by: legal */
+.page-legal .jp-legal-tab {
+  border: 1px solid var(--jp-border);
+  background: #fff;
+  padding: 11px 15px;
+  border-radius: 11px;
+  font-weight: 800;
+  color: #63748d;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Used only by: legal */
+.page-legal .jp-legal-tab.active {
+  background: var(--jp-navy);
+  color: #fff;
+  border-color: var(--jp-navy);
+}
+
+/* Used only by: legal */
+.page-legal .jp-legal-panel {
+  display: none;
+}
+
+/* Used only by: legal */
+.page-legal .jp-legal-panel.active {
+  display: block;
+}

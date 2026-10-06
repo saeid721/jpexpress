@@ -1,0 +1,612 @@
+/* ===============================================================
+   JP EXPRESS — ABOUT PAGE STYLES
+   Only selectors unique to about.html are kept here.
+   Page isolation: html.page-about
+   ===============================================================
+
+/* Used only by: about */
+.page-about .home-section.abt-plain {
+  background: var(--jp-white);
+}
+
+/* Used only by: about */
+.page-about .home-section.abt-alt {
+  background: var(--jp-bg-light);
+}
+
+/* Used only by: about */
+.page-about .abt-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 28px;
+}
+
+/* Used only by: about */
+.page-about .abt-head p {
+  margin: 6px auto 0;
+  color: var(--jp-text-muted);
+  font-size: 15px;
+}
+
+/* Used only by: about */
+.page-about .abt-head h2, .page-about .abt-copy h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.45rem, 3.4vw, 2rem);
+  line-height: 1.15;
+  color: var(--jp-heading-color);
+  margin: 4px 0 0;
+}
+
+/* Used only by: about */
+.page-about .abt-copy p {
+  color: var(--jp-text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 12px 0 0;
+}
+
+/* Used only by: about */
+.page-about .abt-copy .accent, .page-about .abt-hero h1 .accent {
+  color: var(--jp-orange-accent);
+}
+
+/* Used only by: about */
+.page-about .abt-hero {
+  min-height: 0;
+  padding: clamp(36px, 7vw, 76px) 0;
+}
+
+/* Used only by: about */
+.page-about .abt-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--jp-blue-light);
+}
+
+/* Used only by: about */
+.page-about .abt-crumb a:hover {
+  color: var(--jp-white);
+}
+
+/* Used only by: about */
+.page-about .abt-crumb i {
+  font-size: 9px;
+  opacity: .7;
+}
+
+/* Used only by: about */
+.page-about .abt-hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  max-width: 760px;
+}
+
+/* Used only by: about */
+.page-about .abt-hero p {
+  max-width: 640px;
+}
+
+/* Used only by: about */
+.page-about .abt-trust {
+  position: relative;
+  z-index: 3;
+}
+
+/* Used only by: about */
+.page-about .abt-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+/* Used only by: about */
+.page-about .abt-photo {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--jp-shadow-lg);
+}
+
+/* Used only by: about */
+.page-about .abt-photo img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+}
+
+/* Used only by: about */
+.page-about .abt-glance {
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  padding: 6px 20px;
+  box-shadow: var(--jp-shadow-lg);
+  margin: 0;
+}
+
+/* Used only by: about */
+.page-about .abt-glance div {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--jp-border-light);
+}
+
+/* Used only by: about */
+.page-about .abt-glance div:last-child {
+  border-bottom: 0;
+}
+
+/* Used only by: about */
+.page-about .abt-glance dt {
+  flex: 0 0 112px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+  padding-top: 2px;
+}
+
+/* Used only by: about */
+.page-about .abt-glance dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--jp-ink);
+  font-weight: 600;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Used only by: about */
+.page-about .abt-glance dd a:hover {
+  color: var(--jp-orange);
+}
+
+/* Used only by: about */
+.page-about .abt-mv {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Used only by: about */
+.page-about .abt-mv-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 26px 22px;
+  color: var(--jp-white);
+  box-shadow: var(--jp-shadow-lg);
+}
+
+/* Used only by: about */
+.page-about .abt-mv-card.m {
+  background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+}
+
+/* Used only by: about */
+.page-about .abt-mv-card.v {
+  background: linear-gradient(150deg, var(--jp-red), var(--jp-orange-accent));
+}
+
+/* Used only by: about */
+.page-about .abt-mv-card::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .1);
+}
+
+/* Used only by: about */
+.page-about .abt-mv-card i {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .16);
+  margin-bottom: 14px;
+}
+
+/* Used only by: about */
+.page-about .abt-mv-card h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin: 0 0 8px;
+}
+
+/* Used only by: about */
+.page-about .abt-mv-card p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, .92);
+  position: relative;
+  z-index: 1;
+}
+
+/* Used only by: about */
+.page-about .abt-link-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  height: 100%;
+  padding: 18px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 14px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* Used only by: about */
+.page-about .abt-link-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--jp-shadow-lg);
+  border-color: var(--jp-orange);
+}
+
+/* Used only by: about */
+.page-about .abt-link-card>i {
+  flex: 0 0 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(242, 99, 35, .1);
+  color: var(--jp-orange);
+  font-size: 19px;
+}
+
+/* Used only by: about */
+.page-about .abt-link-card h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  margin: 0 0 4px;
+}
+
+/* Used only by: about */
+.page-about .abt-link-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--jp-text-subtle);
+}
+
+/* Used only by: about */
+.page-about .abt-link-card span {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--jp-orange);
+}
+
+/* Used only by: about */
+.page-about .home-section.abt-net {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--jp-white);
+  padding: clamp(40px, 7vw, 72px) 0;
+  background: radial-gradient(520px 300px at 8% 0%, rgba(242, 99, 35, .22), transparent 65%),
+    radial-gradient(620px 360px at 100% 100%, rgba(255, 255, 255, .08), transparent 65%),
+    linear-gradient(135deg, var(--jp-navy-dark), var(--jp-navy));
+}
+
+/* Used only by: about */
+.page-about .abt-net::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+  pointer-events: none;
+}
+
+/* Used only by: about */
+.page-about .abt-net .abt-copy h2 {
+  color: var(--jp-white);
+}
+
+/* Used only by: about */
+.page-about .abt-net .abt-copy p {
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: about */
+.page-about .abt-net .eyebrow {
+  color: var(--jp-orange-light);
+}
+
+/* Used only by: about */
+.page-about .abt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* Used only by: about */
+.page-about .abt-chips span {
+  padding: 8px 15px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jp-white);
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .25);
+  backdrop-filter: blur(4px);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+/* Used only by: about */
+.page-about .abt-chips span:hover {
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+  transform: translateY(-2px);
+}
+
+/* Used only by: about */
+.page-about .abt-map {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 18px;
+  padding: clamp(12px, 2.5vw, 20px);
+  box-shadow: 0 18px 40px rgba(10, 16, 60, .35);
+}
+
+/* Used only by: about */
+.page-about .abt-map img {
+  width: 100%;
+  height: auto;
+  opacity: .9;
+  filter: brightness(2) saturate(.5);
+}
+
+/* Used only by: about */
+.page-about .abt-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* Used only by: about */
+.page-about .abt-logos span {
+  display: grid;
+  place-items: center;
+  height: 58px;
+  padding: 8px 10px;
+  background: var(--jp-white);
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+/* Used only by: about */
+.page-about .abt-logos span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, .22);
+}
+
+/* Used only by: about */
+.page-about .abt-logos img {
+  max-height: 30px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Used only by: about */
+.page-about .abt-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  counter-reset: s;
+}
+
+/* Used only by: about */
+.page-about .abt-steps li {
+  counter-increment: s;
+  position: relative;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 14px;
+  padding: 18px 18px 18px 64px;
+}
+
+/* Used only by: about */
+.page-about .abt-steps li::before {
+  content: counter(s);
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--jp-orange);
+  color: var(--jp-white);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+/* Used only by: about */
+.page-about .abt-steps strong {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--jp-navy);
+  font-size: 15px;
+}
+
+/* Used only by: about */
+.page-about .abt-steps small {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--jp-text-subtle);
+  line-height: 1.5;
+}
+
+/* Used only by: about */
+.page-about .abt-apply {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--jp-bg-soft);
+  border: 1px dashed var(--jp-border-hover-2);
+}
+
+/* Used only by: about */
+.page-about .abt-apply p {
+  margin: 0;
+  font-size: 14.5px;
+  color: var(--jp-ink);
+  font-weight: 600;
+  flex: 1 1 260px;
+}
+
+/* Used only by: about */
+.page-about .abt-apply .btn-main {
+  width: auto;
+}
+
+
+@media (min-width: 768px) {
+  /* Used only by: about */
+  .page-about .abt-mv {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Used only by: about */
+  .page-about .abt-mv-card {
+    padding: 32px 28px;
+  }
+
+}
+
+@media (min-width: 992px) {
+  /* Used only by: about */
+  .page-about .abt-split {
+    grid-template-columns: 1.05fr .95fr;
+    gap: 48px;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+}
+
+@media (max-width: 575px) {
+  /* Used only by: about */
+  .page-about .abt-head {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-glance {
+    padding: 4px 16px;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-glance div {
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-glance dt {
+    flex: none;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-apply .btn-main {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-hero .hero-actions .btn-main {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-chips {
+    gap: 6px;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-chips span {
+    padding: 7px 12px;
+    font-size: 12.5px;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-logos {
+    gap: 8px;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-logos span {
+    height: 50px;
+    padding: 6px 8px;
+  }
+
+  /* Used only by: about */
+  .page-about .abt-logos img {
+    max-height: 24px;
+  }
+
+}
+
+/* Used only by: about */
+.page-about .abt-hero .hero-actions .btn-main {
+  width: 100%;
+  justify-content: center;
+}
+
+
+@media (max-width: 360px) {
+  /* Used only by: about */
+  .page-about .abt-logos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}

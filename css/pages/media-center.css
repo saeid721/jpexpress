@@ -1,0 +1,47 @@
+/* ===============================================================
+   JP EXPRESS — MEDIA-CENTER PAGE STYLES
+   Only selectors unique to media-center.html are kept here.
+   Page isolation: html.page-media-center
+   ===============================================================
+
+/* Used only by: media-center */
+.page-media-center .jp-media-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Used only by: media-center */
+.page-media-center .jp-media-card .media-image {
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  overflow: hidden;
+  margin: -1px -1px 18px;
+}
+
+/* Used only by: media-center */
+.page-media-center .jp-media-card .media-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Used only by: media-center */
+.page-media-center .jp-media-card .media-date {
+  font-size: 10px;
+  color: var(--jp-orange);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/* Used only by: media-center */
+.page-media-center .jp-media-card h3 {
+  margin-top: 7px;
+}
+
+/* Used only by: media-center */
+.page-media-center .jp-media-card .media-actions {
+  margin-top: auto;
+  padding-top: 17px;
+}

@@ -1,0 +1,72 @@
+/* ===============================================================
+   JP EXPRESS — FAQ PAGE STYLES
+   Only selectors unique to faq.html are kept here.
+   Page isolation: html.page-faq
+   ===============================================================
+
+/* Used only by: faq */
+.page-faq .jp-accordion {
+  display: grid;
+  gap: 10px;
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-item {
+  background: #fff;
+  border: 1px solid var(--jp-border);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-btn {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+  color: var(--jp-heading-color);
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-btn i {
+  transition: .2s;
+  color: var(--jp-orange);
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-btn[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .25s ease;
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-body>div {
+  overflow: hidden;
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-item.open .jp-accordion-body {
+  grid-template-rows: 1fr;
+}
+
+/* Used only by: faq */
+.page-faq .jp-accordion-body p {
+  padding: 0 20px 19px;
+  margin: 0;
+  color: var(--jp-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}

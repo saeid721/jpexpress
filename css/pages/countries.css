@@ -1,0 +1,367 @@
+/* ===============================================================
+   JP EXPRESS — COUNTRIES PAGE STYLES
+   Only selectors unique to countries.html are kept here.
+   Page isolation: html.page-countries
+   ===============================================================
+
+/* Used only by: countries */
+.page-countries .pg-hero {
+  position: relative;
+  overflow: hidden;
+  color: var(--jp-white);
+  padding: clamp(26px, 6vw, 60px) 0 clamp(54px, 8vw, 80px);
+  background: radial-gradient(520px 300px at 92% 0, rgba(242, 99, 35, .28), transparent 65%),
+              linear-gradient(135deg, var(--jp-navy-dark), var(--jp-navy));
+}
+
+/* Used only by: countries */
+.page-countries .pg-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
+  mask-image: linear-gradient(180deg, #000, transparent 85%);
+}
+
+/* Used only by: countries */
+.page-countries .pg-hero .container-fluid {
+  position: relative;
+}
+
+/* Used only by: countries */
+.page-countries .pg-hero h1 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  font-size: clamp(1.45rem, 5vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0 0 10px;
+  max-width: 800px;
+  text-wrap: balance;
+}
+
+/* Used only by: countries */
+.page-countries .pg-hero h1 span {
+  color: var(--jp-orange-accent);
+}
+
+/* Used only by: countries */
+.page-countries .pg-hero p {
+  max-width: 640px;
+  color: var(--jp-text-light-blue);
+  font-size: clamp(14px, 2.4vw, 16.5px);
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+/* Used only by: countries */
+.page-countries .pg-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--jp-blue-light);
+}
+
+/* Used only by: countries */
+.page-countries .pg-crumb a:hover {
+  color: var(--jp-white);
+}
+
+/* Used only by: countries */
+.page-countries .pg-crumb i {
+  font-size: 9px;
+  opacity: .7;
+}
+
+/* Used only by: countries */
+.page-countries .pg-sec {
+  padding: clamp(26px, 5vw, 54px) 0;
+  background: var(--jp-white);
+  scroll-margin-top: calc(var(--jp-header-h, 96px) + 64px);
+}
+
+/* Used only by: countries */
+.page-countries .pg-alt {
+  background: var(--jp-bg-light);
+}
+
+/* Used only by: countries */
+.page-countries .pg-h {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  font-size: clamp(1.2rem, 3.4vw, 1.75rem);
+  line-height: 1.2;
+  margin: 0 0 16px;
+}
+
+/* Used only by: countries */
+.page-countries .pg-sub {
+  color: var(--jp-text-muted);
+  font-size: 15px;
+  margin: -8px 0 16px;
+  max-width: 680px;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 640px;
+  background: var(--jp-white);
+  border-radius: 14px;
+  box-shadow: 0 14px 34px rgba(10, 16, 60, .3);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-search>i {
+  position: absolute;
+  left: 16px;
+  color: var(--jp-orange);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-search input {
+  width: 100%;
+  min-height: 54px;
+  border: 0;
+  border-radius: 14px;
+  padding: 0 48px 0 44px;
+  font-size: 16px;
+  color: var(--jp-ink);
+  background: transparent;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-search input:focus {
+  outline: 3px solid rgba(242, 99, 35, .45);
+  outline-offset: 0;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-search button {
+  position: absolute;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--jp-bg-muted);
+  color: var(--jp-navy);
+  cursor: pointer;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-quick button {
+  border: 1px solid rgba(255, 255, 255, .3);
+  background: rgba(255, 255, 255, .1);
+  color: var(--jp-white);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-quick button:hover {
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-chips::-webkit-scrollbar {
+  display: none;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-meta select {
+  min-height: 40px;
+  border: 1px solid var(--jp-border-soft);
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: var(--jp-ink);
+  background: var(--jp-white);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+  gap: 14px;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-empty {
+  text-align: center;
+  padding: 36px 16px;
+  border: 1px dashed var(--jp-border-hover-2);
+  border-radius: 14px;
+  background: var(--jp-white);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-empty h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--jp-navy);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-empty p {
+  color: var(--jp-text-muted);
+  margin: 6px 0 14px;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-guides {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 14px;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-guides a {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 14px;
+  transition: transform .2s ease, border-color .2s ease;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-guides a:hover {
+  transform: translateY(-3px);
+  border-color: var(--jp-orange);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-guides i {
+  flex: 0 0 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: rgba(242, 99, 35, .1);
+  color: var(--jp-orange);
+}
+
+/* Used only by: countries */
+.page-countries .ctr-guides strong {
+  display: block;
+  color: var(--jp-navy);
+  font-size: 15px;
+}
+
+/* Used only by: countries */
+.page-countries .ctr-guides span {
+  font-size: 13px;
+  color: var(--jp-text-subtle);
+}
+
+/* Used only by: countries */
+.page-countries .cd-cta .btn-main {
+  min-height: 48px;
+  padding: 0 22px;
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+/* Used only by: countries */
+.page-countries .cd-actions .btn-main {
+  min-height: 48px;
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+/* Used only by: countries */
+.page-countries .cd-track .btn-main {
+  min-height: 46px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+/* Used only by: countries */
+.page-countries .cd-biz .btn-main {
+  min-height: 48px;
+  font-size: 15px;
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
+/* Used only by: countries */
+.page-countries .final-cta .container-fluid {
+  max-width: 1280px;
+}
+
+
+@media (min-width: 576px) {
+  /* Used only by: countries */
+  .page-countries .ctr-bar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+}
+
+@media (max-width: 575px) {
+  /* Used only by: countries */
+  .page-countries .cd-cta .btn-main {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+}

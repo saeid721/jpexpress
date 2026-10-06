@@ -1,0 +1,837 @@
+/* ===============================================================
+   JP EXPRESS — RESOURCES PAGE STYLES
+   Only selectors unique to resources.html are kept here.
+   Page isolation: html.page-resources
+   ===============================================================
+
+/* Used only by: resources */
+.page-resources .res-hero {
+  background: var(--navy);
+  color: #fff;
+  position: relative;
+  padding: clamp(2.4rem,6vw,4rem) 0 clamp(3.6rem,8vw,5.5rem);
+  overflow: clip;
+}
+
+/* Used only by: resources */
+.page-resources .res-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 0%,#000 30%,transparent 75%);
+}
+
+/* Used only by: resources */
+.page-resources .res-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px 320px at 10% 0%,rgba(230,34,41,.22),transparent 65%),radial-gradient(700px 380px at 95% 100%,rgba(18,165,198,.16),transparent 65%);
+  pointer-events: none;
+}
+
+/* Used only by: resources */
+.page-resources .res-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Used only by: resources */
+.page-resources .res-hero-body {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto clamp(1.4rem,3vw,2rem);
+}
+
+/* Used only by: resources */
+.page-resources .res-hero-body h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.9rem,4.2vw,3.1rem);
+  line-height: 1.15;
+  margin-bottom: .9rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-hero-body h1 .hl {
+  color: #FF7B81;
+}
+
+/* Used only by: resources */
+.page-resources .res-hero-body p {
+  color: #B9C6DA;
+  font-size: clamp(.9rem,1.5vw,1.08rem);
+  line-height: 1.6;
+}
+
+/* Used only by: resources */
+.page-resources .res-search-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: clamp(1rem,2.2vw,1.4rem);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Used only by: resources */
+.page-resources .res-search-card .res-search-wrap {
+  position: relative;
+}
+
+/* Used only by: resources */
+.page-resources .res-search-card .res-search-wrap .bi {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+/* Used only by: resources */
+.page-resources .res-search-card input {
+  width: 100%;
+  padding-left: 2.6rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-hero-stats {
+  margin-top: clamp(1.6rem,4vw,2.6rem);
+  position: relative;
+  z-index: 5;
+}
+
+/* Used only by: resources */
+.page-resources .res-catnav {
+  position: sticky;
+  top: var(--jp-header-h,86px);
+  z-index: 20;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Used only by: resources */
+.page-resources .res-catnav-inner {
+  display: flex;
+  gap: .4rem;
+  overflow-x: auto;
+  padding: .85rem 0;
+  scrollbar-width: none;
+}
+
+/* Used only by: resources */
+.page-resources .res-catnav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+/* Used only by: resources */
+.page-resources .res-catlink {
+  flex: 0 0 auto;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .8rem;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  padding: .5rem 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  white-space: nowrap;
+  transition: all .25s;
+}
+
+/* Used only by: resources */
+.page-resources .res-catlink .bi {
+  font-size: .85rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-catlink:hover {
+  color: var(--navy);
+  border-color: var(--navy);
+}
+
+/* Used only by: resources */
+.page-resources .res-catlink.active {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+/* Used only by: resources */
+.page-resources .res-cat {
+  scroll-margin-top: calc(var(--jp-header-h,86px) + 64px);
+}
+
+/* Used only by: resources */
+.page-resources .res-cat-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+  margin-bottom: 2.2rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-cat-ico {
+  width: 60px;
+  height: 60px;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  background: var(--navy);
+  color: #FF7B81;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-cat-head h2 {
+  font-size: clamp(1.4rem,2.6vw,1.9rem);
+  font-weight: 800;
+  margin-bottom: .3rem;
+  color: var(--navy);
+}
+
+/* Used only by: resources */
+.page-resources .res-cat-head p {
+  color: var(--muted);
+  font-size: .92rem;
+  margin: 0;
+  max-width: 64ch;
+}
+
+/* Used only by: resources */
+.page-resources .res-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+  gap: 1.1rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.4rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform .35s ease,box-shadow .35s ease,border-color .35s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Used only by: resources */
+.page-resources .res-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--red);
+  transform: scaleY(0);
+  transition: transform .35s;
+  transform-origin: top;
+}
+
+/* Used only by: resources */
+.page-resources .res-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: transparent;
+}
+
+/* Used only by: resources */
+.page-resources .res-card:hover::after {
+  transform: scaleY(1);
+}
+
+/* Used only by: resources */
+.page-resources .res-card-ico {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: var(--red-soft);
+  color: var(--red);
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  margin-bottom: 1.05rem;
+  transition: transform .35s,background .35s,color .35s;
+}
+
+/* Used only by: resources */
+.page-resources .res-card:hover .res-card-ico {
+  background: var(--red);
+  color: #fff;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* Used only by: resources */
+.page-resources .res-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+  color: var(--navy);
+}
+
+/* Used only by: resources */
+.page-resources .res-card p {
+  font-size: .85rem;
+  color: var(--muted);
+  margin-bottom: 1.05rem;
+  flex: 1;
+}
+
+/* Used only by: resources */
+.page-resources .res-card-more {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: .78rem;
+  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-card-more .bi {
+  transition: transform .3s;
+}
+
+/* Used only by: resources */
+.page-resources .res-card:hover .res-card-more .bi {
+  transform: translateX(4px);
+}
+
+/* Used only by: resources */
+.page-resources .res-dodont {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+}
+
+
+@media (min-width:768px) {
+  /* Used only by: resources */
+  .page-resources .res-dodont {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+/* Used only by: resources */
+.page-resources .res-do, .page-resources .res-dont {
+  border-radius: var(--radius-lg);
+  padding: 1.7rem;
+  border: 1px solid var(--border);
+}
+
+/* Used only by: resources */
+.page-resources .res-do {
+  background: rgba(31,169,92,.06);
+  border-color: rgba(31,169,92,.25);
+}
+
+/* Used only by: resources */
+.page-resources .res-dont {
+  background: var(--red-soft);
+  border-color: rgba(230,34,41,.25);
+}
+
+/* Used only by: resources */
+.page-resources .res-do h3, .page-resources .res-dont h3 {
+  font-size: 1.02rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-do h3 {
+  color: var(--green);
+}
+
+/* Used only by: resources */
+.page-resources .res-dont h3 {
+  color: var(--red);
+}
+
+/* Used only by: resources */
+.page-resources .res-do ul, .page-resources .res-dont ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .65rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-do li, .page-resources .res-dont li {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: .88rem;
+  color: var(--ink);
+}
+
+/* Used only by: resources */
+.page-resources .res-do li i {
+  color: var(--green);
+  margin-top: .15rem;
+  flex: 0 0 auto;
+}
+
+/* Used only by: resources */
+.page-resources .res-dont li i {
+  color: var(--red);
+  margin-top: .15rem;
+  flex: 0 0 auto;
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  gap: 1rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+  height: 100%;
+  transition: transform .3s,box-shadow .3s;
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-card .bi {
+  font-size: 1.7rem;
+  color: var(--amber);
+  margin-bottom: .7rem;
+  display: block;
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-card h3 {
+  font-size: .9rem;
+  font-weight: 700;
+  margin-bottom: .3rem;
+  color: var(--navy);
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-card p {
+  font-size: .76rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-note {
+  margin-top: 1.6rem;
+  background: linear-gradient(155deg,var(--navy),var(--navy-2));
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.6rem;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+/* Used only by: resources */
+.page-resources .res-restrict-note p {
+  margin: 0;
+  color: #B9C6DA;
+  font-size: .86rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-search-wrap2 {
+  position: relative;
+  flex: 1 1 260px;
+  max-width: 360px;
+}
+
+/* Used only by: resources */
+.page-resources .res-search-wrap2 .bi {
+  position: absolute;
+  left: .9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+/* Used only by: resources */
+.page-resources .res-search-wrap2 input {
+  padding-left: 2.4rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-note {
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  color: var(--muted);
+  letter-spacing: .04em;
+}
+
+/* Used only by: resources */
+.page-resources .res-tablewrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Used only by: resources */
+.page-resources .res-table-scroll {
+  overflow-x: auto;
+}
+
+/* Used only by: resources */
+.page-resources .res-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+/* Used only by: resources */
+.page-resources .res-table th, .page-resources .res-table td {
+  padding: .95rem 1.15rem;
+  text-align: left;
+  font-size: .86rem;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* Used only by: resources */
+.page-resources .res-table th {
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--bg);
+}
+
+/* Used only by: resources */
+.page-resources .res-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Used only by: resources */
+.page-resources .res-table tr:hover td {
+  background: var(--bg);
+}
+
+/* Used only by: resources */
+.page-resources .res-table td.region {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* Used only by: resources */
+.page-resources .res-table td.days {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--red);
+}
+
+/* Used only by: resources */
+.page-resources .res-table-empty {
+  padding: 2.2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: .86rem;
+  display: none;
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+  gap: 1.1rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .9rem;
+  height: 100%;
+  transition: transform .3s,box-shadow .3s;
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-top {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-ico {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  background: var(--cyan-soft);
+  color: #0B7C96;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-top h3 {
+  font-size: .94rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0;
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-meta {
+  font-family: var(--font-mono);
+  font-size: .64rem;
+  color: var(--muted);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* Used only by: resources */
+.page-resources .res-dl-card .btn-jp {
+  margin-top: auto;
+  justify-content: center;
+}
+
+
+@media (max-width:767px) {
+  /* Used only by: resources */
+  .page-resources .res-hero {
+    padding: 1.6rem 0 2.2rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-hero-body h1 {
+    font-size: 1.55rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-hero-body p {
+    font-size: .82rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-search-card {
+    padding: .9rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-catnav {
+    top: var(--jp-header-h,64px);
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-catnav-inner {
+    padding: .65rem 0;
+    gap: .3rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-catlink {
+    font-size: .7rem;
+    padding: .4rem .8rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-cat {
+    scroll-margin-top: calc(var(--jp-header-h,64px) + 54px);
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-cat-head {
+    gap: .7rem;
+    margin-bottom: 1.3rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-cat-ico {
+    width: 44px;
+    height: 44px;
+    font-size: 1.15rem;
+    border-radius: 12px;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-cat-head h2 {
+    font-size: 1.15rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-cat-head p {
+    font-size: .78rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-grid {
+    grid-template-columns: repeat(2,1fr);
+    gap: .7rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-card {
+    padding: 1.05rem 1rem;
+    border-radius: 13px;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-card-ico {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin-bottom: .7rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-card h3 {
+    font-size: .84rem;
+    margin-bottom: .3rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-card p {
+    font-size: .72rem;
+    line-height: 1.4;
+    margin-bottom: .7rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-card-more {
+    font-size: .68rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-do, .page-resources .res-dont {
+    padding: 1.1rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-do li, .page-resources .res-dont li {
+    font-size: .8rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-restrict-grid {
+    grid-template-columns: repeat(2,1fr);
+    gap: .7rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-restrict-card {
+    padding: 1rem .8rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-restrict-note {
+    padding: 1.1rem 1.2rem;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-search-wrap2 {
+    max-width: none;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-table th, .page-resources .res-table td {
+    padding: .75rem .9rem;
+    font-size: .76rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-dl-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: .7rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-dl-card {
+    padding: 1rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-dl-ico {
+    width: 40px;
+    height: 40px;
+    font-size: 1.05rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-dl-top h3 {
+    font-size: .84rem;
+  }
+
+}
+
+@media (max-width:480px) {
+  /* Used only by: resources */
+  .page-resources .res-hero-body h1 {
+    font-size: 1.35rem;
+  }
+
+  /* Used only by: resources */
+  .page-resources .res-grid, .page-resources .res-restrict-grid, .page-resources .res-dl-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

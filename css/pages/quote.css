@@ -1,0 +1,844 @@
+/* ===============================================================
+   JP EXPRESS — QUOTE PAGE STYLES
+   Only selectors unique to quote.html are kept here.
+   Page isolation: html.page-quote
+   ===============================================================
+
+/* Used only by: quote */
+.page-quote .home-section.prc-plain {
+  background: var(--jp-white);
+}
+
+/* Used only by: quote */
+.page-quote .home-section.prc-alt {
+  background: var(--jp-bg-light);
+}
+
+/* Used only by: quote */
+.page-quote .prc-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 28px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-head h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.45rem, 3.4vw, 2rem);
+  line-height: 1.15;
+  color: var(--jp-heading-color);
+  margin: 4px 0 0;
+}
+
+/* Used only by: quote */
+.page-quote .prc-head p {
+  margin: 8px auto 0;
+  color: var(--jp-text-muted);
+  font-size: 15px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-hero {
+  min-height: 0;
+  padding: clamp(36px, 7vw, 76px) 0;
+}
+
+/* Used only by: quote */
+.page-quote .prc-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--jp-blue-light);
+}
+
+/* Used only by: quote */
+.page-quote .prc-crumb a:hover {
+  color: var(--jp-white);
+}
+
+/* Used only by: quote */
+.page-quote .prc-crumb i {
+  font-size: 9px;
+  opacity: .7;
+}
+
+/* Used only by: quote */
+.page-quote .prc-hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  max-width: 780px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-hero h1 .accent {
+  color: var(--jp-orange-accent);
+}
+
+/* Used only by: quote */
+.page-quote .prc-hero p {
+  max-width: 650px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-trust {
+  position: relative;
+  z-index: 3;
+}
+
+/* Used only by: quote */
+.page-quote .prc-trust .trust-item strong {
+  font-size: clamp(17px, 2.4vw, 22px);
+}
+
+/* Used only by: quote */
+.page-quote .prc-calc {
+  scroll-margin-top: calc(var(--jp-header-h, 86px) + 16px);
+}
+
+/* Used only by: quote */
+.page-quote .prc-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Used only by: quote */
+.page-quote .prc-card {
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 18px;
+  box-shadow: var(--jp-shadow-lg);
+  padding: clamp(18px, 3vw, 28px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Used only by: quote */
+.page-quote .prc-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--jp-orange), var(--jp-navy));
+}
+
+/* Used only by: quote */
+.page-quote .prc-card h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: var(--jp-heading-color);
+  margin: 4px 0 4px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-card>p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: quote */
+.page-quote .prc-modes {
+  border: 0;
+  padding: 0;
+  margin: 0 0 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-modes legend {
+  float: none;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+}
+
+/* Used only by: quote */
+.page-quote .prc-mode {
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Used only by: quote */
+.page-quote .prc-mode input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+/* Used only by: quote */
+.page-quote .prc-mode span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--jp-navy);
+  background: var(--jp-bg-light);
+  border: 1.5px solid var(--jp-border-muted);
+  transition: all .2s ease;
+}
+
+/* Used only by: quote */
+.page-quote .prc-mode:hover span {
+  border-color: var(--jp-orange);
+}
+
+/* Used only by: quote */
+.page-quote .prc-mode input:checked+span {
+  background: var(--jp-navy);
+  border-color: var(--jp-navy);
+  color: var(--jp-white);
+}
+
+/* Used only by: quote */
+.page-quote .prc-mode input:focus-visible+span {
+  outline: 3px solid rgba(242, 99, 35, .45);
+  outline-offset: 2px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-hint {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: quote */
+.page-quote .prc-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-field label, .page-quote .prc-dims-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--jp-navy);
+}
+
+/* Used only by: quote */
+.page-quote .prc-field input, .page-quote .prc-field select {
+  width: 100%;
+  height: 50px;
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--jp-ink);
+  background: var(--jp-bg-light);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  outline: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+/* Used only by: quote */
+.page-quote .prc-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23566' stroke-width='2'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-field input:focus, .page-quote .prc-field select:focus {
+  background-color: var(--jp-white);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+/* Used only by: quote */
+.page-quote .prc-field input[readonly] {
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: quote */
+.page-quote .prc-dim-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-dim-row .prc-field label {
+  font-weight: 600;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: quote */
+.page-quote .prc-error {
+  margin: 14px 0 0;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #B42318;
+  background: #FEF3F2;
+  border: 1px solid #FECDCA;
+  border-radius: 10px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-error[hidden] {
+  display: none !important;
+}
+
+/* Used only by: quote */
+.page-quote .prc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-actions .btn-main {
+  flex: 1 1 200px;
+  justify-content: center;
+}
+
+/* Used only by: quote */
+.page-quote .prc-actions .prc-reset {
+  flex: 0 0 auto;
+  padding: 0 20px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--jp-text-muted);
+  background: transparent;
+  border: 1.5px solid var(--jp-border-muted);
+}
+
+/* Used only by: quote */
+.page-quote .prc-actions .prc-reset:hover {
+  color: var(--jp-navy);
+  border-color: var(--jp-navy);
+}
+
+/* Used only by: quote */
+.page-quote .prc-result-card {
+  scroll-margin-top: calc(var(--jp-header-h, 86px) + 16px);
+  background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+  color: var(--jp-white);
+  border-radius: 18px;
+  box-shadow: var(--jp-shadow-lg);
+  padding: clamp(18px, 3vw, 28px);
+}
+
+/* Used only by: quote */
+.page-quote .prc-empty {
+  text-align: center;
+  padding: 18px 8px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-empty i {
+  font-size: 34px;
+  color: var(--jp-orange-light);
+}
+
+/* Used only by: quote */
+.page-quote .prc-empty h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 12px 0 6px;
+  color: var(--jp-white);
+}
+
+/* Used only by: quote */
+.page-quote .prc-empty p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: quote */
+.page-quote .prc-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Used only by: quote */
+.page-quote .prc-badge.is-est {
+  background: rgba(255, 255, 255, .16);
+}
+
+/* Used only by: quote */
+.page-quote .prc-badge.is-quote {
+  background: var(--jp-orange);
+}
+
+/* Used only by: quote */
+.page-quote .prc-price {
+  margin: 10px 0 4px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 7vw, 2.6rem);
+  line-height: 1.1;
+}
+
+/* Used only by: quote */
+.page-quote .prc-price--quote {
+  font-size: clamp(1.5rem, 5vw, 1.9rem);
+}
+
+/* Used only by: quote */
+.page-quote .prc-sub {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: quote */
+.page-quote .prc-kvs, .page-quote .prc-break {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+  padding: 4px 14px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-break {
+  margin-top: 12px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-break h4 {
+  margin: 12px 0 2px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange-light);
+}
+
+/* Used only by: quote */
+.page-quote .prc-kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+/* Used only by: quote */
+.page-quote .prc-kvs .prc-kv:first-child, .page-quote .prc-break h4+.prc-kv {
+  border-top: 0;
+}
+
+/* Used only by: quote */
+.page-quote .prc-kv span {
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: quote */
+.page-quote .prc-kv strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* Used only by: quote */
+.page-quote .prc-fine {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: quote */
+.page-quote .prc-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-cta .btn-main {
+  flex: 1 1 150px;
+  justify-content: center;
+}
+
+/* Used only by: quote */
+.page-quote .prc-call {
+  flex: 1 1 100%;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--jp-white);
+  padding: 6px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-call:hover {
+  color: var(--jp-orange-light);
+}
+
+/* Used only by: quote */
+.page-quote .prc-trio, .page-quote .prc-factors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-trio li, .page-quote .prc-factors li {
+  padding: 22px 20px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* Used only by: quote */
+.page-quote .prc-trio li:hover, .page-quote .prc-factors li:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--jp-shadow-lg);
+}
+
+/* Used only by: quote */
+.page-quote .prc-ico {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  border-radius: 13px;
+  font-size: 19px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+/* Used only by: quote */
+.page-quote .prc-trio h3, .page-quote .prc-factors h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  margin: 0 0 6px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-trio p, .page-quote .prc-factors p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--jp-text-subtle);
+}
+
+/* Used only by: quote */
+.page-quote .prc-tag {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--jp-navy);
+  background: var(--jp-bg-soft);
+}
+
+/* Used only by: quote */
+.page-quote .prc-weight {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Used only by: quote */
+.page-quote .prc-formula {
+  padding: clamp(18px, 3vw, 28px);
+  background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+  color: var(--jp-white);
+  border-radius: 18px;
+  box-shadow: var(--jp-shadow-lg);
+}
+
+/* Used only by: quote */
+.page-quote .prc-formula code {
+  display: block;
+  margin: 10px 0 14px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #fff;
+  background: rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  white-space: normal;
+}
+
+/* Used only by: quote */
+.page-quote .prc-formula p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: quote */
+.page-quote .prc-formula strong {
+  color: var(--jp-white);
+}
+
+/* Used only by: quote */
+.page-quote .prc-copy h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.45rem, 3.4vw, 2rem);
+  line-height: 1.15;
+  color: var(--jp-heading-color);
+  margin: 4px 0 10px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-copy p {
+  margin: 0 0 10px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: quote */
+.page-quote .prc-two {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-list {
+  padding: clamp(20px, 3vw, 28px);
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  box-shadow: var(--jp-shadow-lg);
+}
+
+/* Used only by: quote */
+.page-quote .prc-list h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--jp-navy);
+  margin: 0 0 14px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-list h3 i {
+  color: var(--jp-orange);
+}
+
+/* Used only by: quote */
+.page-quote .prc-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-list li {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--jp-ink);
+}
+
+/* Used only by: quote */
+.page-quote .prc-list li i {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: var(--jp-orange);
+}
+
+/* Used only by: quote */
+.page-quote .prc-biz {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: clamp(22px, 4vw, 36px);
+  border-radius: 20px;
+  color: var(--jp-white);
+  background: radial-gradient(420px 260px at 100% 0%, rgba(242, 99, 35, .3), transparent 65%), linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+  box-shadow: var(--jp-shadow-lg);
+}
+
+/* Used only by: quote */
+.page-quote .prc-biz h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.35rem, 3.2vw, 1.8rem);
+  margin: 0 0 8px;
+  color: var(--jp-white);
+}
+
+/* Used only by: quote */
+.page-quote .prc-biz p {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: quote */
+.page-quote .prc-biz-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Used only by: quote */
+.page-quote .prc-biz-actions .btn-main {
+  flex: 1 1 200px;
+  justify-content: center;
+}
+
+
+@media (min-width: 576px) {
+  /* Used only by: quote */
+  .page-quote .prc-modes {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+}
+
+@media (min-width: 768px) {
+  /* Used only by: quote */
+  .page-quote .prc-fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-fields .prc-wide {
+    grid-column: 1 / -1;
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-trio {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-factors {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-two {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (min-width: 992px) {
+  /* Used only by: quote */
+  .page-quote .prc-layout {
+    grid-template-columns: 1.15fr .85fr;
+    gap: 24px;
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-result-card {
+    position: sticky;
+    top: calc(var(--jp-header-h, 86px) + 16px);
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-weight {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-factors {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-biz {
+    grid-template-columns: 1.3fr .7fr;
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-biz-actions {
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 575px) {
+  /* Used only by: quote */
+  .page-quote .prc-head {
+    text-align: left;
+    margin-bottom: 20px;
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-hero .hero-actions .btn-main {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Used only by: quote */
+  .page-quote .prc-actions .prc-reset {
+    flex: 1 1 100%;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Used only by: quote */
+  .page-quote .prc-trio li, .page-quote .prc-factors li, .page-quote .prc-mode span {
+    transition: none;
+  }
+
+}

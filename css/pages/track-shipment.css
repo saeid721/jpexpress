@@ -1,0 +1,1116 @@
+/* ===============================================================
+   JP EXPRESS — TRACK-SHIPMENT PAGE STYLES
+   Only selectors unique to track-shipment.html are kept here.
+   Page isolation: html.page-track-shipment
+   ===============================================================
+
+/* Used only by: track-shipment */
+.page-track-shipment .home-section.trk-plain {
+  background: var(--jp-white);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .home-section.trk-alt {
+  background: var(--jp-bg-light);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-hero {
+  min-height: 0;
+  padding: clamp(32px, 6vw, 64px) 0 clamp(64px, 9vw, 96px);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-crumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--jp-blue-light);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-crumb a:hover {
+  color: var(--jp-white);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-crumb i {
+  font-size: 9px;
+  opacity: .7;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-hero-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 22px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-hero-head h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  margin: 0 0 8px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-hero-head p {
+  margin: 0 auto;
+  font-size: clamp(.9rem, 1.6vw, 1.05rem);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-search {
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(16px, 3vw, 24px);
+  background: var(--jp-white);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(8, 14, 70, .35);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-search label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--jp-navy);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row {
+  display: flex;
+  gap: 10px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 54px;
+  padding: 0 16px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--jp-ink);
+  background: var(--jp-bg-light);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  outline: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row input:focus {
+  background: var(--jp-white);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row input[aria-invalid="true"] {
+  border-color: #D92D20;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row .btn-main {
+  flex: 0 0 auto;
+  height: 54px;
+  justify-content: center;
+  min-width: 150px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row .btn-main.is-loading {
+  pointer-events: none;
+  opacity: .85;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row .btn-main.is-loading i {
+  display: none;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-row .btn-main.is-loading::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  margin-left: 8px;
+  border: 2.5px solid rgba(255, 255, 255, .45);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: trkspin .7s linear infinite;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-error {
+  margin: 10px 0 0;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #B42318;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-error[hidden], .page-track-shipment .trk-demo[hidden] {
+  display: none !important;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-hint {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-links a {
+  color: var(--jp-orange);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-links a:hover {
+  text-decoration: underline;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-demo {
+  max-width: 760px;
+  margin: 14px auto 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #7A4A00;
+  background: #FFF4D6;
+  border: 1px solid #F5D78B;
+  border-radius: 12px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-body {
+  padding: clamp(28px, 5vw, 56px) 0;
+  margin-top: -40px;
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(56px, 8vw, 80px);
+  background: var(--jp-bg-light);
+  scroll-margin-top: calc(var(--jp-header-h, 86px) + 8px);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment #trkView {
+  scroll-margin-top: calc(var(--jp-header-h, 86px) + 8px);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-guide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-guide-item {
+  padding: 22px 20px;
+  text-align: center;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-guide-ico {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  font-size: 20px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-guide-item h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  margin: 0 0 4px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-guide-item p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--jp-text-subtle);
+  line-height: 1.55;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-state {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 36px) 20px;
+  text-align: center;
+  background: var(--jp-white);
+  border: 1px dashed var(--jp-border-hover-2);
+  border-radius: 18px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-state-ico {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 24px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-state h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--jp-navy);
+  margin: 0 0 8px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-state p {
+  margin: 0 auto 14px;
+  max-width: 46ch;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tips {
+  list-style: none;
+  margin: 0 auto 16px;
+  padding: 0;
+  display: inline-grid;
+  gap: 6px;
+  text-align: left;
+  font-size: 14px;
+  color: var(--jp-ink);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tips i {
+  color: var(--jp-orange);
+  margin-right: 6px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-actions .btn-main {
+  flex: 1 1 170px;
+  justify-content: center;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-ghost {
+  color: var(--jp-navy) !important;
+  border-color: var(--jp-border-hover-2) !important;
+  background: transparent !important;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-skel {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--jp-white);
+  border-radius: 18px;
+  border: 1px solid var(--jp-border-muted);
+  display: grid;
+  gap: 14px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .sk {
+  border-radius: 10px;
+  background: linear-gradient(90deg, var(--jp-border-light) 25%, var(--jp-bg-light) 50%, var(--jp-border-light) 75%);
+  background-size: 200% 100%;
+  animation: trksk 1.3s ease infinite;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .sk-h {
+  height: 28px;
+  width: 55%;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .sk-l {
+  height: 16px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .sk-s {
+  width: 70%;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .sk-b {
+  height: 90px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-main, .page-track-shipment .trk-side {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-card {
+  padding: clamp(18px, 3vw, 26px);
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  box-shadow: var(--jp-shadow-lg);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-lbl {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-id {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-id strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
+  color: var(--jp-navy);
+  overflow-wrap: anywhere;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--jp-navy);
+  background: var(--jp-bg-soft);
+  border: 0;
+  border-radius: 999px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-copy:hover {
+  background: var(--jp-navy);
+  color: var(--jp-white);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 800;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-badge.is-go {
+  color: var(--jp-navy);
+  background: var(--jp-bg-soft);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-badge.is-done {
+  color: #067647;
+  background: #ECFDF3;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-badge.is-warn {
+  color: #B54708;
+  background: #FFF4D6;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-explain {
+  margin: 14px 0 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: var(--jp-bg-light);
+  border-radius: 12px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-facts strong {
+  display: block;
+  font-size: 15px;
+  color: var(--jp-ink);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-facts small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 0 18px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li:last-child {
+  padding-bottom: 0;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 2px;
+  background: var(--jp-border-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li:last-child::after {
+  display: none;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li.done::after {
+  background: var(--jp-orange);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-dot {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 13px;
+  color: transparent;
+  background: var(--jp-white);
+  border: 2px solid var(--jp-border-muted);
+  position: relative;
+  z-index: 1;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li.done .trk-dot {
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+  color: var(--jp-white);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li.current .trk-dot {
+  box-shadow: 0 0 0 5px rgba(242, 99, 35, .2);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-step-l {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-steps li.done .trk-step-l {
+  color: var(--jp-navy);
+  font-weight: 800;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-card h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  color: var(--jp-navy);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-latest h3 {
+  font-size: 1.1rem;
+  margin: 0 0 6px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-latest p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-when {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--jp-text-subtle) !important;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-latest {
+  border-left: 4px solid var(--jp-orange);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-note {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-note>i {
+  font-size: 22px;
+  color: var(--jp-orange);
+  margin-top: 2px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-note h3 {
+  font-size: 1.05rem;
+  margin: 0 0 4px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-note p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--jp-text-muted);
+  line-height: 1.55;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-exc {
+  border-color: #F5D78B;
+  background: #FFFAEB;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-exc h3 {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+  color: #B54708;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-exc p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--jp-ink);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-exc .btn-main {
+  margin-top: 6px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+  margin: 0 0 14px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-h>i {
+  color: var(--jp-orange);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--jp-border-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl li {
+  position: relative;
+  padding: 0 0 18px 30px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl li:last-child {
+  padding-bottom: 0;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--jp-white);
+  border: 3px solid var(--jp-border-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl li.is-current::before {
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .2);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl strong {
+  display: block;
+  font-size: 15px;
+  color: var(--jp-navy);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-meta {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--jp-text-subtle);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-meta i {
+  color: var(--jp-orange);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-tl p {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-help {
+  background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+  border: 0;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-help h3, .page-track-shipment .trk-help .trk-h>i {
+  color: var(--jp-white);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-help p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-help .trk-ghost {
+  color: var(--jp-white) !important;
+  border-color: rgba(255, 255, 255, .4) !important;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-table th {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-white);
+  background: var(--jp-navy);
+  white-space: nowrap;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-table td {
+  padding: 14px;
+  font-size: 14px;
+  border-top: 1px solid var(--jp-border-light);
+  vertical-align: middle;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-view {
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--jp-white);
+  background: var(--jp-orange);
+  border: 0;
+  border-radius: 999px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-table-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--jp-border-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-head {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 26px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-head h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.45rem, 3.4vw, 2rem);
+  line-height: 1.15;
+  color: var(--jp-heading-color);
+  margin: 4px 0 0;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-head p {
+  margin: 8px auto 0;
+  font-size: 15px;
+  color: var(--jp-text-muted);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-two {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-find {
+  display: flex;
+  gap: 14px;
+  padding: 20px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-find>i {
+  flex: 0 0 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-size: 19px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-find h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  margin: 0 0 4px;
+}
+
+/* Used only by: track-shipment */
+.page-track-shipment .trk-find p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--jp-text-subtle);
+}
+
+
+@media (min-width: 576px) {
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-guide {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (min-width: 768px) {
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-two {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-steps {
+    grid-template-columns: repeat(6, 1fr);
+    margin-top: 26px;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-steps li {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    gap: 8px;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-steps li::after {
+    left: calc(50% + 20px);
+    right: calc(-50% + 20px);
+    top: 15px;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-step-l {
+    font-size: 12.5px;
+  }
+
+}
+
+@media (min-width: 992px) {
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-grid {
+    grid-template-columns: 1.6fr 1fr;
+    gap: 20px;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-side {
+    position: sticky;
+    top: calc(var(--jp-header-h, 86px) + 16px);
+  }
+
+}
+
+@media (max-width: 767px) {
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table-wrap {
+    border: 0;
+    overflow: visible;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table, .page-track-shipment .trk-table tbody, .page-track-shipment .trk-table tr, .page-track-shipment .trk-table td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table tr {
+    margin-bottom: 12px;
+    padding: 6px 14px;
+    border: 1px solid var(--jp-border-muted);
+    border-radius: 14px;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    text-align: right;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table td::before {
+    content: attr(data-label);
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--jp-orange);
+    text-align: left;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table td:last-child::before {
+    content: none;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-table td:last-child {
+    justify-content: flex-end;
+  }
+
+}
+
+@media (max-width: 575px) {
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-row {
+    flex-direction: column;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-row .btn-main {
+    width: 100%;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-head {
+    text-align: left;
+  }
+
+  /* Used only by: track-shipment */
+  .page-track-shipment .trk-actions .btn-main {
+    flex-basis: 100%;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Used only by: track-shipment */
+  .page-track-shipment .sk, .page-track-shipment .trk-row .btn-main.is-loading::after {
+    animation: none;
+  }
+
+}

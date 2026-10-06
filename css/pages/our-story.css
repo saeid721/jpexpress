@@ -1,0 +1,10 @@
+/* ===============================================================
+   JP EXPRESS — OUR-STORY PAGE STYLES
+   Only selectors unique to our-story.html are kept here.
+   Page isolation: html.page-our-story
+   ===============================================================
+
+/* Used only by: our-story */
+.page-our-story .jp-split.reverse .jp-split-media {
+  order: 1;
+}
