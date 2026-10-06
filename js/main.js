@@ -1572,13 +1572,13 @@ const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
   /* ---------- SEO (title, meta, canonical, JSON-LD) ---------- */
   const title = `Shipping from Bangladesh to ${d.n} | JP Express`;
   const desc = `Courier and freight from Bangladesh to ${d.n}: services, estimated ${d.t} transit, documents, customs notes, restricted items and a quote path.`;
-  const url = `https://www.jpexpress.com/country.html?c=${slug}`;
+  const url = `https://www.jpex.com.bd/country.html?c=${slug}`;
   document.title = title;
   const meta = (sel, attr, val) => { const e = document.querySelector(sel); if (e) e.setAttribute(attr, val); };
   meta('meta[name="description"]', 'content', desc); meta('link[rel="canonical"]', 'href', url);
   meta('meta[property="og:title"]', 'content', title); meta('meta[property="og:description"]', 'content', desc); meta('meta[property="og:url"]', 'content', url);
   const ld = o => { const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(o); document.head.appendChild(s); };
-  ld({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', 'index.html'], ['Countries', 'countries.html'], [d.n, 'country.html?c=' + slug]].map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x[0], item: 'https://www.jpexpress.com/' + x[1] })) });
+  ld({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [['Home', 'index.html'], ['Countries', 'countries.html'], [d.n, 'country.html?c=' + slug]].map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x[0], item: 'https://www.jpex.com.bd/' + x[1] })) });
   ld({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(f => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } })) });
   ld({ '@context': 'https://schema.org', '@type': 'Service', name: `International shipping from Bangladesh to ${d.n}`, provider: { '@type': 'Organization', name: 'JP Express', telephone: '+8801681637836' }, areaServed: d.n });
 
@@ -1694,7 +1694,7 @@ const REGIONS = ['North America', 'Europe', 'Middle East', 'Asia-Pacific'];
 
   // Blog structured data
   const s = document.createElement('script'); s.type = 'application/ld+json';
-  s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Blog', name: 'JP Express Shipping & Logistics Blog', url: 'https://www.jpexpress.com/blog.html',
+  s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Blog', name: 'JP Express Shipping & Logistics Blog', url: 'https://www.jpex.com.bd/blog.html',
     publisher: { '@type': 'Organization', name: 'JP Express' },
     blogPost: BLOG_POSTS.map(p => ({ '@type': 'BlogPosting', headline: p.t, description: p.x, datePublished: p.d, articleSection: BLOG_CATS[p.c], author: { '@type': 'Organization', name: 'JP Express' } })) });
   document.head.appendChild(s);
