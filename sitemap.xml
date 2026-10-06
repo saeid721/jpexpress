@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.jpexpress.com/</loc><priority>1.0</priority></url>
+
+  <url><loc>https://www.jpexpress.com/our-story.html</loc></url>
+  <url><loc>https://www.jpexpress.com/leadership.html</loc></url>
+  <url><loc>https://www.jpexpress.com/careers.html</loc></url>
+  <url><loc>https://www.jpexpress.com/shipping-guides.html</loc></url>
+  <url><loc>https://www.jpexpress.com/faq.html</loc></url>
+  <url><loc>https://www.jpexpress.com/media-center.html</loc></url>
+  <url><loc>https://www.jpexpress.com/legal.html</loc></url>
+  <url><loc>https://www.jpexpress.com/international-courier.html</loc></url>
+  <url><loc>https://www.jpexpress.com/air-freight.html</loc></url>
+  <url><loc>https://www.jpexpress.com/sea-freight.html</loc></url>
+  <url><loc>https://www.jpexpress.com/export-logistics.html</loc></url>
+  <url><loc>https://www.jpexpress.com/import-solutions.html</loc></url>
+  <url><loc>https://www.jpexpress.com/terms-of-service.html</loc></url>
+  <url><loc>https://www.jpexpress.com/privacy-policy.html</loc></url>
+  <url><loc>https://www.jpexpress.com/sitemap.html</loc></url>
 </urlset>
