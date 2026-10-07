@@ -29,7 +29,8 @@
 }
 
 /* Used only by: about */
-.page-about .abt-head h2, .page-about .abt-copy h2 {
+.page-about .abt-head h2,
+.page-about .abt-copy h2 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   font-size: clamp(1.45rem, 3.4vw, 2rem);
@@ -47,48 +48,8 @@
 }
 
 /* Used only by: about */
-.page-about .abt-copy .accent, .page-about .abt-hero h1 .accent {
+.page-about .abt-copy .accent {
   color: var(--jp-orange-accent);
-}
-
-/* Used only by: about */
-.page-about .abt-hero {
-  min-height: 0;
-  padding: clamp(36px, 7vw, 76px) 0;
-}
-
-/* Used only by: about */
-.page-about .abt-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-/* Used only by: about */
-.page-about .abt-crumb a:hover {
-  color: var(--jp-white);
-}
-
-/* Used only by: about */
-.page-about .abt-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: about */
-.page-about .abt-hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  max-width: 760px;
-}
-
-/* Used only by: about */
-.page-about .abt-hero p {
-  max-width: 640px;
 }
 
 /* Used only by: about */
@@ -500,6 +461,7 @@
 
 
 @media (min-width: 768px) {
+
   /* Used only by: about */
   .page-about .abt-mv {
     grid-template-columns: 1fr 1fr;
@@ -518,6 +480,7 @@
 }
 
 @media (min-width: 992px) {
+
   /* Used only by: about */
   .page-about .abt-split {
     grid-template-columns: 1.05fr .95fr;
@@ -532,6 +495,7 @@
 }
 
 @media (max-width: 575px) {
+
   /* Used only by: about */
   .page-about .abt-head {
     text-align: left;
@@ -557,12 +521,6 @@
 
   /* Used only by: about */
   .page-about .abt-apply .btn-main {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Used only by: about */
-  .page-about .abt-hero .hero-actions .btn-main {
     width: 100%;
     justify-content: center;
   }
@@ -596,14 +554,9 @@
 
 }
 
-/* Used only by: about */
-.page-about .abt-hero .hero-actions .btn-main {
-  width: 100%;
-  justify-content: center;
-}
-
 
 @media (max-width: 360px) {
+
   /* Used only by: about */
   .page-about .abt-logos {
     grid-template-columns: repeat(2, 1fr);

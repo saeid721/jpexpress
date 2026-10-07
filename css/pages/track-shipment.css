@@ -15,55 +15,6 @@
 }
 
 /* Used only by: track-shipment */
-.page-track-shipment .trk-hero {
-  min-height: 0;
-  padding: clamp(32px, 6vw, 64px) 0 clamp(64px, 9vw, 96px);
-}
-
-/* Used only by: track-shipment */
-.page-track-shipment .trk-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-/* Used only by: track-shipment */
-.page-track-shipment .trk-crumb a:hover {
-  color: var(--jp-white);
-}
-
-/* Used only by: track-shipment */
-.page-track-shipment .trk-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: track-shipment */
-.page-track-shipment .trk-hero-head {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 22px;
-}
-
-/* Used only by: track-shipment */
-.page-track-shipment .trk-hero-head h1 {
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  margin: 0 0 8px;
-}
-
-/* Used only by: track-shipment */
-.page-track-shipment .trk-hero-head p {
-  margin: 0 auto;
-  font-size: clamp(.9rem, 1.6vw, 1.05rem);
-}
-
-/* Used only by: track-shipment */
 .page-track-shipment .trk-search {
   position: relative;
   z-index: 2;
@@ -163,7 +114,8 @@
 }
 
 /* Used only by: track-shipment */
-.page-track-shipment .trk-error[hidden], .page-track-shipment .trk-demo[hidden] {
+.page-track-shipment .trk-error[hidden],
+.page-track-shipment .trk-demo[hidden] {
   display: none !important;
 }
 
@@ -401,7 +353,8 @@
 }
 
 /* Used only by: track-shipment */
-.page-track-shipment .trk-main, .page-track-shipment .trk-side {
+.page-track-shipment .trk-main,
+.page-track-shipment .trk-side {
   display: grid;
   gap: 16px;
   min-width: 0;
@@ -819,7 +772,8 @@
 }
 
 /* Used only by: track-shipment */
-.page-track-shipment .trk-help h3, .page-track-shipment .trk-help .trk-h>i {
+.page-track-shipment .trk-help h3,
+.page-track-shipment .trk-help .trk-h>i {
   color: var(--jp-white);
 }
 
@@ -956,6 +910,7 @@
 
 
 @media (min-width: 576px) {
+
   /* Used only by: track-shipment */
   .page-track-shipment .trk-guide {
     grid-template-columns: repeat(3, 1fr);
@@ -969,6 +924,7 @@
 }
 
 @media (min-width: 768px) {
+
   /* Used only by: track-shipment */
   .page-track-shipment .trk-two {
     grid-template-columns: 1fr 1fr;
@@ -1007,6 +963,7 @@
 }
 
 @media (min-width: 992px) {
+
   /* Used only by: track-shipment */
   .page-track-shipment .trk-grid {
     grid-template-columns: 1.6fr 1fr;
@@ -1022,6 +979,7 @@
 }
 
 @media (max-width: 767px) {
+
   /* Used only by: track-shipment */
   .page-track-shipment .trk-table-wrap {
     border: 0;
@@ -1038,7 +996,10 @@
   }
 
   /* Used only by: track-shipment */
-  .page-track-shipment .trk-table, .page-track-shipment .trk-table tbody, .page-track-shipment .trk-table tr, .page-track-shipment .trk-table td {
+  .page-track-shipment .trk-table,
+  .page-track-shipment .trk-table tbody,
+  .page-track-shipment .trk-table tr,
+  .page-track-shipment .trk-table td {
     display: block;
     width: 100%;
   }
@@ -1085,6 +1046,7 @@
 }
 
 @media (max-width: 575px) {
+
   /* Used only by: track-shipment */
   .page-track-shipment .trk-row {
     flex-direction: column;
@@ -1108,8 +1070,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   /* Used only by: track-shipment */
-  .page-track-shipment .sk, .page-track-shipment .trk-row .btn-main.is-loading::after {
+  .page-track-shipment .sk,
+  .page-track-shipment .trk-row .btn-main.is-loading::after {
     animation: none;
   }
 

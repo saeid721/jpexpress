@@ -165,16 +165,19 @@
 
   <main id="main">
 
-    <!-- ============ HERO ============ -->
-    <section class="hero res-hero" aria-labelledby="resTitle">
+    <!-- HERO -->
+    <section class="hero page-hero" aria-labelledby="cntTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
-        <div class="hero-copy">
-          <nav class="res-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i
-              class="fa-solid fa-chevron-right" aria-hidden="true"></i><span>Resources</span></nav>
+        <div class="hero-copy" data-reveal>
+          <nav class="page-crumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
+              aria-current="page">Resources</span>
+          </nav>
           <div class="hero-kicker"><span>KNOWLEDGE</span> CENTER</div>
           <h1 id="resTitle">Shipping &amp; Export <span class="accent">Knowledge Center</span></h1>
-          <p>Clear guides on export, shipping, customs and packaging, plus tools to help you ship from Bangladesh with
+          <p>Clear guides on export, shipping, customs and packaging, plus tools to help you ship from Bangladesh
+            with
             confidence.</p>
         </div>
       </div>
@@ -185,7 +188,8 @@
       <div class="container-fluid">
         <div class="row g-0">
           <div class="trust-item col-6 col-md-3"><i
-              class="fa-solid fa-file-export"></i><strong>Export</strong><small>Documents and process</small></div>
+              class="fa-solid fa-file-export"></i><strong>Export</strong><small>Documents and process</small>
+          </div>
           <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-stamp"></i><strong>Customs</strong><small>Duties
               and clearance</small></div>
           <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-box"></i><strong>Packaging</strong><small>Pack it
@@ -232,7 +236,8 @@
               data-cat="packaging" aria-pressed="false">Packaging</button><button type="button" class="res-chip"
               data-cat="cost" aria-pressed="false">Cost & Transit</button><button type="button" class="res-chip"
               data-cat="country" aria-pressed="false">Country Guides</button><button type="button" class="res-chip"
-              data-cat="restricted" aria-pressed="false">Restricted Items</button></div>
+              data-cat="restricted" aria-pressed="false">Restricted Items</button>
+          </div>
           <p class="res-count" id="resCount" aria-live="polite"></p>
         </div>
         <div class="res-guides" id="resGuides">
@@ -260,7 +265,8 @@
             <summary><span class="res-g-ico"><i class="fa-solid fa-barcode" aria-hidden="true"></i></span><span><span
                   class="res-g-title">HS codes explained</span><span class="res-g-tag">Export</span></span></summary>
             <div class="res-g-body">
-              <p>An HS (Harmonized System) code classifies your goods. Customs use it to apply duties, taxes and rules.
+              <p>An HS (Harmonized System) code classifies your goods. Customs use it to apply duties, taxes and
+                rules.
                 Use the correct code on your invoice, and ask us if you are unsure which one applies.</p><a
                 class="res-g-link" href="contact.html?intent=export">Ask our team <i class="fa-solid fa-arrow-right"
                   aria-hidden="true"></i></a>
@@ -271,17 +277,19 @@
                   class="res-g-title">Sending product samples</span><span class="res-g-tag">Export</span></span>
             </summary>
             <div class="res-g-body">
-              <p>Samples usually travel by courier. Describe them clearly, state a value, and ask whether a commercial
+              <p>Samples usually travel by courier. Describe them clearly, state a value, and ask whether a
+                commercial
                 invoice is needed for your destination.</p><a class="res-g-link" href="services.html#export">Sample
                 shipment service <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </details>
           <details class="res-guide" data-cat="shipping" data-tags="courier air sea freight compare choose" data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-scale-balanced"
-                  aria-hidden="true"></i></span><span><span class="res-g-title">Courier, air or sea freight?</span><span
-                  class="res-g-tag">Shipping</span></span></summary>
+                  aria-hidden="true"></i></span><span><span class="res-g-title">Courier, air or sea
+                  freight?</span><span class="res-g-tag">Shipping</span></span></summary>
             <div class="res-g-body">
-              <p><strong>Courier</strong> suits documents and parcels. <strong>Air freight</strong> suits time-critical
+              <p><strong>Courier</strong> suits documents and parcels. <strong>Air freight</strong> suits
+                time-critical
                 commercial cargo. <strong>Sea freight</strong> suits larger, less urgent cargo.</p>
               <p>If you are unsure, tell us what you ship and we will recommend an option.</p><a class="res-g-link"
                 href="services.html">Compare services <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
@@ -290,7 +298,8 @@
           <details class="res-guide" data-cat="shipping" data-tags="first time beginner how to send parcel abroad"
             data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span><span><span
-                  class="res-g-title">First-time shipper steps</span><span class="res-g-tag">Shipping</span></span>
+                  class="res-g-title">First-time shipper
+                  steps</span><span class="res-g-tag">Shipping</span></span>
             </summary>
             <div class="res-g-body">
               <ol>
@@ -305,10 +314,11 @@
           </details>
           <details class="res-guide" data-cat="shipping" data-tags="pickup door to door collect" data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-truck-pickup"
-                  aria-hidden="true"></i></span><span><span class="res-g-title">Door-to-door and pickup</span><span
-                  class="res-g-tag">Shipping</span></span></summary>
+                  aria-hidden="true"></i></span><span><span class="res-g-title">Door-to-door and
+                  pickup</span><span class="res-g-tag">Shipping</span></span></summary>
             <div class="res-g-body">
-              <p>Pickup availability depends on your area in Bangladesh. Share your location when you request a quote
+              <p>Pickup availability depends on your area in Bangladesh. Share your location when you request a
+                quote
                 and we will confirm your options.</p><a class="res-g-link" href="quote.html">Book a pickup <i
                   class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
@@ -317,7 +327,8 @@
             <summary><span class="res-g-ico"><i class="fa-solid fa-stamp" aria-hidden="true"></i></span><span><span
                   class="res-g-title">Customs basics</span><span class="res-g-tag">Customs</span></span></summary>
             <div class="res-g-body">
-              <p>Customs check what enters a country and apply duties, taxes and rules. A correct description, declared
+              <p>Customs check what enters a country and apply duties, taxes and rules. A correct description,
+                declared
                 value and recipient details help avoid delays.</p><a class="res-g-link"
                 href="countries.html">Destination guides <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
@@ -326,25 +337,28 @@
             <summary><span class="res-g-ico"><i class="fa-solid fa-receipt" aria-hidden="true"></i></span><span><span
                   class="res-g-title">Duties and taxes</span><span class="res-g-tag">Customs</span></span></summary>
             <div class="res-g-body">
-              <p>Shipping charges, customs duties and import taxes are separate. Duties and taxes depend on the goods,
+              <p>Shipping charges, customs duties and import taxes are separate. Duties and taxes depend on the
+                goods,
                 their value and the destination. Who pays depends on the arrangement for your shipment, so confirm
-                before booking.</p><a class="res-g-link" href="contact.html?intent=quote">Ask about your shipment <i
-                  class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+                before booking.</p><a class="res-g-link" href="contact.html?intent=quote">Ask about your shipment
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </details>
           <details class="res-guide" data-cat="customs" data-tags="customs support clearance help" data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-clipboard-check"
-                  aria-hidden="true"></i></span><span><span class="res-g-title">Customs clearance support</span><span
-                  class="res-g-tag">Customs</span></span></summary>
+                  aria-hidden="true"></i></span><span><span class="res-g-title">Customs clearance
+                  support</span><span class="res-g-tag">Customs</span></span></summary>
             <div class="res-g-body">
-              <p>JP Express provides customs support for eligible international shipments. Tell us your shipment details
+              <p>JP Express provides customs support for eligible international shipments. Tell us your shipment
+                details
                 and we will confirm what we can help with.</p><a class="res-g-link" href="services.html#import">Import
                 services <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </details>
           <details class="res-guide" data-cat="packaging" data-tags="pack box tape label parcel" data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-box" aria-hidden="true"></i></span><span><span
-                  class="res-g-title">Packing a parcel</span><span class="res-g-tag">Packaging</span></span></summary>
+                  class="res-g-title">Packing a parcel</span><span class="res-g-tag">Packaging</span></span>
+            </summary>
             <div class="res-g-body">
               <ul>
                 <li>Use a strong, undamaged box that suits the weight</li>
@@ -357,10 +371,12 @@
           </details>
           <details class="res-guide" data-cat="packaging" data-tags="fragile glass breakable cushion" data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-wine-glass" aria-hidden="true"></i></span><span><span
-                  class="res-g-title">Protecting fragile items</span><span class="res-g-tag">Packaging</span></span>
+                  class="res-g-title">Protecting fragile
+                  items</span><span class="res-g-tag">Packaging</span></span>
             </summary>
             <div class="res-g-body">
-              <p>Wrap each item separately, keep it away from the box walls and add cushioning on every side. Mark the
+              <p>Wrap each item separately, keep it away from the box walls and add cushioning on every side. Mark
+                the
                 box as fragile.</p><a class="res-g-link" href="#packaging">Packaging dos and don'ts <i
                   class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
@@ -371,8 +387,10 @@
                   aria-hidden="true"></i></span><span><span class="res-g-title">Volumetric weight</span><span
                   class="res-g-tag">Cost & Transit</span></span></summary>
             <div class="res-g-body">
-              <p>Bulky, light parcels are priced by size as well as weight. Volumetric weight is length × width × height
-                (cm) divided by a divisor. The higher of actual and volumetric weight is usually the chargeable weight.
+              <p>Bulky, light parcels are priced by size as well as weight. Volumetric weight is length × width ×
+                height
+                (cm) divided by a divisor. The higher of actual and volumetric weight is usually the chargeable
+                weight.
                 The divisor varies by service.</p><a class="res-g-link" href="pricing.html#calculator">Try the
                 calculator <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
@@ -394,7 +412,8 @@
           </details>
           <details class="res-guide" data-cat="cost" data-tags="transit delivery time how long days" data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-clock" aria-hidden="true"></i></span><span><span
-                  class="res-g-title">What affects transit time</span><span class="res-g-tag">Cost &
+                  class="res-g-title">What affects transit
+                  time</span><span class="res-g-tag">Cost &
                   Transit</span></span></summary>
             <div class="res-g-body">
               <ul>
@@ -410,7 +429,8 @@
           <details class="res-guide" data-cat="country" data-tags="country destination usa uk canada australia uae"
             data-reveal>
             <summary><span class="res-g-ico"><i class="fa-solid fa-earth-asia" aria-hidden="true"></i></span><span><span
-                  class="res-g-title">Country shipping guides</span><span class="res-g-tag">Country Guides</span></span>
+                  class="res-g-title">Country shipping
+                  guides</span><span class="res-g-tag">Country Guides</span></span>
             </summary>
             <div class="res-g-body">
               <p>Every destination has its own customs rules, documents and restrictions. Open a country guide for
@@ -424,8 +444,10 @@
                   class="res-g-title">Restricted vs prohibited items</span><span class="res-g-tag">Restricted
                   Items</span></span></summary>
             <div class="res-g-body">
-              <p><strong>Prohibited</strong> items cannot be shipped. <strong>Restricted</strong> items may need special
-                handling, documents or approval. Rules depend on the destination and carrier, so check before booking.
+              <p><strong>Prohibited</strong> items cannot be shipped. <strong>Restricted</strong> items may need
+                special
+                handling, documents or approval. Rules depend on the destination and carrier, so check before
+                booking.
               </p><a class="res-g-link" href="#restricted">See common restricted items <i
                   class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
             </div>
@@ -455,25 +477,31 @@
           <div class="res-do" data-reveal>
             <h3><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Do</h3>
             <ul>
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i>Use a strong, undamaged box that suits the weight
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i>Use a strong, undamaged box that suits the
+                weight
               </li>
               <li><i class="fa-solid fa-check" aria-hidden="true"></i>Wrap fragile items individually</li>
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i>Fill empty space so nothing shifts in transit</li>
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i>Fill empty space so nothing shifts in
+                transit</li>
               <li><i class="fa-solid fa-check" aria-hidden="true"></i>Seal seams with strong tape</li>
-              <li><i class="fa-solid fa-check" aria-hidden="true"></i>Put full recipient details on the box and keep a
+              <li><i class="fa-solid fa-check" aria-hidden="true"></i>Put full recipient details on the box and
+                keep a
                 copy of your invoice</li>
             </ul>
           </div>
           <div class="res-dont" data-reveal style="transition-delay:80ms">
             <h3><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i> Don't</h3>
             <ul>
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Reuse crushed or damaged boxes for valuable items
+              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Reuse crushed or damaged boxes for valuable
+                items
               </li>
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Leave liquids or powders loose without sealing
+              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Leave liquids or powders loose without
+                sealing
                 them</li>
               <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Overfill the box so the lid bulges</li>
               <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Leave old labels or barcodes on the box</li>
-              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Use string or cloth instead of proper tape</li>
+              <li><i class="fa-solid fa-xmark" aria-hidden="true"></i>Use string or cloth instead of proper tape
+              </li>
             </ul>
           </div>
         </div>
@@ -525,8 +553,10 @@
           </li>
         </ul>
         <div class="res-note" data-reveal>
-          <p>Restrictions vary by destination and carrier and can change. Please confirm with our team before booking.
-            We are not a customs authority.</p><a class="btn-main btn-red" href="contact.html?intent=general">Ask Our
+          <p>Restrictions vary by destination and carrier and can change. Please confirm with our team before
+            booking.
+            We are not a customs authority.</p><a class="btn-main btn-red" href="contact.html?intent=general">Ask
+            Our
             Team <i class="fa-solid fa-arrow-right"></i></a>
         </div>
       </div>
@@ -561,7 +591,8 @@
             <tbody id="resDestBody"></tbody>
           </table>
         </div>
-        <p class="res-table-empty" id="resDestEmpty" hidden>No destination matches your search. Message us to check if
+        <p class="res-table-empty" id="resDestEmpty" hidden>No destination matches your search. Message us to
+          check if
           we can ship there.</p>
       </div>
     </section>
@@ -644,7 +675,8 @@
         <div class="accordion mx-auto" id="resFaq" style="max-width:860px" data-reveal>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#rf0" aria-expanded="false" aria-controls="rf0">Are the guides
+                data-bs-toggle="collapse" data-bs-target="#rf0" aria-expanded="false" aria-controls="rf0">Are the
+                guides
                 legal or customs advice?</button></h3>
             <div id="rf0" class="accordion-collapse collapse" data-bs-parent="#resFaq">
               <div class="accordion-body">No. They are general shipping information. Rules change and differ by
@@ -653,37 +685,45 @@
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#rf1" aria-expanded="false" aria-controls="rf1">How accurate
+                data-bs-toggle="collapse" data-bs-target="#rf1" aria-expanded="false" aria-controls="rf1">How
+                accurate
                 are the transit estimates?</button></h3>
             <div id="rf1" class="accordion-collapse collapse" data-bs-parent="#resFaq">
-              <div class="accordion-body">They are estimates, not guarantees. Actual time depends on service, customs,
+              <div class="accordion-body">They are estimates, not guarantees. Actual time depends on service,
+                customs,
                 holidays and delivery location.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#rf2" aria-expanded="false" aria-controls="rf2">Can I get the
+                data-bs-toggle="collapse" data-bs-target="#rf2" aria-expanded="false" aria-controls="rf2">Can I
+                get the
                 downloadable guides?</button></h3>
             <div id="rf2" class="accordion-collapse collapse" data-bs-parent="#resFaq">
-              <div class="accordion-body">Use the Request on WhatsApp button in the Download Center and our team will
+              <div class="accordion-body">Use the Request on WhatsApp button in the Download Center and our team
+                will
                 send you the file.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#rf3" aria-expanded="false" aria-controls="rf3">Where do I
+                data-bs-toggle="collapse" data-bs-target="#rf3" aria-expanded="false" aria-controls="rf3">Where do
+                I
                 check restricted items?</button></h3>
             <div id="rf3" class="accordion-collapse collapse" data-bs-parent="#resFaq">
-              <div class="accordion-body">See the restricted items section on this page, then confirm with our team for
+              <div class="accordion-body">See the restricted items section on this page, then confirm with our
+                team for
                 your destination before booking.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#rf4" aria-expanded="false" aria-controls="rf4">Who can I ask
+                data-bs-toggle="collapse" data-bs-target="#rf4" aria-expanded="false" aria-controls="rf4">Who can
+                I ask
                 if my question is not covered?</button></h3>
             <div id="rf4" class="accordion-collapse collapse" data-bs-parent="#resFaq">
-              <div class="accordion-body">Message us on WhatsApp, call the hotline or send an inquiry. Our hotline runs
+              <div class="accordion-body">Message us on WhatsApp, call the hotline or send an inquiry. Our hotline
+                runs
                 9am to 11pm.</div>
             </div>
           </div>

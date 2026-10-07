@@ -214,15 +214,19 @@
 
   <main id="main">
 
-    <section class="hero prc-hero" aria-labelledby="prcTitle">
+    <!-- HERO -->
+    <section class="hero page-hero" aria-labelledby="cntTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
         <div class="hero-copy" data-reveal>
-          <nav class="prc-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i
-              class="fa-solid fa-chevron-right"></i><span>Pricing</span></nav>
+          <nav class="page-crumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
+              aria-current="page">Pricing</span>
+          </nav>
           <div class="hero-kicker"><span>SHIPPING</span> CALCULATOR</div>
           <h1 id="prcTitle">Calculate Your International <span class="accent">Shipping Cost</span></h1>
-          <p>Enter your destination, service and shipment details to see your chargeable weight and next steps. Final
+          <p>Enter your destination, service and shipment details to see your chargeable weight and next steps.
+            Final
             prices are always confirmed in a shipment-specific quote.</p>
         </div>
       </div>
@@ -232,7 +236,8 @@
       <div class="container-fluid">
         <div class="row g-0">
           <div class="trust-item col-6 col-md-3"><i
-              class="fa-solid fa-weight-hanging"></i><strong>Weight</strong><small>Actual vs volumetric</small></div>
+              class="fa-solid fa-weight-hanging"></i><strong>Weight</strong><small>Actual vs volumetric</small>
+          </div>
           <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-eye"></i><strong>Transparent</strong><small>Clear
               cost factors</small></div>
           <div class="trust-item col-6 col-md-3"><i
@@ -307,7 +312,8 @@
                     <option value="United Kingdom"></option>
                     <option value="United States"></option>
                   </datalist></div>
-                <div class="prc-field"><label for="prcService">Service</label><select id="prcService"></select></div>
+                <div class="prc-field"><label for="prcService">Service</label><select id="prcService"></select>
+                </div>
                 <div class="prc-field"><label for="prcWeight">Total weight (kg)</label><input id="prcWeight"
                     type="number" inputmode="decimal" min="0.1" step="0.1" placeholder="e.g. 2.5" required></div>
                 <div class="prc-wide" id="prcDims" hidden>
@@ -338,7 +344,8 @@
             <div id="prcResult">
               <div class="prc-empty"><i class="fa-solid fa-scale-balanced"></i>
                 <h3>Your result appears here</h3>
-                <p>Enter your shipment details to see actual, volumetric and chargeable weight, plus your next step.</p>
+                <p>Enter your shipment details to see actual, volumetric and chargeable weight, plus your next
+                  step.</p>
               </div>
             </div>
           </aside>
@@ -356,12 +363,14 @@
           <li data-reveal style="transition-delay:0ms"><span class="prc-ico"><i
                 class="fa-solid fa-calculator"></i></span><span class="prc-tag">Estimated</span>
             <h3>Calculator</h3>
-            <p>Works out actual, volumetric and chargeable weight and, where rates are available, an estimated cost.</p>
+            <p>Works out actual, volumetric and chargeable weight and, where rates are available, an estimated
+              cost.</p>
           </li>
           <li data-reveal style="transition-delay:70ms"><span class="prc-ico"><i
                 class="fa-solid fa-file-signature"></i></span><span class="prc-tag">Confirmed</span>
             <h3>Quote</h3>
-            <p>A shipment-specific price after our team reviews your actual requirement, service and destination.</p>
+            <p>A shipment-specific price after our team reviews your actual requirement, service and destination.
+            </p>
           </li>
           <li data-reveal style="transition-delay:140ms"><span class="prc-ico"><i
                 class="fa-solid fa-briefcase"></i></span><span class="prc-tag">Commercial</span>
@@ -378,15 +387,18 @@
           <div class="prc-copy" data-reveal>
             <span class="eyebrow">Weight</span>
             <h2 id="wtT">Actual vs Volumetric Weight</h2>
-            <p>Light but bulky parcels take up a lot of space. For pricing, carriers compare the actual weight with the
+            <p>Light but bulky parcels take up a lot of space. For pricing, carriers compare the actual weight
+              with the
               volumetric weight and use the higher one as the chargeable weight.</p>
-            <p>The divisor can differ by service, so the calculator uses the applicable rule and our team confirms the
+            <p>The divisor can differ by service, so the calculator uses the applicable rule and our team confirms
+              the
               final chargeable weight in your quote.</p>
           </div>
           <div class="prc-formula" data-reveal style="transition-delay:80ms">
             <p><strong>Volumetric weight</strong></p>
             <code>Length × Width × Height (cm) ÷ divisor</code>
-            <p><strong>Example (illustrative):</strong> a 40 × 30 × 30 cm box is 36,000 cm³. With a divisor of 5,000,
+            <p><strong>Example (illustrative):</strong> a 40 × 30 × 30 cm box is 36,000 cm³. With a divisor of
+              5,000,
               volumetric weight is 7.2 kg. If it actually weighs 3 kg, the chargeable weight is 7.2 kg.</p>
           </div>
         </div>
@@ -476,7 +488,8 @@
         <div class="prc-biz" data-reveal>
           <div><span class="eyebrow" style="color:var(--jp-orange-light)">Business &amp; Freight</span>
             <h2 id="bizT">Shipping for Business? Request a Business Quote</h2>
-            <p>Commercial exports, recurring shipments, air and sea freight are priced to your requirement. Share your
+            <p>Commercial exports, recurring shipments, air and sea freight are priced to your requirement. Share
+              your
               shipment details and our team will respond with a shipment-specific quote.</p>
           </div>
           <div class="prc-biz-actions">
@@ -499,7 +512,8 @@
                 data-bs-toggle="collapse" data-bs-target="#pf0" aria-expanded="false" aria-controls="pf0">Is the
                 calculator result the final price?</button></h3>
             <div id="pf0" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">No. The calculator gives an estimate or tells you a quote is needed. The final
+              <div class="accordion-body">No. The calculator gives an estimate or tells you a quote is needed. The
+                final
                 price is confirmed in a shipment-specific quote.</div>
             </div>
           </div>
@@ -508,13 +522,15 @@
                 data-bs-toggle="collapse" data-bs-target="#pf1" aria-expanded="false" aria-controls="pf1">What is
                 chargeable weight?</button></h3>
             <div id="pf1" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">It is the weight used for pricing: the higher of actual weight and volumetric
+              <div class="accordion-body">It is the weight used for pricing: the higher of actual weight and
+                volumetric
                 weight, based on the applicable service rules.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf2" aria-expanded="false" aria-controls="pf2">Why does the
+                data-bs-toggle="collapse" data-bs-target="#pf2" aria-expanded="false" aria-controls="pf2">Why does
+                the
                 calculator sometimes say Quote Required?</button></h3>
             <div id="pf2" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
               <div class="accordion-body">For commercial, freight, sea and unusually large or heavy shipments, an
@@ -523,7 +539,8 @@
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf3" aria-expanded="false" aria-controls="pf3">Do the prices
+                data-bs-toggle="collapse" data-bs-target="#pf3" aria-expanded="false" aria-controls="pf3">Do the
+                prices
                 include duties and taxes?</button></h3>
             <div id="pf3" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
               <div class="accordion-body">Not unless your quote says so. Duties, taxes and customs charges at the
@@ -532,10 +549,12 @@
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf4" aria-expanded="false" aria-controls="pf4">How can I get
+                data-bs-toggle="collapse" data-bs-target="#pf4" aria-expanded="false" aria-controls="pf4">How can
+                I get
                 an exact price?</button></h3>
             <div id="pf4" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">Use the Request a Quote button or message us on WhatsApp with your shipment
+              <div class="accordion-body">Use the Request a Quote button or message us on WhatsApp with your
+                shipment
                 details.</div>
             </div>
           </div>

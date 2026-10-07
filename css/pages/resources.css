@@ -38,36 +38,6 @@
   color: var(--jp-text-muted);
 }
 
-/* Hero */
-.page-resources .res-hero {
-  min-height: 0;
-  padding: clamp(36px, 7vw, 72px) 0;
-}
-
-.page-resources .res-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-.page-resources .res-crumb a:hover {
-  color: var(--jp-white);
-}
-
-.page-resources .res-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-.page-resources .res-hero h1 {
-  max-width: 780px;
-}
-
 .page-resources .res-trust .trust-item strong {
   font-size: clamp(17px, 2.4vw, 22px);
 }

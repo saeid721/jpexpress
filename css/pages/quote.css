@@ -39,51 +39,6 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-hero {
-  min-height: 0;
-  padding: clamp(36px, 7vw, 76px) 0;
-}
-
-/* Used only by: quote */
-.page-quote .prc-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-/* Used only by: quote */
-.page-quote .prc-crumb a:hover {
-  color: var(--jp-white);
-}
-
-/* Used only by: quote */
-.page-quote .prc-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: quote */
-.page-quote .prc-hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  max-width: 780px;
-}
-
-/* Used only by: quote */
-.page-quote .prc-hero h1 .accent {
-  color: var(--jp-orange-accent);
-}
-
-/* Used only by: quote */
-.page-quote .prc-hero p {
-  max-width: 650px;
-}
-
-/* Used only by: quote */
 .page-quote .prc-trust {
   position: relative;
   z-index: 3;
@@ -236,7 +191,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-field label, .page-quote .prc-dims-label {
+.page-quote .prc-field label,
+.page-quote .prc-dims-label {
   display: block;
   margin-bottom: 6px;
   font-size: 12.5px;
@@ -245,7 +201,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-field input, .page-quote .prc-field select {
+.page-quote .prc-field input,
+.page-quote .prc-field select {
   width: 100%;
   height: 50px;
   padding: 0 14px;
@@ -269,7 +226,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-field input:focus, .page-quote .prc-field select:focus {
+.page-quote .prc-field input:focus,
+.page-quote .prc-field select:focus {
   background-color: var(--jp-white);
   border-color: var(--jp-orange);
   box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
@@ -426,7 +384,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-kvs, .page-quote .prc-break {
+.page-quote .prc-kvs,
+.page-quote .prc-break {
   background: rgba(255, 255, 255, .07);
   border: 1px solid rgba(255, 255, 255, .14);
   border-radius: 12px;
@@ -459,7 +418,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-kvs .prc-kv:first-child, .page-quote .prc-break h4+.prc-kv {
+.page-quote .prc-kvs .prc-kv:first-child,
+.page-quote .prc-break h4+.prc-kv {
   border-top: 0;
 }
 
@@ -513,7 +473,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-trio, .page-quote .prc-factors {
+.page-quote .prc-trio,
+.page-quote .prc-factors {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -523,7 +484,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-trio li, .page-quote .prc-factors li {
+.page-quote .prc-trio li,
+.page-quote .prc-factors li {
   padding: 22px 20px;
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
@@ -532,7 +494,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-trio li:hover, .page-quote .prc-factors li:hover {
+.page-quote .prc-trio li:hover,
+.page-quote .prc-factors li:hover {
   transform: translateY(-3px);
   box-shadow: var(--jp-shadow-lg);
 }
@@ -551,7 +514,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-trio h3, .page-quote .prc-factors h3 {
+.page-quote .prc-trio h3,
+.page-quote .prc-factors h3 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 16px;
   font-weight: 800;
@@ -560,7 +524,8 @@
 }
 
 /* Used only by: quote */
-.page-quote .prc-trio p, .page-quote .prc-factors p {
+.page-quote .prc-trio p,
+.page-quote .prc-factors p {
   margin: 0;
   font-size: 13.5px;
   line-height: 1.6;
@@ -744,6 +709,7 @@
 
 
 @media (min-width: 576px) {
+
   /* Used only by: quote */
   .page-quote .prc-modes {
     grid-template-columns: repeat(4, 1fr);
@@ -752,6 +718,7 @@
 }
 
 @media (min-width: 768px) {
+
   /* Used only by: quote */
   .page-quote .prc-fields {
     grid-template-columns: 1fr 1fr;
@@ -780,6 +747,7 @@
 }
 
 @media (min-width: 992px) {
+
   /* Used only by: quote */
   .page-quote .prc-layout {
     grid-template-columns: 1.15fr .85fr;
@@ -816,16 +784,11 @@
 }
 
 @media (max-width: 575px) {
+
   /* Used only by: quote */
   .page-quote .prc-head {
     text-align: left;
     margin-bottom: 20px;
-  }
-
-  /* Used only by: quote */
-  .page-quote .prc-hero .hero-actions .btn-main {
-    width: 100%;
-    justify-content: center;
   }
 
   /* Used only by: quote */
@@ -836,8 +799,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   /* Used only by: quote */
-  .page-quote .prc-trio li, .page-quote .prc-factors li, .page-quote .prc-mode span {
+  .page-quote .prc-trio li,
+  .page-quote .prc-factors li,
+  .page-quote .prc-mode span {
     transition: none;
   }
 

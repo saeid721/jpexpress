@@ -15,7 +15,11 @@
 }
 
 /* Used only by: services */
-.page-services .svp-item[hidden], .page-services .svp-catlink[hidden], .page-services .svp-empty[hidden], .page-services .svp-clear[hidden], .page-services .svp-cat[hidden] {
+.page-services .svp-item[hidden],
+.page-services .svp-catlink[hidden],
+.page-services .svp-empty[hidden],
+.page-services .svp-clear[hidden],
+.page-services .svp-cat[hidden] {
   display: none !important;
 }
 
@@ -41,51 +45,6 @@
   margin: 8px auto 0;
   color: var(--jp-text-muted);
   font-size: 15px;
-}
-
-/* Used only by: services */
-.page-services .svp-hero {
-  min-height: 0;
-  padding: clamp(36px, 7vw, 76px) 0;
-}
-
-/* Used only by: services */
-.page-services .svp-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-/* Used only by: services */
-.page-services .svp-crumb a:hover {
-  color: var(--jp-white);
-}
-
-/* Used only by: services */
-.page-services .svp-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: services */
-.page-services .svp-hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  max-width: 780px;
-}
-
-/* Used only by: services */
-.page-services .svp-hero h1 .accent {
-  color: var(--jp-orange-accent);
-}
-
-/* Used only by: services */
-.page-services .svp-hero p {
-  max-width: 640px;
 }
 
 /* Used only by: services */
@@ -482,7 +441,8 @@
 }
 
 /* Used only by: services */
-.page-services .svp-item-more, .page-services .svp-link {
+.page-services .svp-item-more,
+.page-services .svp-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -492,12 +452,15 @@
 }
 
 /* Used only by: services */
-.page-services .svp-item-more i, .page-services .svp-link i {
+.page-services .svp-item-more i,
+.page-services .svp-link i {
   transition: transform .25s ease;
 }
 
 /* Used only by: services */
-.page-services .svp-item:hover .svp-item-more i, .page-services .svp-item-more:hover i, .page-services .svp-link:hover i {
+.page-services .svp-item:hover .svp-item-more i,
+.page-services .svp-item-more:hover i,
+.page-services .svp-link:hover i {
   transform: translateX(4px);
 }
 
@@ -673,6 +636,7 @@
 
 
 @media (min-width: 576px) {
+
   /* Used only by: services */
   .page-services .svp-steps {
     grid-template-columns: repeat(2, 1fr);
@@ -681,6 +645,7 @@
 }
 
 @media (min-width: 992px) {
+
   /* Used only by: services */
   .page-services .svp-steps {
     grid-template-columns: repeat(4, 1fr);
@@ -689,6 +654,7 @@
 }
 
 @media (max-width: 767px) {
+
   /* Used only by: services */
   .page-services .svp-catlink {
     padding: 8px 14px;
@@ -713,7 +679,10 @@
   }
 
   /* Used only by: services */
-  .page-services .svp-table, .page-services .svp-table tbody, .page-services .svp-table tr, .page-services .svp-table td {
+  .page-services .svp-table,
+  .page-services .svp-table tbody,
+  .page-services .svp-table tr,
+  .page-services .svp-table td {
     display: block;
     width: 100%;
   }
@@ -767,6 +736,7 @@
 }
 
 @media (max-width: 575px) {
+
   /* Used only by: services */
   .page-services .svp-head {
     text-align: left;
@@ -832,8 +802,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   /* Used only by: services */
-  .page-services .svp-item, .page-services .svp-item::after, .page-services .svp-item-more i, .page-services .svp-link i {
+  .page-services .svp-item,
+  .page-services .svp-item::after,
+  .page-services .svp-item-more i,
+  .page-services .svp-link i {
     transition: none;
   }
 

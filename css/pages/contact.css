@@ -10,45 +10,8 @@
 }
 
 /* Used only by: contact */
-.page-contact .cnt-hero {
-  min-height: 400px;
-}
-
-/* Used only by: contact */
-.page-contact .cnt-hero .hero-copy {
-  max-width: 620px;
-}
-
-/* Used only by: contact */
-.page-contact .cnt-crumb {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--jp-text-light-blue-2);
-}
-
-/* Used only by: contact */
-.page-contact .cnt-crumb a:hover {
-  color: var(--jp-orange-light);
-}
-
-/* Used only by: contact */
-.page-contact .cnt-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: contact */
-.page-contact .cnt-crumb span {
-  color: var(--jp-white);
-}
-
-/* Used only by: contact */
 .page-contact .cnt-section {
-  padding: clamp(40px,6vw,72px) 0;
+  padding: clamp(40px, 6vw, 72px) 0;
   background: var(--jp-white);
   scroll-margin-top: calc(var(--sp-90) + 8px);
 }
@@ -72,17 +35,19 @@
 
 
 @media (min-width:576px) {
+
   /* Used only by: contact */
   .page-contact .cnt-channels {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }
 
 @media (min-width:1200px) {
+
   /* Used only by: contact */
   .page-contact .cnt-channels {
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
 }
@@ -102,8 +67,8 @@
   background: var(--jp-white);
   border: 1px solid #e6edf6;
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(43,57,144,.06);
-  transition: transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  box-shadow: 0 4px 14px rgba(43, 57, 144, .06);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
 
 /* Used only by: contact */
@@ -155,7 +120,7 @@
 /* Used only by: contact */
 .page-contact .cnt-channel h3 {
   margin: 0 0 6px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 18px;
   font-weight: 800;
   color: var(--jp-navy);
@@ -172,7 +137,7 @@
 /* Used only by: contact */
 .page-contact .cnt-val {
   display: block;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 15.5px;
   font-weight: 800;
   color: var(--jp-navy);
@@ -218,16 +183,17 @@
 /* Used only by: contact */
 .page-contact .cnt-layout {
   display: grid;
-  grid-template-columns: minmax(0,1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   align-items: start;
 }
 
 
 @media (min-width:992px) {
+
   /* Used only by: contact */
   .page-contact .cnt-layout {
-    grid-template-columns: minmax(0,1.65fr) minmax(0,1fr);
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
     gap: 24px;
   }
 
@@ -241,6 +207,7 @@
 
 
 @media (min-width:992px) {
+
   /* Used only by: contact */
   .page-contact .cnt-side {
     position: sticky;
@@ -254,8 +221,8 @@
   background: var(--jp-white);
   border: 1px solid #e3ebf5;
   border-radius: 14px;
-  box-shadow: 0 10px 28px rgba(43,57,144,.08);
-  padding: clamp(16px,3vw,30px);
+  box-shadow: 0 10px 28px rgba(43, 57, 144, .08);
+  padding: clamp(16px, 3vw, 30px);
 }
 
 /* Used only by: contact */
@@ -315,7 +282,7 @@
   font-weight: 700;
   line-height: 1.2;
   color: var(--jp-navy);
-  transition: background .2s,border-color .2s,color .2s,box-shadow .2s,transform .2s;
+  transition: background .2s, border-color .2s, color .2s, box-shadow .2s, transform .2s;
 }
 
 /* Used only by: contact */
@@ -336,7 +303,7 @@
   background: var(--jp-navy);
   border-color: var(--jp-navy);
   color: var(--jp-white);
-  box-shadow: 0 6px 14px rgba(43,57,144,.22);
+  box-shadow: 0 6px 14px rgba(43, 57, 144, .22);
 }
 
 /* Used only by: contact */
@@ -383,7 +350,8 @@
 }
 
 /* Used only by: contact */
-.page-contact .cnt-form .form-control, .page-contact .cnt-form .form-select {
+.page-contact .cnt-form .form-control,
+.page-contact .cnt-form .form-select {
   width: 100%;
   background-color: var(--jp-white);
   font-size: 15px;
@@ -396,9 +364,10 @@
 }
 
 /* Used only by: contact */
-.page-contact .cnt-form .form-control:focus, .page-contact .cnt-form .form-select:focus {
+.page-contact .cnt-form .form-control:focus,
+.page-contact .cnt-form .form-select:focus {
   border-color: #f6b99c;
-  box-shadow: 0 0 0 3px rgba(242,99,35,.14);
+  box-shadow: 0 0 0 3px rgba(242, 99, 35, .14);
 }
 
 /* Used only by: contact */
@@ -524,7 +493,7 @@
   border-radius: 14px;
   overflow: hidden;
   color: var(--jp-white);
-  background: linear-gradient(180deg,#2B3990,#1E2A6B);
+  background: linear-gradient(180deg, #2B3990, #1E2A6B);
   border: 1px solid #2B3990;
   box-shadow: var(--jp-shadow-lg);
 }
@@ -534,7 +503,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(260px 180px at 100% 0%,rgba(242,99,35,.32),transparent 70%);
+  background: radial-gradient(260px 180px at 100% 0%, rgba(242, 99, 35, .32), transparent 70%);
   pointer-events: none;
 }
 
@@ -567,7 +536,7 @@
 
 /* Used only by: contact */
 .page-contact .cnt-badge.is-open {
-  background: rgba(29,168,107,.2);
+  background: rgba(29, 168, 107, .2);
   color: #7ee7a8;
 }
 
@@ -578,14 +547,14 @@
 
 /* Used only by: contact */
 .page-contact .cnt-badge.is-closed {
-  background: rgba(255,138,87,.2);
+  background: rgba(255, 138, 87, .2);
   color: var(--jp-orange-light);
 }
 
 /* Used only by: contact */
 .page-contact .cnt-live h3 {
   margin: 0 0 6px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 20px;
   font-weight: 800;
 }
@@ -611,7 +580,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px 0;
-  border-top: 1px solid rgba(255,255,255,.14);
+  border-top: 1px solid rgba(255, 255, 255, .14);
   font-size: 13.5px;
 }
 
@@ -655,13 +624,13 @@
   background: var(--jp-white);
   border: 1px solid #e3ebf5;
   border-radius: 14px;
-  box-shadow: 0 4px 14px rgba(43,57,144,.06);
+  box-shadow: 0 4px 14px rgba(43, 57, 144, .06);
 }
 
 /* Used only by: contact */
 .page-contact .cnt-quick h3 {
   margin: 0 0 8px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 17px;
   font-weight: 800;
   color: var(--jp-navy);
@@ -689,7 +658,7 @@
   background: var(--jp-bg-muted);
   color: var(--jp-red);
   font-size: 15px;
-  transition: background .2s,color .2s;
+  transition: background .2s, color .2s;
 }
 
 /* Used only by: contact */
@@ -716,7 +685,7 @@
 .page-contact .cnt-row>i {
   font-size: 12px;
   color: var(--jp-text-muted-4);
-  transition: transform .2s,color .2s;
+  transition: transform .2s, color .2s;
 }
 
 /* Used only by: contact */
@@ -739,15 +708,16 @@
 /* Used only by: contact */
 .page-contact .cnt-visit {
   display: grid;
-  grid-template-columns: minmax(0,1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 16px;
 }
 
 
 @media (min-width:992px) {
+
   /* Used only by: contact */
   .page-contact .cnt-visit {
-    grid-template-columns: minmax(0,.85fr) minmax(0,1.25fr);
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.25fr);
     gap: 24px;
   }
 
@@ -755,17 +725,17 @@
 
 /* Used only by: contact */
 .page-contact .cnt-office {
-  padding: clamp(18px,3vw,28px);
+  padding: clamp(18px, 3vw, 28px);
   background: var(--jp-white);
   border: 1px solid #e3ebf5;
   border-radius: 14px;
-  box-shadow: 0 4px 14px rgba(43,57,144,.06);
+  box-shadow: 0 4px 14px rgba(43, 57, 144, .06);
 }
 
 /* Used only by: contact */
 .page-contact .cnt-office h3 {
   margin: 0 0 12px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 20px;
   font-weight: 800;
   color: var(--jp-navy);
@@ -884,7 +854,7 @@
   border-radius: 50%;
   color: var(--jp-navy);
   font-size: 15px;
-  transition: background .2s,color .2s,border-color .2s,transform .2s;
+  transition: background .2s, color .2s, border-color .2s, transform .2s;
 }
 
 /* Used only by: contact */
@@ -903,7 +873,7 @@
   border-radius: 14px;
   overflow: hidden;
   background: var(--jp-bg-muted);
-  box-shadow: 0 4px 14px rgba(43,57,144,.06);
+  box-shadow: 0 4px 14px rgba(43, 57, 144, .06);
 }
 
 /* Used only by: contact */
@@ -925,7 +895,7 @@
   gap: 8px;
   padding: 9px 14px;
   border-radius: 8px;
-  background: rgba(255,255,255,.96);
+  background: rgba(255, 255, 255, .96);
   box-shadow: var(--jp-shadow-2xl);
   font-size: 13px;
   font-weight: 800;
@@ -939,12 +909,6 @@
 
 
 @media (max-width:767px) {
-  /* Used only by: contact */
-  .page-contact .cnt-crumb {
-    justify-content: center;
-    margin-bottom: 10px;
-    font-size: 12px;
-  }
 
   /* Used only by: contact */
   .page-contact .cnt-section {
@@ -964,7 +928,7 @@
   /* Used only by: contact */
   .page-contact .cnt-channel {
     display: grid;
-    grid-template-columns: 44px minmax(0,1fr);
+    grid-template-columns: 44px minmax(0, 1fr);
     column-gap: 12px;
     row-gap: 8px;
     padding: 14px;
@@ -1030,7 +994,8 @@
   }
 
   /* Used only by: contact */
-  .page-contact .cnt-form .form-control, .page-contact .cnt-form .form-select {
+  .page-contact .cnt-form .form-control,
+  .page-contact .cnt-form .form-select {
     font-size: 16px;
   }
 
@@ -1068,6 +1033,7 @@
 }
 
 @media (max-width:380px) {
+
   /* Used only by: contact */
   .page-contact .cnt-chip {
     padding: 7px 10px;

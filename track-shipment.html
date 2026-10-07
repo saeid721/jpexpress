@@ -215,45 +215,44 @@
 
   <main id="main">
 
-    <!-- ============ HERO (same hero system as Home) ============ -->
-    <section class="hero cnt-hero" aria-labelledby="cntTitle">
+    <!-- HERO -->
+    <section class="hero page-hero" aria-labelledby="cntTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-copy" data-reveal>
-              <nav class="cnt-crumb" aria-label="Breadcrumb">
-                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
-                  aria-current="page">Track Shipment</span>
-              </nav>
-              <div class="hero-kicker"><span>TRACK SHIPMENT</span> JP EXPRESS</div>
-              <h1 id="cntTitle">Track Your Shipment</h1>
-              <p>Enter your JP Express tracking number to view your shipment status and latest update.</p>
+        <div class="hero-copy" data-reveal>
+          <nav class="page-crumb" aria-label="Breadcrumb">
+            <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
+              aria-current="page">Track Shipment</span>
+          </nav>
+          <div class="hero-kicker"><span>TRACK SHIPMENT</span> JP EXPRESS</div>
+          <h1 id="cntTitle">Track Your Shipment</h1>
+          <p>Enter your JP Express tracking number to view your shipment status and latest update.</p>
 
-              <div class="trk-search" data-reveal style="transition-delay:80ms">
-                <form id="trkForm" novalidate>
-                  <label for="trkInput">Tracking number</label>
-                  <div class="trk-row">
-                    <input id="trkInput" type="text" inputmode="text" enterkeyhint="search" autocomplete="off"
-                      autocapitalize="characters" spellcheck="false" placeholder="Enter your tracking number"
-                      aria-describedby="trkHint trkError">
-                    <button id="trkBtn" type="submit" class="btn-main btn-red">Track Shipment <i
-                        class="fa-solid fa-arrow-right"></i></button>
-                  </div>
-                  <p class="trk-error" id="trkError" role="alert" hidden></p>
-                  <p class="trk-hint" id="trkHint">Your tracking number can be found on your booking confirmation or
-                    shipment
-                    receipt. To track several shipments, separate the numbers with commas.</p>
-                  <div class="trk-links"><a href="#help">Need Help?</a><a href="quote.html">Get a Quote</a><a
-                      href="quote.html">Book a Shipment</a></div>
-                </form>
+          <div class="trk-search" data-reveal style="transition-delay:80ms">
+            <form id="trkForm" novalidate>
+              <label for="trkInput">Tracking number</label>
+              <div class="trk-row">
+                <input id="trkInput" type="text" inputmode="text" enterkeyhint="search" autocomplete="off"
+                  autocapitalize="characters" spellcheck="false" placeholder="Enter your tracking number"
+                  aria-describedby="trkHint trkError">
+                <button id="trkBtn" type="submit" class="btn-main btn-red">Track Shipment <i
+                    class="fa-solid fa-arrow-right"></i></button>
               </div>
-              <div class="trk-demo" id="trkDemo" hidden><strong>Preview mode.</strong> Sample data only, not real
-                shipments.
-                Try JPEDEMO001, JPEDEMO002, JPEDEMO003 or JPEDEMO004.</div>
-            </div>
+              <p class="trk-error" id="trkError" role="alert" hidden></p>
+              <p class="trk-hint" id="trkHint">Your tracking number can be found on your booking confirmation
+                or
+                shipment
+                receipt. To track several shipments, separate the numbers with commas.</p>
+              <div class="trk-links"><a href="#help">Need Help?</a><a href="quote.html">Get a Quote</a><a
+                  href="quote.html">Book a Shipment</a></div>
+            </form>
           </div>
+          <div class="trk-demo" id="trkDemo" hidden><strong>Preview mode.</strong> Sample data only, not real
+            shipments.
+            Try JPEDEMO001, JPEDEMO002, JPEDEMO003 or JPEDEMO004.</div>
         </div>
+      </div>
+      </div>
       </div>
     </section>
 
@@ -287,37 +286,46 @@
         <div class="accordion mx-auto" id="trkFaq" style="max-width:860px" data-reveal>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#tf0" aria-expanded="false" aria-controls="tf0">How can I
+                data-bs-toggle="collapse" data-bs-target="#tf0" aria-expanded="false" aria-controls="tf0">How can
+                I
                 track my JP Express shipment?</button></h3>
             <div id="tf0" class="accordion-collapse collapse" data-bs-parent="#trkFaq">
-              <div class="accordion-body">Enter your tracking number in the box at the top of this page and press Track
-                Shipment. You can also track up to 10 shipments at once by separating the numbers with commas.</div>
+              <div class="accordion-body">Enter your tracking number in the box at the top of this page and press
+                Track
+                Shipment. You can also track up to 10 shipments at once by separating the numbers with commas.
+              </div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#tf1" aria-expanded="false" aria-controls="tf1">Where can I
+                data-bs-toggle="collapse" data-bs-target="#tf1" aria-expanded="false" aria-controls="tf1">Where
+                can I
                 find my tracking number?</button></h3>
             <div id="tf1" class="accordion-collapse collapse" data-bs-parent="#trkFaq">
-              <div class="accordion-body">Your tracking number is on your booking confirmation or shipment receipt. If
+              <div class="accordion-body">Your tracking number is on your booking confirmation or shipment
+                receipt. If
                 you cannot find it, contact our team.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#tf2" aria-expanded="false" aria-controls="tf2">When does
+                data-bs-toggle="collapse" data-bs-target="#tf2" aria-expanded="false" aria-controls="tf2">When
+                does
                 tracking information appear?</button></h3>
             <div id="tf2" class="accordion-collapse collapse" data-bs-parent="#trkFaq">
-              <div class="accordion-body">Tracking appears once your shipment is registered. Movement updates depend on
+              <div class="accordion-body">Tracking appears once your shipment is registered. Movement updates
+                depend on
                 shipment progress, so they may take some time to show.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#tf3" aria-expanded="false" aria-controls="tf3">Why is my
+                data-bs-toggle="collapse" data-bs-target="#tf3" aria-expanded="false" aria-controls="tf3">Why is
+                my
                 tracking not updating?</button></h3>
             <div id="tf3" class="accordion-collapse collapse" data-bs-parent="#trkFaq">
-              <div class="accordion-body">Updates appear as your shipment moves and is scanned. If you see no change for
+              <div class="accordion-body">Updates appear as your shipment moves and is scanned. If you see no
+                change for
                 several days, contact us with your tracking number.</div>
             </div>
           </div>
@@ -326,7 +334,8 @@
                 data-bs-toggle="collapse" data-bs-target="#tf4" aria-expanded="false" aria-controls="tf4">How do I
                 contact JP Express about a shipment?</button></h3>
             <div id="tf4" class="accordion-collapse collapse" data-bs-parent="#trkFaq">
-              <div class="accordion-body">Call or message us on WhatsApp and share your tracking number so we can check
+              <div class="accordion-body">Call or message us on WhatsApp and share your tracking number so we can
+                check
                 your shipment quickly.</div>
             </div>
           </div>
