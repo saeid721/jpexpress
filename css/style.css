@@ -4954,6 +4954,38 @@ html.template-jp body {
   }
 }
 
+/* Desktop: every inner-page hero = 40px top/bottom + single-line, full-width text (Home excluded) */
+@media (min-width: 992px) {
+  html:not(.page-index) .hero {
+    min-height: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  /* Full container width */
+  html:not(.page-index) .hero-copy {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* Title: one line, font scales with screen so it never overflows */
+  html:not(.page-index) .hero.page-hero h1 {
+    max-width: 100%;
+    font-size: clamp(1.6rem, 2.6vw, 2.5rem);
+    white-space: nowrap;
+    text-wrap: nowrap;
+  }
+
+  /* Description: one line */
+  html:not(.page-index) .hero .hero-copy p,
+  html:not(.page-index) .page-hero .hero-copy p {
+    max-width: 100%;
+    font-size: clamp(.82rem, 1.25vw, 1.05rem);
+    white-space: nowrap;
+    text-wrap: nowrap;
+  }
+}
+
 /* ===============================================================
    ANIMATIONS
    =============================================================== */
