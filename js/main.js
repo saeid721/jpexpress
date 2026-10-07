@@ -866,10 +866,11 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
         if (!started) return;
         clearTimeout(timer);
         if (document.hidden) return;
-        var c = slides[idx]._c;
-        c.forEach(function (x) { x.classList.remove("is-caret"); x.classList.add("on"); });
-        c[c.length - 1].classList.add("is-caret");
-        timer = setTimeout(function () { eraseOut(c.length); }, HOLD_MS);
+        slides.forEach(function (s) {
+          s._c.forEach(function (x) { x.classList.remove("on", "is-caret"); });
+        });
+        setActive(idx);
+        timer = setTimeout(function () { typeIn(0); }, GAP_MS);
       });
     }
   } catch (err) {

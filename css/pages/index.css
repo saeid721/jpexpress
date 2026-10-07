@@ -9,7 +9,10 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-content: start;
-  margin-bottom: 1rem;
+  margin-bottom: 1.1rem;
+  font-size: clamp(2.2rem, 3.6vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: -.025em;
 }
 
 /* Used only by: index */
@@ -2637,6 +2640,51 @@
   .quote-form .row {
     --bs-gutter-x: 6px;
     --bs-gutter-y: 6px;
+  }
+
+}
+
+
+/* =========================================================
+   HERO TEXT — match design (kicker, title, description, buttons)
+   ========================================================= */
+
+/* Title: every headline = 2 white lines + last orange line */
+.hero h1 .ht-slide {
+  text-wrap: wrap;
+}
+
+.hero h1 .ht-slide .accent {
+  display: block;
+}
+
+@media (min-width: 768px) {
+
+  .hero .hero-copy {
+    max-width: 760px;
+  }
+
+  .hero .hero-kicker {
+    font-size: clamp(.78rem, 1vw, 1rem);
+    letter-spacing: .18em;
+    font-weight: 800;
+    margin-bottom: 18px;
+  }
+
+  .hero .hero-copy>p {
+    max-width: 680px;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+    line-height: 1.6;
+    font-weight: 500;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 28px;
+  }
+
+  .hero .hero-actions .btn-main {
+    min-height: 54px;
+    padding: 0 28px;
+    font-size: clamp(.95rem, 1.1vw, 1.1rem);
   }
 
 }
