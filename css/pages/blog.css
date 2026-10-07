@@ -1,7 +1,7 @@
 /* =========================================
-   BLOG PAGE  (loads AFTER home.css — uses --jp-* tokens only)
-   Prefix: bl-
-   ========================================= */
+BLOG PAGE  (loads AFTER home.css — uses --jp-* tokens only)
+Prefix: bl-
+========================================= */
 .bl-wrap {
   max-width: 1520px;
 }
@@ -160,19 +160,20 @@
 /* ---------- Sticky topic bar ---------- */
 .bl-bar {
   position: sticky;
-  top: var(--jp-header-h, 96px);
+  top: calc(var(--jp-header-h, 68px) - 1px);
   z-index: 20;
-  background: rgba(255, 255, 255, .96);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--jp-border-light);
+  background: var(--jp-white);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom: 1px solid var(--jp-border-muted);
+  box-shadow: 0 6px 16px rgba(20, 30, 90, .06);
 }
 
 .bl-chips {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 10px 0;
+  padding: 12px 0;
   scrollbar-width: none;
 }
 
@@ -184,12 +185,12 @@
   flex: 0 0 auto;
   min-height: 42px;
   padding: 0 16px;
-  border: 1px solid var(--jp-border-soft);
+  border: 1.5px solid var(--jp-border-muted);
   border-radius: 999px;
-  background: var(--jp-white);
+  background: var(--jp-bg-light);
   font-size: 14px;
   font-weight: 700;
-  color: var(--jp-navy);
+  color: var(--jp-text-muted);
   cursor: pointer;
   transition: background .2s ease, color .2s ease, border-color .2s ease;
 }
@@ -201,7 +202,8 @@
 }
 
 .bl-chip:hover {
-  border-color: var(--jp-orange);
+  border-color: var(--jp-navy);
+  color: var(--jp-navy);
 }
 
 .bl-chip.active {
@@ -655,12 +657,9 @@
   }
 }
 
-
-
 /* =========================================
-   BLOG FIXES (keep at the very end of file)
-   ========================================= */
-
+BLOG FIXES (Contextual overrides only)
+========================================= */
 /* hidden attribute must always win (Load more / clear button / empty state) */
 .page-blog [hidden] {
   display: none !important;
@@ -677,38 +676,6 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--jp-blue-light);
-}
-
-/* topic bar: same look as services / business / resources tab nav */
-.bl-bar {
-  top: calc(var(--jp-header-h, 68px) - 1px);
-  background: var(--jp-white);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  border-bottom: 1px solid var(--jp-border-muted);
-  box-shadow: 0 6px 16px rgba(20, 30, 90, .06);
-}
-
-.bl-chips {
-  gap: 8px;
-  padding: 12px 0;
-}
-
-.bl-chip {
-  background: var(--jp-bg-light);
-  border: 1.5px solid var(--jp-border-muted);
-  color: var(--jp-text-muted);
-}
-
-.bl-chip:hover {
-  border-color: var(--jp-navy);
-  color: var(--jp-navy);
-}
-
-.bl-chip.active {
-  background: var(--jp-navy);
-  border-color: var(--jp-navy);
-  color: var(--jp-white);
 }
 
 /* touch devices have no "/" shortcut */
