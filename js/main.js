@@ -13,13 +13,16 @@
   /* ---------- Fixed header height sync (prevents content jump) ---------- */
   const siteHeader = document.getElementById('siteHeader');
   function setHeaderHeight() {
-    document.documentElement.style.setProperty('--jp-header-h', siteHeader.offsetHeight + 'px');
+    document.documentElement.style.setProperty('--jp-header-h', Math.round(siteHeader.getBoundingClientRect().height) + 'px');
   }
   setHeaderHeight();
   window.addEventListener('resize', setHeaderHeight);
-  document.getElementById('topBar').addEventListener('transitionend', e => {
-    if (e.propertyName === 'max-height') setHeaderHeight();
-  });
+  window.addEventListener('load', setHeaderHeight);
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(setHeaderHeight).observe(siteHeader);
+  } else {
+    document.getElementById('topBar').addEventListener('transitionend', setHeaderHeight);
+  }
 
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
   const revealEls = document.querySelectorAll('[data-reveal]');
@@ -1329,7 +1332,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     ['Can JP Express pick up from my address?', 'Pickup availability depends on your area in Bangladesh. Share your location when you request a quote and we will confirm options.']
   ];
   const steps = [['Request a quote', 'Share route, weight and contents.'], ['Confirm shipment', 'Service, price and requirements are agreed.'], ['Pickup or drop-off', 'We collect or receive your parcel.'], ['Documents & checks', 'Paperwork and contents are reviewed.'], ['Dispatch from Bangladesh', 'Shipment enters the international network.'], [`Processing in ${d.n}`, 'Destination-side handling and customs where applicable.'], ['Final delivery', 'Delivered to the recipient.'], ['Track & confirm', 'Follow status and delivery updates.']];
-  const nav = [['overview', 'Overview'], ['services', 'Services'], ['process', 'Process'], ['quote', 'Cost & Transit'], ['docs', 'Documents'], ['restrict', 'Restrictions'], ['delivery', 'Pickup & Delivery'], ['business', 'Business'], ['faq', 'FAQ']];
+  const nav = [['overview', 'Overview', 'fa-eye'], ['services', 'Services', 'fa-layer-group'], ['process', 'Process', 'fa-list-check'], ['quote', 'Cost & Transit', 'fa-calculator'], ['docs', 'Documents', 'fa-file-lines'], ['restrict', 'Restrictions', 'fa-ban'], ['delivery', 'Pickup & Delivery', 'fa-truck-fast'], ['business', 'Business', 'fa-briefcase'], ['faq', 'FAQ', 'fa-circle-question']];
   const sec = (id, t, body, alt) => `<section class="pg-sec cx${alt ? ' pg-alt' : ''}" id="${id}" aria-labelledby="${id}T"><div class="container-fluid"><h2 class="pg-h" id="${id}T">${t}</h2>${body}</div></section>`;
 
   root.innerHTML = `
@@ -1338,7 +1341,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     <div><i class="fa-solid fa-layer-group"></i><b>${sv.length}</b><small>Services</small></div>
     <div><i class="fa-solid fa-location-dot"></i><b>${d.cap}</b><small>Capital</small></div>
     <div><i class="fa-solid fa-coins"></i><b>${d.cur}</b><small>Currency</small></div></div></div>
-  <div class="cd-nav" id="cdNav"><div class="container-fluid"><div class="cd-nav-in">${nav.map(n => `<a href="#${n[0]}">${n[1]}</a>`).join('')}</div></div></div>
+  <div class="cd-nav" id="cdNav"><div class="container-fluid"><div class="cd-nav-in">${nav.map(n => `<a href="#${n[0]}"><i class="fa-solid ${n[2]}"></i>${n[1]}</a>`).join('')}</div></div></div>
 
   ${sec('overview', `Shipping to ${d.n} at a glance`, `
     <div class="cd-grid3">
