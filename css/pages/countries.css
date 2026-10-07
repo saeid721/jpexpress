@@ -274,8 +274,8 @@
 }
 
 /* Used only by: countries */
-.page-countries .final-cta .container-fluid {
-  max-width: 1280px;
+.page-countries .final-cta .cta-actions {
+  margin-right: 0;
 }
 
 
@@ -322,4 +322,98 @@
     font-size: 12.5px;
   }
 
+}
+
+
+/* ===============================================================
+   COUNTRY DETAIL PAGE — intro section, route pill, lists
+   =============================================================== */
+.page-countries .pg-hero {
+  padding: clamp(28px, 5vw, 48px) 0 clamp(56px, 7vw, 72px);
+  background: var(--jp-white);
+}
+
+/* hero banner already has a breadcrumb, so hide the duplicate */
+.page-countries .pg-crumb {
+  display: none;
+}
+
+.page-countries .pg-hero h1,
+.page-countries .pg-hero .cd-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3.2vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: -.03em;
+  color: var(--jp-heading-color);
+  margin: 0 0 12px;
+}
+
+.page-countries .pg-hero .cd-lead {
+  max-width: 760px;
+  margin: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--jp-text-muted);
+}
+
+.page-countries .pg-hero .cd-route {
+  background: var(--jp-bg-muted);
+  border-color: var(--jp-border-muted);
+  color: var(--jp-navy);
+}
+
+.page-countries .pg-hero .btn-dark-outline {
+  background: var(--jp-white);
+  border-color: var(--jp-navy);
+  color: var(--jp-navy);
+}
+
+.page-countries .pg-hero .btn-dark-outline:hover {
+  background: var(--jp-navy);
+  color: var(--jp-white);
+}
+
+.page-countries .pg-hero .cd-link {
+  color: var(--jp-navy);
+}
+
+.page-countries .pg-hero .cd-link:hover {
+  color: var(--jp-orange);
+}
+
+.page-countries .cd-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.page-countries .cd-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--jp-text-muted-dark);
+}
+
+.page-countries .cd-list li i {
+  flex: 0 0 auto;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--jp-orange);
+}
+
+.page-countries .cd-bad .cd-list li i {
+  color: #c0392b;
+}
+
+.page-countries .cd-warn .cd-list li i {
+  color: #e69a00;
+}
+
+.page-countries .cd-dest .cd-list li i {
+  color: var(--jp-navy);
 }

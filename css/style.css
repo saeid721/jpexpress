@@ -4056,11 +4056,11 @@ html.template-jp body {
 
 }
 
-/* Used by: countries, country */
+/* Used by: countries, country (same width as every other page) */
 .template-countries .pg-sec .container-fluid,
 .template-countries .pg-hero .container-fluid,
 .template-countries .cd-nav .container-fluid {
-  max-width: 1280px;
+  max-width: 1520px;
 }
 
 .template-countries .ctr-chip {
@@ -4251,8 +4251,8 @@ html.template-jp body {
 }
 
 .template-countries .cd-stats-wrap {
-  max-width: 1280px;
-  margin-top: -40px;
+  max-width: 1520px;
+  margin-top: -32px;
   position: relative;
   z-index: 3;
 }
