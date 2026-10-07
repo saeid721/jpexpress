@@ -15,7 +15,9 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-card[hidden], .page-industries .ind-empty[hidden], .page-industries .ind-clear[hidden] {
+.page-industries .ind-card[hidden],
+.page-industries .ind-empty[hidden],
+.page-industries .ind-clear[hidden] {
   display: none !important;
 }
 
@@ -41,51 +43,6 @@
   margin: 8px auto 0;
   color: var(--jp-text-muted);
   font-size: 15px;
-}
-
-/* Used only by: industries */
-.page-industries .ind-hero {
-  min-height: 0;
-  padding: clamp(36px, 7vw, 76px) 0;
-}
-
-/* Used only by: industries */
-.page-industries .ind-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-/* Used only by: industries */
-.page-industries .ind-crumb a:hover {
-  color: var(--jp-white);
-}
-
-/* Used only by: industries */
-.page-industries .ind-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: industries */
-.page-industries .ind-hero h1 {
-  font-size: clamp(1.8rem, 5vw, 3rem);
-  max-width: 800px;
-}
-
-/* Used only by: industries */
-.page-industries .ind-hero h1 .accent {
-  color: var(--jp-orange-accent);
-}
-
-/* Used only by: industries */
-.page-industries .ind-hero p {
-  max-width: 650px;
 }
 
 /* Used only by: industries */
@@ -214,7 +171,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-tab, .page-industries .ind-need {
+.page-industries .ind-tab,
+.page-industries .ind-need {
   padding: 8px 15px;
   border-radius: 999px;
   font-size: 13px;
@@ -226,7 +184,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-tab:hover, .page-industries .ind-need:hover {
+.page-industries .ind-tab:hover,
+.page-industries .ind-need:hover {
   border-color: var(--jp-orange);
   color: var(--jp-orange);
 }
@@ -392,7 +351,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-card:hover .ind-more i, .page-industries .ind-more:hover i {
+.page-industries .ind-card:hover .ind-more i,
+.page-industries .ind-more:hover i {
   transform: translateX(4px);
 }
 
@@ -430,7 +390,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-support, .page-industries .ind-steps {
+.page-industries .ind-support,
+.page-industries .ind-steps {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -440,7 +401,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-support li, .page-industries .ind-steps li {
+.page-industries .ind-support li,
+.page-industries .ind-steps li {
   position: relative;
   padding: 24px 20px;
   text-align: center;
@@ -470,7 +432,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-support h3, .page-industries .ind-steps h3 {
+.page-industries .ind-support h3,
+.page-industries .ind-steps h3 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 16px;
   font-weight: 800;
@@ -479,7 +442,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-support p, .page-industries .ind-steps p {
+.page-industries .ind-support p,
+.page-industries .ind-steps p {
   margin: 0;
   font-size: 13.5px;
   line-height: 1.55;
@@ -518,6 +482,7 @@
 
 
 @media (min-width: 576px) {
+
   /* Used only by: industries */
   .page-industries .ind-steps {
     grid-template-columns: repeat(2, 1fr);
@@ -526,6 +491,7 @@
 }
 
 @media (min-width: 768px) {
+
   /* Used only by: industries */
   .page-industries .ind-support {
     grid-template-columns: repeat(3, 1fr);
@@ -534,6 +500,7 @@
 }
 
 @media (min-width: 992px) {
+
   /* Used only by: industries */
   .page-industries .ind-steps {
     grid-template-columns: repeat(4, 1fr);
@@ -542,6 +509,7 @@
 }
 
 @media (max-width: 767px) {
+
   /* Used only by: industries */
   .page-industries .ind-row {
     flex-wrap: nowrap;
@@ -557,7 +525,8 @@
   }
 
   /* Used only by: industries */
-  .page-industries .ind-tab, .page-industries .ind-need {
+  .page-industries .ind-tab,
+  .page-industries .ind-need {
     flex: 0 0 auto;
     white-space: nowrap;
   }
@@ -565,6 +534,7 @@
 }
 
 @media (max-width: 575px) {
+
   /* Used only by: industries */
   .page-industries .ind-head {
     text-align: left;
@@ -581,17 +551,14 @@
     padding: 18px;
   }
 
-  /* Used only by: industries */
-  .page-industries .ind-hero .hero-actions .btn-main {
-    width: 100%;
-    justify-content: center;
-  }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   /* Used only by: industries */
-  .page-industries .ind-card, .page-industries .ind-card::after, .page-industries .ind-more i {
+  .page-industries .ind-card,
+  .page-industries .ind-card::after,
+  .page-industries .ind-more i {
     transition: none;
   }
 

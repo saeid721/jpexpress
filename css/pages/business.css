@@ -21,7 +21,7 @@
 
 /* Used only by: business */
 .page-business .biz-sec {
-  scroll-margin-top: calc(var(--jp-header-h,86px) + 64px);
+  scroll-margin-top: calc(var(--jp-header-h, 86px) + 64px);
 }
 
 /* Used only by: business */
@@ -33,9 +33,9 @@
 
 /* Used only by: business */
 .page-business .biz-head h2 {
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(1.45rem,3.4vw,2rem);
+  font-size: clamp(1.45rem, 3.4vw, 2rem);
   line-height: 1.15;
   color: var(--jp-heading-color);
   margin: 4px 0 0;
@@ -64,56 +64,6 @@
 }
 
 /* Used only by: business */
-.page-business .biz-hero {
-  min-height: 0;
-  padding: clamp(36px,7vw,76px) 0;
-}
-
-/* Used only by: business */
-.page-business .biz-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-/* Used only by: business */
-.page-business .biz-crumb a:hover {
-  color: var(--jp-white);
-}
-
-/* Used only by: business */
-.page-business .biz-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: business */
-.page-business .biz-hero .hero-copy {
-  max-width: 700px;
-}
-
-/* Used only by: business */
-.page-business .biz-hero h1 {
-  font-size: clamp(1.8rem,5vw,3rem);
-  max-width: 800px;
-}
-
-/* Used only by: business */
-.page-business .biz-hero h1 .accent {
-  color: var(--jp-orange-accent);
-}
-
-/* Used only by: business */
-.page-business .biz-hero p {
-  max-width: 660px;
-}
-
-/* Used only by: business */
 .page-business .biz-trust {
   position: relative;
   z-index: 3;
@@ -121,17 +71,17 @@
 
 /* Used only by: business */
 .page-business .biz-trust .trust-item strong {
-  font-size: clamp(17px,2.4vw,22px);
+  font-size: clamp(17px, 2.4vw, 22px);
 }
 
 /* Used only by: business */
 .page-business .biz-catnav {
   position: sticky;
-  top: var(--jp-header-h,86px);
+  top: var(--jp-header-h, 86px);
   z-index: 20;
   background: var(--jp-white);
   border-bottom: 1px solid var(--jp-border-muted);
-  box-shadow: 0 6px 16px rgba(20,30,90,.06);
+  box-shadow: 0 6px 16px rgba(20, 30, 90, .06);
 }
 
 /* Used only by: business */
@@ -165,7 +115,7 @@
   color: var(--jp-text-muted);
   background: var(--jp-bg-light);
   border: 1.5px solid var(--jp-border-muted);
-  transition: background .2s,color .2s,border-color .2s;
+  transition: background .2s, color .2s, border-color .2s;
 }
 
 /* Used only by: business */
@@ -195,8 +145,8 @@
   border-radius: 14px;
   font-size: 20px;
   color: var(--jp-orange);
-  background: rgba(242,99,35,.1);
-  transition: background .25s,color .25s;
+  background: rgba(242, 99, 35, .1);
+  transition: background .25s, color .25s;
   flex: 0 0 auto;
 }
 
@@ -207,8 +157,8 @@
   font-size: 23px;
   border-radius: 16px;
   color: var(--jp-white);
-  background: linear-gradient(145deg,var(--jp-navy),var(--jp-navy-dark));
-  box-shadow: 0 8px 18px rgba(43,57,144,.25);
+  background: linear-gradient(145deg, var(--jp-navy), var(--jp-navy-dark));
+  box-shadow: 0 8px 18px rgba(43, 57, 144, .25);
 }
 
 /* Used only by: business */
@@ -240,17 +190,19 @@
 
 
 @media (min-width:640px) {
+
   /* Used only by: business */
   .page-business .biz-grid {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }
 
 @media (min-width:992px) {
+
   /* Used only by: business */
   .page-business .biz-grid {
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
 }
@@ -284,7 +236,7 @@
 /* Used only by: business */
 .page-business .biz-card:hover {
   box-shadow: var(--jp-shadow-lg);
-  border-color: rgba(242,99,35,.35);
+  border-color: rgba(242, 99, 35, .35);
 }
 
 /* Used only by: business */
@@ -320,7 +272,7 @@
 
 /* Used only by: business */
 .page-business .biz-card h3 {
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 17px;
   font-weight: 800;
   color: var(--jp-navy);
@@ -340,7 +292,7 @@
 .page-business .biz-aud {
   max-width: 1060px;
   margin: 0 auto;
-  padding: clamp(16px,3vw,28px);
+  padding: clamp(16px, 3vw, 28px);
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
   border-radius: 18px;
@@ -427,7 +379,7 @@
 /* Used only by: business */
 .page-business .biz-p-main h3 {
   margin: 14px 0 6px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--jp-navy);
@@ -514,6 +466,7 @@
 
 
 @media (min-width:992px) {
+
   /* Used only by: business */
   .page-business .biz-panel {
     grid-template-columns: 1.1fr 1fr 1fr;
@@ -524,7 +477,7 @@
 
 /* Used only by: business */
 .page-business .home-section.biz-account {
-  background: linear-gradient(145deg,var(--jp-navy-dark),var(--jp-navy));
+  background: linear-gradient(145deg, var(--jp-navy-dark), var(--jp-navy));
   color: var(--jp-white);
 }
 
@@ -537,8 +490,8 @@
   font-size: 12.5px;
   font-weight: 700;
   color: var(--jp-orange-light);
-  background: rgba(255,138,87,.14);
-  border: 1px solid rgba(255,138,87,.3);
+  background: rgba(255, 138, 87, .14);
+  border: 1px solid rgba(255, 138, 87, .3);
 }
 
 /* Used only by: business */
@@ -550,17 +503,19 @@
 
 
 @media (min-width:640px) {
+
   /* Used only by: business */
   .page-business .biz-acc-grid {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }
 
 @media (min-width:992px) {
+
   /* Used only by: business */
   .page-business .biz-acc-grid {
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
 }
@@ -570,16 +525,16 @@
   display: flex;
   gap: 14px;
   padding: 18px;
-  border: 1px solid rgba(255,255,255,.14);
+  border: 1px solid rgba(255, 255, 255, .14);
   border-radius: 14px;
-  background: rgba(255,255,255,.07);
-  transition: background .25s,border-color .25s;
+  background: rgba(255, 255, 255, .07);
+  transition: background .25s, border-color .25s;
 }
 
 /* Used only by: business */
 .page-business .biz-acc:hover {
-  background: rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.28);
+  background: rgba(255, 255, 255, .12);
+  border-color: rgba(255, 255, 255, .28);
 }
 
 /* Used only by: business */
@@ -596,7 +551,7 @@
 /* Used only by: business */
 .page-business .biz-acc h3 {
   margin: 0 0 4px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 16px;
   font-weight: 800;
 }
@@ -635,6 +590,7 @@
 
 
 @media (min-width:768px) {
+
   /* Used only by: business */
   .page-business .biz-duo {
     grid-template-columns: 1fr 1fr;
@@ -644,7 +600,7 @@
 
 /* Used only by: business */
 .page-business .biz-info {
-  padding: clamp(20px,3vw,28px);
+  padding: clamp(20px, 3vw, 28px);
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
   border-radius: 16px;
@@ -657,7 +613,7 @@
   align-items: center;
   gap: 10px;
   margin: 0 0 14px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 1.15rem;
   font-weight: 800;
   color: var(--jp-navy);
@@ -729,17 +685,19 @@
 
 
 @media (min-width:576px) {
+
   /* Used only by: business */
   .page-business .biz-steps {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }
 
 @media (min-width:992px) {
+
   /* Used only by: business */
   .page-business .biz-steps {
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
 }
@@ -783,7 +741,7 @@
 
 /* Used only by: business */
 .page-business .biz-steps h3 {
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 15.5px;
   font-weight: 800;
   color: var(--jp-navy);
@@ -801,23 +759,24 @@
 /* Used only by: business */
 .page-business .biz-quote {
   display: grid;
-  grid-template-columns: minmax(0,1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   align-items: start;
 }
 
 
 @media (min-width:992px) {
+
   /* Used only by: business */
   .page-business .biz-quote {
-    grid-template-columns: minmax(0,.8fr) minmax(0,1.5fr);
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.5fr);
     gap: 24px;
   }
 
   /* Used only by: business */
   .page-business .biz-side {
     position: sticky;
-    top: calc(var(--jp-header-h,86px) + 76px);
+    top: calc(var(--jp-header-h, 86px) + 76px);
   }
 
 }
@@ -825,11 +784,11 @@
 /* Used only by: business */
 .page-business .biz-side {
   position: relative;
-  padding: clamp(20px,3vw,28px);
+  padding: clamp(20px, 3vw, 28px);
   border-radius: 16px;
   color: var(--jp-white);
   overflow: hidden;
-  background: linear-gradient(180deg,#2B3990,#1E2A6B);
+  background: linear-gradient(180deg, #2B3990, #1E2A6B);
   box-shadow: var(--jp-shadow-lg);
 }
 
@@ -838,7 +797,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(260px 180px at 100% 0%,rgba(242,99,35,.32),transparent 70%);
+  background: radial-gradient(260px 180px at 100% 0%, rgba(242, 99, 35, .32), transparent 70%);
   pointer-events: none;
 }
 
@@ -850,7 +809,7 @@
 /* Used only by: business */
 .page-business .biz-side h3 {
   margin: 0 0 12px;
-  font-family: "Plus Jakarta Sans",sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 1.2rem;
   font-weight: 800;
 }
@@ -889,7 +848,7 @@
   display: grid;
   gap: 10px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255,255,255,.18);
+  border-top: 1px solid rgba(255, 255, 255, .18);
 }
 
 /* Used only by: business */
@@ -931,8 +890,8 @@
   background: var(--jp-white);
   border: 1px solid #e3ebf5;
   border-radius: 16px;
-  box-shadow: 0 10px 28px rgba(43,57,144,.08);
-  padding: clamp(16px,3vw,30px);
+  box-shadow: 0 10px 28px rgba(43, 57, 144, .08);
+  padding: clamp(16px, 3vw, 30px);
 }
 
 /* Used only by: business */
@@ -956,7 +915,8 @@
 }
 
 /* Used only by: business */
-.page-business .biz-form .form-control, .page-business .biz-form .form-select {
+.page-business .biz-form .form-control,
+.page-business .biz-form .form-select {
   width: 100%;
   background-color: var(--jp-white);
   font-size: 15px;
@@ -969,9 +929,10 @@
 }
 
 /* Used only by: business */
-.page-business .biz-form .form-control:focus, .page-business .biz-form .form-select:focus {
+.page-business .biz-form .form-control:focus,
+.page-business .biz-form .form-select:focus {
   border-color: #f6b99c;
-  box-shadow: 0 0 0 3px rgba(242,99,35,.14);
+  box-shadow: 0 0 0 3px rgba(242, 99, 35, .14);
 }
 
 /* Used only by: business */
@@ -984,7 +945,8 @@
 }
 
 /* Used only by: business */
-.page-business .biz-f.has-error .form-control, .page-business .biz-f.has-error .form-select {
+.page-business .biz-f.has-error .form-control,
+.page-business .biz-f.has-error .form-select {
   border-color: #d93025;
   background-color: #fff8f7;
 }
@@ -1082,7 +1044,7 @@
   height: 14px;
   margin-left: 10px;
   vertical-align: -2px;
-  border: 2px solid rgba(255,255,255,.45);
+  border: 2px solid rgba(255, 255, 255, .45);
   border-top-color: #fff;
   border-radius: 50%;
   animation: bizSpin .7s linear infinite;
@@ -1140,17 +1102,19 @@
 
 
 @media (min-width:576px) {
+
   /* Used only by: business */
   .page-business .biz-links {
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
 }
 
 @media (min-width:1200px) {
+
   /* Used only by: business */
   .page-business .biz-links {
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
 }
@@ -1165,7 +1129,7 @@
   border: 1px solid var(--jp-border-muted);
   border-radius: 14px;
   color: var(--jp-navy);
-  transition: transform .22s,box-shadow .22s,border-color .22s;
+  transition: transform .22s, box-shadow .22s, border-color .22s;
 }
 
 /* Used only by: business */
@@ -1179,7 +1143,7 @@
   background: var(--jp-bg-muted);
   color: var(--jp-orange);
   font-size: 18px;
-  transition: background .2s,color .2s;
+  transition: background .2s, color .2s;
 }
 
 /* Used only by: business */
@@ -1206,7 +1170,7 @@
 .page-business .biz-link>i {
   font-size: 13px;
   color: var(--jp-text-muted-4);
-  transition: transform .2s,color .2s;
+  transition: transform .2s, color .2s;
 }
 
 /* Used only by: business */
@@ -1229,16 +1193,11 @@
 
 
 @media (max-width:767px) {
+
   /* Used only by: business */
   .page-business .biz-head {
     text-align: left;
     margin-bottom: 18px;
-  }
-
-  /* Used only by: business */
-  .page-business .biz-hero .hero-actions .btn-main {
-    width: 100%;
-    justify-content: center;
   }
 
   /* Used only by: business */
@@ -1307,7 +1266,8 @@
   }
 
   /* Used only by: business */
-  .page-business .biz-form .form-control, .page-business .biz-form .form-select {
+  .page-business .biz-form .form-control,
+  .page-business .biz-form .form-select {
     font-size: 16px;
   }
 
@@ -1325,6 +1285,7 @@
 }
 
 @media (prefers-reduced-motion:reduce) {
+
   /* Used only by: business */
   .page-business .biz-aud.is-js .biz-panel {
     animation: none;

@@ -787,18 +787,6 @@
     font-size: 17px;
   }
 
-  /* Used only by: services */
-  .page-services .svp-hero .hero-actions .btn-main {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Used only by: services */
-  .page-services .svp-info .btn-main {
-    width: 100%;
-    justify-content: center;
-  }
-
 }
 
 @media (prefers-reduced-motion: reduce) {

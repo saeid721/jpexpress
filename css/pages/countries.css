@@ -5,82 +5,6 @@
    ===============================================================
 
 /* Used only by: countries */
-.page-countries .pg-hero {
-  position: relative;
-  overflow: hidden;
-  color: var(--jp-white);
-  padding: clamp(26px, 6vw, 60px) 0 clamp(54px, 8vw, 80px);
-  background: radial-gradient(520px 300px at 92% 0, rgba(242, 99, 35, .28), transparent 65%),
-              linear-gradient(135deg, var(--jp-navy-dark), var(--jp-navy));
-}
-
-/* Used only by: countries */
-.page-countries .pg-hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, .07) 1px, transparent 1px);
-  background-size: 24px 24px;
-  -webkit-mask-image: linear-gradient(180deg, #000, transparent 85%);
-  mask-image: linear-gradient(180deg, #000, transparent 85%);
-}
-
-/* Used only by: countries */
-.page-countries .pg-hero .container-fluid {
-  position: relative;
-}
-
-/* Used only by: countries */
-.page-countries .pg-hero h1 {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 800;
-  letter-spacing: -.02em;
-  font-size: clamp(1.45rem, 5vw, 2.6rem);
-  line-height: 1.15;
-  margin: 0 0 10px;
-  max-width: 800px;
-  text-wrap: balance;
-}
-
-/* Used only by: countries */
-.page-countries .pg-hero h1 span {
-  color: var(--jp-orange-accent);
-}
-
-/* Used only by: countries */
-.page-countries .pg-hero p {
-  max-width: 640px;
-  color: var(--jp-text-light-blue);
-  font-size: clamp(14px, 2.4vw, 16.5px);
-  line-height: 1.6;
-  margin: 0 0 18px;
-}
-
-/* Used only by: countries */
-.page-countries .pg-crumb {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--jp-blue-light);
-}
-
-/* Used only by: countries */
-.page-countries .pg-crumb a:hover {
-  color: var(--jp-white);
-}
-
-/* Used only by: countries */
-.page-countries .pg-crumb i {
-  font-size: 9px;
-  opacity: .7;
-}
-
-/* Used only by: countries */
 .page-countries .pg-sec {
   padding: clamp(26px, 5vw, 54px) 0;
   background: var(--jp-white);
@@ -348,6 +272,7 @@
 
 
 @media (min-width: 576px) {
+
   /* Used only by: countries */
   .page-countries .ctr-bar {
     flex-direction: row;
@@ -358,6 +283,7 @@
 }
 
 @media (max-width: 575px) {
+
   /* Used only by: countries */
   .page-countries .cd-cta .btn-main {
     flex: 1 1 100%;
