@@ -662,6 +662,24 @@ button:focus-visible,
   color: var(--jp-navy);
 }
 
+
+.offcanvas .nav-link {
+  position: relative;
+  transition: color .2s ease, background-color .2s ease, padding-left .2s ease, box-shadow .2s ease;
+}
+
+.offcanvas .nav-link:hover,
+.offcanvas .nav-link:focus-visible {
+  color: var(--jp-red);
+}
+
+.offcanvas .nav-link.active {
+  color: var(--jp-red);
+  background: var(--jp-bg-soft);
+  padding-left: 14px;
+  box-shadow: inset 3px 0 0 var(--jp-red);
+}
+
 /* Used by: about, business, contact, index, industries, quote, services, track-shipment */
 .hero {
   position: relative;

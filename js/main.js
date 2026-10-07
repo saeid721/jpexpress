@@ -406,6 +406,44 @@
     if (oc) oc.hide();
   }));
 
+
+  /* ---------- Active nav link: follows the current page (desktop + mobile menu) ---------- */
+  (function setActiveNav() {
+    const navLinks = document.querySelectorAll('.jp-navbar .nav-link, #jpMenu .nav-link');
+    if (!navLinks.length) return;
+
+    const slug = (location.pathname.split('/').pop() || 'index').replace(/\.html$/i, '').toLowerCase() || 'index';
+
+    /* Sub pages highlight their parent menu */
+    const parentMap = {
+      'index': 'index',
+      'about': 'about', 'our-story': 'about', 'leadership': 'about', 'careers': 'about', 'media-center': 'about',
+      'services': 'services', 'international-courier': 'services', 'air-freight': 'services',
+      'sea-freight': 'services', 'export-logistics': 'services', 'import-solutions': 'services',
+      'countries': 'countries', 'country': 'countries',
+      'industries': 'industries',
+      'business': 'business',
+      'resources': 'resources', 'shipping-guides': 'resources', 'faq': 'resources', 'blog': 'resources',
+      'contact': 'contact'
+    };
+    const current = parentMap[slug] || null; /* quote, track-shipment, legal... = no menu active */
+
+    const hrefSlug = a => (a.getAttribute('href') || '').split(/[?#]/)[0].replace(/\.html$/i, '').toLowerCase();
+
+    function mark(target) {
+      navLinks.forEach(a => {
+        const on = !!target && hrefSlug(a) === target;
+        a.classList.toggle('active', on);
+        if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+      });
+    }
+
+    mark(current);
+
+    /* Instant feedback when a menu is clicked (before the next page loads) */
+    navLinks.forEach(a => a.addEventListener('click', () => mark(hrefSlug(a))));
+  })();
+
   /* ---------- Quote/Track buttons open the matching #tools tab ---------- */
   document.querySelectorAll('[data-open-tab]').forEach(el => {
     el.addEventListener('click', () => {
