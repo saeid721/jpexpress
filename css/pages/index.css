@@ -2710,3 +2710,103 @@
   }
 
 }
+
+
+/* =========================================================
+   MOBILE ONLY — one consistent left/right alignment
+   Every section uses only the .container-fluid padding (10px)
+   ========================================================= */
+@media (max-width: 767px) {
+
+  .tools-section,
+  .trust-strip,
+  .home-section,
+  .home-section.services-section,
+  .home-section.needs-section,
+  .home-section.process-section,
+  .home-section.industries-section,
+  .home-section.partners-section,
+  .home-section.faq-section,
+  .home-section.resources-section,
+  .destination-section,
+  .solution-section,
+  .testimonial-section,
+  .final-cta {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* carousel cards start exactly on the same line as the heading */
+  .destination-row {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
+
+
+/* =========================================================
+   SECTION HEADING — link always on the eyebrow row, right side
+   (desktop + tablet + mobile)
+   ========================================================= */
+.section-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 12px;
+  row-gap: 0;
+  align-items: start;
+}
+
+/* children of the text wrapper become grid items */
+.section-heading>div {
+  display: contents;
+}
+
+.section-heading .eyebrow {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+/* title + description go below, full width */
+.section-heading>div> :not(.eyebrow) {
+  grid-column: 1 / -1;
+}
+
+/* the button: same row as the eyebrow, pinned to the right */
+.section-heading>.section-link {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: end;
+  margin: 0;
+  padding: 4px 0;
+  line-height: 1.2;
+  text-align: right;
+}
+
+@media (max-width: 767px) {
+
+  .section-heading .eyebrow {
+    font-size: 11px;
+    letter-spacing: .08em;
+  }
+
+  .section-heading>.section-link {
+    font-size: 12.5px;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .section-heading .eyebrow {
+    font-size: 10px;
+    letter-spacing: .06em;
+  }
+
+  .section-heading>.section-link {
+    font-size: 12px;
+  }
+
+}
