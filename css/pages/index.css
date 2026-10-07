@@ -2688,3 +2688,25 @@
   }
 
 }
+
+
+/* =========================================================
+   MOBILE ONLY — hero title always fits in 2 lines
+   ========================================================= */
+@media (max-width: 767px) {
+
+  .hero h1.hero-title {
+    font-size: clamp(1rem, 5.1vw, 1.4rem);
+    line-height: 1.22;
+    letter-spacing: -.02em;
+    margin: 0 0 10px;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  /* "Bangladesh" will flow with the sentence instead of a new line */
+  .hero h1.hero-title .ht-slide .accent {
+    display: inline;
+  }
+
+}
