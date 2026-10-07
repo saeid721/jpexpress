@@ -467,26 +467,37 @@
   </header>
 
   <main id="main">
-    <section class="pg-hero" aria-labelledby="ctrTitle">
-      <div class="container-fluid">
-        <nav class="pg-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"
-            aria-hidden="true"></i><span aria-current="page">Countries</span></nav>
-        <h1 id="ctrTitle">Where are you shipping from <span>Bangladesh</span>?</h1>
-        <p>Pick a destination to see available services, estimated transit, documents, customs notes and restricted
-          items &mdash; then get a quote in minutes.</p>
-        <div class="ctr-search" role="search">
-          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-          <label class="visually-hidden" for="ctrSearch">Search destinations</label>
-          <input type="search" id="ctrSearch" placeholder="Search a country or city, e.g. UAE, Toronto"
-            autocomplete="off" enterkeyhint="search">
-          <button type="button" id="ctrClear" aria-label="Clear search" hidden><i
-              class="fa-solid fa-xmark"></i></button>
-        </div>
-        <div class="ctr-quick" aria-label="Popular searches">
-          <button type="button" data-q="United States">USA</button><button type="button"
-            data-q="United Kingdom">UK</button><button type="button" data-q="Canada">Canada</button><button
-            type="button" data-q="Australia">Australia</button><button type="button"
-            data-q="Emirates">UAE</button><button type="button" data-q="Saudi">Saudi Arabia</button>
+    <!-- ============ HERO (same hero system as Home) ============ -->
+    <section class="hero" aria-labelledby="ctrTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
+                  aria-current="page">Destinations</span>
+              </nav>
+              <div class="hero-kicker"><span>COUNTRIES</span> JP EXPRESS</div>
+              <h1 id="ctrTitle">Where are you shipping from <span>Bangladesh</span>?</h1>
+              <p>Pick a destination to see available services, transit times, customs notes and restricted items.
+                Then get a quote in minutes.</p>
+              <div class="ctr-search" role="search">
+                <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                <label class="visually-hidden" for="ctrSearch">Search destinations</label>
+                <input type="search" id="ctrSearch" placeholder="Search a country or city, e.g. UAE, Toronto"
+                  autocomplete="off" enterkeyhint="search">
+                <button type="button" id="ctrClear" aria-label="Clear search" hidden><i
+                    class="fa-solid fa-xmark"></i></button>
+              </div>
+              <div class="ctr-quick" aria-label="Popular searches">
+                <button type="button" data-q="United States">USA</button><button type="button"
+                  data-q="United Kingdom">UK</button><button type="button" data-q="Canada">Canada</button><button
+                  type="button" data-q="Australia">Australia</button><button type="button"
+                  data-q="Emirates">UAE</button><button type="button" data-q="Saudi">Saudi Arabia</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -670,7 +681,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

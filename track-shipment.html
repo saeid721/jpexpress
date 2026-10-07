@@ -215,40 +215,45 @@
 
   <main id="main">
 
-    <section class="hero trk-hero" aria-labelledby="trkTitle">
+    <!-- ============ HERO (same hero system as Home) ============ -->
+    <section class="hero cnt-hero" aria-labelledby="cntTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
-        <nav class="trk-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><i
-            class="fa-solid fa-chevron-right"></i><span>Track Shipment</span></nav>
-        <div class="trk-hero-head" data-reveal>
-          <h1 id="trkTitle">Track Your Shipment</h1>
-          <p>Enter your JP Express tracking number to view your shipment status and latest update.</p>
-        </div>
-        <div class="trk-search" data-reveal style="transition-delay:80ms">
-          <form id="trkForm" novalidate>
-            <label for="trkInput">Tracking number</label>
-            <div class="trk-row">
-              <input id="trkInput" type="text" inputmode="text" enterkeyhint="search" autocomplete="off"
-                autocapitalize="characters" spellcheck="false" placeholder="Enter your tracking number"
-                aria-describedby="trkHint trkError">
-              <button id="trkBtn" type="submit" class="btn-main btn-red">Track Shipment <i
-                  class="fa-solid fa-arrow-right"></i></button>
-            </div>
-            <p class="trk-error" id="trkError" role="alert" hidden></p>
-            <p class="trk-hint" id="trkHint">Your tracking number can be found on your booking confirmation or shipment
-              receipt. To track several shipments, separate the numbers with commas.</p>
-            <div class="trk-links"><a href="#help">Need Help?</a><a href="index.html#quote">Get a Quote</a><a
-                href="index.html#quote">Book a Shipment</a></div>
-          </form>
-        </div>
-        <div class="trk-demo" id="trkDemo" hidden><strong>Preview mode.</strong> Sample data only, not real shipments.
-          Try JPEDEMO001, JPEDEMO002, JPEDEMO003 or JPEDEMO004.</div>
-      </div>
-    </section>
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
+                  aria-current="page">Track Shipment</span>
+              </nav>
+              <div class="hero-kicker"><span>TRACK SHIPMENT</span> JP EXPRESS</div>
+              <h1 id="cntTitle">Track Your Shipment</h1>
+              <p>Enter your JP Express tracking number to view your shipment status and latest update.</p>
 
-    <section class="trk-body" aria-label="Tracking results">
-      <div class="container-fluid">
-        <div id="trkView" aria-live="polite"></div>
+              <div class="trk-search" data-reveal style="transition-delay:80ms">
+                <form id="trkForm" novalidate>
+                  <label for="trkInput">Tracking number</label>
+                  <div class="trk-row">
+                    <input id="trkInput" type="text" inputmode="text" enterkeyhint="search" autocomplete="off"
+                      autocapitalize="characters" spellcheck="false" placeholder="Enter your tracking number"
+                      aria-describedby="trkHint trkError">
+                    <button id="trkBtn" type="submit" class="btn-main btn-red">Track Shipment <i
+                        class="fa-solid fa-arrow-right"></i></button>
+                  </div>
+                  <p class="trk-error" id="trkError" role="alert" hidden></p>
+                  <p class="trk-hint" id="trkHint">Your tracking number can be found on your booking confirmation or
+                    shipment
+                    receipt. To track several shipments, separate the numbers with commas.</p>
+                  <div class="trk-links"><a href="#help">Need Help?</a><a href="quote.html">Get a Quote</a><a
+                      href="quote.html">Book a Shipment</a></div>
+                </form>
+              </div>
+              <div class="trk-demo" id="trkDemo" hidden><strong>Preview mode.</strong> Sample data only, not real
+                shipments.
+                Try JPEDEMO001, JPEDEMO002, JPEDEMO003 or JPEDEMO004.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -460,7 +465,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

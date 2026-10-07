@@ -316,18 +316,23 @@
   </header>
 
   <main id="main">
-    <section class="jp-page-hero">
-      <div class="container-xl hero-inner">
-        <div class="jp-breadcrumb"><a href="index.html">Home</a><i
-            class="fa-solid fa-chevron-right"></i><span>FAQ</span></div>
-        <span class="jp-eyebrow"><i class="fa-solid fa-sparkles"></i>FAQ</span>
-        <h1>Answers before you <span class="accent">ship.</span></h1>
-        <p class="lead">Find practical answers to common questions about international courier, freight, export
-          logistics, pricing, tracking and customer support.</p>
-        <div class="jp-hero-actions">
-          <a class="jp-btn jp-btn-primary" href="contact.html">Ask a Question <i
-              class="fa-solid fa-arrow-right"></i></a>
-          <a class="jp-btn jp-btn-ghost" href="shipping-guides.html">Shipping Guides</a>
+    <!-- ============ HERO (same hero system as Home) ============ -->
+    <section class="hero" aria-labelledby="faqTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
+                  aria-current="page">FAQ</span>
+              </nav>
+              <div class="hero-kicker"><span>FAQ</span> JP EXPRESS</div>
+              <h1 id="faqTitle">Answers before you <span class="accent">ship.</span></h1>
+              <p>Find practical answers to common questions about international courier, freight, export logistics,
+                pricing, tracking and customer support.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -577,7 +582,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

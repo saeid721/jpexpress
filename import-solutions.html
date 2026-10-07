@@ -211,23 +211,24 @@
   </header>
 
   <main id="main">
-    <section class="jp-page-hero">
-      <div class="container-xl hero-inner">
-        <div class="jp-breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><a
-            href="services.html">Services</a><i class="fa-solid fa-chevron-right"></i><span>Import Solutions</span>
-        </div>
-        <div class="jp-service-hero-grid">
-          <div><span class="jp-eyebrow"><i class="fa-solid fa-boxes-packing"></i> JP Express service</span>
-            <h1>Import Solutions for <span class="accent">real-world shipping.</span></h1>
-            <p class="lead">Import services should be presented only where JP Express genuinely provides or arranges
-              them. Availability, customs requirements and handling depend on the shipment, origin and destination.</p>
-            <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="index.html#quote">Request a Quote <i
-                  class="fa-solid fa-arrow-right"></i></a><a class="jp-btn jp-btn-ghost" href="contact.html">Talk to
-                Support</a></div>
-          </div>
-          <div class="jp-service-visual"><img src="assets/hero-banner.png" alt="Import Solutions at JP Express">
-            <div class="jp-floating-card"><small>Service focus</small><strong>Support for inbound shipments where JP
-                Express provides the required import and logistics services.</strong></div>
+    <!-- ============ HERO (same hero system as Home) ============ -->
+    <section class="hero" aria-labelledby="impTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><a
+                  href="services.html">Services</a><i class="fa-solid fa-chevron-right" aria-hidden="true"><span
+                    aria-current="page">Import Solutions</span></i>
+              </nav>
+              <div class="hero-kicker"><span>IMPORT SOLUTIONS</span> JP EXPRESS</div>
+              <h1 id="impTitle">Import Solutions for <span class="accent">real-world shipping.</span></h1>
+              <p>Import services should be presented only where JP Express genuinely provides or arranges
+                them. Availability, customs requirements and handling depend on the shipment, origin and destination.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -446,7 +447,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

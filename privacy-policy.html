@@ -212,17 +212,25 @@
   </header>
 
   <main id="main">
-    <section class="jp-page-hero">
-      <div class="container-xl hero-inner">
-        <div class="jp-breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><a
-            href="legal.html">Legal</a><i class="fa-solid fa-chevron-right"></i><span>Privacy Policy</span></div>
-        <span class="jp-eyebrow"><i class="fa-solid fa-shield-halved"></i>Privacy & data</span>
-        <h1>Your information, handled with <span class="accent">care.</span></h1>
-        <p class="lead">This Privacy Policy explains the categories of information JP Express may collect, why it is
-          used, how it may be shared and the choices available to customers and website visitors.</p>
-        <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="contact.html">Privacy Questions <i
-              class="fa-solid fa-arrow-right"></i></a><a class="jp-btn jp-btn-ghost" href="terms-of-service.html">Terms
-            of Service</a></div>
+    <!-- ============ HERO (same hero system as Home) ============ -->
+    <section class="hero" aria-labelledby="privacyTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><a
+                  href="legal.html">Legal</a><i class="fa-solid fa-chevron-right" aria-hidden="true"><span
+                    aria-current="page">Privacy Policy</span></i>
+              </nav>
+              <div class="hero-kicker"><span>PRIVACY & DATA</span> JP EXPRESS</div>
+              <h1 id="privacyTitle">Your information, handled with <span class="accent">care.</span></h1>
+              <p>This Privacy Policy explains the categories of information JP Express may collect, why it is
+                collected, how it is used, shared, retained and protected, and your rights regarding your data.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section class="jp-section">
@@ -425,7 +433,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

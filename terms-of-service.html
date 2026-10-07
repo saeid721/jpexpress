@@ -211,18 +211,24 @@
   </header>
 
   <main id="main">
-    <section class="jp-page-hero">
-      <div class="container-xl hero-inner">
-        <div class="jp-breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><a
-            href="legal.html">Legal</a><i class="fa-solid fa-chevron-right"></i><span>Terms of Service</span>
+    <section class="hero" aria-labelledby="termsTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"><a
+                    href="legal.html">Legal</a><i class="fa-solid fa-chevron-right" aria-hidden="true"><span
+                      aria-current="page">Terms of Service</span></i>
+              </nav>
+              <div class="hero-kicker"><span>TERMS OF SERVICE</span> AGREED CONDITIONS</div>
+              <h1 id="termsTitle">Terms built around <span class="accent">responsible shipping.</span></h1>
+              <p>These Terms of Service explain the general conditions for using JP Express services, requesting
+                quotations, arranging shipments and receiving support.</p>
+            </div>
+          </div>
         </div>
-        <span class="jp-eyebrow"><i class="fa-solid fa-file-contract"></i>Customer agreement</span>
-        <h1>Terms built around <span class="accent">responsible shipping.</span></h1>
-        <p class="lead">These Terms of Service explain the general conditions for using JP Express services,
-          requesting quotations, arranging shipments and receiving support.</p>
-        <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="index.html#quote">Get a Quote <i
-              class="fa-solid fa-arrow-right"></i></a><a class="jp-btn jp-btn-ghost" href="contact.html">Contact
-            Support</a></div>
       </div>
     </section>
     <section class="jp-section">
@@ -423,7 +429,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

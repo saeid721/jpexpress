@@ -212,17 +212,23 @@
   </header>
 
   <main id="main">
-    <section class="jp-page-hero">
-      <div class="container-xl hero-inner">
-        <div class="jp-breadcrumb"><a href="index.html">Home</a><i
-            class="fa-solid fa-chevron-right"></i><span>Sitemap</span></div>
-        <span class="jp-eyebrow"><i class="fa-solid fa-sitemap"></i>Explore JP Express</span>
-        <h1>Everything important, <span class="accent">one clear map.</span></h1>
-        <p class="lead">Find JP Express company information, shipping services, destinations, resources and customer
-          support pages from one mobile-friendly directory.</p>
-        <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="index.html#quote">Get a Quote <i
-              class="fa-solid fa-arrow-right"></i></a><a class="jp-btn jp-btn-ghost" href="track-shipment.html">Track
-            Shipment</a></div>
+    <section class="hero" aria-labelledby="sitemapTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"><span
+                    aria-current="page">Sitemap</span></i>
+              </nav>
+              <div class="hero-kicker"><span>SITEMAP</span> ORGANISED CONTENT</div>
+              <h1 id="sitemapTitle">Everything important, <span class="accent">one clear map.</span></h1>
+              <p>Find JP Express company information, shipping services, destinations, resources and customer
+                support pages from one mobile-friendly directory.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     <section class="jp-section">
@@ -463,7 +469,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

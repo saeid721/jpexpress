@@ -212,18 +212,24 @@
   </header>
 
   <main id="main">
-    <section class="jp-page-hero">
-      <div class="container-xl hero-inner">
-        <div class="jp-breadcrumb"><a href="index.html">Home</a><i
-            class="fa-solid fa-chevron-right"></i><span>Leadership</span></div>
-        <span class="jp-eyebrow"><i class="fa-solid fa-sparkles"></i>Leadership</span>
-        <h1>People who keep the <span class="accent">shipment moving.</span></h1>
-        <p class="lead">JP Express depends on coordinated teams across customer support, operations, documentation and
-          business shipping. This page keeps the focus on responsibilities and verified company information.</p>
-        <div class="jp-hero-actions">
-          <a class="jp-btn jp-btn-primary" href="contact.html">Contact Our Team <i
-              class="fa-solid fa-arrow-right"></i></a>
-          <a class="jp-btn jp-btn-ghost" href="our-story.html">Our Story</a>
+
+    <!-- ============ HERO (same hero system as Home) ============ -->
+    <section class="hero cnt-hero" aria-labelledby="cntTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
+                  aria-current="page">Leadership</span>
+              </nav>
+              <div class="hero-kicker"><span>Leadership</span> JP EXPRESS</div>
+              <h1 id="cntTitle">People who keep the <span class="accent">shipment moving.</span></h1>
+              <p>JP Express depends on coordinated teams across customer support, operations, documentation and
+                business shipping. This page keeps the focus on responsibilities and verified company information.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -407,7 +413,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

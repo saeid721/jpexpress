@@ -211,23 +211,24 @@
   </header>
 
   <main id="main">
-    <section class="jp-page-hero">
-      <div class="container-xl hero-inner">
-        <div class="jp-breadcrumb"><a href="index.html">Home</a><i class="fa-solid fa-chevron-right"></i><a
-            href="services.html">Services</a><i class="fa-solid fa-chevron-right"></i><span>Sea Freight</span></div>
-        <div class="jp-service-hero-grid">
-          <div><span class="jp-eyebrow"><i class="fa-solid fa-ship"></i> JP Express service</span>
-            <h1>Sea Freight for <span class="accent">real-world shipping.</span></h1>
-            <p class="lead">Sea freight can be a suitable option for larger commercial shipments where transit planning
-              and cargo volume make ocean transport appropriate. Availability and routing should be confirmed for each
-              shipment.</p>
-            <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="index.html#quote">Request a Quote <i
-                  class="fa-solid fa-arrow-right"></i></a><a class="jp-btn jp-btn-ghost" href="contact.html">Talk to
-                Support</a></div>
-          </div>
-          <div class="jp-service-visual"><img src="assets/container-ship.png" alt="Sea Freight at JP Express">
-            <div class="jp-floating-card"><small>Service focus</small><strong>A practical freight route for larger
-                commercial cargo and international trade.</strong></div>
+    <!-- ============ HERO (same hero system as Home) ============ -->
+    <section class="hero" aria-labelledby="seaFreightTitle">
+      <div class="hero-bg"></div>
+      <div class="container-fluid position-relative">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-copy" data-reveal>
+              <nav class="cnt-crumb" aria-label="Breadcrumb">
+                <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><a
+                  href="services.html">Services</a><i class="fa-solid fa-chevron-right" aria-hidden="true"><span
+                    aria-current="page">Sea Freight</span></i>
+              </nav>
+              <div class="hero-kicker"><span>SEA FREIGHT</span> OCEAN SHIPPING</div>
+              <h1 id="seaFreightTitle">International Ocean <span class="accent">Freight Solutions</span></h1>
+              <p>JP Express supports sea freight shipments from Bangladesh to worldwide destinations with export
+                customs, booking and door-to-port / door-to-door support where JP Express provides or arranges
+                sea-freight-related logistics services.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -446,7 +447,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
-<script src="js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

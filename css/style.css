@@ -3447,29 +3447,6 @@ html.template-jp body {
   opacity: .7;
 }
 
-.template-jp .jp-page-hero {
-  position: relative;
-  padding: clamp(54px, 8vw, 100px) 0 82px;
-  color: #fff;
-  background: radial-gradient(600px 360px at 90% 10%, rgba(242, 99, 35, .25), transparent 65%),
-    radial-gradient(520px 300px at 10% 100%, rgba(70, 100, 190, .22), transparent 70%),
-    linear-gradient(135deg, #18245f, #2b3990);
-}
-
-.template-jp .jp-page-hero:after {
-  content: "";
-  position: absolute;
-  inset: auto -10% -70px;
-  height: 160px;
-  background: var(--jp-page-bg);
-  border-radius: 50% 50% 0 0/40% 40% 0 0;
-}
-
-.template-jp .jp-page-hero .hero-inner {
-  position: relative;
-  z-index: 2;
-}
-
 .template-jp .jp-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -3487,35 +3464,6 @@ html.template-jp body {
 
 .template-jp .jp-eyebrow i {
   color: #ff9b72;
-}
-
-.template-jp .jp-page-hero h1 {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -.045em;
-  margin: 16px 0 15px;
-  max-width: 880px;
-}
-
-.template-jp .jp-page-hero h1 .accent {
-  color: #ff9b72;
-}
-
-.template-jp .jp-page-hero .lead {
-  max-width: 720px;
-  color: rgba(255, 255, 255, .82);
-  font-size: clamp(15px, 1.8vw, 18px);
-  line-height: 1.75;
-  margin: 0;
-}
-
-.template-jp .jp-hero-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 25px;
 }
 
 .template-jp .jp-btn {
@@ -3998,11 +3946,6 @@ html.template-jp body {
     order: initial;
   }
 
-  /* Used by: air-freight, careers, export-logistics, faq, import-solutions, international-courier, leadership, legal, media-center, our-story, privacy-policy, sea-freight, shipping-guides, sitemap, terms-of-service */
-  .template-jp .jp-page-hero {
-    padding-top: 46px;
-  }
-
 }
 
 @media (max-width:767.98px) {
@@ -4012,15 +3955,6 @@ html.template-jp body {
   .template-jp .jp-grid-3,
   .template-jp .jp-grid-4 {
     grid-template-columns: 1fr;
-  }
-
-  /* Used by: air-freight, careers, export-logistics, faq, import-solutions, international-courier, leadership, legal, media-center, our-story, privacy-policy, sea-freight, shipping-guides, sitemap, terms-of-service */
-  .template-jp .jp-page-hero {
-    padding: 36px 0 66px;
-  }
-
-  .template-jp .jp-page-hero h1 {
-    font-size: clamp(2rem, 10vw, 2.8rem);
   }
 
   .template-jp .jp-section {
@@ -4084,11 +4018,6 @@ html.template-jp body {
 
 
 @media (max-width:575.98px) {
-
-  /* Used by: air-freight, careers, export-logistics, faq, import-solutions, international-courier, leadership, legal, media-center, our-story, privacy-policy, sea-freight, shipping-guides, sitemap, terms-of-service */
-  .template-jp .jp-page-hero .jp-breadcrumb {
-    font-size: 11px;
-  }
 
   .template-jp .jp-eyebrow {
     font-size: 10px;
