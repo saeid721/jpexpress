@@ -1723,6 +1723,37 @@ button:focus-visible,
   color: #7ee7a8;
 }
 
+/* Login tab (mobile bottom bar) */
+.fab-bar a.bar-login {
+  color: #ffd2bb;
+}
+
+.fab-bar a.bar-login i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-top: -2px;
+  border-radius: 50%;
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .22);
+  transition: background .25s ease, border-color .25s ease, transform .2s ease;
+}
+
+.fab-bar a.bar-login:hover,
+.fab-bar a.bar-login:active {
+  color: #fff;
+}
+
+.fab-bar a.bar-login:hover i,
+.fab-bar a.bar-login:active i {
+  background: #F26323;
+  border-color: #F26323;
+  transform: scale(1.06);
+}
+
 .fab-side {
   position: fixed;
   right: 20px;
@@ -3632,6 +3663,20 @@ html.template-jp body {
 
 .template-jp .fab-bar a.bar-wa:active {
   color: var(--text-fab-active);
+}
+
+.template-jp .fab-bar a.bar-login {
+  color: #ffd2bb;
+}
+
+.template-jp .fab-bar a.bar-login i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .1);
+  border: 1px solid rgba(255, 255, 255, .22);
 }
 
 
