@@ -1158,6 +1158,16 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   var chips = Array.prototype.slice.call(document.querySelectorAll(".svp-chip"));
 
   items.forEach(function (el) {
+    var h = el.querySelector("h3");
+    var ic = el.querySelector(".svp-item-ico i");
+    var tg = el.querySelector(".svp-item-tag");
+    var sec = el.closest(".svp-cat");
+    var ch = sec && sec.querySelector(".svp-cat-head h2");
+
+    el._title = h ? h.textContent.trim() : "";
+    el._icon = ic ? ic.className : "fa-solid fa-box";
+    el._tag = tg ? tg.textContent.trim() : "";
+    el._cat = ch ? ch.textContent.trim() : "Services";
     el._text = (el.textContent + " " + (el.getAttribute("data-tags") || "")).toLowerCase().replace(/\s+/g, " ");
   });
 
@@ -1166,8 +1176,11 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     var terms = q.split(/\s+/).filter(Boolean);
     var shown = 0;
 
+    /* exact service name picked/typed => show only that service */
+    var exact = items.filter(function (el) { return el._title.toLowerCase() === q; })[0] || null;
+
     items.forEach(function (el) {
-      var ok = terms.every(function (t) { return el._text.indexOf(t) > -1; });
+      var ok = exact ? el === exact : terms.every(function (t) { return el._text.indexOf(t) > -1; });
       el.hidden = !ok;
       if (ok) shown++;
     });
@@ -1185,6 +1198,8 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
 
     var firstVisible = links.filter(function (l) { return !l.hidden; })[0];
     if (firstVisible) setActive(firstVisible);
+
+    if (!list.hidden) renderList(false);
   }
 
   function goToResults() {
@@ -1192,7 +1207,197 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     if (first) first.scrollIntoView({ behavior: behavior, block: "start" });
   }
 
-  input.addEventListener("input", apply);
+  /* ---------- Search dropdown (combobox): click = all services, type = live filter ---------- */
+  var wrap = input.parentNode;
+  var list = document.createElement("div");
+  var options = [];
+  var activeIdx = -1;
+
+  list.className = "svp-dd";
+  list.id = "svcList";
+  list.hidden = true;
+  list.setAttribute("role", "listbox");
+  list.setAttribute("aria-label", "Services");
+  wrap.appendChild(list);
+
+  input.setAttribute("role", "combobox");
+  input.setAttribute("aria-autocomplete", "list");
+  input.setAttribute("aria-controls", "svcList");
+  input.setAttribute("aria-expanded", "false");
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  /* highlight the typed words inside a title */
+  function mark(title, terms) {
+    var low = title.toLowerCase(), flags = [], i, k, n;
+    for (n = 0; n < title.length; n++) flags[n] = false;
+    terms.forEach(function (t) {
+      i = t ? low.indexOf(t) : -1;
+      while (i > -1) {
+        for (k = i; k < i + t.length; k++) flags[k] = true;
+        i = low.indexOf(t, i + t.length);
+      }
+    });
+    var out = "", open = false;
+    for (n = 0; n < title.length; n++) {
+      if (flags[n] && !open) { out += "<mark>"; open = true; }
+      if (!flags[n] && open) { out += "</mark>"; open = false; }
+      out += esc(title.charAt(n));
+    }
+    return open ? out + "</mark>" : out;
+  }
+
+  function renderList(allowAll) {
+    var q = input.value.trim().toLowerCase();
+    var current = items.filter(function (el) { return el._title.toLowerCase() === q; })[0] || null;
+    var terms = current && allowAll ? [] : q.split(/\s+/).filter(Boolean);
+    var html = "", lastCat = "";
+
+    options = [];
+
+    items.forEach(function (el) {
+      if (!terms.every(function (t) { return el._text.indexOf(t) > -1; })) return;
+
+      if (el._cat !== lastCat) {
+        lastCat = el._cat;
+        html += '<div class="svp-dd-group" role="presentation">' + esc(lastCat) + "</div>";
+      }
+
+      var n = options.length;
+      html += '<div class="svp-dd-opt' + (el === current ? " is-current" : "") + '" role="option" id="svcOpt' + n + '" data-i="' + n + '" aria-selected="false">' +
+        '<span class="svp-dd-ico"><i class="' + esc(el._icon) + '" aria-hidden="true"></i></span>' +
+        '<span class="svp-dd-txt"><strong>' + mark(el._title, terms) + "</strong><small>" + esc(el._tag) + "</small></span>" +
+        '<i class="fa-solid fa-arrow-right svp-dd-go" aria-hidden="true"></i></div>';
+      options.push(el);
+    });
+
+    list.innerHTML = html || '<div class="svp-dd-empty"><i class="fa-solid fa-circle-question" aria-hidden="true"></i>' +
+      '<p>No matching service found.</p><a href="index.html#quote">Request a Quote</a></div>';
+
+    activeIdx = -1;
+    input.removeAttribute("aria-activedescendant");
+    return current;
+  }
+
+  function revealOnMobile() {
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    setTimeout(function () {
+      var hh = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--jp-header-h")) || 64) + 64;
+      var top = wrap.getBoundingClientRect().top;
+      if (Math.abs(top - hh - 12) > 16) window.scrollBy({ top: top - hh - 12, behavior: behavior });
+    }, 120);
+  }
+
+  function openList(allowAll) {
+    var current = renderList(allowAll);
+    list.hidden = false;
+    wrap.classList.add("is-open");
+    input.setAttribute("aria-expanded", "true");
+
+    var node = list.querySelector(".is-current");
+    if (current && allowAll && node) list.scrollTop = Math.max(0, node.offsetTop - 56);
+
+    revealOnMobile();
+  }
+
+  function closeList() {
+    list.hidden = true;
+    activeIdx = -1;
+    wrap.classList.remove("is-open");
+    input.setAttribute("aria-expanded", "false");
+    input.removeAttribute("aria-activedescendant");
+  }
+
+  function setActiveOpt(i, noScroll) {
+    var nodes = list.querySelectorAll(".svp-dd-opt");
+    if (!nodes.length) return;
+
+    activeIdx = (i + nodes.length) % nodes.length;
+    Array.prototype.forEach.call(nodes, function (nd, k) {
+      var on = k === activeIdx;
+      nd.classList.toggle("is-active", on);
+      nd.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    input.setAttribute("aria-activedescendant", nodes[activeIdx].id);
+
+    if (noScroll) return;
+    var o = nodes[activeIdx], top = o.offsetTop, bottom = top + o.offsetHeight;
+    if (top < list.scrollTop + 32) list.scrollTop = Math.max(0, top - 36);
+    else if (bottom > list.scrollTop + list.clientHeight) list.scrollTop = bottom - list.clientHeight + 8;
+  }
+
+  function pick(el) {
+    if (!el) return;
+    input.value = el._title;
+    closeList();
+    apply();
+
+    el.classList.add("is-picked");
+    setTimeout(function () { el.classList.remove("is-picked"); }, 2400);
+    el.scrollIntoView({ behavior: behavior, block: "center" });
+
+    if (window.matchMedia("(max-width: 767px)").matches) input.blur();
+  }
+
+  function isPicked() {
+    var q = input.value.trim().toLowerCase();
+    return !!q && items.some(function (el) { return el._title.toLowerCase() === q; });
+  }
+
+  input.addEventListener("input", function () {
+    apply();
+    if (list.hidden) openList(false);
+  });
+
+  input.addEventListener("focus", function () {
+    if (!list.hidden) return;
+    openList(true);
+    if (isPicked()) input.select();
+  });
+
+  input.addEventListener("click", function () {
+    if (list.hidden) openList(true);
+  });
+
+  input.addEventListener("keydown", function (e) {
+    var k = e.key;
+
+    if (k === "ArrowDown" || k === "ArrowUp") {
+      e.preventDefault();
+      if (list.hidden) openList(true);
+      setActiveOpt(activeIdx < 0 ? (k === "ArrowDown" ? 0 : -1) : activeIdx + (k === "ArrowDown" ? 1 : -1));
+    } else if (k === "Enter") {
+      e.preventDefault();
+      if (!list.hidden && activeIdx > -1 && options[activeIdx]) {
+        pick(options[activeIdx]);
+      } else {
+        closeList();
+        goToResults();
+      }
+    } else if (k === "Escape") {
+      if (!list.hidden) { e.preventDefault(); closeList(); }
+    } else if (k === "Tab") {
+      closeList();
+    }
+  });
+
+  list.addEventListener("click", function (e) {
+    var o = e.target.closest(".svp-dd-opt");
+    if (o) pick(options[parseInt(o.getAttribute("data-i"), 10)]);
+  });
+
+  list.addEventListener("mouseover", function (e) {
+    var o = e.target.closest(".svp-dd-opt");
+    if (o) setActiveOpt(parseInt(o.getAttribute("data-i"), 10), true);
+  });
+
+  document.addEventListener("click", function (e) {
+    if (!wrap.contains(e.target)) closeList();
+  });
 
   clear.addEventListener("click", function () {
     input.value = "";

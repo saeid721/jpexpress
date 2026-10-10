@@ -800,3 +800,216 @@
   }
 
 }
+
+/* ===============================================================
+   SERVICE SEARCH DROPDOWN (combobox)
+   =============================================================== */
+.page-services .svp-finder-box {
+  position: relative;
+  z-index: 10;
+}
+
+.page-services .svp-search.is-open input {
+  background: var(--jp-white);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+.page-services .svp-dd {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 40;
+  max-height: 360px;
+  max-height: min(360px, 52vh);
+  padding: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  text-align: left;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  box-shadow: 0 22px 50px rgba(30, 42, 107, .18);
+  animation: svpDdIn .18s ease both;
+}
+
+.page-services .svp-dd[hidden] {
+  display: none;
+}
+
+@keyframes svpDdIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-services .svp-dd-group {
+  position: sticky;
+  top: -1px;
+  z-index: 1;
+  margin: 0 -8px;
+  padding: 9px 18px 7px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+  background: rgba(255, 255, 255, .96);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.page-services .svp-dd-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+
+.page-services .svp-dd-opt:hover,
+.page-services .svp-dd-opt.is-active {
+  background: var(--jp-bg-soft);
+}
+
+.page-services .svp-dd-opt.is-current {
+  box-shadow: inset 3px 0 0 var(--jp-orange);
+}
+
+.page-services .svp-dd-ico {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  font-size: 16px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+  transition: background .2s ease, color .2s ease;
+}
+
+.page-services .svp-dd-opt:hover .svp-dd-ico,
+.page-services .svp-dd-opt.is-active .svp-dd-ico,
+.page-services .svp-dd-opt.is-current .svp-dd-ico {
+  background: var(--jp-orange);
+  color: var(--jp-white);
+}
+
+.page-services .svp-dd-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.page-services .svp-dd-txt strong {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--jp-navy);
+}
+
+.page-services .svp-dd-txt small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--jp-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-services .svp-dd-txt mark {
+  padding: 0 1px;
+  border-radius: 3px;
+  color: var(--jp-red);
+  background: rgba(242, 99, 35, .16);
+}
+
+.page-services .svp-dd-go {
+  font-size: 12px;
+  color: var(--jp-orange);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.page-services .svp-dd-opt:hover .svp-dd-go,
+.page-services .svp-dd-opt.is-active .svp-dd-go {
+  opacity: 1;
+  transform: none;
+}
+
+.page-services .svp-dd-empty {
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.page-services .svp-dd-empty i {
+  font-size: 26px;
+  color: var(--jp-orange);
+}
+
+.page-services .svp-dd-empty p {
+  margin: 8px 0 6px;
+  font-size: 14px;
+  color: var(--jp-text-muted);
+}
+
+.page-services .svp-dd-empty a {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--jp-orange);
+}
+
+/* card highlight after selecting from the dropdown */
+.page-services .svp-item.is-picked {
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .16), var(--jp-shadow-lg);
+}
+
+@media (hover: none) {
+  .page-services .svp-dd-go {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-services .svp-dd {
+    top: calc(100% + 6px);
+    max-height: 320px;
+    max-height: min(320px, 46vh);
+    padding: 6px;
+    border-radius: 14px;
+  }
+
+  .page-services .svp-dd-group {
+    margin: 0 -6px;
+    padding: 8px 14px 6px;
+  }
+
+  .page-services .svp-dd-opt {
+    gap: 10px;
+    padding: 9px 10px;
+  }
+
+  .page-services .svp-dd-ico {
+    flex-basis: 38px;
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+}
