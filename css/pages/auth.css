@@ -1328,3 +1328,373 @@
         gap: 4px;
     }
 }
+
+
+
+
+/* =========================================================
+   PREMIUM COMPACT OVERRIDE (paste at the very bottom)
+   ========================================================= */
+
+/* ---------- DESKTOP + TABLET (768px and up) ---------- */
+@media (min-width: 768px) {
+
+    .auth-card {
+        margin: 20px auto 28px;
+        border-radius: 14px;
+    }
+
+    .auth-visual {
+        padding: 28px 32px;
+    }
+
+    .auth-visual h2 {
+        font-size: 1.5rem;
+        margin-bottom: .6rem;
+    }
+
+    .auth-visual p {
+        font-size: 14px;
+        line-height: 1.55;
+    }
+
+    .auth-points {
+        margin-top: 1rem;
+    }
+
+    .auth-points li {
+        margin-bottom: 8px;
+    }
+
+    .auth-form {
+        padding: 26px 32px 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .auth-form h3 {
+        font-size: 1.4rem;
+        margin-bottom: 2px;
+    }
+
+    .auth-form .subtitle {
+        font-size: 14px;
+        line-height: 1.45;
+        margin-bottom: 16px;
+    }
+
+    .auth-field {
+        margin-bottom: .8rem;
+    }
+
+    .auth-field>label,
+    .auth-legend {
+        margin-bottom: 4px;
+        font-size: 12.5px;
+    }
+
+    .auth-field .form-control,
+    .auth-select-btn {
+        height: 44px;
+        font-size: 14.5px;
+    }
+
+    .auth-field textarea.form-control {
+        height: auto;
+        min-height: 64px;
+        padding: 10px 14px;
+    }
+
+    .auth-field .auth-input .form-control {
+        padding-left: 40px;
+        padding-right: 44px;
+    }
+
+    .auth-input .password-toggle {
+        width: 34px;
+        height: 34px;
+    }
+
+    .auth-hint,
+    .auth-err {
+        margin-top: 3px;
+        font-size: 12px;
+    }
+
+    .auth-options {
+        margin: 0 0 .9rem;
+    }
+
+    .btn-auth {
+        height: 46px;
+        font-size: 14.5px;
+    }
+
+    .auth-divider {
+        margin: 1rem 0;
+    }
+
+    .auth-footer-text {
+        margin-top: .8rem;
+    }
+
+    .auth-steps {
+        margin-bottom: 1rem;
+    }
+
+    .reg-types {
+        margin-bottom: .5rem;
+    }
+
+    .reg-type>span {
+        min-height: 74px;
+        padding: 9px 6px;
+        gap: 3px;
+    }
+
+    .reg-type>span>i {
+        width: 32px;
+        height: 32px;
+    }
+
+    .reg-type-note {
+        margin-bottom: .9rem;
+        padding: 8px 12px;
+        font-size: 12.5px;
+    }
+
+    .otp-grid input {
+        height: 48px;
+    }
+
+    .pw-meter {
+        margin-top: 6px;
+    }
+
+    .pw-rules {
+        margin-top: 6px;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px 12px;
+    }
+}
+
+/* ---------- MOBILE (767px and down) ---------- */
+@media (max-width: 767px) {
+
+    .auth-card {
+        margin: 8px 0 12px;
+        border-radius: 12px;
+    }
+
+    .auth-form {
+        padding: 14px 12px 16px;
+    }
+
+    .auth-form h3 {
+        font-size: 1.2rem;
+    }
+
+    .auth-form .subtitle {
+        margin-bottom: 10px;
+        font-size: 13px;
+    }
+
+    .auth-field {
+        margin-bottom: .55rem;
+    }
+
+    .auth-field .form-control,
+    .auth-select-btn {
+        height: 44px;
+        font-size: 16px;
+        /* stops iOS zoom */
+    }
+
+    .auth-field .auth-input .form-control {
+        padding-left: 38px;
+    }
+
+    .auth-input .password-toggle {
+        width: 34px;
+        height: 34px;
+    }
+
+    .auth-options {
+        margin: 0 0 .7rem;
+    }
+
+    .btn-auth {
+        height: 44px;
+    }
+
+    .auth-divider {
+        margin: .75rem 0;
+    }
+
+    .auth-footer-text {
+        margin-top: .6rem;
+    }
+
+    .auth-steps {
+        margin-bottom: .8rem;
+    }
+
+    .reg-type>span {
+        min-height: 64px;
+        padding: 7px 4px;
+    }
+
+    .reg-type>span>i {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+
+    .reg-type-note {
+        margin-bottom: .7rem;
+        padding: 7px 10px;
+    }
+
+    .otp-grid input {
+        height: 44px;
+    }
+
+    .pw-rules {
+        grid-template-columns: 1fr 1fr;
+        gap: 3px 10px;
+    }
+
+    .pw-rules li {
+        font-size: 12px;
+    }
+
+    .terms-text {
+        font-size: 12px;
+    }
+}
+
+
+
+
+/* =========================================================
+   ACCOUNT TYPE CARDS: icon + text on ONE line
+   (paste at the very bottom, after the compact override)
+   ========================================================= */
+
+/* ---------- Card layout: icon left, text right ---------- */
+.reg-type>span {
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    grid-template-areas:
+        "ico title"
+        "ico sub";
+    align-items: center;
+    justify-content: stretch;
+    column-gap: 10px;
+    row-gap: 1px;
+    min-height: 58px;
+    padding: 10px 12px;
+    text-align: left;
+}
+
+.reg-type>span>i {
+    grid-area: ico;
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+}
+
+.reg-type>span>b {
+    grid-area: title;
+    align-self: end;
+    font-size: 13.5px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.reg-type>span>small {
+    grid-area: sub;
+    align-self: start;
+    font-size: 11.5px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* tick mark: keep it in the top-right corner, clear of the text */
+.reg-type input:checked+span::after {
+    top: 5px;
+    right: 7px;
+    font-size: 9px;
+}
+
+/* ---------- Tablet / small desktop (576px to 991px) ---------- */
+@media (max-width: 991px) {
+
+    .reg-type>span {
+        grid-template-columns: 32px minmax(0, 1fr);
+        column-gap: 8px;
+        padding: 9px 10px;
+        min-height: 54px;
+    }
+
+    .reg-type>span>i {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .reg-type>span>b {
+        font-size: 13px;
+    }
+
+    .reg-type>span>small {
+        font-size: 11px;
+    }
+}
+
+/* ---------- Mobile (575px and down) ---------- */
+@media (max-width: 575px) {
+
+    /* 3 cards in one row would be too tight, so stack them
+       as full-width rows: icon left, text right, easy to tap */
+    .reg-types-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+    }
+
+    .reg-type>span {
+        grid-template-columns: 34px minmax(0, 1fr);
+        column-gap: 12px;
+        min-height: 54px;
+        padding: 9px 12px;
+    }
+
+    .reg-type>span>i {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .reg-type>span>b {
+        font-size: 14px;
+    }
+
+    /* the old rule hid the sub text on mobile; show it again,
+       there is room now that cards are full width */
+    .reg-type small {
+        display: block;
+        font-size: 12px;
+    }
+
+    .reg-type input:checked+span::after {
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        font-size: 11px;
+    }
+}

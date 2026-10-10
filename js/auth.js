@@ -582,6 +582,15 @@
                 });
         });
 
+        function maskContact(v, type) {
+            v = String(v);
+            if (type === "email") {
+                var p = v.split("@");
+                return p[0].charAt(0) + "***@" + p[1];
+            }
+            return "********" + v.replace(/\D/g, "").slice(-3);
+        }
+
         function goToOtp(type) {
             formId.hidden = true;
             formOtp.hidden = false;
@@ -590,7 +599,9 @@
 
             heading.textContent = "Enter verification code";
             subtitle.textContent = "We sent a 6-digit code to your " + (type === "phone" ? "phone" : "email") + ".";
-            otpTo.textContent = type === "phone" ? "Sent by SMS to " + account + "." : "Sent to " + account + ".";
+            otpTo.textContent = type === "phone"
+                ? "Sent by SMS to " + maskContact(account, type) + "."
+                : "Sent to " + maskContact(account, type) + ".";
 
             otpIn.forEach(function (i) { i.value = ""; i.classList.remove("is-filled"); });
             otpValue = "";
@@ -673,6 +684,7 @@
         /* ---------- step 2: verify (unchanged) ---------- */
         formOtp.addEventListener("submit", function (e) {
             e.preventDefault();
+            if (verifyBtn.disabled) return;
             hideStatus();
             var code = readOtp();
             if (code.length !== 6) {
@@ -694,6 +706,9 @@
                         showStatus("error", "That code has expired. Tap resend to get a new one.");
                     } else {
                         showStatus("error", firstError(r.json) || "That code is not correct. Please check and try again.");
+                        otpIn.forEach(function (i) { i.value = ""; i.classList.remove("is-filled"); });
+                        otpValue = "";
+                        otpIn[0].focus();
                     }
                 })
                 .catch(function () {
