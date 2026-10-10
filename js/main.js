@@ -401,10 +401,32 @@
   }));
 
   /* ---------- Close offcanvas on link click ---------- */
-  document.querySelectorAll('#jpMenu .nav-link').forEach(a => a.addEventListener('click', () => {
+  document.querySelectorAll('#jpMenu .nav-link, #jpMenu .jp-sub-link').forEach(a => a.addEventListener('click', () => {
     const oc = bootstrap.Offcanvas.getInstance(document.getElementById('jpMenu'));
     if (oc) oc.hide();
   }));
+
+  /* ---------- Services dropdown: active sub link + mobile accordion ---------- */
+  (function servicesDropdown() {
+    const slug = (location.pathname.split('/').pop() || 'index').replace(/\.html$/i, '').toLowerCase();
+
+    document.querySelectorAll('.jp-dd-link, .jp-sub-link').forEach(a => {
+      const on = (a.getAttribute('href') || '').replace(/\.html$/i, '').toLowerCase() === slug;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'page');
+    });
+
+    document.querySelectorAll('.jp-m-dd').forEach(item => {
+      const btn = item.querySelector('.jp-m-dd-toggle');
+      if (!btn) return;
+      const setOpen = open => {
+        item.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      };
+      btn.addEventListener('click', () => setOpen(!item.classList.contains('open')));
+      if (item.querySelector('.jp-sub-link.active')) setOpen(true);
+    });
+  })();
 
 
   /* ---------- Active nav link: follows the current page (desktop + mobile menu) ---------- */

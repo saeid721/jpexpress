@@ -194,7 +194,39 @@
         <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
           <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item jp-dropdown">
+            <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">
+              Services <i class="fa-solid fa-chevron-down"></i>
+            </a>
+
+            <div class="jp-dd-menu" role="menu" aria-label="Services">
+              <a class="jp-dd-link" href="international-courier.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span>
+                <span class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp; parcels
+                    worldwide</small></span>
+              </a>
+              <a class="jp-dd-link" href="air-freight.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-plane-departure"></i></span>
+                <span class="jp-dd-txt"><strong>Air Freight</strong><small>Fast cargo for commercial
+                    shipments</small></span>
+              </a>
+              <a class="jp-dd-link" href="sea-freight.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-ship"></i></span>
+                <span class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL &amp; LCL for bulk cargo</small></span>
+              </a>
+              <a class="jp-dd-link" href="export-logistics.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-boxes-packing"></i></span>
+                <span class="jp-dd-txt"><strong>Export Logistics</strong><small>Documentation &amp; export
+                    support</small></span>
+              </a>
+              <a class="jp-dd-link" href="import-solutions.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-truck-ramp-box"></i></span>
+                <span class="jp-dd-txt"><strong>Import Solutions</strong><small>Sourcing, customs &amp;
+                    delivery</small></span>
+              </a>
+              <a class="jp-dd-all" href="services.html">View All Services <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </li>
           <li class="nav-item"><a class="nav-link" href="countries.html">Destinations</a></li>
           <li class="nav-item"><a class="nav-link" href="industries.html">Industries</a></li>
           <li class="nav-item"><a class="nav-link" href="business.html">Business</a></li>
@@ -214,7 +246,28 @@
         <ul class="navbar-nav gap-1">
           <li><a class="nav-link active" href="index.html">Home</a></li>
           <li><a class="nav-link" href="about.html">About</a></li>
-          <li><a class="nav-link" href="services.html">Services</a></li>
+          <li class="jp-m-dd">
+            <div class="jp-m-dd-row">
+              <a class="nav-link" href="services.html">Services</a>
+              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubServices"
+                aria-label="Toggle services submenu">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
+            <div class="jp-m-sub" id="jpSubServices">
+              <ul>
+                <li><a class="jp-sub-link" href="international-courier.html"><i class="fa-solid fa-plane"></i>
+                    International Courier</a></li>
+                <li><a class="jp-sub-link" href="air-freight.html"><i class="fa-solid fa-plane-departure"></i> Air
+                    Freight</a></li>
+                <li><a class="jp-sub-link" href="sea-freight.html"><i class="fa-solid fa-ship"></i> Sea Freight</a></li>
+                <li><a class="jp-sub-link" href="export-logistics.html"><i class="fa-solid fa-boxes-packing"></i> Export
+                    Logistics</a></li>
+                <li><a class="jp-sub-link" href="import-solutions.html"><i class="fa-solid fa-truck-ramp-box"></i>
+                    Import Solutions</a></li>
+              </ul>
+            </div>
+          </li>
           <li><a class="nav-link" href="countries.html">Destinations</a></li>
           <li><a class="nav-link" href="industries.html">Industries</a></li>
           <li><a class="nav-link" href="business.html">Business</a></li>
