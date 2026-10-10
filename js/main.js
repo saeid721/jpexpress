@@ -1642,7 +1642,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
         <div class="cd-result" aria-live="polite"><span>Chargeable weight</span><b id="qOut">—</b></div>
         <p class="cd-note">Volumetric = L × W × H (cm) ÷ 5000. Final rules follow the service used. We confirm the exact price on request.</p>
         <div class="cd-actions"><a id="qWa" class="btn-main btn-red" target="_blank" rel="noopener" href="#"><i class="fa-brands fa-whatsapp"></i> Request quote on WhatsApp</a>
-        <a class="btn-main cd-ghost" href="index.html?dest=${encodeURIComponent(d.n)}#quote">Full quote form</a></div></div>
+        <a class="btn-main cd-ghost" href="quote.html?dest=${encodeURIComponent(d.n)}#calculator">Calculate shipping cost</a></div></div>
     </div></div></section>
 
   ${sec('docs', 'Documents, customs & duties', `
@@ -1826,176 +1826,365 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
 /* =========================================================
    PAGE: quote.html
    CONSOLIDATED MODULE: pricing.js
-   ========================================================= */
-/* =========================================================
    JP EXPRESS: PRICING / SHIPPING CALCULATOR
-   Calculates actual, volumetric and chargeable weight.
-   A price is shown ONLY when real rates are added to
-   JP_PRICING_CONFIG.rates below. Until then the result is "Quote Required".
+   Actual, volumetric and chargeable weight. A price is shown ONLY
+   when real rates exist in JP_PRICING_CONFIG.rates (data.js);
+   otherwise the result is "Quote Required". Never invents a number.
    ========================================================= */
 (function () {
   "use strict";
 
-  /* ---------------- BUSINESS RULES (edit these) ---------------- */
-  ;
+  var CFG = JP_PRICING_CONFIG, SVC = JP_PRICING_SERVICES, COU = JP_PRICING_COURIERS, MODES = JP_PRICING_MODES;
+  var W_UNIT = { kg: 1, g: 0.001, lb: 0.45359237 };
+  var D_UNIT = { cm: 1, "in": 2.54 };
+  var ALT_NOTE = {
+    express: "Faster, usually a higher price.",
+    economy: "Lower cost, longer transit.",
+    door: "Pickup and delivery handled for you.",
+    air: "Faster for urgent cargo, higher cost.",
+    sea: "Usually cheaper for large cargo, much longer transit."
+  };
 
-  ;
-  ;
-
-  /* ---------------- helpers ---------------- */
   var $ = function (id) { return document.getElementById(id); };
   var form = $("prcForm");
   if (!form) return;
 
   var els = {
-    to: $("prcTo"), service: $("prcService"), weight: $("prcWeight"),
-    l: $("prcL"), w: $("prcW"), h: $("prcH"), pcs: $("prcPcs"),
-    dims: $("prcDims"), hint: $("prcHint"), err: $("prcError"), result: $("prcResult")
+    to: $("prcTo"), weight: $("prcWeight"), wUnit: $("prcWUnit"),
+    l: $("prcL"), w: $("prcW"), h: $("prcH"), dUnit: $("prcDUnit"), pcs: $("prcPcs"),
+    dims: $("prcDims"), dimsNote: $("prcDimsNote"), svcBox: $("prcServices"),
+    courierWrap: $("prcCourierWrap"), courier: $("prcCourier"),
+    item: $("prcItem"), qty: $("prcQty"), value: $("prcValue"), city: $("prcCity"), pickup: $("prcPickup"),
+    hint: $("prcHint"), err: $("prcError"), live: $("prcLive"), chips: $("prcChips"),
+    result: $("prcResult"), card: $("prcResultCard"), list: $("prcCountries")
   };
   var placeholder = els.result.innerHTML;
   var calculated = false;
 
+  /* ---------------- helpers ---------------- */
+  var NAMES = {};
+  CFG.destinations.forEach(function (n) { NAMES[n.toLowerCase()] = n; });
+  if (els.list) els.list.innerHTML = CFG.destinations.map(function (n) { return '<option value="' + n + '"></option>'; }).join("");
+
   function esc(s) {
-    return String(s).replace(/[&<>"']/g, function (c) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function kg(n) { return (Math.round(n * 100) / 100).toLocaleString("en-US", { maximumFractionDigits: 2 }) + " kg"; }
-  function money(n) { return JP_PRICING_CONFIG.currency + " " + Math.round(n).toLocaleString("en-US"); }
-  function mode() { return JP_PRICING_MODES[form.elements.mode.value]; }
+  function r2(n) { return Math.round(n * 100) / 100; }
+  function kg(n) { return r2(n).toLocaleString("en-US", { maximumFractionDigits: 2 }) + " kg"; }
+  function money(n) { return CFG.currency + " " + Math.round(n).toLocaleString("en-US"); }
+  function num(el) { var v = parseFloat(el.value); return isNaN(v) ? 0 : v; }
+  function mode() { return form.elements.mode.value; }
+  function svc() { var r = form.querySelector('input[name="service"]:checked'); return r ? r.value : ""; }
+  function canon(s) {
+    var k = String(s || "").toLowerCase().replace(/\s+/g, " ").trim();
+    return NAMES[k] ? k : (CFG.aliases[k] || k);
+  }
+  var restrictedRx = new RegExp("\\b(" + CFG.restricted.map(function (w) { return w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|") + ")(s|es)?\\b", "i");
+  function restricted(text) { var m = restrictedRx.exec(String(text || "")); return m ? m[1].toLowerCase() : ""; }
 
-  /* ---------------- mode handling ---------------- */
-  function applyMode() {
-    var m = mode();
-    var prev = els.service.value;
-    els.service.innerHTML = m.services.map(function (k) {
-      return '<option value="' + k + '">' + JP_PRICING_SERVICES[k] + "</option>";
-    }).join("");
-    if (m.services.indexOf(prev) > -1) els.service.value = prev;
-    els.dims.hidden = !m.dims;
-    els.hint.textContent = m.hint;
-    els.err.hidden = true;
-    if (calculated) run();
+  /* ---------------- reading the form ---------------- */
+  function read() {
+    var wu = W_UNIT[els.wUnit.value] || 1, du = D_UNIT[els.dUnit.value] || 1;
+    var d = {
+      mode: mode(), svc: svc(), courier: els.courier.value || "all",
+      destRaw: els.to.value.trim(), city: els.city.value.trim(),
+      weightIn: num(els.weight), weight: num(els.weight) * wu, wUnitName: els.wUnit.value,
+      l: num(els.l) * du, w: num(els.w) * du, h: num(els.h) * du, rawDims: [num(els.l), num(els.w), num(els.h)], dUnitName: els.dUnit.value,
+      pcs: Math.max(parseInt(els.pcs.value, 10) || 1, 1),
+      item: els.item.value.trim(), qty: els.qty.value.trim(), value: els.value.value.trim(), pickup: els.pickup.checked
+    };
+    d.dest = canon(d.destRaw);
+    return d;
+  }
+
+  function weights(d, courier) {
+    var m = MODES[d.mode];
+    var has = m.dims && d.l > 0 && d.w > 0 && d.h > 0;
+    var cm3 = has ? d.l * d.w * d.h * d.pcs : 0;
+    var div = (CFG.courierDivisors && CFG.courierDivisors[courier]) || CFG.divisors[d.svc];
+    var vol = has && div ? cm3 / div : 0;
+    var cw = Math.max(d.weight, vol);
+    if (CFG.roundStep > 0) cw = Math.ceil(cw / CFG.roundStep - 1e-9) * CFG.roundStep;
+    return { has: has, cbm: cm3 / 1000000, vol: vol, div: div || 0, cw: cw };
+  }
+
+  /* ---------------- validation (says how to fix it) ---------------- */
+  function validate(d) {
+    var m = MODES[d.mode];
+    if (!d.destRaw) return { msg: "Choose a destination country, for example United States.", el: els.to };
+    if (!(d.weightIn > 0)) return { msg: "Enter the shipment weight, for example 2.5 kg.", el: els.weight };
+    if (d.weight < 0.01) return { msg: "That weight is too small. Enter at least 10 g.", el: els.weight };
+    if (m.dims) {
+      var f = d.rawDims.filter(function (x) { return x > 0; }).length;
+      var firstEmpty = [els.l, els.w, els.h].filter(function (e) { return !(num(e) > 0); })[0];
+      if (f > 0 && f < 3) return { msg: "Enter length, width and height together, or leave all three empty.", el: firstEmpty };
+      if (d.svc === "sea" && f < 3) return { msg: "Sea freight is priced by volume (CBM). Enter length, width and height.", el: els.l };
+    }
+    return null;
   }
 
   /* ---------------- calculation ---------------- */
-  function read() {
-    var num = function (el) { var v = parseFloat(el.value); return isNaN(v) ? 0 : v; };
-    return {
-      mode: form.elements.mode.value, svc: els.service.value, dest: els.to.value.trim(),
-      weight: num(els.weight), l: num(els.l), w: num(els.w), h: num(els.h),
-      pcs: Math.max(parseInt(els.pcs.value, 10) || 1, 1)
-    };
-  }
-
-  function validate(d) {
-    var m = JP_PRICING_MODES[d.mode];
-    if (!d.dest) return "Please enter the destination country.";
-    if (!(d.weight > 0)) return "Please enter the shipment weight in kg.";
-    if (m.dims) {
-      var filled = [d.l, d.w, d.h].filter(function (x) { return x > 0; }).length;
-      if (filled > 0 && filled < 3) return "Enter length, width and height together, or leave all three empty.";
-      if (d.svc === "sea" && filled < 3) return "Sea freight needs dimensions so we can work out volume (CBM).";
-    }
-    return "";
+  function price(rate, cw) {
+    var base = rate.base || 0, wc = (rate.perKg || 0) * cw, sub = base + wc, adj = 0;
+    if (rate.minCharge && sub < rate.minCharge) { adj = rate.minCharge - sub; sub = rate.minCharge; }
+    var fuel = sub * ((rate.fuelPct || 0) / 100);
+    return { base: base, weightCharge: wc, adj: adj, fuelPct: rate.fuelPct || 0, fuel: fuel, total: sub + fuel };
   }
 
   function compute(d) {
-    var m = JP_PRICING_MODES[d.mode];
-    var hasDims = m.dims && d.l > 0 && d.w > 0 && d.h > 0;
-    var cm3 = hasDims ? d.l * d.w * d.h * d.pcs : 0;
-    var divisor = JP_PRICING_CONFIG.divisors[d.svc];
-    var vol = hasDims && divisor ? cm3 / divisor : 0;
-    var cw = Math.max(d.weight, vol);
-    if (JP_PRICING_CONFIG.roundStep > 0) cw = Math.ceil(cw / JP_PRICING_CONFIG.roundStep) * JP_PRICING_CONFIG.roundStep;
+    var m = MODES[d.mode], w = weights(d, d.courier), reasons = [], flagged = restricted(d.item);
+    var isCourier = d.svc === "express" || d.svc === "economy" || d.svc === "door";
 
-    var reasons = [];
+    if (flagged) reasons.push("This shipment may require additional review. Please contact JP Express before booking.");
+    if (!NAMES[d.dest]) reasons.push("We could not match \u201C" + d.destRaw + "\u201D to a destination in our list. We may still be able to ship there, so request a quote to confirm.");
     if (m.quote) reasons.push("Commercial and freight shipments are priced by quote.");
     if (d.svc === "sea") reasons.push("Sea freight is priced by volume and route, so a quote is needed.");
-    if (d.svc === "courier" && cw > JP_PRICING_CONFIG.maxCourierKg) reasons.push("Shipments over " + JP_PRICING_CONFIG.maxCourierKg + " kg need a manual review.");
-    if (hasDims && Math.max(d.l, d.w, d.h) > JP_PRICING_CONFIG.maxSideCm) reasons.push("Large dimensions need a manual review.");
+    if (isCourier && w.cw > CFG.maxCourierKg) reasons.push("Courier shipments over " + CFG.maxCourierKg + " kg need a manual review.");
+    var oversize = w.has && Math.max(d.l, d.w, d.h) > CFG.maxSideCm;
+    if (oversize) reasons.push("Large dimensions need a manual review.");
 
-    var rate = null;
-    if (!reasons.length && JP_PRICING_CONFIG.rates && JP_PRICING_CONFIG.rates[d.svc]) {
-      rate = JP_PRICING_CONFIG.rates[d.svc][d.dest.toLowerCase()] || null;
+    var options = [];
+    if (!reasons.length && CFG.rates && CFG.rates[d.svc]) {
+      var keys = d.courier === "all" ? Object.keys(COU).filter(function (k) { return k !== "all"; }) : [d.courier];
+      keys.forEach(function (k) {
+        var rate = CFG.rates[d.svc][k] && CFG.rates[d.svc][k][d.dest];
+        if (!rate) return;
+        var cw = weights(d, k).cw, o = price(rate, cw);
+        o.courier = k; o.cw = cw; o.transit = rate.transit || "";
+        options.push(o);
+      });
+      options.sort(function (a, b) { return a.total - b.total; });
     }
-    if (!reasons.length && !rate) reasons.push("We need to review your shipment details to provide an accurate quote.");
+    if (!reasons.length && !options.length) reasons.push("We need to review your shipment details to provide an accurate quote.");
 
-    var out = { d: d, vol: vol, cw: cw, cbm: cm3 / 1000000, hasDims: hasDims, reasons: reasons, rate: rate };
-    if (rate && !reasons.length) {
-      var sub = (rate.base || 0) + (rate.perKg || 0) * cw;
-      var fuel = sub * ((rate.fuelPct || 0) / 100);
-      out.base = rate.base || 0; out.weightCharge = (rate.perKg || 0) * cw;
-      out.fuelPct = rate.fuelPct || 0; out.fuel = fuel; out.total = sub + fuel;
-    }
-    return out;
+    var r = { d: d, m: m, w: w, reasons: reasons, options: options, best: options[0] || null, review: flagged, oversize: oversize };
+    r.advice = advice(r);
+    return r;
   }
 
-  /* ---------------- render ---------------- */
-  function row(label, value) {
-    return '<div class="prc-kv"><span>' + label + "</span><strong>" + value + "</strong></div>";
+  /* Recommendation always explains its basis (from the customer's own inputs) */
+  function advice(r) {
+    var d = r.d, cw = r.w.cw, rec, why, alt;
+    if (r.w.cbm >= 1) { rec = "sea"; alt = "air"; why = "Your cargo is " + r2(r.w.cbm) + " CBM. Large volume is usually cheaper by sea if you are not in a hurry."; }
+    else if (cw > CFG.maxCourierKg || r.oversize) { rec = "air"; alt = "sea"; why = "Over " + CFG.maxCourierKg + " kg or very large. Freight suits this better than courier."; }
+    else if (d.mode === "freight") { rec = "air"; alt = "sea"; why = "Freight shipments are normally moved by air or sea cargo."; }
+    else if (d.mode === "commercial") { rec = (d.svc === "express" || d.svc === "economy") ? d.svc : "air"; alt = rec === "air" ? "sea" : "air"; why = "Business shipments can go by courier for samples or by air for cargo. A quote confirms the best route."; }
+    else if (d.mode === "document") { rec = "express"; alt = "economy"; why = "Documents are light and usually time-sensitive."; }
+    else { rec = d.svc; alt = rec === "express" ? "economy" : "express"; why = "A " + kg(cw) + " parcel fits courier services. Choose speed or lower cost."; }
+    return { rec: rec, alt: alt, why: why, same: rec === d.svc };
+  }
+
+  /* ---------------- rendering ---------------- */
+  function row(label, value) { return '<div class="prc-kv"><span>' + label + "</span><strong>" + value + "</strong></div>"; }
+
+  function destName(d) { return NAMES[d.dest] || d.destRaw; }
+
+  function summary(r) {
+    var d = r.d, W = r.best ? weights(d, r.best.courier) : r.w;
+    var lines = [
+      "Shipment: " + MODES[d.mode].label,
+      "Service: " + SVC[d.svc].label + (d.svc !== "sea" && d.courier !== "all" ? " (" + COU[d.courier] + ")" : ""),
+      "Route: Bangladesh to " + destName(d) + (d.city ? " (" + d.city + ")" : ""),
+      "Actual weight: " + kg(d.weight)
+    ];
+    if (W.has) lines.push("Size: " + d.rawDims.join(" x ") + " " + d.dUnitName + " x " + d.pcs + " pc", d.svc === "sea" ? "Volume: " + r2(W.cbm) + " CBM" : "Chargeable weight: " + kg(W.cw));
+    else if (d.svc !== "sea") lines.push("Chargeable weight: " + kg(W.cw));
+    if (d.item) lines.push("Item: " + d.item);
+    if (d.qty) lines.push("Quantity: " + d.qty);
+    if (d.value) lines.push("Approx. value: " + d.value);
+    if (d.pickup) lines.push("Pickup needed: Yes");
+    lines.push("Calculator result: " + (r.best ? "Estimated " + money(r.best.total) : "Quote required"));
+    return lines.join("\n");
+  }
+
+  function bar(label, val, max, used) {
+    var pct = Math.max(4, Math.round(val / max * 100));
+    return '<div class="prc-bar' + (used ? " is-used" : "") + '"><span>' + label + '</span><span class="prc-bar-track" aria-hidden="true"><span class="prc-bar-fill" style="width:' + pct + '%"></span></span><strong>' + kg(val) + (used ? " &middot; billed" : "") + "</strong></div>";
   }
 
   function render(r) {
-    var d = r.d, estimated = r.total !== undefined;
-    var wa = "Hello JP Express, I'd like a shipping quote.\n" +
-      "Shipment type: " + JP_PRICING_MODES[d.mode].label + "\nService: " + JP_PRICING_SERVICES[d.svc] + "\nDestination: " + d.dest +
-      "\nActual weight: " + kg(d.weight) + "\nChargeable weight: " + kg(r.cw) +
-      (r.hasDims ? "\nSize: " + d.l + " x " + d.w + " x " + d.h + " cm x " + d.pcs + " pc" : "");
+    var d = r.d, priced = !!r.best, W = priced ? weights(d, r.best.courier) : r.w;
+    var cw = priced ? r.best.cw : r.w.cw, sea = d.svc === "sea";
+    var txt = summary(r);
+    var dest = esc(destName(d)) + (d.city ? " &middot; " + esc(d.city) : "");
+    var courierTxt = sea ? "" : priced ? COU[r.best.courier] : (d.courier === "all" ? "All Couriers" : COU[d.courier]);
 
-    var head = estimated
-      ? '<span class="prc-badge is-est">Estimated</span><div class="prc-price">' + money(r.total) + '</div><p class="prc-sub">Estimated shipping cost. Final price is confirmed in your quote.</p>'
-      : '<span class="prc-badge is-quote">Quote Required</span><div class="prc-price prc-price--quote">Request a Quote</div><p class="prc-sub">' + esc(r.reasons[0]) + "</p>";
+    var head = '<div class="prc-chipline">' +
+      (priced ? '<span class="prc-badge is-est">Estimated</span>' : '<span class="prc-badge is-quote">Quote Required</span>') +
+      '<span class="prc-badge is-calc">Weight calculated</span></div>' +
+      (priced
+        ? '<div class="prc-price">' + money(r.best.total) + '</div><p class="prc-sub">Estimated shipping cost, not a final invoice. Your quote confirms the exact price.</p>'
+        : '<div class="prc-price prc-price--quote">Request a Quote</div><p class="prc-sub">' + esc(r.reasons[0]) + "</p>");
 
-    var rows = row("Service", esc(JP_PRICING_SERVICES[d.svc])) + row("Destination", esc(d.dest)) +
-      row("Actual weight", kg(d.weight)) +
-      (r.hasDims ? (d.svc === "sea" ? row("Volume", (Math.round(r.cbm * 1000) / 1000) + " CBM") : row("Volumetric weight", kg(r.vol))) : "") +
-      row("Chargeable weight", kg(r.cw)) +
-      row("Estimated transit", r.rate && r.rate.transit ? esc(r.rate.transit) : "Confirmed in quote");
-
-    var breakdown = estimated
-      ? '<div class="prc-break"><h4>Breakdown</h4>' + row("Base charge", money(r.base)) + row("Weight charge", money(r.weightCharge)) +
-      (r.fuelPct ? row("Fuel surcharge (" + r.fuelPct + "%)", money(r.fuel)) : "") + row("Total (estimate)", money(r.total)) + "</div>"
+    var warn = r.review
+      ? '<div class="prc-warn" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>&ldquo;' + esc(r.review) + '&rdquo; may need extra checks. See <a href="resources.html">Restricted &amp; Prohibited Items</a> or contact us before booking.</span></div>'
       : "";
 
-    els.result.innerHTML =
-      '<div class="prc-res">' + head + '<div class="prc-kvs">' + rows + "</div>" + breakdown +
-      '<p class="prc-fine"><i class="fa-solid fa-circle-info"></i> Duties, taxes, customs charges and extra services are not included unless stated in your quote.' +
-      (JP_PRICING_CONFIG.ratesNote ? " " + esc(JP_PRICING_CONFIG.ratesNote) : "") + "</p>" +
-      '<div class="prc-cta">' +
-      '<a class="btn-main btn-red" href="index.html#quote">Request a Quote <i class="fa-solid fa-arrow-right"></i></a>' +
-      '<a class="btn-main btn-dark-outline prc-wa" target="_blank" rel="noopener" href="https://wa.me/8801681637836?text=' + encodeURIComponent(wa) + '"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>' +
-      '<a class="prc-call" href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> Call us</a></div></div>';
+    var bars = "";
+    if (W.has && !sea) {
+      var max = Math.max(d.weight, W.vol) || 1;
+      bars = '<div class="prc-bars" aria-label="Actual versus volumetric weight">' + bar("Actual", d.weight, max, d.weight >= W.vol) + bar("Volumetric", W.vol, max, W.vol > d.weight) +
+        '<p class="prc-bars-note">The higher weight is billed. Divisor used: ' + W.div.toLocaleString("en-US") + ". Final rule is confirmed in your quote.</p></div>";
+    }
+
+    var rows = row("Service", esc(SVC[d.svc].label)) + (courierTxt ? row("Courier", esc(courierTxt)) : "") + row("Destination", dest) + row("Actual weight", kg(d.weight)) +
+      (W.has ? (sea ? row("Volume", r2(W.cbm) + " CBM") : row("Volumetric weight", kg(W.vol))) : "") +
+      (sea ? "" : row("Chargeable weight", kg(cw))) +
+      row("Estimated transit", priced && r.best.transit ? esc(r.best.transit) : "Confirmed in quote") +
+      row("Pricing status", priced ? "Estimated" : "Quote required");
+
+    var breakdown = priced
+      ? '<div class="prc-break"><h4>Breakdown</h4>' + row("Base charge", money(r.best.base)) + row("Weight charge (" + kg(cw) + ")", money(r.best.weightCharge)) +
+      (r.best.adj > 0 ? row("Minimum charge adjustment", money(r.best.adj)) : "") +
+      (r.best.fuelPct ? row("Fuel surcharge (" + r.best.fuelPct + "%)", money(r.best.fuel)) : "") + row("Total (estimate)", money(r.best.total)) + "</div>"
+      : "";
+
+    var compare = "";
+    if (priced && r.options.length > 1) {
+      compare = '<div class="prc-break"><h4>Compare couriers</h4><ul class="prc-compare">' + r.options.map(function (o, i) {
+        return "<li><span><strong>" + esc(COU[o.courier]) + "</strong>" + (i === 0 ? ' <em>Lowest</em>' : "") + "<small>" + esc(o.transit || "Transit in quote") + "</small></span><b>" + money(o.total) + "</b></li>";
+      }).join("") + "</ul></div>";
+    }
+
+    var a = r.advice, fit = a.same
+      ? "Good fit: " + esc(SVC[a.rec].label) : "Better fit: " + esc(SVC[a.rec].label);
+    var adv = '<div class="prc-adv"><span class="prc-adv-tag">Service guide</span><strong>' + fit + "</strong><p>" + esc(a.why) + "</p>" +
+      '<p class="prc-adv-alt"><b>Alternative: ' + esc(SVC[a.alt].label) + ".</b> " + ALT_NOTE[a.alt] + "</p></div>";
+
+    var inc = '<details class="prc-inc"><summary>What is included and what may cost extra</summary><div class="prc-inc-grid"><div><h5>' +
+      (priced ? "This estimate covers" : "Your quote will confirm") + "</h5><ul><li>" +
+      (priced ? "Transport charges shown in the breakdown" : "Transport, pickup, delivery and tracking") + "</li><li>Applicable service surcharges</li></ul></div><div><h5>May be charged separately</h5><ul>" +
+      "<li>Customs duties and import taxes</li><li>Special packaging or handling</li><li>Remote-area charges and storage</li><li>Regulatory and destination-side fees</li></ul></div></div></details>";
+
+    var wa = "https://wa.me/" + JP_SITE_CONFIG.whatsapp + "?text=" + encodeURIComponent("Hello JP Express, I'd like a shipping quote.\n" + txt);
+    var qUrl = "contact.html?intent=quote&dest=" + encodeURIComponent(destName(d)) + "&weight=" + r2(d.weight) + "&msg=" + encodeURIComponent(txt) + "#inquiry";
+    var bizUrl = "business.html?solution=" + (d.mode === "commercial" || d.mode === "freight" ? "export" : "account") + "#bizQuote";
+
+    els.result.innerHTML = '<div class="prc-res">' + head + warn + bars + '<div class="prc-kvs">' + rows + "</div>" + breakdown + compare + adv + inc +
+      '<p class="prc-fine"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Duties, taxes, customs charges and extra services are not included unless stated in your quote.' + (CFG.ratesNote ? " " + esc(CFG.ratesNote) : "") + "</p>" +
+      '<div class="prc-cta"><a class="btn-main btn-red" href="' + qUrl + '">Request Detailed Quote <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' +
+      '<a class="btn-main btn-dark-outline prc-wa" target="_blank" rel="noopener" href="' + wa + '"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>' +
+      '<a class="prc-call" href="tel:+8801681637836"><i class="fa-solid fa-phone" aria-hidden="true"></i> Call us</a></div>' +
+      '<p class="prc-links"><a href="' + bizUrl + '">Regular or commercial shipper? Request business pricing</a><a href="track-shipment.html">Already shipped? Track your shipment</a></p></div>';
   }
 
-  function run() {
-    var d = read();
-    var msg = validate(d);
+  /* ---------------- live weight line ---------------- */
+  function updateLive() {
+    var d = read(), m = MODES[d.mode];
+    if (!(d.weight > 0)) { els.live.hidden = true; return; }
+    var w = weights(d, d.courier), t;
+    if (w.has && d.svc === "sea") t = "Volume so far: <b>" + r2(w.cbm) + " CBM</b>";
+    else if (w.has) t = "Chargeable weight so far: <b>" + kg(w.cw) + "</b> (" + (w.vol > d.weight ? "volumetric" : "actual") + " weight is higher)";
+    else t = "Actual weight: <b>" + kg(d.weight) + "</b>" + (m.dims && d.svc !== "sea" ? ". Add size to check volumetric weight." : "");
+    els.live.innerHTML = '<i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span>' + t + "</span>";
+    els.live.hidden = false;
+  }
+
+  /* ---------------- mode / service handling ---------------- */
+  function renderServices() {
+    var m = MODES[mode()], cur = svc();
+    if (m.services.indexOf(cur) < 0) cur = m.services[0];
+    els.svcBox.innerHTML = m.services.map(function (k) {
+      var s = SVC[k];
+      return '<label class="prc-svc-opt"><input type="radio" name="service" value="' + k + '"' + (k === cur ? " checked" : "") + '><span><i class="fa-solid ' + s.icon + '" aria-hidden="true"></i><b>' + s.label + "</b><small>" + s.note + "</small></span></label>";
+    }).join("");
+  }
+  function syncService() {
+    var m = MODES[mode()], sea = svc() === "sea";
+    els.dims.hidden = !m.dims;
+    els.courierWrap.hidden = sea;
+    els.dimsNote.textContent = sea ? "Required for sea freight, we price by volume (CBM)." : "Optional, but needed to check volumetric weight.";
+  }
+  function applyMode() {
+    renderServices();
+    els.hint.textContent = MODES[mode()].hint;
+    syncService();
+    showError("");
+    updateLive();
+    if (calculated) run(false);
+  }
+
+  /* ---------------- errors ---------------- */
+  function clearInvalid() {
+    Array.prototype.forEach.call(form.querySelectorAll('[aria-invalid="true"]'), function (e) { e.removeAttribute("aria-invalid"); });
+  }
+  function showError(msg, el) {
+    clearInvalid();
+    els.err.textContent = msg || "";
     els.err.hidden = !msg;
-    els.err.textContent = msg;
-    if (msg) return false;
+    if (msg && el) el.setAttribute("aria-invalid", "true");
+  }
+
+  function run(fromSubmit) {
+    var d = read(), bad = validate(d);
+    if (bad) {
+      els.result.innerHTML = placeholder;
+      if (fromSubmit) { showError(bad.msg, bad.el); bad.el.focus(); } else showError("");
+      return false;
+    }
+    showError("");
     render(compute(d));
     calculated = true;
     return true;
   }
 
+  function syncChips() {
+    var v = canon(els.to.value);
+    Array.prototype.forEach.call(els.chips.querySelectorAll(".prc-chip"), function (c) {
+      var on = canon(c.getAttribute("data-dest")) === v;
+      c.classList.toggle("is-on", on);
+      c.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
   /* ---------------- events ---------------- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (run() && window.matchMedia("(max-width: 991px)").matches) {
-      els.result.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+    if (run(true) && window.matchMedia("(max-width: 991px)").matches) {
+      els.card.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
     }
   });
   form.addEventListener("reset", function () {
-    calculated = false;
-    setTimeout(function () { els.result.innerHTML = placeholder; applyMode(); }, 0);
+    setTimeout(function () {
+      calculated = false;
+      els.result.innerHTML = placeholder;
+      applyMode(); syncChips(); els.live.hidden = true;
+    }, 0);
   });
   form.addEventListener("change", function (e) {
-    if (e.target.name === "mode") applyMode(); else if (calculated) run();
+    if (e.target.name === "mode") applyMode();
+    else if (e.target.name === "service") { syncService(); updateLive(); if (calculated) run(false); }
+    else { updateLive(); if (calculated) run(false); }
   });
-  form.addEventListener("input", function () { if (calculated) run(); });
+  form.addEventListener("input", function (e) {
+    if (e.target.getAttribute("aria-invalid")) { e.target.removeAttribute("aria-invalid"); els.err.hidden = true; }
+    updateLive(); syncChips();
+    if (calculated) run(false);
+  });
+  els.chips.addEventListener("click", function (e) {
+    var b = e.target.closest(".prc-chip");
+    if (!b) return;
+    els.to.value = b.getAttribute("data-dest");
+    els.to.dispatchEvent(new Event("input", { bubbles: true }));
+  });
 
-  applyMode();
+  /* ---------------- init (+ prefill: quote.html?dest=USA&mode=parcel&weight=2&service=express) ---------------- */
+  (function init() {
+    var q = new URLSearchParams(window.location.search);
+    var m = q.get("mode"), radio = m && form.querySelector('input[name="mode"][value="' + m + '"]');
+    if (radio) radio.checked = true;
+    renderServices();
+    var s = q.get("service"), sr = s && form.querySelector('input[name="service"][value="' + s + '"]');
+    if (sr) sr.checked = true;
+    if (q.get("dest")) els.to.value = q.get("dest").slice(0, 60);
+    if (q.get("weight") && parseFloat(q.get("weight")) > 0) els.weight.value = parseFloat(q.get("weight"));
+    var c = q.get("courier"); if (c && COU[c.toLowerCase()]) els.courier.value = c.toLowerCase();
+    els.hint.textContent = MODES[mode()].hint;
+    syncService(); syncChips(); updateLive();
+    if (q.get("dest") && q.get("weight")) run(false);
+  })();
 })();
 
 /* =========================================================
@@ -2078,6 +2267,8 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     var q = new URLSearchParams(window.location.search);
     applyIntent(q.get('intent') || 'general');
     if (q.get('dest') && $('#fDest')) $('#fDest').value = q.get('dest').slice(0, 60);
+    if (q.get('weight') && $('#fWeight')) $('#fWeight').value = parseFloat(q.get('weight')) || '';
+    if (q.get('msg') && $('#fMsg')) $('#fMsg').value = q.get('msg').slice(0, 800);
     if (q.get('intent') && window.location.hash !== '#inquiry') {
       var s = $('#inquiry');
       if (s) setTimeout(function () { s.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 350);

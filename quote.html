@@ -116,6 +116,18 @@
   ]
 }
 </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+   {"@type":"Question","name":"How is international shipping cost calculated?","acceptedAnswer":{"@type":"Answer","text":"Cost depends on destination, chargeable weight, service, shipment type and any surcharges. The calculator works out your chargeable weight and shows an estimate where rates are available. Otherwise it asks you to request a quote."}},
+   {"@type":"Question","name":"What are volumetric and chargeable weight?","acceptedAnswer":{"@type":"Answer","text":"Volumetric weight reflects the space a parcel takes: length × width × height (cm) ÷ a divisor. Chargeable weight is the higher of actual and volumetric weight. The divisor can differ by courier and service, so your quote confirms the final figure."}},
+   {"@type":"Question","name":"Why does the calculator sometimes say Quote Required?","acceptedAnswer":{"@type":"Answer","text":"Commercial, freight, sea, very large or heavy shipments, and items that need review cannot be priced reliably by a form. We review the details instead of showing a misleading number."}},
+   {"@type":"Question","name":"Does the price include customs duties and taxes?","acceptedAnswer":{"@type":"Answer","text":"Not unless your quote says so. Duties, import taxes and customs charges at the destination are usually separate from shipping cost."}},
+   {"@type":"Question","name":"Is pickup or home delivery included?","acceptedAnswer":{"@type":"Answer","text":"Only when stated in your quote. Pickup availability depends on your area in Bangladesh, and we confirm it when you request a quote."}},
+   {"@type":"Question","name":"Why can the final price differ from the calculator?","acceptedAnswer":{"@type":"Answer","text":"The calculator is an estimate from the details you enter. Measured weight and size, service rules, surcharges and customs can change the final price, which is confirmed in your quote."}},
+   {"@type":"Question","name":"How do I get a business, freight or recurring-shipment quote?","acceptedAnswer":{"@type":"Answer","text":"Use Request Business Pricing or Request a Quote. Share your product, destination, weight or CBM and shipment frequency. Air, sea and export shipments are priced to your requirement."}},
+   {"@type":"Question","name":"How long is a quote valid?","acceptedAnswer":{"@type":"Answer","text":"Validity is stated on your quote. Rates and surcharges can change, so confirm your quote before booking."}}
+  ]}
+  </script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages/quote.css">
 
@@ -268,7 +280,7 @@
   <main id="main">
 
     <!-- HERO -->
-    <section class="hero page-hero" aria-labelledby="cntTitle">
+    <section class="hero page-hero" aria-labelledby="prcTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
         <div class="hero-copy" data-reveal>
@@ -277,8 +289,13 @@
               aria-current="page">Pricing</span>
           </nav>
           <div class="hero-kicker"><span>SHIPPING</span> CALCULATOR</div>
-          <h1 id="prcTitle">Get Your <span class="accent">Shipping Quote</span></h1>
-          <p>Share your destination, weight and shipment type and our team will confirm the best option and price.</p>
+          <h1 id="prcTitle">International <span class="accent">Shipping Cost Calculator</span></h1>
+          <p>Enter destination, weight and size to see your chargeable weight, estimated cost or quote route.</p>
+          <div class="hero-actions">
+            <a href="#calculator" class="btn-main btn-red">Calculate Shipping Cost <i
+                class="fa-solid fa-arrow-right"></i></a>
+            <a href="contact.html?intent=quote#inquiry" class="btn-main btn-dark-outline">Request a Quote</a>
+          </div>
         </div>
       </div>
     </section>
@@ -301,102 +318,164 @@
 
     <section class="home-section prc-alt prc-calc" id="calculator" aria-labelledby="calcT">
       <div class="container-fluid">
+
+        <p class="prc-trustnote" data-reveal>
+          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+          <span><strong>Estimate vs confirmed quote.</strong> The calculator shows an estimated cost, or tells you when
+            a
+            quote is needed. Final charges can vary with shipment details, carrier or service rules, customs, duties,
+            taxes and surcharges. An estimate is never a final invoice.</span>
+        </p>
+
         <div class="prc-layout">
+
+          <!-- ===== FORM ===== -->
           <div class="prc-card" data-reveal>
-            <span class="eyebrow">Shipping Calculator</span>
-            <h2 id="calcT">Get Your Chargeable Weight &amp; Estimate</h2>
-            <p>From Bangladesh to anywhere in the world.</p>
+            <div class="prc-card-head">
+              <span class="eyebrow">Shipping Calculator</span>
+              <h2 id="calcT">Calculate Your Shipping Cost</h2>
+              <p>From Bangladesh to anywhere in the world. It takes about 30 seconds.</p>
+            </div>
+
             <form id="prcForm" novalidate autocomplete="off">
-              <fieldset class="prc-modes">
-                <legend>What are you shipping?</legend><label class="prc-mode"><input type="radio" name="mode"
-                    value="document" checked><span><i class="fa-solid fa-file-lines"></i>Document</span></label><label
-                  class="prc-mode"><input type="radio" name="mode" value="parcel"><span><i
-                      class="fa-solid fa-box-open"></i>Parcel</span></label><label class="prc-mode"><input type="radio"
-                    name="mode" value="commercial"><span><i
-                      class="fa-solid fa-boxes-stacked"></i>Commercial</span></label><label class="prc-mode"><input
-                    type="radio" name="mode" value="freight"><span><i
-                      class="fa-solid fa-plane-departure"></i>Freight</span></label>
-              </fieldset>
-              <p class="prc-hint" id="prcHint"></p>
-              <div class="prc-fields">
-                <div class="prc-field"><label for="prcFrom">From</label><input id="prcFrom" value="Bangladesh" readonly>
-                </div>
-                <div class="prc-field"><label for="prcTo">Destination country</label><input id="prcTo"
-                    list="prcCountries" placeholder="e.g. United States" autocomplete="off" required><datalist
-                    id="prcCountries">
-                    <option value="Australia"></option>
-                    <option value="Austria"></option>
-                    <option value="Bahrain"></option>
-                    <option value="Belgium"></option>
-                    <option value="Canada"></option>
-                    <option value="China"></option>
-                    <option value="Denmark"></option>
-                    <option value="France"></option>
-                    <option value="Germany"></option>
-                    <option value="Hong Kong"></option>
-                    <option value="India"></option>
-                    <option value="Indonesia"></option>
-                    <option value="Ireland"></option>
-                    <option value="Italy"></option>
-                    <option value="Japan"></option>
-                    <option value="Kuwait"></option>
-                    <option value="Malaysia"></option>
-                    <option value="Maldives"></option>
-                    <option value="Nepal"></option>
-                    <option value="Netherlands"></option>
-                    <option value="New Zealand"></option>
-                    <option value="Norway"></option>
-                    <option value="Oman"></option>
-                    <option value="Pakistan"></option>
-                    <option value="Qatar"></option>
-                    <option value="Saudi Arabia"></option>
-                    <option value="Singapore"></option>
-                    <option value="South Africa"></option>
-                    <option value="South Korea"></option>
-                    <option value="Spain"></option>
-                    <option value="Sri Lanka"></option>
-                    <option value="Sweden"></option>
-                    <option value="Switzerland"></option>
-                    <option value="Thailand"></option>
-                    <option value="Turkey"></option>
-                    <option value="UAE"></option>
-                    <option value="United Kingdom"></option>
-                    <option value="United States"></option>
-                  </datalist></div>
-                <div class="prc-field"><label for="prcService">Service</label><select id="prcService"></select>
-                </div>
-                <div class="prc-field"><label for="prcWeight">Total weight (kg)</label><input id="prcWeight"
-                    type="number" inputmode="decimal" min="0.1" step="0.1" placeholder="e.g. 2.5" required></div>
-                <div class="prc-wide" id="prcDims" hidden>
-                  <span class="prc-dims-label">Size per piece (cm)</span>
-                  <div class="prc-dim-row">
-                    <div class="prc-field"><label for="prcL">Length</label><input id="prcL" type="number"
-                        inputmode="decimal" min="1" step="1" placeholder="L"></div>
-                    <div class="prc-field"><label for="prcW">Width</label><input id="prcW" type="number"
-                        inputmode="decimal" min="1" step="1" placeholder="W"></div>
-                    <div class="prc-field"><label for="prcH">Height</label><input id="prcH" type="number"
-                        inputmode="decimal" min="1" step="1" placeholder="H"></div>
+
+              <!-- 1. Route -->
+              <div class="prc-block">
+                <h3 class="prc-step"><b>1</b> Where is it going?</h3>
+                <div class="prc-fields">
+                  <div class="prc-field">
+                    <label for="prcFrom">From</label>
+                    <input id="prcFrom" value="Bangladesh" readonly>
                   </div>
-                  <div class="prc-field mt-3"><label for="prcPcs">Number of pieces</label><input id="prcPcs"
-                      type="number" inputmode="numeric" min="1" step="1" value="1"></div>
+                  <div class="prc-field">
+                    <label for="prcTo">To (destination country)</label>
+                    <input id="prcTo" list="prcCountries" placeholder="e.g. United States" autocomplete="off"
+                      autocapitalize="words" enterkeyhint="next" required>
+                    <datalist id="prcCountries"></datalist>
+                  </div>
+                </div>
+                <div class="prc-chips" id="prcChips" role="group" aria-label="Popular destinations">
+                  <button type="button" class="prc-chip" data-dest="United States" aria-pressed="false">USA</button>
+                  <button type="button" class="prc-chip" data-dest="United Kingdom" aria-pressed="false">UK</button>
+                  <button type="button" class="prc-chip" data-dest="Canada" aria-pressed="false">Canada</button>
+                  <button type="button" class="prc-chip" data-dest="Australia" aria-pressed="false">Australia</button>
+                  <button type="button" class="prc-chip" data-dest="UAE" aria-pressed="false">UAE</button>
+                  <button type="button" class="prc-chip" data-dest="Saudi Arabia" aria-pressed="false">Saudi
+                    Arabia</button>
                 </div>
               </div>
+
+              <!-- 2. Shipment type -->
+              <fieldset class="prc-modes">
+                <legend><b>2</b> What are you shipping?</legend>
+                <label class="prc-mode"><input type="radio" name="mode" value="document" checked><span><i
+                      class="fa-solid fa-file-lines" aria-hidden="true"></i>Document</span></label>
+                <label class="prc-mode"><input type="radio" name="mode" value="parcel"><span><i
+                      class="fa-solid fa-box-open" aria-hidden="true"></i>Parcel</span></label>
+                <label class="prc-mode"><input type="radio" name="mode" value="commercial"><span><i
+                      class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>Commercial</span></label>
+                <label class="prc-mode"><input type="radio" name="mode" value="freight"><span><i
+                      class="fa-solid fa-plane-departure" aria-hidden="true"></i>Freight</span></label>
+              </fieldset>
+              <p class="prc-hint" id="prcHint"></p>
+
+              <!-- 3. Weight and size -->
+              <div class="prc-block">
+                <h3 class="prc-step"><b>3</b> How heavy and how big?</h3>
+                <div class="prc-field">
+                  <label for="prcWeight">Total weight</label>
+                  <div class="prc-ig">
+                    <input id="prcWeight" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 2.5"
+                      required>
+                    <select id="prcWUnit" aria-label="Weight unit">
+                      <option value="kg">kg</option>
+                      <option value="g">g</option>
+                      <option value="lb">lb</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="prc-dims" id="prcDims" hidden>
+                  <div class="prc-dims-head">
+                    <span class="prc-dims-label">Size per piece</span>
+                    <select id="prcDUnit" class="prc-mini" aria-label="Size unit">
+                      <option value="cm">cm</option>
+                      <option value="in">inch</option>
+                    </select>
+                  </div>
+                  <div class="prc-dim-row">
+                    <div class="prc-field"><label for="prcL">Length</label><input id="prcL" type="number"
+                        inputmode="decimal" min="0" step="any" placeholder="L"></div>
+                    <div class="prc-field"><label for="prcW">Width</label><input id="prcW" type="number"
+                        inputmode="decimal" min="0" step="any" placeholder="W"></div>
+                    <div class="prc-field"><label for="prcH">Height</label><input id="prcH" type="number"
+                        inputmode="decimal" min="0" step="any" placeholder="H"></div>
+                    <div class="prc-field prc-pcs"><label for="prcPcs">Number of pieces</label><input id="prcPcs"
+                        type="number" inputmode="numeric" min="1" step="1" value="1"></div>
+                  </div>
+                  <p class="prc-why"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    <span>Bulky parcels are priced on the space they take, not only their weight. <span
+                        id="prcDimsNote"></span></span>
+                  </p>
+                </div>
+
+                <div class="prc-live" id="prcLive" aria-live="polite" hidden></div>
+              </div>
+
+              <!-- 4. Service -->
+              <div class="prc-block">
+                <h3 class="prc-step"><b>4</b> Which service?</h3>
+                <div class="prc-svc" id="prcServices" role="radiogroup" aria-label="Service"></div>
+
+                <div class="prc-field prc-courier" id="prcCourierWrap">
+                  <label for="prcCourier"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Courier</label>
+                  <select id="prcCourier">
+                    <option value="all">All Couriers</option>
+                    <option value="dhl">DHL</option>
+                    <option value="fedex">FedEx</option>
+                    <option value="ups">UPS</option>
+                    <option value="aramex">Aramex</option>
+                    <option value="jpex">JPEX</option>
+                    <option value="gpo">GPO</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Optional details (progressive disclosure) -->
+              <details class="prc-more">
+                <summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Add item details <small>(optional,
+                    improves accuracy)</small></summary>
+                <div class="prc-more-body">
+                  <div class="prc-field prc-wide"><label for="prcItem">What is inside?</label><input id="prcItem"
+                      placeholder="e.g. cotton t-shirts" maxlength="120"></div>
+                  <div class="prc-field"><label for="prcQty">Quantity</label><input id="prcQty" type="number"
+                      inputmode="numeric" min="1" placeholder="e.g. 20"></div>
+                  <div class="prc-field"><label for="prcValue">Approx. value (৳)</label><input id="prcValue"
+                      type="number" inputmode="decimal" min="0" placeholder="e.g. 15000"></div>
+                  <div class="prc-field prc-wide"><label for="prcCity">City / postal code (optional)</label><input
+                      id="prcCity" placeholder="e.g. New York or 10001" maxlength="60"></div>
+                  <label class="prc-check prc-wide"><input type="checkbox" id="prcPickup"> I need pickup from my
+                    address</label>
+                </div>
+              </details>
+
               <p class="prc-error" id="prcError" role="alert" hidden></p>
               <div class="prc-actions">
                 <button type="submit" class="btn-main btn-red">Calculate Shipping Cost <i
-                    class="fa-solid fa-arrow-right"></i></button>
+                    class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
                 <button type="reset" class="prc-reset">Reset</button>
               </div>
             </form>
           </div>
 
+          <!-- ===== RESULT ===== -->
           <aside class="prc-result-card" id="prcResultCard" aria-live="polite" aria-label="Calculation result"
             data-reveal style="transition-delay:80ms">
             <div id="prcResult">
-              <div class="prc-empty"><i class="fa-solid fa-scale-balanced"></i>
+              <div class="prc-empty"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
                 <h3>Your result appears here</h3>
-                <p>Enter your shipment details to see actual, volumetric and chargeable weight, plus your next
-                  step.</p>
+                <p>Enter your shipment details to see actual, volumetric and chargeable weight, your estimate or quote
+                  status, and the next step.</p>
               </div>
             </div>
           </aside>
@@ -560,56 +639,111 @@
         <div class="accordion mx-auto" id="prcFaq" style="max-width:860px" data-reveal>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf0" aria-expanded="false" aria-controls="pf0">Is the
-                calculator result the final price?</button></h3>
+                data-bs-toggle="collapse" data-bs-target="#pf0" aria-expanded="false" aria-controls="pf0">How is
+                international shipping cost calculated?</button></h3>
             <div id="pf0" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">No. The calculator gives an estimate or tells you a quote is needed. The
-                final
-                price is confirmed in a shipment-specific quote.</div>
+              <div class="accordion-body">Cost depends on destination, chargeable weight, service, shipment type and any
+                surcharges. The calculator works out your chargeable weight and shows an estimate where rates are
+                available. Otherwise it asks you to request a quote.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf1" aria-expanded="false" aria-controls="pf1">What is
-                chargeable weight?</button></h3>
+                data-bs-toggle="collapse" data-bs-target="#pf1" aria-expanded="false" aria-controls="pf1">What are
+                volumetric and chargeable weight?</button></h3>
             <div id="pf1" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">It is the weight used for pricing: the higher of actual weight and
-                volumetric
-                weight, based on the applicable service rules.</div>
+              <div class="accordion-body">Volumetric weight reflects the space a parcel takes: length × width × height
+                (cm) ÷ a divisor. Chargeable weight is the higher of actual and volumetric weight. The divisor can
+                differ by courier and service, so your quote confirms the final figure.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf2" aria-expanded="false" aria-controls="pf2">Why does
-                the
+                data-bs-toggle="collapse" data-bs-target="#pf2" aria-expanded="false" aria-controls="pf2">Why does the
                 calculator sometimes say Quote Required?</button></h3>
             <div id="pf2" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">For commercial, freight, sea and unusually large or heavy shipments, an
-                automatic price may not be reliable, so our team reviews the details first.</div>
+              <div class="accordion-body">Commercial, freight, sea, very large or heavy shipments, and items that need
+                review cannot be priced reliably by a form. We review the details instead of showing a misleading
+                number.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf3" aria-expanded="false" aria-controls="pf3">Do the
-                prices
-                include duties and taxes?</button></h3>
+                data-bs-toggle="collapse" data-bs-target="#pf3" aria-expanded="false" aria-controls="pf3">Does the price
+                include customs duties and taxes?</button></h3>
             <div id="pf3" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">Not unless your quote says so. Duties, taxes and customs charges at the
-                destination are usually separate.</div>
+              <div class="accordion-body">Not unless your quote says so. Duties, import taxes and customs charges at the
+                destination are usually separate from shipping cost.</div>
             </div>
           </div>
           <div class="accordion-item">
             <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#pf4" aria-expanded="false" aria-controls="pf4">How can
-                I get
-                an exact price?</button></h3>
+                data-bs-toggle="collapse" data-bs-target="#pf4" aria-expanded="false" aria-controls="pf4">Is pickup or
+                home delivery included?</button></h3>
             <div id="pf4" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
-              <div class="accordion-body">Use the Request a Quote button or message us on WhatsApp with your
-                shipment
-                details.</div>
+              <div class="accordion-body">Only when stated in your quote. Pickup availability depends on your area in
+                Bangladesh, and we confirm it when you request a quote.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#pf5" aria-expanded="false" aria-controls="pf5">Why can the
+                final price differ from the calculator?</button></h3>
+            <div id="pf5" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
+              <div class="accordion-body">The calculator is an estimate from the details you enter. Measured weight and
+                size, service rules, surcharges and customs can change the final price, which is confirmed in your
+                quote.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#pf6" aria-expanded="false" aria-controls="pf6">How do I get a
+                business, freight or recurring-shipment quote?</button></h3>
+            <div id="pf6" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
+              <div class="accordion-body">Use Request Business Pricing or Request a Quote. Share your product,
+                destination, weight or CBM and shipment frequency. Air, sea and export shipments are priced to your
+                requirement.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                data-bs-toggle="collapse" data-bs-target="#pf7" aria-expanded="false" aria-controls="pf7">How long is a
+                quote valid?</button></h3>
+            <div id="pf7" class="accordion-collapse collapse" data-bs-parent="#prcFaq">
+              <div class="accordion-body">Validity is stated on your quote. Rates and surcharges can change, so confirm
+                your quote before booking.</div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="home-section prc-plain" aria-labelledby="relT">
+      <div class="container-fluid">
+        <div class="prc-head" data-reveal><span class="eyebrow">Explore</span>
+          <h2 id="relT">Plan Your Shipment</h2>
+        </div>
+        <ul class="prc-factors">
+          <li data-reveal><a href="services.html"><span class="prc-ico"><i class="fa-solid fa-truck-fast"></i></span>
+              <h3>Shipping Services</h3>
+              <p>Courier, air freight, sea freight and export logistics.</p>
+            </a></li>
+          <li data-reveal style="transition-delay:60ms"><a href="countries.html"><span class="prc-ico"><i
+                  class="fa-solid fa-earth-asia"></i></span>
+              <h3>Destinations</h3>
+              <p>Transit, documents and customs notes by country.</p>
+            </a></li>
+          <li data-reveal style="transition-delay:120ms"><a href="resources.html"><span class="prc-ico"><i
+                  class="fa-solid fa-book-open"></i></span>
+              <h3>Packaging &amp; Customs Guides</h3>
+              <p>Volumetric weight, packing and restricted items.</p>
+            </a></li>
+          <li data-reveal style="transition-delay:180ms"><a href="track-shipment.html"><span class="prc-ico"><i
+                  class="fa-solid fa-location-dot"></i></span>
+              <h3>Track a Shipment</h3>
+              <p>Already shipped? Check your status.</p>
+            </a></li>
+        </ul>
       </div>
     </section>
 

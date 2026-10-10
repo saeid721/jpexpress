@@ -808,3 +808,693 @@
   }
 
 }
+
+
+/* ===============================================================
+   QUOTE PAGE — PREMIUM CALCULATOR UPGRADE
+   Paste at the VERY BOTTOM of css/pages/quote.css
+   =============================================================== */
+.page-quote [hidden] {
+  display: none !important;
+}
+
+/* hero buttons */
+.page-quote .page-hero .hero-actions {
+  justify-content: center;
+  margin-top: 22px;
+}
+
+/* trust note */
+.page-quote .prc-trustnote {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 0 0 18px;
+  padding: 12px 16px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--jp-text-muted-dark);
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-left: 4px solid var(--jp-orange);
+  border-radius: 12px;
+}
+
+.page-quote .prc-trustnote i {
+  margin-top: 3px;
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-trustnote strong {
+  color: var(--jp-navy);
+}
+
+/* card head + steps */
+.page-quote .prc-card-head {
+  margin-bottom: 18px;
+}
+
+.page-quote .prc-card-head p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-block {
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+}
+
+.page-quote .prc-step,
+.page-quote .prc-modes legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-step b,
+.page-quote .prc-modes legend b {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 12px;
+  letter-spacing: 0;
+  color: var(--jp-white);
+  background: var(--jp-navy);
+}
+
+.page-quote .prc-modes {
+  margin-bottom: 8px;
+}
+
+.page-quote .prc-hint {
+  margin: 0 0 20px;
+  padding-left: 2px;
+}
+
+/* input + unit */
+.page-quote .prc-ig {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+}
+
+.page-quote .prc-ig input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
+}
+
+.page-quote .prc-field .prc-ig select {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 0 30px 0 14px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  background-color: var(--jp-white);
+}
+
+.page-quote .prc-field input[aria-invalid="true"],
+.page-quote .prc-field select[aria-invalid="true"] {
+  border-color: #B42318;
+  background-color: #FEF3F2;
+}
+
+/* popular destination chips */
+.page-quote .prc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.page-quote .prc-chip {
+  min-height: 36px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--jp-navy);
+  background: var(--jp-white);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 999px;
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+
+.page-quote .prc-chip:hover {
+  border-color: var(--jp-orange);
+}
+
+.page-quote .prc-chip.is-on {
+  color: var(--jp-white);
+  background: var(--jp-navy);
+  border-color: var(--jp-navy);
+}
+
+/* dimensions */
+.page-quote .prc-dims {
+  margin-top: 16px;
+  padding: 14px;
+  background: var(--jp-bg-light);
+  border: 1px dashed var(--jp-border-hover-2);
+  border-radius: 14px;
+}
+
+.page-quote .prc-dims-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.page-quote .prc-dims-head .prc-dims-label {
+  margin: 0;
+}
+
+.page-quote .prc-mini {
+  height: 36px;
+  padding: 0 28px 0 12px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  background: var(--jp-white);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 10px;
+}
+
+.page-quote .prc-pcs {
+  margin-top: 12px;
+  max-width: 200px;
+}
+
+.page-quote .prc-why {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-why i {
+  margin-top: 2px;
+  color: var(--jp-orange);
+}
+
+/* live weight line */
+.page-quote .prc-live {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--jp-navy);
+  background: var(--jp-bg-soft);
+  border: 1px solid var(--jp-border-hover-2);
+  border-radius: 12px;
+}
+
+.page-quote .prc-live i {
+  color: var(--jp-orange);
+}
+
+/* service cards */
+.page-quote .prc-svc {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.page-quote .prc-svc-opt {
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+}
+
+.page-quote .prc-svc-opt input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.page-quote .prc-svc-opt span {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-items: center;
+  min-height: 60px;
+  padding: 10px 14px;
+  background: var(--jp-bg-light);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  transition: all .2s ease;
+}
+
+.page-quote .prc-svc-opt i {
+  grid-row: 1 / span 2;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  font-size: 16px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+.page-quote .prc-svc-opt b {
+  align-self: end;
+  font-size: 14px;
+  color: var(--jp-navy);
+  line-height: 1.2;
+}
+
+.page-quote .prc-svc-opt small {
+  align-self: start;
+  font-size: 12px;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-svc-opt:hover span {
+  border-color: var(--jp-orange);
+}
+
+.page-quote .prc-svc-opt input:checked+span {
+  background: var(--jp-navy);
+  border-color: var(--jp-navy);
+}
+
+.page-quote .prc-svc-opt input:checked+span b {
+  color: var(--jp-white);
+}
+
+.page-quote .prc-svc-opt input:checked+span small {
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-svc-opt input:checked+span i {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+}
+
+.page-quote .prc-svc-opt input:focus-visible+span {
+  outline: 3px solid rgba(242, 99, 35, .45);
+  outline-offset: 2px;
+}
+
+.page-quote .prc-courier {
+  margin-top: 14px;
+}
+
+/* optional details */
+.page-quote .prc-more {
+  margin: 4px 0 0;
+  background: var(--jp-bg-light);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 14px;
+}
+
+.page-quote .prc-more>summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 12px 16px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  cursor: pointer;
+}
+
+.page-quote .prc-more>summary::-webkit-details-marker {
+  display: none;
+}
+
+.page-quote .prc-more>summary i {
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-more>summary small {
+  font-weight: 500;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-more>summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--jp-navy);
+}
+
+.page-quote .prc-more[open]>summary::after {
+  content: "\2212";
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-more-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  padding: 4px 16px 16px;
+}
+
+.page-quote .prc-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--jp-navy);
+  cursor: pointer;
+}
+
+.page-quote .prc-check input {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  accent-color: var(--jp-orange);
+}
+
+/* actions: comfortable touch targets */
+.page-quote .prc-actions .btn-main {
+  min-height: 52px;
+  border-radius: 12px;
+}
+
+.page-quote .prc-actions .prc-reset {
+  height: 52px;
+}
+
+/* ===== result ===== */
+.page-quote .prc-res {
+  display: grid;
+  gap: 14px;
+}
+
+.page-quote .prc-chipline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.page-quote .prc-badge.is-calc {
+  background: rgba(126, 231, 168, .18);
+  color: #CFF5DD;
+}
+
+.page-quote .prc-price {
+  margin: 0;
+}
+
+.page-quote .prc-sub {
+  margin: 0;
+}
+
+.page-quote .prc-warn {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #7A2E0E;
+  background: #FFF6ED;
+  border: 1px solid #F9DBAF;
+  border-radius: 12px;
+}
+
+.page-quote .prc-warn i {
+  margin-top: 3px;
+  color: #D4500F;
+}
+
+.page-quote .prc-warn a {
+  font-weight: 800;
+  text-decoration: underline;
+  color: inherit;
+}
+
+.page-quote .prc-bars {
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+}
+
+.page-quote .prc-bar {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  font-size: 12.5px;
+}
+
+.page-quote .prc-bar>span:first-child {
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-bar-track {
+  display: block;
+  height: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, .14);
+  border-radius: 99px;
+}
+
+.page-quote .prc-bar-fill {
+  display: block;
+  height: 100%;
+  background: rgba(255, 255, 255, .5);
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+
+.page-quote .prc-bar.is-used .prc-bar-fill {
+  background: var(--jp-orange);
+}
+
+.page-quote .prc-bar strong {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.page-quote .prc-bars-note {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-break,
+.page-quote .prc-kvs {
+  margin: 0;
+}
+
+.page-quote .prc-compare {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-quote .prc-compare li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.page-quote .prc-compare li:first-child {
+  border-top: 0;
+}
+
+.page-quote .prc-compare small {
+  display: block;
+  font-size: 12px;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-compare em {
+  margin-left: 6px;
+  padding: 2px 8px;
+  font-size: 10.5px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--jp-white);
+  background: var(--jp-orange);
+  border-radius: 99px;
+}
+
+.page-quote .prc-adv {
+  padding: 14px;
+  background: rgba(242, 99, 35, .14);
+  border: 1px solid rgba(242, 99, 35, .45);
+  border-radius: 12px;
+}
+
+.page-quote .prc-adv-tag {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange-light);
+}
+
+.page-quote .prc-adv p {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-adv-alt b {
+  color: var(--jp-white);
+}
+
+.page-quote .prc-inc {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+}
+
+.page-quote .prc-inc summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.page-quote .prc-inc-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0 14px 14px;
+}
+
+.page-quote .prc-inc h5 {
+  margin: 0 0 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange-light);
+}
+
+.page-quote .prc-inc ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-fine {
+  margin: 0;
+}
+
+.page-quote .prc-cta {
+  margin: 0;
+}
+
+.page-quote .prc-cta .btn-main {
+  min-height: 50px;
+  border-radius: 12px;
+}
+
+.page-quote .prc-links {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.page-quote .prc-links a {
+  color: var(--jp-text-light-blue-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.page-quote .prc-links a:hover {
+  color: var(--jp-orange-light);
+}
+
+/* related cards */
+.page-quote .prc-factors li a {
+  display: block;
+  color: inherit;
+}
+
+/* FIX: business buttons were stretching tall on desktop (flex-basis 200px inside a column) */
+@media (min-width: 992px) {
+  .page-quote .prc-biz-actions .btn-main {
+    flex: 0 0 auto;
+    min-height: 50px;
+  }
+}
+
+@media (min-width: 576px) {
+  .page-quote .prc-svc {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .page-quote .prc-more-body {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .page-quote .prc-more-body .prc-wide {
+    grid-column: 1 / -1;
+  }
+
+  .page-quote .prc-inc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-quote .prc-bar {
+    grid-template-columns: 70px minmax(0, 1fr);
+  }
+
+  .page-quote .prc-bar strong {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .page-quote .prc-trustnote {
+    font-size: 12.5px;
+  }
+
+  .page-quote .prc-dims {
+    padding: 12px;
+  }
+}
