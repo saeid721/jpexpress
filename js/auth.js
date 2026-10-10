@@ -437,4 +437,373 @@
         /* ----- start (supports registration.html?type=traveler) ----- */
         applyType(new URLSearchParams(location.search).get("type") || "merchant", false);
     })();
+
+    /* =========================================================
+       FORGOT PASSWORD: identify → OTP → new password
+       (Step 1 accepts Email or Phone only — no username)
+       ========================================================= */
+    (function initForgotPassword() {
+        var formId = $("#fpFormId");
+        if (!formId) return;                       /* page not loaded: skip */
+
+        var AUTHX = {
+            sendEndpoint: "",   /* e.g. "/api/forgot-password"       ("" = demo) */
+            verifyEndpoint: "",   /* e.g. "/api/verify-reset-code"     ("" = demo) */
+            resetEndpoint: "",   /* e.g. "/api/reset-password"        ("" = demo) */
+            resendSeconds: 30,
+            demoCode: "123456"
+        };
+
+        var formOtp = $("#fpFormOtp"),
+            formPw = $("#fpFormPw"),
+            status = $("#fpStatus"),
+            idInput = $("#fpId"),
+            idIcon = $("#fpIdIcon"),
+            idHint = $("#fpIdHint"),
+            fId = $('[data-f="login"]', formId),
+            sendBtn = $("#fpSendBtn"),
+            otpGrid = $("#fpOtpGrid"),
+            otpIn = $$("input", otpGrid),
+            fOtp = $('[data-f="otp"]', formOtp),
+            verifyBtn = $("#fpVerifyBtn"),
+            resendBtn = $("#fpResend"),
+            resendSec = $("#fpResendSec"),
+            otpTo = $("#fpOtpTo"),
+            pwInput = $("#fpNewPassword"),
+            pwConfirm = $("#fpConfirmPassword"),
+            fPw = $('[data-f="password"]', formPw),
+            fPwC = $('[data-f="confirm"]', formPw),
+            rules = $("#fpPwRules"),
+            resetBtn = $("#fpResetBtn"),
+            steps = $$("#fpSteps li"),
+            visualTitle = $("#fpVisualTitle"),
+            visualText = $("#fpVisualText"),
+            heading = $("#fpHeading"),
+            subtitle = $("#fpSubtitle");
+
+        /* Only two contact types are allowed on this page */
+        var ICONS = { "": "fa-envelope", email: "fa-envelope", phone: "fa-phone" };
+        var HINTS = {
+            "": "We'll send a verification code to your email or phone.",
+            email: "We'll send the verification code to your email address.",
+            phone: "We'll send the verification code by SMS to your phone."
+        };
+        var account = "", accountType = "", otpValue = "", resendTimer = 0;
+
+        /* ---------- step UI ---------- */
+        function setStep(n) {
+            steps.forEach(function (li) {
+                var s = parseInt(li.getAttribute("data-step"), 10);
+                li.classList.toggle("is-done", s < n);
+                li.classList.toggle("is-on", s === n);
+            });
+        }
+
+        /* ---------- status ---------- */
+        function showStatus(type, msg) {
+            status.className = "auth-status is-" + type;
+            status.textContent = msg;
+            status.hidden = false;
+        }
+        function hideStatus() { status.hidden = true; }
+
+        /* ---------- submit lock ---------- */
+        function setLoading(btn, on, label) {
+            if (!btn) return;
+            if (on) {
+                btn.dataset.html = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> ' + esc(label);
+            } else if (btn.dataset.html) {
+                btn.innerHTML = btn.dataset.html;
+            }
+            btn.disabled = on;
+        }
+
+        /* ---------- live detect: only email or phone ---------- */
+        function detectContact(v) {
+            v = String(v || "").trim();
+            if (!v) return "";
+            if (v.indexOf("@") > -1) return "email";
+            if (/^\+?[0-9\s().-]+$/.test(v) && /\d/.test(v)) return "phone";
+            return "";                 /* anything else = invalid */
+        }
+
+        /* ---------- step 1: identify (Email or Phone) ---------- */
+        idInput.addEventListener("input", function () {
+            var t = detectContact(idInput.value);
+            idIcon.className = "fa-solid " + (ICONS[t] || "fa-envelope") + " auth-input-ico";
+            idHint.textContent = HINTS[t] || HINTS[""];
+            idInput.setAttribute("inputmode", t === "phone" ? "tel" : "email");
+            setError(fId, "");
+        });
+
+        formId.addEventListener("submit", function (e) {
+            e.preventDefault();
+            hideStatus();
+
+            var id = idInput.value.trim();
+            var type = detectContact(id);
+            var msg = "";
+
+            if (!id) {
+                msg = "Enter your email or phone number.";
+            } else if (type === "email") {
+                if (!RX.email.test(id)) msg = "Enter a valid email address, e.g. you@example.com.";
+            } else if (type === "phone") {
+                if (!phoneOk(id)) msg = "Enter a valid phone number, e.g. +880 1XXX XXXXXX.";
+            } else {
+                msg = "Enter a valid email or phone number.";
+            }
+
+            setError(fId, msg);
+            if (msg) { idInput.focus(); return; }
+
+            account = id;
+            accountType = type;
+
+            var fd = new FormData(formId);
+            fd.set("login_type", type);   /* "email" or "phone" */
+
+            setLoading(sendBtn, true, "Sending code...");
+            (AUTHX.sendEndpoint ? send(AUTHX.sendEndpoint, fd) : demo())
+                .then(function (r) {
+                    setLoading(sendBtn, false);
+                    if (r.ok) {
+                        goToOtp(type);
+                    } else if (r.status === 404) {
+                        showStatus("error", "We couldn't find an account with those details.");
+                    } else {
+                        showStatus("error", firstError(r.json) || "We couldn't send the code. Please try again.");
+                    }
+                })
+                .catch(function () {
+                    setLoading(sendBtn, false);
+                    showStatus("error", "Connection problem. Check your internet and try again.");
+                });
+        });
+
+        function goToOtp(type) {
+            formId.hidden = true;
+            formOtp.hidden = false;
+            formPw.hidden = true;
+            setStep(2);
+
+            heading.textContent = "Enter verification code";
+            subtitle.textContent = "We sent a 6-digit code to your " + (type === "phone" ? "phone" : "email") + ".";
+            otpTo.textContent = type === "phone" ? "Sent by SMS to " + account + "." : "Sent to " + account + ".";
+
+            otpIn.forEach(function (i) { i.value = ""; i.classList.remove("is-filled"); });
+            otpValue = "";
+            otpIn[0].focus();
+
+            startResendTimer();
+        }
+
+        /* ---------- OTP inputs (unchanged) ---------- */
+        function readOtp() {
+            return otpIn.map(function (i) { return i.value.replace(/\D/g, ""); }).join("");
+        }
+        otpIn.forEach(function (inp, idx) {
+            inp.addEventListener("input", function () {
+                inp.value = inp.value.replace(/\D/g, "").slice(0, 1);
+                inp.classList.toggle("is-filled", !!inp.value);
+                setError(fOtp, "");
+                if (inp.value && idx < otpIn.length - 1) otpIn[idx + 1].focus();
+                otpValue = readOtp();
+                if (otpValue.length === otpIn.length) formOtp.requestSubmit();
+            });
+            inp.addEventListener("keydown", function (e) {
+                if (e.key === "Backspace" && !inp.value && idx > 0) otpIn[idx - 1].focus();
+                if (e.key === "ArrowLeft" && idx > 0) otpIn[idx - 1].focus();
+                if (e.key === "ArrowRight" && idx < otpIn.length - 1) otpIn[idx + 1].focus();
+            });
+            inp.addEventListener("paste", function (e) {
+                var txt = (e.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "").slice(0, 6);
+                if (!txt) return;
+                e.preventDefault();
+                otpIn.forEach(function (x, k) { x.value = txt[k] || ""; x.classList.toggle("is-filled", !!x.value); });
+                otpValue = readOtp();
+                var last = Math.min(txt.length, otpIn.length) - 1;
+                if (last >= 0) otpIn[last].focus();
+                if (otpValue.length === otpIn.length) formOtp.requestSubmit();
+            });
+        });
+
+        /* ---------- resend ---------- */
+        function startResendTimer() {
+            clearInterval(resendTimer);
+            var left = AUTHX.resendSeconds;
+            resendBtn.disabled = true;
+            resendBtn.innerHTML = 'Resend in <b id="fpResendSec">' + left + "s</b>";
+            resendSec = $("#fpResendSec");
+            resendTimer = setInterval(function () {
+                left--;
+                if (left <= 0) {
+                    clearInterval(resendTimer);
+                    resendBtn.disabled = false;
+                    resendBtn.textContent = "Resend code";
+                } else {
+                    resendSec.textContent = left + "s";
+                }
+            }, 1000);
+        }
+        resendBtn.addEventListener("click", function () {
+            var fd = new FormData(formId);
+            fd.set("login_type", accountType || detectContact(account));
+            resendBtn.disabled = true;
+            (AUTHX.sendEndpoint ? send(AUTHX.sendEndpoint, fd) : demo())
+                .then(function (r) {
+                    if (r.ok) {
+                        showStatus("info", "A new code is on its way.");
+                        otpIn.forEach(function (i) { i.value = ""; i.classList.remove("is-filled"); });
+                        otpValue = "";
+                        otpIn[0].focus();
+                        startResendTimer();
+                    } else {
+                        showStatus("error", firstError(r.json) || "We couldn't resend the code.");
+                        resendBtn.disabled = false;
+                    }
+                })
+                .catch(function () {
+                    showStatus("error", "Connection problem. Please try again.");
+                    resendBtn.disabled = false;
+                });
+        });
+
+        /* ---------- step 2: verify (unchanged) ---------- */
+        formOtp.addEventListener("submit", function (e) {
+            e.preventDefault();
+            hideStatus();
+            var code = readOtp();
+            if (code.length !== 6) {
+                setError(fOtp, "Enter the 6-digit code.");
+                otpIn[Math.min(code.length, 5)].focus();
+                return;
+            }
+            var fd = new FormData(formOtp);
+            fd.set("login", account);
+            fd.set("code", code);
+
+            setLoading(verifyBtn, true, "Verifying...");
+            (AUTHX.verifyEndpoint ? send(AUTHX.verifyEndpoint, fd) : demoVerify(code))
+                .then(function (r) {
+                    setLoading(verifyBtn, false);
+                    if (r.ok) {
+                        goToPassword();
+                    } else if (r.status === 410) {
+                        showStatus("error", "That code has expired. Tap resend to get a new one.");
+                    } else {
+                        showStatus("error", firstError(r.json) || "That code is not correct. Please check and try again.");
+                    }
+                })
+                .catch(function () {
+                    setLoading(verifyBtn, false);
+                    showStatus("error", "Connection problem. Please try again.");
+                });
+        });
+        function demoVerify(code) {
+            return new Promise(function (resolve) {
+                setTimeout(function () {
+                    resolve(code === AUTHX.demoCode
+                        ? { ok: true, status: 200, json: { demo: true } }
+                        : { ok: false, status: 422, json: { message: "Incorrect code." } });
+                }, 700);
+            });
+        }
+
+        $("#fpBack1").addEventListener("click", function () {
+            formOtp.hidden = true;
+            formId.hidden = false;
+            setStep(1);
+            heading.textContent = "Reset your password";
+            subtitle.textContent = "Enter your email or phone number and we'll send you a verification code.";
+            hideStatus();
+            idInput.focus();
+        });
+
+        /* ---------- step 3: new password (unchanged) ---------- */
+        function goToPassword() {
+            formId.hidden = true;
+            formOtp.hidden = true;
+            formPw.hidden = false;
+            setStep(3);
+            heading.textContent = "Set a new password";
+            subtitle.textContent = "Choose a strong password you haven't used before.";
+            hideStatus();
+            pwInput.value = "";
+            pwConfirm.value = "";
+            updateRules("");
+            pwInput.focus();
+        }
+
+        function updateRules(v) {
+            var checks = {
+                len: v.length >= 8,
+                case: /[a-z]/.test(v) && /[A-Z]/.test(v),
+                num: /\d/.test(v),
+                sym: /[^A-Za-z0-9]/.test(v) || v.length >= 12
+            };
+            rules.querySelectorAll("li").forEach(function (li) {
+                li.classList.toggle("is-ok", !!checks[li.getAttribute("data-rule")]);
+            });
+        }
+        pwInput.addEventListener("input", function () { updateRules(pwInput.value); setError(fPw, ""); });
+        pwConfirm.addEventListener("input", function () { setError(fPwC, ""); });
+
+        $("#fpBack2").addEventListener("click", function () {
+            formPw.hidden = true;
+            formOtp.hidden = false;
+            setStep(2);
+            heading.textContent = "Enter verification code";
+            subtitle.textContent = "We sent a 6-digit code to your registered contact.";
+            hideStatus();
+            otpIn[0].focus();
+        });
+
+        formPw.addEventListener("submit", function (e) {
+            e.preventDefault();
+            hideStatus();
+
+            var pw = pwInput.value, cf = pwConfirm.value, bad = [];
+            var msg = pw.length < 8 ? "Password must be at least 8 characters."
+                : (!/[A-Za-z]/.test(pw) || !/\d/.test(pw)) ? "Use at least one letter and one number."
+                    : "";
+            setError(fPw, msg); if (msg) bad.push(pwInput);
+
+            var cMsg = !cf ? "Please confirm your password."
+                : cf !== pw ? "Passwords do not match." : "";
+            setError(fPwC, cMsg); if (cMsg) bad.push(pwConfirm);
+
+            if (bad.length) { sortByDom(bad)[0].focus(); return; }
+
+            var fd = new FormData(formPw);
+            fd.set("login", account);
+
+            setLoading(resetBtn, true, "Updating...");
+            (AUTHX.resetEndpoint ? send(AUTHX.resetEndpoint, fd) : demo())
+                .then(function (r) {
+                    setLoading(resetBtn, false);
+                    if (r.ok) {
+                        showStatus("success", "Password updated. Redirecting to sign in...");
+                        setTimeout(function () {
+                            window.location.href = (r.json && r.json.redirect) || "login.html";
+                        }, reduced ? 0 : 1400);
+                    } else {
+                        showStatus("error", firstError(r.json) || "We couldn't update your password. Please try again.");
+                    }
+                })
+                .catch(function () {
+                    setLoading(resetBtn, false);
+                    showStatus("error", "Connection problem. Check your internet and try again.");
+                });
+        });
+
+        /* ---------- prefill: forgot-password.html?login=you@mail.com ---------- */
+        (function prefill() {
+            var q = new URLSearchParams(location.search).get("login");
+            if (!q) return;
+            idInput.value = q.slice(0, 60);
+            idInput.dispatchEvent(new Event("input"));
+        })();
+    })();
 })();

@@ -971,3 +971,360 @@
         max-height: 210px;
     }
 }
+
+.auth-select-list {
+    max-height: 210px;
+}
+
+
+/* =========================================================
+   MOBILE ONLY — same left/right edge as the other pages
+   (10px, like About Us) + tighter spacing
+   Applies to login.html and registration.html
+   ========================================================= */
+@media (max-width: 767px) {
+
+    /* 1. Same 10px page edge as .container-fluid */
+    main.flex-grow-1>.container {
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    main.flex-grow-1>.container>.row {
+        --bs-gutter-x: 0;
+    }
+
+    main.flex-grow-1>.container>.row>[class*="col-"] {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    /* 2. Card: full width, small vertical gap */
+    .auth-card {
+        margin: 12px 0 16px;
+        border-radius: 14px;
+        box-shadow: 0 6px 22px rgba(30, 42, 107, .08);
+    }
+
+    /* 3. Less inner padding */
+    .auth-form {
+        padding: 16px 14px 18px;
+    }
+
+    .auth-form h3 {
+        margin-bottom: 2px;
+        font-size: 1.3rem;
+    }
+
+    .auth-form .subtitle {
+        margin-bottom: 14px;
+        font-size: 13.5px;
+        line-height: 1.45;
+    }
+
+    /* 4. Tighter fields */
+    .auth-field {
+        margin-bottom: .7rem;
+    }
+
+    .auth-field>label,
+    .auth-legend {
+        margin-bottom: 4px;
+        font-size: 12.5px;
+    }
+
+    .auth-field .form-control,
+    .auth-select-btn {
+        height: 46px;
+    }
+
+    .auth-field textarea.form-control {
+        height: auto;
+        min-height: 68px;
+        padding: 10px 14px;
+    }
+
+    .auth-hint,
+    .auth-err {
+        margin-top: 3px;
+        font-size: 12px;
+    }
+
+    .auth-options {
+        margin: 0 0 .9rem;
+        gap: 6px 12px;
+    }
+
+    .auth-options a,
+    .auth-options .form-check-label {
+        font-size: 13.5px !important;
+    }
+
+    /* 5. Registration: compact account-type cards */
+    .reg-types {
+        margin-bottom: .55rem;
+    }
+
+    .reg-types-grid {
+        gap: 8px;
+    }
+
+    .reg-type>span {
+        min-height: 70px;
+        padding: 8px 4px;
+        gap: 3px;
+        border-radius: 10px;
+    }
+
+    .reg-type>span>i {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .reg-type-note {
+        margin-bottom: .9rem;
+        padding: 8px 10px;
+        font-size: 12.5px;
+    }
+
+    /* 6. Buttons, divider, footer text */
+    .btn-auth {
+        height: 46px;
+        font-size: 14.5px;
+    }
+
+    .auth-status {
+        margin-bottom: .7rem;
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .auth-divider {
+        margin: 1rem 0;
+    }
+
+    .auth-footer-text {
+        margin-top: .9rem;
+        font-size: 13.5px;
+    }
+
+    .pw-meter {
+        margin-top: 6px;
+    }
+
+    .terms-text {
+        font-size: 12.5px;
+    }
+
+    .auth-select-panel {
+        padding: 6px;
+    }
+}
+
+
+@media (max-width: 380px) {
+
+    .auth-form {
+        padding: 14px 12px 16px;
+    }
+
+    .reg-type b {
+        font-size: 12px;
+    }
+}
+
+
+.auth-steps {
+    list-style: none;
+    margin: 0 0 1.35rem;
+    padding: 0;
+    display: flex;
+    gap: 6px;
+}
+
+.auth-steps li {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.auth-steps li>span {
+    display: block;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--jp-border-muted);
+    transition: background .25s ease;
+}
+
+.auth-steps li>b {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--jp-text-muted);
+    transition: color .25s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.auth-steps li.is-on>span,
+.auth-steps li.is-done>span {
+    background: var(--jp-red);
+}
+
+.auth-steps li.is-on>b,
+.auth-steps li.is-done>b {
+    color: var(--jp-navy);
+}
+
+.otp-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+
+.otp-grid input {
+    width: 100%;
+    height: 54px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--jp-navy);
+    background: var(--jp-white);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 10px;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .12s ease;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.otp-grid input::-webkit-outer-spin-button,
+.otp-grid input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.otp-grid input:focus {
+    outline: 0;
+    border-color: var(--jp-red);
+    box-shadow: 0 0 0 3px rgba(242, 99, 35, .12);
+}
+
+.otp-grid input.is-filled {
+    border-color: var(--jp-red);
+    background: #fff8f4;
+}
+
+.auth-field.has-error .otp-grid input {
+    border-color: #c0392b;
+}
+
+.otp-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.otp-meta small {
+    font-size: 12.5px;
+    color: var(--jp-text-muted);
+}
+
+.otp-resend {
+    background: none;
+    border: 0;
+    padding: 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--jp-red);
+    cursor: pointer;
+}
+
+.otp-resend:disabled {
+    color: var(--jp-text-muted);
+    cursor: not-allowed;
+    font-weight: 600;
+}
+
+.otp-resend:not(:disabled):hover {
+    text-decoration: underline;
+}
+
+.auth-inline-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--jp-red);
+}
+
+.auth-inline-link:hover {
+    text-decoration: underline;
+}
+
+.pw-rules {
+    list-style: none;
+    margin: 8px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 5px;
+}
+
+.pw-rules li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: var(--jp-text-muted);
+    transition: color .2s ease;
+}
+
+.pw-rules li i {
+    font-size: 11px;
+    color: var(--jp-border-hover);
+    transition: color .2s ease;
+}
+
+.pw-rules li.is-ok {
+    color: var(--jp-success-text);
+}
+
+.pw-rules li.is-ok i {
+    color: var(--jp-success-text);
+}
+
+@media (max-width: 575px) {
+    .otp-grid {
+        gap: 6px;
+    }
+
+    .otp-grid input {
+        height: 48px;
+        font-size: 19px;
+        border-radius: 9px;
+    }
+
+    .auth-steps li>b {
+        font-size: 10.5px;
+    }
+}
+
+@media (max-width: 380px) {
+    .otp-grid input {
+        height: 44px;
+        font-size: 17px;
+    }
+
+    .auth-steps {
+        gap: 4px;
+    }
+}
