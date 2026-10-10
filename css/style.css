@@ -929,6 +929,79 @@ button:focus-visible,
   box-shadow: inset 3px 0 0 var(--jp-red);
 }
 
+/* ===============================================================
+   MOBILE SIDEBAR MENU: compact spacing (1199px and down)
+   =============================================================== */
+@media (max-width: 1199px) {
+
+  /* header: logo + close button */
+  .offcanvas .offcanvas-header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--jp-line);
+  }
+
+  .offcanvas .offcanvas-header .brand-logo {
+    height: 32px;
+  }
+
+  /* body: less padding, extra bottom space so the buttons
+     are never hidden behind the bottom quick bar */
+  .offcanvas .offcanvas-body {
+    padding: 6px 16px calc(76px + env(safe-area-inset-bottom));
+  }
+
+  /* menu list: remove the gap between items */
+  .offcanvas .offcanvas-body .navbar-nav {
+    gap: 0 !important;
+  }
+
+  /* menu rows: smaller top/bottom padding (was .75rem) */
+  .offcanvas .offcanvas-body .nav-link {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  /* Services row: arrow button follows the row height */
+  .jp-m-dd-toggle {
+    flex: 0 0 44px;
+    width: 44px;
+  }
+
+  /* services sub menu */
+  .jp-m-dd.open .jp-m-sub ul {
+    margin: 2px 0 4px 8px;
+  }
+
+  .jp-sub-link {
+    min-height: 40px;
+    padding: 6px 12px;
+    gap: 10px;
+    font-size: 13.5px;
+  }
+
+  .jp-sub-link i {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+
+  /* Get a Quote / Track Shipment buttons */
+  .offcanvas .offcanvas-body .d-grid {
+    margin-top: 14px !important;
+    gap: 8px !important;
+  }
+
+  .offcanvas .offcanvas-body .d-grid .btn-header {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 13.5px;
+  }
+}
+
 /* Used by: about, business, contact, index, industries, quote, services, track-shipment */
 .hero {
   position: relative;
