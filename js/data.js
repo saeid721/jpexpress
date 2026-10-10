@@ -290,6 +290,17 @@ const JP_PRICING_COURIERS = {
   all: "All Couriers", dhl: "DHL", fedex: "FedEx", ups: "UPS", aramex: "Aramex", jpex: "JPEX", gpo: "GPO"
 };
 
+/* Country flags for the calculator dropdowns (flagcdn.com ISO codes) */
+const JP_PRICING_FLAGS = {
+  "Bangladesh": "bd", "Australia": "au", "Austria": "at", "Bahrain": "bh", "Belgium": "be", "Canada": "ca",
+  "China": "cn", "Denmark": "dk", "France": "fr", "Germany": "de", "Hong Kong": "hk", "India": "in",
+  "Indonesia": "id", "Ireland": "ie", "Italy": "it", "Japan": "jp", "Kuwait": "kw", "Malaysia": "my",
+  "Maldives": "mv", "Nepal": "np", "Netherlands": "nl", "New Zealand": "nz", "Norway": "no", "Oman": "om",
+  "Pakistan": "pk", "Qatar": "qa", "Saudi Arabia": "sa", "Singapore": "sg", "South Africa": "za",
+  "South Korea": "kr", "Spain": "es", "Sri Lanka": "lk", "Sweden": "se", "Switzerland": "ch",
+  "Thailand": "th", "Turkey": "tr", "UAE": "ae", "United Kingdom": "gb", "United States": "us"
+};
+
 const JP_PRICING_MODES = {
   document: { label: "Document", services: ["express", "economy"], dims: false, quote: false, hint: "Letters and paperwork. Size is not needed." },
   parcel: { label: "Parcel", services: ["express", "economy", "door"], dims: true, quote: false, hint: "Personal parcels, gifts and small online orders." },

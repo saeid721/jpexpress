@@ -1850,13 +1850,13 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   if (!form) return;
 
   var els = {
-    to: $("prcTo"), weight: $("prcWeight"), wUnit: $("prcWUnit"),
+    from: $("prcFrom"), to: $("prcTo"), weight: $("prcWeight"), wUnit: $("prcWUnit"),
     l: $("prcL"), w: $("prcW"), h: $("prcH"), dUnit: $("prcDUnit"), pcs: $("prcPcs"),
     dims: $("prcDims"), dimsNote: $("prcDimsNote"), svcBox: $("prcServices"),
     courierWrap: $("prcCourierWrap"), courier: $("prcCourier"),
     item: $("prcItem"), qty: $("prcQty"), value: $("prcValue"), city: $("prcCity"), pickup: $("prcPickup"),
-    hint: $("prcHint"), err: $("prcError"), live: $("prcLive"), chips: $("prcChips"),
-    result: $("prcResult"), card: $("prcResultCard"), list: $("prcCountries")
+    hint: $("prcHint"), err: $("prcError"), live: $("prcLive"),
+    result: $("prcResult"), card: $("prcResultCard")
   };
   var placeholder = els.result.innerHTML;
   var calculated = false;
@@ -1864,7 +1864,190 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   /* ---------------- helpers ---------------- */
   var NAMES = {};
   CFG.destinations.forEach(function (n) { NAMES[n.toLowerCase()] = n; });
-  if (els.list) els.list.innerHTML = CFG.destinations.map(function (n) { return '<option value="' + n + '"></option>'; }).join("");
+  /* ---------------- country dropdown (flag + search) ---------------- */
+  NAMES["bangladesh"] = "Bangladesh";
+  var FLAGS = JP_PRICING_FLAGS, ALIAS_BY = {};
+  Object.keys(CFG.aliases).forEach(function (a) {
+    var t = CFG.aliases[a];
+    (ALIAS_BY[t] = ALIAS_BY[t] || []).push(a);
+  });
+
+  function flagImg(n) {
+    return FLAGS[n]
+      ? '<img src="https://flagcdn.com/w40/' + FLAGS[n] + '.png" alt="" width="26" height="26" loading="lazy">'
+      : '<i class="fa-solid fa-earth-asia" aria-hidden="true"></i>';
+  }
+  function pickName(text) { return NAMES[canon(text)] || ""; }
+  function fromName(d) { return pickName(d.fromRaw) || "Bangladesh"; }
+
+  function makeCombo(input, names, fallback, otherInput) {
+    var root = input.closest(".prc-cs"),
+      flag = root.querySelector(".prc-cs-flag"),
+      list = root.querySelector(".prc-cs-list"),
+      clr = root.querySelector(".prc-cs-clear"),
+      tgl = root.querySelector(".prc-cs-toggle"),
+      committed = fallback, opts = [], active = -1, busy = false;
+
+    var items = names.map(function (n) {
+      return { n: n, s: (n + " " + (ALIAS_BY[n.toLowerCase()] || []).join(" ")).toLowerCase() };
+    });
+
+    function isOpen() { return !list.hidden; }
+    function paint(name) {
+      flag.innerHTML = flagImg(name);
+      root.classList.toggle("has-text", !!input.value);
+    }
+    function resolve(text) {
+      var n = pickName(text);
+      if (!n || names.indexOf(n) < 0) return "";
+      if (n.toLowerCase() === pickName(otherInput.value).toLowerCase()) return "";
+      return n;
+    }
+    function mark(n, t) {
+      var i = t ? n.toLowerCase().indexOf(t) : -1;
+      if (i < 0) return esc(n);
+      return esc(n.slice(0, i)) + "<mark>" + esc(n.slice(i, i + t.length)) + "</mark>" + esc(n.slice(i + t.length));
+    }
+
+    function render(q) {
+      var t = q.trim().toLowerCase(), terms = t.split(/\s+/).filter(Boolean),
+        other = pickName(otherInput.value).toLowerCase();
+      var shown = items.filter(function (it) {
+        return it.n.toLowerCase() !== other && terms.every(function (w) { return it.s.indexOf(w) > -1; });
+      });
+      if (t) shown.sort(function (a, b) {
+        return (b.n.toLowerCase().indexOf(t) === 0) - (a.n.toLowerCase().indexOf(t) === 0);
+      });
+      opts = shown.map(function (it) { return it.n; });
+      list.innerHTML = shown.length ? shown.map(function (it, i) {
+        var sel = it.n === committed;
+        return '<div class="prc-cs-opt' + (sel ? " is-sel" : "") + '" role="option" id="' + input.id + "Opt" + i +
+          '" data-i="' + i + '" aria-selected="' + sel + '">' + flagImg(it.n) + "<span>" + mark(it.n, t) +
+          '</span><i class="fa-solid fa-check" aria-hidden="true"></i></div>';
+      }).join("") : '<div class="prc-cs-empty"><i class="fa-solid fa-earth-asia" aria-hidden="true"></i><p>No country found for &ldquo;' +
+      esc(q.trim()) + '&rdquo;.</p><a href="contact.html?intent=quote#inquiry">Ask us if we can ship there</a></div>';
+      active = -1;
+      input.removeAttribute("aria-activedescendant");
+    }
+
+    function open(all) {
+      render(all ? "" : input.value);
+      list.hidden = false;
+      root.classList.add("is-open");
+      input.setAttribute("aria-expanded", "true");
+      var s = list.querySelector(".is-sel");
+      list.scrollTop = s ? Math.max(0, s.offsetTop - 56) : 0;
+      if (window.matchMedia("(max-width: 767px)").matches) {
+        setTimeout(function () {
+          var hh = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--jp-header-h")) || 64) + 8;
+          var top = root.getBoundingClientRect().top;
+          if (Math.abs(top - hh - 12) > 16) window.scrollBy({ top: top - hh - 12, behavior: "smooth" });
+        }, 120);
+      }
+    }
+    function close() {
+      list.hidden = true;
+      active = -1;
+      root.classList.remove("is-open");
+      input.setAttribute("aria-expanded", "false");
+      input.removeAttribute("aria-activedescendant");
+    }
+    function commit(name, fire) {
+      var changed = name !== committed;
+      committed = name;
+      busy = true;
+      input.value = name;
+      paint(name);
+      if (fire && changed) input.dispatchEvent(new Event("input", { bubbles: true }));
+      busy = false;
+    }
+    function setActive(i) {
+      var nodes = list.querySelectorAll(".prc-cs-opt");
+      if (!nodes.length) return;
+      active = (i + nodes.length) % nodes.length;
+      Array.prototype.forEach.call(nodes, function (n, k) { n.classList.toggle("is-active", k === active); });
+      input.setAttribute("aria-activedescendant", nodes[active].id);
+      var o = nodes[active], top = o.offsetTop, bot = top + o.offsetHeight;
+      if (top < list.scrollTop) list.scrollTop = top - 6;
+      else if (bot > list.scrollTop + list.clientHeight) list.scrollTop = bot - list.clientHeight + 6;
+    }
+    function prevent(e) { e.preventDefault(); }
+
+    input.addEventListener("focus", function () {
+      if (!isOpen()) { open(true); input.select(); }
+    });
+    input.addEventListener("click", function () { if (!isOpen()) open(true); });
+
+    input.addEventListener("input", function (e) {
+      if (busy) return;                 /* our own event: let the form hear it */
+      e.stopPropagation();              /* typing alone must not re-run the calculator */
+      input.removeAttribute("aria-invalid");
+      paint(pickName(input.value));
+      if (isOpen()) render(input.value); else open(false);
+    });
+
+    input.addEventListener("keydown", function (e) {
+      var k = e.key;
+      if (k === "ArrowDown" || k === "ArrowUp") {
+        e.preventDefault();
+        if (!isOpen()) open(true);
+        setActive(active < 0 ? (k === "ArrowDown" ? 0 : -1) : active + (k === "ArrowDown" ? 1 : -1));
+      } else if (k === "Enter") {
+        if (!isOpen()) return;
+        e.preventDefault();
+        var n = active > -1 ? opts[active] : (opts.length === 1 ? opts[0] : resolve(input.value));
+        if (n) { commit(n, true); close(); }
+      } else if (k === "Escape") {
+        if (isOpen()) { e.preventDefault(); commit(committed, false); close(); }
+      }
+    });
+
+    input.addEventListener("blur", function () {
+      var n = resolve(input.value);
+      if (!n && isOpen() && opts.length === 1 && input.value.trim()) n = opts[0];
+      commit(n || committed || fallback, true);
+      close();
+    });
+
+    list.addEventListener("mousedown", prevent);
+    list.addEventListener("click", function (e) {
+      var o = e.target.closest(".prc-cs-opt");
+      if (!o) return;
+      commit(opts[parseInt(o.getAttribute("data-i"), 10)], true);
+      close();
+      if (window.matchMedia("(max-width: 767px)").matches) input.blur();
+    });
+
+    tgl.addEventListener("mousedown", prevent);
+    tgl.addEventListener("click", function () {
+      if (isOpen()) { close(); return; }
+      input.focus();
+      if (!isOpen()) open(true);
+    });
+
+    clr.addEventListener("mousedown", prevent);
+    clr.addEventListener("click", function () {
+      var had = !!committed;
+      busy = true;
+      input.value = "";
+      committed = "";
+      paint("");
+      if (had) input.dispatchEvent(new Event("input", { bubbles: true }));
+      busy = false;
+      input.focus();
+      open(true);
+    });
+
+    function sync() {
+      commit(resolve(input.value) || fallback, false);
+      close();
+    }
+    sync();
+    return { sync: sync };
+  }
+
+  var csFrom = makeCombo(els.from, ["Bangladesh"].concat(CFG.destinations), "Bangladesh", els.to);
+  var csTo = makeCombo(els.to, CFG.destinations, "", els.from);
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -1889,7 +2072,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     var wu = W_UNIT[els.wUnit.value] || 1, du = D_UNIT[els.dUnit.value] || 1;
     var d = {
       mode: mode(), svc: svc(), courier: els.courier.value || "all",
-      destRaw: els.to.value.trim(), city: els.city.value.trim(),
+      fromRaw: els.from.value.trim(), destRaw: els.to.value.trim(), city: els.city.value.trim(),
       weightIn: num(els.weight), weight: num(els.weight) * wu, wUnitName: els.wUnit.value,
       l: num(els.l) * du, w: num(els.w) * du, h: num(els.h) * du, rawDims: [num(els.l), num(els.w), num(els.h)], dUnitName: els.dUnit.value,
       pcs: Math.max(parseInt(els.pcs.value, 10) || 1, 1),
@@ -1937,6 +2120,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     var m = MODES[d.mode], w = weights(d, d.courier), reasons = [], flagged = restricted(d.item);
     var isCourier = d.svc === "express" || d.svc === "economy" || d.svc === "door";
 
+    if (fromName(d) !== "Bangladesh") reasons.push("Shipments from outside Bangladesh are priced by quote.");
     if (flagged) reasons.push("This shipment may require additional review. Please contact JP Express before booking.");
     if (!NAMES[d.dest]) reasons.push("We could not match \u201C" + d.destRaw + "\u201D to a destination in our list. We may still be able to ship there, so request a quote to confirm.");
     if (m.quote) reasons.push("Commercial and freight shipments are priced by quote.");
@@ -1986,7 +2170,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     var lines = [
       "Shipment: " + MODES[d.mode].label,
       "Service: " + SVC[d.svc].label + (d.svc !== "sea" && d.courier !== "all" ? " (" + COU[d.courier] + ")" : ""),
-      "Route: Bangladesh to " + destName(d) + (d.city ? " (" + d.city + ")" : ""),
+      "Route: " + fromName(d) + " to " + destName(d) + (d.city ? " (" + d.city + ")" : ""),
       "Actual weight: " + kg(d.weight)
     ];
     if (W.has) lines.push("Size: " + d.rawDims.join(" x ") + " " + d.dUnitName + " x " + d.pcs + " pc", d.svc === "sea" ? "Volume: " + r2(W.cbm) + " CBM" : "Chargeable weight: " + kg(W.cw));
@@ -2130,15 +2314,6 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     return true;
   }
 
-  function syncChips() {
-    var v = canon(els.to.value);
-    Array.prototype.forEach.call(els.chips.querySelectorAll(".prc-chip"), function (c) {
-      var on = canon(c.getAttribute("data-dest")) === v;
-      c.classList.toggle("is-on", on);
-      c.setAttribute("aria-pressed", on ? "true" : "false");
-    });
-  }
-
   /* ---------------- events ---------------- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -2150,7 +2325,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     setTimeout(function () {
       calculated = false;
       els.result.innerHTML = placeholder;
-      applyMode(); syncChips(); els.live.hidden = true;
+      applyMode(); csFrom.sync(); csTo.sync(); els.live.hidden = true;
     }, 0);
   });
   form.addEventListener("change", function (e) {
@@ -2160,15 +2335,44 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   });
   form.addEventListener("input", function (e) {
     if (e.target.getAttribute("aria-invalid")) { e.target.removeAttribute("aria-invalid"); els.err.hidden = true; }
-    updateLive(); syncChips();
+    updateLive();
     if (calculated) run(false);
   });
-  els.chips.addEventListener("click", function (e) {
-    var b = e.target.closest(".prc-chip");
-    if (!b) return;
-    els.to.value = b.getAttribute("data-dest");
-    els.to.dispatchEvent(new Event("input", { bubbles: true }));
+
+  /* ---------------- pieces stepper (- / +) ---------------- */
+  var pcsBtns = form.querySelectorAll(".prc-num-btn");
+
+  function pcsBtnState() {
+    var v = parseInt(els.pcs.value, 10) || 1;
+    if (pcsBtns.length > 1) {
+      pcsBtns[0].disabled = v <= 1;
+      pcsBtns[1].disabled = v >= 999;
+    }
+  }
+  function clampPcs() {
+    var v = parseInt(els.pcs.value, 10);
+    if (isNaN(v) || v < 1) v = 1;
+    if (v > 999) v = 999;
+    els.pcs.value = v;
+    pcsBtnState();
+  }
+
+  Array.prototype.forEach.call(pcsBtns, function (b) {
+    b.addEventListener("click", function () {
+      var v = parseInt(els.pcs.value, 10) || 1;
+      els.pcs.value = v + parseInt(b.getAttribute("data-step"), 10);
+      clampPcs();
+      els.pcs.dispatchEvent(new Event("input", { bubbles: true }));
+    });
   });
+  els.pcs.addEventListener("input", pcsBtnState);
+  els.pcs.addEventListener("blur", function () {
+    var before = els.pcs.value;
+    clampPcs();
+    if (els.pcs.value !== before) els.pcs.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  form.addEventListener("reset", function () { setTimeout(clampPcs, 0); });
+  clampPcs();
 
   /* ---------------- init (+ prefill: quote.html?dest=USA&mode=parcel&weight=2&service=express) ---------------- */
   (function init() {
@@ -2182,7 +2386,7 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
     if (q.get("weight") && parseFloat(q.get("weight")) > 0) els.weight.value = parseFloat(q.get("weight"));
     var c = q.get("courier"); if (c && COU[c.toLowerCase()]) els.courier.value = c.toLowerCase();
     els.hint.textContent = MODES[mode()].hint;
-    syncService(); syncChips(); updateLive();
+    csFrom.sync(); csTo.sync(); syncService(); updateLive();
     if (q.get("dest") && q.get("weight")) run(false);
   })();
 })();

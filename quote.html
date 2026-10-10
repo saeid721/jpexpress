@@ -343,25 +343,42 @@
               <div class="prc-block">
                 <h3 class="prc-step"><b>1</b> Where is it going?</h3>
                 <div class="prc-fields">
+
+                  <!-- FROM -->
                   <div class="prc-field">
                     <label for="prcFrom">From</label>
-                    <input id="prcFrom" value="Bangladesh" readonly>
+                    <div class="prc-cs">
+                      <span class="prc-cs-flag" aria-hidden="true"><img src="https://flagcdn.com/w40/bd.png" alt=""
+                          width="26" height="26"></span>
+                      <input id="prcFrom" class="prc-cs-input" type="text" role="combobox" aria-expanded="false"
+                        aria-controls="prcFromList" aria-autocomplete="list" autocomplete="off" autocapitalize="words"
+                        spellcheck="false" enterkeyhint="done" placeholder="Select origin country" value="Bangladesh">
+                      <button type="button" class="prc-cs-clear" aria-label="Clear origin country" tabindex="-1"><i
+                          class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                      <button type="button" class="prc-cs-toggle" aria-label="Show origin countries" tabindex="-1"><i
+                          class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+                      <div class="prc-cs-list" id="prcFromList" role="listbox" aria-label="Origin countries" hidden>
+                      </div>
+                    </div>
                   </div>
+
+                  <!-- TO -->
                   <div class="prc-field">
                     <label for="prcTo">To (destination country)</label>
-                    <input id="prcTo" list="prcCountries" placeholder="e.g. United States" autocomplete="off"
-                      autocapitalize="words" enterkeyhint="next" required>
-                    <datalist id="prcCountries"></datalist>
+                    <div class="prc-cs">
+                      <span class="prc-cs-flag" aria-hidden="true"><i class="fa-solid fa-earth-asia"></i></span>
+                      <input id="prcTo" class="prc-cs-input" type="text" role="combobox" aria-expanded="false"
+                        aria-controls="prcToList" aria-autocomplete="list" autocomplete="off" autocapitalize="words"
+                        spellcheck="false" enterkeyhint="next" placeholder="Search or select country">
+                      <button type="button" class="prc-cs-clear" aria-label="Clear destination country" tabindex="-1"><i
+                          class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                      <button type="button" class="prc-cs-toggle" aria-label="Show destination countries"
+                        tabindex="-1"><i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+                      <div class="prc-cs-list" id="prcToList" role="listbox" aria-label="Destination countries" hidden>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="prc-chips" id="prcChips" role="group" aria-label="Popular destinations">
-                  <button type="button" class="prc-chip" data-dest="United States" aria-pressed="false">USA</button>
-                  <button type="button" class="prc-chip" data-dest="United Kingdom" aria-pressed="false">UK</button>
-                  <button type="button" class="prc-chip" data-dest="Canada" aria-pressed="false">Canada</button>
-                  <button type="button" class="prc-chip" data-dest="Australia" aria-pressed="false">Australia</button>
-                  <button type="button" class="prc-chip" data-dest="UAE" aria-pressed="false">UAE</button>
-                  <button type="button" class="prc-chip" data-dest="Saudi Arabia" aria-pressed="false">Saudi
-                    Arabia</button>
+
                 </div>
               </div>
 
@@ -410,8 +427,16 @@
                         inputmode="decimal" min="0" step="any" placeholder="W"></div>
                     <div class="prc-field"><label for="prcH">Height</label><input id="prcH" type="number"
                         inputmode="decimal" min="0" step="any" placeholder="H"></div>
-                    <div class="prc-field prc-pcs"><label for="prcPcs">Number of pieces</label><input id="prcPcs"
-                        type="number" inputmode="numeric" min="1" step="1" value="1"></div>
+                    <div class="prc-field prc-pcs">
+                      <label for="prcPcs">Number of pieces</label>
+                      <div class="prc-num">
+                        <button type="button" class="prc-num-btn" data-step="-1" aria-label="Decrease pieces"><i
+                            class="fa-solid fa-minus" aria-hidden="true"></i></button>
+                        <input id="prcPcs" type="number" inputmode="numeric" min="1" max="999" step="1" value="1">
+                        <button type="button" class="prc-num-btn" data-step="1" aria-label="Increase pieces"><i
+                            class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                      </div>
+                    </div>
                   </div>
                   <p class="prc-why"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>
                     <span>Bulky parcels are priced on the space they take, not only their weight. <span

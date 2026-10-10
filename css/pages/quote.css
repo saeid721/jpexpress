@@ -1498,3 +1498,374 @@
     padding: 12px;
   }
 }
+
+
+/* ===============================================================
+   COUNTRY DROPDOWN: flag + search (From / To)
+   =============================================================== */
+.page-quote .prc-cs {
+  position: relative;
+}
+
+.page-quote .prc-cs.is-open {
+  z-index: 40;
+}
+
+.page-quote .prc-cs-flag {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: 18px;
+  color: var(--jp-text-muted);
+  pointer-events: none;
+}
+
+.page-quote .prc-cs-flag img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-quote .prc-cs .prc-cs-input {
+  padding: 0 80px 0 52px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  cursor: text;
+}
+
+.page-quote .prc-cs .prc-cs-input::placeholder {
+  font-weight: 500;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-cs.is-open .prc-cs-input {
+  background-color: var(--jp-white);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+.page-quote .prc-cs-toggle,
+.page-quote .prc-cs-clear {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--jp-text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+
+.page-quote .prc-cs-toggle {
+  right: 8px;
+}
+
+.page-quote .prc-cs-clear {
+  right: 42px;
+  display: none;
+}
+
+.page-quote .prc-cs.has-text .prc-cs-clear {
+  display: grid;
+}
+
+.page-quote .prc-cs-toggle:hover,
+.page-quote .prc-cs-clear:hover {
+  background: var(--jp-bg-soft);
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-cs-toggle i {
+  transition: transform .2s ease;
+}
+
+.page-quote .prc-cs.is-open .prc-cs-toggle i {
+  transform: rotate(180deg);
+  color: var(--jp-orange);
+}
+
+/* dropdown list */
+.page-quote .prc-cs-list {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  max-height: min(300px, 50vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(30, 42, 107, .18);
+  animation: prcCsIn .16s ease;
+}
+
+@keyframes prcCsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-quote .prc-cs-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.page-quote .prc-cs-list::-webkit-scrollbar-thumb {
+  background: var(--jp-border-hover);
+  border-radius: 99px;
+}
+
+.page-quote .prc-cs-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 46px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--jp-navy);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+
+.page-quote .prc-cs-opt img {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-quote .prc-cs-opt span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-quote .prc-cs-opt mark {
+  padding: 0 1px;
+  color: inherit;
+  background: rgba(242, 99, 35, .18);
+  border-radius: 3px;
+}
+
+.page-quote .prc-cs-opt .fa-check {
+  display: none;
+  font-size: 13px;
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-cs-opt.is-sel {
+  background: var(--jp-bg-soft);
+}
+
+.page-quote .prc-cs-opt.is-sel .fa-check {
+  display: block;
+}
+
+.page-quote .prc-cs-opt:hover,
+.page-quote .prc-cs-opt.is-active {
+  background: #fff3ec;
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-cs-empty {
+  padding: 22px 14px;
+  text-align: center;
+}
+
+.page-quote .prc-cs-empty i {
+  font-size: 24px;
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-cs-empty p {
+  margin: 8px 0 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--jp-navy);
+}
+
+.page-quote .prc-cs-empty a {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--jp-orange);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* mobile */
+@media (max-width: 575px) {
+  .page-quote .prc-cs-list {
+    max-height: 45vh;
+    border-radius: 12px;
+  }
+
+  .page-quote .prc-cs-opt {
+    min-height: 50px;
+    font-size: 15.5px;
+  }
+
+  .page-quote .prc-cs .prc-cs-input {
+    padding-left: 50px;
+  }
+}
+
+
+/* ===============================================================
+   SIZE ROW: Desktop = L / W / H / Pieces in 1 line, Mobile = 2 + 2
+   =============================================================== */
+.page-quote .prc-dim-row {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.page-quote .prc-dim-row .prc-field {
+  min-width: 0;
+}
+
+.page-quote .prc-dim-row .prc-field label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-quote .prc-dim-row .prc-pcs {
+  margin-top: 0;
+  max-width: none;
+}
+
+/* hide the browser's tiny number arrows */
+.page-quote .prc-dim-row input::-webkit-outer-spin-button,
+.page-quote .prc-dim-row input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.page-quote .prc-dim-row input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* pieces stepper  [ - ]  1  [ + ] */
+.page-quote .prc-num {
+  display: flex;
+  align-items: stretch;
+  height: 50px;
+  overflow: hidden;
+  background: var(--jp-bg-light);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.page-quote .prc-num:focus-within {
+  background: var(--jp-white);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+.page-quote .prc-num input {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  text-align: center;
+  font-weight: 800;
+  color: var(--jp-navy);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.page-quote .prc-num input:focus {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.page-quote .prc-num-btn {
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--jp-navy);
+  font-size: 13px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background .2s ease, color .2s ease, transform .15s ease;
+}
+
+.page-quote .prc-num-btn:hover {
+  background: rgba(242, 99, 35, .1);
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-num-btn:active {
+  transform: scale(.92);
+}
+
+.page-quote .prc-num-btn:disabled {
+  opacity: .35;
+  pointer-events: none;
+}
+
+.page-quote .prc-num-btn:focus-visible {
+  outline: 3px solid rgba(242, 99, 35, .45);
+  outline-offset: -3px;
+}
+
+/* desktop + tablet: 4 fields in one line */
+@media (min-width: 768px) {
+  .page-quote .prc-dim-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* small phones: tighter spacing so 2 per row always fits */
+@media (max-width: 575px) {
+  .page-quote .prc-dim-row {
+    gap: 10px;
+  }
+
+  .page-quote .prc-dim-row .prc-field>input {
+    padding: 0 12px;
+  }
+
+  .page-quote .prc-num-btn {
+    flex-basis: 38px;
+  }
+}
