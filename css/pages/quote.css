@@ -1869,3 +1869,254 @@
     flex-basis: 38px;
   }
 }
+
+
+
+/* ===============================================================
+   PRICING FACTORS: icon + title on the same line (premium cards)
+   Also applies to "Plan Your Shipment" cards (same .prc-factors)
+   =============================================================== */
+.page-quote .prc-factors li,
+.page-quote .prc-factors li>a {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 10px;
+  align-items: center;
+  align-content: start;
+}
+
+/* linked cards: <li><a>..</a></li> keeps the same layout */
+.page-quote .prc-factors li>a {
+  grid-column: 1 / -1;
+  height: 100%;
+}
+
+.page-quote .prc-factors .prc-ico {
+  grid-column: 1;
+  grid-row: 1;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 12px;
+  font-size: 18px;
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.page-quote .prc-factors h3 {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.page-quote .prc-factors p {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px dashed var(--jp-border-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* premium hover: icon fills with brand orange */
+.page-quote .prc-factors li:hover .prc-ico {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+  transform: scale(1.06) rotate(-4deg);
+}
+
+.page-quote .prc-factors li:hover h3 {
+  color: var(--jp-orange);
+}
+
+/* small laptops: 4 columns get narrow, so tighten a little */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .page-quote .prc-factors li {
+    padding: 18px 16px;
+  }
+
+  .page-quote .prc-factors li,
+  .page-quote .prc-factors li>a {
+    grid-template-columns: 40px minmax(0, 1fr);
+    column-gap: 10px;
+  }
+
+  .page-quote .prc-factors .prc-ico {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .page-quote .prc-factors h3 {
+    font-size: 15px;
+  }
+}
+
+/* mobile: compact, full width cards */
+@media (max-width: 575px) {
+  .page-quote .prc-factors li {
+    padding: 16px 16px 18px;
+  }
+
+  .page-quote .prc-factors li,
+  .page-quote .prc-factors li>a {
+    grid-template-columns: 42px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+
+  .page-quote .prc-factors .prc-ico {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    border-radius: 11px;
+  }
+
+  .page-quote .prc-factors h3 {
+    font-size: 15.5px;
+  }
+
+  .page-quote .prc-factors p {
+    font-size: 13px;
+  }
+}
+
+/* touch devices: no sticky hover effect */
+@media (hover: none) {
+  .page-quote .prc-factors li:hover .prc-ico {
+    color: var(--jp-orange);
+    background: rgba(242, 99, 35, .1);
+    transform: none;
+  }
+
+  .page-quote .prc-factors li:hover h3 {
+    color: var(--jp-navy);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-quote .prc-factors .prc-ico {
+    transition: none;
+  }
+
+  .page-quote .prc-factors li:hover .prc-ico {
+    transform: none;
+  }
+}
+
+
+
+/* ===============================================================
+   ESTIMATE VS QUOTE: icon beside tag + title (premium cards)
+   Layout:  [icon]  TAG
+            [icon]  Title
+            description (full width)
+   =============================================================== */
+.page-quote .prc-trio li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: 14px;
+  row-gap: 0;
+  align-items: center;
+  align-content: start;
+}
+
+.page-quote .prc-trio .prc-ico {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  border-radius: 13px;
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.page-quote .prc-trio .prc-tag {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+  align-self: end;
+  margin: 0 0 4px;
+}
+
+.page-quote .prc-trio h3 {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.page-quote .prc-trio p {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--jp-border-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+/* premium hover: icon fills with brand orange */
+.page-quote .prc-trio li:hover .prc-ico {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+  transform: scale(1.06) rotate(-4deg);
+}
+
+.page-quote .prc-trio li:hover h3 {
+  color: var(--jp-orange);
+}
+
+/* mobile: compact cards */
+@media (max-width: 575px) {
+  .page-quote .prc-trio li {
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 16px 16px 18px;
+  }
+
+  .page-quote .prc-trio .prc-ico {
+    width: 44px;
+    height: 44px;
+    font-size: 17px;
+    border-radius: 12px;
+  }
+
+  .page-quote .prc-trio h3 {
+    font-size: 16px;
+  }
+
+  .page-quote .prc-trio p {
+    margin-top: 12px;
+    padding-top: 10px;
+    font-size: 13px;
+  }
+}
+
+/* touch devices: no sticky hover effect */
+@media (hover: none) {
+  .page-quote .prc-trio li:hover .prc-ico {
+    color: var(--jp-orange);
+    background: rgba(242, 99, 35, .1);
+    transform: none;
+  }
+
+  .page-quote .prc-trio li:hover h3 {
+    color: var(--jp-navy);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-quote .prc-trio .prc-ico {
+    transition: none;
+  }
+
+  .page-quote .prc-trio li:hover .prc-ico {
+    transform: none;
+  }
+}
