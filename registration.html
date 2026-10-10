@@ -7,7 +7,7 @@
 
     <!-- 01. Primary SEO -->
 
-    <title>Registration | International Courier & Logistics from Bangladesh</title>
+    <title>Create Account | JP Express</title>
     <meta name="description"
         content="Learn about JP Express, a Bangladesh-based international courier and logistics company providing courier, air and sea freight, export logistics, import support and customs clearance worldwide.">
     <meta name="author" content="JP Express">
@@ -163,7 +163,7 @@
   }
   </script>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/pages/registration.css">
+    <link rel="stylesheet" href="css/pages/auth.css">
 
 </head>
 
@@ -318,91 +318,216 @@
     <main class="flex-grow-1">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-10 col-xl-9">
+                <div class="col-lg-11 col-xl-10">
                     <div class="auth-card">
                         <div class="row g-0">
-                            <!-- Left Visual Panel -->
+
+                            <!-- Left Visual Panel (text changes with account type) -->
                             <div class="col-lg-5 d-none d-lg-flex auth-visual">
                                 <div>
-                                    <h2>Join JP Express</h2>
-                                    <p>Create an account to unlock seamless international shipping, real-time
-                                        tracking, and dedicated business support.</p>
-                                    <ul class="list-unstyled mt-4"
-                                        style="font-size: 14px; color: var(--jp-text-light-blue-2);">
-                                        <li class="mb-2"><i class="fa-solid fa-check-circle me-2"
-                                                style="color: var(--jp-orange-accent);"></i> Instant shipping quotes
-                                        </li>
-                                        <li class="mb-2"><i class="fa-solid fa-check-circle me-2"
-                                                style="color: var(--jp-orange-accent);"></i> Save frequent
-                                            destinations</li>
-                                        <li class="mb-2"><i class="fa-solid fa-check-circle me-2"
-                                                style="color: var(--jp-orange-accent);"></i> Priority customer
-                                            support</li>
-                                    </ul>
+                                    <h2 id="regVisualTitle">Grow your business with JP Express</h2>
+                                    <p id="regVisualText">Open a merchant account to book shipments, get business rates
+                                        and track every parcel in one place.</p>
+                                    <ul class="auth-points" id="regVisualList"></ul>
                                 </div>
                             </div>
 
                             <!-- Right Form Panel -->
                             <div class="col-lg-7 auth-form">
                                 <h3>Create Account</h3>
-                                <p class="subtitle">Fill in your details to get started.</p>
+                                <p class="subtitle">Choose your account type, then fill in your details.</p>
 
                                 <form id="registerForm" novalidate>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-floating-custom">
-                                                <label for="regName">Full Name</label>
-                                                <input type="text" class="form-control" id="regName"
-                                                    placeholder="John Doe" required>
-                                            </div>
+
+                                    <!-- Account type -->
+                                    <fieldset class="reg-types">
+                                        <legend class="auth-legend">I want to register as</legend>
+                                        <div class="reg-types-grid">
+                                            <label class="reg-type">
+                                                <input type="radio" name="account_type" value="merchant" checked>
+                                                <span><i class="fa-solid fa-store"
+                                                        aria-hidden="true"></i><b>Merchant</b><small>Sell &amp;
+                                                        ship</small></span>
+                                            </label>
+                                            <label class="reg-type">
+                                                <input type="radio" name="account_type" value="traveler">
+                                                <span><i class="fa-solid fa-suitcase-rolling"
+                                                        aria-hidden="true"></i><b>Traveler</b><small>Join a
+                                                        branch</small></span>
+                                            </label>
+                                            <label class="reg-type">
+                                                <input type="radio" name="account_type" value="branch">
+                                                <span><i class="fa-solid fa-sitemap"
+                                                        aria-hidden="true"></i><b>Branch</b><small>Open a
+                                                        branch</small></span>
+                                            </label>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating-custom">
-                                                <label for="regPhone">Phone Number</label>
-                                                <input type="tel" class="form-control" id="regPhone"
-                                                    placeholder="+880 1XXX XXXXXX" required>
-                                            </div>
+                                    </fieldset>
+                                    <p class="reg-type-note" id="regTypeNote" aria-live="polite"></p>
+
+                                    <div class="row gx-3">
+
+                                        <!-- Common fields -->
+                                        <div class="auth-field col-md-6" data-f="name">
+                                            <label for="regName">Full Name</label>
+                                            <input type="text" class="form-control" id="regName" name="full_name"
+                                                placeholder="John Doe" autocomplete="name" required>
+                                            <small class="auth-err" role="alert"></small>
                                         </div>
+                                        <div class="auth-field col-md-6" data-f="phone">
+                                            <label for="regPhone">Phone Number</label>
+                                            <input type="tel" class="form-control" id="regPhone" name="phone"
+                                                placeholder="+880 1XXX XXXXXX" inputmode="tel" autocomplete="tel"
+                                                required>
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+                                        <div class="auth-field col-md-6" data-f="email">
+                                            <label for="regEmail">Email Address</label>
+                                            <input type="email" class="form-control" id="regEmail" name="email"
+                                                placeholder="name@company.com" autocomplete="email"
+                                                autocapitalize="none" required>
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+                                        <div class="auth-field col-md-6" data-f="username">
+                                            <label for="regUsername">Username</label>
+                                            <input type="text" class="form-control" id="regUsername" name="username"
+                                                placeholder="john.doe" autocomplete="username" autocapitalize="none"
+                                                spellcheck="false" required>
+                                            <small class="auth-hint">You can sign in with this, your email or
+                                                phone.</small>
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+
+                                        <!-- Merchant only -->
+                                        <div class="auth-field col-12" data-f="business" data-for="merchant">
+                                            <label for="regBusiness"><i class="fa-solid fa-store"
+                                                    aria-hidden="true"></i> Business / Shop Name</label>
+                                            <input type="text" class="form-control" id="regBusiness"
+                                                name="business_name" placeholder="Your business name"
+                                                autocomplete="organization">
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+
+                                        <!-- Merchant + Traveler: searchable branch select -->
+                                        <div class="auth-field col-12" data-f="branch" data-for="merchant traveler">
+                                            <label for="branchBtn"><i class="fa-solid fa-sitemap"
+                                                    aria-hidden="true"></i> Select Branch <span
+                                                    class="req">*</span></label>
+                                            <div class="auth-select" id="branchSelect">
+                                                <input type="hidden" name="branch_id" id="branchId" value="">
+                                                <button type="button" class="auth-select-btn" id="branchBtn"
+                                                    aria-haspopup="listbox" aria-expanded="false"
+                                                    aria-controls="branchList">
+                                                    <span class="auth-select-text is-placeholder">Select a branch</span>
+                                                    <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                                                </button>
+                                                <div class="auth-select-panel" id="branchPanel" hidden>
+                                                    <div class="auth-select-search">
+                                                        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                                                        <input type="search" id="branchSearch"
+                                                            placeholder="Search branch" autocomplete="off"
+                                                            aria-label="Search branch">
+                                                    </div>
+                                                    <ul class="auth-select-list" id="branchList" role="listbox"
+                                                        aria-label="Branches"></ul>
+                                                </div>
+                                            </div>
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+
+                                        <!-- Traveler only -->
+                                        <div class="auth-field col-12" data-f="city" data-for="traveler">
+                                            <label for="regCity"><i class="fa-solid fa-location-dot"
+                                                    aria-hidden="true"></i> City / Area</label>
+                                            <input type="text" class="form-control" id="regCity" name="city"
+                                                placeholder="e.g. Dhaka, Mirpur" autocomplete="address-level2">
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+
+                                        <!-- Branch only -->
+                                        <div class="auth-field col-md-6" data-f="branchName" data-for="branch">
+                                            <label for="regBranchName"><i class="fa-solid fa-sitemap"
+                                                    aria-hidden="true"></i> Branch Name</label>
+                                            <input type="text" class="form-control" id="regBranchName"
+                                                name="branch_name" placeholder="e.g. JP Express Uttara">
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+                                        <div class="auth-field col-md-6" data-f="branchCity" data-for="branch">
+                                            <label for="regBranchCity"><i class="fa-solid fa-location-dot"
+                                                    aria-hidden="true"></i> City / District</label>
+                                            <input type="text" class="form-control" id="regBranchCity"
+                                                name="branch_city" placeholder="e.g. Dhaka"
+                                                autocomplete="address-level2">
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+                                        <div class="auth-field col-12" data-f="branchAddress" data-for="branch">
+                                            <label for="regBranchAddress"><i class="fa-solid fa-map-location-dot"
+                                                    aria-hidden="true"></i> Full Branch Address</label>
+                                            <textarea class="form-control" id="regBranchAddress" name="branch_address"
+                                                rows="2" placeholder="House, road, area, postal code"
+                                                autocomplete="street-address"></textarea>
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+
+                                        <!-- Passwords -->
+                                        <div class="auth-field col-md-6" data-f="password">
+                                            <label for="regPassword">Password</label>
+                                            <div class="auth-input">
+                                                <i class="fa-solid fa-lock auth-input-ico" aria-hidden="true"></i>
+                                                <input type="password" class="form-control" id="regPassword"
+                                                    name="password" placeholder="Min. 8 characters"
+                                                    autocomplete="new-password" minlength="8" required>
+                                                <button type="button" class="password-toggle"
+                                                    data-toggle-password="regPassword" aria-label="Show password"
+                                                    aria-pressed="false">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <div class="pw-meter" id="pwMeter" data-level="0" aria-hidden="true">
+                                                <div class="pw-meter-bar">
+                                                    <span></span><span></span><span></span><span></span>
+                                                </div>
+                                                <small id="pwMeterText"></small>
+                                            </div>
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+                                        <div class="auth-field col-md-6" data-f="confirm">
+                                            <label for="regConfirmPassword">Confirm Password</label>
+                                            <div class="auth-input">
+                                                <i class="fa-solid fa-lock auth-input-ico" aria-hidden="true"></i>
+                                                <input type="password" class="form-control" id="regConfirmPassword"
+                                                    name="password_confirmation" placeholder="Re-enter password"
+                                                    autocomplete="new-password" required>
+                                                <button type="button" class="password-toggle"
+                                                    data-toggle-password="regConfirmPassword" aria-label="Show password"
+                                                    aria-pressed="false">
+                                                    <i class="fa-regular fa-eye"></i>
+                                                </button>
+                                            </div>
+                                            <small class="auth-err" role="alert"></small>
+                                        </div>
+
                                     </div>
 
-                                    <div class="form-floating-custom">
-                                        <label for="regEmail">Email Address</label>
-                                        <input type="email" class="form-control" id="regEmail"
-                                            placeholder="name@company.com" required>
+                                    <!-- Terms -->
+                                    <div class="auth-field" data-f="terms">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="agreeTerms" name="terms"
+                                                value="1" required>
+                                            <label class="form-check-label terms-text" for="agreeTerms">
+                                                I agree to the <a href="terms-of-service.html">Terms of Service</a> and
+                                                <a href="privacy-policy.html">Privacy Policy</a>.
+                                            </label>
+                                        </div>
+                                        <small class="auth-err" role="alert"></small>
                                     </div>
 
-                                    <div class="form-floating-custom">
-                                        <label for="regPassword">Password</label>
-                                        <input type="password" class="form-control" id="regPassword"
-                                            placeholder="••••••••" required minlength="8">
-                                        <button type="button" class="password-toggle"
-                                            onclick="togglePassword('regPassword', this)"
-                                            aria-label="Toggle password visibility">
-                                            <i class="fa-regular fa-eye"></i>
-                                        </button>
+                                    <div class="auth-status" id="regStatus" role="status" aria-live="polite" hidden>
                                     </div>
 
-                                    <div class="form-floating-custom">
-                                        <label for="regConfirmPassword">Confirm Password</label>
-                                        <input type="password" class="form-control" id="regConfirmPassword"
-                                            placeholder="••••••••" required>
-                                        <button type="button" class="password-toggle"
-                                            onclick="togglePassword('regConfirmPassword', this)"
-                                            aria-label="Toggle password visibility">
-                                            <i class="fa-regular fa-eye"></i>
-                                        </button>
-                                    </div>
-
-                                    <div class="form-check mb-4">
-                                        <input class="form-check-input" type="checkbox" id="agreeTerms" required>
-                                        <label class="form-check-label terms-text" for="agreeTerms">
-                                            I agree to the <a href="terms-of-service.html">Terms of Service</a> and
-                                            <a href="privacy-policy.html">Privacy Policy</a>.
-                                        </label>
-                                    </div>
-
-                                    <button type="submit" class="btn-main btn-red btn-auth">
-                                        Create Account <i class="fa-solid fa-arrow-right"></i>
+                                    <button type="submit" class="btn-main btn-red btn-auth" id="regSubmit">
+                                        <span class="btn-label">Create Merchant Account</span> <i
+                                            class="fa-solid fa-arrow-right"></i>
                                     </button>
                                 </form>
 
@@ -410,6 +535,7 @@
                                     Already have an account? <a href="login.html">Sign in</a>
                                 </p>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -525,53 +651,11 @@
         <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i>Call</a>
     </nav>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
 
-
-    <script>
-        // Password Visibility Toggle
-        function togglePassword(inputId, btn) {
-            const input = document.getElementById(inputId);
-            const icon = btn.querySelector('i');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        // Simple Form Handling (Prevent default for demo)
-        document.getElementById('registerForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const pass = document.getElementById('regPassword').value;
-            const confirmPass = document.getElementById('regConfirmPassword').value;
-
-            if (pass !== confirmPass) {
-                alert('Passwords do not match!');
-                return;
-            }
-
-            const btn = this.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating Account...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                alert('Account created successfully! (Demo)');
-                window.location.href = 'login.html';
-            }, 1500);
-        });
-    </script>
 </body>
 
 </html>

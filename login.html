@@ -7,7 +7,7 @@
 
     <!-- 01. Primary SEO -->
 
-    <title>About JP Express | International Courier & Logistics from Bangladesh</title>
+    <title>Sign In | JP Express</title>
     <meta name="description"
         content="Learn about JP Express, a Bangladesh-based international courier and logistics company providing courier, air and sea freight, export logistics, import support and customs clearance worldwide.">
     <meta name="author" content="JP Express">
@@ -24,13 +24,13 @@
     <!-- 02. Search Engine Instructions -->
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="robots" content="noindex, follow">
     <meta name="theme-color" content="#2B3990">
 
     <!-- 03. Canonical & Language -->
     <link rel="alternate" hreflang="en" href="https://www.jpex.com.bd/about.html">
     <link rel="alternate" hreflang="x-default" href="https://www.jpex.com.bd/about.html">
-    <link rel="canonical" href="https://www.jpex.com.bd/about.html">
+    <link rel="canonical" href="https://www.jpex.com.bd/login.html">
 
     <!-- 04. Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
@@ -163,7 +163,7 @@
   }
   </script>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/pages/login.css">
+    <link rel="stylesheet" href="css/pages/auth.css">
 
 </head>
 
@@ -322,62 +322,78 @@
                 <div class="col-lg-10 col-xl-9">
                     <div class="auth-card">
                         <div class="row g-0">
+
                             <!-- Left Visual Panel -->
                             <div class="col-lg-5 d-none d-lg-flex auth-visual">
                                 <div>
                                     <h2>Welcome Back!</h2>
                                     <p>Log in to manage your shipments, track orders in real-time, and access
                                         exclusive business shipping rates.</p>
-                                    <div class="mt-4 d-flex gap-3">
-                                        <div class="d-flex align-items-center gap-2">
-                                            <i class="fa-solid fa-shield-halved"
-                                                style="color: var(--jp-orange-accent);"></i>
-                                            <span style="font-size: 13px; font-weight: 600;">Secure Login</span>
-                                        </div>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <i class="fa-solid fa-bolt" style="color: var(--jp-orange-accent);"></i>
-                                            <span style="font-size: 13px; font-weight: 600;">Fast Access</span>
-                                        </div>
-                                    </div>
+                                    <ul class="auth-points">
+                                        <li><i class="fa-solid fa-envelope" aria-hidden="true"></i><span>Sign in with
+                                                your email</span></li>
+                                        <li><i class="fa-solid fa-phone" aria-hidden="true"></i><span>Or your phone
+                                                number</span></li>
+                                        <li><i class="fa-solid fa-user" aria-hidden="true"></i><span>Or your
+                                                username</span></li>
+                                    </ul>
                                 </div>
                             </div>
 
                             <!-- Right Form Panel -->
                             <div class="col-lg-7 auth-form">
                                 <h3>Sign In</h3>
-                                <p class="subtitle">Enter your credentials to access your account.</p>
+                                <p class="subtitle">Use your email, phone number or username to access your account.</p>
 
                                 <form id="loginForm" novalidate>
-                                    <div class="form-floating-custom">
-                                        <label for="loginEmail">Email Address</label>
-                                        <input type="email" class="form-control" id="loginEmail"
-                                            placeholder="name@company.com" required>
+
+                                    <div class="auth-field" data-f="login">
+                                        <label for="loginId">Email / Phone / Username</label>
+                                        <div class="auth-input">
+                                            <i class="fa-solid fa-user auth-input-ico" id="loginIdIcon"
+                                                aria-hidden="true"></i>
+                                            <input type="text" class="form-control" id="loginId" name="login"
+                                                placeholder="Email, phone or username" autocomplete="username"
+                                                autocapitalize="none" spellcheck="false" aria-describedby="loginIdHint"
+                                                required>
+                                        </div>
+                                        <small class="auth-hint" id="loginIdHint">Use your email, phone number or
+                                            username.</small>
+                                        <small class="auth-err" role="alert"></small>
                                     </div>
 
-                                    <div class="form-floating-custom">
+                                    <div class="auth-field" data-f="password">
                                         <label for="loginPassword">Password</label>
-                                        <input type="password" class="form-control" id="loginPassword"
-                                            placeholder="••••••••" required>
-                                        <button type="button" class="password-toggle"
-                                            onclick="togglePassword('loginPassword', this)"
-                                            aria-label="Toggle password visibility">
-                                            <i class="fa-regular fa-eye"></i>
-                                        </button>
+                                        <div class="auth-input">
+                                            <i class="fa-solid fa-lock auth-input-ico" aria-hidden="true"></i>
+                                            <input type="password" class="form-control" id="loginPassword"
+                                                name="password" placeholder="Enter your password"
+                                                autocomplete="current-password" required>
+                                            <button type="button" class="password-toggle"
+                                                data-toggle-password="loginPassword" aria-label="Show password"
+                                                aria-pressed="false">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </button>
+                                        </div>
+                                        <small class="auth-err" role="alert"></small>
                                     </div>
 
                                     <div class="auth-options">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" id="rememberMe"
+                                                name="remember">
                                             <label class="form-check-label" for="rememberMe"
-                                                style="font-size: 14px; color: var(--jp-text-muted-dark);">
-                                                Remember me
-                                            </label>
+                                                style="font-size: 14px; color: var(--jp-text-muted-dark);">Remember
+                                                me</label>
                                         </div>
                                         <a href="forgot-password.html">Forgot Password?</a>
                                     </div>
 
-                                    <button type="submit" class="btn-main btn-red btn-auth">
-                                        Sign In <i class="fa-solid fa-arrow-right"></i>
+                                    <div class="auth-status" id="loginStatus" role="status" aria-live="polite" hidden>
+                                    </div>
+
+                                    <button type="submit" class="btn-main btn-red btn-auth" id="loginSubmit">
+                                        <span class="btn-label">Sign In</span> <i class="fa-solid fa-arrow-right"></i>
                                     </button>
                                 </form>
 
@@ -389,6 +405,7 @@
                                     Don't have an account? <a href="registration.html">Create an account</a>
                                 </p>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -503,43 +520,11 @@
         <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i>Call</a>
     </nav>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
 
-    <script>
-        // Password Visibility Toggle
-        function togglePassword(inputId, btn) {
-            const input = document.getElementById(inputId);
-            const icon = btn.querySelector('i');
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        // Simple Form Handling (Prevent default for demo)
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            // Add your actual authentication logic here
-            const btn = this.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Signing In...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                alert('Login successful! (Demo)');
-            }, 1500);
-        });
-    </script>
 </body>
 
 </html>
