@@ -1671,7 +1671,18 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
       <div class="cd-tags">${d.ind.map(i => `<a href="industries.html">${i}</a>`).join('')}</div></div>
       <a class="btn-main btn-red" target="_blank" rel="noopener" href="${ask(`Hi JP Express, I need a business shipping quote from Bangladesh to ${d.n}.`)}">Request Business Quote</a></div>`, 1)}
 
-  ${sec('faq', `${d.n} shipping FAQs`, `<div class="accordion" id="cdFaq">${faqs.map((f, i) => `<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button${i ? ' collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#f${i}" aria-expanded="${!i}" aria-controls="f${i}">${f[0]}</button></h3><div id="f${i}" class="accordion-collapse collapse${i ? '' : ' show'}" data-bs-parent="#cdFaq"><div class="accordion-body">${f[1]}</div></div></div>`).join('')}</div>`)}
+  ${sec('faq', `${d.n} shipping FAQs`, `<div class="row g-2 g-lg-3">
+    <div class="col-lg-6">
+      <div class="accordion" id="cdFaqLeft">
+        ${faqs.slice(0, Math.ceil(faqs.length / 2)).map((f, i) => `<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button${i ? ' collapsed' : ''}" type="button" data-bs-toggle="collapse" data-bs-target="#f${i}" aria-expanded="${!i}" aria-controls="f${i}">${f[0]}</button></h3><div id="f${i}" class="accordion-collapse collapse${i ? '' : ' show'}" data-bs-parent="#cdFaqLeft"><div class="accordion-body">${f[1]}</div></div></div>`).join('')}
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="accordion" id="cdFaqRight">
+        ${faqs.slice(Math.ceil(faqs.length / 2)).map((f, i) => { const idx = i + Math.ceil(faqs.length / 2); return `<div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f${idx}" aria-expanded="false" aria-controls="f${idx}">${f[0]}</button></h3><div id="f${idx}" class="accordion-collapse collapse" data-bs-parent="#cdFaqRight"><div class="accordion-body">${f[1]}</div></div></div>`; }).join('')}
+      </div>
+    </div>
+  </div>`)}
 
   <section class="pg-sec pg-alt cx"><div class="container-fluid"><h2 class="pg-h">Other destinations</h2>
     <div class="ctr-grid">${related.map(s => { const c = COUNTRY_DATA[s]; return `<a class="ctr-card" href="country.html?c=${s}"><span class="ctr-card-top">${flag(c.c, 44)}<span><strong>${c.n}</strong><small>${c.r}</small></span></span><span class="ctr-card-meta"><span><i class="fa-regular fa-clock"></i> ${c.t}</span></span><span class="ctr-card-go">View guide <i class="fa-solid fa-arrow-right"></i></span></a>`; }).join('')}</div>

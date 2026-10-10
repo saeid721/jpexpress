@@ -417,3 +417,67 @@
 .page-countries .cd-dest .cd-list li i {
   color: var(--jp-navy);
 }
+
+
+/* ===============================================================
+   COUNTRY FAQ: Two-column layout (matches Contact page style)
+   =============================================================== */
+.template-countries #cdFaqLeft .accordion,
+.template-countries #cdFaqRight .accordion {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.template-countries #cdFaqLeft .accordion-item,
+.template-countries #cdFaqRight .accordion-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.template-countries #cdFaqLeft .accordion-collapse,
+.template-countries #cdFaqRight .accordion-collapse {
+  flex: 1 1 auto;
+}
+
+.template-countries #cdFaqLeft .accordion-body,
+.template-countries #cdFaqRight .accordion-body {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile: single column, tighter spacing */
+@media (max-width: 991.98px) {
+  .template-countries #cdFaqLeft {
+    margin-bottom: 12px;
+  }
+}
+
+/* Small screens: even tighter gaps */
+@media (max-width: 575px) {
+
+  .template-countries #cdFaqLeft .accordion-item,
+  .template-countries #cdFaqRight .accordion-item {
+    border-radius: 10px !important;
+  }
+
+  .template-countries #cdFaqLeft .accordion-button,
+  .template-countries #cdFaqRight .accordion-button {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .template-countries #cdFaqLeft .accordion-body,
+  .template-countries #cdFaqRight .accordion-body {
+    padding: 0 16px 16px;
+    font-size: 13.5px;
+  }
+}
+
+/* Equal height fix for premium look */
+.template-countries #cdFaqLeft .accordion-item:last-child,
+.template-countries #cdFaqRight .accordion-item:last-child {
+  margin-bottom: 0;
+}

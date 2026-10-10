@@ -70,3 +70,184 @@
   font-size: 14px;
   line-height: 1.75;
 }
+
+
+
+/* ===============================================================
+   FAQ: Two-column layout (matches Contact page style)
+   =============================================================== */
+.page-faq #faqLeft,
+.page-faq #faqRight {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-faq #faqLeft .jp-accordion,
+.page-faq #faqRight .jp-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+
+.page-faq #faqLeft .jp-accordion-item,
+.page-faq #faqRight .jp-accordion-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-faq #faqLeft .jp-accordion-body,
+.page-faq #faqRight .jp-accordion-body {
+  flex: 1 1 auto;
+}
+
+/* Mobile: single column, tighter spacing */
+@media (max-width: 991.98px) {
+  .page-faq #faqLeft {
+    margin-bottom: 12px;
+  }
+}
+
+/* Small screens: even tighter gaps */
+@media (max-width: 575px) {
+
+  .page-faq #faqLeft .jp-accordion-item,
+  .page-faq #faqRight .jp-accordion-item {
+    border-radius: 12px;
+  }
+
+  .page-faq #faqLeft .jp-accordion-btn,
+  .page-faq #faqRight .jp-accordion-btn {
+    padding: 14px 16px;
+    font-size: 13.5px;
+  }
+
+  .page-faq #faqLeft .jp-accordion-body p,
+  .page-faq #faqRight .jp-accordion-body p {
+    padding: 0 16px 16px;
+    font-size: 13.5px;
+  }
+}
+
+/* Equal height fix for premium look */
+.page-faq #faqLeft .jp-accordion-item:last-child,
+.page-faq #faqRight .jp-accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ===============================================================
+   FAQ PAGE — match About page accordion style (Bootstrap accordion)
+   =============================================================== */
+
+/* Section padding matches other pages */
+.page-faq .jp-section {
+  padding: clamp(40px, 6vw, 72px) 0;
+  background: var(--jp-white);
+}
+
+.page-faq .jp-section.alt {
+  background: var(--jp-bg-light);
+}
+
+/* Search bar (kept from original) */
+.page-faq .jp-search {
+  max-width: 720px;
+  margin: 0 auto 26px;
+  position: relative;
+}
+
+.page-faq .jp-search>i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--jp-orange);
+  pointer-events: none;
+}
+
+.page-faq .jp-search input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px 0 46px;
+  font-size: 15px;
+  color: var(--jp-ink);
+  background: var(--jp-bg-light);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  outline: 0;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.page-faq .jp-search input:focus {
+  background: var(--jp-white);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+/* ===============================================================
+   Two-column FAQ layout — equal heights + responsive
+   =============================================================== */
+.page-faq #faqLeft .accordion,
+.page-faq #faqRight .accordion {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-faq #faqLeft .accordion-item,
+.page-faq #faqRight .accordion-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-faq #faqLeft .accordion-collapse,
+.page-faq #faqRight .accordion-collapse {
+  flex: 1 1 auto;
+}
+
+.page-faq #faqLeft .accordion-body,
+.page-faq #faqRight .accordion-body {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile: single column, tighter spacing */
+@media (max-width: 991.98px) {
+  .page-faq #faqLeft {
+    margin-bottom: 12px;
+  }
+}
+
+/* Small screens: even tighter gaps */
+@media (max-width: 575px) {
+
+  .page-faq #faqLeft .accordion-item,
+  .page-faq #faqRight .accordion-item {
+    border-radius: 10px !important;
+  }
+
+  .page-faq #faqLeft .accordion-button,
+  .page-faq #faqRight .accordion-button {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .page-faq #faqLeft .accordion-body,
+  .page-faq #faqRight .accordion-body {
+    padding: 0 16px 16px;
+    font-size: 13.5px;
+  }
+}
+
+/* Equal height fix for premium look */
+.page-faq #faqLeft .accordion-item:last-child,
+.page-faq #faqRight .accordion-item:last-child {
+  margin-bottom: 0;
+}

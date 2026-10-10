@@ -705,3 +705,70 @@ BLOG FIXES (Contextual overrides only)
     padding: 14px;
   }
 }
+
+
+
+/* ===============================================================
+   FAQ: Two-column layout (matches Contact page style)
+   =============================================================== */
+.page-blog #blFaqLeft .accordion,
+.page-blog #blFaqRight .accordion {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-blog #blFaqLeft .accordion-item,
+.page-blog #blFaqRight .accordion-item {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-blog #blFaqLeft .accordion-collapse,
+.page-blog #blFaqRight .accordion-collapse {
+  flex: 1 1 auto;
+}
+
+.page-blog #blFaqLeft .accordion-body,
+.page-blog #blFaqRight .accordion-body {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Mobile: single column, tighter spacing */
+@media (max-width: 991.98px) {
+
+  .page-blog #blFaqLeft,
+  .page-blog #blFaqRight {
+    margin-bottom: 12px;
+  }
+}
+
+/* Small screens: even tighter gaps */
+@media (max-width: 575px) {
+
+  .page-blog #blFaqLeft .accordion-item,
+  .page-blog #blFaqRight .accordion-item {
+    border-radius: 10px !important;
+  }
+
+  .page-blog #blFaqLeft .accordion-button,
+  .page-blog #blFaqRight .accordion-button {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .page-blog #blFaqLeft .accordion-body,
+  .page-blog #blFaqRight .accordion-body {
+    padding: 0 16px 16px;
+    font-size: 13.5px;
+  }
+}
+
+/* Equal height fix for premium look */
+.page-blog #blFaqLeft .accordion-item:last-child,
+.page-blog #blFaqRight .accordion-item:last-child {
+  margin-bottom: 0;
+}
