@@ -339,14 +339,12 @@
 .page-about .abt-map img {
   width: 100%;
   height: auto;
-  opacity: .9;
-  filter: brightness(2) saturate(.5);
 }
 
 /* Used only by: about */
 .page-about .abt-logos {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin-top: 14px;
 }
@@ -355,22 +353,17 @@
 .page-about .abt-logos span {
   display: grid;
   place-items: center;
-  height: 58px;
+  height: 62px;
+  min-width: 0;
   padding: 8px 10px;
   background: var(--jp-white);
   border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(10, 16, 60, .12);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 
 /* Used only by: about */
-.page-about .abt-logos span:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, .22);
-}
-
-/* Used only by: about */
 .page-about .abt-logos img {
-  max-height: 30px;
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -559,7 +552,8 @@
 
   /* Used only by: about */
   .page-about .abt-logos {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
   }
 
 }
@@ -852,13 +846,13 @@
   }
 
   .page-about .abt-logos span {
-    height: 44px;
-    padding: 6px 8px;
-    border-radius: 10px;
+    height: 42px;
+    padding: 5px 6px;
+    border-radius: 9px;
   }
 
   .page-about .abt-logos img {
-    max-height: 22px;
+    max-height: 20px;
   }
 
   /* ---------- Careers steps and apply box ---------- */
@@ -983,5 +977,23 @@
 
   .page-about .abt-mv-card p {
     font-size: 12.5px;
+  }
+}
+
+
+/* very small phones: keep 4 logos per row, just a little tighter */
+@media (max-width: 360px) {
+  .page-about .abt-map {
+    padding: 8px;
+  }
+
+  .page-about .abt-logos span {
+    height: 38px;
+    padding: 4px 5px;
+    border-radius: 8px;
+  }
+
+  .page-about .abt-logos img {
+    max-height: 18px;
   }
 }
