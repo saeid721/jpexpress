@@ -3255,7 +3255,7 @@
   /* ---------------- helpers ---------------- */
   var $ = function (id) { return document.getElementById(id); };
   var els = { form: $("trkForm"), input: $("trkInput"), btn: $("trkBtn"), err: $("trkError"), view: $("trkView"), demo: $("trkDemo") };
-  if (!els.form) return;
+  if (!els.form || !els.view) return;
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -3282,11 +3282,24 @@
     };
   }
 
+  /* Sample shipments: work while no live API is connected (or with ?demo=1).
+     Also accepts the number without the leading "JP" (PEDEMO002 -> JPEDEMO002). */
+  function demoKey(id) {
+    if (JP_TRACKING_DEMO_DATA[id]) return id;
+    if (JP_TRACKING_DEMO_DATA["JP" + id]) return "JP" + id;
+    return "";
+  }
+  var DEMO_ON = DEMO || !JP_TRACKING_CONFIG.apiUrl;
+
   function fetchOne(id) {
-    if (DEMO) {
-      return new Promise(function (res) {
-        setTimeout(function () { res(JP_TRACKING_DEMO_DATA[id] ? { state: "ok", data: normalize(JP_TRACKING_DEMO_DATA[id], id) } : { state: "notfound" }); }, 500);
-      });
+    if (DEMO_ON) {
+      var k = demoKey(id);
+      if (k) {
+        return new Promise(function (res) {
+          setTimeout(function () { res({ state: "ok", demo: true, data: normalize(JP_TRACKING_DEMO_DATA[k], k) }); }, 500);
+        });
+      }
+      if (DEMO) return Promise.resolve({ state: "notfound" });
     }
     if (!JP_TRACKING_CONFIG.apiUrl) return Promise.resolve({ state: "unconfigured" });
     var ctrl = "AbortController" in window ? new AbortController() : null;
@@ -3338,8 +3351,10 @@
   };
 
   function statusBadge(status) {
-    var cls = isProblem(status) ? "is-warn" : stageOf(status) === 5 ? "is-done" : "is-go";
-    return '<span class="trk-badge ' + cls + '"><span class="dot"></span>' + esc(status || "Status unavailable") + "</span>";
+    var bad = isProblem(status), done = stageOf(status) === 5;
+    var cls = bad ? "is-warn" : done ? "is-done" : "is-go";
+    var ic = bad ? "fa-triangle-exclamation" : done ? "fa-circle-check" : "fa-truck-fast";
+    return '<span class="trk-badge ' + cls + '">' + icon(ic) + " " + esc(status || "Status unavailable") + "</span>";
   }
 
   function stepper(current) {
@@ -3350,6 +3365,29 @@
   }
 
   function kv(label, val) { return val ? '<li><span>' + label + "</span><strong>" + esc(val) + "</strong></li>" : ""; }
+
+  function nextSteps(d) {
+    var L = [], dest = d.destination.toLowerCase(), svc = d.service.toLowerCase();
+    if (typeof COUNTRY_DATA !== "undefined") {
+      Object.keys(COUNTRY_DATA).some(function (s) {
+        var n = COUNTRY_DATA[s].n;
+        if (dest.indexOf(n.toLowerCase()) > -1 || dest.split(/[,\s]+/).pop() === s) {
+          L.push(["fa-earth-asia", "Shipping from Bangladesh to " + n, "country.html?c=" + s]);
+          return true;
+        }
+        return false;
+      });
+    }
+    var page = /courier/.test(svc) ? "international-courier.html" : /air/.test(svc) ? "air-freight.html" :
+      /sea/.test(svc) ? "sea-freight.html" : /export/.test(svc) ? "export-logistics.html" :
+        /import/.test(svc) ? "import-solutions.html" : "";
+    if (page) L.push(["fa-box", d.service, page]);
+    if (/commercial/i.test(d.type)) L.push(["fa-briefcase", "Business shipping solutions", "business.html"]);
+    L.push(["fa-calculator", stageOf(d.status) === 5 ? "Send another shipment" : "Get a quote", "quote.html"]);
+    return '<article class="trk-card"><h3 class="trk-h">' + icon("fa-route") + " What's next?</h3><ul class=\"trk-next-list\">" +
+      L.map(function (x) { return '<li><a href="' + x[2] + '">' + icon(x[0]) + "<span>" + esc(x[1]) + "</span>" + icon("fa-arrow-right") + "</a></li>"; }).join("") +
+      "</ul></article>";
+  }
 
   function resultView(d) {
     var top = d.events[0];
@@ -3395,7 +3433,7 @@
     var pod = d.pod ? '<article class="trk-card"><h3 class="trk-h">' + icon("fa-circle-check") + " Proof of delivery</h3><ul class=\"trk-kv\">" + kv("Delivered", d.pod.on) + kv("Location", d.pod.location) + kv("Received by", d.pod.by) + "</ul></article>" : "";
     var help = '<article class="trk-card trk-help"><h3 class="trk-h">' + icon("fa-headset") + " Need help?</h3><p>Share your tracking number with our team and we will check for you.</p><div class=\"trk-actions\">" + supportBtns(d.id) + "</div></article>";
 
-    return '<div class="trk-grid"><div class="trk-main">' + main + '</div><aside class="trk-side">' + info + pod + help + "</aside></div>";
+    return '<div class="trk-grid"><div class="trk-main">' + main + '</div><aside class="trk-side">' + info + pod + nextSteps(d) + help + "</aside></div>";
   }
 
   function multiView(list) {
@@ -3414,8 +3452,9 @@
   function setView(html, scroll) {
     els.view.innerHTML = html;
     els.view.removeAttribute("aria-busy");
-    if (scroll && window.innerWidth < 992) {
+    if (scroll) {
       els.view.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      els.view.focus({ preventScroll: true });
     }
   }
   function setBusy(on) {
@@ -3438,12 +3477,14 @@
     if (bad.length) { showError("Please check the tracking number. Use letters and numbers only."); els.input.focus(); return; }
     showError("");
     lastQuery = ids.join(", ");
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="robots"],meta[name="googlebot"],meta[name="bingbot"]'), function (m) { m.setAttribute("content", "noindex, nofollow"); });
     els.input.value = lastQuery;
     var u = new URL(window.location.href); u.searchParams.set("tracking", lastQuery); history.replaceState({}, "", u);
 
     setBusy(true);
     Promise.all(ids.map(function (id) { return fetchOne(id).then(function (r) { r.id = id; return r; }); })).then(function (rs) {
       setBusy(false);
+      if (els.demo && rs.some(function (r) { return r.demo; })) els.demo.hidden = false;
       if (rs.length > 1) {
         if (rs.every(function (r) { return r.state === "unconfigured"; })) return setView(V.unconfigured(lastQuery), true);
         return setView(multiView(rs), true);
@@ -3471,6 +3512,18 @@
       else { var ta = document.createElement("textarea"); ta.value = v; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); done(); } catch (x) { } document.body.removeChild(ta); }
     }
   });
+
+  /* ---------------- sample chips (only while sample data is active) ---------------- */
+  var samples = $("trkSamples");
+  if (samples && DEMO_ON) {
+    samples.hidden = false;
+    samples.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-sample]");
+      if (!b) return;
+      els.input.value = b.getAttribute("data-sample");
+      track(els.input.value);
+    });
+  }
 
   /* ---------------- init ---------------- */
   if (DEMO && els.demo) els.demo.hidden = false;

@@ -19,7 +19,8 @@
   position: relative;
   z-index: 2;
   max-width: 760px;
-  margin: 0 auto;
+  margin: 24px auto 0;
+  text-align: left;
   padding: clamp(16px, 3vw, 24px);
   background: var(--jp-white);
   border-radius: 18px;
@@ -41,6 +42,26 @@
 .page-track-shipment .trk-row {
   display: flex;
   gap: 10px;
+}
+
+.page-track-shipment .trk-field {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.page-track-shipment .trk-field>i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--jp-text-subtle);
+  pointer-events: none;
+}
+
+.page-track-shipment .trk-field input {
+  width: 100%;
+  padding-left: 44px;
 }
 
 /* Used only by: track-shipment */
@@ -163,12 +184,12 @@
 /* Used only by: track-shipment */
 .page-track-shipment .trk-body {
   padding: clamp(28px, 5vw, 56px) 0;
-  margin-top: -40px;
-  position: relative;
-  z-index: 1;
-  padding-top: clamp(56px, 8vw, 80px);
   background: var(--jp-bg-light);
   scroll-margin-top: calc(var(--jp-header-h, 86px) + 8px);
+}
+
+.page-track-shipment #trkView:focus {
+  outline: 0;
 }
 
 /* Used only by: track-shipment */
@@ -1143,4 +1164,463 @@
 .page-track-shipment #trkFaqLeft .accordion-item:last-child,
 .page-track-shipment #trkFaqRight .accordion-item:last-child {
   margin-bottom: 0;
+}
+
+/* ===== Result polish: details list, badge icon, next steps ===== */
+.page-track-shipment .trk-summary {
+  border-top: 4px solid var(--jp-orange);
+}
+
+.page-track-shipment .trk-badge i {
+  font-size: 13px;
+}
+
+.page-track-shipment .trk-steps li.current .trk-step-l {
+  color: var(--jp-orange);
+}
+
+.page-track-shipment .trk-kv {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.page-track-shipment .trk-kv li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-top: 1px solid var(--jp-border-light);
+  font-size: 14px;
+}
+
+.page-track-shipment .trk-kv li:first-child {
+  border-top: 0;
+}
+
+.page-track-shipment .trk-kv span {
+  color: var(--jp-text-muted);
+}
+
+.page-track-shipment .trk-kv strong {
+  color: var(--jp-navy);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.page-track-shipment .trk-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--jp-bg-soft);
+  color: var(--jp-navy);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.page-track-shipment .trk-next-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.page-track-shipment .trk-next-list a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--jp-navy);
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.page-track-shipment .trk-next-list a:hover {
+  border-color: var(--jp-orange);
+  color: var(--jp-orange);
+  transform: translateX(3px);
+}
+
+.page-track-shipment .trk-next-list a>i:first-child {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(242, 99, 35, .1);
+  color: var(--jp-orange);
+}
+
+.page-track-shipment .trk-next-list a>i:last-child {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+/* ===== How it works / status guide / related actions ===== */
+.page-track-shipment .trk-how,
+.page-track-shipment .trk-sg,
+.page-track-shipment .trk-related {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-track-shipment .trk-how {
+  counter-reset: h;
+}
+
+.page-track-shipment .trk-how>div {
+  counter-increment: h;
+  position: relative;
+  padding: 18px 18px 18px 68px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+}
+
+.page-track-shipment .trk-how>div::before {
+  content: counter(h);
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--jp-orange);
+  color: var(--jp-white);
+  font-weight: 800;
+}
+
+.page-track-shipment .trk-how h3 {
+  margin: 0 0 4px;
+  font: 800 16px "Plus Jakarta Sans", sans-serif;
+  color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-how p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--jp-text-subtle);
+}
+
+.page-track-shipment .trk-sg>div {
+  padding: 16px 18px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-left: 4px solid var(--jp-orange);
+  border-radius: 12px;
+}
+
+.page-track-shipment .trk-sg b {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 15px;
+  color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-sg b i {
+  color: var(--jp-orange);
+}
+
+.page-track-shipment .trk-sg span {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--jp-text-muted);
+}
+
+.page-track-shipment .trk-related a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.page-track-shipment .trk-related a:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--jp-shadow-lg);
+  border-color: var(--jp-orange);
+}
+
+.page-track-shipment .trk-related a>i {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-size: 19px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+.page-track-shipment .trk-related strong {
+  display: block;
+  font-size: 15px;
+  color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-related small {
+  font-size: 12.5px;
+  color: var(--jp-text-muted);
+}
+
+@media (min-width: 768px) {
+
+  .page-track-shipment .trk-how,
+  .page-track-shipment .trk-sg {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-track-shipment .trk-related {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-track-shipment .trk-how {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .page-track-shipment .trk-sg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+/* ===== Sample number chips (mobile-friendly, wraps) ===== */
+.page-track-shipment .trk-samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--jp-border-muted);
+  font-size: 12.5px;
+  color: var(--jp-text-muted);
+}
+
+.page-track-shipment .trk-samples[hidden] {
+  display: none !important;
+}
+
+.page-track-shipment .trk-samples button {
+  min-height: 34px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  color: var(--jp-navy);
+  background: var(--jp-bg-soft);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.page-track-shipment .trk-samples button:hover,
+.page-track-shipment .trk-samples button:focus-visible {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+}
+
+@media (max-width: 575px) {
+  .page-track-shipment .trk-samples button {
+    flex: 1 1 calc(50% - 8px);
+  }
+}
+
+/* ===============================================================
+   COMPACT HERO — Track Shipment (less space, smaller card)
+   =============================================================== */
+
+/* ---------- Hero section spacing ---------- */
+html.page-track-shipment .hero.page-hero {
+  padding: 22px 0 28px;
+}
+
+.page-track-shipment .page-crumb {
+  margin: 0 auto 10px;
+  padding: 5px 14px;
+  font-size: 12px;
+}
+
+html.page-track-shipment .hero.page-hero .hero-kicker {
+  margin-bottom: 4px;
+  font-size: 12px;
+  letter-spacing: .12em;
+}
+
+html.page-track-shipment .hero.page-hero h1 {
+  margin: 0 auto 6px;
+}
+
+/* ---------- Search card ---------- */
+.page-track-shipment .trk-search {
+  max-width: 680px;
+  margin: 14px auto 0;
+  padding: 14px 16px 12px;
+  border-radius: 14px;
+  box-shadow: 0 16px 40px rgba(8, 14, 70, .30);
+}
+
+.page-track-shipment .trk-search label {
+  margin-bottom: 6px;
+  font-size: 11.5px;
+  letter-spacing: .05em;
+}
+
+/* ---------- Input + button row ---------- */
+.page-track-shipment .trk-row {
+  gap: 8px;
+}
+
+.page-track-shipment .trk-row input {
+  height: 46px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+/* FIX: icon no longer covers the placeholder text */
+.page-track-shipment .trk-row .trk-field input {
+  padding-left: 42px;
+}
+
+.page-track-shipment .trk-field>i {
+  left: 14px;
+  font-size: 15px;
+}
+
+.page-track-shipment .trk-row .btn-main {
+  height: 46px;
+  min-width: 136px;
+  padding: 0 16px;
+  font-size: 14.5px;
+  border-radius: 10px;
+}
+
+/* ---------- Hint + error ---------- */
+.page-track-shipment .trk-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.page-track-shipment .trk-error {
+  margin-top: 6px;
+  font-size: 12.5px;
+}
+
+/* ---------- Sample chips ---------- */
+.page-track-shipment .trk-samples {
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  font-size: 12px;
+}
+
+.page-track-shipment .trk-samples button {
+  min-height: 28px;
+  padding: 3px 10px;
+  font-size: 11.5px;
+}
+
+.page-track-shipment .trk-demo {
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+/* ---------- Desktop: smaller title + description ---------- */
+@media (min-width: 992px) {
+  html.page-track-shipment .hero.page-hero h1 {
+    font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  }
+
+  html.page-track-shipment .hero.page-hero .hero-copy>p {
+    font-size: clamp(.8rem, 1vw, .95rem);
+  }
+}
+
+/* ---------- Mobile (phones): tighter + one-row chips ---------- */
+@media (max-width: 575px) {
+  html.page-track-shipment .hero.page-hero {
+    padding: 14px 0 22px;
+  }
+
+  /* breadcrumb stays, kicker hidden so the form sits higher */
+  .page-track-shipment .page-crumb {
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    font-size: 11.5px;
+  }
+
+  html.page-track-shipment .hero.page-hero .hero-kicker {
+    display: none;
+  }
+
+  .page-track-shipment .trk-search {
+    margin-top: 10px;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .page-track-shipment .trk-row {
+    gap: 8px;
+  }
+
+  .page-track-shipment .trk-row input,
+  .page-track-shipment .trk-row .btn-main {
+    height: 44px;
+  }
+
+  .page-track-shipment .trk-row .btn-main {
+    min-width: 0;
+    font-size: 14px;
+  }
+
+  .page-track-shipment .trk-hint {
+    font-size: 11.5px;
+  }
+
+  /* chips scroll sideways in ONE row instead of stacking */
+  .page-track-shipment .trk-samples {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-top: 8px;
+    padding-top: 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-track-shipment .trk-samples::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-track-shipment .trk-samples span,
+  .page-track-shipment .trk-samples button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
 }

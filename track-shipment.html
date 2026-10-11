@@ -9,7 +9,7 @@
 
   <title>Track Your Shipment | JP Express</title>
   <meta name="description"
-    content="Track your JP Express shipment in real time — tracking history, live status and delivery updates from Bangladesh to 220+ countries.">
+    content="Enter your JP Express tracking number to see your shipment status, latest update, timeline and estimated delivery.">
   <meta name="author" content="JP Express">
   <meta name="publisher" content="JP Express">
   <meta name="application-name" content="JP Express">
@@ -269,7 +269,7 @@
   <main id="main">
 
     <!-- HERO -->
-    <section class="hero page-hero" aria-labelledby="cntTitle">
+    <section class="hero page-hero" aria-labelledby="trkTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
         <div class="hero-copy" data-reveal>
@@ -278,34 +278,42 @@
               aria-current="page">Track Shipment</span>
           </nav>
           <div class="hero-kicker"><span>TRACK SHIPMENT</span> JP EXPRESS</div>
-          <h1 id="cntTitle">Track Your <span class="accent">Shipment Online</span></h1>
+          <h1 id="trkTitle">Track Your <span class="accent">Shipment Online</span></h1>
           <p>Enter your tracking number to see the latest status, timeline and delivery details of your shipment.</p>
 
           <div class="trk-search" data-reveal style="transition-delay:80ms">
             <form id="trkForm" novalidate>
               <label for="trkInput">Tracking number</label>
               <div class="trk-row">
-                <input id="trkInput" type="text" inputmode="text" enterkeyhint="search" autocomplete="off"
-                  autocapitalize="characters" spellcheck="false" placeholder="Enter your tracking number"
-                  aria-describedby="trkHint trkError">
-                <button id="trkBtn" type="submit" class="btn-main btn-red">Track Shipment <i
+                <div class="trk-field">
+                  <i class="fa-solid fa-barcode" aria-hidden="true"></i>
+                  <input id="trkInput" type="text" inputmode="text" enterkeyhint="search" autocomplete="off"
+                    autocapitalize="characters" spellcheck="false" placeholder="e.g. JPE123456789"
+                    aria-describedby="trkHint trkError">
+                </div>
+                <button id="trkBtn" type="submit" class="btn-main btn-red"><span>Track Shipment</span> <i
                     class="fa-solid fa-arrow-right"></i></button>
               </div>
-              <p class="trk-error" id="trkError" role="alert" hidden></p>
-              <p class="trk-hint" id="trkHint">Your tracking number can be found on your booking confirmation
-                or
-                shipment
-                receipt. To track several shipments, separate the numbers with commas.</p>
-              <div class="trk-links"><a href="#help">Need Help?</a><a href="quote.html">Get a Quote</a><a
-                  href="quote.html">Book a Shipment</a></div>
+              <div class="trk-error" id="trkError" role="alert" hidden></div>
+              <div class="trk-hint" id="trkHint">Find it on your booking confirmation or shipment receipt. Separate
+                several numbers with commas (max 10).</div>
+              <div class="trk-samples" id="trkSamples" hidden>
+                <span>Try a sample:</span>
+                <button type="button" data-sample="JPEDEMO001">JPEDEMO001</button>
+                <button type="button" data-sample="JPEDEMO002">JPEDEMO002</button>
+                <button type="button" data-sample="JPEDEMO003">JPEDEMO003</button>
+                <button type="button" data-sample="JPEDEMO004">JPEDEMO004</button>
+              </div>
             </form>
           </div>
-          <div class="trk-demo" id="trkDemo" hidden><strong>Preview mode.</strong> Sample data only, not real
-            shipments.
-            Try JPEDEMO001, JPEDEMO002, JPEDEMO003 or JPEDEMO004.</div>
         </div>
       </div>
-      </div>
+    </section>
+
+    <!-- TRACKING RESULT -->
+    <section class="trk-body" id="trkBody" aria-label="Tracking result">
+      <div class="container-fluid">
+        <div id="trkView" aria-live="polite" tabindex="-1"></div>
       </div>
     </section>
 
@@ -327,6 +335,55 @@
               <p>Check the receipt you received when your shipment was collected or booked.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section trk-alt" aria-labelledby="howT">
+      <div class="container-fluid">
+        <div class="trk-head" data-reveal><span class="eyebrow">How Tracking Works</span>
+          <h2 id="howT">Track Your Shipment in 4 Steps</h2>
+        </div>
+        <div class="trk-how">
+          <div data-reveal>
+            <h3>Find your number</h3>
+            <p>Check your booking confirmation or shipment receipt.</p>
+          </div>
+          <div data-reveal>
+            <h3>Enter it above</h3>
+            <p>Type or paste it. Separate several numbers with commas.</p>
+          </div>
+          <div data-reveal>
+            <h3>Check the status</h3>
+            <p>See the current status, latest update and estimated delivery.</p>
+          </div>
+          <div data-reveal>
+            <h3>Get help if needed</h3>
+            <p>If action is required, contact our team with your tracking number.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section trk-plain" aria-labelledby="sgT">
+      <div class="container-fluid">
+        <div class="trk-head" data-reveal><span class="eyebrow">Status Guide</span>
+          <h2 id="sgT">Understanding Shipment Status</h2>
+        </div>
+        <div class="trk-sg">
+          <div data-reveal><b><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> In Transit</b><span>Your
+              shipment is currently moving through the international delivery network.</span></div>
+          <div data-reveal><b><i class="fa-solid fa-stamp" aria-hidden="true"></i> Customs Clearance</b><span>Your
+              shipment is currently undergoing customs processing in the destination country.</span></div>
+          <div data-reveal><b><i class="fa-solid fa-person-walking-luggage" aria-hidden="true"></i> Out for
+              Delivery</b><span>Your shipment has been assigned for delivery to the recipient.</span></div>
+          <div data-reveal><b><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Delivered</b><span>The
+              shipment has been recorded as delivered.</span></div>
+          <div data-reveal><b><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Hold /
+              Exception</b><span>Something needs attention. We show what happened, what it means and what to do
+              next.</span></div>
+          <div data-reveal><b><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Registered</b><span>Your
+              shipment is registered, but the latest movement information is not yet available.</span></div>
         </div>
       </div>
     </section>
@@ -400,6 +457,23 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="home-section trk-plain" aria-labelledby="relT">
+      <div class="container-fluid">
+        <div class="trk-head" data-reveal><span class="eyebrow">Related Actions</span>
+          <h2 id="relT">What Would You Like to Do Next?</h2>
+        </div>
+        <div class="trk-related">
+          <a href="quote.html"><i class="fa-solid fa-calculator" aria-hidden="true"></i><span><strong>Get a
+                Quote</strong><small>Estimate your next shipment</small></span></a>
+          <a href="quote.html"><i class="fa-solid fa-box-open" aria-hidden="true"></i><span><strong>Book a
+                Shipment</strong><small>Send another parcel or cargo</small></span></a>
+          <a href="contact.html?intent=support#inquiry"><i class="fa-solid fa-headset"
+              aria-hidden="true"></i><span><strong>Contact Support</strong><small>Share your tracking number with
+                us</small></span></a>
         </div>
       </div>
     </section>
@@ -494,11 +568,11 @@
 
       <!-- Footer Bottom -->
       <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3">
-        <span>© 2024 JP Express. All rights reserved.</span>
+        <span>© 2026 JP Express. All rights reserved.</span>
         <div class="footer-legal">
-          <a href="#">Terms of Service</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Sitemap</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="sitemap.html">Sitemap</a>
         </div>
       </div>
     </div>
