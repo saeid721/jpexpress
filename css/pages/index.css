@@ -930,24 +930,6 @@
 }
 
 /* Used only by: index */
-.p1 {
-  left: 34%;
-  top: 45%;
-}
-
-/* Used only by: index */
-.p2 {
-  left: 56%;
-  top: 38%;
-}
-
-/* Used only by: index */
-.p3 {
-  left: 72%;
-  top: 59%;
-}
-
-/* Used only by: index */
 .partner-logos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2784,5 +2766,297 @@
     font-size: 28px;
     top: 14px;
     right: 16px;
+  }
+}
+
+
+
+/* =========================================================
+   PARTNERS SECTION: premium map + 4-per-row logo cards
+   (keep this block at the END of index.css so it overrides
+   the older .partners-grid / .partner-map / .p1-.p3 rules)
+   ========================================================= */
+
+/* ---------- layout: copy | map | logos ---------- */
+.partners-grid {
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr) minmax(0, 1.6fr);
+  gap: 28px;
+  align-items: center;
+}
+
+/* ---------- map: wrapper = exact image box, so pins are accurate ---------- */
+.partner-map {
+  /* map calibration: the only 4 numbers that control every pin */
+  --lon-min: -180;
+  --lon-span: 360;
+  --lat-top: 84;
+  --lat-span: 142;
+  --pin: 9px;
+
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  aspect-ratio: 380 / 184;
+}
+
+.partner-map>img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: contain;
+  opacity: .9;
+}
+
+/* route lines (Dhaka -> destinations) */
+.map-routes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.map-routes path {
+  fill: none;
+  stroke: var(--jp-red);
+  stroke-width: 1.3;
+  stroke-linecap: round;
+  stroke-dasharray: 3 5;
+  opacity: .55;
+  vector-effect: non-scaling-stroke;
+  animation: dashMove 28s linear infinite;
+}
+
+/* pins */
+.partner-map .map-pin {
+  --pin-rgb: 43, 57, 144;
+  position: absolute;
+  left: calc((var(--lon) - var(--lon-min)) / var(--lon-span) * 100%);
+  top: calc((var(--lat-top) - var(--lat)) / var(--lat-span) * 100%);
+  z-index: 2;
+  width: var(--pin);
+  height: var(--pin);
+  border-radius: 50%;
+  background: var(--jp-navy);
+  border: 2px solid var(--jp-white);
+  box-shadow: 0 2px 8px rgba(var(--pin-rgb), .4);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  animation: pinPulse 2.6s ease-out infinite;
+}
+
+.partner-map .map-pin {
+  animation-delay: var(--d, 0s);
+}
+
+/* HQ pin (Dhaka) */
+.partner-map .map-pin.pin-hq {
+  --pin-rgb: 242, 99, 35;
+  width: 17px;
+  height: 17px;
+  z-index: 3;
+  background: var(--jp-red);
+}
+
+/* tooltip label */
+.partner-map .map-pin::after {
+  content: attr(data-city);
+  position: absolute;
+  bottom: calc(100% + 9px);
+  left: 50%;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: var(--jp-navy-dark);
+  color: var(--jp-white);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.partner-map .map-pin:hover,
+.partner-map .map-pin:focus-visible {
+  z-index: 5;
+}
+
+.partner-map .map-pin:hover::after,
+.partner-map .map-pin:focus-visible::after,
+.partner-map .map-pin.pin-hq::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.partner-map .map-pin.pin-hq::after {
+  background: var(--jp-red);
+}
+
+@keyframes pinPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--pin-rgb), .5);
+  }
+
+  70% {
+    box-shadow: 0 0 0 12px rgba(var(--pin-rgb), 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--pin-rgb), 0);
+  }
+}
+
+/* ---------- logo cards: ALWAYS 4 per row ---------- */
+.partner-logos {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.partner-logos span {
+  min-height: 76px;
+  padding: 10px 12px;
+}
+
+.partner-logos span img {
+  max-height: 38px;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1199px) {
+  .partners-grid {
+    gap: 20px;
+  }
+
+  .partner-logos {
+    gap: 10px;
+  }
+
+  .partner-logos span {
+    min-height: 68px;
+    padding: 8px;
+  }
+
+  .partner-logos span img {
+    max-height: 32px;
+  }
+}
+
+@media (max-width: 991px) {
+  .partners-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .partners-copy {
+    grid-column: auto;
+  }
+
+  .partners-copy p {
+    max-width: 560px;
+  }
+
+  .partner-map {
+    max-width: 420px;
+  }
+
+  .partner-logos {
+    gap: 12px;
+  }
+
+  .partner-logos span {
+    min-height: 74px;
+  }
+
+  .partner-logos span img {
+    max-height: 36px;
+  }
+}
+
+@media (max-width: 767px) {
+  .partner-map {
+    max-width: 360px;
+  }
+
+  .partner-map {
+    --pin: 8px;
+  }
+
+  .partner-map .map-pin {
+    border-width: 1.5px;
+  }
+
+  .partner-map .map-pin.pin-hq {
+    width: 13px;
+    height: 13px;
+  }
+
+  .partner-map .map-pin::after {
+    font-size: 10px;
+    padding: 4px 7px;
+  }
+
+  .partner-logos {
+    gap: 8px;
+  }
+
+  .partner-logos span {
+    min-height: 58px;
+    padding: 8px 6px;
+    border-radius: 10px;
+  }
+
+  .partner-logos span img {
+    max-height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .partner-logos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .partner-logos span {
+    min-height: 50px;
+    padding: 6px 4px;
+    border-radius: 8px;
+  }
+
+  .partner-logos span img {
+    max-height: 22px;
+  }
+}
+
+@media (max-width: 360px) {
+  .partner-logos span {
+    min-height: 46px;
+    padding: 5px 3px;
+  }
+
+  .partner-logos span img {
+    max-height: 18px;
+  }
+}
+
+/* touch devices: only the Dhaka HQ label stays visible */
+@media (hover: none) {
+  .partner-map .map-pin:not(.pin-hq)::after {
+    display: none;
+  }
+}
+
+
+
+/* very small phones: smaller pins so Saudi Arabia and Dubai never overlap */
+@media (max-width: 480px) {
+  .partner-map {
+    --pin: 7px;
   }
 }
