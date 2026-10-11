@@ -100,8 +100,8 @@
 /* Finder */
 .page-resources .res-finder {
   max-width: 980px;
-  margin: 0 auto 24px;
-  padding: clamp(18px, 3vw, 28px);
+  margin: 0 auto 18px;
+  padding: clamp(14px, 2.2vw, 20px);
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
   border-radius: 18px;
@@ -116,8 +116,8 @@
   margin: 0 0 4px;
 }
 
-.page-resources .res-finder>p {
-  margin: 0 0 16px;
+.page-resources .res-finder>p:not(.res-count) {
+  margin: 0 0 12px;
   font-size: 14.5px;
   color: var(--jp-text-muted);
 }
@@ -137,8 +137,8 @@
 
 .page-resources .res-search input {
   width: 100%;
-  height: 52px;
-  padding: 0 46px;
+  height: 46px;
+  padding: 0 44px;
   font-size: 16px;
   color: var(--jp-ink);
   background: var(--jp-bg-light);
@@ -182,11 +182,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 .page-resources .res-chip {
-  padding: 8px 15px;
+  padding: 7px 14px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 700;
@@ -208,11 +208,15 @@
 }
 
 .page-resources .res-count {
-  min-height: 20px;
-  margin: 12px 0 0;
+  min-height: 0;
+  margin: 10px 0 0;
   font-size: 13px;
   font-weight: 600;
   color: var(--jp-text-muted);
+}
+
+.page-resources .res-count:empty {
+  display: none;
 }
 
 /* Guide library (native <details>) */
@@ -1010,16 +1014,16 @@
     margin: 0 0 2px;
   }
 
-  .page-resources .res-finder>p {
+  .page-resources .res-finder>p:not(.res-count) {
     margin: 0 0 10px;
     font-size: 13.5px;
     line-height: 1.45;
   }
 
   .page-resources .res-search input {
-    height: 42px;
+    height: 44px;
     padding: 0 40px;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 10px;
   }
 
@@ -1357,7 +1361,7 @@
 
   .page-resources .res-head p,
   .page-resources .res-cat-head p,
-  .page-resources .res-finder>p {
+  .page-resources .res-finder>p:not(.res-count) {
     font-size: 13px;
   }
 
