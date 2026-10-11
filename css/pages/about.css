@@ -18,14 +18,14 @@
 .page-about .abt-head {
   text-align: center;
   max-width: 720px;
-  margin: 0 auto 28px;
+  margin: 0 auto 18px;
 }
 
 /* Used only by: about */
 .page-about .abt-head p {
-  margin: 6px auto 0;
+  margin: 4px auto 0;
   color: var(--jp-text-muted);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 /* Used only by: about */
@@ -33,18 +33,18 @@
 .page-about .abt-copy h2 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(1.45rem, 3.4vw, 2rem);
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   line-height: 1.15;
   color: var(--jp-heading-color);
-  margin: 4px 0 0;
+  margin: 2px 0 0;
 }
 
 /* Used only by: about */
 .page-about .abt-copy p {
   color: var(--jp-text-muted);
-  font-size: 15px;
-  line-height: 1.7;
-  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 8px 0 0;
 }
 
 /* Used only by: about */
@@ -62,7 +62,7 @@
 .page-about .abt-split {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 28px;
+  gap: 20px;
   align-items: center;
 }
 
@@ -86,7 +86,7 @@
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
   border-radius: 16px;
-  padding: 6px 20px;
+  padding: 2px 18px;
   box-shadow: var(--jp-shadow-lg);
   margin: 0;
 }
@@ -94,8 +94,8 @@
 /* Used only by: about */
 .page-about .abt-glance div {
   display: flex;
-  gap: 14px;
-  padding: 14px 0;
+  gap: 12px;
+  padding: 10px 0;
   border-bottom: 1px solid var(--jp-border-light);
 }
 
@@ -106,8 +106,8 @@
 
 /* Used only by: about */
 .page-about .abt-glance dt {
-  flex: 0 0 112px;
-  font-size: 11.5px;
+  flex: 0 0 100px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -118,8 +118,8 @@
 /* Used only by: about */
 .page-about .abt-glance dd {
   margin: 0;
-  font-size: 14px;
-  line-height: 1.5;
+  font-size: 13.5px;
+  line-height: 1.45;
   color: var(--jp-ink);
   font-weight: 600;
   min-width: 0;
@@ -135,7 +135,7 @@
 .page-about .abt-mv {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 12px;
 }
 
 /* Used only by: about */
@@ -143,7 +143,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  padding: 26px 22px;
+  padding: 18px 18px;
   color: var(--jp-white);
   box-shadow: var(--jp-shadow-lg);
 }
@@ -172,29 +172,29 @@
 
 /* Used only by: about */
 .page-about .abt-mv-card i {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
-  font-size: 22px;
-  border-radius: 14px;
+  font-size: 19px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, .16);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 /* Used only by: about */
 .page-about .abt-mv-card h3 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: 1.2rem;
-  margin: 0 0 8px;
+  font-size: 1.1rem;
+  margin: 0 0 6px;
 }
 
 /* Used only by: about */
 .page-about .abt-mv-card p {
   margin: 0;
-  font-size: 14.5px;
-  line-height: 1.65;
+  font-size: 13.5px;
+  line-height: 1.55;
   color: rgba(255, 255, 255, .92);
   position: relative;
   z-index: 1;
@@ -204,9 +204,9 @@
 .page-about .abt-link-card {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
   height: 100%;
-  padding: 18px;
+  padding: 14px;
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
   border-radius: 14px;
@@ -222,40 +222,62 @@
 
 /* Used only by: about */
 .page-about .abt-link-card>i {
-  flex: 0 0 46px;
-  height: 46px;
+  flex: 0 0 40px;
+  height: 40px;
   display: grid;
   place-items: center;
-  border-radius: 12px;
+  border-radius: 11px;
   background: rgba(242, 99, 35, .1);
   color: var(--jp-orange);
-  font-size: 19px;
+  font-size: 17px;
 }
 
 /* Used only by: about */
 .page-about .abt-link-card h3 {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
   color: var(--jp-navy);
-  margin: 0 0 4px;
+  margin: 0 0 2px;
 }
 
 /* Used only by: about */
 .page-about .abt-link-card p {
   margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 12.5px;
+  line-height: 1.45;
   color: var(--jp-text-subtle);
 }
 
 /* Used only by: about */
 .page-about .abt-link-card span {
   display: inline-block;
-  margin-top: 8px;
-  font-size: 13px;
+  margin-top: 4px;
+  font-size: 12.5px;
   font-weight: 800;
   color: var(--jp-orange);
+}
+
+/* Compact mini cards (desktop and tablet) */
+.page-about .mini-card {
+  min-height: 0;
+  padding: 16px 14px 14px;
+  border-radius: 12px;
+}
+
+.page-about .mini-card i {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.page-about .mini-card h3 {
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+
+.page-about .mini-card p {
+  font-size: 12.5px;
+  line-height: 1.45;
 }
 
 /* Used only by: about */
@@ -264,7 +286,7 @@
   overflow: hidden;
   isolation: isolate;
   color: var(--jp-white);
-  padding: clamp(40px, 7vw, 72px) 0;
+  padding: 32px 0;
   background: radial-gradient(520px 300px at 8% 0%, rgba(242, 99, 35, .22), transparent 65%),
     radial-gradient(620px 360px at 100% 100%, rgba(255, 255, 255, .08), transparent 65%),
     linear-gradient(135deg, var(--jp-navy-dark), var(--jp-navy));
@@ -302,15 +324,15 @@
 .page-about .abt-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 20px;
+  gap: 6px;
+  margin-top: 12px;
 }
 
 /* Used only by: about */
 .page-about .abt-chips span {
-  padding: 8px 15px;
+  padding: 6px 13px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
   color: var(--jp-white);
   background: rgba(255, 255, 255, .1);
@@ -331,7 +353,7 @@
   background: rgba(255, 255, 255, .07);
   border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 18px;
-  padding: clamp(12px, 2.5vw, 20px);
+  padding: clamp(10px, 1.8vw, 14px);
   box-shadow: 0 18px 40px rgba(10, 16, 60, .35);
 }
 
@@ -345,17 +367,17 @@
 .page-about .abt-logos {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 14px;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 /* Used only by: about */
 .page-about .abt-logos span {
   display: grid;
   place-items: center;
-  height: 62px;
+  height: 50px;
   min-width: 0;
-  padding: 8px 10px;
+  padding: 6px 8px;
   background: var(--jp-white);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(10, 16, 60, .12);
@@ -376,7 +398,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 10px;
   counter-reset: s;
 }
 
@@ -387,24 +409,24 @@
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
   border-radius: 14px;
-  padding: 18px 18px 18px 64px;
+  padding: 12px 14px 12px 54px;
 }
 
 /* Used only by: about */
 .page-about .abt-steps li::before {
   content: counter(s);
   position: absolute;
-  left: 16px;
-  top: 16px;
-  width: 34px;
-  height: 34px;
+  left: 12px;
+  top: 12px;
+  width: 30px;
+  height: 30px;
   display: grid;
   place-items: center;
   border-radius: 50%;
   background: var(--jp-orange);
   color: var(--jp-white);
   font-weight: 800;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 /* Used only by: about */
@@ -412,28 +434,28 @@
   display: block;
   font-family: "Plus Jakarta Sans", sans-serif;
   color: var(--jp-navy);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 /* Used only by: about */
 .page-about .abt-steps small {
   display: block;
-  margin-top: 2px;
-  font-size: 13px;
+  margin-top: 1px;
+  font-size: 12.5px;
   color: var(--jp-text-subtle);
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 /* Used only by: about */
 .page-about .abt-apply {
-  margin-top: 20px;
+  margin-top: 14px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 20px;
-  border-radius: 16px;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 14px;
   background: var(--jp-bg-soft);
   border: 1px dashed var(--jp-border-hover-2);
 }
@@ -441,7 +463,7 @@
 /* Used only by: about */
 .page-about .abt-apply p {
   margin: 0;
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--jp-ink);
   font-weight: 600;
   flex: 1 1 260px;
@@ -450,6 +472,9 @@
 /* Used only by: about */
 .page-about .abt-apply .btn-main {
   width: auto;
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 14.5px;
 }
 
 
@@ -467,7 +492,7 @@
 
   /* Used only by: about */
   .page-about .abt-mv-card {
-    padding: 32px 28px;
+    padding: 22px 22px;
   }
 
 }
@@ -477,7 +502,7 @@
   /* Used only by: about */
   .page-about .abt-split {
     grid-template-columns: 1.05fr .95fr;
-    gap: 48px;
+    gap: 32px;
   }
 
   /* Used only by: about */
@@ -682,7 +707,7 @@
   }
 
   .page-about .abt-photo img {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 5 / 3;
   }
 
   /* ---------- Company glance card ---------- */
@@ -995,5 +1020,195 @@
 
   .page-about .abt-logos img {
     max-height: 18px;
+  }
+}
+
+
+/* ===============================================================
+   ABOUT: DESKTOP / TABLET COMPACT (matches Home page density)
+   =============================================================== */
+@media (min-width: 768px) {
+
+  /* tighter vertical rhythm between sections */
+  .page-about .home-section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  /* card grid gutters */
+  .page-about .row.g-3 {
+    --bs-gutter-x: 12px;
+    --bs-gutter-y: 12px;
+  }
+
+  /* FAQ */
+  .page-about .accordion {
+    gap: 8px;
+  }
+
+  .page-about .accordion-button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .page-about .accordion-body {
+    padding: 0 16px 14px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  .page-about #abtFaqLeft .accordion-button,
+  .page-about #abtFaqRight .accordion-button {
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  .page-about #abtFaqLeft .accordion-body,
+  .page-about #abtFaqRight .accordion-body {
+    padding: 0 16px 14px;
+    font-size: 13.5px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  /* g-lg-4 would widen the gutter again on desktop */
+  .page-about .row.g-3.g-lg-4 {
+    --bs-gutter-x: 14px;
+    --bs-gutter-y: 14px;
+  }
+}
+
+
+/* ===============================================================
+   ABOUT: OUR STORY (text height matches photo height)
+   =============================================================== */
+.page-about .abt-points {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.page-about .abt-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 12px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.page-about .abt-points li:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--jp-shadow-lg);
+  border-color: var(--jp-orange);
+}
+
+.page-about .abt-points i {
+  flex: 0 0 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(242, 99, 35, .1);
+  color: var(--jp-orange);
+  font-size: 14px;
+}
+
+.page-about .abt-points strong {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--jp-navy);
+}
+
+.page-about .abt-points span {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--jp-text-subtle);
+}
+
+.page-about .abt-copy .abt-note {
+  margin: 14px 0 0;
+  padding-left: 12px;
+  border-left: 3px solid var(--jp-orange);
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--jp-ink);
+  font-weight: 600;
+}
+
+@media (min-width: 576px) {
+  .page-about .abt-points {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Our Story photo: fixed 5:3 ratio on every screen */
+.page-about #story .abt-photo {
+  display: block;
+  height: auto;
+  aspect-ratio: 5 / 3;
+}
+
+.page-about #story .abt-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 992px) {
+  .page-about #story .abt-split {
+    align-items: center;
+  }
+
+  .page-about #story .abt-story-copy {
+    align-self: center;
+  }
+}
+
+/* Mobile: keep the compact look */
+@media (max-width: 767px) {
+  .page-about .abt-points {
+    margin-top: 10px;
+    gap: 6px;
+  }
+
+  .page-about .abt-points li {
+    padding: 8px 10px;
+    border-radius: 10px;
+  }
+
+  .page-about .abt-points i {
+    flex-basis: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .page-about .abt-points strong {
+    font-size: 13px;
+  }
+
+  .page-about .abt-points span {
+    font-size: 12px;
+  }
+
+  .page-about .abt-copy .abt-note {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.5;
   }
 }
