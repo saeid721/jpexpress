@@ -58,15 +58,15 @@
 
 /* Used only by: industries */
 .page-industries .ind-finder {
-  padding-top: clamp(28px, 5vw, 48px);
-  padding-bottom: 8px;
+  padding-top: clamp(20px, 3.5vw, 32px);
+  padding-bottom: 4px;
 }
 
 /* Used only by: industries */
 .page-industries .ind-box {
   max-width: 980px;
   margin: 0 auto;
-  padding: clamp(18px, 3vw, 28px);
+  padding: clamp(14px, 2.2vw, 20px);
   background: var(--jp-white);
   border: 1px solid var(--jp-border-muted);
   border-radius: 18px;
@@ -83,8 +83,8 @@
 }
 
 /* Used only by: industries */
-.page-industries .ind-box>p {
-  margin: 0 0 16px;
+.page-industries .ind-box>h2+p {
+  margin: 0 0 12px;
   font-size: 14.5px;
   color: var(--jp-text-muted);
 }
@@ -107,8 +107,8 @@
 /* Used only by: industries */
 .page-industries .ind-search input {
   width: 100%;
-  height: 52px;
-  padding: 0 46px;
+  height: 46px;
+  padding: 0 44px;
   font-size: 16px;
   color: var(--jp-ink);
   background: var(--jp-bg-light);
@@ -154,7 +154,7 @@
 
 /* Used only by: industries */
 .page-industries .ind-row-label {
-  margin: 16px 0 8px;
+  margin: 12px 0 6px;
   font-size: 11.5px;
   font-weight: 800;
   letter-spacing: .08em;
@@ -173,7 +173,7 @@
 /* Used only by: industries */
 .page-industries .ind-tab,
 .page-industries .ind-need {
-  padding: 8px 15px;
+  padding: 7px 14px;
   border-radius: 999px;
   font-size: 13px;
   font-weight: 700;
@@ -206,11 +206,15 @@
 
 /* Used only by: industries */
 .page-industries .ind-count {
-  min-height: 20px;
-  margin: 14px 0 0;
+  min-height: 0;
+  margin: 10px 0 0;
   font-size: 13px;
   font-weight: 600;
   color: var(--jp-text-muted);
+}
+
+.page-industries .ind-count:empty {
+  display: none;
 }
 
 /* Used only by: industries */
@@ -621,16 +625,16 @@
     margin: 0 0 2px;
   }
 
-  .page-industries .ind-box>p {
+  .page-industries .ind-box>h2+p {
     margin: 0 0 10px;
     font-size: 13.5px;
     line-height: 1.45;
   }
 
   .page-industries .ind-search input {
-    height: 42px;
+    height: 44px;
     padding: 0 40px;
-    font-size: 14px;
+    font-size: 16px;
     border-radius: 10px;
   }
 
@@ -645,7 +649,7 @@
   }
 
   .page-industries .ind-row-label {
-    margin: 10px 0 6px;
+    margin: 10px 0 5px;
     font-size: 10.5px;
   }
 
@@ -829,7 +833,7 @@
   }
 
   .page-industries .ind-head p,
-  .page-industries .ind-box>p {
+  .page-industries .ind-box>h2+p {
     font-size: 13px;
   }
 
