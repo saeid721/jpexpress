@@ -739,7 +739,7 @@
         <div class="row g-3">
           <div class="col-12 col-sm-6 col-lg-3">
             <article class="image-card">
-              <img src="assets/international-01.jpg" alt="International courier shipment" loading="lazy">
+              <img src="assets/hero-banner3.jpg" alt="International courier shipment" loading="lazy">
               <div>
                 <h3>International Courier</h3>
                 <p>Documents, parcels and express international shipments.</p>
@@ -997,7 +997,7 @@
         <div class="row g-3">
           <div class="col-6 col-md-4 col-xl-2">
             <article class="industry-card">
-              <img src="assets/international-01.jpg" alt="Garments and textiles" loading="lazy">
+              <img src="assets/hero-banner3.jpg" alt="Garments and textiles" loading="lazy">
               <strong>Garments &amp; Textiles</strong>
             </article>
           </div>
@@ -1079,54 +1079,32 @@
     </section>
 
     <!-- Testimonial Section -->
-    <section class="home-section testimonial-section" id="testimonials">
+    <section class="home-section testimonial-section" id="testimonials" aria-labelledby="tstTitle">
       <div class="container-fluid">
-        <div class="testimonial-grid">
 
-          <!-- LEFT: Copy -->
-          <div class="testimonial-copy">
+        <div class="tst-head">
+          <div class="tst-head-copy">
             <span class="eyebrow">Customer Reviews</span>
-            <h2>What Our Customers Say</h2>
+            <h2 id="tstTitle">What Our Customers Say</h2>
             <p>Trusted by individuals and businesses across the world.</p>
           </div>
 
-          <!-- CENTER: Avatar (changes with review) -->
-          <div class="testimonial-avatar">
-            <img id="testimonialAvatar" src="assets/teams/founder02.jpg" alt="Customer photo">
-          </div>
-
-          <!-- RIGHT: Review Card (content changes) -->
-          <div class="testimonial-card" id="testimonialCard">
-
-            <!-- Progress dots -->
-            <div class="testimonial-dots" id="testimonialDots"></div>
-
-            <!-- Review content -->
-            <blockquote id="testimonialQuote">
-              "Reliable service and excellent support. JP Express made our export process smooth and easy. Highly
-              recommended."
-            </blockquote>
-
-            <div class="testimonial-meta">
-              <div>
-                <strong id="testimonialName">Tanvir Ahmed</strong>
-                <small id="testimonialRole">Managing Director, Dhaka, Bangladesh</small>
-              </div>
-              <div class="stars" id="testimonialStars">★★★★★</div>
-            </div>
-          </div>
-
-          <!-- Nav arrows (moved OUTSIDE the card, sits in its own grid column) -->
-          <div class="testimonial-nav">
-            <button type="button" id="testimonialPrev" aria-label="Previous review">
+          <div class="tst-nav">
+            <button type="button" id="tstPrev" aria-label="Previous reviews">
               <i class="fa-solid fa-chevron-left"></i>
             </button>
-            <button type="button" id="testimonialNext" aria-label="Next review">
+            <button type="button" id="tstNext" aria-label="Next reviews">
               <i class="fa-solid fa-chevron-right"></i>
             </button>
           </div>
-
         </div>
+
+        <div class="tst-viewport" role="region" aria-roledescription="carousel" aria-label="Customer reviews">
+          <div class="tst-track" id="tstTrack" tabindex="0"></div>
+        </div>
+
+        <div class="tst-dots" id="tstDots"></div>
+
       </div>
     </section>
 
@@ -1283,7 +1261,7 @@
         <div class="row g-3">
           <div class="col-md-4">
             <article class="resource-card">
-              <img src="assets/international-01.jpg" alt="Shipping guide" loading="lazy">
+              <img src="assets/blog/01.jpg" alt="Shipping guide" loading="lazy">
               <div>
                 <small>SHIPPING GUIDE</small>
                 <h3>How to Ship Commercial Products from Bangladesh to the USA</h3>
@@ -1293,7 +1271,7 @@
           </div>
           <div class="col-md-4">
             <article class="resource-card">
-              <img src="assets/business-solution.jpg" alt="Export documentation" loading="lazy">
+              <img src="assets/blog/02.jpg" alt="Export documentation" loading="lazy">
               <div>
                 <small>EXPORT GUIDE</small>
                 <h3>Export Documentation from Bangladesh</h3>
@@ -1303,7 +1281,7 @@
           </div>
           <div class="col-md-4">
             <article class="resource-card">
-              <img src="assets/stroy.jpg" alt="Customs clearance" loading="lazy">
+              <img src="assets/blog/03.jpg" alt="Customs clearance" loading="lazy">
               <div>
                 <small>CUSTOMS</small>
                 <h3>Understanding Customs Clearance Process</h3>

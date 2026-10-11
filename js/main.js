@@ -567,105 +567,157 @@
 })();
 
 
-/* ---------- Testimonials auto-rotator ---------- */
-;
+/* ---------- Testimonials slider: 3 / 2 / 1 cards ---------- */
+(function () {
+  "use strict";
 
-const testimonialCard = document.getElementById('testimonialCard');
-const testimonialAvatar = document.getElementById('testimonialAvatar');
-const testimonialQuote = document.getElementById('testimonialQuote');
-const testimonialName = document.getElementById('testimonialName');
-const testimonialRole = document.getElementById('testimonialRole');
-const testimonialStars = document.getElementById('testimonialStars');
-const testimonialDots = document.getElementById('testimonialDots');
-const testimonialPrev = document.getElementById('testimonialPrev');
-const testimonialNext = document.getElementById('testimonialNext');
+  var track = document.getElementById("tstTrack");
+  var dotsEl = document.getElementById("tstDots");
+  var prevBtn = document.getElementById("tstPrev");
+  var nextBtn = document.getElementById("tstNext");
+  if (!track || !dotsEl || typeof JP_HOME_TESTIMONIALSDATA === "undefined" || !JP_HOME_TESTIMONIALSDATA.length) return;
 
-if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
-  let currentIndex = 0;
-  let autoTimer = null;
-  const INTERVAL = 3000;
+  var data = JP_HOME_TESTIMONIALSDATA;
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var DELAY = 4500;
 
-  // Build dots
-  JP_HOME_TESTIMONIALSDATA.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.setAttribute('role', 'button');
-    dot.setAttribute('aria-label', 'Go to review ' + (i + 1));
-    if (i === 0) dot.classList.add('is-active');
-    dot.addEventListener('click', () => goToReview(i));
-    testimonialDots.appendChild(dot);
+  var step = 1, perView = 1, maxIndex = 0, index = 0;
+  var timer = null, hold = false, visible = true, settle = 0, rz = 0;
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function clean(q) { return String(q || "").replace(/^[“"]+|[”"]+$/g, "").trim(); }
+  function initials(n) {
+    return String(n || "").trim().split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join("").toUpperCase();
+  }
+  function stars(s) {
+    var out = "", n = 0;
+    Array.from(String(s || "")).forEach(function (c) {
+      var on = c === "★";
+      if (on) n++;
+      out += "<span" + (on ? ' class="on"' : "") + ">★</span>";
+    });
+    return '<div class="tst-stars" role="img" aria-label="' + n + ' out of 5 stars">' + out + "</div>";
+  }
+
+  /* ---------- render cards from data.js ---------- */
+  track.innerHTML = data.map(function (d, i) {
+    return '<article class="tst-card" aria-roledescription="slide" aria-label="Review ' + (i + 1) + ' of ' + data.length + '">' +
+      '<i class="fa-solid fa-quote-right tst-q-ico" aria-hidden="true"></i>' +
+      stars(d.stars) +
+      '<blockquote class="tst-quote">' + esc(clean(d.quote)) + "</blockquote>" +
+      '<div class="tst-who"><span class="tst-av" data-i="' + esc(initials(d.name)) + '">' +
+      '<img src="' + esc(d.avatar) + '" alt="' + esc(d.name) + '" width="52" height="52" loading="lazy"></span>' +
+      "<div><strong>" + esc(d.name) + "</strong><small>" + esc(d.role) + "</small></div></div></article>";
+  }).join("");
+
+  var cards = Array.prototype.slice.call(track.children);
+  /* broken avatar -> initials show instead */
+  track.querySelectorAll(".tst-av img").forEach(function (img) {
+    img.addEventListener("error", function () { img.remove(); });
   });
 
-  function updateDots() {
-    const dots = testimonialDots.querySelectorAll('span');
-    dots.forEach((d, i) => d.classList.toggle('is-active', i === currentIndex));
+  /* ---------- geometry ---------- */
+  function measure() {
+    var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    step = cards[0].getBoundingClientRect().width + gap;
+    perView = Math.max(1, Math.round((track.clientWidth + gap) / step));
+    maxIndex = Math.max(0, cards.length - perView);
+    if (index > maxIndex) index = maxIndex;
   }
 
-  function goToReview(index) {
-    if (index === currentIndex) return;
-    currentIndex = index;
-    renderReview(true);
-    resetAuto();
-  }
-
-  function nextReview() {
-    currentIndex = (currentIndex + 1) % JP_HOME_TESTIMONIALSDATA.length;
-    renderReview(true);
-  }
-
-  function prevReview() {
-    currentIndex = (currentIndex - 1 + JP_HOME_TESTIMONIALSDATA.length) % JP_HOME_TESTIMONIALSDATA.length;
-    renderReview(true);
-  }
-
-  function renderReview(animate) {
-    const data = JP_HOME_TESTIMONIALSDATA[currentIndex];
-
-    if (animate) {
-      testimonialCard.classList.add('is-changing');
-      testimonialAvatar.classList.add('is-changing');
-      setTimeout(() => {
-        applyData(data);
-        testimonialCard.classList.remove('is-changing');
-        testimonialAvatar.classList.remove('is-changing');
-      }, 350);
-    } else {
-      applyData(data);
+  function buildDots() {
+    dotsEl.innerHTML = "";
+    var multi = maxIndex > 0;
+    dotsEl.hidden = !multi;
+    if (prevBtn) prevBtn.hidden = !multi;
+    if (nextBtn) nextBtn.hidden = !multi;
+    if (!multi) return;
+    for (var i = 0; i <= maxIndex; i++) {
+      (function (n) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "Go to review " + (n + 1));
+        b.addEventListener("click", function () { goTo(n, true); restart(); });
+        dotsEl.appendChild(b);
+      })(i);
     }
     updateDots();
   }
 
-  function applyData(data) {
-    testimonialQuote.textContent = data.quote;
-    testimonialName.textContent = data.name;
-    testimonialRole.textContent = data.role;
-    testimonialStars.textContent = data.stars;
-    testimonialAvatar.src = data.avatar;
-    testimonialAvatar.alt = data.name;
+  function updateDots() {
+    Array.prototype.forEach.call(dotsEl.children, function (b, i) {
+      var on = i === index;
+      b.classList.toggle("is-active", on);
+      if (on) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current");
+    });
   }
 
-  function startAuto() {
-    if (autoTimer) return;
-    autoTimer = setInterval(nextReview, INTERVAL);
+  /* ---------- movement ---------- */
+  function goTo(i, smooth) {
+    index = Math.max(0, Math.min(maxIndex, i));
+    track.scrollTo({ left: index * step, behavior: smooth && !reduced ? "smooth" : "auto" });
+    updateDots();
+  }
+  function next() { goTo(index >= maxIndex ? 0 : index + 1, true); }
+  function prev() { goTo(index <= 0 ? maxIndex : index - 1, true); }
+
+  /* keep dots in sync after the user swipes */
+  track.addEventListener("scroll", function () {
+    clearTimeout(settle);
+    settle = setTimeout(function () {
+      var i = Math.max(0, Math.min(maxIndex, Math.round(track.scrollLeft / step)));
+      if (i !== index) { index = i; updateDots(); }
+    }, 90);
+  }, { passive: true });
+
+  /* ---------- autoplay ---------- */
+  function play() {
+    if (timer || hold || reduced || !visible || maxIndex <= 0) return;
+    timer = setInterval(function () { if (!document.hidden) next(); }, DELAY);
+  }
+  function stop() { clearInterval(timer); timer = null; }
+  function restart() { stop(); play(); }
+
+  track.addEventListener("mouseenter", function () { hold = true; stop(); });
+  track.addEventListener("mouseleave", function () { hold = false; play(); });
+  track.addEventListener("focusin", function () { hold = true; stop(); });
+  track.addEventListener("focusout", function () { hold = false; play(); });
+  track.addEventListener("touchstart", function () { hold = true; stop(); }, { passive: true });
+  track.addEventListener("touchend", function () { setTimeout(function () { hold = false; play(); }, 2500); }, { passive: true });
+
+  if (prevBtn) prevBtn.addEventListener("click", function () { prev(); restart(); });
+  if (nextBtn) nextBtn.addEventListener("click", function () { next(); restart(); });
+
+  track.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { e.preventDefault(); next(); restart(); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); prev(); restart(); }
+  });
+
+  /* run only while the section is on screen */
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) play(); else stop();
+    }, { threshold: 0.2 }).observe(track);
   }
 
-  function resetAuto() {
-    clearInterval(autoTimer);
-    autoTimer = null;
-    startAuto();
-  }
+  /* ---------- resize: 3 / 2 / 1 re-calc ---------- */
+  window.addEventListener("resize", function () {
+    clearTimeout(rz);
+    rz = setTimeout(function () { measure(); buildDots(); goTo(index, false); restart(); }, 120);
+  });
 
-  // Pause on hover
-  testimonialCard.addEventListener('mouseenter', () => clearInterval(autoTimer));
-  testimonialCard.addEventListener('mouseleave', startAuto);
+  /* ---------- init ---------- */
+  measure();
+  buildDots();
+  goTo(0, false);
+  play();
+})();
 
-  // Manual nav
-  if (testimonialNext) testimonialNext.addEventListener('click', nextReview);
-  if (testimonialPrev) testimonialPrev.addEventListener('click', prevReview);
-
-  // Init
-  renderReview(false);
-  startAuto();
-}
 
 /* ---------- Destinations auto-scroll (right → left, non-stop) ---------- */
 (function () {
@@ -3425,4 +3477,88 @@ if (testimonialCard && JP_HOME_TESTIMONIALSDATA.length > 1) {
   var initial = (params.get("tracking") || "").trim();
   setView(V.empty());
   if (initial) { els.input.value = initial.toUpperCase(); track(initial); }
+})();
+
+
+
+
+/* JP Express - Mobile inner-page hero title: always single line (Home excluded) */
+(function () {
+  "use strict";
+
+  if (document.documentElement.classList.contains("page-index")) return;
+
+  var MIN_PX = 10;
+
+  function fitTitles() {
+    var titles = document.querySelectorAll(".hero.page-hero h1");
+    Array.prototype.forEach.call(titles, function (h1) {
+      h1.style.fontSize = "";
+      if (window.innerWidth > 767) return;
+
+      var size = parseFloat(window.getComputedStyle(h1).fontSize);
+      while (h1.scrollWidth > h1.clientWidth + 1 && size > MIN_PX) {
+        size -= 0.5;
+        h1.style.fontSize = size + "px";
+      }
+    });
+  }
+
+  var timer;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(fitTitles, 80);
+  }
+
+  fitTitles();
+  window.addEventListener("load", fitTitles);
+  window.addEventListener("resize", schedule);
+  window.addEventListener("orientationchange", schedule);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitles);
+})();
+
+
+
+/* JP Express - Mobile inner-page hero paragraph: max 2 lines (Home excluded) */
+(function () {
+  "use strict";
+
+  if (document.documentElement.classList.contains("page-index")) return;
+
+  var MIN_PX = 10.5;
+
+  function fitParagraphs() {
+    var list = document.querySelectorAll(".hero.page-hero .hero-copy p");
+    Array.prototype.forEach.call(list, function (p) {
+      p.style.fontSize = "";
+      p.classList.remove("is-clamped");
+      if (window.innerWidth > 767) return;
+
+      var cs = window.getComputedStyle(p);
+      var size = parseFloat(cs.fontSize);
+      var ratio = parseFloat(cs.lineHeight) / size || 1.4;
+
+      function tooTall() {
+        return p.getBoundingClientRect().height > size * ratio * 2 + 1;
+      }
+
+      while (tooTall() && size > MIN_PX) {
+        size -= 0.25;
+        p.style.fontSize = size + "px";
+      }
+      if (tooTall()) p.classList.add("is-clamped");
+    });
+  }
+
+  var timer;
+  function schedule() {
+    clearTimeout(timer);
+    timer = setTimeout(fitParagraphs, 80);
+  }
+
+  fitParagraphs();
+  window.addEventListener("load", fitParagraphs);
+  window.addEventListener("resize", schedule);
+  window.addEventListener("orientationchange", schedule);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitParagraphs);
 })();
