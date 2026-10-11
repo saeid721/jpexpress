@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="page-leadership template-jp">
+<html lang="en" id="top" class="page-leadership template-jp">
 
 <head>
   <meta charset="utf-8">
@@ -141,7 +141,7 @@
           <button class="lang-btn active" type="button">English</button>
           <span>|</span>
           <button class="lang-btn" type="button">বাংলা</button>
-          <a class="d-none d-md-inline" href="#contact">
+          <a class="d-none d-md-inline" href="login.html">
             <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
           </a>
         </div>
@@ -169,8 +169,8 @@
         </div>
 
         <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
           <li class="nav-item jp-dropdown">
             <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">
               Services <i class="fa-solid fa-chevron-down"></i>
@@ -221,8 +221,8 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav gap-1">
-          <li><a class="nav-link active" href="index.html">Home</a></li>
-          <li><a class="nav-link" href="about.html">About</a></li>
+          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link active" href="about.html">About</a></li>
           <li class="jp-m-dd">
             <div class="jp-m-dd-row">
               <a class="nav-link" href="services.html">Services</a>
@@ -267,7 +267,7 @@
   <main id="main">
 
     <!-- HERO -->
-    <section class="hero page-hero" aria-labelledby="cntTitle">
+    <section class="hero page-hero" aria-labelledby="ldTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
         <div class="hero-copy" data-reveal>
@@ -276,84 +276,200 @@
               aria-current="page">Leadership</span>
           </nav>
           <div class="hero-kicker"><span>LEADERSHIP</span> JP EXPRESS</div>
-          <h1 id="cntTitle">People Behind <span class="accent">Every Shipment</span></h1>
+          <h1 id="ldTitle">People Behind <span class="accent">Every Shipment</span></h1>
           <p>Meet the teams in support, operations, documentation and business shipping that keep your cargo moving.</p>
         </div>
       </div>
     </section>
-    <section class="jp-section">
-      <div class="container-xl">
-        <div class="jp-section-head">
-          <div class="jp-kicker">Leadership</div>
-          <h2>Leadership with operational focus</h2>
-          <p>Personnel names and titles should always reflect the current JP Express organization. The roles below
-            describe the core functions customers interact with.</p>
+    <div class="leadership-page">
+
+      <!-- ================= TEAM ================= -->
+      <section class="leadership-section leadership-team-section" aria-labelledby="teamTitle">
+        <div class="container-xl">
+
+          <div class="leadership-section-heading" data-reveal>
+            <div class="leadership-section-label"><span></span>Leadership</div>
+            <div class="leadership-heading-row">
+              <div>
+                <h2 id="teamTitle">Leadership with <span>operational focus</span></h2>
+                <p>Meet the people who guide JP Express, from business direction to daily operations and customer care.
+                </p>
+              </div>
+              <div class="leadership-heading-mark" aria-hidden="true">
+                <i class="fa-solid fa-people-group"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="leadership-team-grid">
+
+            <article class="leadership-team-card" data-reveal>
+              <div class="leadership-team-image">
+                <img src="assets/teams/founder.jpg" alt="Md. Masud Parvez, Founder and Managing Director of JP Express"
+                  width="640" height="563" loading="lazy" decoding="async">
+                <span class="leadership-team-index">01</span>
+              </div>
+              <div class="leadership-team-content">
+                <span class="leadership-team-role">Founder &amp; Managing Director</span>
+                <h3>Md. Masud Parvez</h3>
+                <p>Sets service priorities, customer standards and long-term business direction.</p>
+                <div class="leadership-team-divider"></div>
+                <div class="leadership-team-focus">
+                  <i class="fa-solid fa-compass" aria-hidden="true"></i>
+                  <span>Business direction</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="leadership-team-card" data-reveal>
+              <div class="leadership-team-image">
+                <img src="assets/teams/palok.png" alt="Md. Mustakim Zaman Palok, Operations at JP Express" width="640"
+                  height="563" loading="lazy" decoding="async">
+                <span class="leadership-team-index">02</span>
+              </div>
+              <div class="leadership-team-content">
+                <span class="leadership-team-role">Operations</span>
+                <h3>Md. Mustakim Zaman Palok</h3>
+                <p>Coordinates pickup, handling, documentation and shipment movement across the service journey.</p>
+                <div class="leadership-team-divider"></div>
+                <div class="leadership-team-focus">
+                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  <span>Pickup &amp; shipment flow</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="leadership-team-card" data-reveal>
+              <div class="leadership-team-image">
+                <img src="assets/teams/02.jpg" alt="JP Express customer support team member" width="640" height="563"
+                  loading="lazy" decoding="async">
+                <span class="leadership-team-index">03</span>
+              </div>
+              <div class="leadership-team-content">
+                <span class="leadership-team-role">Customer Experience</span>
+                <h3>Customer Support</h3>
+                <p>Helps customers with enquiries, quotes, booking questions and shipment support.</p>
+                <div class="leadership-team-divider"></div>
+                <div class="leadership-team-focus">
+                  <i class="fa-solid fa-headset" aria-hidden="true"></i>
+                  <span>Quotes &amp; enquiries</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="leadership-team-footnote" data-reveal>
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <p>The roles above describe the core functions customers work with every day at JP Express.</p>
+          </div>
+
         </div>
-        <div class="jp-grid jp-grid-3">
-          <div class="jp-card jp-team-card jp-reveal" data-jp-reveal><img src="assets/teams/founder.jpg"
-              alt="JP Express leadership">
-            <div class="team-copy"><span class="role">Founder & Managing Director</span>
-              <h3>Md. Masud Parvez</h3>
-              <p>Sets service priorities, customer standards and long-term business direction.</p>
+      </section>
+
+      <!-- ================= OPERATING MODEL ================= -->
+      <section class="leadership-section leadership-operating-section" aria-labelledby="modelTitle">
+        <div class="container-xl">
+
+          <div class="leadership-section-heading" data-reveal>
+            <div class="leadership-section-label"><span></span>How teams connect</div>
+            <h2 id="modelTitle">A coordinated <span>operating model</span></h2>
+            <div class="leadership-heading-row">
+              <div>
+                <p>You should not need to understand our internal departments to get help. The experience should feel
+                  like one connected JP Express team.</p>
+              </div>
             </div>
           </div>
-          <div class="jp-card jp-team-card jp-reveal" data-jp-reveal><img src="assets/teams/palok.png"
-              alt="JP Express operations team">
-            <div class="team-copy"><span class="role">Operations</span>
-              <h3>Md. Mustakim Zaman Palok</h3>
-              <p>Coordinates pickup, handling, documentation and shipment movement across the service journey.</p>
-            </div>
-          </div>
-          <div class="jp-card jp-team-card jp-reveal" data-jp-reveal><img src="assets/teams/02.jpg"
-              alt="JP Express customer support team">
-            <div class="team-copy"><span class="role">Customer Experience</span>
+
+          <div class="leadership-process-grid">
+
+            <article class="leadership-process-card" data-reveal>
+              <div class="leadership-process-top">
+                <span class="leadership-process-number">01</span>
+                <span class="leadership-process-icon" aria-hidden="true"><i class="fa-solid fa-headset"></i></span>
+              </div>
               <h3>Customer Support</h3>
-              <p>Helps customers with enquiries, quotes, booking questions and shipment support.</p>
+              <p>Receives the requirement and helps clarify the right service path.</p>
+              <span class="leadership-process-caption">First point of contact</span>
+            </article>
+
+            <article class="leadership-process-card" data-reveal>
+              <div class="leadership-process-top">
+                <span class="leadership-process-number">02</span>
+                <span class="leadership-process-icon" aria-hidden="true"><i
+                    class="fa-solid fa-boxes-packing"></i></span>
+              </div>
+              <h3>Operations</h3>
+              <p>Coordinates pickup, handling and shipment movement.</p>
+              <span class="leadership-process-caption">Pickup to dispatch</span>
+            </article>
+
+            <article class="leadership-process-card" data-reveal>
+              <div class="leadership-process-top">
+                <span class="leadership-process-number">03</span>
+                <span class="leadership-process-icon" aria-hidden="true"><i class="fa-solid fa-file-shield"></i></span>
+              </div>
+              <h3>Documentation &amp; Customs</h3>
+              <p>Supports the paperwork and compliance information relevant to the shipment.</p>
+              <span class="leadership-process-caption">Paperwork &amp; compliance</span>
+            </article>
+
+            <article class="leadership-process-card" data-reveal>
+              <div class="leadership-process-top">
+                <span class="leadership-process-number">04</span>
+                <span class="leadership-process-icon" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
+              </div>
+              <h3>Business &amp; Export Desk</h3>
+              <p>Supports commercial shipments, exporters and business enquiries.</p>
+              <span class="leadership-process-caption">Commercial shipping</span>
+            </article>
+
+          </div>
+
+          <div class="leadership-operating-note" data-reveal>
+            <span class="leadership-operating-note-icon" aria-hidden="true"><i class="fa-solid fa-link"></i></span>
+            <p><strong>One team, one conversation.</strong> Share your requirement once and we route it to the right
+              function for you.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= CTA ================= -->
+      <section class="leadership-section leadership-cta-section" aria-labelledby="ctaLeadTitle">
+        <div class="container-xl">
+          <div class="leadership-cta" data-reveal="zoom">
+            <span class="leadership-cta-decoration" aria-hidden="true"></span>
+
+            <div class="leadership-cta-content">
+              <span class="leadership-cta-label">Get in touch</span>
+              <h2 id="ctaLeadTitle">Need the right team for <span>your shipment?</span></h2>
+              <p>Start with your shipment requirement and we will route the enquiry to the appropriate support function.
+              </p>
+              <div class="leadership-cta-actions">
+                <a class="leadership-btn leadership-btn-primary" href="contact.html">
+                  Contact Support <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+                <a class="leadership-btn leadership-btn-light" href="quote.html">
+                  Get a Quote <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="leadership-cta-visual" aria-hidden="true">
+              <span class="leadership-cta-orbit leadership-cta-orbit-one"></span>
+              <span class="leadership-cta-orbit leadership-cta-orbit-two"></span>
+              <span class="leadership-cta-globe"><i class="fa-solid fa-earth-asia"></i></span>
+              <span class="leadership-cta-dot leadership-cta-dot-one"></span>
+              <span class="leadership-cta-dot leadership-cta-dot-two"></span>
+              <span class="leadership-cta-dot leadership-cta-dot-three"></span>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="jp-section alt">
-      <div class="container-xl">
-        <div class="jp-section-head">
-          <div class="jp-kicker">How teams connect</div>
-          <h2>A coordinated operating model</h2>
-          <p>Customers should not need to understand internal departments to get help. The experience should feel
-            like
-            one connected JP Express team.</p>
-        </div>
-        <div class="jp-grid jp-grid-4">
-          <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">1</span>
-            <h3>Customer Support</h3>
-            <p>Receives the requirement and helps clarify the right service path.</p>
-          </div>
-          <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">2</span>
-            <h3>Operations</h3>
-            <p>Coordinates pickup, handling and shipment movement.</p>
-          </div>
-          <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">3</span>
-            <h3>Documentation & Customs</h3>
-            <p>Supports the paperwork and compliance information relevant to the shipment.</p>
-          </div>
-          <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">4</span>
-            <h3>Business & Export Desk</h3>
-            <p>Supports commercial shipments, exporters and business enquiries.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="jp-section">
-      <div class="container-xl">
-        <div class="jp-cta jp-reveal" data-jp-reveal>
-          <h2>Need the right team for your shipment?</h2>
-          <p>Start with your shipment requirement and we will route the enquiry to the appropriate support
-            function.</p>
-          <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="contact.html">Contact Support</a><a
-              class="jp-btn jp-btn-ghost" href="index.html#quote">Get a Quote</a></div>
-        </div>
-      </div>
-    </section>
+      </section>
+
+    </div>
   </main>
 
   <!-- ======= FOOTER ========== -->
@@ -437,7 +553,7 @@
     <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top">
       <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
     </a>
-    <a href="#quote" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote">
+    <a href="quote.html" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote">
       <i class="fa-solid fa-calculator" aria-hidden="true"></i>
     </a>
     <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment."
@@ -453,7 +569,7 @@
   <nav class="fab-bar" aria-label="Mobile quick actions">
     <a href="index.html" class="bar-quote"><i class="fa-solid fa-house"></i>Home</a>
     <a href="track-shipment.html"><i class="fa-solid fa-location-dot"></i>Track</a>
-    <a href="#quote"><i class="fa-solid fa-calculator"></i>Quote</a>
+    <a href="quote.html"><i class="fa-solid fa-calculator"></i>Quote</a>
     <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment."
       target="_blank" rel="noopener" class="wa-link" data-wa-text="Hi JP Express, I'd like to ask about a shipment."
       aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i>WhatsApp</a>

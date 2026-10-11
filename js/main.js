@@ -3562,3 +3562,28 @@
   window.addEventListener("orientationchange", schedule);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitParagraphs);
 })();
+
+
+
+
+/* ---------- LEADERSHIP PAGE: staggered card reveal ---------- */
+(function leadershipPage() {
+  "use strict";
+
+  if (!document.documentElement.classList.contains("page-leadership")) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  document.querySelectorAll(".leadership-team-grid, .leadership-process-grid").forEach(function (grid) {
+    Array.prototype.forEach.call(grid.children, function (el, i) {
+      el.style.setProperty("--d", (i * 90) + "ms");
+
+      function settle(e) {
+        if (e.propertyName !== "opacity") return;
+        el.style.removeProperty("--d");
+        el.classList.add("is-settled");
+        el.removeEventListener("transitionend", settle);
+      }
+      el.addEventListener("transitionend", settle);
+    });
+  });
+})();
