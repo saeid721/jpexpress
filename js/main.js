@@ -1566,7 +1566,12 @@
 
   // Popular destinations
   const pop = $('ctrPopular');
-  if (pop) pop.innerHTML = list.filter(c => c.pop).map(card).join('');
+  if (pop) {
+    const POP_MAX = 10;
+    const flagged = list.filter(c => c.pop);
+    const rest = list.filter(c => !c.pop);
+    pop.innerHTML = flagged.concat(rest).slice(0, POP_MAX).map(card).join('');
+  }
 
   // Region filter chips
   filters.innerHTML = ['All'].concat(REGIONS).map((r, i) =>
@@ -1576,7 +1581,7 @@
   function render() {
     const q = search.value.trim().toLowerCase();
     let out = list.filter(c => (region === 'All' || c.r === region) &&
-      (!q || (c.n + ' ' + c.cap + ' ' + c.r + ' ' + c.cur + ' ' + c.ci).toLowerCase().includes(q)));
+      (!q || (c.n + ' ' + c.s + ' ' + c.cap + ' ' + c.r + ' ' + c.cur + ' ' + c.ci).toLowerCase().includes(q)));
     if (sortSel.value === 'az') out.sort((a, b) => a.n.localeCompare(b.n));
     else if (sortSel.value === 'fast') out.sort((a, b) => parseInt(a.t) - parseInt(b.t) || a.n.localeCompare(b.n));
     else out.sort((a, b) => (b.pop || 0) - (a.pop || 0) || a.n.localeCompare(b.n));
@@ -1596,11 +1601,86 @@
     filters.querySelectorAll('.ctr-chip').forEach(x => { const on = x === b; x.classList.toggle('active', on); x.setAttribute('aria-pressed', on); });
     render();
   });
-  // Quick search buttons in hero
-  document.querySelectorAll('[data-q]').forEach(b => b.addEventListener('click', () => {
-    search.value = b.dataset.q; render();
-    $('directory').scrollIntoView({ behavior: 'smooth' });
-  }));
+  // Hero search dropdown: click = all destinations, type = live filter, select = open guide
+  const wrap = search.closest('.ctr-search');
+  const dd = document.createElement('div');
+  let opts = [], act = -1;
+  dd.className = 'ctr-dd'; dd.id = 'ctrDd'; dd.hidden = true;
+  dd.setAttribute('role', 'listbox'); dd.setAttribute('aria-label', 'Destinations');
+  wrap.appendChild(dd);
+  search.setAttribute('role', 'combobox');
+  search.setAttribute('aria-autocomplete', 'list');
+  search.setAttribute('aria-controls', 'ctrDd');
+  search.setAttribute('aria-expanded', 'false');
+
+  const ddText = c => (c.n + ' ' + c.s + ' ' + c.cap + ' ' + c.r + ' ' + c.cur + ' ' + c.ci).toLowerCase();
+
+  function ddRender() {
+    const terms = search.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    opts = list.filter(c => terms.every(t => ddText(c).includes(t))).sort((a, b) => a.n.localeCompare(b.n));
+    dd.innerHTML = opts.length ? opts.map((c, i) =>
+      '<div class="ctr-dd-opt" role="option" id="ctrOpt' + i + '" data-i="' + i + '" aria-selected="false">' +
+      '<img src="https://flagcdn.com/w80/' + c.c + '.png" width="32" height="32" alt="" loading="lazy">' +
+      '<span class="ctr-dd-txt"><strong>' + c.n + '</strong><small>' + c.r + ' · ' + c.t + '</small></span>' +
+      '<i class="fa-solid fa-arrow-right ctr-dd-go" aria-hidden="true"></i></div>').join('')
+      : '<div class="ctr-dd-empty">No destination found.<br><a target="_blank" rel="noopener" href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20can%20you%20ship%20to%20my%20country%3F">Ask on WhatsApp</a></div>';
+    act = -1;
+    search.removeAttribute('aria-activedescendant');
+  }
+  function openDd() {
+    ddRender();
+    dd.hidden = false;
+    wrap.classList.add('is-open');
+    search.setAttribute('aria-expanded', 'true');
+  }
+  function closeDd() {
+    dd.hidden = true;
+    act = -1;
+    wrap.classList.remove('is-open');
+    search.setAttribute('aria-expanded', 'false');
+    search.removeAttribute('aria-activedescendant');
+  }
+  function setAct(i) {
+    const nodes = dd.querySelectorAll('.ctr-dd-opt');
+    if (!nodes.length) return;
+    act = (i + nodes.length) % nodes.length;
+    nodes.forEach((n, k) => { n.classList.toggle('is-active', k === act); n.setAttribute('aria-selected', k === act); });
+    search.setAttribute('aria-activedescendant', nodes[act].id);
+    const o = nodes[act], top = o.offsetTop, bot = top + o.offsetHeight;
+    if (top < dd.scrollTop) dd.scrollTop = top - 6;
+    else if (bot > dd.scrollTop + dd.clientHeight) dd.scrollTop = bot - dd.clientHeight + 6;
+  }
+  const go = c => { if (c) location.href = 'country.html?c=' + c.s; };
+
+  search.addEventListener('focus', openDd);
+  search.addEventListener('click', () => { if (dd.hidden) openDd(); });
+  search.addEventListener('input', () => { if (dd.hidden) openDd(); else ddRender(); });
+  clearBtn.addEventListener('click', openDd);
+  search.addEventListener('keydown', e => {
+    const k = e.key;
+    if (k === 'ArrowDown' || k === 'ArrowUp') {
+      e.preventDefault();
+      if (dd.hidden) openDd();
+      setAct(act < 0 ? (k === 'ArrowDown' ? 0 : -1) : act + (k === 'ArrowDown' ? 1 : -1));
+    } else if (k === 'Enter') {
+      e.preventDefault();
+      if (!dd.hidden && act > -1) go(opts[act]);
+      else if (opts.length === 1) go(opts[0]);
+      else { closeDd(); $('directory').scrollIntoView({ behavior: 'smooth' }); }
+    } else if (k === 'Escape') {
+      if (!dd.hidden) { e.preventDefault(); closeDd(); }
+    } else if (k === 'Tab') closeDd();
+  });
+  dd.addEventListener('mousedown', e => e.preventDefault());
+  dd.addEventListener('click', e => {
+    const o = e.target.closest('.ctr-dd-opt');
+    if (o) go(opts[parseInt(o.dataset.i, 10)]);
+  });
+  dd.addEventListener('mouseover', e => {
+    const o = e.target.closest('.ctr-dd-opt');
+    if (o) setAct(parseInt(o.dataset.i, 10));
+  });
+  document.addEventListener('click', e => { if (!wrap.contains(e.target)) closeDd(); });
   // Allow /countries.html?q=uk
   const qp = new URLSearchParams(location.search).get('q');
   if (qp) search.value = qp;

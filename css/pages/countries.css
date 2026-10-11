@@ -41,7 +41,7 @@
   align-items: center;
   width: 100%;
   max-width: 640px;
-  margin: 22px auto 0;
+  margin: 14px auto 0;
   background: var(--jp-white);
   border-radius: 999px;
   box-shadow: 0 14px 34px rgba(10, 16, 60, .3);
@@ -65,7 +65,7 @@
 /* Used only by: countries */
 .page-countries .ctr-search input {
   width: 100%;
-  min-height: 56px;
+  min-height: 48px;
   border: 0;
   border-radius: 999px;
   padding: 0 52px 0 50px;
@@ -168,6 +168,30 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
   gap: 14px;
+}
+
+/* Popular: 5 per row on desktop, 2 on tablet, 1 on phone (10 cards = even rows) */
+.page-countries #ctrPopular {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1199px) {
+  .page-countries #ctrPopular {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .page-countries #ctrPopular {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 479px) {
+  .page-countries #ctrPopular {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Used only by: countries */
@@ -305,25 +329,15 @@
 
   /* Used only by: countries */
   .page-countries .ctr-search {
-    margin-top: 16px;
+    margin-top: 12px;
   }
 
   .page-countries .ctr-search input {
-    min-height: 50px;
-    font-size: 15px;
-  }
-
-  .page-countries .ctr-quick {
-    gap: 6px;
-  }
-
-  .page-countries .ctr-quick button {
-    padding: 6px 12px;
-    font-size: 12.5px;
+    min-height: 46px;
+    font-size: 16px;
   }
 
 }
-
 
 /* ===============================================================
    COUNTRY DETAIL PAGE — intro section, route pill, lists
@@ -480,4 +494,168 @@
 .template-countries #cdFaqLeft .accordion-item:last-child,
 .template-countries #cdFaqRight .accordion-item:last-child {
   margin-bottom: 0;
+}
+
+
+/* ===============================================================
+   HERO SEARCH DROPDOWN (flag + name list)
+   =============================================================== */
+
+/* let the dropdown sit outside the hero banner */
+.page-countries .hero.page-hero {
+  overflow: visible;
+  z-index: 6;
+}
+
+/* background fills the hero exactly (no bleed, no parallax shift) */
+.page-countries .hero .hero-bg {
+  inset: 0;
+  translate: none !important;
+}
+
+.page-countries .hero .hero-copy p {
+  margin-bottom: 0;
+}
+
+.page-countries .ctr-search.is-open {
+  box-shadow: 0 18px 40px rgba(10, 16, 60, .38), 0 0 0 4px rgba(242, 99, 35, .35);
+}
+
+.page-countries .ctr-dd {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 50;
+  max-height: min(360px, 52vh);
+  padding: 6px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  text-align: left;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  box-shadow: 0 22px 50px rgba(30, 42, 107, .22);
+  animation: ctrDdIn .18s ease both;
+}
+
+.page-countries .ctr-dd[hidden] {
+  display: none;
+}
+
+@keyframes ctrDdIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.page-countries .ctr-dd-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 7px 10px;
+  border-radius: 12px;
+  color: var(--jp-navy);
+  cursor: pointer;
+  transition: background .15s ease;
+}
+
+.page-countries .ctr-dd-opt:hover,
+.page-countries .ctr-dd-opt.is-active {
+  background: var(--jp-bg-soft);
+}
+
+.page-countries .ctr-dd-opt img {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-countries .ctr-dd-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.page-countries .ctr-dd-txt strong {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--jp-navy);
+}
+
+.page-countries .ctr-dd-txt small {
+  display: block;
+  margin-top: 1px;
+  font-size: 12px;
+  color: var(--jp-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-countries .ctr-dd-go {
+  font-size: 12px;
+  color: var(--jp-orange);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.page-countries .ctr-dd-opt:hover .ctr-dd-go,
+.page-countries .ctr-dd-opt.is-active .ctr-dd-go {
+  opacity: 1;
+  transform: none;
+}
+
+.page-countries .ctr-dd-empty {
+  padding: 20px 14px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--jp-text-muted);
+}
+
+.page-countries .ctr-dd-empty a {
+  display: inline-block;
+  margin-top: 6px;
+  font-weight: 800;
+  color: var(--jp-orange);
+}
+
+@media (hover: none) {
+  .page-countries .ctr-dd-go {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-countries .ctr-dd {
+    top: calc(100% + 6px);
+    max-height: min(320px, 46vh);
+    border-radius: 14px;
+  }
+
+  .page-countries .ctr-dd-opt {
+    gap: 10px;
+    min-height: 48px;
+    padding: 6px 8px;
+  }
+
+  .page-countries .ctr-dd-opt img {
+    flex-basis: 28px;
+    width: 28px;
+    height: 28px;
+  }
 }

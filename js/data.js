@@ -112,7 +112,7 @@ const COUNTRY_DATA = {
     ind: ['Garments & Textile', 'Handicrafts', 'SMEs'], ci: 'Riyadh, Jeddah, Dammam'
   },
   germany: {
-    n: 'Germany', c: 'de', r: 'Europe', cap: 'Berlin', cur: 'EUR', t: '3–5 days', v: ALL,
+    n: 'Germany', c: 'de', r: 'Europe', cap: 'Berlin', cur: 'EUR', t: '3–5 days', pop: 1, v: ALL,
     ov: 'An important EU gateway for garment buyers, e-commerce sellers and families.',
     cu: 'Imports into the EU involve customs declarations and import VAT. Commercial shipments may need an EORI number.',
     rs: ['Food and animal products', 'Medicines and cosmetics', 'Batteries and liquids'],
@@ -120,7 +120,7 @@ const COUNTRY_DATA = {
     ind: ['Garments & Textile', 'Leather', 'E-commerce'], ci: 'Berlin, Hamburg, Munich, Frankfurt'
   },
   france: {
-    n: 'France', c: 'fr', r: 'Europe', cap: 'Paris', cur: 'EUR', t: '3–5 days', v: ALL,
+    n: 'France', c: 'fr', r: 'Europe', cap: 'Paris', cur: 'EUR', t: '3–5 days', pop: 1, v: ALL,
     ov: 'A steady route for personal parcels, fashion samples and small commercial shipments.',
     cu: 'EU customs declarations and import VAT apply. Commercial shipments may need an EORI number and a detailed invoice.',
     rs: ['Food and animal products', 'Medicines and cosmetics', 'Batteries and liquids'],
@@ -160,7 +160,7 @@ const COUNTRY_DATA = {
     ind: ['Buying Houses', 'Manufacturing', 'E-commerce'], ci: 'Guangzhou, Shanghai, Beijing'
   },
   singapore: {
-    n: 'Singapore', c: 'sg', r: 'Asia-Pacific', cap: 'Singapore', cur: 'SGD', t: '2–4 days', v: ALL,
+    n: 'Singapore', c: 'sg', r: 'Asia-Pacific', cap: 'Singapore', cur: 'SGD', t: '2–4 days', pop: 1, v: ALL,
     ov: 'A fast regional hub for documents, parcels and business shipments.',
     cu: 'GST and duty depend on goods and value; controlled items need permits.',
     rs: ['Chewing gum and e-cigarettes', 'Medicines and supplements', 'Controlled or regulated goods'],
@@ -168,7 +168,7 @@ const COUNTRY_DATA = {
     ind: ['E-commerce', 'SMEs', 'Garments & Textile'], ci: 'Singapore'
   },
   malaysia: {
-    n: 'Malaysia', c: 'my', r: 'Asia-Pacific', cap: 'Kuala Lumpur', cur: 'MYR', t: '3–5 days', v: ALL,
+    n: 'Malaysia', c: 'my', r: 'Asia-Pacific', cap: 'Kuala Lumpur', cur: 'MYR', t: '3–5 days', pop: 1, v: ALL,
     ov: 'A popular route for workers, students and traders with strong two-way links.',
     cu: 'Duties and taxes depend on goods and value; certain goods need permits.',
     rs: ['Pork and alcohol products', 'Medicines and supplements', 'Controlled or regulated goods'],
