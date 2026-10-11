@@ -563,3 +563,306 @@
   }
 
 }
+
+
+/* ===============================================================
+   INDUSTRIES: MOBILE COMPACT (matches Home page mobile sizing)
+   =============================================================== */
+@media (max-width: 767px) {
+
+  /* ---------- Section spacing ---------- */
+  .page-industries .home-section,
+  .page-industries .home-section.ind-plain,
+  .page-industries .home-section.ind-alt {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .page-industries .home-section.ind-finder {
+    padding-top: 12px;
+    padding-bottom: 4px;
+  }
+
+  .page-industries .home-section.ind-alt[aria-label="Industries"] {
+    padding-top: 8px !important;
+  }
+
+  /* ---------- Section headings ---------- */
+  .page-industries .ind-head {
+    max-width: 100%;
+    margin: 0 0 10px;
+    text-align: left;
+  }
+
+  .page-industries .ind-head h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 2px 0 4px;
+  }
+
+  .page-industries .ind-head p {
+    margin: 4px 0 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Finder box ---------- */
+  .page-industries .ind-box {
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(30, 42, 107, .1);
+  }
+
+  .page-industries .ind-box h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 0 0 2px;
+  }
+
+  .page-industries .ind-box>p {
+    margin: 0 0 10px;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .page-industries .ind-search input {
+    height: 42px;
+    padding: 0 40px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .page-industries .ind-search>i {
+    left: 14px;
+    font-size: 13px;
+  }
+
+  .page-industries .ind-clear {
+    width: 32px;
+    height: 32px;
+  }
+
+  .page-industries .ind-row-label {
+    margin: 10px 0 6px;
+    font-size: 10.5px;
+  }
+
+  .page-industries .ind-row {
+    gap: 6px;
+  }
+
+  .page-industries .ind-tab,
+  .page-industries .ind-need {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .page-industries .ind-count {
+    min-height: 0;
+    margin: 8px 0 0;
+    font-size: 12px;
+  }
+
+  /* ---------- Industry cards ---------- */
+  .page-industries .ind-grid {
+    gap: 8px;
+  }
+
+  .page-industries .ind-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .page-industries .ind-top {
+    margin-bottom: 8px;
+  }
+
+  .page-industries .ind-ico {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .page-industries .ind-tag {
+    padding: 3px 9px;
+    font-size: 10.5px;
+  }
+
+  .page-industries .ind-card h3 {
+    font-size: 15px;
+    line-height: 1.25;
+    margin: 0 0 4px;
+  }
+
+  .page-industries .ind-card p {
+    margin: 0 0 8px;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-industries .ind-needs {
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .page-industries .ind-needs span {
+    padding: 3px 8px;
+    border-radius: 7px;
+    font-size: 11px;
+  }
+
+  .page-industries .ind-more {
+    font-size: 12.5px;
+  }
+
+  /* ---------- Empty state ---------- */
+  .page-industries .ind-empty {
+    margin-top: 4px;
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
+
+  .page-industries .ind-empty>i {
+    font-size: 24px;
+  }
+
+  .page-industries .ind-empty h3 {
+    margin: 6px 0 2px;
+    font-size: 1rem;
+  }
+
+  .page-industries .ind-empty p {
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Support + steps cards ---------- */
+  .page-industries .ind-support,
+  .page-industries .ind-steps {
+    gap: 8px;
+  }
+
+  .page-industries .ind-support li,
+  .page-industries .ind-steps li {
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  /* icon + title on one line, text below (same pattern as About Mission/Vision) */
+  .page-industries .ind-support li,
+  .page-industries .ind-steps li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 4px;
+    align-items: center;
+  }
+
+  .page-industries .ind-s-ico {
+    grid-column: 1;
+    grid-row: 1;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    border-radius: 11px;
+    font-size: 17px;
+  }
+
+  .page-industries .ind-steps .ind-s-ico {
+    border-width: 1.5px;
+    border-radius: 50%;
+  }
+
+  .page-industries .ind-support h3,
+  .page-industries .ind-steps h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.25;
+  }
+
+  .page-industries .ind-support p,
+  .page-industries .ind-steps p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-industries .ind-steps li::before {
+    top: 8px;
+    left: auto;
+    right: 12px;
+    font-size: 11px;
+  }
+
+  .page-industries .ind-more-wrap,
+  .page-industries .ind-support+p {
+    margin-top: 10px !important;
+  }
+
+  /* ---------- FAQ ---------- */
+  .page-industries .accordion-button {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .page-industries .accordion-body {
+    padding: 0 14px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- Very small phones (same breakpoint as Home) ---------- */
+@media (max-width: 380px) {
+
+  .page-industries .ind-head h2,
+  .page-industries .ind-box h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-industries .ind-head p,
+  .page-industries .ind-box>p {
+    font-size: 13px;
+  }
+
+  .page-industries .ind-box {
+    padding: 12px;
+  }
+
+  .page-industries .ind-card {
+    padding: 10px;
+  }
+
+  .page-industries .ind-card h3,
+  .page-industries .ind-support h3,
+  .page-industries .ind-steps h3 {
+    font-size: 14px;
+  }
+
+  .page-industries .ind-card p,
+  .page-industries .ind-support p,
+  .page-industries .ind-steps p {
+    font-size: 12px;
+  }
+
+  .page-industries .ind-support li,
+  .page-industries .ind-steps li {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .page-industries .ind-s-ico {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+}

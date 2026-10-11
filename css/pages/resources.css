@@ -903,3 +903,517 @@
 .page-resources #resFaqRight .accordion-item:last-child {
   margin-bottom: 0;
 }
+
+
+/* ===============================================================
+   RESOURCES: MOBILE COMPACT (matches Home page mobile sizing)
+   =============================================================== */
+@media (max-width: 767px) {
+
+  /* ---------- Section spacing ---------- */
+  .page-resources .home-section,
+  .page-resources .home-section.res-plain,
+  .page-resources .home-section.res-alt {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .page-resources .res-cat {
+    scroll-margin-top: calc(var(--jp-header-h, 64px) + 52px);
+  }
+
+  /* ---------- Section headings ---------- */
+  .page-resources .res-head {
+    max-width: 100%;
+    margin: 0 0 10px;
+    text-align: left;
+  }
+
+  .page-resources .res-head h2,
+  .page-resources .res-cat-head h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 2px 0 4px;
+  }
+
+  .page-resources .res-head p {
+    margin: 4px 0 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  /* icon + title on one line, description below */
+  .page-resources .res-cat-head {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 4px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .page-resources .res-cat-head>div {
+    display: contents;
+  }
+
+  .page-resources .res-cat-ico {
+    grid-column: 1;
+    grid-row: 1;
+    flex-basis: auto;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(43, 57, 144, .22);
+  }
+
+  .page-resources .res-cat-head h2 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+  }
+
+  .page-resources .res-cat-head p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    max-width: 100%;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Sticky section nav ---------- */
+  .page-resources .res-catnav-inner {
+    gap: 6px;
+    padding: 8px 0;
+  }
+
+  .page-resources .res-catlink {
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+
+  /* ---------- Finder box ---------- */
+  .page-resources .res-finder {
+    margin: 0 auto 12px;
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(30, 42, 107, .1);
+  }
+
+  .page-resources .res-finder h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 0 0 2px;
+  }
+
+  .page-resources .res-finder>p {
+    margin: 0 0 10px;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .page-resources .res-search input {
+    height: 42px;
+    padding: 0 40px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .page-resources .res-search>i {
+    left: 14px;
+    font-size: 13px;
+  }
+
+  .page-resources .res-clear {
+    width: 32px;
+    height: 32px;
+  }
+
+  .page-resources .res-chips {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .page-resources .res-chip {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .page-resources .res-count {
+    min-height: 0;
+    margin: 8px 0 0;
+    font-size: 12px;
+  }
+
+  /* ---------- Guide library ---------- */
+  .page-resources .res-guides {
+    gap: 8px;
+  }
+
+  .page-resources .res-guide {
+    border-radius: 12px;
+  }
+
+  .page-resources .res-guide summary {
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .page-resources .res-guide summary::after {
+    font-size: 20px;
+  }
+
+  .page-resources .res-g-ico {
+    flex: 0 0 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .page-resources .res-g-title {
+    font-size: 14.5px;
+    line-height: 1.25;
+  }
+
+  .page-resources .res-g-tag {
+    margin-top: 2px;
+    font-size: 10.5px;
+  }
+
+  .page-resources .res-g-body {
+    padding: 0 12px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .page-resources .res-g-body p {
+    margin: 0 0 8px;
+    font-size: 13px;
+  }
+
+  .page-resources .res-g-body ul,
+  .page-resources .res-g-body ol {
+    margin: 0 0 8px;
+    padding-left: 18px;
+    gap: 3px;
+  }
+
+  .page-resources .res-g-link {
+    font-size: 12.5px;
+  }
+
+  .page-resources .res-empty {
+    margin-top: 4px;
+    padding: 18px 14px;
+    border-radius: 12px;
+  }
+
+  .page-resources .res-empty>i {
+    font-size: 24px;
+  }
+
+  .page-resources .res-empty h3 {
+    margin: 6px 0 2px;
+    font-size: 1rem;
+  }
+
+  .page-resources .res-empty p {
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Do / Don't ---------- */
+  .page-resources .res-dodont {
+    gap: 8px;
+  }
+
+  .page-resources .res-do,
+  .page-resources .res-dont {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-resources .res-do h3,
+  .page-resources .res-dont h3 {
+    gap: 8px;
+    margin: 0 0 10px;
+    font-size: 1rem;
+  }
+
+  .page-resources .res-do ul,
+  .page-resources .res-dont ul {
+    gap: 8px;
+  }
+
+  .page-resources .res-do li,
+  .page-resources .res-dont li {
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Restricted items (icon left, text right) ---------- */
+  .page-resources .res-restrict {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .page-resources .res-restrict li {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 2px;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .page-resources .res-restrict i {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    margin: 0;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .page-resources .res-restrict h3 {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    margin: 0;
+    font-size: 14.5px;
+  }
+
+  .page-resources .res-restrict p {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  .page-resources .res-note {
+    gap: 10px;
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-resources .res-note p {
+    flex: 1 1 100%;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .page-resources .res-note .btn-main {
+    width: 100%;
+    min-height: 42px;
+    font-size: 14.5px;
+  }
+
+  /* ---------- Destination table (stacked cards) ---------- */
+  .page-resources .res-toolbar {
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .page-resources .res-toolbar .res-search {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .page-resources .res-toolbar small {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .page-resources .res-table tr {
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+
+  .page-resources .res-table td {
+    gap: 12px;
+    padding: 7px 0;
+    font-size: 13px;
+  }
+
+  .page-resources .res-table td::before {
+    font-size: 10.5px;
+  }
+
+  .page-resources .res-dest {
+    gap: 8px;
+  }
+
+  .page-resources .res-dest img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .page-resources .res-table-empty {
+    padding: 18px 12px;
+    font-size: 13px;
+  }
+
+  /* ---------- Tools, downloads, articles ---------- */
+  .page-resources .res-cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .page-resources .res-card {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+    align-content: start;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  /* everything spans the full width below the icon + title row */
+  .page-resources .res-card>* {
+    grid-column: 1 / -1;
+  }
+
+  /* icon + title on the same line */
+  .page-resources .res-card>.res-ico {
+    grid-column: 1;
+    grid-row: 1;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .page-resources .res-card>h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .page-resources .res-card>.res-card-tag {
+    justify-self: start;
+  }
+
+  .page-resources .res-card>.res-g-link {
+    justify-self: start;
+  }
+
+  .page-resources .res-card p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-resources .res-card-tag {
+    padding: 3px 9px;
+    font-size: 10.5px;
+  }
+
+  .page-resources .res-card .btn-main {
+    min-height: 40px;
+    padding: 8px 12px;
+    font-size: 13.5px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .page-resources #resFaqLeft,
+  .page-resources #resFaqRight {
+    margin-bottom: 8px;
+  }
+
+  .page-resources #resFaqLeft .accordion-button,
+  .page-resources #resFaqRight .accordion-button {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .page-resources #resFaqLeft .accordion-body,
+  .page-resources #resFaqRight .accordion-body {
+    padding: 0 14px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- Very small phones (same breakpoint as Home) ---------- */
+@media (max-width: 380px) {
+
+  .page-resources .res-head h2,
+  .page-resources .res-cat-head h2,
+  .page-resources .res-finder h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-resources .res-head p,
+  .page-resources .res-cat-head p,
+  .page-resources .res-finder>p {
+    font-size: 13px;
+  }
+
+  .page-resources .res-finder {
+    padding: 12px;
+  }
+
+  .page-resources .res-cat-head {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 8px;
+  }
+
+  .page-resources .res-cat-ico {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .page-resources .res-g-title,
+  .page-resources .res-card h3,
+  .page-resources .res-restrict h3 {
+    font-size: 14px;
+  }
+
+  .page-resources .res-g-body,
+  .page-resources .res-g-body p,
+  .page-resources .res-card p,
+  .page-resources .res-restrict p {
+    font-size: 12px;
+  }
+
+  .page-resources .res-guide summary {
+    padding: 10px;
+  }
+
+  .page-resources .res-g-ico {
+    flex: 0 0 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .page-resources .res-restrict li {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .page-resources .res-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 10px;
+  }
+
+  .page-resources .res-card>.res-ico {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+}

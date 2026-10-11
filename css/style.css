@@ -5738,3 +5738,183 @@ html.template-jp body {
     overflow: hidden;
   }
 }
+
+
+/* ===============================================================
+   SHIPPING GUIDES: MOBILE COMPACT (matches Home page mobile sizing)
+   =============================================================== */
+@media (max-width: 767px) {
+
+  /* ---------- Section spacing + side alignment ---------- */
+  html.page-shipping-guides .jp-section {
+    padding: 12px 0;
+  }
+
+  html.page-shipping-guides .container-xl {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* ---------- Search ---------- */
+  html.page-shipping-guides .jp-search {
+    margin-bottom: 10px;
+  }
+
+  html.page-shipping-guides .jp-search i {
+    top: 50%;
+    left: 14px;
+    transform: translateY(-50%);
+    font-size: 13px;
+    pointer-events: none;
+  }
+
+  html.page-shipping-guides .jp-search input {
+    height: 42px;
+    padding: 0 14px 0 38px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  /* ---------- Filter chips (one scrollable row) ---------- */
+  html.page-shipping-guides .jp-filterbar {
+    flex-wrap: nowrap;
+    gap: 6px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  html.page-shipping-guides .jp-filterbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.page-shipping-guides .jp-filter {
+    flex: 0 0 auto;
+    padding: 6px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Guide cards ---------- */
+  html.page-shipping-guides .jp-grid {
+    gap: 8px;
+  }
+
+  /* icon + title on one line, text and link below */
+  html.page-shipping-guides .jp-card {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  html.page-shipping-guides .jp-card>* {
+    grid-column: 1 / -1;
+  }
+
+  html.page-shipping-guides .jp-card>.jp-icon {
+    grid-column: 1;
+    grid-row: 1;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  html.page-shipping-guides .jp-card>h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  html.page-shipping-guides .jp-card p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  html.page-shipping-guides .jp-card .jp-service-link {
+    margin-top: 4px !important;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  html.page-shipping-guides .jp-service-link span {
+    font-size: 12.5px;
+  }
+
+  /* ---------- Bottom CTA ---------- */
+  html.page-shipping-guides .jp-cta {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  html.page-shipping-guides .jp-cta h2 {
+    margin: 0 0 6px;
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+  }
+
+  html.page-shipping-guides .jp-cta p {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  html.page-shipping-guides .jp-hero-actions {
+    display: grid;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  html.page-shipping-guides .jp-hero-actions .jp-btn {
+    min-height: 42px;
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+}
+
+/* ---------- Very small phones (same breakpoint as Home) ---------- */
+@media (max-width: 380px) {
+
+  html.page-shipping-guides .jp-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 10px;
+  }
+
+  html.page-shipping-guides .jp-card>.jp-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  html.page-shipping-guides .jp-card>h3 {
+    font-size: 14px;
+  }
+
+  html.page-shipping-guides .jp-card p {
+    font-size: 12px;
+  }
+
+  html.page-shipping-guides .jp-cta {
+    padding: 14px;
+  }
+
+  html.page-shipping-guides .jp-cta h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  html.page-shipping-guides .jp-cta p {
+    font-size: 13px;
+  }
+}

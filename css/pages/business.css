@@ -1358,3 +1358,574 @@
 .page-business #bizFaqRight .accordion-item:last-child {
   margin-bottom: 0;
 }
+
+
+/* ===============================================================
+   BUSINESS: MOBILE COMPACT (matches Home page mobile sizing)
+   =============================================================== */
+@media (max-width: 767px) {
+
+  /* ---------- Section spacing ---------- */
+  .page-business .home-section,
+  .page-business .home-section.biz-plain,
+  .page-business .home-section.biz-alt,
+  .page-business .home-section.biz-account {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .page-business .biz-sec {
+    scroll-margin-top: calc(var(--jp-header-h, 64px) + 52px);
+  }
+
+  /* ---------- Section headings ---------- */
+  .page-business .biz-head {
+    max-width: 100%;
+    margin: 0 0 10px;
+    text-align: left;
+  }
+
+  .page-business .biz-head h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 2px 0 4px;
+  }
+
+  .page-business .biz-head p {
+    margin: 4px 0 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Sticky section nav ---------- */
+  .page-business .biz-catnav-inner {
+    gap: 6px;
+    padding: 8px 0;
+  }
+
+  .page-business .biz-catlink {
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+
+  .page-business .biz-catlink i {
+    font-size: 12px;
+  }
+
+  /* ---------- Solution cards ---------- */
+  .page-business .biz-grid {
+    gap: 8px;
+  }
+
+  .page-business .biz-card {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .page-business .biz-top {
+    margin-bottom: 8px;
+  }
+
+  .page-business .biz-ico {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .page-business .biz-tag {
+    padding: 3px 9px;
+    font-size: 10.5px;
+  }
+
+  .page-business .biz-card h3 {
+    font-size: 15px;
+    line-height: 1.25;
+    margin: 0 0 4px;
+  }
+
+  .page-business .biz-card p {
+    margin: 0 0 8px;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-business .biz-more {
+    font-size: 12.5px;
+  }
+
+  /* ---------- Who we serve (tabs + panel) ---------- */
+  .page-business .biz-aud {
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(30, 42, 107, .1);
+  }
+
+  .page-business .biz-tabs {
+    gap: 6px;
+    margin: 0 -12px 10px;
+    padding: 0 12px 4px;
+  }
+
+  .page-business .biz-tab {
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .page-business .biz-tab i {
+    font-size: 12px;
+  }
+
+  .page-business .biz-panel {
+    gap: 8px;
+    padding: 0;
+  }
+
+  .page-business .biz-panel+.biz-panel {
+    margin-top: 12px;
+    padding-top: 12px;
+  }
+
+  /* icon + title on one line, text below (same pattern as About Mission/Vision) */
+  .page-business .biz-p-main {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+    align-items: center;
+  }
+
+  .page-business .biz-p-main>* {
+    grid-column: 1 / -1;
+  }
+
+  .page-business .biz-p-main>.biz-ico {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .page-business .biz-p-main>h3 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .page-business .biz-ico.lg {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(43, 57, 144, .22);
+  }
+
+  .page-business .biz-p-main h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .page-business .biz-p-main>p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .page-business .biz-chips {
+    gap: 5px;
+    margin-bottom: 4px;
+  }
+
+  .page-business .biz-chips span {
+    padding: 3px 9px;
+    border-radius: 7px;
+    font-size: 11px;
+  }
+
+  .page-business .biz-p-main .btn-main {
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 14.5px;
+  }
+
+  .page-business .biz-p-list {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .page-business .biz-p-list h4 {
+    margin: 0 0 8px;
+    font-size: 10.5px;
+  }
+
+  .page-business .biz-p-list ul {
+    gap: 8px;
+  }
+
+  .page-business .biz-p-list li {
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .page-business .biz-p-list li i {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  /* ---------- Business account ---------- */
+  .page-business .biz-note-pill {
+    margin: 0 0 12px;
+    padding: 5px 12px;
+    font-size: 11.5px;
+  }
+
+  .page-business .biz-acc-grid {
+    gap: 8px;
+  }
+
+  .page-business .biz-acc {
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    align-items: center;
+  }
+
+  .page-business .biz-acc .a-ico {
+    flex: 0 0 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .page-business .biz-acc h3 {
+    margin: 0 0 2px;
+    font-size: 14.5px;
+  }
+
+  .page-business .biz-acc p {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  .page-business .biz-acc-cta {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .page-business .biz-acc-cta .btn-main {
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 14.5px;
+  }
+
+  /* ---------- Export / import support ---------- */
+  .page-business .biz-duo {
+    gap: 8px;
+  }
+
+  .page-business .biz-info {
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(30, 42, 107, .1);
+  }
+
+  .page-business .biz-info h3 {
+    gap: 8px;
+    margin: 0 0 10px;
+    font-size: 1rem;
+  }
+
+  .page-business .biz-info ul {
+    gap: 8px;
+    margin: 0 0 12px;
+  }
+
+  .page-business .biz-info li {
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .page-business .biz-info li i {
+    margin-top: 3px;
+    font-size: 11px;
+  }
+
+  .page-business .biz-warn {
+    gap: 8px;
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  /* ---------- How it works (steps) ---------- */
+  .page-business .biz-steps {
+    gap: 8px;
+  }
+
+  .page-business .biz-steps li {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 4px;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 12px;
+    text-align: left;
+  }
+
+  .page-business .biz-steps li::before {
+    top: 8px;
+    left: auto;
+    right: 12px;
+    font-size: 11px;
+  }
+
+  .page-business .biz-steps .s-ico {
+    grid-column: 1;
+    grid-row: 1;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    font-size: 17px;
+    border-width: 1.5px;
+  }
+
+  .page-business .biz-steps h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    padding-right: 24px;
+    font-size: 14.5px;
+    line-height: 1.25;
+  }
+
+  .page-business .biz-steps p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  /* ---------- Business quote ---------- */
+  .page-business .biz-quote {
+    gap: 8px;
+  }
+
+  .page-business .biz-side {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-business .biz-side h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+
+  .page-business .biz-ready {
+    gap: 7px;
+    margin: 0 0 12px;
+  }
+
+  .page-business .biz-ready li {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .page-business .biz-ready li i {
+    flex: 0 0 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  .page-business .biz-talk {
+    gap: 8px;
+    padding-top: 12px;
+  }
+
+  .page-business .biz-talk h4 {
+    font-size: 11.5px;
+  }
+
+  .page-business .biz-talk .btn-main {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .page-business .biz-mail {
+    font-size: 13px;
+  }
+
+  .page-business .biz-form-card {
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(30, 42, 107, .1);
+  }
+
+  .page-business .biz-form .row {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 8px;
+  }
+
+  .page-business .biz-f label {
+    margin: 0 0 3px;
+    font-size: 12px;
+  }
+
+  .page-business .biz-form .form-control,
+  .page-business .biz-form .form-select {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .page-business .biz-form textarea.form-control {
+    min-height: 0;
+  }
+
+  .page-business .biz-err {
+    margin-top: 3px;
+    font-size: 12px;
+  }
+
+  .page-business .biz-consent {
+    gap: 8px;
+    font-size: 13px;
+  }
+
+  .page-business .biz-actions {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .page-business .biz-actions .btn-main {
+    min-height: 42px;
+    padding: 0 16px;
+    font-size: 14.5px;
+    border-radius: 8px;
+  }
+
+  .page-business .biz-status {
+    margin-top: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .page-business #bizFaqLeft,
+  .page-business #bizFaqRight {
+    margin-bottom: 8px;
+  }
+
+  .page-business #bizFaqLeft .accordion-button,
+  .page-business #bizFaqRight .accordion-button {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .page-business #bizFaqLeft .accordion-body,
+  .page-business #bizFaqRight .accordion-body {
+    padding: 0 14px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Explore more links ---------- */
+  .page-business .biz-links {
+    gap: 8px;
+  }
+
+  .page-business .biz-link {
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+  }
+
+  .page-business .biz-link .l-ico {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .page-business .biz-link b {
+    font-size: 14px;
+  }
+
+  .page-business .biz-link small {
+    font-size: 12px;
+  }
+}
+
+/* ---------- Very small phones (same breakpoint as Home) ---------- */
+@media (max-width: 380px) {
+
+  .page-business .biz-head h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-business .biz-head p {
+    font-size: 13px;
+  }
+
+  .page-business .biz-card {
+    padding: 10px;
+  }
+
+  .page-business .biz-card h3,
+  .page-business .biz-acc h3,
+  .page-business .biz-steps h3 {
+    font-size: 14px;
+  }
+
+  .page-business .biz-card p,
+  .page-business .biz-acc p,
+  .page-business .biz-steps p {
+    font-size: 12px;
+  }
+
+  .page-business .biz-aud {
+    padding: 10px;
+  }
+
+  .page-business .biz-tabs {
+    margin: 0 -10px 10px;
+    padding: 0 10px 4px;
+  }
+
+  .page-business .biz-p-main {
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 8px;
+  }
+
+  .page-business .biz-ico.lg {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+
+  .page-business .biz-p-main h3 {
+    font-size: 1rem;
+  }
+
+  .page-business .biz-steps li {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .page-business .biz-steps .s-ico {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .page-business .biz-form-card,
+  .page-business .biz-side {
+    padding: 12px;
+  }
+}

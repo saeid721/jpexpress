@@ -45,3 +45,117 @@
   margin-top: auto;
   padding-top: 17px;
 }
+
+
+/* ===============================================================
+   MEDIA CENTER: MOBILE COMPACT (matches Home page mobile sizing)
+   =============================================================== */
+@media (max-width: 767px) {
+
+  /* ---------- Section spacing + side alignment ---------- */
+  .page-media-center .jp-section {
+    padding: 12px 0;
+  }
+
+  .page-media-center .container-xl {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* ---------- Filter chips (one scrollable row) ---------- */
+  .page-media-center .jp-filterbar {
+    flex-wrap: nowrap;
+    gap: 6px;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-media-center .jp-filterbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .page-media-center .jp-filter {
+    flex: 0 0 auto;
+    padding: 6px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Media cards ---------- */
+  .page-media-center .jp-grid {
+    gap: 8px;
+  }
+
+  .page-media-center .jp-media-card {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .page-media-center .jp-media-card .media-image {
+    aspect-ratio: 16 / 9;
+    margin: 0 0 10px;
+    border-radius: 8px;
+  }
+
+  .page-media-center .jp-media-card .media-date {
+    font-size: 10px;
+  }
+
+  .page-media-center .jp-media-card h3 {
+    margin: 4px 0 4px;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .page-media-center .jp-media-card p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-media-center .jp-media-card .media-actions {
+    padding-top: 10px;
+  }
+
+  .page-media-center .jp-media-card .jp-service-link {
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+
+  .page-media-center .jp-media-card .jp-service-link span {
+    font-size: 12.5px;
+  }
+
+  /* ---------- Publishing note ---------- */
+  .page-media-center .jp-empty {
+    margin-top: 8px !important;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+}
+
+/* ---------- Very small phones (same breakpoint as Home) ---------- */
+@media (max-width: 380px) {
+
+  .page-media-center .jp-media-card {
+    padding: 8px;
+  }
+
+  .page-media-center .jp-media-card h3 {
+    font-size: 14px;
+  }
+
+  .page-media-center .jp-media-card p {
+    font-size: 12px;
+  }
+
+  .page-media-center .jp-empty {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}

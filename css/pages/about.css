@@ -629,3 +629,359 @@
 .page-about #abtFaqRight .accordion-item:last-child {
   margin-bottom: 0;
 }
+
+
+/* ===============================================================
+   ABOUT: MOBILE COMPACT (matches Home page mobile sizing)
+   =============================================================== */
+@media (max-width: 767px) {
+
+  /* ---------- Section spacing ---------- */
+  .page-about .home-section,
+  .page-about .home-section.abt-plain,
+  .page-about .home-section.abt-alt,
+  .page-about .home-section.abt-net {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .page-about .row.g-3 {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 8px;
+  }
+
+  /* ---------- Headings and body text ---------- */
+  .page-about .abt-head {
+    max-width: 100%;
+    margin: 0 0 10px;
+    text-align: left;
+  }
+
+  .page-about .abt-head h2,
+  .page-about .abt-copy h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 2px 0 4px;
+  }
+
+  .page-about .abt-head p {
+    margin: 4px 0 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .page-about .abt-copy p {
+    margin: 8px 0 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  /* ---------- Split layout and photo ---------- */
+  .page-about .abt-split {
+    gap: 14px;
+  }
+
+  .page-about .abt-photo {
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(30, 42, 107, .14);
+  }
+
+  .page-about .abt-photo img {
+    aspect-ratio: 16 / 9;
+  }
+
+  /* ---------- Company glance card ---------- */
+  .page-about .abt-glance {
+    padding: 2px 14px;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(30, 42, 107, .1);
+  }
+
+  .page-about .abt-glance div {
+    gap: 2px;
+    padding: 10px 0;
+  }
+
+  .page-about .abt-glance dt {
+    font-size: 10.5px;
+  }
+
+  .page-about .abt-glance dd {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* ---------- Mission / Vision ---------- */
+  .page-about .abt-mv {
+    gap: 8px;
+  }
+
+  .page-about .abt-mv-card {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 8px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-about .abt-mv-card i {
+    grid-column: 1;
+    grid-row: 1;
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+    border-radius: 10px;
+    margin: 0;
+  }
+
+  .page-about .abt-mv-card h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .page-about .abt-mv-card p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Mini cards: same one-per-row layout as Home "Why" ---------- */
+  .page-about .home-section .row>.col-6 {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .page-about .mini-card {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    row-gap: 2px;
+    align-items: center;
+    min-height: 0;
+    padding: 12px 14px;
+    text-align: left;
+    border-radius: 10px;
+  }
+
+  .page-about .mini-card i {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    border-radius: 10px;
+    background: rgba(43, 57, 144, .08);
+    font-size: 20px;
+  }
+
+  .page-about .mini-card h3 {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    margin: 0;
+    font-size: 14.5px;
+  }
+
+  .page-about .mini-card p {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  /* ---------- Link cards (services / teams) ---------- */
+  .page-about .abt-link-card {
+    gap: 10px;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .page-about .abt-link-card>i {
+    flex: 0 0 38px;
+    height: 38px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+
+  .page-about .abt-link-card h3 {
+    font-size: 14.5px;
+    margin: 0 0 2px;
+  }
+
+  .page-about .abt-link-card p {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  .page-about .abt-link-card span {
+    margin-top: 4px;
+    font-size: 12.5px;
+  }
+
+  /* ---------- Global network ---------- */
+  .page-about .abt-chips {
+    margin-top: 12px;
+    gap: 6px;
+  }
+
+  .page-about .abt-chips span {
+    padding: 6px 11px;
+    font-size: 12px;
+  }
+
+  .page-about .abt-map {
+    padding: 10px;
+    border-radius: 12px;
+  }
+
+  .page-about .abt-logos {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .page-about .abt-logos span {
+    height: 44px;
+    padding: 6px 8px;
+    border-radius: 10px;
+  }
+
+  .page-about .abt-logos img {
+    max-height: 22px;
+  }
+
+  /* ---------- Careers steps and apply box ---------- */
+  .page-about .abt-steps {
+    gap: 8px;
+  }
+
+  .page-about .abt-steps li {
+    padding: 12px 12px 12px 52px;
+    border-radius: 10px;
+  }
+
+  .page-about .abt-steps li::before {
+    left: 12px;
+    top: 12px;
+    width: 30px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  .page-about .abt-steps strong {
+    font-size: 14px;
+  }
+
+  .page-about .abt-steps small {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  .page-about .abt-apply {
+    margin-top: 10px;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-about .abt-apply p {
+    flex: 1 1 100%;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .page-about .abt-apply .btn-main {
+    width: 100%;
+    min-height: 42px;
+    font-size: 14.5px;
+    justify-content: center;
+  }
+
+  /* ---------- FAQ ---------- */
+  .page-about #abtFaqLeft,
+  .page-about #abtFaqRight {
+    margin-bottom: 8px;
+  }
+
+  .page-about #abtFaqLeft .accordion-button,
+  .page-about #abtFaqRight .accordion-button {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .page-about #abtFaqLeft .accordion-body,
+  .page-about #abtFaqRight .accordion-body {
+    padding: 0 14px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- Very small phones (same breakpoint as Home) ---------- */
+@media (max-width: 380px) {
+
+  .page-about .abt-head h2,
+  .page-about .abt-copy h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-about .abt-copy p,
+  .page-about .abt-head p {
+    font-size: 13px;
+  }
+
+  .page-about .mini-card {
+    grid-template-columns: 38px 1fr;
+    column-gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .page-about .mini-card i {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+  }
+
+  .page-about .mini-card h3 {
+    font-size: 14px;
+  }
+
+  .page-about .mini-card p {
+    font-size: 12px;
+  }
+
+  .page-about .abt-link-card h3 {
+    font-size: 14px;
+  }
+
+  .page-about .abt-mv-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 12px;
+  }
+
+  .page-about .abt-mv-card i {
+    width: 34px;
+    height: 34px;
+    font-size: 15px;
+  }
+
+  .page-about .abt-mv-card h3 {
+    font-size: .95rem;
+  }
+
+  .page-about .abt-mv-card p {
+    font-size: 12.5px;
+  }
+}
