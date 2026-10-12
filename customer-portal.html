@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="page-portal">
+<html lang="en" class="page-portal" data-site-title="JP Express Customer Portal">
 
 <head>
     <meta charset="utf-8">
@@ -27,7 +27,6 @@
             <div class="sb-head">
                 <a class="brand" href="index.html" aria-label="JP Express home">
                     <img src="assets/logo.png" alt="JP Express">
-                    <span><b>Customer Portal</b><small>SHIP WITH CONFIDENCE</small></span>
                 </a>
                 <button class="icon-btn sb-close" data-action="closeNav" aria-label="Close menu"><i
                         class="fa-solid fa-xmark"></i></button>
@@ -39,7 +38,34 @@
                 <i class="fa-solid fa-arrows-up-down"></i>
             </button>
 
-            <nav class="side-nav" id="sideNav" aria-label="Main"></nav>
+            <nav class="side-nav" id="sideNav" aria-label="Main">
+                <a href="#dashboard" data-nav="dashboard" data-title="Dashboard"><i
+                        class="fa-solid fa-table-cells-large"></i><span class="nav-label">Dashboard</span></a>
+                <a href="#shipments" data-nav="shipments" data-title="My shipments" data-perm="ship.view" data-count><i
+                        class="fa-solid fa-box"></i><span class="nav-label">My shipments</span></a>
+                <a href="#create" data-nav="create" data-title="Create shipment" data-perm="ship.create"><i
+                        class="fa-solid fa-circle-plus"></i><span class="nav-label">Create shipment</span></a>
+                <a href="#tracking" data-nav="tracking" data-title="Track shipment" data-perm="track"><i
+                        class="fa-solid fa-location-crosshairs"></i><span class="nav-label">Track shipment</span></a>
+                <a href="#quotes" data-nav="quotes" data-title="Quotes & bookings" data-perm="quote"><i
+                        class="fa-solid fa-file-invoice-dollar"></i><span class="nav-label">Quotes &amp;
+                        bookings</span></a>
+                <a href="#contacts" data-nav="contacts" data-title="Address book" data-perm="contacts"><i
+                        class="fa-solid fa-address-book"></i><span class="nav-label">Address book</span></a>
+                <a href="#family" data-nav="family" data-title="Family & access" data-alt="Team & access"
+                    data-perm="members"><i class="fa-solid fa-people-roof"></i><span class="nav-label">Family &amp;
+                        access</span></a>
+                <a href="#documents" data-nav="documents" data-title="Documents" data-perm="docs.view"><i
+                        class="fa-solid fa-folder-open"></i><span class="nav-label">Documents</span></a>
+                <a href="#billing" data-nav="billing" data-title="Invoices & payments" data-perm="billing.view"><i
+                        class="fa-solid fa-wallet"></i><span class="nav-label">Invoices &amp; payments</span></a>
+                <a href="#notifications" data-nav="notifications" data-title="Notifications" data-badge><i
+                        class="fa-solid fa-bell"></i><span class="nav-label">Notifications</span></a>
+                <a href="#support" data-nav="support" data-title="Help & support" data-perm="support"><i
+                        class="fa-solid fa-headset"></i><span class="nav-label">Help &amp; support</span></a>
+                <a href="#profile" data-nav="profile" data-title="Profile & security"><i
+                        class="fa-solid fa-user-shield"></i><span class="nav-label">Profile &amp; security</span></a>
+            </nav>
 
             <div class="sb-foot">
                 <a class="side-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to website</a>
@@ -52,8 +78,14 @@
             <header class="topbar">
                 <button class="icon-btn menu-btn" data-action="openNav" aria-label="Open menu"><i
                         class="fa-solid fa-bars"></i></button>
-                <div class="crumb"><span>My account</span><i class="fa-solid fa-chevron-right"></i><b
-                        id="crumbTitle">Dashboard</b></div>
+                <div class="crumb">
+                    <b class="crumb-title">Customer Portal</b>
+                    <div class="crumb-path">
+                        <span>My account</span>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        <strong id="crumbTitle">Dashboard</strong>
+                    </div>
+                </div>
 
                 <form class="top-search" id="topSearch" role="search">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -98,8 +130,6 @@
 
             <footer class="portal-foot">
                 <span>© 2026 JP Express. All rights reserved.</span>
-                <span><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a><a
-                        href="contact.html">Support</a></span>
             </footer>
         </div>
     </div>

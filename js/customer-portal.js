@@ -382,14 +382,13 @@
             { l: 'Add sender', s: 'Save pickup details', ic: 'fa-house-user', t: 'green', act: 'addContact', type: 'sender', p: 'contacts' },
             { l: 'Add receiver', s: 'Save delivery details', ic: 'fa-location-dot', t: 'green', act: 'addContact', type: 'receiver', p: 'contacts' },
             { l: 'Make payment', s: 'Pay open invoices', ic: 'fa-credit-card', t: 'amber', nav: 'billing', p: 'billing.pay' },
-            { l: 'Contact support', s: 'We reply fast', ic: 'fa-headset', t: 'blue', nav: 'support', p: 'support' }
         ].filter(function (q) { return can(q.p); });
 
         var recent = sh.slice().sort(function (x, y) { return new Date(y.date) - new Date(x.date); }).slice(0, 4);
 
         return '<section class="welcome"><div><div class="eyebrow"><span class="pulse"></span>' + (isBiz() ? 'BUSINESS ACCOUNT · ' + esc(a.role).toUpperCase() : 'PERSONAL ACCOUNT') + '</div>' +
             '<h1>' + greet + ', ' + esc(first) + ' <span class="spark">✦</span></h1><p>Create your account once. Manage your shipments anytime.</p></div>' +
-            (can('ship.create') ? '<a class="btn btn-primary btn-lg" href="#create" data-nav="create"><i class="fa-solid fa-plus"></i> Create a shipment</a>' : '') + '</section>' +
+            (can('ship.create') ? '' : '') + '</section>' +
 
             '<section class="hero"><div class="hero-copy"><span class="hero-tag"><i class="fa-solid fa-earth-asia"></i> GLOBAL SHIPPING, MADE SIMPLE</span>' +
             '<h2>Your next shipment starts right here.</h2><p>Pick a saved sender and receiver, enter the weight, and book in under a minute.</p>' +
@@ -398,7 +397,7 @@
             '<div class="hero-art" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="globe"><i class="fa-solid fa-earth-asia"></i></div><div class="fbox b1"><i class="fa-solid fa-box"></i></div><div class="fbox b2"><i class="fa-solid fa-plane"></i></div></div></section>' +
 
             '<section class="stats">' + stats.map(function (s) {
-                return '<button class="stat" data-action="statGo" data-go="' + s.go + '" data-f="' + (s.f || '') + '"><span class="stat-ico ' + s.t + '"><i class="fa-solid ' + s.ic + '"></i></span><span class="stat-k">' + esc(s.k) + '</span><strong class="' + (s.small ? 'sm' : '') + '">' + esc(s.v) + '</strong></button>';
+                return '<button class="stat tone-' + s.t + '" data-action="statGo" data-go="' + s.go + '" data-f="' + (s.f || '') + '"><span class="stat-ico ' + s.t + '"><i class="fa-solid ' + s.ic + '"></i></span><span class="stat-k">' + esc(s.k) + '</span><strong class="' + (s.small ? 'sm' : '') + '">' + esc(s.v) + '</strong></button>';
             }).join('') + '</section>' +
 
             (todo.length ? '<section class="panel attention"><div class="panel-head"><div><h3>Needs your attention</h3><p>Things to review or complete.</p></div><span class="count-pill">' + todo.length + '</span></div>' +
