@@ -354,6 +354,172 @@
     function ctaBtn(label, attrs, icon) { return '<button class="btn btn-primary" ' + attrs + '>' + (icon ? '<i class="fa-solid ' + icon + '"></i> ' : '') + esc(label) + '</button>'; }
     function shipLabel(s) { return esc(s.from) + ' <i class="fa-solid fa-arrow-right-long arrow"></i> ' + esc(s.to); }
 
+    /* ---------- Dashboard hero: rotating dotted world map + flying plane ---------- */
+    var WORLD = [
+        '..........#########..####..............#############....',
+        '...#######################...#########################..',
+        '...######################....#########################..',
+        '....#################......###########################..',
+        '.....#################....############################..',
+        '.....################.....#############################.',
+        '......##############......############################..',
+        '.......###########........##########################....',
+        '.......##########.........###########################...',
+        '..........######...........########################.....',
+        '.............########......###########......###.###.#...',
+        '...............#########....###########........####.....',
+        '...............#########....##########........#######...',
+        '................########.....#########.........########.',
+        '................#########....#########..........########',
+        '.................########....########.........########..',
+        '..................#######.....#######........##########.',
+        '..................######.......#####.........##########.',
+        '..................#####.......................#######...',
+        '..................####................................##',
+        '..................###...................................'
+    ];
+    var PLANE = [[9, 0], [3, -1.8], [-1, -8], [-3.5, -8], [-1.8, -1.6], [-6, -1.2], [-7.5, -3.6], [-9, -3.6], [-8, 0], [-9, 3.6], [-7.5, 3.6], [-6, 1.2], [-1.8, 1.6], [-3.5, 8], [-1, 8], [3, 1.8]];
+    /* ship: hull (bow = +x), deck cabin, funnel, containers */
+    var SHIP_HULL = [[10, -1.2], [7, 3.4], [-8, 3.4], [-10.5, -3.8], [6.5, -3.8]];
+    var SHIP_CABIN = [[-6.6, -3.8], [-6.6, -7.4], [-2.6, -7.4], [-2.6, -3.8]];
+    var SHIP_BOX = [[1.2, '#F26323'], [3.7, '#ffd08a'], [6.2, '#8ea2ff']];
+    var heroRAF = 0;
+
+    function stopHero() { if (heroRAF) cancelAnimationFrame(heroRAF); heroRAF = 0; }
+
+    function startHero() {
+        stopHero();
+        var cv = $('#heroCanvas'); if (!cv || !cv.getContext) return;
+        var ctx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2), W = 0;
+        var D = Math.PI / 180, TAU = Math.PI * 2, TILT = .42, STEP = 6.4, pts = [];
+        WORLD.forEach(function (row, r) {
+            for (var c = 0; c < 56; c++) if (row.charAt(c) === '#') pts.push([(80 - (r + .5) * STEP) * D, ((c + .5) * STEP - 180) * D]);
+        });
+        var HUB = [23.8 * D, 90.4 * D]; /* Dhaka */
+        var RINGS = [
+            { rx: .47, ry: .17, rot: -26, sp: .00055, ph: .6, kind: 'plane', col: 'rgba(184,196,255,.38)' },
+            { rx: .40, ry: .27, rot: 36, sp: -.0004, ph: 2.2, kind: 'ship', col: 'rgba(255,177,139,.34)' }
+        ];
+
+        function size() {
+            W = cv.clientWidth; if (!W) return;
+            cv.width = cv.height = Math.round(W * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        function proj(lat, lon, rot) {
+            var l = lon - 1.58 + rot, cl = Math.cos(lat), x = cl * Math.sin(l), y = Math.sin(lat), z = cl * Math.cos(l);
+            return [x, y * Math.cos(TILT) - z * Math.sin(TILT), y * Math.sin(TILT) + z * Math.cos(TILT)];
+        }
+        function ring(g, fn) { ctx.save(); ctx.translate(W / 2, W / 2); ctx.rotate(g.rot * D); fn(); ctx.restore(); }
+        function orbiter(g, th, k) {
+            var rx = g.rx * W, ry = g.ry * W, dir = g.sp < 0 ? -1 : 1;
+            ring(g, function () {
+                var i, a, f;
+                if (g.kind === 'plane') {
+                    for (i = 18; i > 0; i--) {
+                        a = th - dir * i * .05; f = 1 - i / 18;
+                        ctx.globalAlpha = f * .6; ctx.fillStyle = '#ff9a6b';
+                        ctx.beginPath(); ctx.arc(rx * Math.cos(a), ry * Math.sin(a), 2.4 * k * f + .4, 0, TAU); ctx.fill();
+                    }
+                    ctx.globalAlpha = 1;
+                    ctx.translate(rx * Math.cos(th), ry * Math.sin(th));
+                    ctx.rotate(Math.atan2(dir * ry * Math.cos(th), -dir * rx * Math.sin(th)));
+                    ctx.scale(1.15 * k, 1.15 * k);
+                    ctx.shadowColor = 'rgba(242,99,35,.95)'; ctx.shadowBlur = 12;
+                    ctx.fillStyle = '#fff'; ctx.beginPath();
+                    PLANE.forEach(function (p, n) { if (n) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); });
+                    ctx.closePath(); ctx.fill();
+                } else {
+                    var sx = rx * Math.cos(th), sy = ry * Math.sin(th), bob = reduced ? 0 : Math.sin(th * 9) * .6 * k;
+
+                    /* wake trail (water ripples behind the ship) */
+                    for (i = 22; i > 0; i--) {
+                        a = th - dir * i * .045; f = 1 - i / 22;
+                        ctx.globalAlpha = f * .5; ctx.fillStyle = '#cfe0ff';
+                        ctx.beginPath(); ctx.arc(rx * Math.cos(a), ry * Math.sin(a) + Math.sin(i * 1.3 + th * 6) * .9 * k, (1.9 * f + .4) * k, 0, TAU); ctx.fill();
+                    }
+                    ctx.globalAlpha = 1;
+
+                    ctx.translate(sx, sy + bob);
+                    var tan = Math.atan2(dir * ry * Math.cos(th), -dir * rx * Math.sin(th));
+                    ctx.rotate(Math.cos(tan) < 0 ? tan + Math.PI : tan); /* ship kokhono ulta hobe na */
+                    if (Math.cos(tan) < 0) ctx.scale(-1, 1);
+                    ctx.scale(.95 * k, .95 * k);
+                    ctx.shadowColor = 'rgba(242,99,35,.85)'; ctx.shadowBlur = 10;
+
+                    /* containers */
+                    SHIP_BOX.forEach(function (b) { ctx.fillStyle = b[1]; ctx.fillRect(b[0] - 1.1, -6.6, 2.2, 2.8); });
+                    ctx.shadowBlur = 0;
+
+                    /* cabin + funnel */
+                    ctx.fillStyle = '#fff'; ctx.beginPath();
+                    SHIP_CABIN.forEach(function (p, n) { if (n) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); });
+                    ctx.closePath(); ctx.fill();
+                    ctx.fillStyle = '#F26323'; ctx.fillRect(-5.3, -9.6, 1.9, 2.4);
+
+                    /* hull */
+                    ctx.shadowColor = 'rgba(242,99,35,.85)'; ctx.shadowBlur = 8;
+                    ctx.fillStyle = '#F26323'; ctx.beginPath();
+                    SHIP_HULL.forEach(function (p, n) { if (n) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); });
+                    ctx.closePath(); ctx.fill();
+                    ctx.shadowBlur = 0; ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fillRect(-9.2, -1.4, 17, .9);
+                }
+            });
+        }
+        function frame(t) {
+            if (!document.body.contains(cv)) { heroRAF = 0; return; }
+            if (cv.clientWidth !== W) size();
+            if (W) {
+                var c = W / 2, R = W * .27, k = W / 300, rot = reduced ? 0 : t * .00014, i, p;
+                var ang = function (g) { return g.ph + (reduced ? 0 : t * g.sp); };
+                ctx.clearRect(0, 0, W, W);
+
+                /* 1. orbit lines */
+                RINGS.forEach(function (g) { ring(g, function () { ctx.beginPath(); ctx.ellipse(0, 0, g.rx * W, g.ry * W, 0, 0, TAU); ctx.strokeStyle = g.col; ctx.lineWidth = 1; ctx.stroke(); }); });
+                /* 2. orbiters behind the globe */
+                RINGS.forEach(function (g) { var th = ang(g); if (Math.sin(th) < 0) orbiter(g, th, k); });
+
+                /* 3. globe */
+                var gr = ctx.createRadialGradient(c - R * .35, c - R * .4, R * .1, c, c, R);
+                gr.addColorStop(0, '#7d8fe6'); gr.addColorStop(.55, '#394ba8'); gr.addColorStop(1, '#1c286e');
+                ctx.save(); ctx.shadowColor = 'rgba(120,140,255,.45)'; ctx.shadowBlur = 26 * k;
+                ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(c, c, R, 0, TAU); ctx.fill(); ctx.restore();
+
+                /* 4. rotating world map (dots) */
+                var dr = Math.max(1.1, R * .03);
+                ctx.fillStyle = '#dfe6ff';
+                for (i = 0; i < pts.length; i++) {
+                    p = proj(pts[i][0], pts[i][1], rot); if (p[2] <= 0) continue;
+                    ctx.globalAlpha = .22 + .78 * p[2];
+                    ctx.beginPath(); ctx.arc(c + R * p[0], c - R * p[1], dr * (.5 + .5 * p[2]), 0, TAU); ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+
+                /* 5. sphere shading */
+                var sh = ctx.createRadialGradient(c - R * .3, c - R * .3, R * .4, c, c, R);
+                sh.addColorStop(0, 'rgba(10,16,60,0)'); sh.addColorStop(1, 'rgba(10,16,60,.5)');
+                ctx.fillStyle = sh; ctx.beginPath(); ctx.arc(c, c, R, 0, TAU); ctx.fill();
+
+                /* 6. Dhaka hub pulse */
+                p = proj(HUB[0], HUB[1], rot);
+                if (p[2] > .15) {
+                    var pu = reduced ? .3 : (t % 2200) / 2200, px = c + R * p[0], py = c - R * p[1];
+                    ctx.strokeStyle = 'rgba(255,138,87,' + (1 - pu) * .85 + ')'; ctx.lineWidth = 1.5;
+                    ctx.beginPath(); ctx.arc(px, py, (3 + pu * 11) * k, 0, TAU); ctx.stroke();
+                    ctx.fillStyle = '#F26323'; ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.2;
+                    ctx.beginPath(); ctx.arc(px, py, 3 * k, 0, TAU); ctx.fill(); ctx.stroke();
+                }
+
+                /* 7. front half of orbit lines + orbiters in front */
+                RINGS.forEach(function (g) { ring(g, function () { ctx.beginPath(); ctx.ellipse(0, 0, g.rx * W, g.ry * W, 0, 0, Math.PI); ctx.strokeStyle = 'rgba(214,222,255,.5)'; ctx.lineWidth = 1.2; ctx.stroke(); }); });
+                RINGS.forEach(function (g) { var th = ang(g); if (Math.sin(th) >= 0) orbiter(g, th, k); });
+            }
+            if (!reduced) heroRAF = requestAnimationFrame(frame);
+        }
+        size();
+        if (reduced) frame(0); else heroRAF = requestAnimationFrame(frame);
+    }
+
     /* ---------- Dashboard ---------- */
     function vDashboard() {
         var a = A(), sh = a.shipments, h = new Date().getHours();
@@ -394,7 +560,7 @@
             '<h2>Your next shipment starts right here.</h2><p>Pick a saved sender and receiver, enter the weight, and book in under a minute.</p>' +
             '<div class="hero-actions">' + (can('ship.create') ? '<a class="btn btn-white" href="#create" data-nav="create">Book a shipment <i class="fa-solid fa-arrow-right"></i></a>' : '') +
             (can('track') ? '<a class="btn btn-outline-w" href="#tracking" data-nav="tracking"><i class="fa-solid fa-location-dot"></i> Track parcel</a>' : '') + '</div></div>' +
-            '<div class="hero-art" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="globe"><i class="fa-solid fa-earth-asia"></i></div><div class="fbox b1"><i class="fa-solid fa-box"></i></div><div class="fbox b2"><i class="fa-solid fa-plane"></i></div></div></section>' +
+            '<div class="hero-art" aria-hidden="true"><canvas id="heroCanvas"></canvas></div></section>' +
 
             '<section class="stats">' + stats.map(function (s) {
                 return '<button class="stat tone-' + s.t + '" data-action="statGo" data-go="' + s.go + '" data-f="' + (s.f || '') + '"><span class="stat-ico ' + s.t + '"><i class="fa-solid ' + s.ic + '"></i></span><span class="stat-k">' + esc(s.k) + '</span><strong class="' + (s.small ? 'sm' : '') + '">' + esc(s.v) + '</strong></button>';
@@ -1040,6 +1206,7 @@
     function render() {
         updateChrome();
         viewEl.innerHTML = (VIEWS[route] || vDashboard)();
+        startHero();
         var se = $('#shipSearch'); if (se) se.addEventListener('input', function () { filterState.q = se.value; var l = $('#shipList'); if (l) l.innerHTML = shipListHtml(); });
     }
     function go(r, force) {

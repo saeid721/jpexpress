@@ -4834,3 +4834,22 @@ button.stat.tone-red:hover {
     font-size: 12px;
   }
 }
+
+/* =====================================================================
+   HERO — ANIMATED GLOBE + FLYING PLANE (canvas)
+   ===================================================================== */
+.hero-art canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Phones: art ektu boro + text readable rakhar jonno halka */
+@media (max-width: 639px) {
+  .hero-art {
+    right: -46px;
+    width: 220px;
+    height: 220px;
+    opacity: .4;
+  }
+}
