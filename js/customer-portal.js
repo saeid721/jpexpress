@@ -1213,6 +1213,8 @@
     function go(r, force) {
         if (!VIEWS[r]) r = 'dashboard';
         var changed = r !== route; route = r; closeNav();
+        viewEl.classList.remove('view-in');
+        void viewEl.offsetWidth; /* force reflow to restart animation */
         if (r !== 'create' && changed) { /* keep wizard draft while browsing */ }
         if (('#' + r) !== location.hash) { try { history.pushState(null, '', '#' + r); } catch (e) { location.hash = r; } }
         render();
