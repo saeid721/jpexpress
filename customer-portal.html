@@ -42,9 +42,6 @@
             <nav class="side-nav" id="sideNav" aria-label="Main"></nav>
 
             <div class="sb-foot">
-                <div class="secure-note"><i class="fa-solid fa-shield-halved"></i>
-                    <span><b>Your account, protected</b><small>Access follows your role in the active account.</small></span>
-                </div>
                 <a class="side-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to website</a>
             </div>
         </aside>
@@ -67,14 +64,33 @@
                 <div class="top-actions">
                     <a class="btn btn-primary btn-sm top-new" href="#create" data-nav="create"><i
                             class="fa-solid fa-plus"></i><span>New shipment</span></a>
-                    <a class="icon-btn" href="contact.html" aria-label="Contact JP Express" title="Contact JP Express"><i
-                            class="fa-regular fa-circle-question"></i></a>
+                    <a class="icon-btn" href="contact.html" aria-label="Contact JP Express"
+                        title="Contact JP Express"><i class="fa-regular fa-circle-question"></i></a>
                     <button class="icon-btn bell" data-nav="notifications" aria-label="Notifications"><i
                             class="fa-regular fa-bell"></i><em id="bellDot" hidden>0</em></button>
-                    <button class="profile-btn" data-nav="profile" aria-label="Profile and security">
-                        <span class="avatar" id="meAvatar">RK</span>
-                        <span class="profile-meta"><b id="meName">Rahim Khan</b><small id="meSub">Personal customer</small></span>
-                    </button>
+                    <div class="profile-wrap" id="profileWrap">
+                        <button type="button" class="profile-btn" id="profileBtn" data-action="toggleProfile"
+                            aria-haspopup="menu" aria-expanded="false" aria-controls="profileMenu"
+                            aria-label="Account menu">
+                            <span class="avatar" id="meAvatar"><b id="meInit">RK</b><img src="assets/customer/01.jpg"
+                                    alt="" onerror="this.remove()"></span>
+                            <span class="profile-meta"><b id="meName">Rahim Khan</b><small id="meSub">Personal
+                                    customer</small></span>
+                            <i class="fa-solid fa-chevron-down pm-caret" aria-hidden="true"></i>
+                        </button>
+
+                        <div class="profile-menu" id="profileMenu" role="menu" aria-label="Account menu">
+                            <div class="pm-head"><b id="pmName">Rahim Khan</b><small id="pmSub">Personal
+                                    customer</small></div>
+                            <a class="pm-item" role="menuitem" href="#profile" data-nav="profile"><i
+                                    class="fa-solid fa-user"></i><span>Profile &amp; security</span></a>
+                            <a class="pm-item" role="menuitem" href="#activity" data-nav="activity"><i
+                                    class="fa-solid fa-clock-rotate-left"></i><span>Activity Log</span></a>
+                            <div class="pm-sep" role="separator"></div>
+                            <button type="button" class="pm-item danger" role="menuitem" data-action="signOut"><i
+                                    class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button>
+                        </div>
+                    </div>
                 </div>
             </header>
 

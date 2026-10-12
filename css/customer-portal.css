@@ -203,45 +203,59 @@ body.lock {
 }
 
 .sb-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 2px 4px 14px;
+  position: relative;
+  padding: 2px 4px 16px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--line-2);
 }
 
 .brand {
   display: flex;
-  align-items: center;
-  gap: 11px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
   min-width: 0;
+  padding-right: 52px;
+  /* mobile drawer: close button er jonno jayga */
 }
 
 .brand img {
-  width: 42px;
-  height: 42px;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 64px;
   object-fit: contain;
-  flex: none;
+  object-position: left center;
 }
 
 .brand span {
   display: block;
-  font: 800 15.5px var(--f-head);
+  width: 100%;
+  min-width: 0;
+}
+
+.brand span b {
+  display: block;
+  font: 800 16px/1.2 var(--f-head);
   color: var(--navy);
-  letter-spacing: -.3px;
-  line-height: 1.15;
+  letter-spacing: -.2px;
 }
 
 .brand small {
   display: block;
   margin-top: 4px;
-  font: 700 8.5px var(--f-body);
-  letter-spacing: 1.3px;
+  font: 700 9px var(--f-body);
+  letter-spacing: 1.4px;
   color: var(--soft);
 }
 
 .sb-close {
   display: grid;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
 }
 
 .acct-switch {
@@ -549,18 +563,26 @@ body.lock {
   display: none;
 }
 
+.profile-wrap {
+  position: relative;
+}
+
 .profile-btn {
   display: flex;
   align-items: center;
   gap: 10px;
   background: none;
-  border: 0;
+  border: 1px solid transparent;
+  border-radius: 14px;
   padding: 0;
   text-align: left;
   min-height: 44px;
+  transition: background .18s, border-color .18s;
 }
 
 .avatar {
+  position: relative;
+  overflow: hidden;
   display: grid;
   place-items: center;
   width: 40px;
@@ -570,6 +592,15 @@ body.lock {
   color: var(--navy);
   font: 800 13px var(--f-head);
   flex: none;
+}
+
+.avatar img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .avatar.xl {
@@ -603,6 +634,129 @@ body.lock {
   max-width: 140px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.pm-caret {
+  display: none;
+  font-size: 11px;
+  color: var(--soft);
+  transition: transform .2s;
+}
+
+.profile-wrap.open .pm-caret {
+  transform: rotate(180deg);
+}
+
+/* ---------- Profile dropdown ---------- */
+.profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 70;
+  width: 240px;
+  max-width: calc(100vw - 24px);
+  padding: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--sh-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(.98);
+  transform-origin: top right;
+  transition: opacity .18s, transform .18s, visibility .18s;
+}
+
+.profile-menu::before {
+  /* hover bridge: button theke menu te mouse nite gele menu bondho hobe na */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12px;
+  height: 12px;
+}
+
+.profile-wrap.open .profile-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.pm-head {
+  margin: -2px -2px 6px;
+  padding: 10px 12px 12px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.pm-head b {
+  display: block;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.pm-head small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pm-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: #4d5875;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  transition: background .18s, color .18s;
+}
+
+.pm-item i {
+  width: 18px;
+  text-align: center;
+  font-size: 14px;
+  color: #8590aa;
+  transition: color .18s;
+}
+
+.pm-item:hover {
+  background: var(--tint);
+  color: var(--navy);
+}
+
+.pm-item:hover i {
+  color: var(--orange);
+}
+
+.pm-sep {
+  height: 1px;
+  margin: 6px 4px;
+  background: var(--line-2);
+}
+
+.pm-item.danger,
+.pm-item.danger i {
+  color: var(--bad);
+}
+
+.pm-item.danger:hover {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+.pm-item.danger:hover i {
+  color: var(--bad);
 }
 
 /* ---------- Mobile tab bar ---------- */
@@ -1001,7 +1155,6 @@ body.lock {
 .hero-copy {
   position: relative;
   z-index: 2;
-  max-width: 480px;
 }
 
 .hero-tag {
@@ -1030,7 +1183,6 @@ body.lock {
   color: #d8ddf5;
   font-size: 14px;
   line-height: 1.65;
-  max-width: 380px;
 }
 
 .hero-actions {
@@ -3752,6 +3904,10 @@ button.stat:hover {
     display: none !important;
   }
 
+  .brand {
+    padding-right: 0;
+  }
+
   .main {
     margin-left: var(--side);
   }
@@ -3813,6 +3969,26 @@ button.stat:hover {
 
   .profile-meta {
     display: block;
+  }
+
+  .profile-btn {
+    padding: 4px 12px 4px 4px;
+    border-color: var(--line);
+    background: #fff;
+  }
+
+  .profile-btn:hover,
+  .profile-wrap.open .profile-btn {
+    background: var(--tint);
+    border-color: #cfd6f3;
+  }
+
+  .pm-caret {
+    display: inline-block;
+  }
+
+  .pm-head {
+    display: none;
   }
 
   .content {
@@ -4179,6 +4355,18 @@ button.stat:hover {
   *::after {
     animation: none !important;
     transition-duration: .01ms !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .profile-wrap:not(.shut):hover .profile-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .profile-wrap:not(.shut):hover .pm-caret {
+    transform: rotate(180deg);
   }
 }
 

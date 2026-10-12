@@ -259,7 +259,7 @@
         $('#cfmOk', el).addEventListener('click', function () { closeModal(); o.onOk(); });
     }
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { if (modalCount) closeModal(); else closeNav(); }
+        if (e.key === 'Escape') { closeProfile(); if (modalCount) closeModal(); else closeNav(); }
         if (e.key === 'Tab' && modalCount) {
             var all = $$('.modal', modalRoot), sheet = $('.sheet', all[all.length - 1]);
             var f = $$('a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])', sheet).filter(function (x) { return x.offsetParent !== null; });
@@ -272,6 +272,19 @@
 
     function openNav() { $('#sidebar').classList.add('open'); $('#scrim').classList.add('show'); document.body.classList.add('lock'); }
     function closeNav() { $('#sidebar').classList.remove('open'); $('#scrim').classList.remove('show'); if (!modalCount) document.body.classList.remove('lock'); }
+
+    /* ---------- Profile dropdown ---------- */
+    function closeProfile() {
+        var w = $('#profileWrap'); if (!w) return;
+        w.classList.remove('open'); w.classList.add('shut');
+        var b = $('#profileBtn'); if (b) b.setAttribute('aria-expanded', 'false');
+    }
+    function toggleProfile() {
+        var w = $('#profileWrap'); if (!w) return;
+        if (w.classList.contains('open')) { closeProfile(); return; }
+        w.classList.remove('shut'); w.classList.add('open');
+        $('#profileBtn').setAttribute('aria-expanded', 'true');
+    }
 
     /* ---------- Field helpers ---------- */
     function field(label, name, o) {
@@ -323,6 +336,7 @@
         { id: 'profile', label: 'Profile & security', icon: 'fa-user-shield' }
     ];
     var TITLES = {}; NAV.forEach(function (n) { TITLES[n.id] = n.label; });
+    TITLES.activity = 'Activity Log';
     var route = 'dashboard', filterState = { status: 'all', q: '' }, docFilter = 'all', contactTab = 'receivers', wiz = null;
 
     function pageHead(eyebrow, title, sub, actionHtml) {
@@ -378,7 +392,7 @@
             (can('ship.create') ? '<a class="btn btn-primary btn-lg" href="#create" data-nav="create"><i class="fa-solid fa-plus"></i> Create a shipment</a>' : '') + '</section>' +
 
             '<section class="hero"><div class="hero-copy"><span class="hero-tag"><i class="fa-solid fa-earth-asia"></i> GLOBAL SHIPPING, MADE SIMPLE</span>' +
-            '<h2>Your next shipment<br>starts right here.</h2><p>Pick a saved sender and receiver, enter the weight, and book in under a minute.</p>' +
+            '<h2>Your next shipment starts right here.</h2><p>Pick a saved sender and receiver, enter the weight, and book in under a minute.</p>' +
             '<div class="hero-actions">' + (can('ship.create') ? '<a class="btn btn-white" href="#create" data-nav="create">Book a shipment <i class="fa-solid fa-arrow-right"></i></a>' : '') +
             (can('track') ? '<a class="btn btn-outline-w" href="#tracking" data-nav="tracking"><i class="fa-solid fa-location-dot"></i> Track parcel</a>' : '') + '</div></div>' +
             '<div class="hero-art" aria-hidden="true"><div class="orbit o1"></div><div class="orbit o2"></div><div class="globe"><i class="fa-solid fa-earth-asia"></i></div><div class="fbox b1"><i class="fa-solid fa-box"></i></div><div class="fbox b2"><i class="fa-solid fa-plane"></i></div></div></section>' +
@@ -814,6 +828,14 @@
             '<section class="panel flush">' + (n.length ? n.map(notifRow).join('') : emptyState('fa-bell-slash', 'You’re all caught up', 'New updates will appear here.')) + '</section>';
     }
 
+    /* ---------- Activity log ---------- */
+    function vActivity() {
+        var a = A(), items = a.notifications;
+        return pageHead('ACCOUNT HISTORY', 'Activity Log', 'Recent shipment, billing and account activity in ' + a.name + '.') +
+            '<section class="panel flush">' + (items.length ? items.map(notifRow).join('') : emptyState('fa-clock-rotate-left', 'No activity yet', 'Your recent actions will appear here.')) + '</section>' +
+            '<div class="privacy-tip"><i class="fa-solid fa-lock"></i><span><b>Visible to you only.</b> This log shows activity for the account you are currently using.</span></div>';
+    }
+
     /* ---------- Support ---------- */
     function vSupport() {
         if (!can('support')) return locked('support');
@@ -886,7 +908,7 @@
     /* =====================================================================
        RENDER, ROUTER, EVENTS
        ===================================================================== */
-    var VIEWS = { dashboard: vDashboard, shipments: vShipments, tracking: vTracking, create: vCreate, quotes: vQuotes, contacts: vContacts, family: vFamily, documents: vDocuments, billing: vBilling, notifications: vNotifications, support: vSupport, profile: vProfile };
+    var VIEWS = { dashboard: vDashboard, shipments: vShipments, tracking: vTracking, create: vCreate, quotes: vQuotes, contacts: vContacts, family: vFamily, documents: vDocuments, billing: vBilling, notifications: vNotifications, activity: vActivity, support: vSupport, profile: vProfile };
 
     function updateChrome() {
         var a = A(), u = a.user, nav = '';
@@ -900,7 +922,9 @@
         $('#sideNav').innerHTML = nav;
         $('#acctName').textContent = a.name; $('#acctRole').textContent = (a.kind === 'business' ? 'Business' : 'Personal') + ' · ' + a.role;
         $('#acctIco').className = 'acct-ico ' + a.kind; $('#acctIco').innerHTML = '<i class="fa-solid ' + (a.kind === 'business' ? 'fa-building' : 'fa-user') + '"></i>';
-        $('#meName').textContent = u.name; $('#meAvatar').textContent = initials(u.name); $('#meSub').textContent = a.kind === 'business' ? a.name : 'Personal customer';
+        var subTxt = a.kind === 'business' ? a.name : 'Personal customer';
+        $('#meName').textContent = u.name; $('#meInit').textContent = initials(u.name); $('#meSub').textContent = subTxt;
+        $('#pmName').textContent = u.name; $('#pmSub').textContent = subTxt;
         var b = $('#bellDot'), c = unreadCount(); b.textContent = c > 9 ? '9+' : c; b.hidden = !c;
         $$('.tabbar [data-nav]').forEach(function (t) { t.classList.toggle('on', t.dataset.nav === route); });
         $('#crumbTitle').textContent = (isBiz() && (NAV.filter(function (n) { return n.id === route; })[0] || {}).alt) || TITLES[route] || 'Dashboard';
@@ -923,7 +947,7 @@
     window.addEventListener('popstate', function () { var r = location.hash.replace('#', ''); if (VIEWS[r] && r !== route) { route = r; render(); } });
 
     var ACTIONS = {
-        openNav: openNav, closeNav: closeNav, closeModal: closeModal, openSwitcher: openSwitcher,
+        openNav: openNav, closeNav: closeNav, closeModal: closeModal, openSwitcher: openSwitcher, toggleProfile: toggleProfile,
         switchTo: function (el) { switchTo(el.dataset.id); },
         statGo: function (el) { filterState.status = el.dataset.f || 'all'; filterState.q = ''; go(el.dataset.go); },
         filter: function (el) { filterState.status = el.dataset.f; render(); },
@@ -994,6 +1018,15 @@
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && e.target.closest && e.target.closest('#wizForm') && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); if (wiz && wiz.step < 4) wizNext(); }
     });
+
+    document.addEventListener('click', function (e) {
+        if (!$('#profileWrap')) return;
+        if (!e.target.closest('#profileWrap') || e.target.closest('.pm-item')) closeProfile();
+    });
+    (function () {
+        var w = $('#profileWrap');
+        if (w) w.addEventListener('mouseleave', function () { w.classList.remove('shut'); });
+    })();
 
     function normalize() { var p = DB.accounts.personal; if (DB.accounts.business) DB.accounts.business.user = p.user; }
     normalize();
