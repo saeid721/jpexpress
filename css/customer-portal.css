@@ -4476,3 +4476,361 @@ button.stat.tone-red:hover {
     margin: 0;
   }
 }
+
+
+/* =====================================================================
+   WIZARD STEP 1 — CONTACT CARDS
+   Mobile: 1 column · Tablet: 2 columns · Desktop (≥1024px): 3 columns
+   ===================================================================== */
+.pick.contacts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .pick.contacts:not(.svc):not(.acct):not(.pay) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .pick.contacts:not(.svc):not(.acct):not(.pay) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+.pickc.contact {
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 92px;
+  padding: 16px 14px;
+  border-radius: 14px;
+  min-width: 0;
+}
+
+.pickc.contact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(40, 55, 141, .1);
+}
+
+.pickc.contact>.m-av {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  transition: background .18s, color .18s;
+}
+
+.pickc.contact .ct-txt {
+  flex: 1;
+  min-width: 0;
+  padding-right: 24px;
+}
+
+.pickc.contact .ct-txt b,
+.pickc.contact .ct-txt small {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pickc.contact .ct-loc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+  color: var(--soft);
+}
+
+.pickc.contact .ct-loc i {
+  color: var(--orange);
+  font-size: 11px;
+}
+
+.pickc.contact>i.fa-circle-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 19px;
+  color: #dde2f1;
+  transition: color .18s, transform .18s;
+}
+
+.pickc.contact:has(input:checked)>.m-av {
+  background: var(--navy);
+  color: #fff;
+}
+
+.pickc.contact:has(input:checked)>i.fa-circle-check {
+  transform: scale(1.08);
+}
+
+/* "Add new sender / receiver" button */
+.link-btn.add {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 16px;
+  margin-top: 12px;
+  border: 1.5px dashed #c5cdee;
+  border-radius: 12px;
+  background: #fafbff;
+  color: var(--navy);
+  transition: background .18s, border-color .18s, color .18s;
+}
+
+.link-btn.add:hover {
+  background: var(--tint);
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+@media (max-width: 639px) {
+  .link-btn.add {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =====================================================================
+   PROFILE PHOTOS — avatars with name (contacts, address book, family)
+   ===================================================================== */
+.m-av {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: 0 0 0 2px #fff, 0 3px 10px rgba(27, 37, 89, .14);
+}
+
+.m-av img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  background: var(--tint);
+}
+
+/* Create shipment — Step 1 cards */
+.pickc.contact>.m-av {
+  width: 48px;
+  height: 48px;
+}
+
+.pickc.contact:has(input:checked)>.m-av {
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--orange);
+}
+
+/* Address book cards */
+.cc-top>.m-av {
+  width: 52px;
+  height: 52px;
+}
+
+/* Family & trusted access rows */
+.mem-p>.m-av {
+  width: 48px;
+  height: 48px;
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+
+  .pickc.contact>.m-av,
+  .mem-p>.m-av {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cc-top>.m-av {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+
+/* =====================================================================
+   PROFILE & SECURITY — OWNER PHOTO (add / change / remove)
+   ===================================================================== */
+.who {
+  align-items: center;
+  gap: 18px;
+}
+
+.who-txt {
+  flex: 1;
+  min-width: 0;
+}
+
+.photo-edit {
+  position: relative;
+  flex: none;
+}
+
+.avatar.xl.photo {
+  width: 92px;
+  height: 92px;
+  border-radius: 26px;
+  font-size: 28px;
+  box-shadow: 0 0 0 4px #fff, 0 0 0 6px rgba(43, 57, 144, .14), 0 12px 28px rgba(27, 37, 89, .18);
+}
+
+.photo-cam {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #fff;
+  font-size: 13px;
+  box-shadow: 0 6px 16px rgba(242, 99, 35, .4);
+  transition: transform .18s, background .18s;
+}
+
+.photo-cam:hover {
+  background: var(--orange-d);
+  transform: scale(1.08);
+}
+
+.photo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.photo-hint {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--soft);
+}
+
+/* Phones: centered, stacked, full-width buttons */
+@media (max-width: 520px) {
+  .who {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .who-txt {
+    width: 100%;
+  }
+
+  .photo-actions {
+    justify-content: center;
+  }
+
+  .photo-actions .btn {
+    flex: 1 1 140px;
+  }
+}
+
+/* =====================================================================
+   PROFILE — ADDRESS TEXTAREA
+   ===================================================================== */
+#f_address {
+  min-height: 96px;
+  max-height: 220px;
+  line-height: 1.55;
+  resize: vertical;
+}
+
+/* =====================================================================
+   HELP & SUPPORT CARDS — icon + title on one line, centered text,
+   border color = icon color
+   ===================================================================== */
+.help {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 104px;
+  padding: 16px 12px;
+  text-align: center;
+}
+
+.help .q-ico {
+  flex: none;
+}
+
+.help b {
+  min-width: 0;
+  max-width: calc(100% - 48px);
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.help small {
+  flex: 0 0 100%;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Border color follows the icon color */
+.help.tone-green {
+  --tone: var(--ok);
+}
+
+.help.tone-blue {
+  --tone: var(--info);
+}
+
+.help.tone-orange {
+  --tone: #e9652e;
+}
+
+.help.tone-violet {
+  --tone: var(--violet);
+}
+
+.help[class*="tone-"] {
+  border-color: color-mix(in srgb, var(--tone) 50%, transparent);
+}
+
+.help[class*="tone-"]:hover {
+  border-color: var(--tone);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--tone) 16%, transparent);
+}
+
+/* Phones: slightly tighter so two cards fit per row */
+@media (max-width: 639px) {
+  .help {
+    gap: 8px;
+    min-height: 96px;
+    padding: 14px 10px;
+  }
+
+  .help .q-ico {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .help b {
+    max-width: calc(100% - 44px);
+    font-size: 13px;
+  }
+
+  .help small {
+    font-size: 12px;
+  }
+}

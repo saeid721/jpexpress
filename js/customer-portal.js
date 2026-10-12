@@ -99,7 +99,7 @@
     function seed() {
         var personal = {
             id: 'personal', kind: 'personal', name: 'Personal account', owner: 'Rahim Khan', role: 'Owner',
-            user: { name: 'Rahim Khan', email: 'rahim@example.com', phone: '+880 1712-345678', country: 'Bangladesh', lang: 'English', since: 'Mar 2026' },
+            user: { name: 'Rahim Khan', email: 'rahim@example.com', phone: '+880 1712-345678', country: 'Bangladesh', address: 'House 12, Road 4, Banani, Dhaka 1213', since: 'Mar 2026' },
             senders: [
                 { id: 's1', label: 'Home', name: 'Rahim Khan', phone: '+880 1712-345678', email: 'rahim@example.com', addr: 'House 12, Road 4, Banani', city: 'Dhaka', postal: '1213', country: 'Bangladesh', def: true },
                 { id: 's2', label: 'Mother – Dhaka', name: 'Momina Khan', phone: '+880 1811-223344', email: 'momina@example.com', addr: 'Flat 5B, Green Road', city: 'Dhaka', postal: '1205', country: 'Bangladesh' },
@@ -426,10 +426,44 @@
             '<div class="privacy-tip"><i class="fa-solid fa-lock"></i><span><b>Controlled by the account owner.</b> Billing, members and security stay private unless the owner grants access.</span></div></section>';
         return '<section class="panel"><div class="panel-head"><div><h3>' + (isBiz() ? 'Team & access' : 'Family & trusted access') + '</h3><p>People you have authorised to help.</p></div><button class="link-btn" data-nav="family">Manage <i class="fa-solid fa-arrow-right"></i></button></div>' +
             a.members.filter(function (m) { return m.role !== 'Owner'; }).slice(0, 3).map(function (m) {
-                return '<div class="mini"><span class="m-av ' + avTone(m.name) + '">' + esc(initials(m.name)) + '</span><div><b>' + esc(m.name) + '</b><small>' + esc(m.rel) + ' · ' + esc(m.role) + '</small></div>' + memberStatus(m.status) + '</div>';
+                return '<div class="mini">' + avatarHtml(m.name) + '<div><b>' + esc(m.name) + '</b><small>' + esc(m.rel) + ' · ' + esc(m.role) + '</small></div>' + memberStatus(m.status) + '</div>';
             }).join('') + '<div class="privacy-tip"><i class="fa-solid fa-lock"></i><span><b>Your account stays yours.</b> Members only see what you authorise. They cannot change ownership or security.</span></div></section>';
     }
     function avTone(n) { return ['peach', 'lilac', 'mint', 'sky'][String(n).length % 4]; }
+
+    /* ---------- Profile photos (assets/customer/) ---------- */
+    var PHOTO_DIR = 'assets/customer/';
+    var PHOTO_POOL = ['01.jpg', '02.jpg', '06.jpg', '03.jpg', '04.jpg', '05.jpg', '07.jpg', '08.jpg'];
+    var PHOTOS = {
+        'rahim khan': '01.jpg',
+        'sadia khan': '02.jpg',
+        'nadia rahman': '06.jpg',
+        'imran hossain': '03.jpg',
+        'md rahman': '03.jpg',
+        'arif khan': '04.jpg',
+        'karim khan': '05.jpg',
+        'asma khan': '07.jpg',
+        'jannat akter': '08.jpg',
+        'momina khan': '08.jpg'
+    };
+    var COMPANY = /\b(ltd|limited|inc|corp|co|company|apparel|garments|traders|enterprise)\b|&/i;
+
+    function photoFor(name) {
+        var n = String(name || '').trim().toLowerCase();
+        if (!n) return '';
+        var me = DB && DB.accounts && DB.accounts.personal && DB.accounts.personal.user;
+        if (me && String(me.name).trim().toLowerCase() === n && me.photo !== undefined) return me.photo;
+        if (PHOTOS[n]) return PHOTO_DIR + PHOTOS[n];
+        if (COMPANY.test(n)) return '';
+        var h = 0;
+        for (var i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) >>> 0;
+        return PHOTO_DIR + PHOTO_POOL[h % PHOTO_POOL.length];
+    }
+    function avatarHtml(name) {
+        var src = photoFor(name);
+        return '<span class="m-av ' + avTone(name) + '">' + esc(initials(name)) +
+            (src ? '<img src="' + esc(src) + '" alt="" loading="lazy" decoding="async" onerror="this.remove()">' : '') + '</span>';
+    }
     function memberStatus(s) { var m = { active: ['ok', 'Active'], invited: ['warn', 'Invited'], suspended: ['bad', 'Suspended'] }[s] || ['info', s]; return '<span class="badge ' + m[0] + '">' + m[1] + '</span>'; }
     function shipRowCompact(s) {
         var sv = SERVICES[s.service] || {};
@@ -535,8 +569,14 @@
     }
     function contactCards(list, kind, sel) {
         if (!list.length) return '<div class="alert warn"><i class="fa-solid fa-circle-info"></i><span>No saved ' + kind + 's yet. Add one to continue.</span></div>';
-        return '<div class="pick">' + list.map(function (c) {
-            return '<label class="pickc"><input type="radio" name="' + kind + '" value="' + esc(c.id) + '"' + (sel === c.id ? ' checked' : '') + '><span><b>' + esc(c.label) + (c.def ? ' <em>Default</em>' : '') + '</b><small>' + esc(c.name) + '</small><small>' + esc(c.city) + ', ' + esc(c.country) + '</small></span><i class="fa-solid fa-circle-check"></i></label>';
+        return '<div class="pick contacts">' + list.map(function (c) {
+            return '<label class="pickc contact">' +
+                '<input type="radio" name="' + kind + '" value="' + esc(c.id) + '"' + (sel === c.id ? ' checked' : '') + '>' +
+                avatarHtml(c.name) +
+                '<span class="ct-txt"><b>' + esc(c.label) + (c.def ? ' <em>Default</em>' : '') + '</b>' +
+                '<small>' + esc(c.name) + '</small>' +
+                '<small class="ct-loc"><i class="fa-solid fa-location-dot"></i>' + esc(c.city) + ', ' + esc(c.country) + '</small></span>' +
+                '<i class="fa-solid fa-circle-check"></i></label>';
         }).join('') + '</div>';
     }
     function vCreate() {
@@ -662,7 +702,7 @@
         return pageHead('SAVED CONTACTS', 'Address book', 'Save senders and receivers once. Reuse them on every shipment.', '<button class="btn btn-primary" data-action="addContact" data-type="' + (tab === 'senders' ? 'sender' : 'receiver') + '"><i class="fa-solid fa-plus"></i> Add ' + (tab === 'senders' ? 'sender' : 'receiver') + '</button>') +
             '<div class="tabs" role="tablist"><button role="tab" class="' + (tab === 'receivers' ? 'on' : '') + '" data-action="ctab" data-t="receivers" aria-selected="' + (tab === 'receivers') + '"><i class="fa-solid fa-location-dot"></i> Receivers <b>' + a.receivers.length + '</b></button><button role="tab" class="' + (tab === 'senders' ? 'on' : '') + '" data-action="ctab" data-t="senders" aria-selected="' + (tab === 'senders') + '"><i class="fa-solid fa-house-user"></i> Senders <b>' + a.senders.length + '</b></button></div>' +
             (list.length ? '<div class="cards">' + list.map(function (c) {
-                return '<article class="panel ccard"><div class="cc-top"><span class="m-av ' + avTone(c.name) + '">' + esc(initials(c.name)) + '</span><div><b>' + esc(c.label) + '</b><small>' + esc(c.name) + '</small></div>' + (c.def ? '<span class="badge info">Default</span>' : '') + '</div>' +
+                return '<article class="panel ccard"><div class="cc-top">' + avatarHtml(c.name) + '<div><b>' + esc(c.label) + '</b><small>' + esc(c.name) + '</small></div>' + (c.def ? '<span class="badge info">Default</span>' : '') + '</div>' +
                     '<p class="addr">' + esc(c.addr) + '<br>' + esc(c.city) + (c.postal ? ' ' + esc(c.postal) : '') + ', ' + esc(c.country) + '</p><div class="cc-meta"><span><i class="fa-solid fa-phone"></i> ' + esc(c.phone) + '</span>' + (c.email ? '<span><i class="fa-regular fa-envelope"></i> ' + esc(c.email) + '</span>' : '') + '</div>' +
                     '<div class="cc-actions">' + (can('ship.create') ? '<button class="btn btn-soft btn-sm" data-action="shipWith" data-id="' + esc(c.id) + '" data-type="' + (tab === 'senders' ? 'sender' : 'receiver') + '"><i class="fa-solid fa-paper-plane"></i> Ship ' + (tab === 'senders' ? 'from' : 'to') + '</button>' : '') +
                     '<button class="btn btn-ghost btn-sm" data-action="editContact" data-id="' + esc(c.id) + '" data-type="' + (tab === 'senders' ? 'sender' : 'receiver') + '">Edit</button>' +
@@ -715,7 +755,7 @@
             '<div class="alert info"><i class="fa-solid fa-shield-halved"></i><span><b>You remain the account owner.</b> Members only get the permissions you select. They can never change ownership, manage other members or open your security settings.</span></div>' +
             '<section class="panel flush"><div class="mem-head"><span>Member</span><span>Role</span><span>Access</span><span>Status</span><span></span></div>' + a.members.map(function (m) {
                 var own = m.role === 'Owner';
-                return '<div class="mem"><div class="mem-p"><span class="m-av ' + avTone(m.name) + '">' + esc(initials(m.name)) + '</span><span><b>' + esc(m.name) + (own ? ' <em class="you">You</em>' : '') + '</b><small>' + esc(m.rel) + ' · ' + esc(m.email) + '</small></span></div>' +
+                return '<div class="mem"><div class="mem-p">' + avatarHtml(m.name) + '<span><b>' + esc(m.name) + (own ? ' <em class="you">You</em>' : '') + '</b><small>' + esc(m.rel) + ' · ' + esc(m.email) + '</small></span></div>' +
                     '<div data-l="Role"><span class="role-chip">' + esc(m.role) + '</span></div><div data-l="Access" class="mem-acc">' + (own ? 'Full control' : m.perms.filter(function (p) { return GRANTABLE.indexOf(p) > -1; }).length + ' of ' + GRANTABLE.length + ' permissions') + '</div><div data-l="Status">' + memberStatus(m.status) + '</div>' +
                     '<div class="mem-act">' + (own ? '' : '<button class="btn btn-soft btn-sm" data-action="editMember" data-id="' + esc(m.id) + '">Edit access</button><button class="icon-btn sm" data-action="toggleMember" data-id="' + esc(m.id) + '" aria-label="' + (m.status === 'suspended' ? 'Reactivate' : 'Suspend') + ' ' + esc(m.name) + '" title="' + (m.status === 'suspended' ? 'Reactivate' : 'Suspend') + '"><i class="fa-solid ' + (m.status === 'suspended' ? 'fa-user-check' : 'fa-user-lock') + '"></i></button><button class="icon-btn sm danger" data-action="removeMember" data-id="' + esc(m.id) + '" aria-label="Remove ' + esc(m.name) + '" title="Remove"><i class="fa-regular fa-trash-can"></i></button>') + '</div></div>';
             }).join('') + '</section>' +
@@ -840,7 +880,7 @@
         if (!can('support')) return locked('support');
         var a = A();
         return pageHead('WE’RE HERE TO HELP', 'Help & support', 'Reach JP Express about a shipment or your account.', '<button class="btn btn-primary" data-action="newTicket"><i class="fa-solid fa-plus"></i> New request</button>') +
-            '<div class="help-grid"><a class="panel help" href="https://wa.me/' + PORTAL_CONFIG.whatsapp + '" target="_blank" rel="noopener"><span class="q-ico green"><i class="fa-brands fa-whatsapp"></i></span><b>WhatsApp</b><small>Chat with our team</small></a><a class="panel help" href="tel:' + PORTAL_CONFIG.hotline + '"><span class="q-ico blue"><i class="fa-solid fa-phone"></i></span><b>Call hotline</b><small>9am to 11pm</small></a><a class="panel help" href="faq.html"><span class="q-ico orange"><i class="fa-regular fa-circle-question"></i></span><b>FAQs</b><small>Quick answers</small></a><a class="panel help" href="track-shipment.html"><span class="q-ico violet"><i class="fa-solid fa-location-dot"></i></span><b>Public tracking</b><small>Any JP Express parcel</small></a></div>' +
+            '<div class="help-grid"><a class="panel help tone-green" href="https://wa.me/' + PORTAL_CONFIG.whatsapp + '" target="_blank" rel="noopener"><span class="q-ico green"><i class="fa-brands fa-whatsapp"></i></span><b>WhatsApp</b><small>Chat with our team</small></a><a class="panel help tone-blue" href="tel:' + PORTAL_CONFIG.hotline + '"><span class="q-ico blue"><i class="fa-solid fa-phone"></i></span><b>Call hotline</b><small>9am to 11pm</small></a><a class="panel help tone-orange" href="faq.html"><span class="q-ico orange"><i class="fa-regular fa-circle-question"></i></span><b>FAQs</b><small>Quick answers</small></a><a class="panel help tone-violet" href="track-shipment.html"><span class="q-ico violet"><i class="fa-solid fa-location-dot"></i></span><b>Public tracking</b><small>Any JP Express parcel</small></a></div>' +
             '<h3 class="sub-h">Your requests</h3><section class="panel flush">' + (a.tickets.length ? a.tickets.map(function (t) {
                 return '<button class="srow" data-action="openTicket" data-id="' + esc(t.id) + '"><span class="s-ico"><i class="fa-regular fa-comments"></i></span><span class="s-main"><b>' + esc(t.subject) + '</b><small>' + esc(t.id) + ' · ' + esc(t.cat) + (t.ship && t.ship !== '—' ? ' · ' + esc(t.ship) : '') + ' · ' + esc(t.created) + '</small></span><span class="s-state"><span class="badge ' + (t.status === 'open' ? 'warn' : 'ok') + '">' + (t.status === 'open' ? 'Open' : 'Resolved') + '</span></span><i class="fa-solid fa-chevron-right chev"></i></button>';
             }).join('') : emptyState('fa-comments', 'No requests yet', 'Need help? Send us a message and attach a shipment number.', ctaBtn('New request', 'data-action="newTicket"', 'fa-plus'))) + '</section>';
@@ -874,14 +914,80 @@
         });
     }
 
+    /* ---------- Owner profile photo (add / update / remove) ---------- */
+    var OWNER_DEFAULT = PHOTO_DIR + '01.jpg';
+
+    /* undefined = default photo · '' = removed (initials) · 'data:...' = uploaded */
+    function userPhoto(u) { return u.photo === undefined ? OWNER_DEFAULT : (u.photo || ''); }
+
+    function userAvatarInner(u) {
+        var src = userPhoto(u);
+        return '<b id="meInit">' + esc(initials(u.name)) + '</b>' +
+            (src ? '<img src="' + esc(src) + '" alt="" onerror="this.remove()">' : '');
+    }
+
+    function ownerCardHtml(u, a) {
+        var src = userPhoto(u), has = !!src;
+        return '<div class="who">' +
+            '<div class="photo-edit">' +
+            '<span class="avatar xl photo">' + esc(initials(u.name)) +
+            (src ? '<img src="' + esc(src) + '" alt="Profile photo of ' + esc(u.name) + '" onerror="this.remove()">' : '') + '</span>' +
+            '<button type="button" class="photo-cam" data-action="photoPick" aria-label="' + (has ? 'Change' : 'Add') + ' profile photo"><i class="fa-solid fa-camera"></i></button>' +
+            '<input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" hidden>' +
+            '</div>' +
+            '<div class="who-txt"><h3>' + esc(u.name) + '</h3><p>' + esc(a.role) + ' · ' + esc(a.name) + '</p><small>Member since ' + esc(u.since) + '</small>' +
+            '<div class="photo-actions">' +
+            '<button type="button" class="btn btn-soft btn-sm" data-action="photoPick"><i class="fa-solid fa-camera"></i> ' + (has ? 'Change photo' : 'Add photo') + '</button>' +
+            (has ? '<button type="button" class="btn btn-ghost btn-sm danger" data-action="photoRemove"><i class="fa-regular fa-trash-can"></i> Remove</button>' : '') +
+            '</div>' +
+            '<small class="photo-hint">JPG, PNG or WebP · up to 5 MB</small></div></div>';
+    }
+
+    function resizePhoto(file, done) {
+        var fr = new FileReader();
+        fr.onerror = function () { done(null); };
+        fr.onload = function () {
+            var img = new Image();
+            img.onerror = function () { done(null); };
+            img.onload = function () {
+                var S = 320, c = document.createElement('canvas'), x = c.getContext('2d');
+                var side = Math.min(img.width, img.height);
+                var sx = (img.width - side) / 2, sy = (img.height - side) * .25;
+                c.width = c.height = S;
+                x.fillStyle = '#fff'; x.fillRect(0, 0, S, S);
+                x.drawImage(img, sx, sy, side, side, 0, 0, S, S);
+                try { done(c.toDataURL('image/jpeg', .86)); } catch (err) { done(null); }
+            };
+            img.src = fr.result;
+        };
+        fr.readAsDataURL(file);
+    }
+
+    document.addEventListener('change', function (e) {
+        var t = e.target;
+        if (!t || t.id !== 'photoInput') return;
+        var file = t.files && t.files[0]; t.value = '';
+        if (!file) return;
+        if (!/^image\/(jpeg|png|webp)$/i.test(file.type)) { toast('Please choose a JPG, PNG or WebP image.', 'bad'); return; }
+        if (file.size > 5 * 1024 * 1024) { toast('Photo is larger than 5 MB. Choose a smaller one.', 'bad'); return; }
+        toast('Updating photo…');
+        resizePhoto(file, function (data) {
+            if (!data) { toast('Could not read this image. Try another photo.', 'bad'); return; }
+            A().user.photo = data; normalize(); save();
+            sync('profile/photo', { photo: data }); /* Laravel: send as a multipart file upload instead */
+            toast('Profile photo updated.', 'ok'); render();
+        });
+    });
+
     /* ---------- Profile & security ---------- */
     function toggleRow(name, label, sub, on) { return '<label class="switch row"><input type="checkbox" name="' + name + '"' + (on ? ' checked' : '') + '><span class="sw"></span><span class="sw-l"><b>' + esc(label) + '</b><small>' + esc(sub) + '</small></span></label>'; }
     function vProfile() {
         var a = A(), u = a.user; u.prefs = u.prefs || { email: true, sms: true, whatsapp: false, portal: true };
         return pageHead('YOUR ACCOUNT', 'Profile & security', 'Manage your details, sign-in security and notifications.') +
-            '<div class="grid-2 top"><section class="panel"><div class="who"><span class="avatar xl">' + esc(initials(u.name)) + '</span><div><h3>' + esc(u.name) + '</h3><p>' + esc(a.role) + ' · ' + esc(a.name) + '</p><small>Member since ' + esc(u.since) + '</small></div></div>' +
+            '<div class="grid-2 top"><section class="panel">' + ownerCardHtml(u, a) +
             '<form id="pForm" novalidate><div class="form-grid">' + field('Full name', 'name', { value: u.name, req: 1, ac: 'name' }) + field('Email', 'email', { value: u.email, type: 'email', req: 1, ac: 'email' }) + field('Phone', 'phone', { value: u.phone, type: 'tel', req: 1, ac: 'tel' }) +
-            field('Country', 'country', { type: 'select', options: ['Bangladesh'].concat(Object.keys(COUNTRIES)), value: u.country }) + field('Language', 'lang', { type: 'select', options: ['English', 'বাংলা'], value: u.lang }) + '</div><div class="form-actions"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-check"></i> Save profile</button></div></form></section>' +
+            field('Country', 'country', { type: 'select', options: ['Bangladesh'].concat(Object.keys(COUNTRIES)), value: u.country }) +
+            field('Address', 'address', { type: 'textarea', value: u.address || '', rows: 3, max: 250, span: 1, ph: 'House, road, area, city and postal code' }) + '</div><div class="form-actions"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-check"></i> Save profile</button></div></form></section>' +
             '<section class="panel"><div class="panel-head"><div><h3>Notifications</h3><p>Choose how we reach you.</p></div></div><form id="nForm">' + toggleRow('portal', 'In the portal', 'Always on for shipment updates', u.prefs.portal) + toggleRow('email', 'Email', 'Booking, invoices and delivery', u.prefs.email) + toggleRow('sms', 'SMS', 'Pickup and delivery alerts', u.prefs.sms) + toggleRow('whatsapp', 'WhatsApp', 'Status updates on WhatsApp', u.prefs.whatsapp) + '</form></section></div>' +
             (can('security') ? '<section class="panel"><div class="panel-head"><div><h3>Sign-in security</h3><p>Only the account owner can change these.</p></div></div><div class="grid-2 inner"><form id="pwForm" novalidate><div class="form-grid one">' + field('Current password', 'cur', { type: 'password', ac: 'current-password' }) + field('New password', 'pw', { type: 'password', ac: 'new-password', hint: 'At least 8 characters, with letters and numbers.' }) + field('Confirm new password', 'pw2', { type: 'password', ac: 'new-password' }) + '</div><div class="form-actions"><button class="btn btn-soft" type="submit">Update password</button></div></form>' +
                 '<div><form id="secForm">' + toggleRow('twofa', 'Two-step verification', 'Ask for a code when signing in on a new device', u.twofa) + '</form><h4 class="mini-h">Active sessions</h4><div class="sess"><i class="fa-solid fa-laptop"></i><span><b>This device</b><small>Dhaka, BD · Active now</small></span><span class="badge ok">Current</span></div><div class="sess"><i class="fa-solid fa-mobile-screen"></i><span><b>Phone · Chrome</b><small>Dhaka, BD · Yesterday</small></span><button class="btn btn-ghost btn-sm" data-action="signoutOthers">Sign out</button></div></div></div></section>'
@@ -922,7 +1028,9 @@
         $('#acctName').textContent = a.name; $('#acctRole').textContent = (a.kind === 'business' ? 'Business' : 'Personal') + ' · ' + a.role;
         $('#acctIco').className = 'acct-ico ' + a.kind; $('#acctIco').innerHTML = '<i class="fa-solid ' + (a.kind === 'business' ? 'fa-building' : 'fa-user') + '"></i>';
         var subTxt = a.kind === 'business' ? a.name : 'Personal customer';
-        $('#meName').textContent = u.name; $('#meInit').textContent = initials(u.name); $('#meSub').textContent = subTxt;
+        var av = $('#meAvatar'), avKey = initials(u.name) + '|' + userPhoto(u);
+        if (av && av.dataset.k !== avKey) { av.innerHTML = userAvatarInner(u); av.dataset.k = avKey; }
+        $('#meName').textContent = u.name; $('#meSub').textContent = subTxt;
         $('#pmName').textContent = u.name; $('#pmSub').textContent = subTxt;
         var b = $('#bellDot'), c = unreadCount(); b.textContent = c > 9 ? '9+' : c; b.hidden = !c;
         $$('.tabbar [data-nav]').forEach(function (t) { t.classList.toggle('on', t.dataset.nav === route); });
@@ -975,6 +1083,13 @@
         readAll: function () { A().notifications.forEach(function (n) { n.unread = false; }); save(); toast('All caught up.', 'ok'); render(); },
         newTicket: function () { ticketModal(); }, openTicket: function (el) { viewTicket(el.dataset.id); },
         signoutOthers: function () { toast('Other sessions signed out.', 'ok'); },
+        photoPick: function () { var i = $('#photoInput'); if (i) i.click(); },
+        photoRemove: function () {
+            confirmBox({
+                title: 'Remove profile photo?', text: 'Your initials will be shown instead. You can add a new photo anytime.', ok: 'Remove', danger: true,
+                onOk: function () { A().user.photo = ''; normalize(); save(); sync('profile/photo', { photo: null }); toast('Profile photo removed.'); render(); }
+            });
+        },
         signOut: function () {
             try { localStorage.removeItem(SESSION_KEY); sessionStorage.removeItem(SESSION_KEY); } catch (e) { }
             location.href = 'login.html';
@@ -997,8 +1112,9 @@
         else if (f.id === 'pForm') {
             e.preventDefault(); var d = formData(f), bad = false;
             setErr(f, 'name', d.name.length < 2 ? 'Enter your full name.' : ''); setErr(f, 'email', EMAIL.test(d.email) ? '' : 'Enter a valid email.'); setErr(f, 'phone', phoneOk(d.phone) ? '' : 'Enter a valid phone number.');
-            if (d.name.length < 2 || !EMAIL.test(d.email) || !phoneOk(d.phone)) { var fb = firstBad(f); if (fb) fb.focus(); return; }
-            Object.assign(DB.accounts.personal.user, { name: d.name, email: d.email, phone: d.phone, country: d.country, lang: d.lang }); normalize(); save(); sync('profile', d); toast('Profile saved.', 'ok'); render();
+            setErr(f, 'address', d.address && d.address.length < 5 ? 'Enter a complete address, or leave it empty.' : '');
+            if (d.name.length < 2 || !EMAIL.test(d.email) || !phoneOk(d.phone) || (d.address && d.address.length < 5)) { var fb = firstBad(f); if (fb) fb.focus(); return; }
+            Object.assign(DB.accounts.personal.user, { name: d.name, email: d.email, phone: d.phone, country: d.country, address: d.address }); normalize(); save(); sync('profile', d); toast('Profile saved.', 'ok'); render();
         } else if (f.id === 'pwForm') {
             e.preventDefault(); var p = formData(f), b2 = false;
             setErr(f, 'cur', p.cur ? '' : 'Enter your current password.'); var pm = p.pw.length < 8 ? 'Use at least 8 characters.' : (!/[A-Za-z]/.test(p.pw) || !/\d/.test(p.pw)) ? 'Use letters and numbers.' : ''; setErr(f, 'pw', pm);
