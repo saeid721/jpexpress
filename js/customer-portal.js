@@ -184,7 +184,26 @@
             ],
             tickets: []
         };
-        return { active: 'personal', accounts: { personal: personal, business: business } };
+        /* Corporate account is a separate account context with isolated demo data.
+           Production data and authorization must be enforced by the Laravel API. */
+        var corporate = JSON.parse(JSON.stringify(business));
+        corporate.id = 'corporate';
+        corporate.kind = 'corporate';
+        corporate.name = 'JPX Corporate Group';
+        corporate.owner = 'Rahim Khan';
+        corporate.role = 'Owner';
+        corporate.user = JSON.parse(JSON.stringify(personal.user));
+        corporate.user.name = 'Rahim Khan';
+        corporate.user.email = 'rahim@example.com';
+        corporate.branches = [
+            { id: 'br-dhk', name: 'Dhaka Head Office', city: 'Dhaka', users: 8 },
+            { id: 'br-ctg', name: 'Chattogram Branch', city: 'Chattogram', users: 4 },
+            { id: 'br-uk', name: 'United Kingdom Office', city: 'London', users: 3 }
+        ];
+        corporate.departments = ['Export Operations', 'Finance & Billing', 'Customer Service', 'Sales'];
+        corporate.credit = { limit: 500000, used: 180000, approved: false };
+        corporate.apiReady = true;
+        return { active: 'personal', accounts: { personal: personal, business: business, corporate: corporate } };
     }
 
     /* ---------- State + persistence ---------- */
@@ -195,9 +214,30 @@
     }
     function save() { try { localStorage.setItem(PORTAL_CONFIG.storageKey, JSON.stringify(DB)); } catch (e) { } }
     DB = load();
+    /* Upgrade existing browser demo data so the newly introduced Corporate
+       account appears without deleting a customer's saved demo workspace. */
+    if (!DB.accounts.corporate && DB.accounts.business) {
+        DB.accounts.corporate = JSON.parse(JSON.stringify(DB.accounts.business));
+        DB.accounts.corporate.id = 'corporate';
+        DB.accounts.corporate.kind = 'corporate';
+        DB.accounts.corporate.name = 'JPX Corporate Group';
+        DB.accounts.corporate.owner = DB.accounts.corporate.owner || 'Account Owner';
+        DB.accounts.corporate.role = 'Owner';
+        DB.accounts.corporate.branches = [
+            { id: 'br-dhk', name: 'Dhaka Head Office', city: 'Dhaka', users: 8 },
+            { id: 'br-ctg', name: 'Chattogram Branch', city: 'Chattogram', users: 4 },
+            { id: 'br-uk', name: 'United Kingdom Office', city: 'London', users: 3 }
+        ];
+        DB.accounts.corporate.departments = ['Export Operations', 'Finance & Billing', 'Customer Service', 'Sales'];
+        DB.accounts.corporate.credit = { limit: 500000, used: 180000, approved: false };
+        DB.accounts.corporate.apiReady = true;
+        save();
+    }
     function A() { return DB.accounts[DB.active]; }
     function can(p) { var a = A(); return ROLES[a.role] ? ROLES[a.role].indexOf(p) > -1 : false; }
-    function isBiz() { return A().kind === 'business'; }
+    function isBiz() { return A().kind === 'business' || A().kind === 'corporate'; }
+    function accountTypeLabel(kind) { return kind === 'corporate' ? 'Corporate' : kind === 'business' ? 'Business' : 'Personal'; }
+    function accountIcon(kind) { return kind === 'personal' ? 'fa-user' : kind === 'corporate' ? 'fa-city' : 'fa-building'; }
     function byId(list, id) { return list.filter(function (x) { return x.id === id; })[0]; }
     function findShip(id) { return A().shipments.filter(function (s) { return s.id.toUpperCase() === String(id).trim().toUpperCase(); })[0]; }
     function unreadCount() { return A().notifications.filter(function (n) { return n.unread; }).length; }
@@ -1167,7 +1207,7 @@
             title: 'Switch account', sub: 'Data and permissions change with the active account.',
             body: '<div class="pick acct">' + Object.keys(DB.accounts).map(function (k) {
                 var a = DB.accounts[k];
-                return '<button class="pickc as" data-action="switchTo" data-id="' + k + '"' + (DB.active === k ? ' aria-current="true"' : '') + '><span class="acct-ico ' + a.kind + '"><i class="fa-solid ' + (a.kind === 'business' ? 'fa-building' : 'fa-user') + '"></i></span><span><b>' + esc(a.name) + '</b><small>' + (a.kind === 'business' ? 'Business' : 'Personal') + ' · your role: ' + esc(a.role) + '</small></span>' + (DB.active === k ? '<i class="fa-solid fa-circle-check on"></i>' : '') + '</button>';
+                return '<button class="pickc as" data-action="switchTo" data-id="' + k + '"' + (DB.active === k ? ' aria-current="true"' : '') + '><span class="acct-ico ' + a.kind + '"><i class="fa-solid ' + accountIcon(a.kind) + '"></i></span><span><b>' + esc(a.name) + '</b><small>' + accountTypeLabel(a.kind) + ' · your role: ' + esc(a.role) + '</small></span>' + (DB.active === k ? '<i class="fa-solid fa-circle-check on"></i>' : '') + '</button>';
             }).join('') + '</div><div class="privacy-tip"><i class="fa-solid fa-shield-halved"></i><span>Switching is not just a visual change. Everything you see — shipments, contacts, billing — is limited to the selected account and your role in it.</span></div>'
         });
     }
@@ -1179,21 +1219,46 @@
     /* =====================================================================
        RENDER, ROUTER, EVENTS
        ===================================================================== */
-    var VIEWS = { dashboard: vDashboard, shipments: vShipments, tracking: vTracking, create: vCreate, quotes: vQuotes, contacts: vContacts, family: vFamily, documents: vDocuments, billing: vBilling, notifications: vNotifications, activity: vActivity, support: vSupport, profile: vProfile };
+    function vAccountDashboard() {
+        var html = vDashboard();
+        if (A().kind !== 'corporate') return html;
+        var c = A(), branches = c.branches || [], departments = c.departments || [], credit = c.credit || { limit: 0, used: 0, approved: false };
+        var available = Math.max(0, Number(credit.limit || 0) - Number(credit.used || 0));
+        return html + '<section class="card corp-workspace" aria-labelledby="corpWorkspaceTitle">' +
+            '<div class="corp-head"><div><span class="corp-eyebrow"><i class="fa-solid fa-building-shield"></i> CORPORATE WORKSPACE</span>' +
+            '<h2 id="corpWorkspaceTitle">Organization at a glance</h2><p>Manage your organization with account-scoped access.</p></div>' +
+            '<span class="corp-status">' + (credit.approved ? 'Credit approved' : 'Credit approval required') + '</span></div>' +
+            '<div class="corp-metrics"><div><span>Branches</span><strong>' + branches.length + '</strong></div>' +
+            '<div><span>Departments</span><strong>' + departments.length + '</strong></div>' +
+            '<div><span>Credit limit</span><strong>' + money(credit.limit) + '</strong></div>' +
+            '<div><span>Available credit</span><strong>' + money(available) + '</strong></div></div>' +
+            '<div class="corp-lower"><div><h3>Branches</h3><div class="corp-branch-list">' + branches.map(function (b) {
+                return '<div class="corp-branch"><span class="corp-branch-icon"><i class="fa-solid fa-location-dot"></i></span><span><b>' + esc(b.name) + '</b><small>' + esc(b.city) + ' · ' + esc(b.users) + ' team members</small></span></div>';
+            }).join('') + '</div></div><div><h3>Corporate controls</h3><div class="corp-actions">' +
+            '<a href="#family" data-nav="family"><i class="fa-solid fa-users"></i><span><b>Users & roles</b><small>Manage authorized team access</small></span><i class="fa-solid fa-chevron-right"></i></a>' +
+            '<a href="#quotes" data-nav="quotes"><i class="fa-solid fa-file-invoice-dollar"></i><span><b>Business quotes</b><small>Review shipping quotes and bookings</small></span><i class="fa-solid fa-chevron-right"></i></a>' +
+            '<a href="#billing" data-nav="billing"><i class="fa-solid fa-wallet"></i><span><b>Billing & credit</b><small>Invoices and payment status</small></span><i class="fa-solid fa-chevron-right"></i></a>' +
+            '<a href="#documents" data-nav="documents"><i class="fa-solid fa-folder-open"></i><span><b>Commercial documents</b><small>Access authorized shipment files</small></span><i class="fa-solid fa-chevron-right"></i></a>' +
+            '</div><p class="corp-note"><i class="fa-solid fa-shield-halved"></i> Credit facilities, branch restrictions and role permissions require server-side approval and enforcement.</p></div></div></section>';
+    }
+
+    var VIEWS = { dashboard: vAccountDashboard, shipments: vShipments, tracking: vTracking, create: vCreate, quotes: vQuotes, contacts: vContacts, family: vFamily, documents: vDocuments, billing: vBilling, notifications: vNotifications, activity: vActivity, support: vSupport, profile: vProfile };
 
     function updateChrome() {
         var a = A(), u = a.user, nav = '';
         NAV.forEach(function (n) {
             var ok = !n.perm || can(n.perm), lbl = isBiz() && n.alt ? n.alt : n.label, extra = '';
+            if (A().kind === 'corporate' && n.id === 'family') lbl = 'Organization & team';
+            if (A().kind === 'corporate' && n.id === 'contacts') lbl = 'Business contacts';
             if (n.count) extra = '<span class="nav-count">' + a.shipments.filter(function (s) { return s.status !== 'delivered'; }).length + '</span>';
             if (n.badge && unreadCount()) extra = '<span class="nav-count hot">' + unreadCount() + '</span>';
             if (!ok) extra = '<i class="fa-solid fa-lock nav-lock" aria-label="Not available for your role"></i>';
             nav += '<a href="#' + n.id + '" data-nav="' + n.id + '" class="' + (route === n.id ? 'active' : '') + (ok ? '' : ' dim') + '"' + (route === n.id ? ' aria-current="page"' : '') + '><i class="fa-solid ' + n.icon + '"></i><span>' + esc(lbl) + '</span>' + extra + '</a>';
         });
         $('#sideNav').innerHTML = nav;
-        $('#acctName').textContent = a.name; $('#acctRole').textContent = (a.kind === 'business' ? 'Business' : 'Personal') + ' · ' + a.role;
-        $('#acctIco').className = 'acct-ico ' + a.kind; $('#acctIco').innerHTML = '<i class="fa-solid ' + (a.kind === 'business' ? 'fa-building' : 'fa-user') + '"></i>';
-        var subTxt = a.kind === 'business' ? a.name : 'Personal customer';
+        $('#acctName').textContent = a.name; $('#acctRole').textContent = accountTypeLabel(a.kind) + ' · ' + a.role;
+        $('#acctIco').className = 'acct-ico ' + a.kind; $('#acctIco').innerHTML = '<i class="fa-solid ' + accountIcon(a.kind) + '"></i>';
+        var subTxt = a.kind === 'personal' ? 'Personal customer' : a.name;
         var av = $('#meAvatar'), avKey = initials(u.name) + '|' + userPhoto(u);
         if (av && av.dataset.k !== avKey) { av.innerHTML = userAvatarInner(u); av.dataset.k = avKey; }
         $('#meName').textContent = u.name; $('#meSub').textContent = subTxt;

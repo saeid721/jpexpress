@@ -4858,3 +4858,31 @@ button.stat.tone-red:hover {
     opacity: .4;
   }
 }
+
+/* Corporate account workspace — responsive extension */
+.page-portal .corp-workspace{margin-top:18px;padding:clamp(16px,2.2vw,26px);overflow:hidden}
+.page-portal .corp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
+.page-portal .corp-eyebrow{display:inline-flex;align-items:center;gap:7px;color:var(--navy);font-size:11px;font-weight:800;letter-spacing:.11em;margin-bottom:9px}
+.page-portal .corp-head h2{font-size:clamp(19px,2vw,25px);margin-bottom:6px}
+.page-portal .corp-head p{color:var(--muted);font-size:13px}
+.page-portal .corp-status{display:inline-flex;align-items:center;justify-content:center;padding:7px 10px;border-radius:999px;background:var(--warn-bg);color:var(--warn);font-size:11px;font-weight:700;white-space:normal;text-align:center}
+.page-portal .corp-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:24px}
+.page-portal .corp-metrics>div{padding:15px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(145deg,#fff,#f8f9ff);min-width:0}
+.page-portal .corp-metrics span{display:block;color:var(--muted);font-size:12px;margin-bottom:7px}
+.page-portal .corp-metrics strong{display:block;color:var(--ink);font-family:var(--f-head);font-size:clamp(16px,1.8vw,22px);overflow-wrap:anywhere}
+.page-portal .corp-lower{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:24px}
+.page-portal .corp-lower h3{font-size:15px;margin-bottom:12px}
+.page-portal .corp-branch-list,.page-portal .corp-actions{display:grid;gap:8px}
+.page-portal .corp-branch{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid var(--line-2);border-radius:10px;min-width:0}
+.page-portal .corp-branch-icon{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:10px;background:var(--tint);color:var(--navy)}
+.page-portal .corp-branch b,.page-portal .corp-actions b{display:block;font-size:12px;overflow-wrap:anywhere}
+.page-portal .corp-branch small,.page-portal .corp-actions small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+.page-portal .corp-actions a{display:flex;align-items:center;gap:11px;padding:12px;border:1px solid var(--line-2);border-radius:10px;min-width:0;transition:border-color .18s,transform .18s}
+.page-portal .corp-actions a:hover{border-color:#c5ccef;transform:translateY(-1px)}
+.page-portal .corp-actions a>i:first-child{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border-radius:10px;background:var(--tint);color:var(--navy)}
+.page-portal .corp-actions a>span{flex:1;min-width:0}
+.page-portal .corp-actions a>i:last-child{font-size:11px;color:var(--soft)}
+.page-portal .corp-note{display:flex;gap:8px;align-items:flex-start;color:var(--muted);font-size:11px;line-height:1.55;margin-top:14px}
+.page-portal .corp-note i{color:var(--navy);margin-top:2px}
+@media(max-width:760px){.page-portal .corp-head{flex-direction:column}.page-portal .corp-status{align-self:flex-start}.page-portal .corp-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.page-portal .corp-lower{grid-template-columns:minmax(0,1fr);gap:22px}.page-portal .corp-metrics>div{padding:12px}}
+@media(prefers-reduced-motion:reduce){.page-portal .corp-actions a{transition:none}}
