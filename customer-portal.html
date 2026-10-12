@@ -1,14 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="page-portal">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <meta name="theme-color" content="#2B3990">
-    <meta name="robots" content="noindex,follow">
-    <title>Customer Portal | JP Express</title>
+    <meta name="robots" content="noindex,nofollow">
+    <title>My Account | JP Express Customer Portal</title>
     <link rel="icon" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
         rel="stylesheet">
@@ -17,564 +19,88 @@
 </head>
 
 <body>
-    <div class="portal-shell">
-        <aside class="sidebar" id="sidebar">
-            <a class="brand" href="index.html"><img src="assets/logo.png" alt="JP Express"><span>Customer
-                    Portal<small>SHIP WITH CONFIDENCE</small></span></a>
-            <div class="nav-label">WORKSPACE</div>
-            <nav class="side-nav">
-                <a class="active" href="#dashboard" data-view="dashboard"><i
-                        class="fa-solid fa-grid-2"></i>Dashboard</a>
-                <a href="#shipments" data-view="shipments"><i class="fa-solid fa-box"></i>My shipments <span
-                        class="nav-count">3</span></a>
-                <a href="#tracking" data-view="tracking"><i class="fa-solid fa-location-crosshairs"></i>Track
-                    shipment</a>
-                <a href="#quotes" data-view="quotes"><i class="fa-solid fa-file-invoice-dollar"></i>Quotes &
-                    bookings</a>
-                <a href="#addresses" data-view="addresses"><i class="fa-solid fa-address-book"></i>Address book</a>
-                <a href="#family" data-view="family"><i class="fa-solid fa-people-roof"></i>Family & access</a>
-                <a href="#documents" data-view="documents"><i class="fa-solid fa-folder-open"></i>Documents</a>
-                <a href="#billing" data-view="billing"><i class="fa-solid fa-wallet"></i>Invoices & payments</a>
-                <a href="#support" data-view="support"><i class="fa-regular fa-comments"></i>Help & support</a>
-            </nav>
-            <div class="sidebar-bottom">
-                <div class="secure-note"><i class="fa-solid fa-shield-halved"></i><span><b>Your account,
-                            protected</b><small>Access is based on your role.</small></span></div><a class="side-link"
-                    href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to website</a>
+    <a class="skip-link" href="#view">Skip to content</a>
+
+    <div class="shell" id="shell">
+        <!-- ===== SIDEBAR (desktop) / DRAWER (mobile) ===== -->
+        <aside class="sidebar" id="sidebar" aria-label="Portal navigation">
+            <div class="sb-head">
+                <a class="brand" href="index.html" aria-label="JP Express home">
+                    <img src="assets/logo.png" alt="JP Express">
+                    <span><b>Customer Portal</b><small>SHIP WITH CONFIDENCE</small></span>
+                </a>
+                <button class="icon-btn sb-close" data-action="closeNav" aria-label="Close menu"><i
+                        class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <button class="acct-switch" id="acctSwitch" data-action="openSwitcher" aria-haspopup="dialog">
+                <span class="acct-ico" id="acctIco"></span>
+                <span class="acct-txt"><b id="acctName">Personal account</b><small id="acctRole">Owner</small></span>
+                <i class="fa-solid fa-arrows-up-down"></i>
+            </button>
+
+            <nav class="side-nav" id="sideNav" aria-label="Main"></nav>
+
+            <div class="sb-foot">
+                <div class="secure-note"><i class="fa-solid fa-shield-halved"></i>
+                    <span><b>Your account, protected</b><small>Access follows your role in the active account.</small></span>
+                </div>
+                <a class="side-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to website</a>
             </div>
         </aside>
-        <main class="main-area">
-            <header class="topbar"><button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open navigation"><i
+        <div class="scrim" id="scrim" data-action="closeNav"></div>
+
+        <!-- ===== MAIN ===== -->
+        <div class="main">
+            <header class="topbar">
+                <button class="icon-btn menu-btn" data-action="openNav" aria-label="Open menu"><i
                         class="fa-solid fa-bars"></i></button>
-                <div class="crumb">JP Express <i class="fa-solid fa-chevron-right"></i> <b id="crumbTitle">Overview</b>
+                <div class="crumb"><span>My account</span><i class="fa-solid fa-chevron-right"></i><b
+                        id="crumbTitle">Dashboard</b></div>
+
+                <form class="top-search" id="topSearch" role="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="topSearchInput" type="search" placeholder="Find a shipment ID" autocomplete="off"
+                        aria-label="Find a shipment by ID">
+                </form>
+
+                <div class="top-actions">
+                    <a class="btn btn-primary btn-sm top-new" href="#create" data-nav="create"><i
+                            class="fa-solid fa-plus"></i><span>New shipment</span></a>
+                    <a class="icon-btn" href="contact.html" aria-label="Contact JP Express" title="Contact JP Express"><i
+                            class="fa-regular fa-circle-question"></i></a>
+                    <button class="icon-btn bell" data-nav="notifications" aria-label="Notifications"><i
+                            class="fa-regular fa-bell"></i><em id="bellDot" hidden>0</em></button>
+                    <button class="profile-btn" data-nav="profile" aria-label="Profile and security">
+                        <span class="avatar" id="meAvatar">RK</span>
+                        <span class="profile-meta"><b id="meName">Rahim Khan</b><small id="meSub">Personal customer</small></span>
+                    </button>
                 </div>
-                <div class="top-actions"><a class="help-link" href="contact.html"><i
-                            class="fa-regular fa-circle-question"></i><span>Need help?</span></a><button
-                        class="icon-btn notification-btn" id="notifyBtn" aria-label="Notifications"><i
-                            class="fa-regular fa-bell"></i><em></em></button><button class="profile-btn"
-                        id="profileBtn"><span class="avatar">RK</span><span class="profile-meta"><b>Rahim
-                                Khan</b><small>Personal customer</small></span><i
-                            class="fa-solid fa-chevron-down"></i></button></div>
             </header>
-            <div class="content">
-                <section class="view active" id="view-dashboard">
-                    <div class="welcome-row">
-                        <div>
-                            <div class="eyebrow"><span class="pulse"></span> PERSONAL ACCOUNT</div>
-                            <h1>Good afternoon, Rahim <span>✦</span></h1>
-                            <p>Everything you ship, all in one place.</p>
-                        </div><a class="primary-btn" href="quote.html"><i class="fa-solid fa-plus"></i> Create a
-                            shipment</a>
-                    </div>
-                    <div class="hero-card">
-                        <div class="hero-copy"><span class="hero-tag"><i class="fa-solid fa-earth-asia"></i> GLOBAL
-                                SHIPPING, MADE SIMPLE</span>
-                            <h2>Your next shipment<br>starts right here.</h2>
-                            <p>Book a pickup, get a quote, or follow your parcel from pickup to delivery.</p>
-                            <div class="hero-actions"><a class="white-btn" href="quote.html">Book a shipment <i
-                                        class="fa-solid fa-arrow-right"></i></a><button class="outline-btn"
-                                    data-go="tracking"><i class="fa-solid fa-location-dot"></i> Track parcel</button>
-                            </div>
-                        </div>
-                        <div class="hero-art">
-                            <div class="orbit orbit-one"></div>
-                            <div class="orbit orbit-two"></div>
-                            <div class="globe"><i class="fa-solid fa-earth-asia"></i></div>
-                            <div class="floating-box box-one"><i class="fa-solid fa-box"></i></div>
-                            <div class="floating-box box-two"><i class="fa-solid fa-plane"></i></div>
-                            <div class="route-line"></div>
-                        </div>
-                    </div>
-                    <div class="stats-grid">
-                        <article class="stat-card"><span class="stat-icon blue"><i
-                                    class="fa-solid fa-boxes-stacked"></i></span>
-                            <div class="stat-label">Total shipments</div>
-                            <div class="stat-bottom"><strong>12</strong><span class="stat-foot">All time</span></div>
-                        </article>
-                        <article class="stat-card"><span class="stat-icon orange"><i
-                                    class="fa-solid fa-truck-fast"></i></span>
-                            <div class="stat-label">In transit</div>
-                            <div class="stat-bottom"><strong>3</strong><span class="status-pill transit">On the
-                                    way</span></div>
-                        </article>
-                        <article class="stat-card"><span class="stat-icon green"><i
-                                    class="fa-solid fa-circle-check"></i></span>
-                            <div class="stat-label">Delivered</div>
-                            <div class="stat-bottom"><strong>8</strong><span class="stat-foot">Successfully</span></div>
-                        </article>
-                        <article class="stat-card"><span class="stat-icon violet"><i
-                                    class="fa-regular fa-file-lines"></i></span>
-                            <div class="stat-label">Open quotes</div>
-                            <div class="stat-bottom"><strong>1</strong><span class="stat-foot">Awaiting review</span>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="dashboard-grid">
-                        <section class="panel shipments-panel">
-                            <div class="panel-heading">
-                                <div>
-                                    <h3>Recent shipments</h3>
-                                    <p>Stay up to date with your parcels.</p>
-                                </div><button class="text-btn" data-go="shipments">View all <i
-                                        class="fa-solid fa-arrow-right"></i></button>
-                            </div>
-                            <div class="shipment-list">
-                                <div class="shipment-row"><span class="shipment-symbol"><i
-                                            class="fa-solid fa-box"></i></span>
-                                    <div class="shipment-info"><b>JPX-2048-6192</b><span>Dhaka, BD <i
-                                                class="fa-solid fa-arrow-right"></i> New York, US</span></div>
-                                    <div class="shipment-state"><span class="state-dot orange-dot"></span>In
-                                        transit<small>Est. Oct 14</small></div><button class="row-arrow"
-                                        data-track="JPX-2048-6192" aria-label="Track shipment"><i
-                                            class="fa-solid fa-chevron-right"></i></button>
-                                </div>
-                                <div class="shipment-row"><span class="shipment-symbol"><i
-                                            class="fa-solid fa-envelope"></i></span>
-                                    <div class="shipment-info"><b>JPX-2047-5108</b><span>Dhaka, BD <i
-                                                class="fa-solid fa-arrow-right"></i> London, UK</span></div>
-                                    <div class="shipment-state"><span
-                                            class="state-dot green-dot"></span>Delivered<small>Oct 08, 2026</small>
-                                    </div><button class="row-arrow" data-track="JPX-2047-5108"
-                                        aria-label="Track shipment"><i class="fa-solid fa-chevron-right"></i></button>
-                                </div>
-                                <div class="shipment-row"><span class="shipment-symbol"><i
-                                            class="fa-solid fa-gift"></i></span>
-                                    <div class="shipment-info"><b>JPX-2046-3821</b><span>Chattogram, BD <i
-                                                class="fa-solid fa-arrow-right"></i> Toronto, CA</span></div>
-                                    <div class="shipment-state"><span class="state-dot blue-dot"></span>Customs
-                                        clearance<small>Updated 2h ago</small></div><button class="row-arrow"
-                                        data-track="JPX-2046-3821" aria-label="Track shipment"><i
-                                            class="fa-solid fa-chevron-right"></i></button>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="panel quick-panel">
-                            <div class="panel-heading">
-                                <div>
-                                    <h3>Quick actions</h3>
-                                    <p>What would you like to do?</p>
-                                </div>
-                            </div>
-                            <div class="quick-grid"><button class="quick-action" data-go="tracking"><span
-                                        class="quick-icon qi-blue"><i
-                                            class="fa-solid fa-location-crosshairs"></i></span><b>Track a
-                                        parcel</b><small>Live shipment updates</small><i
-                                        class="fa-solid fa-arrow-up-right-from-square action-corner"></i></button><a
-                                    class="quick-action" href="quote.html"><span class="quick-icon qi-orange"><i
-                                            class="fa-solid fa-calculator"></i></span><b>Get a quote</b><small>Estimate
-                                        shipping costs</small><i
-                                        class="fa-solid fa-arrow-up-right-from-square action-corner"></i></a><button
-                                    class="quick-action" data-go="addresses"><span class="quick-icon qi-green"><i
-                                            class="fa-solid fa-map-location-dot"></i></span><b>Saved
-                                        addresses</b><small>Manage sender details</small><i
-                                        class="fa-solid fa-arrow-up-right-from-square action-corner"></i></button><button
-                                    class="quick-action" data-go="family"><span class="quick-icon qi-violet"><i
-                                            class="fa-solid fa-user-plus"></i></span><b>Invite family</b><small>Share
-                                        limited access</small><i
-                                        class="fa-solid fa-arrow-up-right-from-square action-corner"></i></button></div>
-                        </section>
-                    </div>
-                    <div class="bottom-grid">
-                        <section class="panel family-preview">
-                            <div class="panel-heading">
-                                <div>
-                                    <h3>Family & trusted access</h3>
-                                    <p>People you've authorized to help with shipments.</p>
-                                </div><button class="text-btn" data-go="family">Manage <i
-                                        class="fa-solid fa-arrow-right"></i></button>
-                            </div>
-                            <div class="member-mini"><span class="member-avatar peach">MK</span>
-                                <div><b>Momina Khan</b><small>Family member · Shipment access</small></div><span
-                                    class="member-status">Active</span>
-                            </div>
-                            <div class="member-mini"><span class="member-avatar lilac">SK</span>
-                                <div><b>Sadia Khan</b><small>Family member · View only</small></div><span
-                                    class="member-status">Active</span>
-                            </div>
-                            <div class="privacy-tip"><i class="fa-solid fa-lock"></i><span><b>Your account stays
-                                        yours.</b> Members only see the information and actions you authorize.</span>
-                            </div>
-                        </section>
-                        <section class="panel activity-panel">
-                            <div class="panel-heading">
-                                <div>
-                                    <h3>Latest activity</h3>
-                                    <p>Recent updates to your account.</p>
-                                </div><button class="dots-btn" aria-label="More activity"><i
-                                        class="fa-solid fa-ellipsis"></i></button>
-                            </div>
-                            <div class="activity-item"><span class="activity-icon ai-green"><i
-                                        class="fa-solid fa-check"></i></span>
-                                <div><b>Delivery completed</b>
-                                    <p>JPX-2047-5108 was delivered successfully.</p><small>Oct 08 · 11:42 AM</small>
-                                </div>
-                            </div>
-                            <div class="activity-item"><span class="activity-icon ai-blue"><i
-                                        class="fa-solid fa-file-circle-check"></i></span>
-                                <div><b>Document uploaded</b>
-                                    <p>Invoice document added to JPX-2048-6192.</p><small>Oct 07 · 04:16 PM</small>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                    <div class="portal-footer"><span>© 2026 JP Express. All rights reserved.</span><span><i
-                                class="fa-solid fa-shield-halved"></i> Secure customer workspace <a
-                                href="privacy-policy.html">Privacy</a></span></div>
-                </section>
-                <section class="view" id="view-shipments">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">SHIPMENT MANAGEMENT</div>
-                            <h1>My shipments</h1>
-                            <p>View and manage shipments linked to your personal account.</p>
-                        </div><a class="primary-btn" href="quote.html"><i class="fa-solid fa-plus"></i> Create
-                            shipment</a>
-                    </div>
-                    <div class="filterbar"><label class="searchbox"><i class="fa-solid fa-magnifying-glass"></i><input
-                                id="shipmentSearch" placeholder="Search shipment ID or destination"></label><select
-                            id="statusFilter">
-                            <option value="all">All statuses</option>
-                            <option>In transit</option>
-                            <option>Delivered</option>
-                            <option>Customs clearance</option>
-                        </select></div>
-                    <div class="panel table-panel">
-                        <div class="table-wrap">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Shipment</th>
-                                        <th>Route</th>
-                                        <th>Ship date</th>
-                                        <th>Service</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="shipmentTable">
-                                    <tr data-status="In transit">
-                                        <td><b>JPX-2048-6192</b><small>Parcel · 2.5 kg</small></td>
-                                        <td>Dhaka, BD <i class="fa-solid fa-arrow-right"></i> New York, US</td>
-                                        <td>Oct 06, 2026</td>
-                                        <td>International Express</td>
-                                        <td><span class="table-status transit">In transit</span></td>
-                                        <td><button class="text-btn" data-track="JPX-2048-6192">Track</button></td>
-                                    </tr>
-                                    <tr data-status="Delivered">
-                                        <td><b>JPX-2047-5108</b><small>Documents · 0.4 kg</small></td>
-                                        <td>Dhaka, BD <i class="fa-solid fa-arrow-right"></i> London, UK</td>
-                                        <td>Oct 02, 2026</td>
-                                        <td>Document Express</td>
-                                        <td><span class="table-status delivered">Delivered</span></td>
-                                        <td><button class="text-btn" data-track="JPX-2047-5108">Track</button></td>
-                                    </tr>
-                                    <tr data-status="Customs clearance">
-                                        <td><b>JPX-2046-3821</b><small>Parcel · 4.0 kg</small></td>
-                                        <td>Chattogram, BD <i class="fa-solid fa-arrow-right"></i> Toronto, CA</td>
-                                        <td>Sep 29, 2026</td>
-                                        <td>International Economy</td>
-                                        <td><span class="table-status customs">Customs clearance</span></td>
-                                        <td><button class="text-btn" data-track="JPX-2046-3821">Track</button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </section>
-                <section class="view" id="view-tracking">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">SHIPMENT VISIBILITY</div>
-                            <h1>Track your shipment</h1>
-                            <p>Get the latest status of your JP Express parcel.</p>
-                        </div>
-                    </div>
-                    <div class="track-card">
-                        <div class="track-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
-                        <h2>Where is your parcel going?</h2>
-                        <p>Enter your JP Express shipment or AWB number to view tracking updates.</p>
-                        <form id="trackingForm" class="track-form"><input id="trackingInput"
-                                placeholder="e.g. JPX-2048-6192" aria-label="Shipment or AWB number" required><button
-                                class="primary-btn">Track shipment <i class="fa-solid fa-arrow-right"></i></button>
-                        </form>
-                        <div class="track-result" id="trackResult" aria-live="polite"></div>
-                        <div class="sample-track">Try a sample: <button
-                                data-sample="JPX-2048-6192">JPX-2048-6192</button><button
-                                data-sample="JPX-2047-5108">JPX-2047-5108</button></div>
-                    </div>
-                </section>
-                <section class="view" id="view-quotes">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">PRICING & BOOKINGS</div>
-                            <h1>Quotes & bookings</h1>
-                            <p>Keep your shipping estimates and booking requests organized.</p>
-                        </div><a class="primary-btn" href="quote.html"><i class="fa-solid fa-plus"></i> Request a
-                            quote</a>
-                    </div>
-                    <div class="panel empty-aware">
-                        <div class="quote-card"><span class="stat-icon violet"><i
-                                    class="fa-solid fa-file-invoice-dollar"></i></span>
-                            <div><b>QT-2026-0184</b>
-                                <p>Dhaka, Bangladesh → New York, USA · Personal parcel</p><small>Requested Oct 09,
-                                    2026</small>
-                            </div><span class="table-status customs">Under review</span>
-                        </div>
-                        <div class="quote-card"><span class="stat-icon green"><i
-                                    class="fa-solid fa-calendar-check"></i></span>
-                            <div><b>BK-2026-0092</b>
-                                <p>Dhaka, Bangladesh → London, UK · Documents</p><small>Booked Oct 02, 2026</small>
-                            </div><span class="table-status delivered">Confirmed</span>
-                        </div>
-                        <div class="notice"><i class="fa-solid fa-circle-info"></i> Quotes and bookings shown here are
-                            sample portal data until connected to your live account system.</div>
-                    </div>
-                </section>
-                <section class="view" id="view-addresses">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">SAVED CONTACTS</div>
-                            <h1>Address book</h1>
-                            <p>Save sender and receiver details to make future bookings faster.</p>
-                        </div><button class="primary-btn" id="addAddressBtn"><i class="fa-solid fa-plus"></i> Add
-                            address</button>
-                    </div>
-                    <div class="address-grid" id="addressGrid">
-                        <article class="panel address-card"><span class="address-type"><i class="fa-solid fa-house"></i>
-                                DEFAULT SENDER</span>
-                            <h3>Rahim Khan</h3>
-                            <p>House 12, Road 4, Banani<br>Dhaka 1213, Bangladesh</p>
-                            <div class="address-contact"><span><i class="fa-solid fa-phone"></i> +880
-                                    1712-345678</span><span><i class="fa-regular fa-envelope"></i>
-                                    rahim@example.com</span></div><button class="text-btn edit-address">Edit
-                                details</button>
-                        </article>
-                        <article class="panel address-card"><span class="address-type receiver"><i
-                                    class="fa-solid fa-location-dot"></i> DEFAULT RECEIVER</span>
-                            <h3>Arif Khan</h3>
-                            <p>25 Broadway, Manhattan<br>New York, NY 10004, USA</p>
-                            <div class="address-contact"><span><i class="fa-solid fa-phone"></i> +1
-                                    212-555-0134</span><span><i class="fa-regular fa-envelope"></i>
-                                    arif@example.com</span></div><button class="text-btn edit-address">Edit
-                                details</button>
-                        </article>
-                    </div>
-                    <form class="panel inline-form hidden" id="addressForm">
-                        <h3>Add a saved address</h3>
-                        <div class="form-grid"><label>Full name<input required placeholder="Name"></label><label>Address
-                                type<select>
-                                    <option>Sender</option>
-                                    <option>Receiver</option>
-                                    <option>Home</option>
-                                    <option>Office</option>
-                                </select></label><label class="span-two">Street address<input required
-                                    placeholder="Street, building, apartment"></label><label>City<input required
-                                    placeholder="City"></label><label>Country<input required
-                                    placeholder="Country"></label><label>Phone<input
-                                    placeholder="+880"></label><label>Email<input type="email"
-                                    placeholder="name@example.com"></label></div>
-                        <div class="form-actions"><button type="button" class="secondary-btn"
-                                id="cancelAddress">Cancel</button><button class="primary-btn">Save address</button>
-                        </div>
-                    </form>
-                </section>
-                <section class="view" id="view-family">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">SHARED, CONTROLLED ACCESS</div>
-                            <h1>Family & trusted access</h1>
-                            <p>Invite people to help with shipments while keeping your account secure.</p>
-                        </div><button class="primary-btn" id="inviteBtn"><i class="fa-solid fa-user-plus"></i> Invite a
-                            member</button>
-                    </div>
-                    <div class="notice access-notice"><i class="fa-solid fa-shield-halved"></i><span><b>You remain the
-                                account owner.</b> Members only get the permissions you select. They cannot change
-                            ownership or manage your security settings.</span></div>
-                    <div class="panel table-panel">
-                        <div class="table-wrap">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Member</th>
-                                        <th>Relationship</th>
-                                        <th>Access level</th>
-                                        <th>Status</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="memberTable">
-                                    <tr>
-                                        <td>
-                                            <div class="person-cell"><span
-                                                    class="member-avatar peach">MK</span><span><b>Momina
-                                                        Khan</b><small>momina@example.com</small></span></div>
-                                        </td>
-                                        <td>Mother</td>
-                                        <td><span class="role-chip">Shipment operator</span></td>
-                                        <td><span class="member-status">Active</span></td>
-                                        <td><button class="dots-btn member-menu" aria-label="Member options"><i
-                                                    class="fa-solid fa-ellipsis"></i></button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="person-cell"><span
-                                                    class="member-avatar lilac">SK</span><span><b>Sadia
-                                                        Khan</b><small>sadia@example.com</small></span></div>
-                                        </td>
-                                        <td>Wife</td>
-                                        <td><span class="role-chip">View only</span></td>
-                                        <td><span class="member-status">Active</span></td>
-                                        <td><button class="dots-btn member-menu" aria-label="Member options"><i
-                                                    class="fa-solid fa-ellipsis"></i></button></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="permission-grid">
-                        <div class="panel permission-card"><i class="fa-solid fa-box"></i><b>Shipment access</b>
-                            <p>Choose who can create, view or manage shipments.</p>
-                        </div>
-                        <div class="panel permission-card"><i class="fa-solid fa-file-arrow-up"></i><b>Document
-                                access</b>
-                            <p>Allow members to upload or download shipment documents.</p>
-                        </div>
-                        <div class="panel permission-card"><i class="fa-solid fa-lock"></i><b>Owner-only controls</b>
-                            <p>Security, ownership, member administration and restricted payments stay private.</p>
-                        </div>
-                    </div>
-                    <form class="panel inline-form hidden" id="inviteForm">
-                        <h3>Invite a family member</h3>
-                        <p class="form-subtitle">An invitation can be sent when the portal is connected to the account
-                            backend.</p>
-                        <div class="form-grid"><label>Full name<input id="memberName" required
-                                    placeholder="Member's full name"></label><label>Email address<input id="memberEmail"
-                                    type="email" required
-                                    placeholder="name@example.com"></label><label>Relationship<select
-                                    id="memberRelation">
-                                    <option>Mother</option>
-                                    <option>Father</option>
-                                    <option>Spouse</option>
-                                    <option>Brother / Sister</option>
-                                    <option>Other</option>
-                                </select></label><label>Access level<select id="memberRole">
-                                    <option>Shipment operator</option>
-                                    <option>View only</option>
-                                    <option>Document access</option>
-                                    <option>Booking access</option>
-                                </select></label></div>
-                        <div class="form-actions"><button type="button" class="secondary-btn"
-                                id="cancelInvite">Cancel</button><button class="primary-btn">Add member</button></div>
-                    </form>
-                </section>
-                <section class="view" id="view-documents">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">SHIPPING PAPERWORK</div>
-                            <h1>Documents</h1>
-                            <p>Keep shipment documents organized in one secure place.</p>
-                        </div><button class="primary-btn" id="uploadBtn"><i class="fa-solid fa-upload"></i> Upload
-                            document</button><input type="file" id="documentInput" hidden>
-                    </div>
-                    <div class="panel table-panel">
-                        <div class="table-wrap">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Document</th>
-                                        <th>Related shipment</th>
-                                        <th>Added</th>
-                                        <th>Type</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="documentTable">
-                                    <tr>
-                                        <td><span class="doc-name"><i
-                                                    class="fa-regular fa-file-pdf"></i><span><b>Commercial-invoice.pdf</b><small>PDF
-                                                        document</small></span></span></td>
-                                        <td>JPX-2048-6192</td>
-                                        <td>Oct 07, 2026</td>
-                                        <td>Invoice</td>
-                                        <td><span class="role-chip">Private</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><span class="doc-name"><i
-                                                    class="fa-regular fa-file-image"></i><span><b>Parcel-details.jpg</b><small>Image
-                                                        document</small></span></span></td>
-                                        <td>JPX-2046-3821</td>
-                                        <td>Sep 29, 2026</td>
-                                        <td>Shipment details</td>
-                                        <td><span class="role-chip">Private</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="notice"><i class="fa-solid fa-lock"></i> Files are shown locally for this UI demo.
-                            Secure server-side storage and permissions must be connected before production use.</div>
-                    </div>
-                </section>
-                <section class="view" id="view-billing">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">PAYMENTS & RECORDS</div>
-                            <h1>Invoices & payments</h1>
-                            <p>Review billing records available to your account.</p>
-                        </div>
-                    </div>
-                    <div class="stats-grid billing-stats">
-                        <article class="stat-card">
-                            <div class="stat-label">Outstanding balance</div>
-                            <div class="stat-bottom"><strong>৳ 0.00</strong><span class="status-pill delivered">All
-                                    clear</span></div>
-                        </article>
-                        <article class="stat-card">
-                            <div class="stat-label">Paid invoices</div>
-                            <div class="stat-bottom"><strong>8</strong><span class="stat-foot">This year</span></div>
-                        </article>
-                        <article class="stat-card">
-                            <div class="stat-label">Pending invoices</div>
-                            <div class="stat-bottom"><strong>0</strong><span class="stat-foot">No action needed</span>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="panel empty-aware">
-                        <div class="empty-state"><span><i class="fa-solid fa-file-invoice"></i></span>
-                            <h3>No outstanding invoices</h3>
-                            <p>Your available invoice and payment history will appear here when connected to your live
-                                customer account.</p>
-                        </div>
-                    </div>
-                </section>
-                <section class="view" id="view-support">
-                    <div class="page-title">
-                        <div>
-                            <div class="eyebrow">WE'RE HERE TO HELP</div>
-                            <h1>Help & support</h1>
-                            <p>Find the right help for your shipment or account.</p>
-                        </div>
-                    </div>
-                    <div class="support-grid"><a class="panel support-card" href="track-shipment.html"><span
-                                class="quick-icon qi-blue"><i class="fa-solid fa-location-dot"></i></span>
-                            <h3>Shipment assistance</h3>
-                            <p>Get help with a delivery, tracking update or exception.</p><span>Track shipment <i
-                                    class="fa-solid fa-arrow-right"></i></span>
-                        </a><a class="panel support-card" href="contact.html"><span class="quick-icon qi-orange"><i
-                                    class="fa-regular fa-comments"></i></span>
-                            <h3>Contact JP Express</h3>
-                            <p>Talk to our support team about your account or shipment.</p><span>Contact support <i
-                                    class="fa-solid fa-arrow-right"></i></span>
-                        </a><a class="panel support-card" href="faq.html"><span class="quick-icon qi-green"><i
-                                    class="fa-regular fa-circle-question"></i></span>
-                            <h3>Frequently asked questions</h3>
-                            <p>Find answers about shipping, documents and services.</p><span>Browse FAQs <i
-                                    class="fa-solid fa-arrow-right"></i></span>
-                        </a></div>
-                </section>
-            </div>
-        </main>
+
+            <main id="view" class="content" tabindex="-1" aria-live="polite"></main>
+
+            <footer class="portal-foot">
+                <span>© 2026 JP Express. All rights reserved.</span>
+                <span><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a><a
+                        href="contact.html">Support</a></span>
+            </footer>
+        </div>
     </div>
+
+    <!-- ===== MOBILE BOTTOM BAR ===== -->
+    <nav class="tabbar" aria-label="Quick navigation">
+        <a href="#dashboard" data-nav="dashboard"><i class="fa-solid fa-house"></i><span>Home</span></a>
+        <a href="#shipments" data-nav="shipments"><i class="fa-solid fa-box"></i><span>Shipments</span></a>
+        <a href="#create" data-nav="create" class="tab-main" aria-label="New shipment"><i
+                class="fa-solid fa-plus"></i></a>
+        <a href="#tracking" data-nav="tracking"><i class="fa-solid fa-location-crosshairs"></i><span>Track</span></a>
+        <button type="button" data-action="openNav"><i class="fa-solid fa-grip"></i><span>More</span></button>
+    </nav>
+
+    <div id="modalRoot"></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
     <script src="js/customer-portal.js"></script>
 </body>
 

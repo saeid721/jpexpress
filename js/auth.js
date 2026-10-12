@@ -10,7 +10,14 @@
         loginEndpoint: "",        /* e.g. "/login"    ("" = demo mode) */
         registerEndpoint: "",     /* e.g. "/register" ("" = demo mode) */
         branchEndpoint: "",       /* e.g. "/api/branches" -> [{ "id": 1, "name": "Dhaka" }] */
-        loginRedirect: "index.html",
+        loginRedirect: "customer-portal.html",
+        demo: {                               /* TEMPORARY: remove before going live */
+            enabled: true,
+            phone: "+8801681637836",
+            password: "12345678",
+            name: "Rahim Khan",
+            sessionKey: "jpx_session"
+        },
         registerRedirect: "login.html",
         branches: [               /* demo list, used until branchEndpoint is set */
             { id: "1", name: "Dhaka Head Office" },
@@ -79,9 +86,28 @@
                     .then(function (j) { return { ok: res.ok, status: res.status, json: j }; });
             });
     }
-    function demo() {
+
+    /* ---- TEMPORARY demo sign-in (works only while loginEndpoint is empty) ---- */
+    function samePhone(a, b) {
+        var x = String(a || "").replace(/\D/g, ""), y = String(b || "").replace(/\D/g, "");
+        return x.length >= 10 && y.length >= 10 && x.slice(-10) === y.slice(-10);
+    }
+    function demoLogin(id, pw, remember) {
+        var D = AUTH.demo;
         return new Promise(function (resolve) {
-            setTimeout(function () { resolve({ ok: true, status: 200, json: { demo: true } }); }, 900);
+            setTimeout(function () {
+                if (samePhone(id, D.phone) && pw === D.password) {
+                    var data = JSON.stringify({ name: D.name, phone: D.phone, at: Date.now() });
+                    try {
+                        localStorage.removeItem(D.sessionKey);
+                        sessionStorage.removeItem(D.sessionKey);
+                        (remember ? localStorage : sessionStorage).setItem(D.sessionKey, data);
+                    } catch (e) { }
+                    resolve({ ok: true, status: 200, json: {} });
+                } else {
+                    resolve({ ok: false, status: 401, json: { message: "Incorrect phone number or password. Please try again." } });
+                }
+            }, 700);
         });
     }
     function firstError(json) {
@@ -135,7 +161,16 @@
             hint.textContent = HINTS[t];
             setError(fId, "");
         });
-        pwInput.addEventListener("input", function () { setError(fPw, ""); });
+
+        /* TEMPORARY demo: prefill fields + tick Remember me */
+        if (!AUTH.loginEndpoint && AUTH.demo && AUTH.demo.enabled) {
+            idInput.value = AUTH.demo.phone;
+            pwInput.value = AUTH.demo.password;
+            $("#rememberMe").checked = true;
+            idInput.dispatchEvent(new Event("input"));
+            var demoNote = $("#loginDemo");
+            if (demoNote) demoNote.hidden = false;
+        }
 
         form.addEventListener("submit", function (e) {
             e.preventDefault();
@@ -160,8 +195,9 @@
             var fd = new FormData(form);
             fd.set("login_type", type);
 
+            var useDemo = !AUTH.loginEndpoint && AUTH.demo && AUTH.demo.enabled;
             setLoading(btn, true, "Signing in...");
-            (AUTH.loginEndpoint ? send(AUTH.loginEndpoint, fd) : demo())
+            (AUTH.loginEndpoint ? send(AUTH.loginEndpoint, fd) : useDemo ? demoLogin(id, pw, $("#rememberMe").checked) : demo())
                 .then(function (r) {
                     setLoading(btn, false);
                     if (r.ok && r.json && r.json.demo) {
