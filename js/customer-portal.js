@@ -1206,6 +1206,7 @@
     function render() {
         updateChrome();
         viewEl.innerHTML = (VIEWS[route] || vDashboard)();
+        viewEl.classList.add('view-in');
         startHero();
         var se = $('#shipSearch'); if (se) se.addEventListener('input', function () { filterState.q = se.value; var l = $('#shipList'); if (l) l.innerHTML = shipListHtml(); });
     }

@@ -297,13 +297,13 @@ body.lock {
 .side-nav a {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 46px;
-  padding: 0 12px;
-  border-radius: 11px;
+  gap: 10px;
+  min-height: 40px;
+  padding: 0 11px;
+  border-radius: 10px;
   color: #59647f;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13.5px;
   transition: background .18s, color .18s;
 }
 
@@ -755,7 +755,7 @@ body.lock {
   grid-template-columns: repeat(5, 1fr);
   align-items: end;
   height: calc(var(--bar) + var(--sab));
-  padding: 0 6px var(--sab);
+  padding: 0 4px var(--sab);
   background: rgba(255, 255, 255, .97);
   border-top: 1px solid var(--line);
   backdrop-filter: blur(14px);
@@ -803,9 +803,9 @@ body.lock {
 .tabbar .tab-main i {
   display: grid;
   place-items: center;
-  width: 50px;
-  height: 50px;
-  margin-top: -18px;
+  width: 46px;
+  height: 46px;
+  margin-top: -16px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--orange), #ff8a57);
   color: #fff;
@@ -1071,14 +1071,15 @@ body.lock {
 }
 
 .panel-head h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 800;
+  letter-spacing: -.01em;
 }
 
 .panel-head p {
-  margin-top: 3px;
+  margin-top: 2px;
   color: var(--soft);
-  font-size: 13px;
+  font-size: 12.5px;
 }
 
 .count-pill {
@@ -2281,7 +2282,7 @@ button.stat.tone-red:hover {
 
 .tl li {
   position: relative;
-  padding: 0 0 16px;
+  padding: 0 0 13px;
 }
 
 .tl li:last-child {
@@ -2308,14 +2309,14 @@ button.stat.tone-red:hover {
 
 .tl b {
   display: block;
-  font-size: 14px;
+  font-size: 13.5px;
   color: var(--ink);
 }
 
 .tl small {
   display: block;
   margin-top: 2px;
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--muted);
 }
 
@@ -3697,14 +3698,15 @@ button.stat.tone-red:hover {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  padding: 12px 18px 12px;
+  gap: 10px;
+  padding: 10px 16px 10px;
   flex: none;
 }
 
 .sheet-head h2 {
-  font-size: 19px;
+  font-size: 17px;
   font-weight: 800;
+  letter-spacing: -.01em;
 }
 
 .sheet-head p {
@@ -3723,9 +3725,9 @@ button.stat.tone-red:hover {
 
 .sheet-foot {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: flex-end;
-  padding: 12px 18px calc(12px + var(--sab));
+  padding: 10px 16px calc(10px + var(--sab));
   border-top: 1px solid var(--line-2);
   flex: none;
   background: #fff;
@@ -4056,7 +4058,7 @@ button.stat.tone-red:hover {
   }
 
   .content {
-    padding: 24px;
+    padding: 20px;
   }
 
   .page-head,
@@ -4506,10 +4508,10 @@ button.stat.tone-red:hover {
 
 .pickc.contact {
   align-items: flex-start;
-  gap: 12px;
-  min-height: 92px;
-  padding: 16px 14px;
-  border-radius: 14px;
+  gap: 10px;
+  min-height: 78px;
+  padding: 12px 12px;
+  border-radius: 12px;
   min-width: 0;
 }
 
