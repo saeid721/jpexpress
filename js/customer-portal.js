@@ -784,7 +784,7 @@
         if (!can('track')) return locked('tracking');
         return pageHead('SHIPMENT VISIBILITY', 'Track your shipment', 'Account shipments show full details. For any other parcel use public tracking.') +
             '<section class="panel track-card"><span class="track-ico"><i class="fa-solid fa-location-crosshairs"></i></span><h2>Where is your parcel?</h2><p>Enter a JP Express shipment or AWB number.</p>' +
-            '<form id="trackForm" class="track-form" novalidate><input id="trackInput" placeholder="e.g. JPX-2048-6192" aria-label="Shipment or AWB number" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="btn btn-primary" type="submit">Track <i class="fa-solid fa-arrow-right"></i></button></form>' +
+            '<form id="trackForm" class="track-form" novalidate><label class="track-field"><i class="fa-solid fa-barcode" aria-hidden="true"></i><input id="trackInput" placeholder="e.g. JPX-2048-6192" aria-label="Shipment or AWB number" autocomplete="off" autocapitalize="characters" spellcheck="false"></label><button class="btn btn-track" type="submit"><span>Track Shipment</span> <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></form>' +
             '<div class="sample"><span class="sample-l">Your shipments:</span>' + sampleShips().map(function (s) {
                 var st = stepOf(s), bad = s.status === 'exception';
                 return '<button class="mini-chip' + (bad ? ' is-bad' : st === STEPS.length - 1 ? ' is-done' : '') + '" data-action="trackShip" data-id="' + esc(s.id) + '">' + esc(s.id) + '<em>' + (bad ? 'Action needed' : esc(STEPS[st])) + ' · ' + (st + 1) + '/' + STEPS.length + '</em></button>';

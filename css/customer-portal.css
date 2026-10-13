@@ -6077,3 +6077,80 @@ select.wz-mini {
     grid-template-columns: 1fr;
   }
 }
+
+/* =====================================================================
+   TRACK SEARCH — barcode input + orange "Track Shipment" button
+   (same look as the public track-shipment page)
+   ===================================================================== */
+.track-form {
+  gap: 10px;
+  max-width: 640px;
+}
+
+.track-field {
+  position: relative;
+  display: block;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+}
+
+.track-field>i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--soft);
+  pointer-events: none;
+  transition: color .2s;
+}
+
+.track-field:focus-within>i {
+  color: var(--orange);
+}
+
+.track-form .track-field input {
+  height: 52px;
+  padding-left: 46px;
+  text-align: left;
+}
+
+.track-form .btn-track {
+  height: 52px;
+  padding: 0 22px;
+  font-size: 14.5px;
+  background: var(--orange);
+  color: #fff;
+  border-color: var(--orange);
+  box-shadow: 0 8px 20px rgba(242, 99, 35, .28);
+}
+
+.track-form .btn-track:hover {
+  background: var(--orange-d);
+  border-color: var(--orange-d);
+  transform: translateY(-1px);
+}
+
+.track-form .btn-track i {
+  transition: transform .18s;
+}
+
+.track-form .btn-track:hover i {
+  transform: translateX(3px);
+}
+
+/* tablet + desktop: input and button on one row */
+@media (min-width: 640px) {
+  .track-form .btn-track {
+    flex: none;
+    min-width: 176px;
+  }
+}
+
+/* phones: stacked, full-width button */
+@media (max-width: 639px) {
+  .track-form .btn-track {
+    width: 100%;
+  }
+}
