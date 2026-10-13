@@ -356,21 +356,34 @@
   gap: 16px;
 }
 
+/* Tablet: 2 columns */
 @media (min-width: 576px) {
   .page-services .svp-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-@media (min-width: 768px) {
-  .page-services .svp-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Odd count: the last visible card spans the full row (class set by JS) */
+  .page-services .svp-grid[data-odd="1"] .svp-item.is-last {
+    grid-column: 1 / -1;
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-rows: auto;
+    align-items: start;
   }
 }
 
-@media (min-width: 1280px) {
+/* Desktop: every card shares one row, 1 to 5 cards always fill the width */
+@media (min-width: 1200px) {
   .page-services .svp-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+  }
+
+  .page-services .svp-grid[data-odd="1"] .svp-item.is-last {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    align-items: stretch;
   }
 }
 
@@ -499,7 +512,7 @@
   grid-template-rows: auto 1fr;
 }
 
-.page-services .svp-item-more::after {
+.page-services .svp-item .svp-item-more::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -1263,11 +1276,12 @@
 }
 
 .page-services .svp-guidance-icon {
-  display: inline-grid;
+  display: grid;
   place-items: center;
+  flex: 0 0 auto;
   width: 52px;
   height: 52px;
-  margin-bottom: 20px;
+  margin: 0;
   border-radius: 16px;
   color: #2b3990;
   background: rgba(43, 57, 144, .09);
@@ -1277,7 +1291,7 @@
 .page-services .svp-guidance-card h3 {
   margin: 0 0 12px;
   color: var(--jp-heading, #17234f);
-  font-size: clamp(18px, 1.6vw, 21px);
+  font-size: clamp(16px, 1.6vw, 18px);
   line-height: 1.35;
   font-weight: 800;
 }
@@ -1294,8 +1308,9 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 9px;
-  color: #2b3990;
-  font-weight: 750;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--jp-orange);
   text-decoration: none;
 }
 
@@ -1324,19 +1339,41 @@
   margin-inline: auto;
 }
 
-/* Equal-height cards, links aligned at the bottom */
+/* Icon + title on one line, text and link below, links aligned at the bottom */
 .page-services .svp-guidance-card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  column-gap: 14px;
+  row-gap: 14px;
+  align-items: center;
+}
+
+.page-services .svp-guidance-card .svp-guidance-icon {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.page-services .svp-guidance-card h3 {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .page-services .svp-guidance-card p {
-  flex: 1 1 auto;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: start;
+  margin: 0;
 }
 
 .page-services .svp-guidance-card a {
-  align-self: flex-start;
-  margin-top: auto;
+  grid-column: 1 / -1;
+  grid-row: 3;
+  justify-self: start;
+  align-self: end;
   min-height: 44px;
 }
 
@@ -1445,14 +1482,27 @@
   }
 
   .page-services .svp-guidance-card {
-    padding: 22px;
+    padding: 18px;
     border-radius: 18px;
+    column-gap: 12px;
+    row-gap: 10px;
   }
 
   .page-services .svp-guidance-icon {
-    width: 46px;
-    height: 46px;
-    margin-bottom: 15px;
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    font-size: 18px;
+  }
+
+  .page-services .svp-guidance-card h3 {
+    font-size: 16.5px;
+    line-height: 1.3;
+  }
+
+  .page-services .svp-guidance-card p {
+    font-size: 14px;
+    line-height: 1.65;
   }
 
   .page-services .svp-next-steps {
@@ -1554,8 +1604,49 @@
 
 .template-jp .jp-service-faq-list {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+  align-items: start;
+  max-width: none;
+}
+
+/* each column stacks on its own, so opening one card never stretches the other column */
+.template-jp .jp-service-faq-col {
+  display: grid;
   gap: 10px;
-  max-width: 900px;
+  align-content: start;
+  min-width: 0;
+}
+
+/* open / hover states, same feel as the Services page FAQ */
+.template-jp .jp-service-faq {
+  transition: border-color .22s ease, box-shadow .22s ease;
+}
+
+.template-jp .jp-service-faq:hover {
+  border-color: #f6b99c;
+  box-shadow: 0 8px 20px rgba(43, 57, 144, .1);
+}
+
+.template-jp .jp-service-faq[open] {
+  border-color: rgba(242, 99, 35, .4);
+  box-shadow: 0 8px 22px rgba(43, 57, 144, .09);
+}
+
+.template-jp .jp-service-faq[open] summary {
+  color: var(--jp-orange);
+}
+
+.template-jp .jp-service-faq[open] summary::after {
+  color: var(--jp-orange);
+}
+
+/* tablet and phone: one column */
+@media (max-width: 991.98px) {
+  .template-jp .jp-service-faq-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
 }
 
 .template-jp .jp-service-faq {
@@ -1711,5 +1802,378 @@
   .template-jp .jp-service-detail-card:hover,
   .template-jp .jp-service-next-links .jp-service-link:hover {
     transform: none;
+  }
+}
+
+/* ===============================================================
+   SERVICES PAGE: premium upgrades
+   =============================================================== */
+
+/* "Popular" badge on cards (added by JS) */
+.page-services .svp-item[data-badge]::before {
+  content: attr(data-badge);
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+/* Category links to the detail pages (added by JS) */
+/* Category title row: icon | title + text | details buttons (right side) */
+.page-services .svp-cat-head {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.page-services .svp-cat-head>div:not(.svp-cat-links) {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.page-services .svp-cat-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.page-services .svp-cat-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 18px;
+  border: 1.5px solid rgba(242, 99, 35, .35);
+  border-radius: 999px;
+  background: var(--jp-white);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: var(--jp-orange);
+  transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.page-services .svp-cat-more i {
+  font-size: 11px;
+  transition: transform .25s ease;
+}
+
+.page-services .svp-cat-more:hover,
+.page-services .svp-cat-more:focus-visible {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+  box-shadow: 0 8px 18px rgba(242, 99, 35, .25);
+}
+
+.page-services .svp-cat-more:hover i {
+  transform: translateX(4px);
+}
+
+/* Tablet and phone: buttons move to their own row under the title, full width */
+@media (max-width: 767px) {
+  .page-services .svp-cat-links {
+    flex: 0 0 100%;
+    justify-content: stretch;
+    margin-left: 0;
+  }
+
+  .page-services .svp-cat-more {
+    flex: 1 1 calc(50% - 4px);
+    min-height: 44px;
+    padding: 0 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-services .svp-cat-head {
+    gap: 10px 12px;
+  }
+
+  .page-services .svp-cat-head>div:not(.svp-cat-links) {
+    flex-basis: 0;
+  }
+}
+
+/* Count badge inside category chips (added by JS) */
+.page-services .svp-catlink {
+  min-height: 42px;
+}
+
+.page-services .svp-catcount {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  background: rgba(43, 57, 144, .1);
+}
+
+.page-services .svp-catlink.active .svp-catcount {
+  color: #fff;
+  background: rgba(255, 255, 255, .22);
+}
+
+/* Compare table: "Quote" pill (the old CSS targeted .svp-link, HTML uses .svp-item-more) */
+.page-services .svp-table .svp-item-more {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(242, 99, 35, .1);
+  transition: background .2s ease, color .2s ease;
+}
+
+.page-services .svp-table .svp-item-more:hover {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+}
+
+@media (max-width: 767px) {
+  .page-services .svp-table td:last-child .svp-item-more {
+    width: 100%;
+    min-height: 44px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-services .svp-item[data-badge]::before {
+    top: 10px;
+    right: 10px;
+    padding: 2px 8px;
+    font-size: 10px;
+  }
+
+  .page-services .svp-item[data-badge] h3 {
+    padding-right: 72px;
+  }
+}
+
+/* ===============================================================
+   INTERNATIONAL COURIER: premium service cards + strip
+   =============================================================== */
+.page-international-courier .trust-item strong {
+  font-size: clamp(17px, 2.4vw, 22px);
+}
+
+.template-jp .jp-svc-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.template-jp .jp-svc-card {
+  position: relative;
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--jp-border);
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(27, 37, 89, .045);
+  transition: opacity .55s ease, transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+/* cards 4 and 5 are wider, so the grid has no empty gap */
+.template-jp .jp-svc-card:nth-child(n+4) {
+  grid-column: span 3;
+}
+
+.template-jp .jp-svc-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--jp-orange);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .3s ease;
+}
+
+.template-jp .jp-svc-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(242, 99, 35, .35);
+  box-shadow: var(--jp-shadow-hover);
+}
+
+.template-jp .jp-svc-card:hover::after {
+  transform: scaleY(1);
+}
+
+.template-jp .jp-svc-ico {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+  border-radius: 14px;
+  font-size: 19px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+  transition: background .25s ease, color .25s ease;
+}
+
+.template-jp .jp-svc-card:hover .jp-svc-ico {
+  color: #fff;
+  background: var(--jp-orange);
+}
+
+.template-jp .jp-svc-tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--jp-navy);
+  background: var(--jp-bg-soft);
+}
+
+.template-jp .jp-svc-card h3 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--jp-heading-color);
+}
+
+.template-jp .jp-svc-card p {
+  flex: 1;
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--jp-muted);
+}
+
+/* whole card is the tap target */
+.template-jp .jp-svc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--jp-orange);
+}
+
+.template-jp .jp-svc-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.template-jp .jp-svc-link i {
+  font-size: 12px;
+  transition: transform .25s ease;
+}
+
+.template-jp .jp-svc-card:hover .jp-svc-link i {
+  transform: translateX(4px);
+}
+
+.template-jp .jp-svc-card:focus-within {
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .16);
+}
+
+/* Tablet: 2 columns, last card full width */
+@media (max-width: 991.98px) {
+  .template-jp .jp-svc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .template-jp .jp-svc-card,
+  .template-jp .jp-svc-card:nth-child(n+4) {
+    grid-column: span 1;
+  }
+
+  .template-jp .jp-svc-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Phone: 1 column, icon on the left, compact */
+@media (max-width: 575.98px) {
+  .template-jp .jp-svc-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .template-jp .jp-svc-card,
+  .template-jp .jp-svc-card:last-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: start;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .template-jp .jp-svc-card>* {
+    grid-column: 2;
+  }
+
+  .template-jp .jp-svc-card>.jp-svc-ico {
+    grid-column: 1;
+    grid-row: 1 / span 4;
+    width: 44px;
+    height: 44px;
+    font-size: 17px;
+  }
+
+  .template-jp .jp-svc-card h3 {
+    font-size: 16px;
+  }
+
+  .template-jp .jp-svc-card p {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .template-jp .jp-svc-tag {
+    justify-self: start;
+  }
+}
+
+@media (hover: none) {
+  .template-jp .jp-svc-card:hover {
+    transform: none;
+    box-shadow: 0 8px 30px rgba(27, 37, 89, .045);
+  }
+
+  .template-jp .jp-svc-card:active {
+    transform: scale(.985);
+    border-color: rgba(242, 99, 35, .45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .template-jp .jp-svc-card,
+  .template-jp .jp-svc-card::after,
+  .template-jp .jp-svc-link i {
+    transition: none;
   }
 }

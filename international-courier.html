@@ -9,7 +9,7 @@
 
   <title>International Courier | JP Express</title>
   <meta name="description"
-    content="International Courier from JP Express — international shipping and logistics support from Bangladesh.">
+    content="Send documents and parcels worldwide from Bangladesh with JP Express: express and economy courier, door-to-door pickup, shipment tracking and customs guidance.">
   <meta name="author" content="JP Express">
   <meta name="publisher" content="JP Express">
   <meta name="application-name" content="JP Express">
@@ -115,6 +115,46 @@
   ]
 }
 </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I send any item by international courier?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Some goods are prohibited, while others need prior approval, special documents or destination-specific checks. Confirm eligibility before packing or paying." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does international courier cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A quote depends on origin, destination, actual and volumetric weight, dimensions, service option and any applicable additional charges." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long will delivery take?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Transit estimates vary by route, service, customs clearance, holidays and delivery location. Ask JP Express to confirm the current estimate for your shipment." }
+      },
+      {
+        "@type": "Question",
+        "name": "What documents do I need to ship?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sender and receiver details and a description of the contents are usually needed. Commercial shipments may also need an invoice, packing list or export documents. Requirements vary by destination and item." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can JP Express pick up from my address?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Pickup availability depends on your area in Bangladesh. Share your location when you request a quote and we will confirm the options." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I track my shipment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use your tracking number on the Track Shipment page to see shipment status updates, or contact JP Express for help." }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages/services.css">
 
@@ -141,7 +181,7 @@
           <button class="lang-btn active" type="button">English</button>
           <span>|</span>
           <button class="lang-btn" type="button">বাংলা</button>
-          <a class="d-none d-md-inline" href="#contact">
+          <a class="d-none d-md-inline" href="login.html">
             <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
           </a>
         </div>
@@ -282,63 +322,99 @@
         </div>
       </div>
     </section>
-    <section class="jp-section">
-      <div class="container-xl">
+
+    <section class="trust-strip" aria-label="Courier highlights">
+      <div class="container-fluid">
+        <div class="row g-0">
+          <div class="trust-item col-6 col-md-3"><i
+              class="fa-solid fa-file-lines"></i><strong>Documents</strong><small>&amp; parcels</small></div>
+          <div class="trust-item col-6 col-md-3"><i
+              class="fa-solid fa-door-open"></i><strong>Pickup</strong><small>Door-to-door options</small></div>
+          <div class="trust-item col-6 col-md-3"><i
+              class="fa-solid fa-location-crosshairs"></i><strong>Tracking</strong><small>Shipment status
+              updates</small></div>
+          <div class="trust-item col-6 col-md-3"><i
+              class="fa-solid fa-headset"></i><strong>Support</strong><small>Phone, WhatsApp, email</small></div>
+        </div>
+      </div>
+    </section>
+    <section class="jp-section jp-service-guidance">
+      <div class="container-fluid">
         <div class="jp-section-head">
           <div class="jp-kicker">Service overview</div>
           <h2>What International Courier can help you do</h2>
-          <p>Choose the service around the shipment—not just the label. Destination, shipment type, dimensions, weight,
+          <p>Choose the service around the shipment—not just the label. Destination, shipment type, dimensions,
+            weight,
             urgency and documentation can all affect the appropriate solution.</p>
         </div>
-        <div class="jp-grid jp-grid-3">
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-plane-departure"></i></div>
+        <div class="jp-svc-grid">
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Time-sensitive</span>
             <h3>Express Courier</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-plane-departure"></i></div>
+            <p>A faster option for urgent documents and parcels. Estimated transit depends on destination and
+              customs.</p>
+            <a class="jp-svc-link" href="quote.html?mode=parcel&amp;service=express#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-wallet" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Cost-conscious</span>
             <h3>Economy Courier</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-plane-departure"></i></div>
+            <p>A more economical choice for non-urgent shipments, with a longer estimated transit time.</p>
+            <a class="jp-svc-link" href="quote.html?mode=parcel&amp;service=economy#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-box-open" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Personal &amp; online orders</span>
             <h3>International Parcel Delivery</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-plane-departure"></i></div>
+            <p>Delivery for gifts, personal items and e-commerce orders to supported destinations.</p>
+            <a class="jp-svc-link" href="quote.html?mode=parcel&amp;service=express#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Papers &amp; certificates</span>
             <h3>International Document Courier</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-plane-departure"></i></div>
+            <p>Trackable delivery for business documents, certificates and personal paperwork.</p>
+            <a class="jp-svc-link" href="quote.html?mode=document&amp;service=express#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-door-open" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Convenience</span>
             <h3>Door-to-Door Delivery</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
+            <p>Pickup from your address and delivery to the recipient, handled from start to finish.</p>
+            <a class="jp-svc-link" href="quote.html?mode=parcel&amp;service=door#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
         </div>
       </div>
     </section>
 
     <section class="jp-section alt">
-      <div class="container-xl">
+      <div class="container-fluid">
         <div class="jp-split">
           <div>
             <div class="jp-section-head">
               <div class="jp-kicker">How it works</div>
               <h2>A clear path from enquiry to shipment</h2>
-              <p>The customer journey should remain simple while the operational details are handled by the appropriate
+              <p>The customer journey should remain simple while the operational details are handled by the
+                appropriate
                 team.</p>
             </div>
             <div class="jp-grid">
               <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">1</span>
                 <h3>Share shipment details</h3>
-                <p>Tell us the origin, destination, shipment type and the basic size/weight information available.</p>
+                <p>Tell us the origin, destination, shipment type and the basic size/weight information available.
+                </p>
               </div>
               <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">2</span>
                 <h3>Confirm the service</h3>
@@ -356,17 +432,18 @@
           </div>
           <div class="jp-callout">
             <div class="jp-icon"><i class="fa-solid fa-plane-departure"></i></div><strong>Need a shipment-specific
-              answer?</strong><span>Service availability, rates and transit times can vary. The safest next step is to
+              answer?</strong><span>Service availability, rates and transit times can vary. The safest next step
+              is to
               share the actual shipment requirement.</span>
             <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="quote.html">Get a Quote</a></div>
           </div>
         </div>
+      </div>
     </section>
 
-
-    <!-- Added against the JP Express Service Page Outline: audience, requirements, cost/transit, compliance and service-specific FAQs. -->
+    <!-- Audience, requirements, cost/transit, compliance -->
     <section class="jp-section jp-service-guidance" aria-labelledby="service-guidance-title">
-      <div class="container-xl">
+      <div class="container-fluid">
         <div class="jp-section-head">
           <div class="jp-kicker">International courier checklist</div>
           <h2 id="service-guidance-title">Is international courier right for your shipment?</h2>
@@ -377,13 +454,15 @@
           <article class="jp-card jp-service-detail-card jp-reveal" data-jp-reveal>
             <div class="jp-service-detail-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
             <h3>Who it suits</h3>
-            <p>Personal and business documents, permitted parcels, samples and smaller commercial shipments. Tell us
+            <p>Personal and business documents, permitted parcels, samples and smaller commercial shipments. Tell
+              us
               whether the shipment is personal or commercial.</p>
           </article>
           <article class="jp-card jp-service-detail-card jp-reveal" data-jp-reveal>
             <div class="jp-service-detail-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
             <h3>What to share</h3>
-            <p>Origin and destination, a plain-language item description, quantity, declared value, packed dimensions
+            <p>Origin and destination, a plain-language item description, quantity, declared value, packed
+              dimensions
               and actual weight.</p>
           </article>
           <article class="jp-card jp-service-detail-card jp-reveal" data-jp-reveal>
@@ -395,7 +474,8 @@
           <article class="jp-card jp-service-detail-card jp-reveal" data-jp-reveal>
             <div class="jp-service-detail-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
             <h3>Cost &amp; delivery</h3>
-            <p>Price and estimated transit depend on destination, chargeable weight, service option, pickup/delivery
+            <p>Price and estimated transit depend on destination, chargeable weight, service option,
+              pickup/delivery
               area and customs processing.</p>
           </article>
         </div>
@@ -407,44 +487,76 @@
                 class="d-block mt-1">Continue planning your shipment</span></span><i class="fa-solid fa-arrow-right"
               aria-hidden="true"></i></a>
         </div>
+      </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="jp-section" aria-labelledby="icFaqTitle">
+      <div class="container-fluid">
         <div class="jp-service-faq-wrap">
           <div class="jp-section-head">
             <div class="jp-kicker">Questions answered</div>
-            <h2>Frequently asked questions</h2>
-            <p>These are general planning notes. Confirm current availability and shipment-specific requirements with JP
+            <h2 id="icFaqTitle">Frequently asked questions</h2>
+            <p>These are general planning notes. Confirm current availability and shipment-specific requirements
+              with JP
               Express.</p>
           </div>
           <div class="jp-service-faq-list">
-            <details class="jp-service-faq">
-              <summary>Can I send any item by international courier?</summary>
-              <p>No. Some goods are prohibited, while others need prior approval, special documents or
-                destination-specific checks. Confirm eligibility before packing or paying.</p>
-            </details>
-            <details class="jp-service-faq">
-              <summary>How much does international courier cost?</summary>
-              <p>A quote depends on origin, destination, actual and volumetric weight, dimensions, service option and
-                any applicable additional charges.</p>
-            </details>
-            <details class="jp-service-faq">
-              <summary>How long will delivery take?</summary>
-              <p>Transit estimates vary by route, service, customs clearance, holidays and delivery location. Ask JP
-                Express to confirm the current estimate for your shipment.</p>
-            </details>
+            <div class="jp-service-faq-col">
+              <details class="jp-service-faq" name="ic-faq-left">
+                <summary>Can I send any item by international courier?</summary>
+                <p>No. Some goods are prohibited, while others need prior approval, special documents or
+                  destination-specific checks. Confirm eligibility before packing or paying.</p>
+              </details>
+              <details class="jp-service-faq" name="ic-faq-left">
+                <summary>How much does international courier cost?</summary>
+                <p>A quote depends on origin, destination, actual and volumetric weight, dimensions, service option
+                  and any applicable additional charges.</p>
+              </details>
+              <details class="jp-service-faq" name="ic-faq-left">
+                <summary>How long will delivery take?</summary>
+                <p>Transit estimates vary by route, service, customs clearance, holidays and delivery location. Ask
+                  JP Express to confirm the current estimate for your shipment.</p>
+              </details>
+            </div>
+            <div class="jp-service-faq-col">
+              <details class="jp-service-faq" name="ic-faq-right">
+                <summary>What documents do I need to ship?</summary>
+                <p>Sender and receiver details and a description of the contents are usually needed. Commercial
+                  shipments may also need an invoice, packing list or export documents. Requirements vary by
+                  destination and item.</p>
+              </details>
+              <details class="jp-service-faq" name="ic-faq-right">
+                <summary>Can JP Express pick up from my address?</summary>
+                <p>Pickup availability depends on your area in Bangladesh. Share your location when you request a
+                  quote and we will confirm the options.</p>
+              </details>
+              <details class="jp-service-faq" name="ic-faq-right">
+                <summary>Can I track my shipment?</summary>
+                <p>Yes. Use your tracking number on the Track Shipment page to see shipment status updates, or
+                  contact JP Express for help.</p>
+              </details>
+            </div>
           </div>
         </div>
         <p class="jp-service-disclaimer"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Service
-          availability, routes, prices, transit estimates, document requirements and item acceptance are confirmed per
+          availability, routes, prices, transit estimates, document requirements and item acceptance are confirmed
+          per
           shipment. Do not dispatch restricted or uncertain items before receiving guidance.</p>
         <div class="jp-hero-actions jp-service-guidance-actions">
-          <a class="jp-btn jp-btn-primary"
-            href="mailto:jpexpress09@gmail.com?subject=Shipment%20quote%20request">Request a Quote</a>
-          <a class="jp-btn jp-btn-ghost" href="tel:+8801681637836">Call JP Express</a>
+          <a class="jp-btn jp-btn-primary" href="quote.html?mode=parcel&amp;service=express#calculator">
+            Request a Quote <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="jp-btn jp-btn-outline wa-link" href="https://wa.me/8801681637836" target="_blank" rel="noopener"
+            data-wa-text="Hi JP Express, I'd like to ask about international courier.">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+          <a class="jp-btn jp-btn-outline" href="tel:+8801681637836">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i> Call JP Express</a>
         </div>
       </div>
     </section>
 
-    <section class="jp-section">
-      <div class="container-xl">
+    <section class="jp-section  jp-service-guidance">
+      <div class="container-fluid">
         <div class="jp-section-head">
           <div class="jp-kicker">Related services</div>
           <h2>Explore the wider logistics journey</h2>
@@ -457,19 +569,20 @@
             <div><strong>Sea Freight</strong><span class="d-block mt-1">Explore service details</span></div><i
               class="fa-solid fa-arrow-right"></i>
           </a><a class="jp-service-link" href="export-logistics.html">
-            <div><strong>Export Logistics</strong><span class="d-block mt-1">Explore service details</span></div><i
-              class="fa-solid fa-arrow-right"></i>
+            <div><strong>Export Logistics</strong><span class="d-block mt-1">Explore service details</span></div>
+            <i class="fa-solid fa-arrow-right"></i>
           </a><a class="jp-service-link" href="import-solutions.html">
-            <div><strong>Import Solutions</strong><span class="d-block mt-1">Explore service details</span></div><i
-              class="fa-solid fa-arrow-right"></i>
+            <div><strong>Import Solutions</strong><span class="d-block mt-1">Explore service details</span></div>
+            <i class="fa-solid fa-arrow-right"></i>
           </a></div>
       </div>
     </section>
     <section class="jp-section alt">
-      <div class="container-xl">
+      <div class="container-fluid">
         <div class="jp-cta jp-reveal" data-jp-reveal>
           <h2>Ready to discuss your shipment?</h2>
-          <p>Share the basic shipment information and let JP Express help you choose the appropriate next step.</p>
+          <p>Share the basic shipment information and let JP Express help you choose the appropriate next step.
+          </p>
           <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="quote.html">Request a Quote</a><a
               class="jp-btn jp-btn-ghost" href="track-shipment.html">Track Shipment</a></div>
         </div>

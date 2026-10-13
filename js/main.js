@@ -1222,6 +1222,92 @@
     el._cat = ch ? ch.textContent.trim() : "Services";
     el._text = (el.textContent + " " + (el.getAttribute("data-tags") || "")).toLowerCase().replace(/\s+/g, " ");
   });
+  /* ---------- Enhancements: smart quote links, badges, category links, counts ---------- */
+  var QUOTE_LINKS = {
+    "Express Courier": "quote.html?mode=parcel&service=express#calculator",
+    "Economy Courier": "quote.html?mode=parcel&service=economy#calculator",
+    "International Parcel Delivery": "quote.html?mode=parcel&service=express#calculator",
+    "International Document Courier": "quote.html?mode=document&service=express#calculator",
+    "Door-to-Door Delivery": "quote.html?mode=parcel&service=door#calculator",
+    "Air Freight": "quote.html?mode=freight&service=air#calculator",
+    "Sea Freight": "quote.html?mode=freight&service=sea#calculator",
+    "Commercial Export": "quote.html?mode=commercial&service=air#calculator",
+    "Sample Shipment": "quote.html?mode=commercial&service=express#calculator",
+    "B2B Export Shipping": "business.html?solution=export#bizQuote",
+    "Export Documentation": "contact.html?intent=export#inquiry",
+    "Import Courier": "contact.html?intent=import#inquiry",
+    "Import Logistics": "contact.html?intent=import#inquiry",
+    "Customs Clearance": "contact.html?intent=import#inquiry",
+    "Freight Forwarding": "quote.html?mode=freight&service=air#calculator",
+    "Packaging": "contact.html?intent=quote#inquiry",
+    "Warehousing": "contact.html?intent=business#inquiry",
+    "Cargo Insurance": "contact.html?intent=quote#inquiry",
+    "Shipment Consolidation": "contact.html?intent=business#inquiry",
+    "Pickup Service": "contact.html?intent=pickup#inquiry"
+  };
+  var BADGES = {
+    "Express Courier": "Popular",
+    "Air Freight": "Popular",
+    "Commercial Export": "Popular",
+    "Customs Clearance": "Popular"
+  };
+  var CAT_LINKS = {
+    "intl-courier": [["International Courier details", "international-courier.html"]],
+    "freight": [["Air Freight details", "air-freight.html"], ["Sea Freight details", "sea-freight.html"]],
+    "export": [["Export Logistics details", "export-logistics.html"]],
+    "import": [["Import Solutions details", "import-solutions.html"]]
+  };
+
+  var totalEl = $("svcTotal");
+  if (totalEl) totalEl.textContent = items.length;
+
+  markGrids();
+
+  items.forEach(function (el) {
+    var a = el.querySelector(".svp-item-more");
+    if (a && QUOTE_LINKS[el._title]) a.setAttribute("href", QUOTE_LINKS[el._title]);
+    if (BADGES[el._title]) el.setAttribute("data-badge", BADGES[el._title]);
+  });
+
+  /* compare table "Quote" links */
+  Array.prototype.forEach.call(document.querySelectorAll(".svp-table tbody tr"), function (tr) {
+    var s = tr.querySelector("strong"), a = tr.querySelector("a");
+    var key = s ? s.textContent.trim() : "";
+    if (key === "Door-to-Door") key = "Door-to-Door Delivery";
+    if (a && QUOTE_LINKS[key]) a.setAttribute("href", QUOTE_LINKS[key]);
+  });
+
+  /* links to the detail pages, on the right side of the category title row */
+  sections.forEach(function (s) {
+    var cl = CAT_LINKS[s.id], head = s.querySelector(".svp-cat-head");
+    if (!cl || !head) return;
+    var box = document.createElement("div");
+    box.className = "svp-cat-links";
+    box.innerHTML = cl.map(function (x) {
+      return '<a class="svp-cat-more" href="' + x[1] + '">' + x[0] + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>';
+    }).join("");
+    head.appendChild(box);
+  });
+
+  /* service count inside each category chip */
+  links.forEach(function (l) {
+    var sec = document.getElementById(l.getAttribute("href").slice(1));
+    if (!sec) return;
+    var b = document.createElement("b");
+    b.className = "svp-catcount";
+    b.textContent = sec.querySelectorAll(".svp-item").length;
+    l.appendChild(b);
+  });
+
+  /* Keeps every card grid full-width, even while searching/filtering */
+  function markGrids() {
+    Array.prototype.forEach.call(document.querySelectorAll(".svp-grid"), function (g) {
+      var vis = Array.prototype.filter.call(g.children, function (el) { return !el.hidden; });
+      Array.prototype.forEach.call(g.children, function (el) { el.classList.remove("is-last"); });
+      g.setAttribute("data-odd", vis.length % 2 ? "1" : "0");
+      if (vis.length) vis[vis.length - 1].classList.add("is-last");
+    });
+  }
 
   function apply() {
     var q = input.value.trim().toLowerCase();
@@ -1242,6 +1328,8 @@
       s.hidden = !any;
       if (byId[s.id]) byId[s.id].hidden = !any;
     });
+
+    markGrids();
 
     clear.hidden = !q;
     empty.hidden = shown !== 0;
@@ -1328,7 +1416,7 @@
     });
 
     list.innerHTML = html || '<div class="svp-dd-empty"><i class="fa-solid fa-circle-question" aria-hidden="true"></i>' +
-      '<p>No matching service found.</p><a href="index.html#quote">Request a Quote</a></div>';
+      '<p>No matching service found.</p><a href="quote.html">Request a Quote</a></div>';
 
     activeIdx = -1;
     input.removeAttribute("aria-activedescendant");

@@ -519,7 +519,7 @@
   <main id="main">
 
     <!-- HERO -->
-    <section class="hero page-hero" aria-labelledby="cntTitle">
+    <section class="hero page-hero" aria-labelledby="svpTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
         <div class="hero-copy" data-reveal>
@@ -569,7 +569,7 @@
       <div class="container-fluid">
         <div class="svp-finder-box" data-reveal>
           <h2 id="finderT">What are you shipping?</h2>
-          <p>Search all 20 services or pick a quick option.</p>
+          <p>Search all <span id="svcTotal">20</span> services or pick a quick option.</p>
           <label class="visually-hidden" for="svcSearch">Search services</label>
           <div class="svp-search">
             <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
@@ -1053,16 +1053,12 @@
       </div>
     </section>
 
-
-    <!-- FINAL CTA -->
-
     <!-- Service decision support: requirements, compliance, tracking and contextual links -->
     <section class="home-section svp-plain svp-decision" id="shipment-guidance"
       aria-labelledby="shipment-guidance-title">
       <div class="container-fluid">
         <div class="section-heading" data-reveal>
-          <div>
-            <span class="section-kicker">Before you ship</span>
+          <div class="svp-head" data-reveal><span class="eyebrow">Before you ship</span>
             <h2 id="shipment-guidance-title">Know What Your Shipment Needs</h2>
             <p>Requirements depend on the service, destination, shipment contents and whether the shipment is personal
               or commercial. Confirm the details with our team before booking.</p>
@@ -1088,7 +1084,8 @@
           <article class="svp-guidance-card" data-reveal>
             <span class="svp-guidance-icon" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
             <h3>Restricted &amp; prohibited items</h3>
-            <p>Some goods may be prohibited or accepted only with conditions. Rules can vary by carrier and destination,
+            <p>Some goods may be prohibited or accepted only with conditions. Rules can vary by carrier and
+              destination,
               so check eligibility before sending food, medicines, batteries, liquids or other sensitive items.</p>
             <a href="contact.html">Check an item with our team <i class="fa-solid fa-arrow-right"
                 aria-hidden="true"></i></a>

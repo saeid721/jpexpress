@@ -204,6 +204,12 @@
 
 /* JP template token overrides/additions. */
 .template-jp {
+  --jp-card: #ffffff;
+  --jp-border: #e3e9f3;
+  --jp-radius-xl: 22px;
+  --jp-shadow-soft: 0 10px 30px rgba(27, 37, 89, .08);
+  --jp-shadow-hover: 0 18px 44px rgba(27, 37, 89, .14);
+  --jp-section-bg: #f7f9fc;
   --sp-rem-lg: 0.95rem;
   --sp-rem-2xl: 1.8rem;
   --text-white: #ffffff;
@@ -3883,13 +3889,71 @@ html.template-jp body {
   color: #fff !important;
 }
 
-.template-jp .jp-btn-ghost:hover {
+/* Button row (was missing: buttons had no gap) */
+.template-jp .jp-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+/* Outline button for LIGHT backgrounds (ghost is white, invisible on white) */
+.template-jp .jp-btn-outline {
   background: #fff;
+  border-color: rgba(43, 57, 144, .28);
   color: var(--jp-navy) !important;
 }
 
+.template-jp .jp-btn-outline:hover {
+  background: var(--jp-navy);
+  border-color: var(--jp-navy);
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+/* Steps (h3 was unstyled, showing large and thin) */
+.template-jp .jp-step h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  margin: 2px 0 4px;
+}
+
+.template-jp .jp-step p {
+  margin: 0;
+  color: var(--jp-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.template-jp .jp-split .jp-grid {
+  gap: 26px;
+}
+
+/* Callout card */
+.template-jp .jp-callout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  box-shadow: var(--jp-shadow-soft);
+}
+
+.template-jp .jp-callout .jp-icon {
+  margin-bottom: 4px;
+}
+
 .template-jp .jp-section {
+  position: relative;
   padding: clamp(52px, 7vw, 90px) 0;
+  text-align: left;
+}
+
+/* Courier highlight strip: sits directly under the hero, same look as Services */
+.page-international-courier .trust-strip {
+  position: relative;
+  z-index: 3;
 }
 
 /* Used by: air-freight, careers, export-logistics, faq, import-solutions, international-courier, leadership, legal, our-story, privacy-policy, sea-freight, shipping-guides, sitemap, terms-of-service */
@@ -3925,8 +3989,8 @@ html.template-jp body {
   font-weight: 800;
   color: var(--jp-heading-color);
   font-size: clamp(1.55rem, 3.5vw, 2.55rem);
-  line-height: 1.13;
-  letter-spacing: -.035em;
+  line-height: 1.15;
+  letter-spacing: -.025em;
   margin: 0 0 10px;
 }
 
