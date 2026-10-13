@@ -1137,3 +1137,453 @@
     font-size: 13px;
   }
 }
+
+
+
+/* =========================================================
+   SERVICE HUB — shipment guidance & contextual next steps
+   Responsive decision-support components for services.html
+   ========================================================= */
+.page-services .svp-decision {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-services .svp-decision .section-heading>div {
+  max-width: 760px;
+}
+
+.page-services .svp-guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.page-services .svp-guidance-card {
+  min-width: 0;
+  padding: clamp(22px, 3vw, 32px);
+  border: 1px solid rgba(43, 57, 144, .12);
+  border-radius: 22px;
+  background: var(--jp-card, #fff);
+  box-shadow: 0 12px 34px rgba(24, 36, 88, .055);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.page-services .svp-guidance-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(43, 57, 144, .3);
+  box-shadow: 0 18px 42px rgba(24, 36, 88, .10);
+}
+
+.page-services .svp-guidance-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  color: #2b3990;
+  background: rgba(43, 57, 144, .09);
+  font-size: 21px;
+}
+
+.page-services .svp-guidance-card h3 {
+  margin: 0 0 12px;
+  color: var(--jp-heading, #17234f);
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.page-services .svp-guidance-card p {
+  margin: 0 0 20px;
+  color: var(--jp-muted, #626b80);
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+.page-services .svp-guidance-card a {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  color: #2b3990;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.page-services .svp-guidance-card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.page-services .svp-next-steps {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(24px, 4vw, 54px);
+  align-items: start;
+  margin-top: clamp(38px, 6vw, 72px);
+  padding: clamp(24px, 4vw, 42px);
+  border-radius: 26px;
+  color: #fff;
+  background: linear-gradient(135deg, #17245f 0%, #2b3990 65%, #394cb1 100%);
+}
+
+.page-services .svp-next-copy h3 {
+  margin: 8px 0 12px;
+  color: #fff;
+  font-size: clamp(23px, 2.4vw, 32px);
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.page-services .svp-next-copy p {
+  margin: 0;
+  color: rgba(255, 255, 255, .78);
+  line-height: 1.75;
+}
+
+.page-services .svp-next-copy .section-kicker {
+  color: #cbd4ff;
+}
+
+.page-services .svp-next-links {
+  display: grid;
+  gap: 10px;
+}
+
+.page-services .svp-next-links>a {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+  padding: 15px 17px;
+  border: 1px solid rgba(255, 255, 255, .17);
+  border-radius: 15px;
+  color: #fff;
+  background: rgba(255, 255, 255, .07);
+  text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.page-services .svp-next-links>a:hover,
+.page-services .svp-next-links>a:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, .15);
+  transform: translateX(3px);
+}
+
+.page-services .svp-next-links>a>i:first-child {
+  color: #d2d9ff;
+}
+
+.page-services .svp-next-links span {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.page-services .svp-next-links strong {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.page-services .svp-next-links small {
+  color: rgba(255, 255, 255, .72);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.page-services .svp-next-links>a>i:last-child {
+  font-size: 13px;
+  opacity: .8;
+}
+
+@media (max-width: 991.98px) {
+  .page-services .svp-guidance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-services .svp-next-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .page-services .svp-guidance-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .page-services .svp-guidance-card {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .page-services .svp-guidance-icon {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 15px;
+  }
+
+  .page-services .svp-next-steps {
+    padding: 20px;
+    gap: 22px;
+    border-radius: 20px;
+  }
+
+  .page-services .svp-next-links>a {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .page-services .svp-guidance-card,
+  .page-services .svp-next-links>a {
+    transition: none;
+  }
+
+  .page-services .svp-guidance-card:hover,
+  .page-services .svp-next-links>a:hover {
+    transform: none;
+  }
+}
+
+
+/* ===============================================================
+   JP EXPRESS — SERVICE DETAIL GUIDANCE
+   Used by: international-courier, air-freight, sea-freight,
+   export-logistics, import-solutions
+   =============================================================== */
+.template-jp .jp-service-guidance {
+  position: relative;
+  overflow: clip;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(43, 57, 144, .055), transparent 34%),
+    var(--jp-section-bg, #f7f9fc);
+}
+
+.template-jp .jp-service-detail-grid {
+  align-items: stretch;
+  gap: 18px;
+}
+
+.template-jp .jp-service-detail-card {
+  min-width: 0;
+  height: 100%;
+  padding: clamp(18px, 2.5vw, 26px);
+  background: rgba(255, 255, 255, .96);
+  border: 1px solid var(--jp-border, #e3e8f0);
+  border-radius: 20px;
+  box-shadow: 0 10px 32px rgba(27, 37, 89, .045);
+}
+
+.template-jp .jp-service-detail-card h3 {
+  margin: 12px 0 8px;
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.35;
+}
+
+.template-jp .jp-service-detail-card p {
+  margin: 0;
+  color: var(--jp-muted, #5d6678);
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.template-jp .jp-service-detail-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  color: #2b3990;
+  background: #eef1ff;
+  font-size: 19px;
+}
+
+.template-jp .jp-service-next-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.template-jp .jp-service-next-links .jp-service-link {
+  min-width: 0;
+  height: 100%;
+  padding: 18px;
+  overflow-wrap: anywhere;
+}
+
+.template-jp .jp-service-faq-wrap {
+  margin-top: clamp(42px, 6vw, 68px);
+}
+
+.template-jp .jp-service-faq-list {
+  display: grid;
+  gap: 10px;
+  max-width: 900px;
+}
+
+.template-jp .jp-service-faq {
+  min-width: 0;
+  border: 1px solid var(--jp-border, #e3e8f0);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 4px 18px rgba(27, 37, 89, .035);
+}
+
+.template-jp .jp-service-faq summary {
+  position: relative;
+  padding: 17px 48px 17px 18px;
+  color: var(--jp-heading-color, #18213c);
+  font-weight: 750;
+  line-height: 1.5;
+  cursor: pointer;
+  list-style: none;
+}
+
+.template-jp .jp-service-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.template-jp .jp-service-faq summary::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  color: #2b3990;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.template-jp .jp-service-faq[open] summary::after {
+  content: "−";
+}
+
+.template-jp .jp-service-faq summary:focus-visible {
+  outline: 3px solid rgba(43, 57, 144, .3);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+.template-jp .jp-service-faq p {
+  margin: 0;
+  padding: 0 18px 18px;
+  color: var(--jp-muted, #5d6678);
+  font-size: 14px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+
+.template-jp .jp-service-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 24px 0 0;
+  padding: 15px 17px;
+  border: 1px solid #dce4f5;
+  border-radius: 14px;
+  color: #45516b;
+  background: rgba(255, 255, 255, .75);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.template-jp .jp-service-disclaimer i {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  color: #2b3990;
+}
+
+.template-jp .jp-service-guidance-actions {
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+@media (max-width: 767.98px) {
+  .template-jp .jp-service-guidance {
+    padding: 44px 0;
+  }
+
+  .template-jp .jp-service-detail-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .template-jp .jp-service-detail-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .template-jp .jp-service-detail-card h3 {
+    font-size: 16px;
+  }
+
+  .template-jp .jp-service-detail-card p {
+    font-size: 13.5px;
+  }
+
+  .template-jp .jp-service-next-links {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .template-jp .jp-service-next-links .jp-service-link {
+    padding: 15px;
+  }
+
+  .template-jp .jp-service-faq-wrap {
+    margin-top: 38px;
+  }
+
+  .template-jp .jp-service-faq summary {
+    padding: 15px 42px 15px 15px;
+    font-size: 14px;
+  }
+
+  .template-jp .jp-service-faq summary::after {
+    right: 14px;
+  }
+
+  .template-jp .jp-service-faq p {
+    padding: 0 15px 15px;
+    font-size: 13.5px;
+  }
+
+  .template-jp .jp-service-disclaimer {
+    padding: 13px;
+    font-size: 12.5px;
+  }
+
+  .template-jp .jp-service-guidance-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .template-jp .jp-service-guidance-actions .jp-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .template-jp .jp-service-detail-card,
+  .template-jp .jp-service-next-links .jp-service-link {
+    transition: none;
+  }
+
+  .template-jp .jp-service-detail-card:hover,
+  .template-jp .jp-service-next-links .jp-service-link:hover {
+    transform: none;
+  }
+}
