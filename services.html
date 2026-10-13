@@ -1248,6 +1248,17 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
-</body>
+
+  (function () {
+  var nav = document.querySelector('.svp-catnav-inner');
+  if (!nav) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function center(link) {
+  if (nav.scrollWidth <= nav.clientWidth) return; nav.scrollTo({ left: link.offsetLeft - (nav.clientWidth -
+    link.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' }); } var mo=new MutationObserver(function (list) {
+    list.forEach(function (r) { if (r.target.classList.contains('active')) center(r.target); }); });
+    nav.querySelectorAll('.svp-catlink').forEach(function (l) { mo.observe(l, { attributes: true, attributeFilter:
+    ['class'] }); }); })(); </body>
 
 </html>
