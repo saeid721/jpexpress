@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- 01. Primary SEO -->
-
   <title>Sea Freight | JP Express</title>
   <meta name="description"
     content="Sea Freight from JP Express — international shipping and logistics support from Bangladesh.">
@@ -14,10 +13,10 @@
   <meta name="publisher" content="JP Express">
   <meta name="application-name" content="JP Express">
   <meta name="subject" content="Sea Freight | JP Express from Bangladesh">
-  <meta name="classification" content="International Courier, Freight Forwarding, Export Logistics, Shipping Services">
-  <meta name="category" content="Courier, Logistics, Freight Forwarding, Export Shipping">
+  <meta name="classification" content="Sea Freight, Freight Forwarding, Export Logistics, Shipping Services">
+  <meta name="category" content="Freight Forwarding, Logistics, Sea Cargo, Export Shipping">
   <meta name="coverage" content="Bangladesh to international destinations worldwide">
-  <meta name="target" content="Individuals, exporters, businesses, e-commerce sellers and commercial shippers">
+  <meta name="target" content="Exporters, businesses, commercial shippers and freight forwarders">
 
   <!-- 02. Search Engine Instructions -->
   <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -115,6 +114,46 @@
   ]
 }
 </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should I choose air freight or sea freight?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Air freight is often considered when time is important; sea freight may suit larger cargo with more flexible timing. Compare route availability, cargo needs and a current quote." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does LCL or FCL mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "LCL generally means cargo shares container space; FCL generally means a full container is booked. Ask JP Express which options are currently available for your route." }
+      },
+      {
+        "@type": "Question",
+        "name": "What affects sea freight transit time?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Route schedules, port handling, customs, inland transport, transshipment and disruptions can affect the overall door-to-door timeline." }
+      },
+      {
+        "@type": "Question",
+        "name": "How is sea freight cost assessed?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Rates commonly depend on cargo volume, container or consolidation option, route, port handling, inland transport and any applicable customs or local charges. Request a shipment-specific quotation." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can all cargo travel by sea?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Dangerous goods and certain controlled items may be restricted or require specialist handling and approval. Confirm eligibility before booking." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I track my sea freight shipment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Use your tracking number on the Track Shipment page to see shipment status updates, or contact JP Express for help." }
+      }
+    ]
+  }
+  </script>
+
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages/services.css">
 
@@ -141,7 +180,7 @@
           <button class="lang-btn active" type="button">English</button>
           <span>|</span>
           <button class="lang-btn" type="button">বাংলা</button>
-          <a class="d-none d-md-inline" href="#contact">
+          <a class="d-none d-md-inline" href="login.html">
             <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
           </a>
         </div>
@@ -276,64 +315,108 @@
               href="services.html">Services</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
               aria-current="page">Sea Freight</span>
           </nav>
-          <div class="hero-kicker"><span>SEA FREIGHT</span> OCEAN SHIPPING</div>
+          <div class="hero-kicker"><span>SEA FREIGHT</span> JP EXPRESS</div>
           <h1 id="seaFreightTitle">Sea Freight <span class="accent">from Bangladesh</span></h1>
           <p>Cost-effective ocean cargo with export customs, booking and door-to-port or door-to-door support for you.
           </p>
         </div>
       </div>
     </section>
-    <section class="jp-section">
-      <div class="container-xl">
-        <div class="jp-section-head">
-          <div class="jp-kicker">Service overview</div>
-          <h2>What Sea Freight can help you do</h2>
-          <p>Choose the service around the shipment—not just the label. Destination, shipment type, dimensions, weight,
-            urgency and documentation can all affect the appropriate solution.</p>
-        </div>
-        <div class="jp-grid jp-grid-3">
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-ship"></i></div>
-            <h3>Larger Commercial Cargo</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-ship"></i></div>
-            <h3>LCL / FCL where offered</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-ship"></i></div>
-            <h3>Export Freight</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-ship"></i></div>
-            <h3>Business Logistics</h3>
-            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance rules
-              and destination requirements.</p>
-          </div>
+
+    <!-- TRUST STRIP (same structure as International Courier) -->
+    <section class="trust-strip" aria-label="Sea freight highlights">
+      <div class="container-fluid">
+        <div class="row g-0">
+          <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-ship"></i><strong>FCL &amp;
+              LCL</strong><small>Container options</small></div>
+          <div class="trust-item col-6 col-md-3"><i class="fa-solid fa-boxes-packing"></i><strong>Bulk
+              Cargo</strong><small>Large volume shipments</small></div>
+          <div class="trust-item col-6 col-md-3"><i
+              class="fa-solid fa-location-crosshairs"></i><strong>Tracking</strong><small>Shipment status
+              updates</small></div>
+          <div class="trust-item col-6 col-md-3"><i
+              class="fa-solid fa-headset"></i><strong>Support</strong><small>Phone, WhatsApp, email</small></div>
         </div>
       </div>
     </section>
 
+    <!-- SERVICE OVERVIEW (same card grid as International Courier) -->
+    <section class="jp-section jp-service-guidance">
+      <div class="container-fluid">
+        <div class="jp-section-head">
+          <div class="jp-kicker">Service overview</div>
+          <h2>What Sea Freight can help you do</h2>
+          <p>Choose the service around the shipment—not just the label. Destination, shipment type, dimensions,
+            weight,
+            urgency and documentation can all affect the appropriate solution.</p>
+        </div>
+        <div class="jp-svc-grid">
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-ship" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Larger cargo</span>
+            <h3>Larger Commercial Cargo</h3>
+            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance
+              rules
+              and destination requirements.</p>
+            <a class="jp-svc-link" href="quote.html?mode=freight&amp;service=sea#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-boxes-packing" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Container options</span>
+            <h3>LCL / FCL where offered</h3>
+            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance
+              rules
+              and destination requirements.</p>
+            <a class="jp-svc-link" href="quote.html?mode=freight&amp;service=sea#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-anchor" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Export freight</span>
+            <h3>Export Freight</h3>
+            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance
+              rules
+              and destination requirements.</p>
+            <a class="jp-svc-link" href="quote.html?mode=freight&amp;service=sea#calculator">Get a quote <i
+                class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+
+          <article class="jp-svc-card jp-reveal" data-jp-reveal>
+            <span class="jp-svc-ico"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></span>
+            <span class="jp-svc-tag">Business logistics</span>
+            <h3>Business Logistics</h3>
+            <p>Available where applicable and subject to current JP Express service coverage, shipment acceptance
+              rules
+              and destination requirements.</p>
+            <a class="jp-svc-link" href="business.html">Business solutions <i class="fa-solid fa-arrow-right"
+                aria-hidden="true"></i></a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS (same split layout as International Courier) -->
     <section class="jp-section alt">
-      <div class="container-xl">
+      <div class="container-fluid">
         <div class="jp-split">
           <div>
             <div class="jp-section-head">
               <div class="jp-kicker">How it works</div>
               <h2>A clear path from enquiry to shipment</h2>
-              <p>The customer journey should remain simple while the operational details are handled by the appropriate
+              <p>The customer journey should remain simple while the operational details are handled by the
+                appropriate
                 team.</p>
             </div>
             <div class="jp-grid">
               <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">1</span>
                 <h3>Share shipment details</h3>
-                <p>Tell us the origin, destination, shipment type and the basic size/weight information available.</p>
+                <p>Tell us the origin, destination, shipment type and the basic size/weight information available.
+                </p>
               </div>
               <div class="jp-step jp-reveal" data-jp-reveal><span class="jp-step-num">2</span>
                 <h3>Confirm the service</h3>
@@ -351,16 +434,18 @@
           </div>
           <div class="jp-callout">
             <div class="jp-icon"><i class="fa-solid fa-ship"></i></div><strong>Need a shipment-specific
-              answer?</strong><span>Service availability, rates and transit times can vary. The safest next step is to
+              answer?</strong><span>Service availability, rates and transit times can vary. The safest next step
+              is to
               share the actual shipment requirement.</span>
             <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="quote.html">Get a Quote</a></div>
           </div>
         </div>
+      </div>
     </section>
 
-    <!-- Added against the JP Express Service Page Outline: audience, requirements, cost/transit, compliance and service-specific FAQs. -->
+    <!-- PLANNING CHECKLIST (same structure as International Courier) -->
     <section class="jp-section jp-service-guidance" aria-labelledby="service-guidance-title">
-      <div class="container-xl">
+      <div class="container-fluid">
         <div class="jp-section-head">
           <div class="jp-kicker">Sea freight planning checklist</div>
           <h2 id="service-guidance-title">Prepare cargo for sea freight</h2>
@@ -375,19 +460,19 @@
               right option depends on volume, cargo and route.</p>
           </article>
           <article class="jp-card jp-service-detail-card jp-reveal" data-jp-reveal>
-            <div class="jp-service-detail-icon"><i class="fa-solid fa-ship" aria-hidden="true"></i></div>
+            <div class="jp-service-detail-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
             <h3>Cargo information</h3>
             <p>Provide commodity details, package count, total dimensions or volume, gross weight, origin, destination
               and whether cargo is containerized or shared.</p>
           </article>
           <article class="jp-card jp-service-detail-card jp-reveal" data-jp-reveal>
-            <div class="jp-service-detail-icon"><i class="fa-solid fa-ship" aria-hidden="true"></i></div>
+            <div class="jp-service-detail-icon"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></div>
             <h3>Documents &amp; compliance</h3>
             <p>Commercial invoice, packing list, transport documents and export/import paperwork may be required
               depending on the cargo and countries.</p>
           </article>
           <article class="jp-card jp-service-detail-card jp-reveal" data-jp-reveal>
-            <div class="jp-service-detail-icon"><i class="fa-solid fa-ship" aria-hidden="true"></i></div>
+            <div class="jp-service-detail-icon"><i class="fa-solid fa-calculator" aria-hidden="true"></i></div>
             <h3>Cost &amp; transit</h3>
             <p>Costs can vary with cargo volume, container or consolidation option, route, port handling, inland
               transport and customs. Sea transit estimates can change.</p>
@@ -401,69 +486,110 @@
                 class="d-block mt-1">Continue planning your shipment</span></span><i class="fa-solid fa-arrow-right"
               aria-hidden="true"></i></a>
         </div>
+      </div>
+    </section>
+
+    <!-- FAQ (same two-column layout as International Courier) -->
+    <section class="jp-section" aria-labelledby="sfFaqTitle">
+      <div class="container-fluid">
         <div class="jp-service-faq-wrap">
           <div class="jp-section-head">
             <div class="jp-kicker">Questions answered</div>
-            <h2>Frequently asked questions</h2>
-            <p>These are general planning notes. Confirm current availability and shipment-specific requirements with JP
+            <h2 id="sfFaqTitle">Frequently asked questions</h2>
+            <p>These are general planning notes. Confirm current availability and shipment-specific requirements
+              with JP
               Express.</p>
           </div>
           <div class="jp-service-faq-list">
-            <details class="jp-service-faq">
-              <summary>Should I choose air freight or sea freight?</summary>
-              <p>Air freight is often considered when time is important; sea freight may suit larger cargo with more
-                flexible timing. Compare route availability, cargo needs and a current quote.</p>
-            </details>
-            <details class="jp-service-faq">
-              <summary>What does LCL or FCL mean?</summary>
-              <p>LCL generally means cargo shares container space; FCL generally means a full container is booked. Ask
-                JP Express which options are currently available for your route.</p>
-            </details>
-            <details class="jp-service-faq">
-              <summary>What affects sea freight transit time?</summary>
-              <p>Route schedules, port handling, customs, inland transport, transshipment and disruptions can affect the
-                overall door-to-door timeline.</p>
-            </details>
+            <div class="jp-service-faq-col">
+              <details class="jp-service-faq" name="sf-faq-left">
+                <summary>Should I choose air freight or sea freight?</summary>
+                <p>Air freight is often considered when time is important; sea freight may suit larger cargo with more
+                  flexible timing. Compare route availability, cargo needs and a current quote.</p>
+              </details>
+              <details class="jp-service-faq" name="sf-faq-left">
+                <summary>What does LCL or FCL mean?</summary>
+                <p>LCL generally means cargo shares container space; FCL generally means a full container is booked.
+                  Ask JP Express which options are currently available for your route.</p>
+              </details>
+              <details class="jp-service-faq" name="sf-faq-left">
+                <summary>What affects sea freight transit time?</summary>
+                <p>Route schedules, port handling, customs, inland transport, transshipment and disruptions can affect
+                  the overall door-to-door timeline.</p>
+              </details>
+            </div>
+            <div class="jp-service-faq-col">
+              <details class="jp-service-faq" name="sf-faq-right">
+                <summary>How is sea freight cost assessed?</summary>
+                <p>Rates commonly depend on cargo volume, container or consolidation option, route, port handling,
+                  inland transport and any applicable customs or local charges. Request a shipment-specific
+                  quotation.</p>
+              </details>
+              <details class="jp-service-faq" name="sf-faq-right">
+                <summary>Can all cargo travel by sea?</summary>
+                <p>No. Dangerous goods and certain controlled items may be restricted or require specialist handling
+                  and approval. Confirm eligibility before booking.</p>
+              </details>
+              <details class="jp-service-faq" name="sf-faq-right">
+                <summary>Can I track my sea freight shipment?</summary>
+                <p>Yes. Use your tracking number on the Track Shipment page to see shipment status updates, or
+                  contact JP Express for help.</p>
+              </details>
+            </div>
           </div>
         </div>
         <p class="jp-service-disclaimer"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Service
-          availability, routes, prices, transit estimates, document requirements and item acceptance are confirmed per
+          availability, routes, prices, transit estimates, document requirements and item acceptance are confirmed
+          per
           shipment. Do not dispatch restricted or uncertain items before receiving guidance.</p>
         <div class="jp-hero-actions jp-service-guidance-actions">
-          <a class="jp-btn jp-btn-primary"
-            href="mailto:jpexpress09@gmail.com?subject=Shipment%20quote%20request">Request a Quote</a>
-          <a class="jp-btn jp-btn-ghost" href="tel:+8801681637836">Call JP Express</a>
+          <a class="jp-btn jp-btn-primary" href="quote.html?mode=freight&amp;service=sea#calculator">
+            Request a Quote <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          <a class="jp-btn jp-btn-outline wa-link" href="https://wa.me/8801681637836" target="_blank" rel="noopener"
+            data-wa-text="Hi JP Express, I'd like to ask about sea freight.">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+          <a class="jp-btn jp-btn-outline" href="tel:+8801681637836">
+            <i class="fa-solid fa-phone" aria-hidden="true"></i> Call JP Express</a>
         </div>
       </div>
     </section>
 
-    <section class="jp-section">
-      <div class="container-xl">
+    <!-- RELATED SERVICES -->
+    <section class="jp-section jp-service-guidance">
+      <div class="container-fluid">
         <div class="jp-section-head">
           <div class="jp-kicker">Related services</div>
           <h2>Explore the wider logistics journey</h2>
           <p>Move between courier, freight and export solutions without losing the context of your shipment.</p>
         </div>
-        <div class="jp-grid jp-grid-2"><a class="jp-service-link" href="international-courier.html">
+        <div class="jp-grid jp-grid-2">
+          <a class="jp-service-link" href="international-courier.html">
             <div><strong>International Courier</strong><span class="d-block mt-1">Explore service details</span></div><i
               class="fa-solid fa-arrow-right"></i>
-          </a><a class="jp-service-link" href="air-freight.html">
+          </a>
+          <a class="jp-service-link" href="air-freight.html">
             <div><strong>Air Freight</strong><span class="d-block mt-1">Explore service details</span></div><i
               class="fa-solid fa-arrow-right"></i>
-          </a><a class="jp-service-link" href="export-logistics.html">
-            <div><strong>Export Logistics</strong><span class="d-block mt-1">Explore service details</span></div><i
-              class="fa-solid fa-arrow-right"></i>
-          </a><a class="jp-service-link" href="import-solutions.html">
-            <div><strong>Import Solutions</strong><span class="d-block mt-1">Explore service details</span></div><i
-              class="fa-solid fa-arrow-right"></i>
-          </a></div>
+          </a>
+          <a class="jp-service-link" href="export-logistics.html">
+            <div><strong>Export Logistics</strong><span class="d-block mt-1">Explore service details</span></div>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a class="jp-service-link" href="import-solutions.html">
+            <div><strong>Import Solutions</strong><span class="d-block mt-1">Explore service details</span></div>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
       </div>
     </section>
+
+    <!-- FINAL CTA (same as International Courier) -->
     <section class="jp-section alt">
-      <div class="container-xl">
+      <div class="container-fluid">
         <div class="jp-cta jp-reveal" data-jp-reveal>
           <h2>Ready to discuss your shipment?</h2>
-          <p>Share the basic shipment information and let JP Express help you choose the appropriate next step.</p>
+          <p>Share the basic shipment information and let JP Express help you choose the appropriate next step.
+          </p>
           <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="quote.html">Request a Quote</a><a
               class="jp-btn jp-btn-ghost" href="track-shipment.html">Track Shipment</a></div>
         </div>
