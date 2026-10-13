@@ -1359,7 +1359,7 @@
 .page-services .svp-next-copy h3 {
   margin: 8px 0 12px;
   color: #fff;
-  font-size: clamp(23px, 2.4vw, 32px);
+  font-size: clamp(23px, 2.4vw, 30px);
   line-height: 1.2;
   font-weight: 800;
 }

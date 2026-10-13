@@ -1059,7 +1059,7 @@
     <!-- Service decision support: requirements, compliance, tracking and contextual links -->
     <section class="home-section svp-plain svp-decision" id="shipment-guidance"
       aria-labelledby="shipment-guidance-title">
-      <div class="container">
+      <div class="container-fluid">
         <div class="section-heading" data-reveal>
           <div>
             <span class="section-kicker">Before you ship</span>
@@ -1249,16 +1249,6 @@
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 
-  (function () {
-  var nav = document.querySelector('.svp-catnav-inner');
-  if (!nav) return;
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function center(link) {
-  if (nav.scrollWidth <= nav.clientWidth) return; nav.scrollTo({ left: link.offsetLeft - (nav.clientWidth -
-    link.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' }); } var mo=new MutationObserver(function (list) {
-    list.forEach(function (r) { if (r.target.classList.contains('active')) center(r.target); }); });
-    nav.querySelectorAll('.svp-catlink').forEach(function (l) { mo.observe(l, { attributes: true, attributeFilter:
-    ['class'] }); }); })(); </body>
+</body>
 
 </html>
