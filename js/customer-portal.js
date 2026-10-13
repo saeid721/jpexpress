@@ -791,15 +791,86 @@
             }).join('') + '</div></section>' +
             '<div id="trackResult" aria-live="polite"></div>';
     }
+
+    /* ---------- Track result: helpers (details, proof of delivery) ---------- */
+    var STEP_NOTE = [
+        'Your booking has been recorded by JP Express.',
+        'Your shipment has been collected from the sender.',
+        'Your shipment is moving through the international delivery network.',
+        'Your shipment is going through customs processing.',
+        'Your shipment is with the courier for final delivery.',
+        'This shipment has been delivered to the recipient.'
+    ];
+    function evWhen(e) { return e ? String(e.t).replace(' · ', ', ') : ''; }
+    function pickedEvent(s) {
+        var l = s.events.filter(function (e) { return /picked up/i.test(e.title); });
+        return l[l.length - 1];
+    }
+    function podOf(s) {
+        if (s.status !== 'delivered' || !s.events.length) return null;
+        var e = s.events[0], rc = byId(A().receivers, s.receiver);
+        return {
+            when: evWhen(e), loc: e.loc, by: rc ? rc.name : 'Recipient',
+            doc: A().documents.filter(function (d) { return d.ship === s.id && d.type === 'POD'; })[0]
+        };
+    }
+    function kvRow(l, v) { return v ? '<li><span>' + esc(l) + '</span><strong>' + esc(v) + '</strong></li>' : ''; }
+
+    function trackResultHtml(s) {
+        var sv = SERVICES[s.service] || { name: '' },
+            sn = byId(A().senders, s.sender), rc = byId(A().receivers, s.receiver),
+            bad = s.status === 'exception', done = s.status === 'delivered',
+            top = s.events[0], pk = pickedEvent(s), pod = podOf(s),
+            explain = bad ? (s.note || 'This shipment needs your attention.') : STEP_NOTE[stepOf(s)];
+
+        /* summary: number, status, estimate, 6-step progress */
+        var summary = '<article class="pt-card pt-summary' + (bad ? ' is-bad' : done ? ' is-done' : '') + '">' +
+            '<div class="d-top"><div><span class="lbl">Tracking number</span><div class="d-id"><strong>' + esc(s.id) + '</strong>' +
+            '<button type="button" class="copy" data-action="copy" data-text="' + esc(s.id) + '"><i class="fa-regular fa-copy"></i> Copy</button></div></div>' + badge(s.status) + '</div>' +
+            '<p class="pt-explain">' + esc(explain) + '</p>' +
+            '<div class="pt-facts"><div><span class="lbl">' + (done ? 'Delivered' : 'Estimated delivery') + '</span><strong>' + esc(s.eta) + '</strong>' + (done ? '' : '<small>Estimated, not guaranteed</small>') + '</div>' +
+            '<div><span class="lbl">Last updated</span><strong>' + esc(top ? evWhen(top) : 'Not available') + '</strong></div></div>' +
+            stepperHtml(s) + '</article>';
+
+        /* latest update */
+        var latest = top ? '<article class="pt-card pt-latest' + (bad ? ' is-bad' : done ? ' is-done' : '') + '"><span class="lbl">Latest update</span>' +
+            '<h3>' + esc(top.title) + (top.loc ? ' · ' + esc(top.loc) : '') + '</h3>' +
+            '<p class="pt-when"><i class="fa-regular fa-clock"></i> ' + esc(evWhen(top)) + '</p></article>' : '';
+
+        /* action needed */
+        var exc = bad ? '<div class="alert bad" role="alert"><i class="fa-solid fa-triangle-exclamation"></i><span><b>What to do:</b> ' + esc(s.note || 'Contact JP Express support.') +
+            (can('support') ? '<br><button type="button" class="btn btn-primary btn-sm pt-exc-btn" data-action="supportFor" data-id="' + esc(s.id) + '"><i class="fa-regular fa-comments"></i> Contact support</button>' : '') + '</span></div>' : '';
+
+        /* timeline */
+        var tl = '<article class="pt-card"><h3 class="pt-h"><i class="fa-solid fa-clock-rotate-left"></i> Shipment timeline <span class="pt-count">' + s.events.length + '</span></h3>' + tlHtml(s) + '</article>';
+
+        /* shipment details */
+        var details = '<article class="pt-card"><h3 class="pt-h"><i class="fa-solid fa-box"></i> Shipment details</h3><ul class="pt-kv">' +
+            kvRow('Service', sv.name) + kvRow('Shipment type', s.kind) + kvRow('Origin', s.from + (sn ? ', ' + sn.country : '')) +
+            kvRow('Destination', s.to + (s.toCountry ? ', ' + s.toCountry : '')) + kvRow('Booked on', s.date) +
+            kvRow('Picked up', pk ? evWhen(pk) : 'Pending') + kvRow('Weight', s.weight + ' kg') + kvRow('Contents', s.desc) +
+            kvRow('Sender', sn ? sn.name : '') + kvRow('Receiver', rc ? rc.name : '') + kvRow('Created by', s.by) + '</ul></article>';
+
+        /* proof of delivery (delivered shipments only) */
+        var podCard = pod ? '<article class="pt-card pt-pod"><h3 class="pt-h"><i class="fa-solid fa-circle-check"></i> Proof of delivery</h3><ul class="pt-kv">' +
+            kvRow('Delivered', pod.when) + kvRow('Location', pod.loc) + kvRow('Received by', pod.by) + '</ul>' +
+            (pod.doc && can('docs.view') ? '<button type="button" class="btn btn-soft pt-pod-btn" data-action="download" data-name="' + esc(pod.doc.name) + '"><i class="fa-solid fa-download"></i> Download proof of delivery</button>' : '') + '</article>' : '';
+
+        /* help + actions */
+        var help = '<article class="pt-card pt-help"><h3 class="pt-h"><i class="fa-solid fa-headset"></i> Need help?</h3><p>Share this tracking number with our team and we will check for you.</p>' +
+            '<div class="pt-actions">' + (can('support') ? '<button type="button" class="btn btn-soft" data-action="supportFor" data-id="' + esc(s.id) + '"><i class="fa-regular fa-comments"></i> Get help</button>' : '') +
+            '<button type="button" class="btn btn-ghost" data-open-ship="' + esc(s.id) + '">Full details</button>' +
+            (can('ship.create') ? '<button type="button" class="btn btn-ghost" data-action="repeat" data-id="' + esc(s.id) + '"><i class="fa-solid fa-rotate-right"></i> Repeat</button>' : '') + '</div></article>';
+
+        return '<div class="pt-grid"><div class="pt-main">' + summary + latest + exc + tl + '</div><aside class="pt-side">' + details + podCard + help + '</aside></div>';
+    }
+
     function showTrack(id) {
         id = String(id || '').trim(); var out = $('#trackResult'); if (!out) return;
         if (!id) { out.innerHTML = '<div class="alert warn"><i class="fa-solid fa-circle-info"></i><span>Enter a shipment number to track.</span></div>'; return; }
         var s = findShip(id);
         if (!s) { out.innerHTML = '<section class="panel"><div class="alert warn"><i class="fa-solid fa-circle-info"></i><span><b>' + esc(id.toUpperCase()) + '</b> is not in ' + esc(A().name) + '. Check the number, or use <a href="track-shipment.html">public tracking</a> for any JP Express parcel.</span></div></section>'; return; }
-        out.innerHTML = '<section class="panel"><div class="d-top"><div><span class="lbl">Shipment</span><div class="d-id"><strong>' + esc(s.id) + '</strong></div><p class="muted-p">' + shipLabel(s) + ' · ' + esc(s.eta) + '</p></div>' + badge(s.status) + '</div>' +
-            stepperHtml(s) +
-            tlHtml(s) +
-            '<div class="row-actions"><button class="btn btn-soft" data-open-ship="' + esc(s.id) + '">Full details</button></div></section>';
+        out.innerHTML = trackResultHtml(s);
         out.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     }
 

@@ -5776,3 +5776,304 @@ select.wz-mini {
     top: 20px;
   }
 }
+
+/* =====================================================================
+   TRACK RESULT — summary, latest update, details, proof of delivery
+   Mobile: 1 column · Desktop (≥1100px): main + sticky side column
+   ===================================================================== */
+.pt-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pt-main,
+.pt-side {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  align-content: start;
+}
+
+.pt-card {
+  min-width: 0;
+  padding: 14px;
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  box-shadow: var(--sh);
+}
+
+.pt-summary {
+  border-top: 4px solid var(--orange);
+}
+
+.pt-summary.is-done {
+  border-top-color: var(--ok);
+}
+
+.pt-summary.is-bad {
+  border-top-color: var(--bad);
+}
+
+.pt-explain {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.pt-facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 12px;
+}
+
+.pt-facts strong {
+  display: block;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.pt-facts small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.pt-summary .stepper-wrap {
+  margin-bottom: 0;
+}
+
+/* latest update */
+.pt-latest {
+  border-left: 4px solid var(--orange);
+}
+
+.pt-latest.is-done {
+  border-left-color: var(--ok);
+}
+
+.pt-latest.is-bad {
+  border-left-color: var(--bad);
+}
+
+.pt-latest h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.pt-latest.is-bad h3 {
+  color: var(--bad);
+}
+
+.pt-when {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.pt-exc-btn {
+  margin-top: 10px;
+}
+
+/* card headings */
+.pt-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.pt-h>i {
+  color: var(--orange);
+}
+
+.pt-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 99px;
+  background: var(--tint);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* key / value list */
+.pt-kv {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pt-kv li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line-2);
+  font-size: 13.5px;
+}
+
+.pt-kv li:first-child {
+  border-top: 0;
+}
+
+.pt-kv span {
+  flex: none;
+  color: var(--muted);
+}
+
+.pt-kv strong {
+  min-width: 0;
+  text-align: right;
+  color: var(--navy);
+  overflow-wrap: anywhere;
+}
+
+/* proof of delivery */
+.pt-pod {
+  background: linear-gradient(180deg, #f2fbf6, #fff 60%);
+  border-color: #bfe6d3;
+}
+
+.pt-pod .pt-h>i {
+  color: var(--ok);
+}
+
+.pt-pod-btn {
+  width: 100%;
+  margin-top: 12px;
+}
+
+/* help */
+.pt-help p {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.pt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pt-actions .btn {
+  flex: 1 1 130px;
+}
+
+/* tablet + */
+@media (min-width: 640px) {
+  .pt-card {
+    padding: 20px;
+  }
+
+  .pt-facts {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* desktop: main + side column */
+@media (min-width: 1100px) {
+  .pt-grid {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .pt-side {
+    position: sticky;
+    top: 88px;
+  }
+}
+
+/* small phones */
+@media (max-width: 380px) {
+  .pt-card {
+    padding: 12px;
+  }
+
+  .pt-kv li {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .pt-kv strong {
+    text-align: left;
+  }
+}
+
+/* =====================================================================
+   TRACK SHIPMENT PAGE — FULL WIDTH (same as the other portal pages)
+   Overrides the old 760px / 1100px limits above.
+   ===================================================================== */
+.track-card {
+  max-width: 760px;
+  margin: 0 auto 12px;
+  padding: 26px 16px;
+}
+
+#trackResult .panel {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.pt-grid {
+  max-width: none;
+  margin: 0;
+}
+
+/* tablet: details + proof of delivery side by side */
+@media (min-width: 640px) {
+  .pt-side {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+  }
+
+  .pt-side>.pt-card:nth-child(3):last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* result: one column until there is enough room for the side column */
+@media (min-width: 1100px) and (max-width: 1179px) {
+  .pt-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pt-side {
+    position: static;
+  }
+}
+
+@media (min-width: 1180px) {
+  .pt-grid {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .pt-side {
+    position: sticky;
+    top: 88px;
+    grid-template-columns: 1fr;
+  }
+}
