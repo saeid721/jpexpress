@@ -21,7 +21,7 @@
     var PORTAL_CONFIG = {
         apiBase: '',                 /* e.g. '/api/portal'  ('' = demo mode, local sample data) */
         trackingEndpoint: '',        /* e.g. '/api/tracking/{id}' */
-        storageKey: 'jpx_portal_demo_v2',
+        storageKey: 'jpx_portal_demo_v3',
         hotline: '+8801681637836',
         whatsapp: '8801681637836'
     };
@@ -80,18 +80,32 @@
         pickup: { label: 'Picked up', cls: 'info', step: 1 },
         transit: { label: 'In transit', cls: 'warn', step: 2 },
         customs: { label: 'Customs clearance', cls: 'violet', step: 3 },
-        delivered: { label: 'Delivered', cls: 'ok', step: 4 },
+        out: { label: 'Out for delivery', cls: 'info', step: 4 },
+        delivered: { label: 'Delivered', cls: 'ok', step: 5 },
         exception: { label: 'Action needed', cls: 'bad', step: 2 }
     };
-    var STEPS = ['Booked', 'Picked up', 'In transit', 'Customs', 'Delivered'];
+    var STEPS = ['Booked', 'Picked Up', 'In Transit', 'Customs', 'Out for Delivery', 'Delivered'];
     var COUNTRIES = {
         'United States': 1, 'United Kingdom': .95, 'Canada': 1, 'Australia': 1.05, 'United Arab Emirates': .8,
         'Saudi Arabia': .8, 'Italy': .95, 'Germany': .95, 'Malaysia': .85, 'Singapore': .85, 'Other country': 1.1
     };
     var SERVICES = {
-        express: { name: 'International Express', eta: '3–5 business days', base: 1800, perKg: 1450, icon: 'fa-plane-up', docOnly: false },
-        economy: { name: 'International Economy', eta: '7–10 business days', base: 1200, perKg: 980, icon: 'fa-boxes-stacked', docOnly: false },
-        document: { name: 'Document Express', eta: '2–4 business days', base: 1500, perKg: 1100, icon: 'fa-file-lines', docOnly: true }
+        express: { name: 'Express Courier', eta: '3–5 business days', icon: 'fa-bolt', note: 'Fastest, for urgent items' },
+        economy: { name: 'Standard / Economy', eta: '7–10 business days', icon: 'fa-box', note: 'Lower cost, longer transit' },
+        door: { name: 'Door-to-Door', eta: 'Confirmed in quote', icon: 'fa-door-open', note: "Pickup to recipient's door" },
+        air: { name: 'Air Freight', eta: 'Confirmed in quote', icon: 'fa-plane-departure', note: 'Commercial cargo by air' },
+        sea: { name: 'Sea Freight', eta: 'Confirmed in quote', icon: 'fa-ship', note: 'Large cargo, priced by volume' },
+        document: { name: 'Document Express', eta: '2–4 business days', icon: 'fa-file-lines', note: 'Documents' } /* old sample data only */
+    };
+
+    /* ---- Calculator rules: same source as quote.html (js/data.js) ---- */
+    var PRC = JP_PRICING_CONFIG, COURIERS = JP_PRICING_COURIERS;
+    var W_UNIT = { kg: 1, g: 0.001, lb: 0.45359237 }, D_UNIT = { cm: 1, 'in': 2.54 };
+    var MODES = {
+        Documents: { label: 'Documents', icon: 'fa-file-lines', services: ['express', 'economy'], dims: false, quote: false, hint: 'Letters and paperwork. Size is not needed.' },
+        Parcel: { label: 'Parcel', icon: 'fa-box-open', services: ['express', 'economy', 'door'], dims: true, quote: false, hint: 'Personal parcels, gifts and small online orders.' },
+        Commercial: { label: 'Commercial', icon: 'fa-boxes-stacked', services: ['express', 'economy', 'air', 'sea'], dims: true, quote: true, hint: 'Samples and business shipments are priced by quote.' },
+        Freight: { label: 'Freight', icon: 'fa-plane-departure', services: ['air', 'sea'], dims: true, quote: true, hint: 'Larger cargo is priced by quote.' }
     };
 
     /* ---------- Seed (sample) data ---------- */
@@ -117,7 +131,7 @@
                 { id: 'JPX-2047-5108', from: 'Dhaka', to: 'London', toCountry: 'United Kingdom', weight: .4, kind: 'Documents', service: 'document', status: 'delivered', date: 'Oct 02, 2026', eta: 'Delivered Oct 08', desc: 'Academic documents', sender: 's1', receiver: 'r3', by: 'Rahim Khan', events: ev([['Oct 08, 2026 · 11:42 AM', 'Delivered to recipient', 'London, UK'], ['Oct 07, 2026 · 9:05 AM', 'Out for delivery', 'London, UK'], ['Oct 05, 2026 · 4:30 PM', 'Customs cleared', 'London, UK'], ['Oct 03, 2026 · 7:15 AM', 'Departed international hub', 'Dhaka, BD'], ['Oct 02, 2026 · 3:00 PM', 'Picked up from sender', 'Banani, Dhaka']]) },
                 { id: 'JPX-2046-3821', from: 'Chattogram', to: 'Toronto', toCountry: 'Canada', weight: 4, kind: 'Parcel', service: 'economy', status: 'customs', date: 'Sep 29, 2026', eta: 'Awaiting customs', desc: 'Handicrafts', sender: 's3', receiver: 'r4', by: 'Rahim Khan', events: ev([['Oct 11, 2026 · 9:15 AM', 'Customs documents under review', 'Toronto, CA'], ['Oct 09, 2026 · 6:00 AM', 'Arrived at destination country', 'Toronto, CA'], ['Oct 02, 2026 · 1:20 PM', 'Departed origin country', 'Dhaka, BD'], ['Sep 29, 2026 · 12:10 PM', 'Picked up from sender', 'Chattogram, BD']]) },
                 { id: 'JPX-2044-9034', from: 'Dhaka', to: 'New York', toCountry: 'United States', weight: 1.2, kind: 'Parcel', service: 'express', status: 'delivered', date: 'Sep 12, 2026', eta: 'Delivered Sep 18', desc: 'Medicine & books', sender: 's1', receiver: 'r1', by: 'Sadia Khan', events: ev([['Sep 18, 2026 · 2:25 PM', 'Delivered to recipient', 'New York, US'], ['Sep 12, 2026 · 10:00 AM', 'Picked up from sender', 'Banani, Dhaka']]) },
-                { id: 'JPX-2043-1182', from: 'Dhaka', to: 'Rome', toCountry: 'Italy', weight: 3.1, kind: 'Parcel', service: 'economy', status: 'exception', date: 'Oct 04, 2026', eta: 'On hold', desc: 'Dry food items', sender: 's1', receiver: 'r3', by: 'Rahim Khan', note: 'The delivery address is incomplete. Please confirm the apartment number and postal code so we can release your parcel.', events: ev([['Oct 10, 2026 · 4:05 PM', 'Delivery on hold: address incomplete', 'Rome, IT'], ['Oct 09, 2026 · 10:30 AM', 'Arrived at destination country', 'Rome, IT'], ['Oct 04, 2026 · 2:00 PM', 'Picked up from sender', 'Banani, Dhaka']]) }
+                { id: 'JPX-2043-1182', from: 'Dhaka', to: 'Rome', toCountry: 'Italy', weight: 3.1, kind: 'Parcel', service: 'economy', status: 'exception', stage: 3, date: 'Oct 04, 2026', eta: 'On hold', desc: 'Dry food items', sender: 's1', receiver: 'r3', by: 'Rahim Khan', note: 'The delivery address is incomplete. Please confirm the apartment number and postal code so we can release your parcel.', events: ev([['Oct 10, 2026 · 4:05 PM', 'Delivery on hold: address incomplete', 'Rome, IT'], ['Oct 09, 2026 · 10:30 AM', 'Arrived at destination country', 'Rome, IT'], ['Oct 04, 2026 · 2:00 PM', 'Picked up from sender', 'Banani, Dhaka']]) }
             ],
             quotes: [
                 { id: 'QT-2026-0184', to: 'New York', toCountry: 'United States', from: 'Dhaka', weight: 3, kind: 'Parcel', service: 'express', price: 6150, valid: 'Oct 16, 2026', status: 'open', requested: 'Oct 09, 2026', sender: 's1', receiver: 'r1', desc: 'Personal parcel' },
@@ -164,7 +178,7 @@
                 { id: 'br2', label: 'UK Buyer', name: 'Harlow & Co', phone: '+44 20 7946 0001', email: '', addr: '9 Carnaby St', city: 'London', postal: 'W1F 9PS', country: 'United Kingdom' }
             ],
             shipments: [
-                { id: 'JPX-3012-4471', from: 'Dhaka', to: 'New York', toCountry: 'United States', weight: 18.5, kind: 'Commercial', service: 'express', status: 'transit', date: 'Oct 08, 2026', eta: 'Est. Oct 13', desc: 'Garment samples', sender: 'bs1', receiver: 'br1', by: 'Karim (Operations)', events: ev([['Oct 10, 2026 · 7:10 AM', 'Departed international hub', 'Dhaka, BD'], ['Oct 08, 2026 · 3:00 PM', 'Picked up from sender', 'Tejgaon, Dhaka']]) },
+                { id: 'JPX-3012-4471', from: 'Dhaka', to: 'New York', toCountry: 'United States', weight: 18.5, kind: 'Commercial', service: 'express', status: 'out', date: 'Oct 08, 2026', eta: 'Arriving today', desc: 'Garment samples', sender: 'bs1', receiver: 'br1', by: 'Karim (Operations)', events: ev([['Oct 10, 2026 · 7:10 AM', 'Departed international hub', 'Dhaka, BD'], ['Oct 08, 2026 · 3:00 PM', 'Picked up from sender', 'Tejgaon, Dhaka']]) },
                 { id: 'JPX-3011-0968', from: 'Dhaka', to: 'London', toCountry: 'United Kingdom', weight: 12, kind: 'Commercial', service: 'economy', status: 'delivered', date: 'Sep 28, 2026', eta: 'Delivered Oct 07', desc: 'Fabric swatches', sender: 'bs1', receiver: 'br2', by: 'Karim (Operations)', events: ev([['Oct 07, 2026 · 10:20 AM', 'Delivered to recipient', 'London, UK'], ['Sep 28, 2026 · 2:00 PM', 'Picked up from sender', 'Tejgaon, Dhaka']]) },
                 { id: 'JPX-3010-7720', from: 'Dhaka', to: 'New York', toCountry: 'United States', weight: 7.2, kind: 'Commercial', service: 'express', status: 'booked', date: 'Oct 11, 2026', eta: 'Pickup pending', desc: 'Buyer samples', sender: 'bs1', receiver: 'br1', by: 'Karim (Operations)', events: ev([['Oct 11, 2026 · 9:00 AM', 'Booking confirmed', 'Dhaka, BD']]) }
             ],
@@ -261,6 +275,33 @@
         clearTimeout(toast.t); toast.t = setTimeout(function () { toastEl.classList.remove('show'); }, 3400);
     }
     function badge(status) { var s = STATUS[status] || STATUS.booked; return '<span class="badge ' + s.cls + '"><i class="dot"></i>' + esc(s.label) + '</span>'; }
+
+    /* ---------- 6-step shipment progress (same stages as track-shipment.html) ---------- */
+    function stepOf(s) {
+        if (typeof s.stage === 'number') return Math.min(Math.max(s.stage, 0), STEPS.length - 1);
+        return (STATUS[s.status] || STATUS.booked).step;
+    }
+    function stepperHtml(s) {
+        var step = stepOf(s), bad = s.status === 'exception';
+        return '<div class="stepper-wrap">' +
+            '<div class="step-meta"><b>' + (bad ? 'Action needed' : 'Step ' + (step + 1) + ' of ' + STEPS.length) + '</b><span>' + esc(STEPS[step]) + '</span></div>' +
+            '<ol class="stepper' + (bad ? ' is-bad' : '') + (!bad && step === STEPS.length - 1 ? ' is-complete' : '') + '" aria-label="Shipment progress: ' + esc(STEPS[step]) + ', step ' + (step + 1) + ' of ' + STEPS.length + '">' +
+            STEPS.map(function (l, i) {
+                var c = i < step ? 'done' : i === step ? (bad ? 'cur' : 'done cur') : '';
+                return '<li class="' + c + '"' + (i === step ? ' aria-current="step"' : '') + '><span><i class="fa-solid ' + (bad && i === step ? 'fa-exclamation' : 'fa-check') + '" aria-hidden="true"></i></span><b>' + esc(l).replace(/^(Picked|In|Out for)\s/, '$1<br>') + '</b></li>';
+            }).join('') + '</ol></div>';
+    }
+
+    /* ---------- Tracking history: every logged event is a completed milestone ---------- */
+    function tlHtml(s) {
+        var bad = s.status === 'exception', done = s.status === 'delivered';
+        return '<ol class="tl tl-pro' + (bad ? ' is-bad' : '') + (done ? ' is-complete' : '') + '" aria-label="Tracking history, ' + s.events.length + ' updates">' +
+            s.events.map(function (e, i) {
+                return '<li class="done' + (i === 0 ? ' cur' : '') + '"><span class="tl-dot"><i class="fa-solid ' + (i === 0 && bad ? 'fa-exclamation' : 'fa-check') + '" aria-hidden="true"></i></span>' +
+                    '<div class="tl-body"><div class="tl-row"><b>' + esc(e.title) + '</b>' + (i === 0 ? '<em class="tl-new">Latest</em>' : '') + '</div>' +
+                    '<small>' + esc(e.t) + ' · ' + esc(e.loc) + '</small></div></li>';
+            }).join('') + '</ol>';
+    }
 
     var lastFocus = null, modalCount = 0;
     function openModal(o) {
@@ -570,7 +611,7 @@
         var stats = [
             { k: 'Total shipments', v: sh.length, ic: 'fa-boxes-stacked', t: 'blue', go: 'shipments', f: 'all' },
             { k: 'Active', v: active, ic: 'fa-bolt', t: 'orange', go: 'shipments', f: 'active' },
-            { k: 'In transit', v: cnt(function (s) { return s.status === 'transit' || s.status === 'customs'; }), ic: 'fa-truck-fast', t: 'violet', go: 'shipments', f: 'transit' },
+            { k: 'In transit', v: cnt(function (s) { return s.status === 'transit' || s.status === 'customs' || s.status === 'out'; }), ic: 'fa-truck-fast', t: 'violet', go: 'shipments', f: 'transit' },
             { k: 'Delivered', v: cnt(function (s) { return s.status === 'delivered'; }), ic: 'fa-circle-check', t: 'green', go: 'shipments', f: 'delivered' },
             { k: 'Pending', v: cnt(function (s) { return s.status === 'booked' || s.status === 'pickup' || s.status === 'exception'; }), ic: 'fa-hourglass-half', t: 'amber', go: 'shipments', f: 'pending' },
             can('billing.view') ? { k: 'Outstanding payment', v: money(outstanding()), ic: 'fa-wallet', t: outstanding() ? 'red' : 'green', go: 'billing', small: true }
@@ -579,7 +620,7 @@
         var todo = [];
         sh.filter(function (s) { return s.status === 'exception'; }).forEach(function (s) { todo.push({ ic: 'fa-triangle-exclamation', t: 'bad', title: s.id + ' needs your attention', text: s.note || 'Open the shipment to see what is needed.', cta: 'View', attr: 'data-open-ship="' + esc(s.id) + '"' }); });
         if (can('billing.pay')) a.invoices.filter(function (i) { return i.status === 'unpaid'; }).slice(0, 2).forEach(function (i) { todo.push({ ic: 'fa-file-invoice', t: 'warn', title: 'Invoice ' + i.id + ' is unpaid', text: money(i.amount) + ' · due ' + i.due, cta: 'Pay now', attr: 'data-action="pay" data-id="' + esc(i.id) + '"' }); });
-        a.quotes.filter(function (q) { return q.status === 'open'; }).slice(0, 1).forEach(function (q) { todo.push({ ic: 'fa-file-signature', t: 'info', title: 'Quote ' + q.id + ' is ready', text: q.from + ' → ' + q.to + ' · ' + money(q.price) + ' · valid until ' + q.valid, cta: 'Review', attr: 'data-nav="quotes"' }); });
+        a.quotes.filter(function (q) { return q.status === 'open'; }).slice(0, 1).forEach(function (q) { todo.push({ ic: 'fa-file-signature', t: 'info', title: 'Quote ' + q.id + ' is ready', text: q.from + ' → ' + q.to + ' · ' + priceTxt(q.price) + ' · valid until ' + q.valid, cta: 'Review', attr: 'data-nav="quotes"' }); });
 
         var quick = [
             { l: 'Create shipment', s: 'Book a pickup', ic: 'fa-circle-plus', t: 'orange', nav: 'create', p: 'ship.create' },
@@ -683,7 +724,7 @@
     /* ---------- Shipments ---------- */
     function matchFilter(s) {
         var f = filterState.status, q = filterState.q.toLowerCase();
-        var okS = f === 'all' || (f === 'active' && s.status !== 'delivered') || (f === 'transit' && (s.status === 'transit' || s.status === 'customs')) || (f === 'delivered' && s.status === 'delivered') || (f === 'pending' && (s.status === 'booked' || s.status === 'pickup' || s.status === 'exception'));
+        var okS = f === 'all' || (f === 'active' && s.status !== 'delivered') || (f === 'transit' && (s.status === 'transit' || s.status === 'customs' || s.status === 'out')) || (f === 'delivered' && s.status === 'delivered') || (f === 'pending' && (s.status === 'booked' || s.status === 'pickup' || s.status === 'exception'));
         var rec = byId(A().receivers, s.receiver);
         var hay = (s.id + ' ' + s.from + ' ' + s.to + ' ' + s.desc + ' ' + (rec ? rec.name : '') + ' ' + (STATUS[s.status] || {}).label).toLowerCase();
         return okS && (!q || hay.indexOf(q) > -1);
@@ -716,14 +757,14 @@
         var s = findShip(id); if (!s) { toast('Shipment not found in this account.', 'bad'); return; }
         if (!can('ship.view')) { toast('Your role cannot view shipment details.', 'bad'); return; }
         var sv = SERVICES[s.service] || { name: '', eta: '' }, snd = byId(A().senders, s.sender), rcv = byId(A().receivers, s.receiver);
-        var step = STATUS[s.status].step, bad = s.status === 'exception';
+        var bad = s.status === 'exception';
         var docs = A().documents.filter(function (d) { return d.ship === s.id; });
         var body = '<div class="d-top"><div><span class="lbl">Shipment number</span><div class="d-id"><strong>' + esc(s.id) + '</strong><button class="copy" data-action="copy" data-text="' + esc(s.id) + '"><i class="fa-regular fa-copy"></i> Copy</button></div></div>' + badge(s.status) + '</div>' +
             (bad ? '<div class="alert bad"><i class="fa-solid fa-triangle-exclamation"></i><span>' + esc(s.note || 'This shipment needs your attention.') + '</span></div>' : '') +
-            '<ol class="stepper' + (bad ? ' is-bad' : '') + '" aria-label="Shipment progress">' + STEPS.map(function (l, i) { return '<li class="' + (i < step ? 'done' : i === step ? 'cur' : '') + '"><span><i class="fa-solid fa-check"></i></span><b>' + l + '</b></li>'; }).join('') + '</ol>' +
+            stepperHtml(s) +
             '<div class="facts"><div><small>Route</small><b>' + shipLabel(s) + '</b></div><div><small>Weight</small><b>' + esc(s.weight) + ' kg</b></div><div><small>Service</small><b>' + esc(sv.name) + '</b></div><div><small>Estimate</small><b>' + esc(s.eta) + '</b></div><div><small>Contents</small><b>' + esc(s.desc) + '</b></div><div><small>Created by</small><b>' + esc(s.by) + '</b></div></div>' +
             '<div class="parties"><div><span class="lbl">Sender</span><b>' + esc(snd ? snd.name : '—') + '</b><small>' + esc(snd ? snd.addr + ', ' + snd.city : '') + '</small></div><div><span class="lbl">Receiver</span><b>' + esc(rcv ? rcv.name : '—') + '</b><small>' + esc(rcv ? rcv.addr + ', ' + rcv.city + ', ' + rcv.country : '') + '</small></div></div>' +
-            '<h3 class="sub-h">Tracking history</h3><ol class="tl">' + s.events.map(function (e, i) { return '<li class="' + (i === 0 ? 'cur' : '') + '"><b>' + esc(e.title) + '</b><small>' + esc(e.t) + ' · ' + esc(e.loc) + '</small></li>'; }).join('') + '</ol>' +
+            '<h3 class="sub-h">Tracking history</h3>' + tlHtml(s) +
             (can('docs.view') && docs.length ? '<h3 class="sub-h">Documents</h3>' + docs.map(function (d) { return '<div class="doc-line"><i class="fa-regular fa-file-pdf"></i><span>' + esc(d.name) + '</span><button class="btn btn-soft btn-sm" data-action="download" data-name="' + esc(d.name) + '">Download</button></div>'; }).join('') : '');
         openModal({
             title: 'Shipment details', sub: 'Private account tracking — richer than public tracking.', wide: true, body: body,
@@ -732,12 +773,22 @@
     }
 
     /* ---------- Tracking ---------- */
+    /* 4 sample chips: one shipment per status, so every chip shows a different progress */
+    function sampleShips() {
+        var list = A().shipments, seen = {}, out = [];
+        list.forEach(function (s) { if (!seen[s.status]) { seen[s.status] = 1; out.push(s); } });
+        list.forEach(function (s) { if (out.length < 4 && out.indexOf(s) < 0) out.push(s); });
+        return out.slice(0, 4).sort(function (a, b) { return stepOf(a) - stepOf(b); });
+    }
     function vTracking() {
         if (!can('track')) return locked('tracking');
         return pageHead('SHIPMENT VISIBILITY', 'Track your shipment', 'Account shipments show full details. For any other parcel use public tracking.') +
             '<section class="panel track-card"><span class="track-ico"><i class="fa-solid fa-location-crosshairs"></i></span><h2>Where is your parcel?</h2><p>Enter a JP Express shipment or AWB number.</p>' +
             '<form id="trackForm" class="track-form" novalidate><input id="trackInput" placeholder="e.g. JPX-2048-6192" aria-label="Shipment or AWB number" autocomplete="off" autocapitalize="characters" spellcheck="false"><button class="btn btn-primary" type="submit">Track <i class="fa-solid fa-arrow-right"></i></button></form>' +
-            '<div class="sample">Your shipments: ' + A().shipments.slice(0, 4).map(function (s) { return '<button class="mini-chip" data-action="trackShip" data-id="' + esc(s.id) + '">' + esc(s.id) + '</button>'; }).join('') + '</div></section>' +
+            '<div class="sample"><span class="sample-l">Your shipments:</span>' + sampleShips().map(function (s) {
+                var st = stepOf(s), bad = s.status === 'exception';
+                return '<button class="mini-chip' + (bad ? ' is-bad' : st === STEPS.length - 1 ? ' is-done' : '') + '" data-action="trackShip" data-id="' + esc(s.id) + '">' + esc(s.id) + '<em>' + (bad ? 'Action needed' : esc(STEPS[st])) + ' · ' + (st + 1) + '/' + STEPS.length + '</em></button>';
+            }).join('') + '</div></section>' +
             '<div id="trackResult" aria-live="polite"></div>';
     }
     function showTrack(id) {
@@ -745,10 +796,9 @@
         if (!id) { out.innerHTML = '<div class="alert warn"><i class="fa-solid fa-circle-info"></i><span>Enter a shipment number to track.</span></div>'; return; }
         var s = findShip(id);
         if (!s) { out.innerHTML = '<section class="panel"><div class="alert warn"><i class="fa-solid fa-circle-info"></i><span><b>' + esc(id.toUpperCase()) + '</b> is not in ' + esc(A().name) + '. Check the number, or use <a href="track-shipment.html">public tracking</a> for any JP Express parcel.</span></div></section>'; return; }
-        var step = STATUS[s.status].step;
         out.innerHTML = '<section class="panel"><div class="d-top"><div><span class="lbl">Shipment</span><div class="d-id"><strong>' + esc(s.id) + '</strong></div><p class="muted-p">' + shipLabel(s) + ' · ' + esc(s.eta) + '</p></div>' + badge(s.status) + '</div>' +
-            '<ol class="stepper' + (s.status === 'exception' ? ' is-bad' : '') + '">' + STEPS.map(function (l, i) { return '<li class="' + (i < step ? 'done' : i === step ? 'cur' : '') + '"><span><i class="fa-solid fa-check"></i></span><b>' + l + '</b></li>'; }).join('') + '</ol>' +
-            '<ol class="tl">' + s.events.map(function (e, i) { return '<li class="' + (i === 0 ? 'cur' : '') + '"><b>' + esc(e.title) + '</b><small>' + esc(e.t) + ' · ' + esc(e.loc) + '</small></li>'; }).join('') + '</ol>' +
+            stepperHtml(s) +
+            tlHtml(s) +
             '<div class="row-actions"><button class="btn btn-soft" data-open-ship="' + esc(s.id) + '">Full details</button></div></section>';
         out.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     }
@@ -757,17 +807,109 @@
     function defContact(list) { var d = list.filter(function (c) { return c.def; })[0] || list[0]; return d ? d.id : ''; }
     function newWiz(base) {
         var a = A();
-        return Object.assign({ step: 1, sender: defContact(a.senders), receiver: defContact(a.receivers), type: 'Parcel', weight: '', unit: 'kg', l: '', w: '', h: '', pcs: 1, desc: '', value: '', service: 'express', agree: false }, base || {});
+        return Object.assign({ step: 1, sender: defContact(a.senders), receiver: defContact(a.receivers), type: 'Parcel', weight: '', unit: 'kg', dUnit: 'cm', l: '', w: '', h: '', pcs: 1, desc: '', qty: '', value: '', pickup: false, courier: 'all', service: 'express', agree: false }, base || {});
     }
-    function chargeable(w) {
-        var kg = Number(w.weight) * (w.unit === 'lb' ? .4536 : w.unit === 'g' ? .001 : 1);
-        var vol = (Number(w.l) * Number(w.w) * Number(w.h) / 5000) * (Number(w.pcs) || 1);
-        return { actual: kg, vol: isFinite(vol) ? vol : 0, charge: Math.max(kg, isFinite(vol) ? vol : 0) };
+    /* ---------- Calculator engine (mirrors quote page) ---------- */
+    function r2(n) { return Math.round(n * 100) / 100; }
+    function kgTxt(n) { return r2(n).toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' kg'; }
+    function priceTxt(p) { return p ? money(p) : 'Quote pending'; }
+    function canonDest(s) {
+        var k = String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+        return PRC.aliases[k] || k;
     }
-    function priceFor(svc, w, country) {
-        var s = SERVICES[svc], c = chargeable(w).charge, z = COUNTRIES[country] || 1.1;
-        var chunk = Math.ceil(c * 2) / 2;
-        return Math.round((s.base + s.perKg * chunk) * z / 10) * 10;
+    function restrictedHit(text) {
+        var t = String(text || '');
+        for (var i = 0; i < PRC.restricted.length; i++) {
+            var w = PRC.restricted[i].replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            if (new RegExp('\\b' + w + '(s|es)?\\b', 'i').test(t)) return PRC.restricted[i];
+        }
+        return '';
+    }
+    function fixService() {
+        var m = MODES[wiz.type] || MODES.Parcel;
+        if (m.services.indexOf(wiz.service) < 0) wiz.service = m.services[0];
+    }
+    function calcW(w, courier) {
+        var m = MODES[w.type] || MODES.Parcel, wu = W_UNIT[w.unit] || 1, du = D_UNIT[w.dUnit] || 1;
+        var actual = (parseFloat(w.weight) || 0) * wu;
+        var L = (parseFloat(w.l) || 0) * du, W = (parseFloat(w.w) || 0) * du, H = (parseFloat(w.h) || 0) * du;
+        var pcs = Math.max(parseInt(w.pcs, 10) || 1, 1);
+        var has = m.dims && L > 0 && W > 0 && H > 0;
+        var cm3 = has ? L * W * H * pcs : 0;
+        var div = (PRC.courierDivisors && PRC.courierDivisors[courier]) || PRC.divisors[w.service] || 0;
+        var vol = has && div ? cm3 / div : 0;
+        var cw = Math.max(actual, vol);
+        if (PRC.roundStep > 0) cw = Math.ceil(cw / PRC.roundStep - 1e-9) * PRC.roundStep;
+        return { actual: actual, vol: vol, cw: cw, has: has, cbm: cm3 / 1000000, div: div, pcs: pcs, maxSide: Math.max(L, W, H) };
+    }
+    function rateTotal(rate, cw) {
+        var sub = (rate.base || 0) + (rate.perKg || 0) * cw;
+        if (rate.minCharge && sub < rate.minCharge) sub = rate.minCharge;
+        return { total: sub + sub * ((rate.fuelPct || 0) / 100) };
+    }
+    function calcQuote(w) {
+        var m = MODES[w.type] || MODES.Parcel, a = A(), snd = byId(a.senders, w.sender), rcv = byId(a.receivers, w.receiver);
+        var c = calcW(w, w.courier), reasons = [], hit = restrictedHit(w.desc);
+        var from = snd ? snd.country : '', to = rcv ? rcv.country : '', dest = canonDest(to);
+        var known = PRC.destinations.some(function (d) { return d.toLowerCase() === dest; });
+        var courierSvc = ['express', 'economy', 'door'].indexOf(w.service) > -1;
+
+        if (from !== 'Bangladesh') reasons.push('Shipments from outside Bangladesh are priced by quote.');
+        if (hit) reasons.push('This shipment may require additional review. Please contact JP Express before booking.');
+        if (!known) reasons.push('We could not match “' + to + '” to a destination in our list. We may still be able to ship there, so we will confirm in your quote.');
+        if (m.quote) reasons.push('Commercial and freight shipments are priced by quote.');
+        if (w.service === 'sea') reasons.push('Sea freight is priced by volume and route, so a quote is needed.');
+        if (courierSvc && c.cw > PRC.maxCourierKg) reasons.push('Courier shipments over ' + PRC.maxCourierKg + ' kg need a manual review.');
+        if (c.has && c.maxSide > PRC.maxSideCm) reasons.push('Large dimensions need a manual review.');
+
+        var options = [];
+        if (!reasons.length && PRC.rates && PRC.rates[w.service]) {
+            var keys = w.courier && w.courier !== 'all' ? [w.courier] : Object.keys(COURIERS).filter(function (k) { return k !== 'all'; });
+            keys.forEach(function (k) {
+                var rate = PRC.rates[w.service][k] && PRC.rates[w.service][k][dest];
+                if (!rate) return;
+                var cw = calcW(w, k).cw, o = rateTotal(rate, cw);
+                o.courier = k; o.cw = cw; o.transit = rate.transit || '';
+                options.push(o);
+            });
+            options.sort(function (x, y) { return x.total - y.total; });
+        }
+        if (!reasons.length && !options.length) reasons.push('We need to review your shipment details to provide an accurate quote.');
+        return { m: m, c: c, snd: snd, rcv: rcv, reasons: reasons, hit: hit, options: options, best: options[0] || null };
+    }
+
+    /* live weight line (step 2) */
+    function wizLiveHtml() {
+        if (!(parseFloat(wiz.weight) > 0)) return '';
+        var c = calcW(wiz, wiz.courier), t;
+        if (c.has && wiz.service === 'sea') t = 'Volume so far: <b>' + r2(c.cbm) + ' CBM</b>';
+        else if (c.has) t = 'Chargeable weight so far: <b>' + kgTxt(c.cw) + '</b> (' + (c.vol > c.actual ? 'volumetric' : 'actual') + ' weight is higher)';
+        else t = 'Actual weight: <b>' + kgTxt(c.actual) + '</b>' + ((MODES[wiz.type] || MODES.Parcel).dims ? '. Add size to check volumetric weight.' : '');
+        return '<i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span>' + t + '</span>';
+    }
+    function wizLive() {
+        var el = $('#wzLive'); if (!el) return;
+        readWiz();
+        var h = wizLiveHtml(); el.innerHTML = h; el.hidden = !h;
+    }
+
+    /* result box (step 3) */
+    function svcInfoHtml() {
+        var res = calcQuote(wiz), c = res.c, best = res.best, sea = wiz.service === 'sea', cw = best ? best.cw : c.cw;
+        var route = res.snd && res.rcv ? '<p class="wz-route"><i class="fa-solid fa-route" aria-hidden="true"></i> ' + esc(res.snd.city) + ', ' + esc(res.snd.country) + ' <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i> ' + esc(res.rcv.city) + ', ' + esc(res.rcv.country) + '</p>' : '';
+        return route +
+            (res.hit ? '<div class="alert warn" role="alert"><i class="fa-solid fa-triangle-exclamation"></i><span>“' + esc(res.hit) + '” may need extra checks. Please contact JP Express before booking.</span></div>' : '') +
+            '<div class="chg"><div><small>Actual</small><b>' + kgTxt(c.actual) + '</b></div>' +
+            '<div><small>' + (sea ? 'Volume' : 'Volumetric') + '</small><b>' + (c.has ? (sea ? r2(c.cbm) + ' CBM' : kgTxt(c.vol)) : '—') + '</b></div>' +
+            '<div class="hl"><small>' + (sea ? 'Billing' : 'Chargeable') + '</small><b>' + (sea ? 'By volume' : kgTxt(cw)) + '</b></div></div>' +
+            (best
+                ? '<div class="wz-res"><span class="wz-badge">Estimated</span><strong>' + money(best.total) + '</strong><small>Estimated shipping cost, not a final invoice. Duties and taxes are separate.</small></div>'
+                : '<div class="wz-res quote"><span class="wz-badge">Quote required</span><strong>We will confirm your price</strong><small>' + esc(res.reasons[0]) + '</small></div>') +
+            (c.has && !sea ? '<p class="note"><i class="fa-solid fa-circle-info"></i> Billed on the higher of actual and volumetric weight (L × W × H ÷ ' + c.div.toLocaleString('en-US') + ').</p>' : '');
+    }
+    function wizInfo() {
+        var b = $('#wzSvcInfo'); if (b) b.innerHTML = svcInfoHtml();
+        var cw = $('#wzCourier'); if (cw) cw.hidden = wiz.service === 'sea';
     }
     var WSTEPS = ['Contacts', 'Package', 'Service', 'Review'];
     function stepsBar() {
@@ -795,26 +937,59 @@
                 '<h3 class="sub-h">Who is receiving?</h3>' + contactCards(a.receivers, 'receiver', wiz.receiver) +
                 (can('contacts') ? '<button class="link-btn add" data-action="addContact" data-type="receiver" data-wiz="1"><i class="fa-solid fa-plus"></i> Add new receiver</button>' : '');
         } else if (wiz.step === 2) {
-            body = '<div class="seg" role="radiogroup" aria-label="Shipment type">' + [['Documents', 'fa-file-lines'], ['Parcel', 'fa-box-open'], ['Commercial', 'fa-boxes-stacked']].map(function (t) { return '<label><input type="radio" name="type" value="' + t[0] + '"' + (wiz.type === t[0] ? ' checked' : '') + '><span><i class="fa-solid ' + t[1] + '"></i>' + t[0] + '</span></label>'; }).join('') + '</div>' +
-                '<div class="form-grid">' + field('Total weight', 'weight', { value: wiz.weight, type: 'number', inputmode: 'decimal', step: 'any', min: 0, ph: 'e.g. 2.5', req: 1 }) +
-                field('Unit', 'unit', { type: 'select', options: ['kg', 'g', 'lb'], value: wiz.unit }) +
-                field('Length (cm)', 'l', { value: wiz.l, type: 'number', inputmode: 'decimal', step: 'any', min: 0, ph: 'L' }) + field('Width (cm)', 'w', { value: wiz.w, type: 'number', inputmode: 'decimal', step: 'any', min: 0, ph: 'W' }) +
-                field('Height (cm)', 'h', { value: wiz.h, type: 'number', inputmode: 'decimal', step: 'any', min: 0, ph: 'H' }) + field('Number of pieces', 'pcs', { value: wiz.pcs, type: 'number', inputmode: 'numeric', min: 1 }) +
-                field('What is inside?', 'desc', { value: wiz.desc, ph: 'e.g. clothes and gifts', max: 120, span: 1, req: 1 }) + field('Approx. value (৳)', 'value', { value: wiz.value, type: 'number', inputmode: 'decimal', min: 0, ph: 'Optional' }) + '</div>' +
-                '<p class="note"><i class="fa-solid fa-circle-info"></i> Bulky parcels are priced on the space they take. Add size so we can work out the chargeable weight (length × width × height ÷ 5,000).</p>';
+            var m = MODES[wiz.type] || MODES.Parcel, live = wizLiveHtml();
+            var dim = function (label, k) {
+                return '<div class="fld" data-f="' + k + '"><label for="f_' + k + '">' + label + '</label><input id="f_' + k + '" name="' + k + '" type="number" inputmode="decimal" step="any" min="0" placeholder="' + k.toUpperCase() + '" value="' + esc(wiz[k]) + '"><small class="err" role="alert"></small></div>';
+            };
+            var opts = function (list, cur) {
+                return list.map(function (u) { return '<option value="' + u + '"' + (cur === u ? ' selected' : '') + '>' + (u === 'in' ? 'inch' : u) + '</option>'; }).join('');
+            };
+            body = '<h3 class="sub-h first">What are you shipping?</h3>' +
+                '<div class="seg four" role="radiogroup" aria-label="Shipment type">' + Object.keys(MODES).map(function (k) {
+                    return '<label><input type="radio" name="type" value="' + k + '"' + (wiz.type === k ? ' checked' : '') + '><span><i class="fa-solid ' + MODES[k].icon + '"></i>' + MODES[k].label + '</span></label>';
+                }).join('') + '</div><p class="wz-hint">' + esc(m.hint) + '</p>' +
+
+                '<h3 class="sub-h">How heavy' + (m.dims ? ' and how big' : '') + '?</h3>' +
+                '<div class="fld" data-f="weight"><label for="f_weight">Total weight <i class="req">*</i></label><div class="wz-ig"><input id="f_weight" name="weight" type="number" inputmode="decimal" step="any" min="0" placeholder="e.g. 2.5" value="' + esc(wiz.weight) + '"><select id="f_unit" name="unit" aria-label="Weight unit">' + opts(['kg', 'g', 'lb'], wiz.unit) + '</select></div><small class="err" role="alert"></small></div>' +
+
+                (m.dims ? '<div class="wz-dims"><div class="wz-dims-head"><b>Size per piece</b><select id="f_dUnit" name="dUnit" class="wz-mini" aria-label="Size unit">' + opts(['cm', 'in'], wiz.dUnit) + '</select></div>' +
+                    '<div class="wz-dim-row">' + dim('Length', 'l') + dim('Width', 'w') + dim('Height', 'h') +
+                    '<div class="fld" data-f="pcs"><label for="f_pcs">Pieces</label><div class="wz-num"><button type="button" class="wz-num-btn" data-action="pcs" data-step="-1" aria-label="Decrease pieces"><i class="fa-solid fa-minus"></i></button><input id="f_pcs" name="pcs" type="number" inputmode="numeric" min="1" max="999" value="' + esc(wiz.pcs) + '"><button type="button" class="wz-num-btn" data-action="pcs" data-step="1" aria-label="Increase pieces"><i class="fa-solid fa-plus"></i></button></div><small class="err" role="alert"></small></div></div>' +
+                    '<p class="note"><i class="fa-solid fa-circle-info"></i> Bulky parcels are priced on the space they take. Size is optional, but needed to check volumetric weight (sea freight needs it).</p></div>' : '') +
+
+                '<div class="wz-live" id="wzLive" aria-live="polite"' + (live ? '' : ' hidden') + '>' + live + '</div>' +
+
+                '<div class="form-grid wz-gap">' + field('What is inside?', 'desc', { value: wiz.desc, ph: 'e.g. clothes and gifts', max: 120, span: 1, req: 1 }) + '</div>' +
+
+                '<details class="wz-more"' + (wiz.qty || wiz.value || wiz.pickup ? ' open' : '') + '><summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Add item details <small>(optional, improves accuracy)</small></summary><div class="wz-more-body form-grid">' +
+                field('Quantity', 'qty', { value: wiz.qty, type: 'number', inputmode: 'numeric', min: 1, ph: 'e.g. 20' }) +
+                field('Approx. value (৳)', 'value', { value: wiz.value, type: 'number', inputmode: 'decimal', min: 0, ph: 'Optional' }) +
+                '<label class="check wz-span"><input type="checkbox" name="pickup" id="f_pickup"' + (wiz.pickup ? ' checked' : '') + '><span>I need pickup from the sender address</span></label></div></details>';
+
         } else if (wiz.step === 3) {
-            var rcv = byId(a.receivers, wiz.receiver), ch = chargeable(wiz);
-            body = '<div class="chg"><div><small>Actual</small><b>' + ch.actual.toFixed(2) + ' kg</b></div><div><small>Volumetric</small><b>' + ch.vol.toFixed(2) + ' kg</b></div><div class="hl"><small>Chargeable</small><b>' + ch.charge.toFixed(2) + ' kg</b></div></div><div class="pick svc">' +
-                Object.keys(SERVICES).map(function (k) {
-                    var s = SERVICES[k], off = s.docOnly && wiz.type !== 'Documents';
-                    return '<label class="pickc' + (off ? ' off' : '') + '"><input type="radio" name="service" value="' + k + '"' + (wiz.service === k ? ' checked' : '') + (off ? ' disabled' : '') + '><span><b><i class="fa-solid ' + s.icon + '"></i> ' + esc(s.name) + '</b><small>' + esc(s.eta) + (off ? ' · documents only' : '') + '</small></span><strong class="price">' + (off ? '—' : money(priceFor(k, wiz, rcv ? rcv.country : ''))) + '</strong><i class="fa-solid fa-circle-check"></i></label>';
-                }).join('') + '</div><p class="note"><i class="fa-solid fa-circle-info"></i> Indicative estimate from the details you entered. Duties, taxes and surcharges at the destination are usually separate. Your confirmed quote is the final price.</p>';
+            fixService();
+            var svcs = MODES[wiz.type].services;
+            body = '<div id="wzSvcInfo">' + svcInfoHtml() + '</div><h3 class="sub-h">Choose a service</h3>' +
+                '<div class="pick svc" role="radiogroup" aria-label="Service" data-n="' + svcs.length + '">' + svcs.map(function (k) {
+                    var s = SERVICES[k], q = calcQuote(Object.assign({}, wiz, { service: k, courier: 'all' })), sea = k === 'sea';
+                    return '<label class="pickc"><input type="radio" name="service" value="' + k + '"' + (wiz.service === k ? ' checked' : '') + '><span><b><i class="fa-solid ' + s.icon + '"></i> ' + esc(s.name) + '</b><small>' + esc(s.note) + '</small><small>' +
+                        (sea ? (q.c.has ? r2(q.c.cbm) + ' CBM' : 'Size needed') : kgTxt(q.c.cw) + ' chargeable') + ' · ' + esc(s.eta) + '</small></span>' +
+                        '<strong class="price">' + (q.best ? money(q.best.total) : 'Quote') + '</strong><i class="fa-solid fa-circle-check"></i></label>';
+                }).join('') + '</div>' +
+                '<div class="fld wz-courier" id="wzCourier" data-f="courier"' + (wiz.service === 'sea' ? ' hidden' : '') + '><label for="f_courier"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Courier</label><select id="f_courier" name="courier">' +
+                Object.keys(COURIERS).map(function (k) { return '<option value="' + k + '"' + ((wiz.courier || 'all') === k ? ' selected' : '') + '>' + esc(COURIERS[k]) + '</option>'; }).join('') + '</select></div>' +
+                '<p class="note"><i class="fa-solid fa-circle-info"></i> Estimate from the details you entered. Duties, taxes and surcharges at the destination are usually separate. Your confirmed quote is the final price.</p>';
+
         } else {
-            var sn = byId(a.senders, wiz.sender), rc = byId(a.receivers, wiz.receiver), sv = SERVICES[wiz.service], c2 = chargeable(wiz), pr = priceFor(wiz.service, wiz, rc.country);
-            body = '<div class="review"><div class="rv"><span class="lbl">Sender</span><b>' + esc(sn.name) + '</b><small>' + esc(sn.addr) + ', ' + esc(sn.city) + '</small></div><div class="rv"><span class="lbl">Receiver</span><b>' + esc(rc.name) + '</b><small>' + esc(rc.addr) + ', ' + esc(rc.city) + ', ' + esc(rc.country) + '</small></div>' +
-                '<div class="rv"><span class="lbl">Package</span><b>' + esc(wiz.type) + ' · ' + esc(c2.charge.toFixed(2)) + ' kg chargeable</b><small>' + esc(wiz.desc) + (wiz.pcs > 1 ? ' · ' + esc(wiz.pcs) + ' pieces' : '') + '</small></div>' +
-                '<div class="rv"><span class="lbl">Service</span><b>' + esc(sv.name) + '</b><small>' + esc(sv.eta) + '</small></div></div>' +
-                '<div class="total"><span>Estimated shipping cost</span><strong>' + money(pr) + '</strong></div>' +
+            var sn = byId(a.senders, wiz.sender), rc = byId(a.receivers, wiz.receiver), sv = SERVICES[wiz.service];
+            var res = calcQuote(wiz), sea = wiz.service === 'sea', cw = res.best ? res.best.cw : res.c.cw;
+            body = (res.hit ? '<div class="alert warn" role="alert"><i class="fa-solid fa-triangle-exclamation"></i><span>“' + esc(res.hit) + '” may need extra checks. Please contact JP Express before booking.</span></div>' : '') +
+                '<div class="review"><div class="rv"><span class="lbl">Sender</span><b>' + esc(sn.name) + '</b><small>' + esc(sn.addr) + ', ' + esc(sn.city) + '</small></div><div class="rv"><span class="lbl">Receiver</span><b>' + esc(rc.name) + '</b><small>' + esc(rc.addr) + ', ' + esc(rc.city) + ', ' + esc(rc.country) + '</small></div>' +
+                '<div class="rv"><span class="lbl">Package</span><b>' + esc(wiz.type) + ' · ' + (sea ? (res.c.has ? r2(res.c.cbm) + ' CBM' : 'By volume') : kgTxt(cw) + ' chargeable') + '</b><small>' + esc(wiz.desc) + (res.c.has && res.c.pcs > 1 ? ' · ' + res.c.pcs + ' pieces' : '') + (wiz.qty ? ' · Qty ' + esc(wiz.qty) : '') + '</small></div>' +
+                '<div class="rv"><span class="lbl">Service</span><b>' + esc(sv.name) + (!sea && wiz.courier && wiz.courier !== 'all' ? ' · ' + esc(COURIERS[wiz.courier]) : '') + '</b><small>' + esc(sv.eta) + (wiz.pickup ? ' · Pickup requested' : '') + '</small></div></div>' +
+                (res.best
+                    ? '<div class="total"><span>Estimated shipping cost</span><strong>' + money(res.best.total) + '</strong></div>'
+                    : '<div class="total wz-pending"><span>Price</span><strong>Quote required</strong></div><p class="note"><i class="fa-solid fa-circle-info"></i> ' + esc(res.reasons[0]) + ' We confirm the exact price before pickup.</p>') +
                 '<label class="check"><input type="checkbox" id="wAgree"' + (wiz.agree ? ' checked' : '') + '><span>I confirm these details are correct and the shipment has no restricted or prohibited items. <a href="shipping-guides.html" target="_blank" rel="noopener">See restricted items</a></span></label><small class="err block" id="agreeErr" role="alert"></small>';
         }
         var last = wiz.step === 4;
@@ -825,31 +1000,50 @@
     function readWiz() {
         var f = $('#wizForm'); if (!f) return;
         if (wiz.step === 1) { var s = $('input[name=sender]:checked', f), r = $('input[name=receiver]:checked', f); if (s) wiz.sender = s.value; if (r) wiz.receiver = r.value; }
-        if (wiz.step === 2) { var d = formData(f); var t = $('input[name=type]:checked', f); if (t) wiz.type = t.value;['weight', 'unit', 'l', 'w', 'h', 'pcs', 'desc', 'value'].forEach(function (k) { if (d[k] != null) wiz[k] = d[k]; }); }
-        if (wiz.step === 3) { var sv = $('input[name=service]:checked', f); if (sv) wiz.service = sv.value; }
+        if (wiz.step === 2) {
+            var d = formData(f), t = $('input[name=type]:checked', f);
+            if (t) wiz.type = t.value;
+            ['weight', 'unit', 'dUnit', 'l', 'w', 'h', 'pcs', 'desc', 'qty', 'value', 'pickup'].forEach(function (k) { if (d[k] != null) wiz[k] = d[k]; });
+        }
+        if (wiz.step === 3) {
+            var sv = $('input[name=service]:checked', f); if (sv) wiz.service = sv.value;
+            var co = $('[name=courier]', f); if (co) wiz.courier = co.value;
+        }
     }
     function wizValidate() {
         var f = $('#wizForm'); readWiz();
         if (wiz.step === 1) { if (!wiz.sender || !wiz.receiver) { toast('Choose a sender and a receiver to continue.', 'bad'); return false; } }
         if (wiz.step === 2) {
-            var bad = false, w = Number(wiz.weight);
-            setErr(f, 'weight', !wiz.weight || !(w > 0) ? 'Enter the total weight.' : (w > 500 && wiz.unit === 'kg') ? 'Over 500 kg? Please request a freight quote.' : ''); if (!wiz.weight || !(w > 0) || (w > 500 && wiz.unit === 'kg')) bad = true;
-            ['l', 'w', 'h'].forEach(function (k) { var v = wiz[k]; var any = wiz.l || wiz.w || wiz.h; var m = any && !(Number(v) > 0) ? 'Required' : ''; setErr(f, k, m); if (m) bad = true; });
-            var pcs = Number(wiz.pcs); setErr(f, 'pcs', pcs >= 1 && pcs <= 999 && pcs % 1 === 0 ? '' : '1–999'); if (!(pcs >= 1 && pcs <= 999 && pcs % 1 === 0)) bad = true;
-            setErr(f, 'desc', wiz.desc.length < 2 ? 'Tell us what is inside.' : ''); if (wiz.desc.length < 2) bad = true;
+            var m = MODES[wiz.type] || MODES.Parcel, bad = false, w = parseFloat(wiz.weight), kg = w * (W_UNIT[wiz.unit] || 1);
+            var wm = !(w > 0) ? 'Enter the shipment weight, for example 2.5 kg.' : kg < 0.01 ? 'That weight is too small. Enter at least 10 g.' : '';
+            setErr(f, 'weight', wm); if (wm) bad = true;
+            if (m.dims) {
+                var filled = ['l', 'w', 'h'].filter(function (k) { return parseFloat(wiz[k]) > 0; }).length;
+                ['l', 'w', 'h'].forEach(function (k) {
+                    var e = filled > 0 && filled < 3 && !(parseFloat(wiz[k]) > 0) ? 'Required' : '';
+                    setErr(f, k, e); if (e) bad = true;
+                });
+                var pcs = Number(wiz.pcs), pm = pcs >= 1 && pcs <= 999 && pcs % 1 === 0 ? '' : '1–999';
+                setErr(f, 'pcs', pm); if (pm) bad = true;
+            }
+            var dm = String(wiz.desc).length < 2 ? 'Tell us what is inside.' : '';
+            setErr(f, 'desc', dm); if (dm) bad = true;
             if (bad) { var fb = firstBad(f); if (fb) fb.focus(); return false; }
-            if (SERVICES[wiz.service].docOnly && wiz.type !== 'Documents') wiz.service = 'express';
+            fixService();
         }
-        if (wiz.step === 3) { var sv = SERVICES[wiz.service]; if (!sv || (sv.docOnly && wiz.type !== 'Documents')) { toast('Choose a service.', 'bad'); return false; } }
+        if (wiz.step === 3) {
+            if (!SERVICES[wiz.service] || MODES[wiz.type].services.indexOf(wiz.service) < 0) { toast('Choose a service.', 'bad'); return false; }
+            if (wiz.service === 'sea' && !calcW(wiz, 'all').has) { toast('Sea freight is priced by volume (CBM). Go back and enter length, width and height.', 'bad'); return false; }
+        }
         return true;
     }
     function makeShipment(status) {
         var a = A(), rc = byId(a.receivers, wiz.receiver), sn = byId(a.senders, wiz.sender);
         var n = a.shipments.length, id = 'JPX-' + (a.kind === 'business' ? 3013 + n : 2050 + n) + '-' + Math.floor(1000 + Math.random() * 9000);
-        var ch = chargeable(wiz).charge;
-        var s = { id: id, from: sn.city, to: rc.city, toCountry: rc.country, weight: Math.round(ch * 100) / 100, kind: wiz.type, service: wiz.service, status: 'booked', date: dateOnly(), eta: 'Pickup pending', desc: wiz.desc, sender: sn.id, receiver: rc.id, by: A().user.name, events: ev([[nowStamp(), 'Booking confirmed', sn.city + ', BD'], [nowStamp(), 'Pickup request received', sn.city + ', BD']]) };
+        var res = calcQuote(wiz), c = res.c;
+        var s = { id: id, from: sn.city, to: rc.city, toCountry: rc.country, weight: r2(c.actual), chargeable: r2(res.best ? res.best.cw : c.cw), kind: wiz.type, service: wiz.service, courier: wiz.courier || 'all', status: 'booked', date: dateOnly(), eta: 'Pickup pending', desc: wiz.desc, sender: sn.id, receiver: rc.id, by: A().user.name, events: ev([[nowStamp(), 'Booking confirmed', sn.city + ', BD'], [nowStamp(), 'Pickup request received', sn.city + ', BD']]) };
         a.shipments.unshift(s);
-        if (can('billing.view') || a.kind === 'personal') a.invoices.unshift({ id: 'INV-2026-' + (430 + a.invoices.length), ship: id, amount: priceFor(wiz.service, wiz, rc.country), status: 'unpaid', date: dateOnly(), due: 'In 10 days' });
+        if (res.best && (can('billing.view') || a.kind === 'personal')) a.invoices.unshift({ id: 'INV-2026-' + (430 + a.invoices.length), ship: id, amount: Math.round(res.best.total), status: 'unpaid', date: dateOnly(), due: 'In 10 days' });
         a.notifications.unshift({ id: uid('n'), icon: 'fa-box', tone: 'info', title: 'Booking confirmed', text: id + ' is booked. We will contact you to arrange pickup.', time: 'Just now', ship: id, unread: true });
         return s;
     }
@@ -857,16 +1051,16 @@
     function wizConfirm() {
         readWiz(); var ag = $('#wAgree'); wiz.agree = ag && ag.checked;
         if (!wiz.agree) { $('#agreeErr').textContent = 'Please confirm to continue.'; $('#wAgree').focus(); return; }
-        var s = makeShipment(); save(); sync('shipments', s); wiz = null; updateChrome();
+        var s = makeShipment(), inv = A().invoices.some(function (i) { return i.ship === s.id; }); save(); sync('shipments', s); wiz = null; updateChrome();
         openModal({
-            title: 'Booking confirmed', body: '<div class="done-box"><span class="done-ico"><i class="fa-solid fa-check"></i></span><h3>' + esc(s.id) + '</h3><p>Your shipment is booked. Our team will contact you to arrange pickup, and your invoice is ready in Invoices &amp; payments.</p></div>',
+            title: 'Booking confirmed', body: '<div class="done-box"><span class="done-ico"><i class="fa-solid fa-check"></i></span><h3>' + esc(s.id) + '</h3><p>' + (inv ? 'Your shipment is booked. Our team will contact you to arrange pickup, and your invoice is ready in Invoices &amp; payments.' : 'Your booking request is received. Our team will confirm the price and arrange pickup. Your invoice appears here once the price is confirmed.') + '</p></div>',
             footer: '<button class="btn btn-ghost" data-action="closeModal" data-nav="shipments">View shipments</button><button class="btn btn-primary" data-action="trackShip" data-id="' + esc(s.id) + '">Track it</button>'
         });
         go('shipments');
     }
     function wizQuote() {
-        readWiz(); var a = A(), rc = byId(a.receivers, wiz.receiver), sn = byId(a.senders, wiz.sender);
-        var q = { id: 'QT-2026-' + (200 + a.quotes.length), to: rc.city, toCountry: rc.country, from: sn.city, weight: Math.round(chargeable(wiz).charge * 100) / 100, kind: wiz.type, service: wiz.service, price: priceFor(wiz.service, wiz, rc.country), valid: 'In 7 days', status: 'open', requested: dateOnly(), sender: sn.id, receiver: rc.id, desc: wiz.desc };
+        readWiz(); var a = A(), rc = byId(a.receivers, wiz.receiver), sn = byId(a.senders, wiz.sender), res = calcQuote(wiz);
+        var q = { id: 'QT-2026-' + (200 + a.quotes.length), to: rc.city, toCountry: rc.country, from: sn.city, weight: r2(res.c.actual), kind: wiz.type, service: wiz.service, price: res.best ? Math.round(res.best.total) : 0, valid: 'In 7 days', status: 'open', requested: dateOnly(), sender: sn.id, receiver: rc.id, desc: wiz.desc };
         a.quotes.unshift(q); save(); sync('quotes', q); wiz = null; toast('Quote ' + q.id + ' saved. Find it under Quotes & bookings.', 'ok'); go('quotes');
     }
 
@@ -880,7 +1074,7 @@
                 var sv = SERVICES[q.service] || { name: '' }, st = { open: ['warn', 'Open'], booked: ['ok', 'Booked'], expired: ['bad', 'Expired'] }[q.status];
                 return '<article class="panel qcard"><div class="qc-top"><span class="stat-ico violet"><i class="fa-solid fa-file-invoice-dollar"></i></span><div><b>' + esc(q.id) + '</b><small>Requested ' + esc(q.requested) + '</small></div><span class="badge ' + st[0] + '">' + st[1] + '</span></div>' +
                     '<div class="qc-route">' + esc(q.from) + ' <i class="fa-solid fa-arrow-right-long arrow"></i> ' + esc(q.to) + '</div><div class="qc-meta"><span>' + esc(q.kind) + ' · ' + esc(q.weight) + ' kg</span><span>' + esc(sv.name) + '</span></div>' +
-                    '<div class="qc-price"><div><small>Estimated price</small><strong>' + money(q.price) + '</strong></div><small>' + (q.status === 'open' ? 'Valid until ' + esc(q.valid) : q.status === 'booked' ? 'Booked as ' + esc(q.shipmentId || '') : 'Expired ' + esc(q.valid)) + '</small></div>' +
+                    '<div class="qc-price"><div><small>Estimated price</small><strong>' + priceTxt(q.price) + '</strong></div><small>' + (q.status === 'open' ? 'Valid until ' + esc(q.valid) : q.status === 'booked' ? 'Booked as ' + esc(q.shipmentId || '') : 'Expired ' + esc(q.valid)) + '</small></div>' +
                     '<div class="qc-actions">' + (q.status === 'open' && can('ship.create') ? '<button class="btn btn-primary btn-sm" data-action="acceptQuote" data-id="' + esc(q.id) + '">Accept &amp; book</button>' : '') +
                     (q.status === 'booked' && q.shipmentId ? '<button class="btn btn-soft btn-sm" data-open-ship="' + esc(q.shipmentId) + '">View shipment</button>' : '') + (q.status === 'expired' && can('ship.create') ? '<button class="btn btn-soft btn-sm" data-action="requote" data-id="' + esc(q.id) + '">Request again</button>' : '') + '</div></article>';
             }).join('') + '</div>' : '<section class="panel">' + emptyState('fa-file-invoice-dollar', 'No quotes yet', 'Start a shipment and choose “Save as quote”.', ctaBtn('Create shipment', 'data-nav="create"', 'fa-plus')) + '</section>');
@@ -888,7 +1082,7 @@
     function acceptQuote(id) {
         var a = A(), q = byId(a.quotes, id); if (!q || q.status !== 'open') return;
         confirmBox({
-            title: 'Accept quote ' + q.id + '?', text: 'This books a shipment from ' + q.from + ' to ' + q.to + ' for about ' + money(q.price) + '. You can track it right after.', ok: 'Accept & book', onOk: function () {
+            title: 'Accept quote ' + q.id + '?', text: 'This books a shipment from ' + q.from + ' to ' + q.to + (q.price ? ' for about ' + money(q.price) : '') + '. You can track it right after.', ok: 'Accept & book', onOk: function () {
                 wiz = newWiz({ sender: q.sender, receiver: q.receiver, type: q.kind, weight: q.weight, desc: q.desc, service: q.service });
                 var s = makeShipment(); q.status = 'booked'; q.shipmentId = s.id; wiz = null; save(); sync('quotes/accept', { id: q.id }); updateChrome(); toast('Booked ' + s.id, 'ok'); render();
             }
@@ -1302,6 +1496,7 @@
         wizNext: wizNext, wizConfirm: wizConfirm, wizQuote: wizQuote,
         wizBack: function () { readWiz(); wiz.step = Math.max(1, wiz.step - 1); render(); window.scrollTo(0, 0); },
         wizCancel: function () { wiz = null; go('dashboard'); },
+        pcs: function (el) { var i = $('#f_pcs'); if (!i) return; i.value = Math.min(999, Math.max(1, (parseInt(i.value, 10) || 1) + parseInt(el.dataset.step, 10))); wizLive(); },
         acceptQuote: function (el) { acceptQuote(el.dataset.id); }, requote: function (el) { requote(el.dataset.id); },
         ctab: function (el) { contactTab = el.dataset.t; render(); },
         addContact: function (el) { if (!can('contacts')) { toast('Your role cannot manage contacts.', 'bad'); return; } if (el.dataset.wiz) readWiz(); contactModal(el.dataset.type, null, !!el.dataset.wiz); },
@@ -1362,11 +1557,15 @@
         var t = e.target;
         if (t.closest('#nForm')) { var u = A().user; u.prefs = u.prefs || {}; u.prefs[t.name] = t.checked; save(); sync('prefs', u.prefs); toast('Preferences saved.', 'ok'); }
         if (t.closest('#secForm')) { A().user.twofa = t.checked; save(); toast('Two-step verification ' + (t.checked ? 'on' : 'off') + ' (demo).'); }
-        if (t.closest('#wizForm') && wiz && wiz.step === 3 && t.name === 'service') { /* selection is read on continue */ }
-        if (t.closest('#wizForm') && wiz && wiz.step === 2 && t.name === 'type') { wiz.type = t.value; }
+        if (t.closest('#wizForm') && wiz && wiz.step === 3 && (t.name === 'service' || t.name === 'courier')) { readWiz(); wizInfo(); }
+        if (t.closest('#wizForm') && wiz && wiz.step === 2 && t.name === 'type') { readWiz(); fixService(); render(); }
     });
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && e.target.closest && e.target.closest('#wizForm') && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); if (wiz && wiz.step < 4) wizNext(); }
+    });
+
+    document.addEventListener('input', function (e) {
+        if (wiz && wiz.step === 2 && e.target.closest && e.target.closest('#wizForm')) wizLive();
     });
 
     document.addEventListener('click', function (e) {
