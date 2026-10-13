@@ -701,16 +701,9 @@
   border-radius: 16px;
 }
 
-/* Used only by: services */
+/* Number badge removed — clean card without step numbers */
 .page-services .svp-steps li::before {
-  content: "0" counter(st);
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .16em;
-  color: var(--jp-orange);
+  content: none;
 }
 
 /* Used only by: services */
@@ -2175,5 +2168,1327 @@
   .template-jp .jp-svc-card::after,
   .template-jp .jp-svc-link i {
     transition: none;
+  }
+}
+
+
+/* ===============================================================
+   SERVICES PAGE — COMPACT SPACING (matches About page density)
+   Reduces font-size + gaps + padding across every section
+   =============================================================== */
+
+/* ---------- Section vertical rhythm ---------- */
+@media (min-width: 768px) {
+
+  .page-services .home-section,
+  .page-services .home-section.svp-plain,
+  .page-services .home-section.svp-alt {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .page-services .row.g-3 {
+    --bs-gutter-x: 12px;
+    --bs-gutter-y: 12px;
+  }
+
+  .page-services .row.g-3.g-lg-4 {
+    --bs-gutter-x: 14px;
+    --bs-gutter-y: 14px;
+  }
+}
+
+/* ---------- Section headings ---------- */
+.page-services .svp-head {
+  max-width: 680px;
+  margin: 0 auto 18px;
+}
+
+.page-services .svp-head h2 {
+  font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  margin: 2px 0 0;
+}
+
+.page-services .svp-head p {
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 6px auto 0;
+}
+
+.page-services .svp-head .eyebrow {
+  font-size: 11.5px;
+  letter-spacing: .1em;
+}
+
+/* ---------- Category head ---------- */
+.page-services .svp-cat-head {
+  gap: 12px 16px;
+  margin-bottom: 18px;
+}
+
+.page-services .svp-cat-ico {
+  flex: 0 0 48px;
+  height: 48px;
+  font-size: 19px;
+  border-radius: 14px;
+}
+
+.page-services .svp-cat-head h2 {
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.18;
+  margin: 0 0 3px;
+}
+
+.page-services .svp-cat-head p {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+/* ---------- Finder box ---------- */
+.page-services .svp-finder {
+  padding-top: 18px;
+  padding-bottom: 6px;
+}
+
+.page-services .svp-finder-box {
+  padding: clamp(14px, 2.5vw, 22px);
+  border-radius: 18px;
+}
+
+.page-services .svp-finder-box h2 {
+  font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+  line-height: 1.2;
+  margin: 0 0 2px;
+}
+
+.page-services .svp-finder-box>p:not(.svp-count) {
+  font-size: 13.5px;
+  margin: 0 0 10px;
+}
+
+.page-services .svp-search input {
+  height: 44px;
+  font-size: 14px;
+  border-radius: 12px;
+  padding: 0 42px;
+}
+
+.page-services .svp-chips {
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.page-services .svp-chip {
+  padding: 6px 13px;
+  font-size: 12.5px;
+}
+
+.page-services .svp-count {
+  font-size: 12.5px;
+  margin: 8px 0 0;
+}
+
+/* ---------- Category chips nav ---------- */
+.page-services .svp-catnav-inner {
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.page-services .svp-catlink {
+  padding: 8px 15px;
+  font-size: 13px;
+  min-height: 38px;
+}
+
+.page-services .svp-catlink i {
+  font-size: 12px;
+}
+
+/* ---------- Service grid + cards ---------- */
+.page-services .svp-grid {
+  gap: 14px;
+}
+
+.page-services .svp-item {
+  gap: 12px;
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.page-services .svp-item-ico {
+  width: 44px;
+  height: 44px;
+  font-size: 17px;
+  border-radius: 12px;
+}
+
+.page-services .svp-item h3 {
+  font-size: 15.5px;
+  line-height: 1.25;
+  margin: 0 0 5px;
+}
+
+.page-services .svp-item-tag {
+  font-size: 11px;
+  padding: 3px 9px;
+  margin-bottom: 6px;
+}
+
+.page-services .svp-item p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.page-services .svp-item-more,
+.page-services .svp-link {
+  font-size: 12.5px;
+}
+
+/* ---------- Compare table ---------- */
+.page-services .svp-table th {
+  padding: 12px 18px;
+  font-size: 11.5px;
+}
+
+.page-services .svp-table td {
+  padding: 14px 18px;
+  font-size: 13.5px;
+}
+
+/* ---------- Price & transit info cards ---------- */
+.page-services .svp-info {
+  padding: clamp(16px, 2.5vw, 22px);
+  border-radius: 14px;
+}
+
+.page-services .svp-info h3 {
+  font-size: 1.05rem;
+  margin: 0 0 12px;
+  gap: 8px;
+}
+
+.page-services .svp-info ul {
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.page-services .svp-info li {
+  font-size: 13.5px;
+  line-height: 1.45;
+  gap: 8px;
+}
+
+/* ---------- How it works steps ---------- */
+.page-services .svp-steps {
+  gap: 12px;
+}
+
+.page-services .svp-steps li {
+  padding: 18px 16px 16px;
+  border-radius: 14px;
+}
+
+.page-services .svp-steps li::before {
+  font-size: 11px;
+  top: 10px;
+  left: 14px;
+}
+
+.page-services .svp-step-ico {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+  margin: 0 auto 10px;
+}
+
+.page-services .svp-steps h3 {
+  font-size: 14.5px;
+  margin: 0 0 5px;
+}
+
+.page-services .svp-steps p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---------- Guidance cards (decision section) ---------- */
+.page-services .svp-guidance-grid {
+  gap: 16px;
+  margin-top: 22px;
+}
+
+.page-services .svp-guidance-card {
+  padding: clamp(16px, 2.4vw, 22px);
+  border-radius: 18px;
+  column-gap: 12px;
+  row-gap: 10px;
+}
+
+.page-services .svp-guidance-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 18px;
+}
+
+.page-services .svp-guidance-card h3 {
+  font-size: clamp(15px, 1.4vw, 16.5px);
+  line-height: 1.28;
+}
+
+.page-services .svp-guidance-card p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.page-services .svp-guidance-card a {
+  font-size: 12.5px;
+  gap: 7px;
+  min-height: 40px;
+}
+
+/* ---------- Next steps CTA ---------- */
+.page-services .svp-next-steps {
+  gap: clamp(20px, 3vw, 36px);
+  margin-top: clamp(28px, 4vw, 48px);
+  padding: clamp(20px, 3vw, 32px);
+  border-radius: 22px;
+}
+
+.page-services .svp-next-copy h3 {
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.2;
+  margin: 6px 0 10px;
+}
+
+.page-services .svp-next-copy p {
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.page-services .svp-next-links {
+  gap: 8px;
+}
+
+.page-services .svp-next-links>a {
+  padding: 13px 15px;
+  min-height: 52px;
+  border-radius: 13px;
+  gap: 11px;
+}
+
+.page-services .svp-next-links strong {
+  font-size: 14px;
+}
+
+.page-services .svp-next-links small {
+  font-size: 12.5px;
+}
+
+/* ---------- FAQ ---------- */
+.page-services #svpFaqLeft .accordion,
+.page-services #svpFaqRight .accordion {
+  gap: 8px;
+}
+
+.page-services .accordion-button {
+  padding: 12px 16px;
+  font-size: 13.5px;
+}
+
+.page-services .accordion-body {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ================================================================
+   MOBILE (<= 767px) — match About page compact density
+   ================================================================ */
+@media (max-width: 767px) {
+
+  .page-services .home-section,
+  .page-services .home-section.svp-plain,
+  .page-services .home-section.svp-alt {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .page-services .row.g-3,
+  .page-services .row.g-3.g-lg-4 {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 8px;
+  }
+
+  /* Section heading */
+  .page-services .svp-head {
+    text-align: left;
+    max-width: 100%;
+    margin: 0 0 10px;
+  }
+
+  .page-services .svp-head h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+  }
+
+  .page-services .svp-head p {
+    font-size: 13px;
+    line-height: 1.45;
+    margin-top: 4px;
+  }
+
+  /* Category head */
+  .page-services .svp-cat-head {
+    gap: 10px 12px;
+    margin-bottom: 14px;
+  }
+
+  .page-services .svp-cat-ico {
+    flex-basis: 42px;
+    height: 42px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .page-services .svp-cat-head h2 {
+    font-size: clamp(1.15rem, 5.2vw, 1.35rem);
+  }
+
+  .page-services .svp-cat-head p {
+    font-size: 13px;
+  }
+
+  /* Finder */
+  .page-services .svp-finder {
+    padding-top: 10px;
+    padding-bottom: 4px;
+  }
+
+  .page-services .svp-finder-box {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .page-services .svp-finder-box h2 {
+    font-size: clamp(1.15rem, 5.2vw, 1.4rem);
+  }
+
+  .page-services .svp-finder-box>p:not(.svp-count) {
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 0 0 10px;
+  }
+
+  .page-services .svp-search input {
+    height: 42px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .page-services .svp-chip {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Chips nav */
+  .page-services .svp-catnav-inner {
+    gap: 5px;
+    padding: 8px 0;
+  }
+
+  .page-services .svp-catlink {
+    padding: 7px 13px;
+    font-size: 12.5px;
+    min-height: 36px;
+  }
+
+  /* Grid + cards */
+  .page-services .svp-grid {
+    gap: 10px;
+  }
+
+  .page-services .svp-item {
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-services .svp-item-ico {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 11px;
+  }
+
+  .page-services .svp-item h3 {
+    font-size: 14.5px;
+  }
+
+  .page-services .svp-item p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-services .svp-item-more,
+  .page-services .svp-link {
+    font-size: 12.5px;
+  }
+
+  /* Info cards */
+  .page-services .svp-info {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-services .svp-info h3 {
+    font-size: 1rem;
+    margin: 0 0 10px;
+  }
+
+  .page-services .svp-info li {
+    font-size: 13px;
+  }
+
+  /* Steps — icon left, title + text on right (no number badge) */
+  .page-services .svp-steps {
+    gap: 8px;
+  }
+
+  .page-services .svp-steps li {
+    padding: 14px 14px 14px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 4px;
+    align-items: center;
+    text-align: left;
+  }
+
+  /* Number badge removed on mobile too */
+  .page-services .svp-steps li::before {
+    content: none;
+  }
+
+  .page-services .svp-step-ico {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .page-services .svp-steps h3 {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    font-size: 14.5px;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .page-services .svp-steps p {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    font-size: 12.5px;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Guidance cards */
+  .page-services .svp-guidance-grid {
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .page-services .svp-guidance-card {
+    padding: 14px;
+    border-radius: 14px;
+    column-gap: 10px;
+    row-gap: 8px;
+  }
+
+  .page-services .svp-guidance-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .page-services .svp-guidance-card h3 {
+    font-size: 14.5px;
+  }
+
+  .page-services .svp-guidance-card p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Next steps */
+  .page-services .svp-next-steps {
+    padding: 16px;
+    gap: 16px;
+    border-radius: 16px;
+    margin-top: 20px;
+  }
+
+  .page-services .svp-next-copy h3 {
+    font-size: clamp(1.15rem, 5.2vw, 1.35rem);
+    margin: 4px 0 8px;
+  }
+
+  .page-services .svp-next-copy p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .page-services .svp-next-links>a {
+    padding: 12px 12px;
+    min-height: 48px;
+    border-radius: 12px;
+    gap: 10px;
+  }
+
+  .page-services .svp-next-links strong {
+    font-size: 13.5px;
+  }
+
+  .page-services .svp-next-links small {
+    font-size: 12px;
+  }
+
+  /* FAQ */
+  .page-services #svpFaqLeft,
+  .page-services #svpFaqRight {
+    margin-bottom: 8px;
+  }
+
+  .page-services #svpFaqLeft .accordion-button,
+  .page-services #svpFaqRight .accordion-button {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .page-services #svpFaqLeft .accordion-body,
+  .page-services #svpFaqRight .accordion-body {
+    padding: 0 14px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- Very small phones (<= 380px) ---------- */
+@media (max-width: 380px) {
+
+  .page-services .svp-head h2,
+  .page-services .svp-cat-head h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-services .svp-head p,
+  .page-services .svp-cat-head p {
+    font-size: 12.5px;
+  }
+
+  .page-services .svp-finder-box {
+    padding: 12px;
+  }
+
+  /* Steps — tighter grid on very small phones */
+  .page-services .svp-steps li {
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 10px;
+    padding: 12px;
+  }
+
+  .page-services .svp-step-ico {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .page-services .svp-steps h3 {
+    font-size: 14px;
+  }
+
+  .page-services .svp-steps p {
+    font-size: 12px;
+  }
+
+  .page-services .svp-guidance-card {
+    padding: 12px;
+  }
+
+  .page-services .svp-guidance-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .page-services .svp-guidance-card h3 {
+    font-size: 14px;
+  }
+
+  .page-services .svp-guidance-card p {
+    font-size: 12.5px;
+  }
+
+  .page-services .svp-next-steps {
+    padding: 14px;
+    border-radius: 14px;
+  }
+}
+
+
+/* ===============================================================
+   INTERNATIONAL COURIER PAGE — COMPACT SPACING
+   (matches About page density; page isolated via .page-international-courier)
+   =============================================================== */
+
+/* ---------- Section vertical rhythm ---------- */
+@media (min-width: 768px) {
+  .page-international-courier .jp-section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .page-international-courier .jp-grid {
+    gap: 14px;
+  }
+
+  .page-international-courier .jp-grid-2 {
+    gap: 14px;
+  }
+
+  .page-international-courier .jp-split {
+    gap: 28px;
+  }
+
+  .page-international-courier .jp-split .jp-grid {
+    gap: 18px;
+  }
+}
+
+/* ---------- Section heads ---------- */
+.page-international-courier .jp-section-head {
+  max-width: 680px;
+  margin-bottom: 18px;
+}
+
+.page-international-courier .jp-section-head h2 {
+  font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  margin: 0 0 6px;
+}
+
+.page-international-courier .jp-section-head p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.page-international-courier .jp-kicker {
+  font-size: 11px;
+  letter-spacing: .1em;
+  margin-bottom: 5px;
+}
+
+/* ---------- Service cards (jp-svc-card) ---------- */
+.page-international-courier .jp-svc-grid {
+  gap: 14px;
+}
+
+.page-international-courier .jp-svc-card {
+  gap: 6px;
+  padding: 18px;
+  border-radius: 16px;
+}
+
+.page-international-courier .jp-svc-ico {
+  width: 42px;
+  height: 42px;
+  font-size: 17px;
+  border-radius: 12px;
+  margin-bottom: 2px;
+}
+
+.page-international-courier .jp-svc-tag {
+  font-size: 11px;
+  padding: 3px 9px;
+}
+
+.page-international-courier .jp-svc-card h3 {
+  font-size: 15.5px;
+  line-height: 1.25;
+}
+
+.page-international-courier .jp-svc-card p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 4px;
+}
+
+.page-international-courier .jp-svc-link {
+  font-size: 12.5px;
+  min-height: 38px;
+}
+
+/* ---------- Steps ---------- */
+.page-international-courier .jp-step {
+  padding-left: 46px;
+}
+
+.page-international-courier .jp-step-num {
+  width: 34px;
+  height: 34px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+.page-international-courier .jp-step h3 {
+  font-size: 14.5px;
+  margin: 2px 0 3px;
+}
+
+.page-international-courier .jp-step p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---------- Callout ---------- */
+.page-international-courier .jp-callout {
+  padding: 18px;
+  border-radius: 16px;
+  gap: 6px;
+}
+
+.page-international-courier .jp-callout strong {
+  font-size: 14.5px;
+  margin-bottom: 4px;
+}
+
+.page-international-courier .jp-callout span {
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.page-international-courier .jp-callout .jp-icon {
+  width: 42px;
+  height: 42px;
+  font-size: 17px;
+  margin-bottom: 2px;
+}
+
+/* ---------- Detail cards (checklist) ---------- */
+.page-international-courier .jp-service-detail-grid {
+  gap: 14px;
+}
+
+.page-international-courier .jp-service-detail-card {
+  padding: clamp(14px, 2vw, 20px);
+  border-radius: 16px;
+}
+
+.page-international-courier .jp-service-detail-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+.page-international-courier .jp-service-detail-card h3 {
+  font-size: 14.5px;
+  line-height: 1.28;
+  margin: 10px 0 6px;
+}
+
+.page-international-courier .jp-service-detail-card p {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ---------- Service links ---------- */
+.page-international-courier .jp-service-link {
+  padding: 14px 16px;
+  border-radius: 13px;
+  gap: 12px;
+}
+
+.page-international-courier .jp-service-link strong {
+  font-size: 13.5px;
+}
+
+.page-international-courier .jp-service-link span {
+  font-size: 12.5px;
+}
+
+.page-international-courier .jp-service-next-links {
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* ---------- FAQ ---------- */
+.page-international-courier .jp-service-faq-wrap {
+  margin-top: clamp(28px, 4vw, 46px);
+}
+
+.page-international-courier .jp-service-faq summary {
+  padding: 13px 44px 13px 16px;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.page-international-courier .jp-service-faq summary::after {
+  font-size: 20px;
+  right: 16px;
+}
+
+.page-international-courier .jp-service-faq p {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.page-international-courier .jp-service-faq-list {
+  gap: 8px 12px;
+}
+
+.page-international-courier .jp-service-faq-col {
+  gap: 8px;
+}
+
+/* ---------- Disclaimer ---------- */
+.page-international-courier .jp-service-disclaimer {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  gap: 8px;
+}
+
+/* ---------- CTA buttons ---------- */
+.page-international-courier .jp-service-guidance-actions {
+  margin-top: 16px;
+  gap: 10px;
+}
+
+.page-international-courier .jp-btn {
+  min-height: 42px;
+  padding: 10px 16px;
+  font-size: 12.5px;
+  border-radius: 9px;
+}
+
+.page-international-courier .jp-hero-actions {
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* ---------- Trust strip ---------- */
+.page-international-courier .trust-item strong {
+  font-size: clamp(16px, 2.2vw, 20px);
+}
+
+.page-international-courier .trust-item small {
+  font-size: 12px;
+}
+
+.page-international-courier .trust-item i {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+}
+
+/* ---------- Final CTA ---------- */
+.page-international-courier .jp-cta {
+  border-radius: 22px;
+  padding: clamp(22px, 4vw, 38px);
+}
+
+.page-international-courier .jp-cta h2 {
+  font-size: clamp(1.3rem, 2.4vw, 1.75rem);
+  margin: 0 0 7px;
+}
+
+.page-international-courier .jp-cta p {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+/* ================================================================
+   MOBILE (<= 767px) — match About page compact density
+   ================================================================ */
+@media (max-width: 767px) {
+  .page-international-courier .jp-section {
+    padding: 12px 0;
+  }
+
+  .page-international-courier .jp-grid,
+  .page-international-courier .jp-grid-2 {
+    gap: 10px;
+  }
+
+  .page-international-courier .jp-split {
+    gap: 16px;
+  }
+
+  .page-international-courier .jp-split .jp-grid {
+    gap: 10px;
+  }
+
+  /* Section heads */
+  .page-international-courier .jp-section-head {
+    max-width: 100%;
+    margin-bottom: 12px;
+    text-align: left;
+  }
+
+  .page-international-courier .jp-section-head h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    margin: 0 0 5px;
+  }
+
+  .page-international-courier .jp-section-head p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .page-international-courier .jp-kicker {
+    font-size: 10.5px;
+    margin-bottom: 4px;
+  }
+
+  /* Service cards — icon on left, compact */
+  .page-international-courier .jp-svc-grid {
+    gap: 10px;
+  }
+
+  .page-international-courier .jp-svc-card,
+  .page-international-courier .jp-svc-card:last-child {
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 4px;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-international-courier .jp-svc-card>.jp-svc-ico {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+  .page-international-courier .jp-svc-card h3 {
+    font-size: 14.5px;
+  }
+
+  .page-international-courier .jp-svc-card p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-international-courier .jp-svc-tag {
+    font-size: 10.5px;
+    padding: 2px 8px;
+  }
+
+  .page-international-courier .jp-svc-link {
+    font-size: 12.5px;
+    min-height: 36px;
+  }
+
+  /* Steps */
+  .page-international-courier .jp-step {
+    padding-left: 42px;
+  }
+
+  .page-international-courier .jp-step:before {
+    left: 16px;
+    top: 40px;
+    bottom: -18px;
+  }
+
+  .page-international-courier .jp-step-num {
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
+    border-radius: 9px;
+  }
+
+  .page-international-courier .jp-step h3 {
+    font-size: 14px;
+    margin: 2px 0 2px;
+  }
+
+  .page-international-courier .jp-step p {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  /* Callout */
+  .page-international-courier .jp-callout {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .page-international-courier .jp-callout strong {
+    font-size: 14px;
+  }
+
+  .page-international-courier .jp-callout span {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .page-international-courier .jp-callout .jp-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+  /* Detail cards — icon + title on SAME LINE, text below */
+  .page-international-courier .jp-service-detail-grid {
+    gap: 10px;
+  }
+
+  .page-international-courier .jp-service-detail-card {
+    padding: 14px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 8px;
+    align-items: center;
+  }
+
+  .page-international-courier .jp-service-detail-icon {
+    grid-column: 1;
+    grid-row: 1;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .page-international-courier .jp-service-detail-card h3 {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 14.5px;
+    line-height: 1.25;
+    margin: 0;
+    align-self: center;
+  }
+
+  .page-international-courier .jp-service-detail-card p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Service links */
+  .page-international-courier .jp-service-link {
+    padding: 12px 14px;
+    border-radius: 11px;
+    gap: 10px;
+  }
+
+  .page-international-courier .jp-service-link strong {
+    font-size: 13px;
+  }
+
+  .page-international-courier .jp-service-link span {
+    font-size: 12px;
+  }
+
+  .page-international-courier .jp-service-next-links {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  /* FAQ */
+  .page-international-courier .jp-service-faq-wrap {
+    margin-top: 22px;
+  }
+
+  .page-international-courier .jp-service-faq-list {
+    gap: 8px;
+  }
+
+  .page-international-courier .jp-service-faq-col {
+    gap: 8px;
+  }
+
+  .page-international-courier .jp-service-faq summary {
+    padding: 12px 40px 12px 14px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .page-international-courier .jp-service-faq summary::after {
+    font-size: 18px;
+    right: 14px;
+  }
+
+  .page-international-courier .jp-service-faq p {
+    padding: 0 14px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  /* Disclaimer */
+  .page-international-courier .jp-service-disclaimer {
+    padding: 11px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    gap: 7px;
+  }
+
+  /* CTA buttons */
+  .page-international-courier .jp-service-guidance-actions {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .page-international-courier .jp-btn {
+    min-height: 40px;
+    padding: 9px 14px;
+    font-size: 12.5px;
+    border-radius: 8px;
+  }
+
+  .page-international-courier .jp-hero-actions {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  /* Trust strip */
+  .page-international-courier .trust-item {
+    column-gap: 10px;
+    padding: 6px 4px 6px 6px;
+  }
+
+  .page-international-courier .trust-item i {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .page-international-courier .trust-item strong {
+    font-size: 18px;
+  }
+
+  .page-international-courier .trust-item small {
+    font-size: 11.5px;
+  }
+
+  /* Final CTA */
+  .page-international-courier .jp-cta {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .page-international-courier .jp-cta h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    margin: 0 0 5px;
+  }
+
+  .page-international-courier .jp-cta p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  /* Hero */
+  .page-international-courier .hero.page-hero {
+    padding: 28px 0 26px;
+  }
+
+  .page-international-courier .page-crumb {
+    margin-bottom: 12px;
+    padding: 5px 12px;
+    font-size: 11.5px;
+  }
+
+  .page-international-courier .page-hero h1 {
+    font-size: clamp(1.15rem, 5.2vw, 1.4rem);
+    margin: 0 auto 8px;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Very small phones (<= 380px) ---------- */
+@media (max-width: 380px) {
+  .page-international-courier .jp-section-head h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-international-courier .jp-section-head p {
+    font-size: 12.5px;
+  }
+
+  .page-international-courier .jp-svc-card,
+  .page-international-courier .jp-svc-card:last-child {
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 12px;
+  }
+
+  .page-international-courier .jp-svc-card>.jp-svc-ico {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .page-international-courier .jp-svc-card h3 {
+    font-size: 14px;
+  }
+
+  .page-international-courier .jp-svc-card p {
+    font-size: 12px;
+  }
+
+  /* Detail cards — tighter grid on very small phones */
+  .page-international-courier .jp-service-detail-card {
+    padding: 12px;
+    grid-template-columns: 32px minmax(0, 1fr);
+    column-gap: 8px;
+    row-gap: 6px;
+  }
+
+  .page-international-courier .jp-service-detail-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+    border-radius: 9px;
+  }
+
+  .page-international-courier .jp-service-detail-card h3 {
+    font-size: 14px;
+  }
+
+  .page-international-courier .jp-service-detail-card p {
+    font-size: 12px;
+  }
+
+  .page-international-courier .jp-cta {
+    padding: 16px;
   }
 }
