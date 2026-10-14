@@ -1828,3 +1828,993 @@
     font-size: 12.5px;
   }
 }
+
+
+
+/* ===============================================================
+   INDUSTRY DETAIL PAGES — COMPACT SPACING
+   (Garments & Textile + all pages using .industry-detail)
+   Matches Services / International Courier density
+   =============================================================== */
+
+/* ---------- Section rhythm ---------- */
+.industry-detail .ind-detail-section {
+  padding: 32px 0;
+}
+
+.industry-detail .ind-detail-section .row {
+  --bs-gutter-x: 18px;
+  --bs-gutter-y: 14px;
+}
+
+/* ---------- Headings + text ---------- */
+.industry-detail .ind-detail-section h2 {
+  font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+  line-height: 1.18;
+  letter-spacing: -.02em;
+  margin: 6px 0 10px;
+}
+
+.industry-detail .ind-detail-section p {
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.industry-detail .ind-lead {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.industry-detail .ind-section-eyebrow {
+  font-size: 11px;
+  letter-spacing: .1em;
+  margin-bottom: 5px;
+}
+
+.industry-detail .ind-section-heading {
+  max-width: 680px;
+  margin-bottom: 18px;
+}
+
+/* ---------- Cards (audience / process / info / cost) ---------- */
+.industry-detail .ind-audience-card,
+.industry-detail .ind-process-card,
+.industry-detail .ind-info-card {
+  padding: clamp(16px, 2vw, 22px);
+  border-radius: 16px;
+}
+
+.industry-detail .ind-card-icon,
+.industry-detail .ind-small-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+.industry-detail .ind-audience-card h3 {
+  font-size: 17px;
+  margin: 12px 0 6px;
+}
+
+.industry-detail .ind-check-list li {
+  padding: 7px 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.industry-detail .ind-info-card h2 {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.industry-detail .ind-text-link {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.industry-detail .ind-cost-card {
+  padding: 16px;
+  border-radius: 13px;
+}
+
+.industry-detail .ind-cost-card h3 {
+  font-size: 15px;
+  margin: 10px 0 6px;
+}
+
+.industry-detail .ind-cost-card p {
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ---------- Challenges ---------- */
+.industry-detail .ind-challenge {
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.industry-detail .ind-number {
+  width: 34px;
+  height: 34px;
+  font-size: 11px;
+  border-radius: 10px;
+}
+
+.industry-detail .ind-challenge h3 {
+  font-size: 15.5px;
+  line-height: 1.25;
+  margin: 12px 0 6px;
+}
+
+.industry-detail .ind-challenge p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---------- Service tiles ---------- */
+.industry-detail .ind-service-tile {
+  min-height: 62px;
+  padding: 10px 13px;
+  gap: 10px;
+  font-size: 13.5px;
+  border-radius: 12px;
+}
+
+.industry-detail .ind-service-icon {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.industry-detail .ind-inline-note,
+.industry-detail .ind-destination-help {
+  padding: 11px 13px;
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 10px;
+}
+
+/* ---------- Table ---------- */
+.industry-detail .ind-table thead th {
+  padding: 11px 14px;
+  font-size: 12px;
+}
+
+.industry-detail .ind-table td {
+  padding: 11px 14px;
+  font-size: 13.5px;
+}
+
+/* ---------- Bullet + process lists ---------- */
+.industry-detail .ind-bullet-list li {
+  padding: 7px 0 7px 22px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.industry-detail .ind-bullet-list li:before {
+  top: 13px;
+  width: 7px;
+  height: 7px;
+}
+
+.industry-detail .ind-process-card h3 {
+  font-size: 18px;
+  margin: 8px 0 12px;
+}
+
+.industry-detail .ind-process-list li {
+  gap: 11px;
+  padding: 9px 0;
+}
+
+.industry-detail .ind-process-list li>span {
+  flex: 0 0 32px;
+  height: 32px;
+  font-size: 10.5px;
+  border-radius: 9px;
+}
+
+.industry-detail .ind-process-list strong {
+  font-size: 13.5px;
+}
+
+.industry-detail .ind-process-list p {
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+/* ---------- Destinations ---------- */
+.industry-detail .ind-destinations {
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.industry-detail .ind-destination-link {
+  padding: 8px 12px;
+  font-size: 12.5px;
+  border-radius: 9px;
+}
+
+/* ---------- Business panel + final CTA ---------- */
+.industry-detail .ind-business-panel {
+  gap: 16px;
+  padding: clamp(18px, 3vw, 26px);
+  border-radius: 16px;
+}
+
+.industry-detail .ind-business-symbol {
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  border-radius: 14px;
+}
+
+.industry-detail .ind-business-copy h2 {
+  margin: 6px 0;
+}
+
+.industry-detail .ind-detail-cta,
+.industry-detail .ind-detail-secondary {
+  padding: 11px 16px;
+  font-size: 13px;
+  border-radius: 9px;
+}
+
+.industry-detail .ind-detail-final {
+  gap: 18px;
+  padding: clamp(18px, 3vw, 26px);
+  border-radius: 16px;
+}
+
+.industry-detail .ind-detail-final h2 {
+  margin: 6px 0;
+}
+
+.industry-detail .ind-detail-disclaimer {
+  margin-top: 12px;
+  font-size: 11px !important;
+  line-height: 1.5;
+}
+
+/* ---------- Related + FAQ ---------- */
+.industry-detail .ind-related-grid {
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.industry-detail .ind-related-link {
+  padding: 12px 14px;
+  font-size: 12.5px;
+  border-radius: 11px;
+}
+
+.industry-detail .ind-faq-list {
+  gap: 8px 12px;
+}
+
+.industry-detail .ind-faq-col {
+  gap: 8px;
+}
+
+.industry-detail .ind-faq {
+  border-radius: 11px;
+}
+
+.industry-detail .ind-faq summary {
+  padding: 13px 44px 13px 16px;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.industry-detail .ind-faq summary:after {
+  right: 14px;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+}
+
+.industry-detail .ind-faq p {
+  padding: 0 16px 14px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* ================================================================
+   MOBILE (<= 767px)
+   ================================================================ */
+@media (max-width: 767px) {
+
+  .industry-detail .ind-detail-section {
+    padding: 12px 0;
+  }
+
+  .industry-detail .ind-detail-section .row {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 8px;
+  }
+
+  .industry-detail .ind-detail-section h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    margin: 4px 0 6px;
+  }
+
+  .industry-detail .ind-detail-section p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .industry-detail .ind-lead {
+    font-size: 14px;
+  }
+
+  .industry-detail .ind-section-eyebrow {
+    font-size: 10.5px;
+    margin-bottom: 4px;
+  }
+
+  .industry-detail .ind-section-heading {
+    max-width: 100%;
+    margin-bottom: 12px;
+  }
+
+  /* Cards */
+  .industry-detail .ind-audience-card,
+  .industry-detail .ind-process-card,
+  .industry-detail .ind-info-card {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .industry-detail .ind-audience-card h3 {
+    font-size: 15.5px;
+    margin: 10px 0 4px;
+  }
+
+  .industry-detail .ind-check-list li {
+    padding: 6px 0;
+    font-size: 13px;
+  }
+
+  .industry-detail .ind-info-card h2 {
+    font-size: 16.5px;
+    margin: 6px 0;
+  }
+
+  .industry-detail .ind-cost-card {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .industry-detail .ind-cost-card.mt-3 {
+    margin-top: 8px !important;
+  }
+
+  /* Challenge: number + title on one line, text below */
+  .industry-detail .ind-challenge {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .industry-detail .ind-challenge .ind-number {
+    grid-column: 1;
+    grid-row: 1;
+    width: 34px;
+    height: 34px;
+  }
+
+  .industry-detail .ind-challenge h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-size: 14.5px;
+  }
+
+  .industry-detail .ind-challenge p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  /* Service tiles */
+  .industry-detail .ind-service-tile {
+    min-height: 52px;
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  .industry-detail .ind-service-icon {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .industry-detail .ind-inline-note,
+  .industry-detail .ind-destination-help {
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 11.5px;
+  }
+
+  /* Table cards */
+  .industry-detail .ind-table tr {
+    margin-bottom: 6px;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+
+  .industry-detail .ind-table td {
+    padding: 4px 0;
+    font-size: 13px;
+  }
+
+  /* Lists */
+  .industry-detail .ind-bullet-list li {
+    padding: 6px 0 6px 20px;
+    font-size: 13px;
+  }
+
+  .industry-detail .ind-bullet-list li:before {
+    top: 12px;
+  }
+
+  .industry-detail .ind-process-card h3 {
+    font-size: 16px;
+    margin: 6px 0 8px;
+  }
+
+  .industry-detail .ind-process-list li {
+    gap: 10px;
+    padding: 8px 0;
+  }
+
+  .industry-detail .ind-process-list li>span {
+    flex-basis: 30px;
+    height: 30px;
+  }
+
+  .industry-detail .ind-process-list strong {
+    font-size: 13px;
+  }
+
+  .industry-detail .ind-process-list p {
+    font-size: 12px;
+  }
+
+  /* Destinations */
+  .industry-detail .ind-destinations {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .industry-detail .ind-destination-link {
+    padding: 7px 11px;
+    font-size: 12px;
+  }
+
+  /* Business panel + final CTA */
+  .industry-detail .ind-business-panel {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .industry-detail .ind-business-symbol {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+  }
+
+  .industry-detail .ind-business-panel .ind-detail-cta {
+    margin: 12px 0 0;
+    width: 100%;
+  }
+
+  .industry-detail .ind-detail-final {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .industry-detail .ind-detail-final .ind-detail-cta {
+    margin-top: 12px;
+    width: 100%;
+  }
+
+  .industry-detail .ind-detail-cta,
+  .industry-detail .ind-detail-secondary {
+    min-height: 42px;
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+
+  .industry-detail .ind-detail-disclaimer {
+    margin-top: 10px;
+    font-size: 10.5px !important;
+  }
+
+  /* Related: 2 per row */
+  .industry-detail .ind-related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .industry-detail .ind-related-link {
+    padding: 10px 11px;
+    font-size: 12px;
+    border-radius: 10px;
+  }
+
+  /* FAQ */
+  .industry-detail .ind-faq-list {
+    gap: 8px;
+  }
+
+  .industry-detail .ind-faq summary {
+    padding: 12px 40px 12px 14px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .industry-detail .ind-faq summary:after {
+    right: 12px;
+  }
+
+  .industry-detail .ind-faq p {
+    padding: 0 14px 12px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+}
+
+/* ---------- Very small phones (<= 380px) ---------- */
+@media (max-width: 380px) {
+
+  .industry-detail .ind-detail-section h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .industry-detail .ind-detail-section p {
+    font-size: 12.5px;
+  }
+
+  .industry-detail .ind-challenge {
+    grid-template-columns: 30px minmax(0, 1fr);
+    column-gap: 8px;
+    padding: 12px;
+  }
+
+  .industry-detail .ind-challenge .ind-number {
+    width: 30px;
+    height: 30px;
+  }
+
+  .industry-detail .ind-challenge h3 {
+    font-size: 14px;
+  }
+
+  .industry-detail .ind-challenge p {
+    font-size: 12px;
+  }
+
+  .industry-detail .ind-related-link {
+    font-size: 11.5px;
+    padding: 9px 10px;
+  }
+}
+
+
+/* ===============================================================
+   INDUSTRIES PAGE — COMPACT SPACING (matches Services page density)
+   Desktop/tablet first, then mobile for sections that had no mobile rules
+   =============================================================== */
+
+/* Fix: step-number circle from the detail-page CSS leaked onto this page */
+.page-industries .ind-steps li::before {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  display: block;
+}
+
+/* FAQ cards: separate cards with small gap (same as Services page) */
+.page-industries #indFaqLeft .accordion,
+.page-industries #indFaqRight .accordion {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+/* ================================================================
+   DESKTOP + TABLET (>= 768px)
+   ================================================================ */
+@media (min-width: 768px) {
+
+  /* ---------- Section rhythm ---------- */
+  .page-industries .home-section,
+  .page-industries .home-section.ind-plain,
+  .page-industries .home-section.ind-alt {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .page-industries .home-section.ind-finder {
+    padding-top: 18px;
+    padding-bottom: 6px;
+  }
+
+  .page-industries .home-section.ind-alt[aria-label="Industries"] {
+    padding-top: 12px;
+  }
+
+  .page-industries .home-section .row.g-4 {
+    --bs-gutter-x: 18px;
+    --bs-gutter-y: 14px;
+  }
+
+  /* ---------- Section headings ---------- */
+  .page-industries .ind-head {
+    max-width: 680px;
+    margin: 0 auto 18px;
+  }
+
+  .page-industries .ind-head h2 {
+    font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 2px 0 0;
+  }
+
+  .page-industries .ind-head p {
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin: 6px auto 0;
+  }
+
+  .page-industries .ind-head .eyebrow {
+    font-size: 11.5px;
+    letter-spacing: .1em;
+  }
+
+  /* ---------- Finder box ---------- */
+  .page-industries .ind-box {
+    padding: clamp(14px, 2.5vw, 22px);
+    border-radius: 18px;
+  }
+
+  .page-industries .ind-box h2 {
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+    line-height: 1.2;
+    margin: 0 0 2px;
+  }
+
+  .page-industries .ind-box>h2+p {
+    font-size: 13.5px;
+    margin: 0 0 10px;
+  }
+
+  .page-industries .ind-search input {
+    height: 44px;
+    border-radius: 12px;
+    padding: 0 42px;
+  }
+
+  .page-industries .ind-row-label {
+    margin: 10px 0 5px;
+    font-size: 11px;
+  }
+
+  .page-industries .ind-row {
+    gap: 6px;
+  }
+
+  .page-industries .ind-tab,
+  .page-industries .ind-need {
+    padding: 6px 13px;
+    font-size: 12.5px;
+  }
+
+  .page-industries .ind-count {
+    margin: 8px 0 0;
+    font-size: 12.5px;
+  }
+
+  /* ---------- Industry cards ---------- */
+  .page-industries .ind-grid {
+    gap: 14px;
+  }
+
+  .page-industries .ind-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .page-industries .ind-top {
+    margin-bottom: 10px;
+  }
+
+  .page-industries .ind-ico {
+    width: 44px;
+    height: 44px;
+    font-size: 17px;
+    border-radius: 12px;
+  }
+
+  .page-industries .ind-tag {
+    padding: 3px 9px;
+    font-size: 10.5px;
+  }
+
+  .page-industries .ind-card h3 {
+    font-size: 15.5px;
+    line-height: 1.25;
+    margin: 0 0 5px;
+  }
+
+  .page-industries .ind-card p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 0 10px;
+  }
+
+  .page-industries .ind-needs {
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+
+  .page-industries .ind-needs span {
+    padding: 3px 9px;
+    font-size: 11px;
+  }
+
+  .page-industries .ind-more {
+    font-size: 12.5px;
+  }
+
+  /* ---------- Empty state ---------- */
+  .page-industries .ind-empty {
+    padding: 20px 16px;
+  }
+
+  .page-industries .ind-empty>i {
+    font-size: 26px;
+  }
+
+  .page-industries .ind-empty h3 {
+    font-size: 1rem;
+    margin: 8px 0 3px;
+  }
+
+  .page-industries .ind-empty p {
+    font-size: 13.5px;
+    margin: 0 0 12px;
+  }
+
+  /* ---------- Support + steps cards ---------- */
+  .page-industries .ind-support,
+  .page-industries .ind-steps {
+    gap: 12px;
+  }
+
+  .page-industries .ind-support li,
+  .page-industries .ind-steps li {
+    padding: 18px 16px 16px;
+    border-radius: 14px;
+  }
+
+  .page-industries .ind-s-ico {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+    margin: 0 auto 10px;
+  }
+
+  .page-industries .ind-support h3,
+  .page-industries .ind-steps h3 {
+    font-size: 14.5px;
+    margin: 0 0 5px;
+  }
+
+  .page-industries .ind-support p,
+  .page-industries .ind-steps p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .page-industries .ind-steps li::before {
+    top: 10px;
+    left: 14px;
+    font-size: 11px;
+  }
+
+  .page-industries .ind-support+p {
+    margin-top: 14px !important;
+  }
+
+  /* ---------- Service guidance table ---------- */
+  .page-industries .ind-table thead th {
+    padding: 11px 14px;
+    font-size: 12px;
+  }
+
+  .page-industries .ind-table td {
+    padding: 11px 14px;
+    font-size: 13.5px;
+  }
+
+  .page-industries .ind-inline-note {
+    padding: 11px 13px;
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 10px;
+  }
+
+  /* ---------- Destinations + Resources ---------- */
+  .page-industries .home-section .row>[class*="col-"]>h2 {
+    font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 6px 0 10px;
+  }
+
+  .page-industries .home-section .row>[class*="col-"]>p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin: 0 0 10px;
+  }
+
+  .page-industries .ind-destinations {
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .page-industries .ind-destination-link {
+    padding: 8px 12px;
+    font-size: 12.5px;
+    border-radius: 9px;
+  }
+
+  /* ---------- Business panel ---------- */
+  .page-industries .ind-business-panel {
+    gap: 16px;
+    padding: clamp(18px, 3vw, 26px);
+    border-radius: 16px;
+  }
+
+  .page-industries .ind-business-symbol {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    border-radius: 14px;
+  }
+
+  .page-industries .ind-business-copy h2 {
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    line-height: 1.2;
+    margin: 6px 0;
+  }
+
+  .page-industries .ind-business-copy p {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  .page-industries .ind-business-panel .ind-detail-cta {
+    padding: 11px 16px;
+    font-size: 13px;
+    border-radius: 9px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .page-industries .accordion-button {
+    padding: 12px 16px;
+    font-size: 13.5px;
+  }
+
+  .page-industries .accordion-body {
+    padding: 0 16px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+}
+
+/* ================================================================
+   MOBILE (<= 767px): only sections that had no mobile rules
+   ================================================================ */
+@media (max-width: 767px) {
+
+  .page-industries .home-section .row.g-4 {
+    --bs-gutter-x: 8px;
+    --bs-gutter-y: 12px;
+  }
+
+  /* Table cards */
+  .page-industries .ind-table tr {
+    margin-bottom: 6px;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+
+  .page-industries .ind-table td {
+    padding: 4px 0;
+    font-size: 13px;
+  }
+
+  .page-industries .ind-inline-note {
+    padding: 10px 12px;
+    margin-top: 10px;
+    font-size: 11.5px;
+  }
+
+  /* Destinations + Resources */
+  .page-industries .home-section .row>[class*="col-"]>h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+    letter-spacing: -.02em;
+    margin: 4px 0 6px;
+  }
+
+  .page-industries .home-section .row>[class*="col-"]>p {
+    font-size: 13px;
+    line-height: 1.45;
+    margin: 0 0 8px;
+  }
+
+  .page-industries .ind-destinations {
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .page-industries .ind-destination-link {
+    padding: 7px 11px;
+    font-size: 12px;
+  }
+
+  /* Business panel */
+  .page-industries .ind-business-panel {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .page-industries .ind-business-symbol {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+  }
+
+  .page-industries .ind-business-copy h2 {
+    font-size: clamp(1.15rem, 5.2vw, 1.35rem);
+    margin: 4px 0 6px;
+  }
+
+  .page-industries .ind-business-copy p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .page-industries .ind-business-panel .ind-detail-cta {
+    width: 100%;
+    min-height: 42px;
+    margin: 12px 0 0;
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,1908 @@
+/* ===============================================================
+   JP EXPRESS — PRICING PAGE STYLES
+   Page isolation: html.page-pricing
+   Self-contained: fully styles the pricing calculator page
+   =============================================================== */
+
+/* ---------- Page resets & tokens ---------- */
+.page-pricing [hidden] {
+    display: none !important;
+}
+
+.page-pricing .home-section.prc-plain {
+    background: var(--jp-white);
+}
+
+.page-pricing .home-section.prc-alt {
+    background: var(--jp-bg-light);
+}
+
+/* ---------- Section headings (centered) ---------- */
+.page-pricing .prc-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 28px;
+}
+
+.page-pricing .prc-head h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.45rem, 3.4vw, 2rem);
+    line-height: 1.15;
+    color: var(--jp-heading-color);
+    margin: 4px 0 0;
+}
+
+.page-pricing .prc-head p {
+    margin: 8px auto 0;
+    color: var(--jp-text-muted);
+    font-size: 15px;
+}
+
+/* ---------- Trust strip ---------- */
+.page-pricing .prc-trust {
+    position: relative;
+    z-index: 3;
+}
+
+.page-pricing .prc-trust .trust-item strong {
+    font-size: clamp(17px, 2.4vw, 22px);
+}
+
+/* ---------- Calculator layout ---------- */
+.page-pricing .prc-calc {
+    scroll-margin-top: calc(var(--jp-header-h, 86px) + 16px);
+}
+
+.page-pricing .prc-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* ---------- Form card ---------- */
+.page-pricing .prc-card {
+    background: var(--jp-white);
+    border: 1px solid var(--jp-border-muted);
+    border-radius: 18px;
+    box-shadow: var(--jp-shadow-lg);
+    padding: clamp(18px, 3vw, 28px);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-pricing .prc-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--jp-orange), var(--jp-navy));
+}
+
+.page-pricing .prc-card h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    color: var(--jp-heading-color);
+    margin: 4px 0 4px;
+}
+
+.page-pricing .prc-card>p {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: var(--jp-text-muted);
+}
+
+/* ---------- Trust note under hero ---------- */
+.page-pricing .prc-trustnote {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 0 0 18px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--jp-text-muted-dark);
+    background: var(--jp-white);
+    border: 1px solid var(--jp-border-muted);
+    border-left: 4px solid var(--jp-orange);
+    border-radius: 12px;
+}
+
+.page-pricing .prc-trustnote i {
+    margin-top: 3px;
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-trustnote strong {
+    color: var(--jp-navy);
+}
+
+/* ---------- Card head ---------- */
+.page-pricing .prc-card-head {
+    margin-bottom: 18px;
+}
+
+.page-pricing .prc-card-head p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--jp-text-muted);
+}
+
+/* ---------- Blocks & steps ---------- */
+.page-pricing .prc-block {
+    margin: 0 0 20px;
+    padding: 0;
+    border: 0;
+}
+
+.page-pricing .prc-step,
+.page-pricing .prc-modes legend {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 10px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-step b,
+.page-pricing .prc-modes legend b {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    letter-spacing: 0;
+    color: var(--jp-white);
+    background: var(--jp-navy);
+}
+
+/* ---------- Fields ---------- */
+.page-pricing .prc-fields {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.page-pricing .prc-field label,
+.page-pricing .prc-dims-label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--jp-navy);
+}
+
+.page-pricing .prc-field input,
+.page-pricing .prc-field select {
+    width: 100%;
+    height: 50px;
+    padding: 0 14px;
+    font-size: 16px;
+    color: var(--jp-ink);
+    background: var(--jp-bg-light);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 12px;
+    outline: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.page-pricing .prc-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23566' stroke-width='2'%3E%3Cpath d='m1 1 5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.page-pricing .prc-field input:focus,
+.page-pricing .prc-field select:focus {
+    background-color: var(--jp-white);
+    border-color: var(--jp-orange);
+    box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+.page-pricing .prc-field input[aria-invalid="true"],
+.page-pricing .prc-field select[aria-invalid="true"] {
+    border-color: #B42318;
+    background-color: #FEF3F2;
+}
+
+/* ---------- Input + unit grid ---------- */
+.page-pricing .prc-ig {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 96px;
+}
+
+.page-pricing .prc-ig input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+}
+
+.page-pricing .prc-field .prc-ig select {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0 30px 0 14px;
+    font-weight: 800;
+    color: var(--jp-navy);
+    background-color: var(--jp-white);
+}
+
+/* ---------- Modes (Document/Parcel/Commercial/Freight) ---------- */
+.page-pricing .prc-modes {
+    border: 0;
+    padding: 0;
+    margin: 0 0 14px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.page-pricing .prc-modes legend {
+    float: none;
+    width: 100%;
+    padding: 0;
+    margin: 0 0 8px;
+}
+
+.page-pricing .prc-mode {
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+
+.page-pricing .prc-mode input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+}
+
+.page-pricing .prc-mode span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--jp-navy);
+    background: var(--jp-bg-light);
+    border: 1.5px solid var(--jp-border-muted);
+    transition: all .2s ease;
+}
+
+.page-pricing .prc-mode:hover span {
+    border-color: var(--jp-orange);
+}
+
+.page-pricing .prc-mode input:checked+span {
+    background: var(--jp-navy);
+    border-color: var(--jp-navy);
+    color: var(--jp-white);
+}
+
+.page-pricing .prc-mode input:focus-visible+span {
+    outline: 3px solid rgba(242, 99, 35, .45);
+    outline-offset: 2px;
+}
+
+.page-pricing .prc-hint {
+    margin: 0 0 20px;
+    padding-left: 2px;
+    font-size: 13px;
+    color: var(--jp-text-muted);
+}
+
+/* ---------- Dimensions block ---------- */
+.page-pricing .prc-dims {
+    margin-top: 16px;
+    padding: 14px;
+    background: var(--jp-bg-light);
+    border: 1px dashed var(--jp-border-hover-2);
+    border-radius: 14px;
+}
+
+.page-pricing .prc-dims-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.page-pricing .prc-dims-head .prc-dims-label {
+    margin: 0;
+}
+
+.page-pricing .prc-mini {
+    height: 36px;
+    padding: 0 28px 0 12px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--jp-navy);
+    background: var(--jp-white);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 10px;
+}
+
+.page-pricing .prc-why {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0 0;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--jp-text-muted);
+}
+
+.page-pricing .prc-why i {
+    margin-top: 2px;
+    color: var(--jp-orange);
+}
+
+/* ---------- Dimension row: L / W / H / Pieces ---------- */
+.page-pricing .prc-dim-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.page-pricing .prc-dim-row .prc-field {
+    min-width: 0;
+}
+
+.page-pricing .prc-dim-row .prc-field label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.page-pricing .prc-dim-row .prc-pcs {
+    margin-top: 0;
+    max-width: none;
+}
+
+.page-pricing .prc-dim-row input::-webkit-outer-spin-button,
+.page-pricing .prc-dim-row input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.page-pricing .prc-dim-row input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* ---------- Pieces stepper ---------- */
+.page-pricing .prc-num {
+    display: flex;
+    align-items: stretch;
+    height: 50px;
+    overflow: hidden;
+    background: var(--jp-bg-light);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 12px;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.page-pricing .prc-num:focus-within {
+    background: var(--jp-white);
+    border-color: var(--jp-orange);
+    box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+.page-pricing .prc-num input {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    text-align: center;
+    font-weight: 800;
+    color: var(--jp-navy);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.page-pricing .prc-num input:focus {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+
+.page-pricing .prc-num-btn {
+    flex: 0 0 40px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--jp-navy);
+    font-size: 13px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .2s ease, color .2s ease, transform .15s ease;
+}
+
+.page-pricing .prc-num-btn:hover {
+    background: rgba(242, 99, 35, .1);
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-num-btn:active {
+    transform: scale(.92);
+}
+
+.page-pricing .prc-num-btn:disabled {
+    opacity: .35;
+    pointer-events: none;
+}
+
+.page-pricing .prc-num-btn:focus-visible {
+    outline: 3px solid rgba(242, 99, 35, .45);
+    outline-offset: -3px;
+}
+
+/* ---------- Live weight line ---------- */
+.page-pricing .prc-live {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--jp-navy);
+    background: var(--jp-bg-soft);
+    border: 1px solid var(--jp-border-hover-2);
+    border-radius: 12px;
+}
+
+.page-pricing .prc-live i {
+    color: var(--jp-orange);
+}
+
+/* ---------- Service cards ---------- */
+.page-pricing .prc-svc {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+}
+
+.page-pricing .prc-svc-opt {
+    position: relative;
+    margin: 0;
+    cursor: pointer;
+}
+
+.page-pricing .prc-svc-opt input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.page-pricing .prc-svc-opt span {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    align-items: center;
+    min-height: 60px;
+    padding: 10px 14px;
+    background: var(--jp-bg-light);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 12px;
+    transition: all .2s ease;
+}
+
+.page-pricing .prc-svc-opt i {
+    grid-row: 1 / span 2;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 11px;
+    font-size: 16px;
+    color: var(--jp-orange);
+    background: rgba(242, 99, 35, .1);
+}
+
+.page-pricing .prc-svc-opt b {
+    align-self: end;
+    font-size: 14px;
+    color: var(--jp-navy);
+    line-height: 1.2;
+}
+
+.page-pricing .prc-svc-opt small {
+    align-self: start;
+    font-size: 12px;
+    color: var(--jp-text-muted);
+}
+
+.page-pricing .prc-svc-opt:hover span {
+    border-color: var(--jp-orange);
+}
+
+.page-pricing .prc-svc-opt input:checked+span {
+    background: var(--jp-navy);
+    border-color: var(--jp-navy);
+}
+
+.page-pricing .prc-svc-opt input:checked+span b {
+    color: var(--jp-white);
+}
+
+.page-pricing .prc-svc-opt input:checked+span small {
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-svc-opt input:checked+span i {
+    color: var(--jp-white);
+    background: var(--jp-orange);
+}
+
+.page-pricing .prc-svc-opt input:focus-visible+span {
+    outline: 3px solid rgba(242, 99, 35, .45);
+    outline-offset: 2px;
+}
+
+.page-pricing .prc-courier {
+    margin-top: 14px;
+}
+
+/* ---------- Optional details accordion ---------- */
+.page-pricing .prc-more {
+    margin: 4px 0 0;
+    background: var(--jp-bg-light);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 14px;
+}
+
+.page-pricing .prc-more>summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 52px;
+    padding: 12px 16px;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--jp-navy);
+    cursor: pointer;
+}
+
+.page-pricing .prc-more>summary::-webkit-details-marker {
+    display: none;
+}
+
+.page-pricing .prc-more>summary i {
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-more>summary small {
+    font-weight: 500;
+    color: var(--jp-text-muted);
+}
+
+.page-pricing .prc-more>summary::after {
+    content: "+";
+    margin-left: auto;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--jp-navy);
+}
+
+.page-pricing .prc-more[open]>summary::after {
+    content: "\2212";
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-more-body {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 4px 16px 16px;
+}
+
+.page-pricing .prc-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--jp-navy);
+    cursor: pointer;
+}
+
+.page-pricing .prc-check input {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    accent-color: var(--jp-orange);
+}
+
+/* ---------- Error ---------- */
+.page-pricing .prc-error {
+    margin: 14px 0 0;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #B42318;
+    background: #FEF3F2;
+    border: 1px solid #FECDCA;
+    border-radius: 10px;
+}
+
+.page-pricing .prc-error[hidden] {
+    display: none !important;
+}
+
+/* ---------- Actions ---------- */
+.page-pricing .prc-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.page-pricing .prc-actions .btn-main {
+    flex: 1 1 200px;
+    min-height: 52px;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.page-pricing .prc-actions .prc-reset {
+    flex: 0 0 auto;
+    padding: 0 20px;
+    height: 52px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--jp-text-muted);
+    background: transparent;
+    border: 1.5px solid var(--jp-border-muted);
+    cursor: pointer;
+}
+
+.page-pricing .prc-actions .prc-reset:hover {
+    color: var(--jp-navy);
+    border-color: var(--jp-navy);
+}
+
+/* ============================================================
+   RESULT CARD
+   ============================================================ */
+.page-pricing .prc-result-card {
+    scroll-margin-top: calc(var(--jp-header-h, 86px) + 16px);
+    background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+    color: var(--jp-white);
+    border-radius: 18px;
+    box-shadow: var(--jp-shadow-lg);
+    padding: clamp(18px, 3vw, 28px);
+}
+
+.page-pricing .prc-empty {
+    text-align: center;
+    padding: 18px 8px;
+}
+
+.page-pricing .prc-empty i {
+    font-size: 34px;
+    color: var(--jp-orange-light);
+}
+
+.page-pricing .prc-empty h3 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin: 12px 0 6px;
+    color: var(--jp-white);
+}
+
+.page-pricing .prc-empty p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-res {
+    display: grid;
+    gap: 14px;
+}
+
+.page-pricing .prc-chipline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.page-pricing .prc-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.page-pricing .prc-badge.is-est {
+    background: rgba(255, 255, 255, .16);
+}
+
+.page-pricing .prc-badge.is-quote {
+    background: var(--jp-orange);
+}
+
+.page-pricing .prc-badge.is-calc {
+    background: rgba(126, 231, 168, .18);
+    color: #CFF5DD;
+}
+
+.page-pricing .prc-price {
+    margin: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2rem, 7vw, 2.6rem);
+    line-height: 1.1;
+}
+
+.page-pricing .prc-price--quote {
+    font-size: clamp(1.5rem, 5vw, 1.9rem);
+}
+
+.page-pricing .prc-sub {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-warn {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #7A2E0E;
+    background: #FFF6ED;
+    border: 1px solid #F9DBAF;
+    border-radius: 12px;
+}
+
+.page-pricing .prc-warn i {
+    margin-top: 3px;
+    color: #D4500F;
+}
+
+.page-pricing .prc-warn a {
+    font-weight: 800;
+    text-decoration: underline;
+    color: inherit;
+}
+
+/* ---------- Weight bars ---------- */
+.page-pricing .prc-bars {
+    display: grid;
+    gap: 10px;
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 12px;
+}
+
+.page-pricing .prc-bar {
+    display: grid;
+    grid-template-columns: 78px minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+    font-size: 12.5px;
+}
+
+.page-pricing .prc-bar>span:first-child {
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-bar-track {
+    display: block;
+    height: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .14);
+    border-radius: 99px;
+}
+
+.page-pricing .prc-bar-fill {
+    display: block;
+    height: 100%;
+    background: rgba(255, 255, 255, .5);
+    border-radius: 99px;
+    transition: width .4s ease;
+}
+
+.page-pricing .prc-bar.is-used .prc-bar-fill {
+    background: var(--jp-orange);
+}
+
+.page-pricing .prc-bar strong {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.page-pricing .prc-bars-note {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--jp-text-light-blue-2);
+}
+
+/* ---------- Key/values list ---------- */
+.page-pricing .prc-kvs,
+.page-pricing .prc-break {
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 12px;
+    padding: 4px 14px;
+    margin: 0;
+}
+
+.page-pricing .prc-break {
+    margin-top: 12px;
+}
+
+.page-pricing .prc-break h4 {
+    margin: 12px 0 2px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--jp-orange-light);
+}
+
+.page-pricing .prc-kv {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.page-pricing .prc-kvs .prc-kv:first-child,
+.page-pricing .prc-break h4+.prc-kv {
+    border-top: 0;
+}
+
+.page-pricing .prc-kv span {
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-kv strong {
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- Compare couriers ---------- */
+.page-pricing .prc-compare {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.page-pricing .prc-compare li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+}
+
+.page-pricing .prc-compare li:first-child {
+    border-top: 0;
+}
+
+.page-pricing .prc-compare small {
+    display: block;
+    font-size: 12px;
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-compare em {
+    margin-left: 6px;
+    padding: 2px 8px;
+    font-size: 10.5px;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--jp-white);
+    background: var(--jp-orange);
+    border-radius: 99px;
+}
+
+/* ---------- Advice box ---------- */
+.page-pricing .prc-adv {
+    padding: 14px;
+    background: rgba(242, 99, 35, .14);
+    border: 1px solid rgba(242, 99, 35, .45);
+    border-radius: 12px;
+}
+
+.page-pricing .prc-adv-tag {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--jp-orange-light);
+}
+
+.page-pricing .prc-adv p {
+    margin: 6px 0 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-adv-alt b {
+    color: var(--jp-white);
+}
+
+/* ---------- Included details ---------- */
+.page-pricing .prc-inc {
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 12px;
+}
+
+.page-pricing .prc-inc summary {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.page-pricing .prc-inc-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 0 14px 14px;
+}
+
+.page-pricing .prc-inc h5 {
+    margin: 0 0 6px;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--jp-orange-light);
+}
+
+.page-pricing .prc-inc ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--jp-text-light-blue-2);
+}
+
+/* ---------- Fine print & CTA ---------- */
+.page-pricing .prc-fine {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.page-pricing .prc-cta .btn-main {
+    flex: 1 1 150px;
+    min-height: 50px;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.page-pricing .prc-call {
+    flex: 1 1 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--jp-white);
+    padding: 6px;
+}
+
+.page-pricing .prc-call:hover {
+    color: var(--jp-orange-light);
+}
+
+.page-pricing .prc-links {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    font-size: 13px;
+}
+
+.page-pricing .prc-links a {
+    color: var(--jp-text-light-blue-2);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.page-pricing .prc-links a:hover {
+    color: var(--jp-orange-light);
+}
+
+/* ============================================================
+   TRIO (Calculator vs Quote vs Business)
+   ============================================================ */
+.page-pricing .prc-trio {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.page-pricing .prc-trio li {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    column-gap: 14px;
+    row-gap: 0;
+    align-items: center;
+    align-content: start;
+    padding: 22px 20px;
+    background: var(--jp-white);
+    border: 1px solid var(--jp-border-muted);
+    border-radius: 16px;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.page-pricing .prc-trio li:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--jp-shadow-lg);
+}
+
+.page-pricing .prc-ico {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    margin: 0;
+    border-radius: 13px;
+    font-size: 19px;
+    color: var(--jp-orange);
+    background: rgba(242, 99, 35, .1);
+    transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.page-pricing .prc-trio .prc-ico {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+}
+
+.page-pricing .prc-trio .prc-tag {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    align-self: end;
+    margin: 0 0 4px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--jp-navy);
+    background: var(--jp-bg-soft);
+}
+
+.page-pricing .prc-trio h3 {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    margin: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--jp-navy);
+}
+
+.page-pricing .prc-trio p {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin: 14px 0 0;
+    padding-top: 12px;
+    border-top: 1px dashed var(--jp-border-muted);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--jp-text-subtle);
+}
+
+.page-pricing .prc-trio li:hover .prc-ico {
+    color: var(--jp-white);
+    background: var(--jp-orange);
+    transform: scale(1.06) rotate(-4deg);
+}
+
+.page-pricing .prc-trio li:hover h3 {
+    color: var(--jp-orange);
+}
+
+/* ============================================================
+   WEIGHT EXPLAINER
+   ============================================================ */
+.page-pricing .prc-weight {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.page-pricing .prc-copy h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.45rem, 3.4vw, 2rem);
+    line-height: 1.15;
+    color: var(--jp-heading-color);
+    margin: 4px 0 10px;
+}
+
+.page-pricing .prc-copy p {
+    margin: 0 0 10px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--jp-text-muted);
+}
+
+.page-pricing .prc-formula {
+    padding: clamp(18px, 3vw, 28px);
+    background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+    color: var(--jp-white);
+    border-radius: 18px;
+    box-shadow: var(--jp-shadow-lg);
+}
+
+.page-pricing .prc-formula code {
+    display: block;
+    margin: 10px 0 14px;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #fff;
+    background: rgba(255, 255, 255, .1);
+    border-radius: 10px;
+    white-space: normal;
+}
+
+.page-pricing .prc-formula p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-formula strong {
+    color: var(--jp-white);
+}
+
+/* ============================================================
+   FACTORS GRID
+   ============================================================ */
+.page-pricing .prc-factors {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.page-pricing .prc-factors li,
+.page-pricing .prc-factors li>a {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 10px;
+    align-items: center;
+    align-content: start;
+}
+
+.page-pricing .prc-factors li {
+    padding: 22px 20px;
+    background: var(--jp-white);
+    border: 1px solid var(--jp-border-muted);
+    border-radius: 16px;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.page-pricing .prc-factors li:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--jp-shadow-lg);
+}
+
+.page-pricing .prc-factors li>a {
+    grid-column: 1 / -1;
+    height: 100%;
+    color: inherit;
+}
+
+.page-pricing .prc-factors .prc-ico {
+    grid-column: 1;
+    grid-row: 1;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+.page-pricing .prc-factors h3 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.25;
+    color: var(--jp-navy);
+}
+
+.page-pricing .prc-factors p {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    padding-top: 10px;
+    border-top: 1px dashed var(--jp-border-muted);
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--jp-text-subtle);
+}
+
+.page-pricing .prc-factors li:hover .prc-ico {
+    color: var(--jp-white);
+    background: var(--jp-orange);
+    transform: scale(1.06) rotate(-4deg);
+}
+
+.page-pricing .prc-factors li:hover h3 {
+    color: var(--jp-orange);
+}
+
+/* ============================================================
+   TWO-COLUMN LISTS (Included / Duties)
+   ============================================================ */
+.page-pricing .prc-two {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+.page-pricing .prc-list {
+    padding: clamp(20px, 3vw, 28px);
+    background: var(--jp-white);
+    border: 1px solid var(--jp-border-muted);
+    border-radius: 16px;
+    box-shadow: var(--jp-shadow-lg);
+}
+
+.page-pricing .prc-list h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--jp-navy);
+    margin: 0 0 14px;
+}
+
+.page-pricing .prc-list h3 i {
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.page-pricing .prc-list li {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--jp-ink);
+}
+
+.page-pricing .prc-list li i {
+    flex: 0 0 auto;
+    margin-top: 3px;
+    color: var(--jp-orange);
+}
+
+/* ============================================================
+   BUSINESS CTA PANEL
+   ============================================================ */
+.page-pricing .prc-biz {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    align-items: center;
+    padding: clamp(22px, 4vw, 36px);
+    border-radius: 20px;
+    color: var(--jp-white);
+    background: radial-gradient(420px 260px at 100% 0%, rgba(242, 99, 35, .3), transparent 65%),
+        linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+    box-shadow: var(--jp-shadow-lg);
+}
+
+.page-pricing .prc-biz h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.35rem, 3.2vw, 1.8rem);
+    margin: 0 0 8px;
+    color: var(--jp-white);
+}
+
+.page-pricing .prc-biz p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-pricing .prc-biz-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.page-pricing .prc-biz-actions .btn-main {
+    flex: 1 1 200px;
+    justify-content: center;
+}
+
+/* ---------- Center link ---------- */
+.page-pricing .prc-center-link {
+    margin: 20px 0 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.page-pricing .prc-center-link a {
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-center-link a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   COUNTRY DROPDOWN (flag + search combobox)
+   ============================================================ */
+.page-pricing .prc-cs {
+    position: relative;
+}
+
+.page-pricing .prc-cs.is-open {
+    z-index: 40;
+}
+
+.page-pricing .prc-cs-flag {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    font-size: 18px;
+    color: var(--jp-text-muted);
+    pointer-events: none;
+}
+
+.page-pricing .prc-cs-flag img {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-pricing .prc-cs .prc-cs-input {
+    padding: 0 80px 0 52px;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    cursor: text;
+}
+
+.page-pricing .prc-cs .prc-cs-input::placeholder {
+    font-weight: 500;
+    color: var(--jp-text-muted);
+}
+
+.page-pricing .prc-cs.is-open .prc-cs-input {
+    background-color: var(--jp-white);
+    border-color: var(--jp-orange);
+    box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
+}
+
+.page-pricing .prc-cs-toggle,
+.page-pricing .prc-cs-clear {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--jp-text-muted);
+    font-size: 13px;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease;
+}
+
+.page-pricing .prc-cs-toggle {
+    right: 8px;
+}
+
+.page-pricing .prc-cs-clear {
+    right: 42px;
+    display: none;
+}
+
+.page-pricing .prc-cs.has-text .prc-cs-clear {
+    display: grid;
+}
+
+.page-pricing .prc-cs-toggle:hover,
+.page-pricing .prc-cs-clear:hover {
+    background: var(--jp-bg-soft);
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-cs-toggle i {
+    transition: transform .2s ease;
+}
+
+.page-pricing .prc-cs.is-open .prc-cs-toggle i {
+    transform: rotate(180deg);
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-cs-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 6px);
+    max-height: min(300px, 50vh);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px;
+    background: var(--jp-white);
+    border: 1px solid var(--jp-border-muted);
+    border-radius: 14px;
+    box-shadow: 0 18px 44px rgba(30, 42, 107, .18);
+    animation: prcCsIn .16s ease;
+}
+
+@keyframes prcCsIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.page-pricing .prc-cs-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.page-pricing .prc-cs-list::-webkit-scrollbar-thumb {
+    background: var(--jp-border-hover);
+    border-radius: 99px;
+}
+
+.page-pricing .prc-cs-opt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 46px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--jp-navy);
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+}
+
+.page-pricing .prc-cs-opt img {
+    width: 26px;
+    height: 26px;
+    flex: 0 0 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-pricing .prc-cs-opt span {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.page-pricing .prc-cs-opt mark {
+    padding: 0 1px;
+    color: inherit;
+    background: rgba(242, 99, 35, .18);
+    border-radius: 3px;
+}
+
+.page-pricing .prc-cs-opt .fa-check {
+    display: none;
+    font-size: 13px;
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-cs-opt.is-sel {
+    background: var(--jp-bg-soft);
+}
+
+.page-pricing .prc-cs-opt.is-sel .fa-check {
+    display: block;
+}
+
+.page-pricing .prc-cs-opt:hover,
+.page-pricing .prc-cs-opt.is-active {
+    background: #fff3ec;
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-cs-empty {
+    padding: 22px 14px;
+    text-align: center;
+}
+
+.page-pricing .prc-cs-empty i {
+    font-size: 24px;
+    color: var(--jp-orange);
+}
+
+.page-pricing .prc-cs-empty p {
+    margin: 8px 0 4px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--jp-navy);
+}
+
+.page-pricing .prc-cs-empty a {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--jp-orange);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ============================================================
+   FAQ two-column equal-height
+   ============================================================ */
+.page-pricing #prcFaqLeft .accordion,
+.page-pricing #prcFaqRight .accordion {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.page-pricing #prcFaqLeft .accordion-item,
+.page-pricing #prcFaqRight .accordion-item {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-pricing #prcFaqLeft .accordion-collapse,
+.page-pricing #prcFaqRight .accordion-collapse {
+    flex: 1 1 auto;
+}
+
+.page-pricing #prcFaqLeft .accordion-body,
+.page-pricing #prcFaqRight .accordion-body {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+}
+
+.page-pricing #prcFaqLeft .accordion-item:last-child,
+.page-pricing #prcFaqRight .accordion-item:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width: 576px) {
+    .page-pricing .prc-modes {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .page-pricing .prc-svc {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page-pricing .prc-more-body {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page-pricing .prc-more-body .prc-wide {
+        grid-column: 1 / -1;
+    }
+
+    .page-pricing .prc-inc-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 768px) {
+    .page-pricing .prc-fields {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page-pricing .prc-fields .prc-wide {
+        grid-column: 1 / -1;
+    }
+
+    .page-pricing .prc-dim-row {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .page-pricing .prc-trio {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .page-pricing .prc-factors {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .page-pricing .prc-two {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .page-pricing .prc-two-thirds {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .page-pricing .prc-layout {
+        grid-template-columns: 1.15fr .85fr;
+        gap: 24px;
+    }
+
+    .page-pricing .prc-result-card {
+        position: sticky;
+        top: calc(var(--jp-header-h, 86px) + 16px);
+    }
+
+    .page-pricing .prc-weight {
+        grid-template-columns: 1fr 1fr;
+        gap: 44px;
+    }
+
+    .page-pricing .prc-factors {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .page-pricing .prc-biz {
+        grid-template-columns: 1.3fr .7fr;
+    }
+
+    .page-pricing .prc-biz-actions {
+        flex-direction: column;
+    }
+
+    .page-pricing .prc-biz-actions .btn-main {
+        flex: 0 0 auto;
+        min-height: 50px;
+    }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 575px) {
+    .page-pricing .prc-head {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .page-pricing .prc-bar {
+        grid-template-columns: 70px minmax(0, 1fr);
+    }
+
+    .page-pricing .prc-bar strong {
+        grid-column: 1 / -1;
+        text-align: left;
+    }
+
+    .page-pricing .prc-trustnote {
+        font-size: 12.5px;
+    }
+
+    .page-pricing .prc-dims {
+        padding: 12px;
+    }
+
+    .page-pricing .prc-actions .prc-reset {
+        flex: 1 1 100%;
+    }
+
+    .page-pricing .prc-dim-row {
+        gap: 10px;
+    }
+
+    .page-pricing .prc-dim-row .prc-field>input {
+        padding: 0 12px;
+    }
+
+    .page-pricing .prc-num-btn {
+        flex-basis: 38px;
+    }
+
+    .page-pricing .prc-trio li {
+        grid-template-columns: 44px minmax(0, 1fr);
+        column-gap: 12px;
+        padding: 16px 16px 18px;
+    }
+
+    .page-pricing .prc-trio .prc-ico {
+        width: 44px;
+        height: 44px;
+        font-size: 17px;
+        border-radius: 12px;
+    }
+
+    .page-pricing .prc-trio h3 {
+        font-size: 16px;
+    }
+
+    .page-pricing .prc-trio p {
+        margin-top: 12px;
+        padding-top: 10px;
+        font-size: 13px;
+    }
+
+    .page-pricing .prc-factors li {
+        padding: 16px 16px 18px;
+    }
+
+    .page-pricing .prc-factors li,
+    .page-pricing .prc-factors li>a {
+        grid-template-columns: 42px minmax(0, 1fr);
+        column-gap: 12px;
+    }
+
+    .page-pricing .prc-factors .prc-ico {
+        width: 42px;
+        height: 42px;
+        font-size: 17px;
+        border-radius: 11px;
+    }
+
+    .page-pricing .prc-factors h3 {
+        font-size: 15.5px;
+    }
+
+    .page-pricing .prc-factors p {
+        font-size: 13px;
+    }
+
+    .page-pricing .prc-cs-list {
+        max-height: 45vh;
+        border-radius: 12px;
+    }
+
+    .page-pricing .prc-cs-opt {
+        min-height: 50px;
+        font-size: 15.5px;
+    }
+
+    .page-pricing .prc-cs .prc-cs-input {
+        padding-left: 50px;
+    }
+}
+
+/* ---------- Touch devices: kill sticky hover ---------- */
+@media (hover: none) {
+
+    .page-pricing .prc-factors li:hover .prc-ico,
+    .page-pricing .prc-trio li:hover .prc-ico {
+        color: var(--jp-orange);
+        background: rgba(242, 99, 35, .1);
+        transform: none;
+    }
+
+    .page-pricing .prc-factors li:hover h3,
+    .page-pricing .prc-trio li:hover h3 {
+        color: var(--jp-navy);
+    }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .page-pricing .prc-trio li,
+    .page-pricing .prc-factors li,
+    .page-pricing .prc-trio .prc-ico,
+    .page-pricing .prc-factors .prc-ico,
+    .page-pricing .prc-mode span,
+    .page-pricing .prc-svc-opt span {
+        transition: none;
+    }
+
+    .page-pricing .prc-trio li:hover,
+    .page-pricing .prc-factors li:hover {
+        transform: none;
+    }
+
+    .page-pricing .prc-trio li:hover .prc-ico,
+    .page-pricing .prc-factors li:hover .prc-ico {
+        transform: none;
+    }
+}

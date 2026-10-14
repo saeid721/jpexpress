@@ -5,69 +5,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- 01. Primary SEO -->
     <title>International Shipping Cost Calculator | JP Express Bangladesh</title>
     <meta name="description"
         content="Calculate international shipping cost from Bangladesh. Estimate chargeable weight, actual vs volumetric weight, air freight and sea freight costs, and request a shipment-specific quote.">
     <meta name="author" content="JP Express">
     <meta name="publisher" content="JP Express">
     <meta name="application-name" content="JP Express">
-    <meta name="classification"
-        content="International Courier, Freight Forwarding, Export Logistics, Shipping Services">
-    <meta name="category" content="Courier, Logistics, Freight Forwarding, Export Shipping">
-    <meta name="coverage" content="Bangladesh to international destinations worldwide">
-    <meta name="target" content="Individuals, exporters, businesses, e-commerce sellers and commercial shippers">
     <meta name="theme-color" content="#2B3990">
-
-    <!-- 02. Robots -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow, max-image-preview:large">
-    <meta name="bingbot" content="index, follow, max-image-preview:large">
 
-    <!-- 03. Canonical -->
     <link rel="canonical" href="https://www.jpex.com.bd/pricing.html">
     <link rel="alternate" hreflang="en" href="https://www.jpex.com.bd/pricing.html">
     <link rel="alternate" hreflang="x-default" href="https://www.jpex.com.bd/pricing.html">
 
-    <!-- 04. Favicon -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
 
-    <!-- 05. Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="JP Express">
     <meta property="og:title" content="International Shipping Cost Calculator | JP Express">
     <meta property="og:description"
-        content="Calculate chargeable weight and estimate international shipping cost from Bangladesh. Learn how shipping cost is calculated by destination, service and weight.">
+        content="Calculate chargeable weight and estimate international shipping cost from Bangladesh.">
     <meta property="og:url" content="https://www.jpex.com.bd/pricing.html">
     <meta property="og:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="en_BD">
 
-    <!-- 06. Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="International Shipping Cost Calculator | JP Express">
     <meta name="twitter:description"
         content="Calculate chargeable weight and estimate international shipping cost from Bangladesh.">
     <meta name="twitter:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
 
-    <!-- 07. GEO -->
     <meta name="geo.region" content="BD-13">
     <meta name="geo.placename" content="Dhaka, Bangladesh">
 
-    <!-- 08. Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- 09. CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
-    <!-- 10. Structured Data -->
     <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
    {"@type":"Organization","name":"JP Express","url":"https://www.jpex.com.bd/","logo":"https://www.jpex.com.bd/assets/logo.png","telephone":"+8801681637836","email":"info@jpex.com.bd"},
@@ -87,7 +69,7 @@
   </script>
 
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/pages/quote.css">
+    <link rel="stylesheet" href="css/pages/pricing.css">
 </head>
 
 <body>
@@ -278,9 +260,7 @@
 
     <main id="main">
 
-        <!-- ============================================================
-         1.5.4 HERO — International Shipping Cost Calculator
-         ============================================================ -->
+        <!-- HERO -->
         <section class="hero page-hero" aria-labelledby="prcTitle">
             <div class="hero-bg"></div>
             <div class="container-fluid position-relative">
@@ -302,9 +282,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.5 PRICING TRUST STATEMENT
-         ============================================================ -->
+        <!-- TRUST STRIP -->
         <section class="trust-strip prc-trust" aria-label="Pricing trust signals">
             <div class="container-fluid">
                 <div class="row g-0">
@@ -324,9 +302,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.6–1.5.18 — THE CALCULATOR
-         ============================================================ -->
+        <!-- CALCULATOR -->
         <section class="home-section prc-alt prc-calc" id="calculator" aria-labelledby="calcT">
             <div class="container-fluid">
 
@@ -339,7 +315,6 @@
                 </p>
 
                 <div class="prc-layout">
-                    <!-- ===== FORM ===== -->
                     <div class="prc-card" data-reveal>
                         <div class="prc-card-head">
                             <span class="eyebrow">Shipping Calculator</span>
@@ -348,7 +323,6 @@
                         </div>
 
                         <form id="prcForm" novalidate autocomplete="off">
-
                             <!-- 1. Route -->
                             <div class="prc-block">
                                 <h3 class="prc-step"><b>1</b> Where is it going?</h3>
@@ -488,7 +462,6 @@
                                 </div>
                             </div>
 
-                            <!-- Optional details (progressive disclosure) -->
                             <details class="prc-more">
                                 <summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Add item details
                                     <small>(optional, improves accuracy)</small>
@@ -518,7 +491,6 @@
                         </form>
                     </div>
 
-                    <!-- ===== RESULT ===== -->
                     <aside class="prc-result-card" id="prcResultCard" aria-live="polite" aria-label="Calculation result"
                         data-reveal style="transition-delay:80ms">
                         <div id="prcResult">
@@ -533,9 +505,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.23 — QUOTE VS CALCULATOR
-         ============================================================ -->
+        <!-- CALCULATOR VS QUOTE -->
         <section class="home-section prc-plain" aria-labelledby="qvT">
             <div class="container-fluid">
                 <div class="prc-head" data-reveal><span class="eyebrow">Calculator vs Quote</span>
@@ -567,9 +537,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.13/1.5.14 — VOLUMETRIC & CHARGEABLE WEIGHT
-         ============================================================ -->
+        <!-- WEIGHT -->
         <section class="home-section prc-alt" aria-labelledby="wtT">
             <div class="container-fluid">
                 <div class="prc-weight">
@@ -594,9 +562,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.32 — PRICING FACTORS
-         ============================================================ -->
+        <!-- PRICING FACTORS -->
         <section class="home-section prc-plain" aria-labelledby="facT">
             <div class="container-fluid">
                 <div class="prc-head" data-reveal><span class="eyebrow">Pricing Factors</span>
@@ -605,8 +571,7 @@
                     </p>
                 </div>
                 <ul class="prc-factors">
-                    <li data-reveal style="transition-delay:0ms"><span class="prc-ico"><i
-                                class="fa-solid fa-earth-asia"></i></span>
+                    <li data-reveal><span class="prc-ico"><i class="fa-solid fa-earth-asia"></i></span>
                         <h3>Destination</h3>
                         <p>Country, and sometimes city or postal code, affects the rate and transit.</p>
                     </li>
@@ -625,8 +590,7 @@
                         <h3>Dimensions</h3>
                         <p>Bulky packages can cost more than their weight suggests.</p>
                     </li>
-                    <li data-reveal style="transition-delay:0ms"><span class="prc-ico"><i
-                                class="fa-solid fa-box-open"></i></span>
+                    <li data-reveal><span class="prc-ico"><i class="fa-solid fa-box-open"></i></span>
                         <h3>Shipment Type</h3>
                         <p>Documents, parcels, samples and commercial cargo differ.</p>
                     </li>
@@ -649,9 +613,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.21/1.5.22 — WHAT IS INCLUDED / NOT INCLUDED
-         ============================================================ -->
+        <!-- INCLUDED / NOT INCLUDED -->
         <section class="home-section prc-alt" aria-labelledby="incT">
             <div class="container-fluid">
                 <div class="prc-head" data-reveal><span class="eyebrow">Transparency</span>
@@ -684,9 +646,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.20 — DUTIES & TAXES DISTINCTION
-         ============================================================ -->
+        <!-- DUTIES & TAXES -->
         <section class="home-section prc-plain" aria-labelledby="duT">
             <div class="container-fluid">
                 <div class="prc-head" data-reveal><span class="eyebrow">Duties &amp; Taxes</span>
@@ -719,9 +679,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.27/1.5.28 — BUSINESS & EXPORT PRICING
-         ============================================================ -->
+        <!-- BUSINESS PRICING -->
         <section class="home-section prc-alt" aria-labelledby="bizT">
             <div class="container-fluid">
                 <div class="prc-biz" data-reveal>
@@ -740,9 +698,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.30 — PRICING BY DESTINATION
-         ============================================================ -->
+        <!-- DESTINATIONS -->
         <section class="home-section prc-plain" aria-labelledby="destT">
             <div class="container-fluid">
                 <div class="prc-head" data-reveal><span class="eyebrow">Popular Destinations</span>
@@ -776,9 +732,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.37 — PRICING FAQ
-         ============================================================ -->
+        <!-- FAQ -->
         <section class="home-section prc-alt" aria-labelledby="faqT">
             <div class="container-fluid">
                 <div class="prc-head" data-reveal><span class="eyebrow">FAQ</span>
@@ -888,9 +842,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.44 — INTERNAL LINKING / RELATED
-         ============================================================ -->
+        <!-- EXPLORE -->
         <section class="home-section prc-plain" aria-labelledby="relT">
             <div class="container-fluid">
                 <div class="prc-head" data-reveal><span class="eyebrow">Explore</span>
@@ -921,9 +873,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-         1.5.60/1.5.63 — FINAL CTA
-         ============================================================ -->
+        <!-- FINAL CTA -->
         <section class="final-cta" aria-labelledby="prcCta">
             <img class="final-cta-art" src="assets/Airliner-Orbiting-a-Glowing-Earth.png" alt="" aria-hidden="true"
                 onerror="this.style.display='none'">
@@ -1020,7 +970,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/quote-wizard.js"></script>
 </body>
 
 </html>
