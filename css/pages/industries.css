@@ -1542,3 +1542,226 @@
     transform: none
   }
 }
+
+
+
+/* ===============================================================
+   NEW: Service Selection Table (req 1.4.13)
+   =============================================================== */
+.ind-table {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(26, 40, 80, .06);
+  border: 1px solid #e4e8f2;
+  margin: 0;
+}
+
+.ind-table thead th {
+  background: #f5f7fc;
+  color: var(--ind-navy, #17245d);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e4e8f2;
+  padding: 14px 16px;
+}
+
+.ind-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #566176;
+  border-bottom: 1px solid #eef1f6;
+}
+
+.ind-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.ind-table td:first-child {
+  font-weight: 700;
+  color: #17245d;
+}
+
+/* ===============================================================
+   NEW: Steps grid for export workflow (req 1.4.16)
+   =============================================================== */
+.ind-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  counter-reset: st;
+}
+
+.ind-steps li {
+  counter-increment: st;
+  position: relative;
+  padding: 24px 20px 24px 76px;
+  background: #fff;
+  border: 1px solid #e4e8f2;
+  border-radius: 16px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.ind-steps li::before {
+  content: counter(st, decimal-leading-zero);
+  position: absolute;
+  left: 20px;
+  top: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #17245d, #2b3990);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+.ind-steps li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(26, 40, 80, .12);
+}
+
+.ind-steps h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #17245d;
+  margin: 0 0 6px;
+}
+
+.ind-steps p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #667085;
+  margin: 0;
+}
+
+@media (min-width: 576px) {
+  .ind-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .ind-steps {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ===============================================================
+   NEW: Destinations + Resources (req 1.4.36 + 1.4.37)
+   =============================================================== */
+.ind-destinations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.ind-destination-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  border: 1px solid #dce2ee;
+  background: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--ind-blue, #2b3990);
+  font-weight: 800;
+  font-size: 13px;
+  transition: border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.ind-destination-link:hover {
+  border-color: var(--ind-orange, #f26323);
+  color: var(--ind-orange, #f26323);
+  transform: translateY(-2px);
+}
+
+/* ===============================================================
+   NEW: Section eyebrow
+   =============================================================== */
+.ind-section-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ind-orange, #f26323);
+  margin-bottom: 8px;
+}
+
+/* ===============================================================
+   MOBILE: new components
+   =============================================================== */
+@media (max-width: 767px) {
+  .ind-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .ind-table tr {
+    display: block;
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    border: 1px solid #e4e8f2;
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .ind-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0;
+    border: 0;
+    font-size: 13.5px;
+  }
+
+  .ind-table td::before {
+    content: attr(data-l);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #f26323;
+  }
+
+  .ind-table td:first-child {
+    font-weight: 800;
+    color: #17245d;
+  }
+
+  .ind-table td:first-child::before,
+  .ind-table td:last-child::before {
+    content: none;
+  }
+
+  .ind-steps li {
+    padding: 20px 16px 20px 68px;
+  }
+
+  .ind-steps li::before {
+    left: 16px;
+    top: 20px;
+    width: 36px;
+    height: 36px;
+    font-size: 11px;
+  }
+
+  .ind-destination-link {
+    padding: 9px 12px;
+    font-size: 12.5px;
+  }
+}
