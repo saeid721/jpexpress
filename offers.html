@@ -118,7 +118,219 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/pages/media-center.css">
 
-<style>.offer-hero{padding:clamp(42px,7vw,86px) 0;color:#fff;background:radial-gradient(circle at 88% 8%,rgba(242,99,35,.28),transparent 32%),linear-gradient(125deg,#11194a,#2b3990)}.offer-crumb{font-size:13px;margin-bottom:26px;color:#d7e5ff}.offer-crumb a{color:#fff;text-decoration:none}.offer-eyebrow,.offer-section-head>div>span{font-size:12px;letter-spacing:.14em;font-weight:800;color:#ffb18d}.offer-hero h1{font-size:clamp(2rem,5vw,3.8rem);font-weight:800;line-height:1.1;max-width:780px;margin:14px 0}.offer-hero h1 span{color:#ff8a50}.offer-hero p{max-width:660px;line-height:1.7;color:#e0e8ff}.offer-cta{display:inline-flex;gap:12px;align-items:center;margin-top:14px;padding:13px 20px;border-radius:10px;background:#f26323;color:#fff;text-decoration:none;font-weight:800}.offer-section{padding:clamp(34px,6vw,70px) 0;background:#f6f8fc}.offer-section-head{display:flex;justify-content:space-between;gap:24px;align-items:end;margin-bottom:24px}.offer-section-head h2{font-weight:800;color:#17204f;margin:8px 0}.offer-section-head p{max-width:390px;color:#667085;font-size:14px}.offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.offer-card{overflow:hidden;background:#fff;border:1px solid #e5e9f2;border-radius:18px;box-shadow:0 12px 30px rgba(20,30,80,.07);display:flex;flex-direction:column}.offer-image{height:220px;position:relative;display:block;overflow:hidden;background:#e9edf7}.offer-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.offer-image:hover img{transform:scale(1.04)}.offer-image>span{position:absolute;bottom:12px;left:12px;background:#fff;color:#202b68;padding:8px 12px;border-radius:8px;font-size:12px;font-weight:800}.offer-copy{padding:22px;display:flex;flex-direction:column;flex:1}.offer-tag{color:#e85c1a;background:#fff0e9;border-radius:99px;padding:5px 10px;font-size:11px;font-weight:800;align-self:flex-start}.offer-copy h3{font-size:20px;font-weight:800;color:#17204f;margin:14px 0 8px}.offer-copy p{color:#667085;font-size:14px;line-height:1.65}.offer-copy>a{margin-top:auto;padding-top:14px;text-decoration:none;font-weight:800;color:#2b3990}.offer-admin-note{margin-top:24px;background:#fff;border:1px solid #e5e9f2;padding:15px 18px;border-radius:12px;color:#596579;font-size:13px}.offer-admin-note i{color:#2b3990;margin-right:8px}@media(max-width:767px){.offer-section-head{display:block}.offer-grid{grid-template-columns:1fr;gap:14px}.offer-image{height:190px}.offer-copy{padding:17px}.offer-copy h3{font-size:18px}.offer-hero{padding:34px 0}.offer-hero p{font-size:14px}}</style>
+  <style>
+    .offer-hero {
+      padding: clamp(42px, 7vw, 86px) 0;
+      color: #fff;
+      background: radial-gradient(circle at 88% 8%, rgba(242, 99, 35, .28), transparent 32%), linear-gradient(125deg, #11194a, #2b3990)
+    }
+
+    .offer-crumb {
+      font-size: 13px;
+      margin-bottom: 26px;
+      color: #d7e5ff
+    }
+
+    .offer-crumb a {
+      color: #fff;
+      text-decoration: none
+    }
+
+    .offer-eyebrow,
+    .offer-section-head>div>span {
+      font-size: 12px;
+      letter-spacing: .14em;
+      font-weight: 800;
+      color: #ffb18d
+    }
+
+    .offer-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      max-width: 780px;
+      margin: 14px 0
+    }
+
+    .offer-hero h1 span {
+      color: #ff8a50
+    }
+
+    .offer-hero p {
+      max-width: 660px;
+      line-height: 1.7;
+      color: #e0e8ff
+    }
+
+    .offer-cta {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 14px;
+      padding: 13px 20px;
+      border-radius: 10px;
+      background: #f26323;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800
+    }
+
+    .offer-section {
+      padding: clamp(34px, 6vw, 70px) 0;
+      background: #f6f8fc
+    }
+
+    .offer-section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 24px
+    }
+
+    .offer-section-head h2 {
+      font-weight: 800;
+      color: #17204f;
+      margin: 8px 0
+    }
+
+    .offer-section-head p {
+      max-width: 390px;
+      color: #667085;
+      font-size: 14px
+    }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px
+    }
+
+    .offer-card {
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #e5e9f2;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(20, 30, 80, .07);
+      display: flex;
+      flex-direction: column
+    }
+
+    .offer-image {
+      height: 220px;
+      position: relative;
+      display: block;
+      overflow: hidden;
+      background: #e9edf7
+    }
+
+    .offer-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .4s
+    }
+
+    .offer-image:hover img {
+      transform: scale(1.04)
+    }
+
+    .offer-image>span {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: #fff;
+      color: #202b68;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800
+    }
+
+    .offer-copy {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1
+    }
+
+    .offer-tag {
+      color: #e85c1a;
+      background: #fff0e9;
+      border-radius: 99px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      align-self: flex-start
+    }
+
+    .offer-copy h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #17204f;
+      margin: 14px 0 8px
+    }
+
+    .offer-copy p {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.65
+    }
+
+    .offer-copy>a {
+      margin-top: auto;
+      padding-top: 14px;
+      text-decoration: none;
+      font-weight: 800;
+      color: #2b3990
+    }
+
+    .offer-admin-note {
+      margin-top: 24px;
+      background: #fff;
+      border: 1px solid #e5e9f2;
+      padding: 15px 18px;
+      border-radius: 12px;
+      color: #596579;
+      font-size: 13px
+    }
+
+    .offer-admin-note i {
+      color: #2b3990;
+      margin-right: 8px
+    }
+
+    @media(max-width:767px) {
+      .offer-section-head {
+        display: block
+      }
+
+      .offer-grid {
+        grid-template-columns: 1fr;
+        gap: 14px
+      }
+
+      .offer-image {
+        height: 190px
+      }
+
+      .offer-copy {
+        padding: 17px
+      }
+
+      .offer-copy h3 {
+        font-size: 18px
+      }
+
+      .offer-hero {
+        padding: 34px 0
+      }
+
+      .offer-hero p {
+        font-size: 14px
+      }
+    }
+  </style>
   <link rel="stylesheet" href="css/pages/industries.css">
 </head>
 
@@ -143,7 +355,7 @@
           <button class="lang-btn active" type="button">English</button>
           <span>|</span>
           <button class="lang-btn" type="button">বাংলা</button>
-          <a class="d-none d-md-inline" href="#contact">
+          <a class="d-none d-md-inline" href="login.html">
             <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
           </a>
         </div>
@@ -179,26 +391,26 @@
             </a>
 
             <div class="jp-dd-menu" role="menu" aria-label="Services">
-              <a class="jp-dd-link" href="international-courier.html" role="menuitem">
+              <a class="jp-dd-link" href="services/international-courier.html" role="menuitem">
                 <span class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span>
                 <span class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp; parcels
                     worldwide</small></span>
               </a>
-              <a class="jp-dd-link" href="air-freight.html" role="menuitem">
+              <a class="jp-dd-link" href="services/air-freight.html" role="menuitem">
                 <span class="jp-dd-ico"><i class="fa-solid fa-plane-departure"></i></span>
                 <span class="jp-dd-txt"><strong>Air Freight</strong><small>Fast cargo for commercial
                     shipments</small></span>
               </a>
-              <a class="jp-dd-link" href="sea-freight.html" role="menuitem">
+              <a class="jp-dd-link" href="services/sea-freight.html" role="menuitem">
                 <span class="jp-dd-ico"><i class="fa-solid fa-ship"></i></span>
                 <span class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL &amp; LCL for bulk cargo</small></span>
               </a>
-              <a class="jp-dd-link" href="export-logistics.html" role="menuitem">
+              <a class="jp-dd-link" href="services/export-logistics.html" role="menuitem">
                 <span class="jp-dd-ico"><i class="fa-solid fa-boxes-packing"></i></span>
                 <span class="jp-dd-txt"><strong>Export Logistics</strong><small>Documentation &amp; export
                     support</small></span>
               </a>
-              <a class="jp-dd-link" href="import-solutions.html" role="menuitem">
+              <a class="jp-dd-link" href="services/import-solutions.html" role="menuitem">
                 <span class="jp-dd-ico"><i class="fa-solid fa-truck-ramp-box"></i></span>
                 <span class="jp-dd-txt"><strong>Import Solutions</strong><small>Sourcing, customs &amp;
                     delivery</small></span>
@@ -206,10 +418,64 @@
               <a class="jp-dd-all" href="services.html">View All Services <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </li>
-          <li class="nav-item"><a class="nav-link" href="countries.html">Destinations</a></li>
-          <li class="nav-item dropdown jp-industry-dropdown"><a class="nav-link dropdown-toggle" href="industries/" id="jpIndustriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Industries</a><ul class="dropdown-menu jp-industry-menu" aria-labelledby="jpIndustriesDropdown"><li><a class="dropdown-item jp-industry-item jp-industry-all" href="industries/"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span>All Industries</span></a></li><li><hr class="dropdown-divider"></li><li><a class="dropdown-item jp-industry-item" href="industries/garments-textile/"><i class="fa-solid fa-shirt" aria-hidden="true"></i><span>Garments & Textile</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/jute-products/"><i class="fa-solid fa-leaf" aria-hidden="true"></i><span>Jute & Sustainable Products</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/leather-products/"><i class="fa-solid fa-briefcase" aria-hidden="true"></i><span>Leather & Leather Goods</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/handicrafts/"><i class="fa-solid fa-palette" aria-hidden="true"></i><span>Handicrafts</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/ecommerce/"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span>E-commerce & Online Businesses</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/manufacturing/"><i class="fa-solid fa-industry" aria-hidden="true"></i><span>Manufacturing</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/buying-houses/"><i class="fa-solid fa-people-arrows-left-right" aria-hidden="true"></i><span>Buying Houses</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/smes/"><i class="fa-solid fa-store" aria-hidden="true"></i><span>SMEs</span></a></li><li><a class="dropdown-item jp-industry-item" href="industries/corporate/"><i class="fa-solid fa-building" aria-hidden="true"></i><span>Corporate</span></a></li></ul></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="countries.html">Destinations</a></li> -->
+          <li class="nav-item jp-dropdown">
+            <a class="nav-link jp-dd-trigger" href="industries.html" aria-haspopup="true">
+              Industries <i class="fa-solid fa-chevron-down"></i>
+            </a>
+
+            <div class="jp-dd-menu" role="menu" aria-label="Industries">
+              <a class="jp-dd-link" href="industries/garments-textiles.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-shirt"></i></span>
+                <span class="jp-dd-txt"><strong>Garments Textile</strong><small>Apparel, fabrics &amp; bulk RMG
+                    exports</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/jute-products.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-seedling"></i></span>
+                <span class="jp-dd-txt"><strong>Jute Products</strong><small>Eco-friendly fibre goods &amp;
+                    bags</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/leather-products.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-bag-shopping"></i></span>
+                <span class="jp-dd-txt"><strong>Leather Products</strong><small>Footwear, bags &amp; finished
+                    leather</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/handicrafts.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-palette"></i></span>
+                <span class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade &amp; fragile artisan
+                    goods</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/e-commerce.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-cart-shopping"></i></span>
+                <span class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border orders &amp; seller
+                    shipping</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/manufacturing.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-industry"></i></span>
+                <span class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery, parts &amp; factory
+                    cargo</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/buying-houses.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-handshake"></i></span>
+                <span class="jp-dd-txt"><strong>Buying Houses</strong><small>Samples, orders &amp;
+                    consolidation</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/smes.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-store"></i></span>
+                <span class="jp-dd-txt"><strong>SMEs</strong><small>Affordable export for growing
+                    businesses</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/corporate-businesses.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-building"></i></span>
+                <span class="jp-dd-txt"><strong>Corporate Businesses</strong><small>Dedicated account &amp; bulk
+                    logistics</small></span>
+              </a>
+          </li>
           <li class="nav-item"><a class="nav-link" href="business.html">Business</a></li>
-          <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="offers.html">Offer</a></li>
+          <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -235,22 +501,60 @@
             </div>
             <div class="jp-m-sub" id="jpSubServices">
               <ul>
-                <li><a class="jp-sub-link" href="international-courier.html"><i class="fa-solid fa-plane"></i>
+                <li><a class="jp-sub-link" href="services/international-courier.html"><i class="fa-solid fa-plane"></i>
                     International Courier</a></li>
-                <li><a class="jp-sub-link" href="air-freight.html"><i class="fa-solid fa-plane-departure"></i> Air
+                <li><a class="jp-sub-link" href="services/air-freight.html"><i class="fa-solid fa-plane-departure"></i>
+                    Air
                     Freight</a></li>
-                <li><a class="jp-sub-link" href="sea-freight.html"><i class="fa-solid fa-ship"></i> Sea Freight</a></li>
-                <li><a class="jp-sub-link" href="export-logistics.html"><i class="fa-solid fa-boxes-packing"></i> Export
+                <li><a class="jp-sub-link" href="services/sea-freight.html"><i class="fa-solid fa-ship"></i> Sea
+                    Freight</a></li>
+                <li><a class="jp-sub-link" href="services/export-logistics.html"><i
+                      class="fa-solid fa-boxes-packing"></i> Export
                     Logistics</a></li>
-                <li><a class="jp-sub-link" href="import-solutions.html"><i class="fa-solid fa-truck-ramp-box"></i>
+                <li><a class="jp-sub-link" href="services/import-solutions.html"><i
+                      class="fa-solid fa-truck-ramp-box"></i>
                     Import Solutions</a></li>
               </ul>
             </div>
           </li>
-          <li><a class="nav-link" href="countries.html">Destinations</a></li>
-          <li class="jp-industry-mobile"><a class="nav-link" href="industries/">Industries <i class="fa-solid fa-chevron-down jp-industry-mobile-chevron" aria-hidden="true"></i></a><ul class="jp-industry-mobile-menu"><li><a class="jp-industry-mobile-link" href="industries/"><i class="fa-solid fa-layer-group" aria-hidden="true"></i>All Industries</a></li><li><a class="jp-industry-mobile-link" href="industries/garments-textile/"><i class="fa-solid fa-shirt" aria-hidden="true"></i>Garments & Textile</a></li><li><a class="jp-industry-mobile-link" href="industries/jute-products/"><i class="fa-solid fa-leaf" aria-hidden="true"></i>Jute & Sustainable Products</a></li><li><a class="jp-industry-mobile-link" href="industries/leather-products/"><i class="fa-solid fa-briefcase" aria-hidden="true"></i>Leather & Leather Goods</a></li><li><a class="jp-industry-mobile-link" href="industries/handicrafts/"><i class="fa-solid fa-palette" aria-hidden="true"></i>Handicrafts</a></li><li><a class="jp-industry-mobile-link" href="industries/ecommerce/"><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>E-commerce & Online Businesses</a></li><li><a class="jp-industry-mobile-link" href="industries/manufacturing/"><i class="fa-solid fa-industry" aria-hidden="true"></i>Manufacturing</a></li><li><a class="jp-industry-mobile-link" href="industries/buying-houses/"><i class="fa-solid fa-people-arrows-left-right" aria-hidden="true"></i>Buying Houses</a></li><li><a class="jp-industry-mobile-link" href="industries/smes/"><i class="fa-solid fa-store" aria-hidden="true"></i>SMEs</a></li><li><a class="jp-industry-mobile-link" href="industries/corporate/"><i class="fa-solid fa-building" aria-hidden="true"></i>Corporate</a></li></ul></li>
+          <!-- <li><a class="nav-link" href="countries.html">Destinations</a></li> -->
+          <li class="jp-m-dd">
+            <div class="jp-m-dd-row">
+              <a class="nav-link" href="industries.html">Industries</a>
+              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubServices"
+                aria-label="Toggle services submenu">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+            </div>
+            <div class="jp-m-sub" id="jpSubServices">
+              <ul>
+                <li><a class="jp-sub-link" href="industries/garments-textiles.html"><i class="fa-solid fa-shirt"></i>
+                    Garments Textile</a></li>
+                <li><a class="jp-sub-link" href="industries/jute-products.html"><i class="fa-solid fa-seedling"></i>
+                    Jute Products</a></li>
+                <li><a class="jp-sub-link" href="industries/leather-products.html"><i
+                      class="fa-solid fa-bag-shopping"></i>
+                    Leather Products</a></li>
+                <li><a class="jp-sub-link" href="industries/e-commerce.html"><i class="fa-solid fa-cart-shopping"></i>
+                    E-commerce</a></li>
+                <li><a class="jp-sub-link" href="industries/manufacturing.html"><i class="fa-solid fa-industry"></i>
+                    Manufacturing</a></li>
+                <li><a class="jp-sub-link" href="industries/buying-houses.html"><i class="fa-solid fa-handshake"></i>
+                    Buying Houses</a></li>
+                <li><a class="jp-sub-link" href="industries/smes.html"><i class="fa-solid fa-store"></i>
+                    SMEs</a></li>
+                <li><a class="jp-sub-link" href="industries/corporate-businesses.html"><i
+                      class="fa-solid fa-building"></i>
+                    Corporate Businesses</a></li>
+              </ul>
+            </div>
+          </li>
+
           <li><a class="nav-link" href="business.html">Business</a></li>
-          <li><a class="nav-link" href="resources.html">Resources</a></li>
+          <li><a class="nav-link" href="offers.html">Offer</a></li>
+          <li><a class="nav-link" href="media.html">Media</a></li>
+          <li><a class="nav-link" href="blog.html">Blog</a></li>
+          <!-- <li><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
         <div class="d-grid gap-2 mt-4">
@@ -267,13 +571,67 @@
   </header>
 
   <main id="main-content" class="page-offers">
-<section class="offer-hero"><div class="container-xl"><nav aria-label="Breadcrumb" class="offer-crumb"><a href="index.html">Home</a><span> / </span><span>Offers</span></nav><span class="offer-eyebrow"><i class="fa-solid fa-sparkles"></i> JP EXPRESS PROMOTIONS</span><h1>Offers that move your business <span>forward.</span></h1><p>Explore the latest promotions and announcements from JP Express. Select an offer to open its related Facebook post and review the details.</p><a class="offer-cta" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Visit our Facebook <i class="fa-brands fa-facebook-f"></i></a></div></section>
-<section class="offer-section"><div class="container-xl"><div class="offer-section-head"><div><span>FEATURED PROMOTIONS</span><h2>Offers & announcements</h2></div><p>Offer availability, terms and validity are defined in each linked Facebook post.</p></div><div class="offer-grid">
-<article class="offer-card"><a class="offer-image" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Open related JP Express Facebook post"><img src="assets/hero-banner2.jpg" alt="International shipping promotion artwork" loading="lazy"><span>View Facebook post <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a><div class="offer-copy"><span class="offer-tag">Shipping offers</span><h3>International Shipping Updates</h3><p>See the latest shipping offers and service announcements published by JP Express.</p><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">View related post <i class="fa-solid fa-arrow-right"></i></a></div></article>
-<article class="offer-card"><a class="offer-image" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Open related JP Express Facebook post"><img src="assets/domestic-02.jpg" alt="Courier pickup and delivery service" loading="lazy"><span>View Facebook post <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a><div class="offer-copy"><span class="offer-tag">Business services</span><h3>Business Shipping Solutions</h3><p>Explore updates relevant to business shipments, export logistics and customer support.</p><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">View related post <i class="fa-solid fa-arrow-right"></i></a></div></article>
-<article class="offer-card"><a class="offer-image" href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Open related JP Express Facebook post"><img src="assets/container-ship.png" alt="Cargo vessel representing freight services" loading="lazy"><span>View Facebook post <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a><div class="offer-copy"><span class="offer-tag">Freight & export</span><h3>Freight & Export Announcements</h3><p>Check the linked post for current freight updates, eligibility and any applicable terms.</p><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">View related post <i class="fa-solid fa-arrow-right"></i></a></div></article>
-</div><p class="offer-admin-note"><i class="fa-solid fa-circle-info"></i> Publishing note: replace each Facebook link with the exact post URL and update the image, heading and description before publishing a specific promotion. Avoid displaying expired offers.</p></div></section>
-</main>
+    <section class="offer-hero">
+      <div class="container-xl">
+        <nav aria-label="Breadcrumb" class="offer-crumb"><a href="index.html">Home</a><span> /
+          </span><span>Offers</span></nav><span class="offer-eyebrow"><i class="fa-solid fa-sparkles"></i> JP EXPRESS
+          PROMOTIONS</span>
+        <h1>Offers that move your business <span>forward.</span></h1>
+        <p>Explore the latest promotions and announcements from JP Express. Select an offer to open its related Facebook
+          post and review the details.</p><a class="offer-cta" href="https://www.facebook.com/" target="_blank"
+          rel="noopener noreferrer">Visit our Facebook <i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </section>
+    <section class="offer-section">
+      <div class="container-xl">
+        <div class="offer-section-head">
+          <div><span>FEATURED PROMOTIONS</span>
+            <h2>Offers & announcements</h2>
+          </div>
+          <p>Offer availability, terms and validity are defined in each linked Facebook post.</p>
+        </div>
+        <div class="offer-grid">
+          <article class="offer-card"><a class="offer-image" href="https://www.facebook.com/" target="_blank"
+              rel="noopener noreferrer" aria-label="Open related JP Express Facebook post"><img
+                src="assets/hero-banner2.jpg" alt="International shipping promotion artwork" loading="lazy"><span>View
+                Facebook post <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+            <div class="offer-copy"><span class="offer-tag">Shipping offers</span>
+              <h3>International Shipping Updates</h3>
+              <p>See the latest shipping offers and service announcements published by JP Express.</p><a
+                href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">View related post <i
+                  class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="offer-card"><a class="offer-image" href="https://www.facebook.com/" target="_blank"
+              rel="noopener noreferrer" aria-label="Open related JP Express Facebook post"><img
+                src="assets/domestic-02.jpg" alt="Courier pickup and delivery service" loading="lazy"><span>View
+                Facebook post <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+            <div class="offer-copy"><span class="offer-tag">Business services</span>
+              <h3>Business Shipping Solutions</h3>
+              <p>Explore updates relevant to business shipments, export logistics and customer support.</p><a
+                href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">View related post <i
+                  class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+          <article class="offer-card"><a class="offer-image" href="https://www.facebook.com/" target="_blank"
+              rel="noopener noreferrer" aria-label="Open related JP Express Facebook post"><img
+                src="assets/container-ship.png" alt="Cargo vessel representing freight services"
+                loading="lazy"><span>View Facebook post <i
+                  class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+            <div class="offer-copy"><span class="offer-tag">Freight & export</span>
+              <h3>Freight & Export Announcements</h3>
+              <p>Check the linked post for current freight updates, eligibility and any applicable terms.</p><a
+                href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">View related post <i
+                  class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+        <p class="offer-admin-note"><i class="fa-solid fa-circle-info"></i> Publishing note: replace each Facebook link
+          with the exact post URL and update the image, heading and description before publishing a specific promotion.
+          Avoid displaying expired offers.</p>
+      </div>
+    </section>
+  </main>
 
   <!-- ======= FOOTER ========== -->
   <footer class="footer">
@@ -305,22 +663,23 @@
         <!-- Services Links -->
         <div class="col-6 col-lg-2">
           <h3>Services</h3>
-          <a href="international-courier.html">International Courier</a>
-          <a href="air-freight.html">Air Freight</a>
-          <a href="sea-freight.html">Sea Freight</a>
-          <a href="export-logistics.html">Export Logistics</a>
-          <a href="import-solutions.html">Import Solutions</a>
+          <a href="services/international-courier.html">International Courier</a>
+          <a href="services/air-freight.html">Air Freight</a>
+          <a href="services/sea-freight.html">Sea Freight</a>
+          <a href="services/export-logistics.html">Export Logistics</a>
+          <a href="services/import-solutions.html">Import Solutions</a>
+          <a href="countries.html">Destinations</a>
         </div>
 
         <!-- Resources Links -->
         <div class="col-6 col-lg-2">
           <h3>Resources</h3>
+          <a href="resources.html">Resources</a>
           <a href="shipping-guides.html">Shipping Guides</a>
+          <a href="offers.html">Offer</a>
+          <a href="media.html">Media</a>
           <a href="blog.html">Blog</a>
-            <a class="nav-link" href="offers.html"><i class="fa-solid fa-tags me-1" aria-hidden="true"></i> Offers</a>
           <a href="faq.html">FAQ</a>
-          <a href="media-center.html">Media Center</a>
-          <a href="legal.html">Legal</a>
         </div>
 
         <!-- Contact Info -->
@@ -371,7 +730,7 @@
   </div>
 
   <nav class="fab-bar" aria-label="Mobile quick actions">
-    <a href="index.html" class="bar-quote"><i class="fa-solid fa-house"></i>Home</a>
+    <a href="index.html" class="bar-home"><i class="fa-solid fa-house"></i>Home</a>
     <a href="track-shipment.html"><i class="fa-solid fa-location-dot"></i>Track</a>
     <a href="quote.html"><i class="fa-solid fa-calculator"></i>Quote</a>
     <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment."
@@ -380,7 +739,7 @@
     <a href="login.html" class="bar-login" aria-label="Customer login"><i class="fa-solid fa-circle-user"></i>Login</a>
   </nav>
 
-
+  <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
