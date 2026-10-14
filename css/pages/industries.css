@@ -1292,15 +1292,78 @@
 }
 
 .ind-faq-list {
-  max-width: 900px
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+  align-items: start;
+  max-width: none
+}
+
+/* each column stacks on its own, so opening one card never stretches the other column */
+.ind-faq-col {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  min-width: 0
 }
 
 .ind-faq {
-  margin-bottom: 10px;
+  margin-bottom: 0;
   border: 1px solid #e1e6f0;
   background: #fff;
   border-radius: 12px;
-  overflow: hidden
+  overflow: hidden;
+  transition: border-color .22s ease, box-shadow .22s ease
+}
+
+.ind-faq:hover {
+  border-color: #f6b99c;
+  box-shadow: 0 8px 20px rgba(43, 57, 144, .1)
+}
+
+.ind-faq[open] {
+  border-color: rgba(242, 99, 35, .4);
+  box-shadow: 0 8px 22px rgba(43, 57, 144, .09)
+}
+
+.ind-faq[open] summary {
+  color: var(--ind-orange)
+}
+
+.ind-faq[open] summary:after {
+  background: #fff0e9;
+  color: var(--ind-orange)
+}
+
+/* tablet and phone: one column */
+@media (max-width: 991.98px) {
+  .ind-faq-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px
+  }
+}
+
+/* phone: tighter spacing */
+@media (max-width: 575.98px) {
+  .ind-faq summary {
+    padding: 14px 44px 14px 14px;
+    font-size: 14px
+  }
+
+  .ind-faq summary:after {
+    right: 12px
+  }
+
+  .ind-faq p {
+    padding: 0 14px 14px;
+    font-size: 13.5px
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ind-faq {
+    transition: none
+  }
 }
 
 .ind-faq summary {

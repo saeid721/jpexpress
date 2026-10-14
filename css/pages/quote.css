@@ -2185,3 +2185,423 @@
 .page-quote #prcFaqRight .accordion-item:last-child {
   margin-bottom: 0;
 }
+
+
+/* ===============================================================
+   QUOTE PAGE — STEP WIZARD, REVIEW & SUCCESS
+   =============================================================== */
+
+/* Step navigation strip */
+.page-quote .prc-steps {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 4px 0 12px;
+  margin: 0 0 16px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-quote .prc-steps::-webkit-scrollbar {
+  display: none;
+}
+
+.page-quote .prc-step-btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 6px 14px;
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 999px;
+  background: var(--jp-white);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jp-text-muted);
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.page-quote .prc-step-btn b {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--jp-bg-soft);
+  color: var(--jp-navy);
+  font-size: 11.5px;
+}
+
+.page-quote .prc-step-btn:hover {
+  border-color: var(--jp-orange);
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-step-btn.active {
+  background: var(--jp-navy);
+  border-color: var(--jp-navy);
+  color: #fff;
+}
+
+.page-quote .prc-step-btn.active b {
+  background: var(--jp-orange);
+  color: #fff;
+}
+
+/* Fieldsets */
+.page-quote .prc-fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.page-quote .prc-fieldset[hidden] {
+  display: none;
+}
+
+.page-quote .prc-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-legend-num {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--jp-navy);
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+
+.page-quote .prc-legend-txt {
+  color: var(--jp-navy);
+}
+
+/* Mode cards — bigger, more descriptive */
+.page-quote .prc-mode span {
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 4px;
+  padding: 14px 16px;
+  min-height: 88px;
+}
+
+.page-quote .prc-mode span i {
+  font-size: 16px;
+  color: var(--jp-orange);
+  margin-bottom: 2px;
+}
+
+.page-quote .prc-mode span b {
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.page-quote .prc-mode span small {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-mode input:checked+span small {
+  color: var(--jp-text-light-blue-2);
+}
+
+/* Inline CTA link */
+.page-quote .prc-inline-cta {
+  margin-top: 12px;
+}
+
+.page-quote .prc-link-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-link-line b {
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-link-line:hover b {
+  text-decoration: underline;
+}
+
+/* Sub-label */
+.page-quote .prc-sub-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--jp-navy);
+}
+
+.page-quote .prc-weight-block {
+  margin-top: 14px;
+}
+
+/* Check rows */
+.page-quote .prc-check-row {
+  margin-top: 14px;
+}
+
+/* Privacy note */
+.page-quote .prc-privacy {
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  color: var(--jp-text-muted);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.page-quote .prc-privacy i {
+  color: var(--jp-orange);
+  margin-top: 3px;
+}
+
+.page-quote .prc-privacy a {
+  color: var(--jp-navy);
+  text-decoration: underline;
+}
+
+/* Review panel */
+.page-quote .prc-review {
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background: var(--jp-bg-light);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 12px;
+}
+
+.page-quote .prc-review-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  font-size: 13.5px;
+  border-top: 1px solid var(--jp-border-light);
+}
+
+.page-quote .prc-review-row:first-child {
+  border-top: 0;
+}
+
+.page-quote .prc-review-row span {
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-review-row strong {
+  color: var(--jp-navy);
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* Terms block */
+.page-quote .prc-terms {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.page-quote .prc-terms .prc-check {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--jp-text-muted-dark);
+}
+
+/* Back / Next / Submit buttons */
+.page-quote .prc-btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--jp-navy);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+
+.page-quote .prc-btn-back:hover {
+  border-color: var(--jp-navy);
+}
+
+.page-quote .prc-btn-back[hidden] {
+  display: none;
+}
+
+/* Success state */
+.page-quote .prc-success {
+  display: grid;
+  gap: 14px;
+}
+
+.page-quote .prc-success-ico {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(29, 168, 107, .15);
+  color: var(--jp-green);
+  font-size: 30px;
+  margin: 0 auto;
+}
+
+.page-quote .prc-success h3 {
+  margin: 0;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.25rem;
+  color: var(--jp-white);
+}
+
+.page-quote .prc-success>p {
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-success-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+}
+
+.page-quote .prc-success-meta>div {
+  display: grid;
+  gap: 3px;
+}
+
+.page-quote .prc-success-meta span {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange-light);
+}
+
+.page-quote .prc-success-meta strong {
+  font-size: 14px;
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+
+.page-quote .prc-success-next h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-orange-light);
+}
+
+.page-quote .prc-success-next ol {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-quote .prc-success-actions .btn-main {
+  flex: 1 1 160px;
+  justify-content: center;
+}
+
+/* Section summary: 3-column thin layout */
+.page-quote .prc-two-thirds {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .page-quote .prc-two-thirds {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Center link */
+.page-quote .prc-center-link {
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.page-quote .prc-center-link a {
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-center-link a:hover {
+  text-decoration: underline;
+}
+
+/* Compact on mobile */
+@media (max-width: 575px) {
+  .page-quote .prc-step-btn {
+    min-height: 36px;
+    padding: 5px 11px;
+    font-size: 12px;
+  }
+
+  .page-quote .prc-step-btn b {
+    width: 18px;
+    height: 18px;
+    font-size: 10.5px;
+  }
+
+  .page-quote .prc-legend {
+    font-size: 11.5px;
+  }
+
+  .page-quote .prc-mode span {
+    padding: 12px 13px;
+    min-height: 80px;
+  }
+
+  .page-quote .prc-review-row {
+    font-size: 13px;
+  }
+
+  .page-quote .prc-success-meta {
+    grid-template-columns: 1fr;
+  }
+}
