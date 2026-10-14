@@ -1,39 +1,884 @@
 /* ===============================================================
    JP EXPRESS — CAREERS PAGE STYLES
-   Only selectors unique to careers.html are kept here.
    Page isolation: html.page-careers
-   ===============================================================
+   =============================================================== */
 
-/* Used only by: careers */
-.page-careers .jp-list {
-  display: grid;
-  gap: 10px;
-  padding: 0;
-  margin: 18px 0 0;
-  list-style: none;
+/* ===============================================================
+   BASE LAYOUT & SECTIONS
+   =============================================================== */
+.page-careers .jp-section {
+  padding: 48px 0;
+  background: #fff;
 }
 
-/* Used only by: careers */
-.page-careers .jp-list li {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
+.page-careers .jp-section.alt {
+  background: #f7f9fc;
+}
+
+.page-careers .container-xl {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 32px);
+}
+
+/* Section head */
+.page-careers .jp-section-head {
+  max-width: 720px;
+  margin-bottom: 32px;
+}
+
+.page-careers .jp-section-head.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-careers .jp-kicker {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+  margin-bottom: 8px;
+}
+
+.page-careers .jp-section-head h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.18;
+  letter-spacing: -.025em;
+  margin: 0 0 10px;
+}
+
+.page-careers .jp-section-head p {
   color: var(--jp-muted);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
 }
 
-/* Used only by: careers */
-.page-careers .jp-list li i {
-  color: var(--jp-green);
-  margin-top: 4px;
+/* ===============================================================
+   REVEAL ANIMATION
+   =============================================================== */
+.page-careers .jp-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22, .61, .36, 1);
 }
 
+.page-careers .jp-reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
 
-@media (max-width:575.98px) {
-  /* Used only by: careers */
-  .page-careers .jp-list li {
-    font-size: 13.5px;
+@media (prefers-reduced-motion: reduce) {
+  .page-careers .jp-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===============================================================
+   GRID SYSTEM
+   =============================================================== */
+.page-careers .jp-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.page-careers .jp-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 991px) {
+  .page-careers .jp-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575px) {
+  .page-careers .jp-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===============================================================
+   HERO ACTIONS
+   =============================================================== */
+.page-careers .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+@media (max-width: 767px) {
+  .page-careers .hero-actions {
+    flex-direction: column;
   }
 
+  .page-careers .hero-actions .btn-main {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===============================================================
+   CARDS (Why Work, Teams)
+   =============================================================== */
+.page-careers .jp-card {
+  background: #fff;
+  border: 1px solid #e3ebf5;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 6px 22px rgba(27, 37, 89, .05);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.page-careers .jp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 38px rgba(27, 37, 89, .11);
+  border-color: #f0c4ad;
+}
+
+.page-careers .jp-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: #fff2ed;
+  color: var(--jp-orange);
+  font-size: 19px;
+  margin-bottom: 14px;
+}
+
+.page-careers .jp-card h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  color: var(--jp-heading-color);
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.page-careers .jp-card p {
+  color: var(--jp-muted);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ===============================================================
+   FILTERS (Search + Selects)
+   =============================================================== */
+.page-careers .career-filters {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.page-careers .career-search {
+  position: relative;
+}
+
+.page-careers .career-search i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9aa8bb;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.page-careers .career-search input {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px 0 44px;
+  border: 1px solid #e3ebf5;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14.5px;
+  color: var(--jp-ink);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.page-careers .career-search input:focus {
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .1);
+}
+
+.page-careers .career-filters select {
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #e3ebf5;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 14.5px;
+  color: var(--jp-ink);
+  outline: none;
+  cursor: pointer;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.page-careers .career-filters select:focus {
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .1);
+}
+
+@media (max-width: 767px) {
+  .page-careers .career-filters {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* ===============================================================
+   JOB CARDS
+   =============================================================== */
+.page-careers .job-card {
+  background: #fff;
+  border: 1px solid #e3ebf5;
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 14px rgba(27, 37, 89, .04);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.page-careers .job-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(27, 37, 89, .1);
+  border-color: #f0c4ad;
+}
+
+.page-careers .job-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.page-careers .job-card-header h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  margin: 0;
+}
+
+.page-careers .job-type {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #fff2ed;
+  color: var(--jp-orange);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: capitalize;
+  letter-spacing: .02em;
+}
+
+.page-careers .job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  font-size: 13px;
+  color: #75849b;
+  margin-bottom: 10px;
+}
+
+.page-careers .job-meta i {
+  color: var(--jp-orange);
+  margin-right: 4px;
+}
+
+.page-careers .job-summary {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--jp-muted);
+  margin: 0 0 14px;
+}
+
+.page-careers .job-apply {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  padding: 8px 16px;
+  border: 1.5px solid var(--jp-navy);
+  border-radius: 10px;
+  background: transparent;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.page-careers .job-apply:hover {
+  background: var(--jp-navy);
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.page-careers .job-apply i {
+  font-size: .8em;
+}
+
+/* ===============================================================
+   EMPTY STATE
+   =============================================================== */
+.page-careers .jp-empty {
+  padding: 40px 24px;
+  text-align: center;
+  border: 1px dashed #d4deea;
+  border-radius: 18px;
+  color: #75849b;
+  background: #fff;
+}
+
+.page-careers .jp-empty i {
+  color: #c4d0e0;
+  margin-bottom: 14px;
+}
+
+.page-careers .jp-empty h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  margin: 0 0 8px;
+}
+
+.page-careers .jp-empty p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 16px;
+  color: var(--jp-muted);
+}
+
+/* ===============================================================
+   BUTTONS
+   =============================================================== */
+.page-careers .jp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 11px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 13.5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+.page-careers .jp-btn-primary {
+  background: var(--jp-orange);
+  color: #fff !important;
+  box-shadow: 0 10px 24px rgba(242, 99, 35, .22);
+}
+
+.page-careers .jp-btn-primary:hover {
+  transform: translateY(-2px);
+  background: #dc541b;
+  box-shadow: 0 14px 30px rgba(242, 99, 35, .3);
+}
+
+.page-careers .jp-btn-outline {
+  background: #fff;
+  border-color: var(--jp-navy);
+  color: var(--jp-navy) !important;
+}
+
+.page-careers .jp-btn-outline:hover {
+  background: var(--jp-navy);
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+/* ===============================================================
+   PROCESS STEPS
+   =============================================================== */
+.page-careers .process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  counter-reset: step;
+}
+
+.page-careers .process-step {
+  position: relative;
+  padding: 26px 18px 20px;
+  background: #fff;
+  border: 1px solid #e3ebf5;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(27, 37, 89, .04);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.page-careers .process-step:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(27, 37, 89, .1);
+}
+
+.page-careers .step-num {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--jp-orange);
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  box-shadow: 0 6px 16px rgba(242, 99, 35, .35);
+}
+
+.page-careers .process-step h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  margin: 12px 0 6px;
+}
+
+.page-careers .process-step p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--jp-muted);
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  .page-careers .process-steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-careers .process-steps {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* ===============================================================
+   APPLICATION FORM
+   =============================================================== */
+.page-careers .application-form {
+  max-width: 780px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e3ebf5;
+  border-radius: 20px;
+  padding: 32px clamp(20px, 4vw, 40px);
+  box-shadow: 0 10px 32px rgba(27, 37, 89, .07);
+}
+
+.page-careers .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.page-careers .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.page-careers .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.page-careers .form-group label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jp-heading-color);
+}
+
+.page-careers .form-group label .required {
+  color: var(--jp-orange);
+  font-weight: 800;
+}
+
+.page-careers .form-group input[type="text"],
+.page-careers .form-group input[type="email"],
+.page-careers .form-group input[type="tel"],
+.page-careers .form-group textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1px solid #dbe5f0;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 14.5px;
+  color: var(--jp-ink);
+  font-family: inherit;
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.page-careers .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+  padding-top: 12px;
+}
+
+.page-careers .form-group input:focus,
+.page-careers .form-group textarea:focus {
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .1);
+}
+
+.page-careers .form-group input.error,
+.page-careers .form-group textarea.error {
+  border-color: #d63a2f;
+  box-shadow: 0 0 0 4px rgba(214, 58, 47, .08);
+}
+
+.page-careers .error-msg {
+  font-size: 12px;
+  color: #d63a2f;
+  font-weight: 600;
+  min-height: 14px;
+}
+
+.page-careers .form-group input[type="file"] {
+  padding: 10px 14px;
+  border: 1px dashed #cbd9ea;
+  border-radius: 10px;
+  background: #f7f9fc;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.page-careers .form-group input[type="file"]:hover {
+  border-color: var(--jp-orange);
+  background: #fff8f4;
+}
+
+.page-careers .file-hint {
+  font-size: 12px;
+  color: #8a97b0;
+}
+
+.page-careers .checkbox-group {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.page-careers .checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex: 0 0 18px;
+  accent-color: var(--jp-orange);
+  cursor: pointer;
+}
+
+.page-careers .checkbox-group label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--jp-muted);
+  cursor: pointer;
+}
+
+.page-careers .checkbox-group label a {
+  color: var(--jp-orange);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page-careers .checkbox-group label a:hover {
+  color: #dc541b;
+}
+
+.page-careers .checkbox-group .error-msg {
+  width: 100%;
+  margin-left: 28px;
+}
+
+.page-careers .form-submit {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.page-careers .form-submit .jp-btn {
+  min-height: 50px;
+  padding: 12px 32px;
+  font-size: 15px;
+}
+
+.page-careers .form-submit .jp-btn:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.page-careers .form-status {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.page-careers .form-status.is-success {
+  background: #eef8f3;
+  border: 1px solid #ccebdd;
+  color: #146d48;
+}
+
+.page-careers .form-status.is-error {
+  background: #fdf1f0;
+  border: 1px solid #f5c8c4;
+  color: #a32b22;
+}
+
+@media (max-width: 767px) {
+  .page-careers .application-form {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  .page-careers .form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .page-careers .checkbox-group {
+    flex-direction: row;
+  }
+
+  .page-careers .form-submit .jp-btn {
+    width: 100%;
+  }
+}
+
+/* ===============================================================
+   FAQ ACCORDION
+   =============================================================== */
+.page-careers .jp-faq {
+  max-width: 840px;
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+}
+
+.page-careers .jp-accordion-item {
+  background: #fff;
+  border: 1px solid #e3ebf5;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.page-careers .jp-accordion-item:hover {
+  border-color: #f0c4ad;
+  box-shadow: 0 6px 18px rgba(27, 37, 89, .06);
+}
+
+.page-careers .jp-accordion-item.open {
+  border-color: var(--jp-orange);
+  box-shadow: 0 8px 22px rgba(242, 99, 35, .1);
+}
+
+.page-careers .jp-accordion-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px 20px;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.page-careers .jp-accordion-item.open .jp-accordion-btn {
+  color: var(--jp-orange);
+}
+
+.page-careers .jp-accordion-btn i {
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: var(--jp-navy);
+  transition: transform .3s ease, color .2s ease;
+}
+
+.page-careers .jp-accordion-item.open .jp-accordion-btn i {
+  transform: rotate(180deg);
+  color: var(--jp-orange);
+}
+
+.page-careers .jp-accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s ease, padding .35s ease;
+  padding: 0 20px;
+}
+
+.page-careers .jp-accordion-item.open .jp-accordion-panel {
+  max-height: 400px;
+  padding: 0 20px 18px;
+}
+
+.page-careers .jp-accordion-panel p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--jp-muted);
+  margin: 0;
+}
+
+.page-careers .jp-accordion-panel a {
+  color: var(--jp-orange);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page-careers .jp-accordion-panel a:hover {
+  color: #dc541b;
+}
+
+@media (max-width: 575px) {
+  .page-careers .jp-accordion-btn {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+
+  .page-careers .jp-accordion-item.open .jp-accordion-panel {
+    padding: 0 16px 16px;
+  }
+
+  .page-careers .jp-accordion-panel p {
+    font-size: 13.5px;
+  }
+}
+
+/* ===============================================================
+   MOBILE COMPACT — align with Home page density
+   =============================================================== */
+@media (max-width: 767px) {
+  .page-careers .jp-section {
+    padding: 24px 0;
+  }
+
+  .page-careers .jp-section-head {
+    margin-bottom: 20px;
+  }
+
+  .page-careers .jp-section-head h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+    line-height: 1.18;
+  }
+
+  .page-careers .jp-section-head p {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .page-careers .jp-card {
+    padding: 18px;
+    border-radius: 14px;
+  }
+
+  .page-careers .jp-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+
+  .page-careers .jp-card h3 {
+    font-size: 15.5px;
+  }
+
+  .page-careers .jp-card p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .page-careers .job-card {
+    padding: 16px 16px;
+    border-radius: 14px;
+  }
+
+  .page-careers .job-card-header h3 {
+    font-size: 15.5px;
+  }
+
+  .page-careers .job-meta {
+    font-size: 12.5px;
+    gap: 4px 12px;
+  }
+
+  .page-careers .job-summary {
+    font-size: 13px;
+  }
+
+  .page-careers .jp-empty {
+    padding: 28px 16px;
+    border-radius: 14px;
+  }
+
+  .page-careers .jp-empty h3 {
+    font-size: 16px;
+  }
+
+  .page-careers .jp-empty p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-careers .jp-section-head h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-careers .jp-card {
+    padding: 14px;
+  }
+
+  .page-careers .jp-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .page-careers .job-card {
+    padding: 14px;
+  }
+
+  .page-careers .job-card-header h3 {
+    font-size: 14.5px;
+  }
 }
