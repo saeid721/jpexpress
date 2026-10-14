@@ -4,22 +4,22 @@
    Full destination-page renderer based on COUNTRY_DATA.
    ========================================================= */
 (function () {
-    'use strict';
-    const root = document.getElementById('cdRoot');
-    if (!root || typeof COUNTRY_DATA === 'undefined') return;
+  'use strict';
+  const root = document.getElementById('cdRoot');
+  if (!root || typeof COUNTRY_DATA === 'undefined') return;
 
-    const q = new URLSearchParams(location.search);
-    const slug = (q.get('c') || q.get('country') || '').toLowerCase();
-    const d = COUNTRY_DATA[slug];
-    const WA = 'https://wa.me/8801681637836?text=';
-    const flag = (c, w) => `<img src="https://flagcdn.com/w80/${c}.png" width="${w}" height="${w}" alt="" loading="lazy">`;
-    const ul = (a, ic) => `<ul class="cd-list">${a.map(x => `<li><i class="fa-solid ${ic || 'fa-check'}" aria-hidden="true"></i>${x}</li>`).join('')}</ul>`;
-    const ask = (t) => `${WA}${encodeURIComponent(t)}`;
+  const q = new URLSearchParams(location.search);
+  const slug = (q.get('c') || q.get('country') || '').toLowerCase();
+  const d = COUNTRY_DATA[slug];
+  const WA = 'https://wa.me/8801681637836?text=';
+  const flag = (c, w) => `<img src="https://flagcdn.com/w80/${c}.png" width="${w}" height="${w}" alt="" loading="lazy">`;
+  const ul = (a, ic) => `<ul class="cd-list">${a.map(x => `<li><i class="fa-solid ${ic || 'fa-check'}" aria-hidden="true"></i>${x}</li>`).join('')}</ul>`;
+  const ask = (t) => `${WA}${encodeURIComponent(t)}`;
 
-    /* ---------- Not found ---------- */
-    if (!d) {
-        document.title = 'Destination Not Found | JP Express';
-        root.innerHTML = `<section class="pg-sec"><div class="container-fluid">
+  /* ---------- Not found ---------- */
+  if (!d) {
+    document.title = 'Destination Not Found | JP Express';
+    root.innerHTML = `<section class="pg-sec"><div class="container-fluid">
       <div class="ctr-empty" style="max-width:640px;margin:0 auto">
         <h1 style="margin:0 0 8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.6rem;color:var(--jp-navy)">We couldn’t find that destination</h1>
         <p>Browse the destinations we serve, or message us to check if we can ship to your country.</p>
@@ -29,60 +29,60 @@
         </div>
       </div>
     </div></section>`;
-        return;
-    }
+    return;
+  }
 
-    const keys = d.v.split('');
-    const sv = keys.map(k => SERVICES[k]);
-    const related = Object.keys(COUNTRY_DATA).filter(s => s !== slug)
-        .sort((a, b) => (COUNTRY_DATA[b].r === d.r) - (COUNTRY_DATA[a].r === d.r) || (COUNTRY_DATA[b].pop || 0) - (COUNTRY_DATA[a].pop || 0)).slice(0, 4);
+  const keys = d.v.split('');
+  const sv = keys.map(k => SERVICES[k]);
+  const related = Object.keys(COUNTRY_DATA).filter(s => s !== slug)
+    .sort((a, b) => (COUNTRY_DATA[b].r === d.r) - (COUNTRY_DATA[a].r === d.r) || (COUNTRY_DATA[b].pop || 0) - (COUNTRY_DATA[a].pop || 0)).slice(0, 4);
 
-    /* Build destination-specific FAQ (dedupe / fallback) */
-    const faqs = (d.faq && d.faq.length)
-        ? d.faq
-        : [
-            [`Does JP Express ship from Bangladesh to ${d.n}?`, `Yes. ${d.n} is a destination we serve, with ${sv.length} service options including ${sv.slice(0, 3).map(s => s.n).join(', ')}. Request a quote to confirm service, price and requirements for your shipment.`],
-            [`How long does shipping to ${d.n} take?`, `Express courier is typically estimated at ${d.t}. Actual time depends on service, shipment type, customs processing, remote areas, weekends/holidays and peak periods.`],
-            [`How is the cost to ${d.n} calculated?`, `Cost depends on actual or volumetric weight (whichever is higher), dimensions, shipment type, service level, pickup needs, surcharges and any destination duties or taxes.`],
-            ['What documents are required?', `Personal shipments usually need sender and recipient details, a contents description and declared value. Commercial shipments typically need a commercial invoice and packing list.`],
-            [`Are customs duties or taxes applicable in ${d.n}?`, `They may be. Duties and import taxes are separate from shipping charges and depend on goods, value and current ${d.n} rules.`],
-            ['Can I track my shipment?', 'Yes. Use your tracking number on our Track Shipment page for shipment status updates.'],
-            ['Can JP Express pick up from my address?', 'Pickup availability depends on your area in Bangladesh. Share your location when you request a quote and we will confirm options.']
-        ];
-
-    /* Steps for the process section */
-    const steps = [
-        ['Request a Quote', 'Share route, weight and contents.'],
-        ['Shipment Assessment', 'We review type, weight, dimensions and destination requirements.'],
-        ['Booking / Pickup', 'Schedule pickup or drop off your shipment.'],
-        ['Documentation', 'Prepare the required shipping and customs documents.'],
-        ['Dispatch from Bangladesh', 'Shipment enters the international network.'],
-        [`Processing in ${d.n}`, 'Destination handling and customs where applicable.'],
-        ['Final Delivery', 'Delivered to the recipient.'],
-        ['Track & Confirm', 'Follow status updates and delivery confirmation.']
+  /* Build destination-specific FAQ (dedupe / fallback) */
+  const faqs = (d.faq && d.faq.length)
+    ? d.faq
+    : [
+      [`Does JP Express ship from Bangladesh to ${d.n}?`, `Yes. ${d.n} is a destination we serve, with ${sv.length} service options including ${sv.slice(0, 3).map(s => s.n).join(', ')}. Request a quote to confirm service, price and requirements for your shipment.`],
+      [`How long does shipping to ${d.n} take?`, `Express courier is typically estimated at ${d.t}. Actual time depends on service, shipment type, customs processing, remote areas, weekends/holidays and peak periods.`],
+      [`How is the cost to ${d.n} calculated?`, `Cost depends on actual or volumetric weight (whichever is higher), dimensions, shipment type, service level, pickup needs, surcharges and any destination duties or taxes.`],
+      ['What documents are required?', `Personal shipments usually need sender and recipient details, a contents description and declared value. Commercial shipments typically need a commercial invoice and packing list.`],
+      [`Are customs duties or taxes applicable in ${d.n}?`, `They may be. Duties and import taxes are separate from shipping charges and depend on goods, value and current ${d.n} rules.`],
+      ['Can I track my shipment?', 'Yes. Use your tracking number on our Track Shipment page for shipment status updates.'],
+      ['Can JP Express pick up from my address?', 'Pickup availability depends on your area in Bangladesh. Share your location when you request a quote and we will confirm options.']
     ];
 
-    const nav = [
-        ['overview', 'Overview', 'fa-eye'],
-        ['who', 'Who Ships', 'fa-users'],
-        ['services', 'Services', 'fa-layer-group'],
-        ['process', 'Process', 'fa-list-check'],
-        ['quote', 'Cost & Transit', 'fa-calculator'],
-        ['docs', 'Documents', 'fa-file-lines'],
-        ['duties', 'Customs & Duties', 'fa-stamp'],
-        ['restrict', 'Restrictions', 'fa-ban'],
-        ['packaging', 'Packaging', 'fa-box'],
-        ['pickup', 'Pickup', 'fa-truck-pickup'],
-        ['tracking', 'Tracking & Delivery', 'fa-location-dot'],
-        ['business', 'Business', 'fa-briefcase'],
-        ['faq', 'FAQ', 'fa-circle-question']
-    ];
+  /* Steps for the process section */
+  const steps = [
+    ['Request a Quote', 'Share route, weight and contents.'],
+    ['Shipment Assessment', 'We review type, weight, dimensions and destination requirements.'],
+    ['Booking / Pickup', 'Schedule pickup or drop off your shipment.'],
+    ['Documentation', 'Prepare the required shipping and customs documents.'],
+    ['Dispatch from Bangladesh', 'Shipment enters the international network.'],
+    [`Processing in ${d.n}`, 'Destination handling and customs where applicable.'],
+    ['Final Delivery', 'Delivered to the recipient.'],
+    ['Track & Confirm', 'Follow status updates and delivery confirmation.']
+  ];
 
-    const sec = (id, t, body, alt) =>
-        `<section class="pg-sec cx${alt ? ' pg-alt' : ''}" id="${id}" aria-labelledby="${id}T"><div class="container-fluid"><h2 class="pg-h" id="${id}T">${t}</h2>${body}</div></section>`;
+  const nav = [
+    ['overview', 'Overview', 'fa-eye'],
+    ['who', 'Who Ships', 'fa-users'],
+    ['services', 'Services', 'fa-layer-group'],
+    ['process', 'Process', 'fa-list-check'],
+    ['quote', 'Cost & Transit', 'fa-calculator'],
+    ['docs', 'Documents', 'fa-file-lines'],
+    ['duties', 'Customs & Duties', 'fa-stamp'],
+    ['restrict', 'Restrictions', 'fa-ban'],
+    ['packaging', 'Packaging', 'fa-box'],
+    ['pickup', 'Pickup', 'fa-truck-pickup'],
+    ['tracking', 'Tracking & Delivery', 'fa-location-dot'],
+    ['business', 'Business', 'fa-briefcase'],
+    ['faq', 'FAQ', 'fa-circle-question']
+  ];
 
-    /* ---------------- RENDER ---------------- */
-    root.innerHTML = `
+  const sec = (id, t, body, alt) =>
+    `<section class="pg-sec cx${alt ? ' pg-alt' : ''}" id="${id}" aria-labelledby="${id}T"><div class="container-fluid"><h2 class="pg-h" id="${id}T">${t}</h2>${body}</div></section>`;
+
+  /* ---------------- RENDER ---------------- */
+  root.innerHTML = `
   <div class="container-fluid cd-stats-wrap"><div class="cd-stats">
     <div><i class="fa-regular fa-clock"></i><b>${d.t}</b><small>Express estimate</small></div>
     <div><i class="fa-solid fa-layer-group"></i><b>${sv.length}</b><small>Services</small></div>
@@ -272,13 +272,7 @@
     <div class="container-fluid">
       <h2 class="pg-h" id="relT">Other popular destinations</h2>
       <div class="ctr-grid">${related.map(s => { const c = COUNTRY_DATA[s]; return `<a class="ctr-card" href="country.html?c=${s}"><span class="ctr-card-top">${flag(c.c, 44)}<span><strong>${c.n}</strong><small>${c.r}</small></span></span><span class="ctr-card-meta"><span><i class="fa-regular fa-clock"></i> ${c.t}</span></span><span class="ctr-card-go">View guide <i class="fa-solid fa-arrow-right"></i></span></a>`; }).join('')}</div>
-      <div class="cd-res">
-        <a href="resources.html">Shipping guide</a>
-        <a href="resources.html">Customs guide</a>
-        <a href="resources.html">Restricted items</a>
-        <a href="resources.html">Export documentation</a>
-        <a href="countries.html">All destinations</a>
-      </div>
+      
     </div>
   </section>
 
@@ -297,82 +291,82 @@
     </div>
   </section>`;
 
-    /* ---------- SEO updates ---------- */
-    const title = `Shipping from Bangladesh to ${d.n} | JP Express`;
-    const desc = `Courier and freight from Bangladesh to ${d.n}: services, estimated ${d.t} transit, documents, customs notes, restricted items and a quote path.`;
-    const url = `https://www.jpex.com.bd/country.html?c=${slug}`;
-    document.title = title;
+  /* ---------- SEO updates ---------- */
+  const title = `Shipping from Bangladesh to ${d.n} | JP Express`;
+  const desc = `Courier and freight from Bangladesh to ${d.n}: services, estimated ${d.t} transit, documents, customs notes, restricted items and a quote path.`;
+  const url = `https://www.jpex.com.bd/country.html?c=${slug}`;
+  document.title = title;
 
-    const heroCrumb = document.querySelector('.page-hero .page-crumb [aria-current="page"]');
-    if (heroCrumb) heroCrumb.textContent = d.n;
-    const heroH1 = document.querySelector('.page-hero h1');
-    if (heroH1) heroH1.innerHTML = 'Shipping from Bangladesh to <span class="accent">' + d.n + '</span>';
-    const heroP = document.querySelector('.page-hero .hero-copy p');
-    if (heroP) heroP.textContent = 'Services, transit time, documents and customs notes from Bangladesh to ' + d.n + '.';
+  const heroCrumb = document.querySelector('.page-hero .page-crumb [aria-current="page"]');
+  if (heroCrumb) heroCrumb.textContent = d.n;
+  const heroH1 = document.querySelector('.page-hero h1');
+  if (heroH1) heroH1.innerHTML = 'Shipping from Bangladesh to <span class="accent">' + d.n + '</span>';
+  const heroP = document.querySelector('.page-hero .hero-copy p');
+  if (heroP) heroP.textContent = 'Services, transit time, documents and customs notes from Bangladesh to ' + d.n + '.';
 
-    const meta = (sel, attr, val) => { const e = document.querySelector(sel); if (e) e.setAttribute(attr, val); };
-    meta('meta[name="description"]', 'content', desc);
-    meta('link[rel="canonical"]', 'href', url);
-    meta('meta[property="og:title"]', 'content', title);
-    meta('meta[property="og:description"]', 'content', desc);
-    meta('meta[property="og:url"]', 'content', url);
-    meta('meta[name="twitter:title"]', 'content', title);
-    meta('meta[name="twitter:description"]', 'content', desc);
+  const meta = (sel, attr, val) => { const e = document.querySelector(sel); if (e) e.setAttribute(attr, val); };
+  meta('meta[name="description"]', 'content', desc);
+  meta('link[rel="canonical"]', 'href', url);
+  meta('meta[property="og:title"]', 'content', title);
+  meta('meta[property="og:description"]', 'content', desc);
+  meta('meta[property="og:url"]', 'content', url);
+  meta('meta[name="twitter:title"]', 'content', title);
+  meta('meta[name="twitter:description"]', 'content', desc);
 
-    const ld = o => { const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(o); document.head.appendChild(s); };
-    ld({
-        '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-        itemListElement: [
-            ['Home', 'index.html'],
-            ['Destinations', 'countries.html'],
-            [d.n, 'country.html?c=' + slug]
-        ].map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x[0], item: 'https://www.jpex.com.bd/' + x[1] }))
-    });
-    ld({
-        '@context': 'https://schema.org', '@type': 'FAQPage',
-        mainEntity: faqs.map(f => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } }))
-    });
+  const ld = o => { const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(o); document.head.appendChild(s); };
+  ld({
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      ['Home', 'index.html'],
+      ['Destinations', 'countries.html'],
+      [d.n, 'country.html?c=' + slug]
+    ].map((x, i) => ({ '@type': 'ListItem', position: i + 1, name: x[0], item: 'https://www.jpex.com.bd/' + x[1] }))
+  });
+  ld({
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({ '@type': 'Question', name: f[0], acceptedAnswer: { '@type': 'Answer', text: f[1] } }))
+  });
 
-    /* ---------- Interactions ---------- */
-    const $ = id => document.getElementById(id);
-    const f = ['qW', 'qL', 'qWd', 'qH', 'qType', 'qSvc'].map($);
+  /* ---------- Interactions ---------- */
+  const $ = id => document.getElementById(id);
+  const f = ['qW', 'qL', 'qWd', 'qH', 'qType', 'qSvc'].map($);
 
-    function calc() {
-        const n = i => parseFloat(f[i].value) || 0;
-        const vol = n(1) * n(2) * n(3) / 5000, ch = Math.max(n(0), vol);
-        $('qOut').textContent = ch ? ch.toFixed(2) + ' kg' : '—';
-        const dims = n(1) && n(2) && n(3) ? `${n(1)}×${n(2)}×${n(3)} cm` : 'not provided';
-        $('qWa').href = ask(`Hi JP Express, I'd like a quote.\nRoute: Bangladesh → ${d.n}\nType: ${f[4].value}\nService: ${f[5].value}\nWeight: ${n(0) || 'not provided'} kg\nDimensions: ${dims}\nChargeable weight: ${ch ? ch.toFixed(2) + ' kg' : 'n/a'}`);
-    }
-    f.forEach(e => e && e.addEventListener('input', calc));
-    calc();
-    const qForm = $('qForm');
-    if (qForm) qForm.addEventListener('submit', e => e.preventDefault());
+  function calc() {
+    const n = i => parseFloat(f[i].value) || 0;
+    const vol = n(1) * n(2) * n(3) / 5000, ch = Math.max(n(0), vol);
+    $('qOut').textContent = ch ? ch.toFixed(2) + ' kg' : '—';
+    const dims = n(1) && n(2) && n(3) ? `${n(1)}×${n(2)}×${n(3)} cm` : 'not provided';
+    $('qWa').href = ask(`Hi JP Express, I'd like a quote.\nRoute: Bangladesh → ${d.n}\nType: ${f[4].value}\nService: ${f[5].value}\nWeight: ${n(0) || 'not provided'} kg\nDimensions: ${dims}\nChargeable weight: ${ch ? ch.toFixed(2) + ' kg' : 'n/a'}`);
+  }
+  f.forEach(e => e && e.addEventListener('input', calc));
+  calc();
+  const qForm = $('qForm');
+  if (qForm) qForm.addEventListener('submit', e => e.preventDefault());
 
-    /* Tabs (personal / commercial) */
-    root.querySelectorAll('.cd-tabs button').forEach(b => b.addEventListener('click', () => {
-        const box = b.closest('.cd-card');
-        box.querySelectorAll('.cd-tabs button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', x === b); });
-        box.querySelectorAll('[data-p]').forEach(p => p.hidden = p.dataset.p !== b.dataset.t);
-    }));
+  /* Tabs (personal / commercial) */
+  root.querySelectorAll('.cd-tabs button').forEach(b => b.addEventListener('click', () => {
+    const box = b.closest('.cd-card');
+    box.querySelectorAll('.cd-tabs button').forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-selected', x === b); });
+    box.querySelectorAll('[data-p]').forEach(p => p.hidden = p.dataset.p !== b.dataset.t);
+  }));
 
-    /* Scroll-spy for sticky nav */
-    const links = [...root.querySelectorAll('#cdNav a')];
-    if ('IntersectionObserver' in window) {
-        const spy = new IntersectionObserver(es => es.forEach(e => {
-            if (e.isIntersecting) links.forEach(a => {
-                const on = a.getAttribute('href') === '#' + e.target.id;
-                a.classList.toggle('on', on);
-                if (on) a.parentElement.scrollTo({ left: a.offsetLeft - 24, behavior: 'smooth' });
-            });
-        }), { rootMargin: '-35% 0px -60% 0px' });
-        nav.forEach(n => { const s = $(n[0]); if (s) spy.observe(s); });
+  /* Scroll-spy for sticky nav */
+  const links = [...root.querySelectorAll('#cdNav a')];
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) links.forEach(a => {
+        const on = a.getAttribute('href') === '#' + e.target.id;
+        a.classList.toggle('on', on);
+        if (on) a.parentElement.scrollTo({ left: a.offsetLeft - 24, behavior: 'smooth' });
+      });
+    }), { rootMargin: '-35% 0px -60% 0px' });
+    nav.forEach(n => { const s = $(n[0]); if (s) spy.observe(s); });
 
-        const rev = new IntersectionObserver(es => es.forEach(e => {
-            if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); }
-        }), { threshold: 0.08 });
-        root.querySelectorAll('.cx').forEach(s => rev.observe(s));
-    } else {
-        root.querySelectorAll('.cx').forEach(s => s.classList.add('in'));
-    }
+    const rev = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); rev.unobserve(e.target); }
+    }), { threshold: 0.08 });
+    root.querySelectorAll('.cx').forEach(s => rev.observe(s));
+  } else {
+    root.querySelectorAll('.cx').forEach(s => s.classList.add('in'));
+  }
 })();
