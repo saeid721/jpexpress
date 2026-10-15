@@ -1,22 +1,8 @@
 /* ===============================================================
    JP EXPRESS — SHARED PRODUCTION STYLES
-   ---------------------------------------------------------------
-   Architecture:
    • style.css contains shared/base CSS only.
-   • Page-only rules live under css/pages/<page>.css.
-   • .template-jp scopes the shared supporting-page template.
-   • .template-countries scopes country-list/detail shared styles.
-   • Each page receives page-* and template-* classes on <html>.
-   • Duplicate selectors are merged; stale unused rules are removed.
-   ---------------------------------------------------------------
-   Template usage:
-   • template-jp: air-freight, careers, export-logistics, faq, import-solutions, international-courier, leadership, legal, media-center, our-story, privacy-policy, sea-freight, shipping-guides, sitemap, terms-of-service
-   • template-countries: countries, country
    =============================================================== */
 
-/* ===============================================================
-   DESIGN TOKENS — shared by every page
-   =============================================================== */
 :root {
   --jp-navy: #2B3990;
   --jp-navy-dark: #1E2A6B;
