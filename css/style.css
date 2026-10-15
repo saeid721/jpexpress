@@ -213,6 +213,8 @@
   --sp-rem-lg: 0.95rem;
   --sp-rem-2xl: 1.8rem;
   --text-white: #ffffff;
+  --red: #F26323;
+  --green: #1da86b;
   --red-dark: #d9531e;
   --cyan: #12a5c6;
   --surface: #ffffff;
@@ -3340,8 +3342,15 @@ html.template-jp body {
 }
 
 .template-jp ::selection {
-  background: var(--red);
-  color: var(--text-white);
+  background: var(--jp-orange);
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.template-jp ::-moz-selection {
+  background: var(--jp-orange);
+  color: #ffffff;
+  text-shadow: none;
 }
 
 .template-jp :focus-visible {
