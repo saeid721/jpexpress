@@ -4,16 +4,15 @@
    ========================================================= */
 
 const BLOG_CATS = {
-    'export-tips': 'Export Tips',
-    'country-guide': 'Country Guides',
-    'packaging': 'Packaging',
-    'logistics': 'Logistics',
-    'customs': 'Customs',
-    'business-growth': 'Business Growth',
-    'courier-news': 'Courier News',
-    'international-trade': 'International Trade'
+    'courier-news': 'International Courier & Shipping',
+    'export-tips': 'Export & Import',
+    'logistics': 'Freight Forwarding & Cargo',
+    'customs': 'Customs Clearance & Documentation',
+    'packaging': 'Packaging & Shipment Preparation',
+    'country-guide': 'Country & Destination Guides',
+    'business-growth': 'Business Shipping & E-commerce',
+    'news': 'JP Express News & Service Updates'
 };
-
 const BLOG_POSTS = [
     {
         slug: 'first-export-shipment',
@@ -27,6 +26,8 @@ const BLOG_POSTS = [
         k: 'red',
         f: 1,
         q: 'export shipment bangladesh documents checklist first export',
+        image: 'assets/business-solution.jpg',
+        alt: 'Preparing an export shipment from Bangladesh with documents and cargo',
         content: `
       <p>Starting your export journey from Bangladesh can feel overwhelming, but with the right preparation, it becomes a straightforward process. This guide walks you through everything you need to know before your first shipment leaves Dhaka.</p>
 
@@ -312,7 +313,7 @@ const BLOG_POSTS = [
     },
     {
         slug: 'international-market-framework',
-        c: 'international-trade',
+        c: 'export-tips',
         t: 'Finding your next international market: a starter framework',
         x: 'Use demand, route and compliance signals to plan expansion.',
         d: '2026-07-09',
@@ -349,3 +350,42 @@ const BLOG_POSTS = [
     `
     }
 ];
+
+
+/* =========================================================
+   v2 — AUTHOR, SERVICE LINKS, PUBLISHING RULES
+   ========================================================= */
+const BLOG_AUTHOR = 'JP Express Editorial Team';
+
+const BLOG_SERVICES = {
+    courier: { t: 'International Courier', d: 'Documents & parcels worldwide', u: 'services/international-courier.html', i: 'fa-plane' },
+    air: { t: 'Air Freight', d: 'Fast cargo for commercial shipments', u: 'services/air-freight.html', i: 'fa-plane-departure' },
+    sea: { t: 'Sea Freight', d: 'FCL & LCL for bulk cargo', u: 'services/sea-freight.html', i: 'fa-ship' },
+    export: { t: 'Export Logistics', d: 'Documentation & export support', u: 'services/export-logistics.html', i: 'fa-boxes-packing' },
+    import: { t: 'Import Solutions', d: 'Sourcing, customs & delivery', u: 'services/import-solutions.html', i: 'fa-truck-ramp-box' },
+    ecom: { t: 'E-commerce Shipping', d: 'Cross-border orders & seller shipping', u: 'industries/e-commerce.html', i: 'fa-cart-shopping' },
+    countries: { t: 'Destinations', d: 'Country shipping guides', u: 'countries.html', i: 'fa-globe' }
+};
+
+/* Which services are shown beside each category (used on the article page) */
+const BLOG_CAT_SERVICES = {
+    'courier-news': ['courier', 'air'],
+    'export-tips': ['export', 'courier'],
+    'logistics': ['air', 'sea'],
+    'customs': ['export', 'import'],
+    'packaging': ['courier', 'export'],
+    'country-guide': ['countries', 'courier'],
+    'business-growth': ['ecom', 'courier'],
+    'news': ['courier', 'export']
+};
+
+/* Hide drafts, archived and future-scheduled posts.
+   Optional post fields: s:'draft'|'archived', d:'YYYY-MM-DD' (future = scheduled),
+   u:'YYYY-MM-DD' (updated date), a:'Author name', image:'assets/x.jpg', alt:'Image description' */
+(function () {
+    var today = new Date().toISOString().slice(0, 10);
+    for (var i = BLOG_POSTS.length - 1; i >= 0; i--) {
+        var p = BLOG_POSTS[i];
+        if (p.s === 'draft' || p.s === 'archived' || (p.d && p.d > today)) BLOG_POSTS.splice(i, 1);
+    }
+})();

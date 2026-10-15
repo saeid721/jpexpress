@@ -24,7 +24,7 @@
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="theme-color" content="#2B3990">
 
-    <!-- 03. Canonical & Language -->
+    <!-- 03. Canonical & Language (JS updates) -->
     <link rel="alternate" hreflang="en" href="https://www.jpex.com.bd/blog.html">
     <link rel="alternate" hreflang="x-default" href="https://www.jpex.com.bd/blog.html">
     <link rel="canonical" href="https://www.jpex.com.bd/blog.html">
@@ -84,6 +84,7 @@
 </head>
 
 <body>
+    <div class="bd-progress" aria-hidden="true"><span id="bdProgress"></span></div>
     <header class="site-header" id="siteHeader">
         <!-- Top Bar -->
         <div class="topbar" id="topBar">
@@ -291,14 +292,17 @@
                         <a href="blog.html">Blog</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                         <span aria-current="page" id="bdCrumbTitle">Article</span>
                     </nav>
-                    <div class="hero-kicker"><span>JP EXPRESS</span> KNOWLEDGE CENTER</div>
+                    <div class="hero-kicker"><span>JP EXPRESS</span> KNOWLEDGE CENTER<span class="bd-kicker-cat"
+                            id="bdCategoryPill"></span></div>
                     <h1 id="bdTitle">Article</h1>
                     <p id="bdExcerpt"></p>
                     <div class="bd-meta-hero">
+                        <span><i class="fa-regular fa-user" aria-hidden="true"></i> <span id="bdAuthor"></span></span>
                         <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> <time id="bdDate"></time></span>
+                        <span id="bdUpdatedWrap" hidden><i class="fa-solid fa-rotate" aria-hidden="true"></i> <time
+                                id="bdUpdated"></time></span>
                         <span><i class="fa-regular fa-clock" aria-hidden="true"></i> <span id="bdReadTime"></span> min
                             read</span>
-                        <span id="bdCategoryPill" class="bd-cat-pill"></span>
                     </div>
                 </div>
             </div>
@@ -343,35 +347,9 @@
                     </article>
 
                     <aside class="bd-sidebar" id="bdSidebar" aria-label="Related content">
-                        <div class="bd-cta-card">
-                            <div class="bd-cta-icon"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></div>
-                            <h3>Need to ship?</h3>
-                            <p>Get a fast quote for your international courier or freight shipment from Bangladesh.</p>
-                            <a href="quote.html" class="btn-main btn-red w-100">Get a Quote <i
-                                    class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-                            <a href="track-shipment.html" class="bd-cta-link">Track an existing shipment <i
-                                    class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-                        </div>
-
                         <div class="bd-related" id="bdRelated" hidden>
                             <h3>Related articles</h3>
                             <ul id="bdRelatedList"></ul>
-                        </div>
-
-                        <div class="bd-related">
-                            <h3>Country guides</h3>
-                            <ul class="bd-country-list">
-                                <li><a href="country.html?c=usa"><img src="https://flagcdn.com/w40/us.png" width="20"
-                                            height="20" alt="" loading="lazy"> United States</a></li>
-                                <li><a href="country.html?c=uk"><img src="https://flagcdn.com/w40/gb.png" width="20"
-                                            height="20" alt="" loading="lazy"> United Kingdom</a></li>
-                                <li><a href="country.html?c=uae"><img src="https://flagcdn.com/w40/ae.png" width="20"
-                                            height="20" alt="" loading="lazy"> UAE</a></li>
-                                <li><a href="country.html?c=canada"><img src="https://flagcdn.com/w40/ca.png" width="20"
-                                            height="20" alt="" loading="lazy"> Canada</a></li>
-                                <li><a href="countries.html">All destinations <i class="fa-solid fa-arrow-right"
-                                            aria-hidden="true"></i></a></li>
-                            </ul>
                         </div>
                     </aside>
                 </div>
@@ -503,6 +481,9 @@
     <script>
         /* =========================================================
            BLOG DETAIL PAGE LOGIC — SELF-CONTAINED
+           One template for every article.
+           Content source: BLOG_POSTS[].content
+           (swap the getContent() function later for an API call)
            ========================================================= */
         (function () {
             'use strict';
@@ -511,39 +492,64 @@
             var qs = new URLSearchParams(window.location.search);
             var slug = (qs.get('slug') || qs.get('article') || '').toLowerCase().trim();
 
-            // 1) Guard: blog data must be present
+            /* ---------- 1. Guard: blog data must exist ---------- */
             if (typeof BLOG_POSTS === 'undefined' || !Array.isArray(BLOG_POSTS)) {
                 showNotFound();
                 document.title = 'Blog Unavailable | JP Express';
                 return;
             }
 
-            // 2) Find by explicit slug (blog-data.js defines it)
+            /* ---------- 2. Find the post by slug (or slugified title) ---------- */
             var post = null;
             for (var i = 0; i < BLOG_POSTS.length; i++) {
                 var p = BLOG_POSTS[i];
                 if ((p.slug || '').toLowerCase() === slug) { post = p; break; }
-                // Fallback: match by slugified title
-                if (!post) {
-                    var titleSlug = (p.t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                    if (titleSlug === slug) post = p;
+            }
+            if (!post && slug) {
+                for (var j = 0; j < BLOG_POSTS.length; j++) {
+                    var t = (BLOG_POSTS[j].t || '').toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    if (t === slug) { post = BLOG_POSTS[j]; break; }
                 }
             }
 
-            if (!post) { showNotFound(); document.title = 'Article Not Found | JP Express'; return; }
+            if (!post) {
+                showNotFound();
+                document.title = 'Article Not Found | JP Express';
+                return;
+            }
 
-            // 3) Data with fallbacks
-            var catLabel = (typeof BLOG_CATS !== 'undefined' && BLOG_CATS[post.c]) ? BLOG_CATS[post.c] : 'Article';
-            var dateStr = post.d ? new Date(post.d + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+            /* ---------- 3. Resolve data with fallbacks ---------- */
+            var catLabel = (typeof BLOG_CATS !== 'undefined' && BLOG_CATS[post.c])
+                ? BLOG_CATS[post.c] : 'Article';
+            var fmtDate = function (d) {
+                return new Date(d + 'T00:00:00').toLocaleDateString('en-GB',
+                    { day: '2-digit', month: 'short', year: 'numeric' });
+            };
+            var dateStr = post.d ? fmtDate(post.d) : '';
             var readTime = post.r || 5;
-            var content = post.content || post.fx || post.x || '<p>Full article content coming soon.</p>';
-            var featuredImage = post.image || 'assets/hero-banner2.jpg';
-            var imageAlt = post.t || 'JP Express article';
-            var pageUrl = window.location.href.split('#')[0];
-            var absoluteUrl = 'https://www.jpex.com.bd/blog-detail.html?slug=' + encodeURIComponent(post.slug);
-            var absoluteImage = featuredImage.indexOf('http') === 0 ? featuredImage : 'https://www.jpex.com.bd/' + featuredImage;
+            var authorName = post.a || (typeof BLOG_AUTHOR !== 'undefined'
+                ? BLOG_AUTHOR : 'JP Express Editorial Team');
 
-            // 4) Update visible elements
+            var CAT_IMG = {
+                'courier-news': 'assets/hero-banner2.jpg',
+                'export-tips': 'assets/business-solution.jpg',
+                'logistics': 'assets/container-ship.png',
+                'customs': 'assets/hero-banner3.jpg',
+                'packaging': 'assets/domestic-02.jpg',
+                'country-guide': 'assets/Airliner-Orbiting-a-Glowing-Earth.png',
+                'business-growth': 'assets/stroy.jpg',
+                'news': 'assets/hero-banner.png'
+            };
+            var featuredImage = post.image || CAT_IMG[post.c] || 'assets/hero-banner2.jpg';
+            var imageAlt = post.alt || post.t || 'JP Express article';
+            var absoluteUrl = 'https://www.jpex.com.bd/blog-detail.html?slug='
+                + encodeURIComponent(post.slug);
+            var absoluteImage = featuredImage.indexOf('http') === 0
+                ? featuredImage
+                : 'https://www.jpex.com.bd/' + featuredImage;
+
+            /* ---------- 4. Update visible hero elements ---------- */
             document.title = post.t + ' | JP Express Blog';
             $('bdTitle').textContent = post.t;
             $('bdExcerpt').textContent = post.x || post.fx || '';
@@ -551,9 +557,15 @@
             $('bdDate').textContent = dateStr;
             $('bdDate').setAttribute('datetime', post.d || '');
             $('bdReadTime').textContent = readTime;
-            $('bdCategoryPill').textContent = catLabel;
+            $('bdCategoryPill').textContent = ' · ' + catLabel;
+            $('bdAuthor').textContent = authorName;
+            if (post.u) {
+                $('bdUpdated').textContent = 'Updated ' + fmtDate(post.u);
+                $('bdUpdated').setAttribute('datetime', post.u);
+                $('bdUpdatedWrap').hidden = false;
+            }
 
-            // 5) Meta tags
+            /* ---------- 5. Meta tags ---------- */
             var setMeta = function (sel, attr, val) {
                 var el = document.querySelector(sel);
                 if (el) el.setAttribute(attr, val);
@@ -570,7 +582,7 @@
             setMeta('meta[name="twitter:description"]', 'content', post.x || post.fx || '');
             setMeta('meta[name="twitter:image"]', 'content', absoluteImage);
 
-            // 6) JSON-LD BlogPosting
+            /* ---------- 6. JSON-LD: BlogPosting + Breadcrumb ---------- */
             var ld = document.getElementById('ld-article');
             if (ld) {
                 ld.textContent = JSON.stringify({
@@ -580,7 +592,7 @@
                     'description': post.x || post.fx || '',
                     'image': [absoluteImage],
                     'datePublished': post.d,
-                    'dateModified': post.d,
+                    'dateModified': post.u || post.d,
                     'articleSection': catLabel,
                     'author': { '@type': 'Organization', 'name': 'JP Express' },
                     'publisher': {
@@ -591,57 +603,113 @@
                     'mainEntityOfPage': { '@type': 'WebPage', '@id': absoluteUrl }
                 });
             }
+            var bcLd = document.createElement('script');
+            bcLd.type = 'application/ld+json';
+            bcLd.textContent = JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://www.jpex.com.bd/' },
+                    { '@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': 'https://www.jpex.com.bd/blog.html' },
+                    { '@type': 'ListItem', 'position': 3, 'name': post.t, 'item': absoluteUrl }
+                ]
+            });
+            document.head.appendChild(bcLd);
 
-            // 7) Build article HTML
+            /* ---------- 7. Build the article body ---------- */
             var contentEl = $('bdContent');
+            if (!contentEl) { showNotFound(); return; }
+
             var placeholder = contentEl.querySelector('.bd-placeholder');
             if (placeholder) placeholder.remove();
 
-            var bodyHtml = '<figure class="bd-featured-img"><img src="' + featuredImage + '" alt="' + imageAlt + '" loading="lazy" width="1200" height="675"></figure>';
-
-            // Wrap plain text into paragraphs (blog-data.js uses HTML, but be safe)
-            if (typeof content === 'string' && !content.trim().startsWith('<')) {
-                content = content.split(/\n\n+/).map(function (p) { return '<p>' + p.trim() + '</p>'; }).join('');
+            /* Content source. Replace this function with an API fetch later. */
+            function getContent(p) {
+                return p.content || p.fx || p.x || '';
             }
-            bodyHtml += '<div class="bd-content">' + content + '</div>';
+            var rawContent = String(getContent(post) || '').trim();
 
-            // Insert BEFORE the TOC so the TOC sits at top of article
+            if (!rawContent) {
+                rawContent = '<p>Full article content coming soon. Please check back later or '
+                    + '<a href="contact.html">contact our team</a> for details.</p>';
+            } else if (rawContent.charAt(0) !== '<') {
+                rawContent = rawContent.split(/\n{2,}/).map(function (para) {
+                    return '<p>' + para.trim().replace(/\n/g, '<br>') + '</p>';
+                }).join('');
+            }
+
+            /* Featured image element */
+            var figEl = document.createElement('figure');
+            figEl.className = 'bd-featured-img';
+            var imgEl = document.createElement('img');
+            imgEl.src = featuredImage;
+            imgEl.alt = imageAlt;
+            imgEl.width = 1200;
+            imgEl.height = 675;
+            imgEl.loading = 'eager';
+            imgEl.setAttribute('fetchpriority', 'high');
+            figEl.appendChild(imgEl);
+
+            /* Body element (no data-reveal — keep it visible immediately) */
+            var bodyEl = document.createElement('div');
+            bodyEl.className = 'bd-content';
+            bodyEl.innerHTML = rawContent;
+
+            /* Insert in the correct order: figure → TOC → body → share */
             var tocEl = $('bdToc');
-            if (tocEl) {
-                tocEl.insertAdjacentHTML('beforebegin', bodyHtml);
+            var shareEl = $('bdShare');
+
+            if (tocEl && tocEl.parentNode === contentEl) {
+                contentEl.insertBefore(figEl, tocEl);
+                contentEl.insertBefore(bodyEl, tocEl.nextSibling);
             } else {
-                contentEl.insertAdjacentHTML('afterbegin', bodyHtml);
+                contentEl.insertBefore(figEl, contentEl.firstChild);
+                contentEl.insertBefore(bodyEl, figEl.nextSibling);
             }
 
-            // 8) Build Table of Contents
-            var contentDiv = contentEl.querySelector('.bd-content');
-            if (contentDiv) {
-                var headings = contentDiv.querySelectorAll('h2, h3');
-                var tocList = $('bdTocList');
-                if (headings.length > 1 && tocList && tocEl) {
-                    headings.forEach(function (h, idx) {
-                        if (!h.id) {
-                            h.id = (h.textContent || 'section').toLowerCase()
-                                .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || ('section-' + idx);
-                        }
-                        var li = document.createElement('li');
-                        if (h.tagName === 'H3') li.className = 'bd-toc-sub';
-                        var a = document.createElement('a');
-                        a.href = '#' + h.id;
-                        a.textContent = h.textContent;
-                        li.appendChild(a);
-                        tocList.appendChild(li);
+            /* ---------- 8. Build the Table of Contents ---------- */
+            var headings = bodyEl.querySelectorAll('h2, h3');
+            var tocList = $('bdTocList');
+            if (headings.length > 1 && tocList && tocEl) {
+                Array.prototype.forEach.call(headings, function (h, idx) {
+                    if (!h.id) {
+                        h.id = (h.textContent || 'section').toLowerCase()
+                            .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+                            || ('section-' + idx);
+                    }
+                    var li = document.createElement('li');
+                    if (h.tagName === 'H3') li.className = 'bd-toc-sub';
+                    var a = document.createElement('a');
+                    a.href = '#' + h.id;
+                    a.textContent = h.textContent;
+                    li.appendChild(a);
+                    tocList.appendChild(li);
+                });
+                tocEl.removeAttribute('hidden');
+
+                /* Mobile: collapsible TOC */
+                var tocTitle = tocEl.querySelector('.bd-toc-title');
+                if (tocTitle && window.matchMedia('(max-width: 1023.98px)').matches) {
+                    tocEl.classList.add('is-collapsed');
+                    tocTitle.setAttribute('role', 'button');
+                    tocTitle.setAttribute('tabindex', '0');
+                    tocTitle.setAttribute('aria-expanded', 'false');
+                    var toggleToc = function () {
+                        var closed = tocEl.classList.toggle('is-collapsed');
+                        tocTitle.setAttribute('aria-expanded', String(!closed));
+                    };
+                    tocTitle.addEventListener('click', toggleToc);
+                    tocTitle.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleToc(); }
                     });
-                    tocEl.removeAttribute('hidden');
-                } else if (tocEl) {
-                    tocEl.hidden = true;
                 }
+            } else if (tocEl) {
+                tocEl.hidden = true;
             }
 
-            // 9) Share links
-            var shareWrap = $('bdShare');
-            if (shareWrap) {
-                shareWrap.removeAttribute('hidden');
+            /* ---------- 9. Share links ---------- */
+            if (shareEl) {
+                shareEl.removeAttribute('hidden');
                 var encUrl = encodeURIComponent(absoluteUrl);
                 var encText = encodeURIComponent(post.t + ' — Read on JP Express Blog');
                 $('bdShareWa').href = 'https://wa.me/?text=' + encText + '%20' + encUrl;
@@ -649,7 +717,6 @@
                 $('bdShareFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encUrl;
             }
 
-            // 10) Copy link
             var copyBtn = $('bdShareCopy');
             if (copyBtn) {
                 copyBtn.addEventListener('click', function () {
@@ -676,7 +743,7 @@
                 });
             }
 
-            // 11) Related articles
+            /* ---------- 10. Related articles ---------- */
             var relatedWrap = $('bdRelated');
             var relatedList = $('bdRelatedList');
             if (relatedWrap && relatedList) {
@@ -693,19 +760,21 @@
                 if (related.length) {
                     relatedWrap.removeAttribute('hidden');
                     relatedList.innerHTML = related.map(function (p) {
-                        var rDate = p.d ? new Date(p.d + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
-                        var rCat = (typeof BLOG_CATS !== 'undefined' && BLOG_CATS[p.c]) ? BLOG_CATS[p.c] : 'Article';
+                        var rDate = p.d ? new Date(p.d + 'T00:00:00').toLocaleDateString('en-GB',
+                            { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+                        var rCat = (typeof BLOG_CATS !== 'undefined' && BLOG_CATS[p.c])
+                            ? BLOG_CATS[p.c] : 'Article';
                         var rUrl = 'blog-detail.html?slug=' + encodeURIComponent(p.slug);
-                        return '<li><a href="' + rUrl + '">' +
-                            '<span class="bd-rel-cat">' + rCat + '</span>' +
-                            '<span class="bd-rel-title">' + p.t + '</span>' +
-                            '<span class="bd-rel-date">' + rDate + '</span>' +
-                            '</a></li>';
+                        return '<li><a href="' + rUrl + '">'
+                            + '<span class="bd-rel-cat">' + rCat + '</span>'
+                            + '<span class="bd-rel-title">' + p.t + '</span>'
+                            + '<span class="bd-rel-date">' + rDate + '</span>'
+                            + '</a></li>';
                     }).join('');
                 }
             }
 
-            // 12) Smooth TOC scroll
+            /* ---------- 11. Smooth TOC scroll ---------- */
             contentEl.querySelectorAll('.bd-toc a[href^="#"]').forEach(function (a) {
                 a.addEventListener('click', function (e) {
                     var target = document.querySelector(a.getAttribute('href'));
@@ -716,18 +785,96 @@
                 });
             });
 
-            // 13) Reveal content
-            if (contentDiv) contentDiv.setAttribute('data-reveal', '');
+            /* ---------- 12. Reading progress bar ---------- */
+            var bar = $('bdProgress');
+            if (bar) {
+                var ticking = false;
+                var updateBar = function () {
+                    var r = bodyEl.getBoundingClientRect();
+                    var total = r.height - window.innerHeight * 0.5;
+                    var pct = total > 0 ? Math.min(100, Math.max(0, (-r.top / total) * 100)) : 100;
+                    bar.style.width = pct + '%';
+                    ticking = false;
+                };
+                window.addEventListener('scroll', function () {
+                    if (!ticking) { ticking = true; requestAnimationFrame(updateBar); }
+                }, { passive: true });
+                window.addEventListener('resize', updateBar);
+                updateBar();
+            }
 
-            /* ----------------- Helpers ----------------- */
+            /* ---------- 13. TOC active-section highlight ---------- */
+            var tocLinks = contentEl.querySelectorAll('.bd-toc a[href^="#"]');
+            if (tocLinks.length && 'IntersectionObserver' in window) {
+                var tocMap = {};
+                tocLinks.forEach(function (a) { tocMap[a.getAttribute('href').slice(1)] = a; });
+                var spy = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (!en.isIntersecting) return;
+                        tocLinks.forEach(function (a) { a.classList.remove('is-active'); });
+                        var hit = tocMap[en.target.id];
+                        if (hit) hit.classList.add('is-active');
+                    });
+                }, { rootMargin: '-90px 0px -70% 0px' });
+                bodyEl.querySelectorAll('h2, h3').forEach(function (h) {
+                    if (tocMap[h.id]) spy.observe(h);
+                });
+            }
+
+            /* ---------- 14. In-article CTA ---------- */
+            var h2s = bodyEl.querySelectorAll('h2');
+            if (h2s.length > 2) {
+                h2s[Math.floor(h2s.length / 2)].insertAdjacentHTML('beforebegin',
+                    '<aside class="bd-inline-cta" aria-label="Ship with JP Express">'
+                    + '<div class="bd-ic-copy"><strong>Ready to ship?</strong>'
+                    + '<span>Get a fast quote from JP Express for your next shipment.</span></div>'
+                    + '<div class="bd-ic-actions">'
+                    + '<a class="btn-main btn-red" href="quote.html">Get a Quote</a>'
+                    + '<a class="bd-ic-link" href="track-shipment.html">Track Shipment</a>'
+                    + '</div></aside>');
+            }
+
+            /* ---------- 15. Author box + previous / next article ---------- */
+            if (shareEl) {
+                var sorted = BLOG_POSTS.slice().sort(function (a, b) {
+                    return b.d.localeCompare(a.d);
+                });
+                var at = sorted.indexOf(post);
+                var navLink = function (p, label, cls) {
+                    if (!p) return '<span class="bd-nav-item is-empty"></span>';
+                    return '<a class="bd-nav-item ' + cls + '" href="blog-detail.html?slug='
+                        + encodeURIComponent(p.slug) + '">'
+                        + '<small>' + label + '</small><strong>' + p.t + '</strong></a>';
+                };
+                shareEl.insertAdjacentHTML('afterend',
+                    '<div class="bd-author"><span class="bd-author-av" aria-hidden="true">JP</span>'
+                    + '<div><strong>' + authorName + '</strong>'
+                    + '<p>Practical guides on international courier, export logistics and shipping from Bangladesh.</p>'
+                    + '</div></div>'
+                    + '<nav class="bd-nav" aria-label="More articles">'
+                    + navLink(sorted[at + 1], 'Older article', 'is-prev')
+                    + navLink(sorted[at - 1], 'Newer article', 'is-next')
+                    + '</nav>');
+            }
+
+            /* ---------- Helpers ---------- */
             function showNotFound() {
+                ['robots', 'googlebot', 'bingbot'].forEach(function (n) {
+                    var m = document.querySelector('meta[name="' + n + '"]');
+                    if (m) m.setAttribute('content', 'noindex, follow');
+                });
                 var bodySec = $('bdBodySec');
                 if (bodySec) {
-                    bodySec.innerHTML = '<div class="container-fluid bl-wrap">' +
-                        '<div class="bd-empty"><div class="bd-empty-icon"><i class="fa-solid fa-file-circle-question" aria-hidden="true"></i></div>' +
-                        '<h2>Article not found</h2><p>We couldn\'t find the article you\'re looking for. It may have been moved or removed.</p>' +
-                        '<div class="bd-empty-actions"><a href="blog.html" class="btn-main btn-red">Back to Blog</a>' +
-                        '<a href="contact.html" class="btn-main btn-dark-outline">Contact Support</a></div></div></div>';
+                    bodySec.innerHTML =
+                        '<div class="container-fluid bl-wrap">'
+                        + '<div class="bd-empty">'
+                        + '<div class="bd-empty-icon"><i class="fa-solid fa-file-circle-question" aria-hidden="true"></i></div>'
+                        + '<h2>Article not found</h2>'
+                        + '<p>We couldn\'t find the article you\'re looking for. It may have been moved or removed.</p>'
+                        + '<div class="bd-empty-actions">'
+                        + '<a href="blog.html" class="btn-main btn-red">Back to Blog</a>'
+                        + '<a href="contact.html" class="btn-main btn-dark-outline">Contact Support</a>'
+                        + '</div></div></div>';
                 }
                 var titleEl = $('bdTitle');
                 if (titleEl) titleEl.textContent = 'Article not found';

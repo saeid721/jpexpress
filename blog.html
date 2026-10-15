@@ -82,6 +82,10 @@
     {"@type":"Blog","@id":"https://www.jpex.com.bd/blog.html#blog","url":"https://www.jpex.com.bd/blog.html","name":"Shipping & Logistics Blog | JP Express","description":"Read JP Express articles about international courier services, shipping, export and import, customs, packaging and logistics.","isPartOf":{"@id":"https://www.jpex.com.bd/#website"},"publisher":{"@id":"https://www.jpex.com.bd/#organization"},"inLanguage":"en-BD"}
   ]}
   </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.jpex.com.bd/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://www.jpex.com.bd/blog.html"}]}
+  </script>
+
 </head>
 
 <body>
@@ -280,27 +284,9 @@
           <h1 id="blTitle">JP Express <span class="accent">Blog</span></h1>
           <p>Read JP Express articles about international courier services, shipping, export and import, customs,
             packaging and logistics.</p>
-
-          <div class="bl-search" role="search">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            <label class="visually-hidden" for="blSearch">Search articles</label>
-            <input id="blSearch" type="search" placeholder="Search articles, e.g. customs, packaging" autocomplete="off"
-              enterkeyhint="search">
-            <button type="button" id="blClear" aria-label="Clear search" hidden><i
-                class="fa-solid fa-xmark"></i></button>
-            <kbd aria-hidden="true">/</kbd>
-          </div>
-          <div class="bl-stats" id="blStats"></div>
         </div>
       </div>
     </section>
-
-    <!-- TOPIC BAR -->
-    <nav class="bl-bar" aria-label="Blog topics">
-      <div class="container-fluid bl-wrap">
-        <div class="bl-chips" id="blChips" role="group" aria-label="Filter by topic"></div>
-      </div>
-    </nav>
 
     <!-- FEATURED -->
     <section class="bl-sec" id="blFeatWrap" aria-label="Featured article">
@@ -334,6 +320,40 @@
         <div class="bl-foot">
           <span id="blCount" aria-live="polite"></span>
           <button class="btn-main" type="button" id="blMore">Load more articles</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED SERVICES CTA -->
+    <section class="bl-sec bl-svc-sec" aria-labelledby="svcT">
+      <div class="container-fluid bl-wrap">
+        <div class="bl-head">
+          <div>
+            <span class="bl-eyebrow">Related services</span>
+            <h2 class="bl-h" id="svcT">Ready to ship what you just read about?</h2>
+          </div>
+        </div>
+        <div class="bl-svc">
+          <a href="services/international-courier.html">
+            <span class="bl-svc-ico"><i class="fa-solid fa-plane" aria-hidden="true"></i></span>
+            <span><strong>International Courier</strong><small>Documents &amp; parcels worldwide</small></span>
+            <i class="fa-solid fa-arrow-right bl-svc-go" aria-hidden="true"></i>
+          </a>
+          <a href="services/air-freight.html">
+            <span class="bl-svc-ico"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i></span>
+            <span><strong>Air Freight</strong><small>Fast cargo for commercial shipments</small></span>
+            <i class="fa-solid fa-arrow-right bl-svc-go" aria-hidden="true"></i>
+          </a>
+          <a href="services/export-logistics.html">
+            <span class="bl-svc-ico"><i class="fa-solid fa-boxes-packing" aria-hidden="true"></i></span>
+            <span><strong>Export Logistics</strong><small>Documentation &amp; export support</small></span>
+            <i class="fa-solid fa-arrow-right bl-svc-go" aria-hidden="true"></i>
+          </a>
+          <a href="quote.html">
+            <span class="bl-svc-ico"><i class="fa-solid fa-calculator" aria-hidden="true"></i></span>
+            <span><strong>Get a Quote</strong><small>Fast estimate for your route</small></span>
+            <i class="fa-solid fa-arrow-right bl-svc-go" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -531,9 +551,13 @@
   <script src="js/data.js"></script>
   <script src="js/blog-data.js"></script>
   <script src="js/main.js"></script>
+
   <script>
     /* =========================================================
-       BLOG LISTING PAGE LOGIC
+       BLOG LISTING PAGE LOGIC — NO FILTERS, ALL ARTICLES
+       - Data comes from BLOG_POSTS (js/blog-data.js)
+       - Featured post uses .f = 1 flag
+       - Cards link to blog-detail.html?slug=<slug>
        ========================================================= */
     (function () {
       'use strict';
@@ -542,124 +566,144 @@
       if (!grid || typeof BLOG_POSTS === 'undefined') return;
 
       var $ = function (id) { return document.getElementById(id); };
-      var search = $('blSearch'), clear = $('blClear'), sortSel = $('blSort'),
-        chips = $('blChips'), count = $('blCount'), more = $('blMore'),
-        empty = $('blEmpty'), featWrap = $('blFeatWrap'), reset = $('blReset');
+      var sortSel = $('blSort'),
+        count = $('blCount'),
+        more = $('blMore'),
+        empty = $('blEmpty'),
+        featWrap = $('blFeatWrap'),
+        reset = $('blReset');
       var PAGE = 6;
-      var params = new URLSearchParams(location.search);
-      var cat = BLOG_CATS[params.get('cat')] ? params.get('cat') : 'all';
-      var q = (params.get('q') || '').trim();
       var limit = PAGE;
-      if (search) search.value = q;
 
+      /* --- helpers --- */
       var fmt = function (d) {
-        return new Date(d + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+        return new Date(d + 'T00:00:00').toLocaleDateString('en-GB',
+          { day: '2-digit', month: 'short', year: 'numeric' });
       };
       var meta = function (p) {
-        return '<div class="bl-meta"><span>' + BLOG_CATS[p.c] + '</span><time datetime="' + p.d + '">' + fmt(p.d) + '</time><span>' + p.r + ' min read</span></div>';
+        return '<div class="bl-meta">'
+          + '<span>' + BLOG_CATS[p.c] + '</span>'
+          + '<time datetime="' + p.d + '">' + fmt(p.d) + '</time>'
+          + '<span>' + p.r + ' min read</span>'
+          + '</div>';
       };
+      var isNew = function (d) {
+        return (Date.now() - new Date(d + 'T00:00:00')) / 864e5 <= 30;
+      };
+      var by = function (p) {
+        return p.a || (typeof BLOG_AUTHOR !== 'undefined' ? BLOG_AUTHOR : 'JP Express');
+      };
+
+      /* Fallback thumbnails per category (used when a post has no p.image) */
+      var CAT_IMG = {
+        'courier-news': 'assets/hero-banner2.jpg',
+        'export-tips': 'assets/business-solution.jpg',
+        'logistics': 'assets/container-ship.png',
+        'customs': 'assets/hero-banner3.jpg',
+        'packaging': 'assets/domestic-02.jpg',
+        'country-guide': 'assets/Airliner-Orbiting-a-Glowing-Earth.png',
+        'business-growth': 'assets/stroy.jpg',
+        'news': 'assets/hero-banner.png'
+      };
+
+      /* --- card template --- */
       var card = function (p) {
         var url = 'blog-detail.html?slug=' + encodeURIComponent(p.slug);
-        return '<article class="bl-card">' +
-          '<div class="bl-art t-' + p.k + '"><i class="fa-solid ' + p.i + '" aria-hidden="true"></i></div>' +
+        var badge = isNew(p.d) ? '<b class="bl-new">NEW</b>' : '';
+        var img = p.image || CAT_IMG[p.c] || 'assets/hero-banner2.jpg';
+        var alt = p.alt || p.t;
+        var art =
+          '<div class="bl-art bl-art-img">' +
+          '<img src="' + img + '" alt="' + alt + '" loading="lazy" width="640" height="360" ' +
+          'onerror="this.onerror=null;this.src=\'assets/hero-banner2.jpg\'">' +
+          badge +
+          '</div>';
+        return '<article class="bl-card">' + art +
           '<div class="bl-body">' + meta(p) +
           '<h3><a href="' + url + '">' + p.t + '</a></h3>' +
           '<p>' + p.x + '</p>' +
-          '<a class="bl-link" href="' + url + '">Read article <i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span class="visually-hidden">: ' + p.t + '</span></a>' +
+          '<div class="bl-cf">' +
+          '<span class="bl-by">' +
+          '<i class="fa-regular fa-user" aria-hidden="true"></i>' +
+          '<span>' + by(p) + '</span>' +
+          '</span>' +
+          '<a class="bl-link" href="' + url + '">Read more ' +
+          '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>' +
+          '<span class="visually-hidden">: ' + p.t + '</span>' +
+          '</a>' +
+          '</div>' +
           '</div></article>';
       };
 
-      // Stats
-      var used = Object.keys(BLOG_CATS).filter(function (k) {
-        return BLOG_POSTS.some(function (p) { return p.c === k; });
-      });
-      $('blStats').textContent = BLOG_POSTS.length + ' articles · ' + used.length + ' topics';
-
-      // Category chips
-      chips.innerHTML = [['all', 'All Articles', BLOG_POSTS.length]].concat(
-        used.map(function (k) {
-          return [k, BLOG_CATS[k], BLOG_POSTS.filter(function (p) { return p.c === k; }).length];
-        })
-      ).map(function (c) {
-        return '<button type="button" class="bl-chip" data-c="' + c[0] + '" aria-pressed="false">' + c[1] + ' <b>' + c[2] + '</b></button>';
-      }).join('');
-
-      // Featured
+      /* --- featured article --- */
       var f = BLOG_POSTS.find(function (p) { return p.f; });
-      if (f) {
+      if (f && featWrap) {
         var featUrl = 'blog-detail.html?slug=' + encodeURIComponent(f.slug);
         var shareUrl = encodeURIComponent(location.href.split('#')[0]);
+        var fImg = f.image || CAT_IMG[f.c] || 'assets/hero-banner2.jpg';
         $('blFeat').innerHTML =
           '<div class="bl-feat">' +
-          '<div class="bl-feat-art t-' + f.k + '">' +
+          '<div class="bl-feat-art has-img" style="background-image:url(\'' + fImg + '\')" ' +
+          'role="img" aria-label="' + (f.alt || f.t) + '">' +
           '<span>FEATURED · ' + BLOG_CATS[f.c].toUpperCase() + '</span>' +
-          '<i class="fa-solid ' + f.i + '" aria-hidden="true"></i>' +
-          '<div class="bl-route"><b>DAC</b><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><b>WORLD</b></div>' +
+          '<div class="bl-route"><b>DAC</b>' +
+          '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i>' +
+          '<b>WORLD</b></div>' +
           '</div>' +
           '<div class="bl-feat-copy">' + meta(f) +
           '<h2>' + f.t + '</h2>' +
           '<p>' + (f.fx || f.x) + '</p>' +
-          '<a class="btn-main btn-red" href="' + featUrl + '">Read article <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' +
+          '<a class="btn-main btn-red" href="' + featUrl + '">Read article ' +
+          '<i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' +
           '<div class="bl-share" aria-label="Share">' +
-          '<a href="https://wa.me/?text=' + encodeURIComponent(f.t) + '%20' + shareUrl + '" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
-          '<a href="https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl + '" target="_blank" rel="noopener" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>' +
-          '<a href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></a>' +
-          '</div></div></div>';
+          '<a href="https://wa.me/?text=' + encodeURIComponent(f.t) + '%20' + shareUrl + '" ' +
+          'target="_blank" rel="noopener" aria-label="Share on WhatsApp">' +
+          '<i class="fa-brands fa-whatsapp"></i></a>' +
+          '<a href="https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl + '" ' +
+          'target="_blank" rel="noopener" aria-label="Share on LinkedIn">' +
+          '<i class="fa-brands fa-linkedin-in"></i></a>' +
+          '<a href="https://www.facebook.com/sharer/sharer.php?u=' + shareUrl + '" ' +
+          'target="_blank" rel="noopener" aria-label="Share on Facebook">' +
+          '<i class="fa-brands fa-facebook-f"></i></a>' +
+          '</div>' +
+          '</div>' +
+          '</div>';
       }
 
-      function render() {
-        var s = q.toLowerCase(), filtering = !!s || cat !== 'all';
-        var list = BLOG_POSTS.filter(function (p) {
-          return (cat === 'all' || p.c === cat) &&
-            (!s || (p.t + ' ' + p.x + ' ' + p.q + ' ' + BLOG_CATS[p.c]).toLowerCase().indexOf(s) > -1) &&
-            (filtering || !p.f);
-        });
+      /* --- grid render --- */
+      function render(from) {
+        /* No filtering — show every post except the featured one */
+        var list = BLOG_POSTS.filter(function (p) { return !p.f; });
+
         list.sort(sortSel && sortSel.value === 'read'
           ? function (a, b) { return a.r - b.r; }
           : function (a, b) { return b.d.localeCompare(a.d); });
 
         var shown = list.slice(0, limit);
         grid.innerHTML = shown.map(card).join('');
-        count.textContent = list.length ? 'Showing ' + shown.length + ' of ' + list.length + ' article' + (list.length === 1 ? '' : 's') : '';
+
+        if (from) {
+          var cards = grid.querySelectorAll('.bl-card');
+          cards.forEach(function (c, i) { if (i < from) c.style.animation = 'none'; });
+          var firstNew = cards[from] && cards[from].querySelector('h3 a');
+          if (firstNew) firstNew.focus({ preventScroll: true });
+        }
+
+        count.textContent = list.length
+          ? 'Showing ' + shown.length + ' of ' + list.length + ' article' + (list.length === 1 ? '' : 's')
+          : '';
         empty.hidden = list.length > 0;
         more.hidden = shown.length >= list.length;
-        clear.hidden = !q;
-        if (featWrap) featWrap.hidden = filtering || !f;
-        chips.querySelectorAll('.bl-chip').forEach(function (b) {
-          var on = b.dataset.c === cat;
-          b.classList.toggle('active', on);
-          b.setAttribute('aria-pressed', on);
-        });
-        var u = new URLSearchParams();
-        if (cat !== 'all') u.set('cat', cat);
-        if (q) u.set('q', q);
-        history.replaceState(null, '', location.pathname + (u.toString() ? '?' + u : '') + location.hash);
       }
 
-      chips.addEventListener('click', function (e) {
-        var b = e.target.closest('.bl-chip');
-        if (!b) return;
-        cat = b.dataset.c;
-        limit = PAGE;
-        render();
-      });
-      search.addEventListener('input', function () { q = search.value.trim(); limit = PAGE; render(); });
-      clear.addEventListener('click', function () { search.value = ''; q = ''; render(); search.focus(); });
-      sortSel.addEventListener('change', render);
-      more.addEventListener('click', function () { limit += PAGE; render(); });
-      reset.addEventListener('click', function () {
-        search.value = ''; q = ''; cat = 'all'; limit = PAGE; render();
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) {
-          e.preventDefault();
-          search.focus();
-        }
-      });
+      sortSel.addEventListener('change', function () { limit = PAGE; render(); });
+      more.addEventListener('click', function () { var from = limit; limit += PAGE; render(from); });
+      reset.addEventListener('click', function () { limit = PAGE; render(); });
 
       render();
     })();
   </script>
+
 </body>
 
 </html>
