@@ -350,12 +350,6 @@
   justify-content: center;
 }
 
-.page-media-center .jp-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
-}
-
 .page-media-center .jp-gallery-item {
   position: relative;
   border-radius: 14px;
@@ -615,17 +609,6 @@
   isolation: isolate;
 }
 
-.page-media-center .jp-video-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  pointer-events: none;
-  background: linear-gradient(140deg, rgba(242, 99, 35, 0) 0%, rgba(242, 99, 35, 0) 100%);
-  transition: background .35s ease;
-  z-index: 2;
-}
-
 .page-media-center .jp-video-card:hover {
   transform: translateY(-6px);
   border-color: rgba(242, 99, 35, .35);
@@ -747,32 +730,6 @@
   border-radius: 18px;
 }
 
-/* ---------- Duration / Live badges (optional, injected by JS) ---------- */
-.page-media-center .jp-video-chip {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 4;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  color: #fff;
-  background: rgba(242, 99, 35, .95);
-  box-shadow: 0 6px 16px rgba(242, 99, 35, .4);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-
-.page-media-center .jp-video-chip i {
-  font-size: 9px;
-}
-
 /* ---------- Body ---------- */
 .page-media-center .jp-video-body {
   padding: 18px 20px 20px;
@@ -804,27 +761,6 @@
   margin: 0;
 }
 
-.page-media-center .jp-video-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  background: linear-gradient(135deg, rgba(242, 99, 35, .15), rgba(242, 99, 35, .06));
-  color: var(--jp-orange);
-  padding: 5px 12px;
-  border-radius: 99px;
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  border: 1px solid rgba(242, 99, 35, .25);
-}
-
-.page-media-center .jp-video-badge i {
-  font-size: 10px;
-}
-
 /* ---------- Featured video ---------- */
 .page-media-center .jp-video-featured {
   max-width: 860px;
@@ -840,65 +776,6 @@
   background: radial-gradient(ellipse at center, rgba(242, 99, 35, .14), transparent 70%);
   z-index: -1;
   pointer-events: none;
-}
-
-.page-media-center .jp-video-card--featured {
-  border-color: rgba(242, 99, 35, .3);
-  box-shadow: 0 18px 48px rgba(242, 99, 35, .16), 0 4px 14px rgba(27, 37, 89, .06);
-  border-radius: 22px;
-}
-
-.page-media-center .jp-video-card--featured .jp-video-frame {
-  aspect-ratio: 16/9;
-}
-
-.page-media-center .jp-video-card--featured .jp-video-title {
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-  letter-spacing: -.015em;
-}
-
-.page-media-center .jp-video-card--featured .jp-video-body {
-  padding: 22px 26px 26px;
-}
-
-.page-media-center .jp-video-card--featured .jp-play-btn i {
-  font-size: 78px;
-}
-
-@media (min-width: 768px) {
-  .page-media-center .jp-video-card--featured .jp-play-btn i {
-    font-size: 88px;
-  }
-}
-
-/* ---------- Fallback ---------- */
-.page-media-center .jp-video-fallback {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #1b2768, #2b3990);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 20px;
-  text-align: center;
-  z-index: 3;
-}
-
-.page-media-center .jp-video-fallback i {
-  font-size: 34px;
-  color: var(--jp-orange-accent);
-}
-
-.page-media-center .jp-video-fallback strong {
-  font-size: 14.5px;
-}
-
-.page-media-center .jp-video-fallback small {
-  font-size: 12.5px;
-  color: rgba(255, 255, 255, .72);
 }
 
 /* ---------- Mobile refinements for video section ---------- */
@@ -922,31 +799,12 @@
     border-radius: 14px;
   }
 
-  .page-media-center .jp-video-card--featured {
-    border-radius: 16px;
-  }
-
-  .page-media-center .jp-video-card--featured .jp-video-body {
-    padding: 16px 18px 18px;
-  }
-
   .page-media-center .jp-video-featured::before {
     display: none;
   }
 
   .page-media-center .jp-play-btn i {
     font-size: 52px;
-  }
-
-  .page-media-center .jp-video-card--featured .jp-play-btn i {
-    font-size: 64px;
-  }
-
-  .page-media-center .jp-video-chip {
-    top: 10px;
-    left: 10px;
-    font-size: 10px;
-    padding: 4px 9px;
   }
 }
 
@@ -4136,5 +3994,400 @@ html.page-news-detail .hero.page-hero .hero-copy p.news-lede {
 
   .page-news-detail .news-prose {
     font-size: 14px;
+  }
+}
+
+
+/* ===============================================================
+   VIDEO PLAYER — loading, playing & fallback states (v6)
+   =============================================================== */
+
+/* player fills the frame */
+.page-media-center .jp-yt-holder,
+.page-media-center .jp-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  z-index: 2;
+}
+
+/* remove the dark thumbnail overlay once the video is playing */
+.page-media-center .jp-video-frame.is-playing::before,
+.page-media-center .jp-video-frame.is-failed::before {
+  display: none;
+}
+
+/* loading spinner */
+.page-media-center .jp-video-frame.is-loading::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, .25);
+  border-top-color: var(--jp-orange);
+  animation: jpSpin .8s linear infinite;
+  z-index: 1;
+}
+
+@keyframes jpSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* fallback card (video cannot be embedded) */
+.page-media-center .jp-video-frame.is-failed img {
+  filter: blur(6px) brightness(.45);
+  transform: scale(1.08);
+}
+
+.page-media-center .jp-vfallback {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 16px;
+  text-align: center;
+  color: #fff;
+}
+
+.page-media-center .jp-vfallback>i {
+  font-size: 30px;
+  color: var(--jp-orange-accent);
+}
+
+.page-media-center .jp-vfallback strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.page-media-center .jp-vfallback span {
+  font-size: 13px;
+  color: rgba(255, 255, 255, .8);
+  margin-bottom: 8px;
+}
+
+.page-media-center .jp-vfallback .jp-vbtn {
+  min-height: 42px;
+  padding: 0 18px;
+}
+
+@media (max-width: 767px) {
+  .page-media-center .jp-vfallback {
+    padding: 12px;
+    gap: 4px;
+  }
+
+  .page-media-center .jp-vfallback>i {
+    font-size: 24px;
+  }
+
+  .page-media-center .jp-vfallback strong {
+    font-size: 14px;
+  }
+
+  .page-media-center .jp-vfallback span {
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .page-media-center .jp-vfallback .jp-vbtn {
+    width: auto;
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 12.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-media-center .jp-video-frame.is-loading::after {
+    animation: none;
+  }
+}
+
+
+/* ===============================================================
+   CUSTOM VIDEO PLAYER (v7) — no YouTube title / logo
+   =============================================================== */
+
+.page-media-center .jp-video-frame.is-custom {
+  background: #000;
+}
+
+.page-media-center .jp-video-frame.is-custom::before {
+  display: none;
+}
+
+/* iframe is taller than the frame, so YouTube's title bar and logo are clipped */
+.page-media-center .jp-yt-wrap {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -64px;
+  bottom: -64px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.page-media-center .jp-yt-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+}
+
+/* transparent click layer: tap = play / pause */
+.page-media-center .jp-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.page-media-center .jp-video-frame.is-custom.is-loading::after {
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* big play icon (paused / autoplay blocked) */
+.page-media-center .jp-bigplay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 4;
+  width: 68px;
+  height: 68px;
+  margin: -34px 0 0 -34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(242, 99, 35, .92);
+  color: #fff;
+  font-size: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+  opacity: 0;
+  transform: scale(.8);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+
+.page-media-center .jp-bigplay i {
+  margin-left: 4px;
+}
+
+.page-media-center .jp-video-frame.is-paused:not(.is-loading) .jp-bigplay {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* control bar */
+.page-media-center .jp-ctrl {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 6;
+  padding: 30px 14px 10px;
+  background: linear-gradient(to top, rgba(5, 10, 31, .9), transparent);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+
+.page-media-center .jp-video-frame.is-paused .jp-ctrl,
+.page-media-center .jp-video-frame.show-ctrl .jp-ctrl,
+.page-media-center .jp-video-frame:hover .jp-ctrl {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.page-media-center .jp-ctrl-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.page-media-center .jp-ctrl-left,
+.page-media-center .jp-ctrl-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.page-media-center .jp-cbtn {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.page-media-center .jp-cbtn[hidden] {
+  display: none;
+}
+
+.page-media-center .jp-cbtn:hover {
+  background: rgba(255, 255, 255, .2);
+}
+
+.page-media-center .jp-cbtn--main {
+  background: var(--jp-orange);
+}
+
+.page-media-center .jp-cbtn--main:hover {
+  background: #dc541b;
+  transform: scale(1.06);
+}
+
+.page-media-center .jp-time {
+  margin-left: 8px;
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* seek bar */
+.page-media-center .jp-range {
+  --p: 0%;
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin: 0 0 2px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.page-media-center .jp-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--jp-orange) var(--p), rgba(255, 255, 255, .3) var(--p));
+}
+
+.page-media-center .jp-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(242, 99, 35, .5);
+}
+
+.page-media-center .jp-range::-moz-range-track {
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .3);
+}
+
+.page-media-center .jp-range::-moz-range-progress {
+  height: 4px;
+  border-radius: 99px;
+  background: var(--jp-orange);
+}
+
+.page-media-center .jp-range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* fullscreen */
+.page-media-center .jp-video-frame:fullscreen {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.page-media-center .jp-video-frame:-webkit-full-screen {
+  aspect-ratio: auto;
+  width: 100%;
+  height: 100%;
+}
+
+/* fallback buttons */
+.page-media-center .jp-vfallback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.page-media-center .jp-vbtn--dark {
+  background: rgba(255, 255, 255, .14);
+  border-color: rgba(255, 255, 255, .3);
+  color: #fff;
+}
+
+.page-media-center .jp-vbtn--dark:hover {
+  background: rgba(255, 255, 255, .26);
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+  .page-media-center .jp-stage-actions [data-jp-next] {
+    grid-column: 1 / -1;
+  }
+
+  .page-media-center .jp-bigplay {
+    width: 56px;
+    height: 56px;
+    margin: -28px 0 0 -28px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 575px) {
+  .page-media-center .jp-ctrl {
+    padding: 24px 8px 6px;
+  }
+
+  .page-media-center .jp-cbtn {
+    width: 34px;
+    height: 34px;
+    font-size: 13.5px;
+  }
+
+  .page-media-center .jp-time {
+    margin-left: 4px;
+    font-size: 11.5px;
+  }
+
+  .page-media-center .jp-vfallback-actions .jp-vbtn {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 12px;
   }
 }

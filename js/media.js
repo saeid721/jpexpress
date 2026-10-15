@@ -366,22 +366,256 @@
 
         featuredEl.setAttribute("aria-live", "polite");
 
-        /* ---------- Player: loads only after a click ---------- */
+        /* ---------- YouTube IFrame API (loaded once, on first play) ---------- */
+        var ytPromise = null;
+        function loadYT() {
+            if (window.YT && window.YT.Player) return Promise.resolve(window.YT);
+            if (ytPromise) return ytPromise;
+            ytPromise = new Promise(function (resolve, reject) {
+                var prev = window.onYouTubeIframeAPIReady;
+                window.onYouTubeIframeAPIReady = function () {
+                    if (typeof prev === "function") prev();
+                    resolve(window.YT);
+                };
+                var s = document.createElement("script");
+                s.src = "https://www.youtube.com/iframe_api";
+                s.async = true;
+                s.onerror = function () { ytPromise = null; reject(new Error("YT API blocked")); };
+                document.head.appendChild(s);
+                setTimeout(function () { reject(new Error("YT API timeout")); }, 12000);
+            });
+            return ytPromise;
+        }
+
+        /* ---------- Helpers for the custom player ---------- */
+        var activePlayer = null;
+
+        function fmtTime(s) {
+            s = Math.max(0, Math.floor(s || 0));
+            var m = Math.floor(s / 60), r = s % 60;
+            return m + ":" + (r < 10 ? "0" : "") + r;
+        }
+
+        function destroyPlayer() {
+            if (!activePlayer) return;
+            clearInterval(activePlayer.timer);
+            clearTimeout(activePlayer.hide);
+            try { if (activePlayer.yt && activePlayer.yt.destroy) activePlayer.yt.destroy(); } catch (e) { }
+            activePlayer = null;
+        }
+
+        function toggleFs(frame) {
+            var cur = document.fullscreenElement || document.webkitFullscreenElement;
+            if (cur) {
+                (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            } else {
+                var req = frame.requestFullscreen || frame.webkitRequestFullscreen;
+                if (req) req.call(frame);
+            }
+        }
+
+        /* ---------- Previous / next video ---------- */
+        function go(delta, noWrap) {
+            var i = -1;
+            for (var k = 0; k < ALL.length; k++) {
+                if (ALL[k].id === stageId) { i = k; break; }
+            }
+            var n = i + delta;
+            if (n < 0 || n >= ALL.length) {
+                if (noWrap) return false;
+                n = (n + ALL.length) % ALL.length;
+            }
+            select(ALL[n].id);
+            return true;
+        }
+
+        /* ---------- Friendly fallback if a video cannot play inside the page ---------- */
+        function showFallback(frame, id, code) {
+            destroyPlayer();
+            frame.classList.remove("is-loading", "is-playing", "is-custom", "is-paused", "is-started", "show-ctrl");
+            frame.classList.add("is-failed");
+
+            var msg = "Please watch it directly on YouTube.";
+            if (code === 101 || code === 150) msg = "The video owner has turned off playback on other websites.";
+            if (code === "file") msg = "Open this page via http://localhost or your live domain.";
+
+            frame.innerHTML =
+                '<img src="' + esc(youtubeThumb(id, false)) + '" alt="" width="640" height="360">' +
+                '<div class="jp-vfallback" role="alert">' +
+                '<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>' +
+                '<strong>This video can\'t be played here</strong>' +
+                '<span>' + esc(msg) + '</span>' +
+                '<div class="jp-vfallback-actions">' +
+                '<a class="jp-vbtn jp-vbtn--solid" href="https://www.youtube.com/watch?v=' + esc(id) + '" target="_blank" rel="noopener">' +
+                '<i class="fa-brands fa-youtube" aria-hidden="true"></i> Watch on YouTube</a>' +
+                (ALL.length > 1 ? '<button type="button" class="jp-vbtn jp-vbtn--dark" data-jp-next>' +
+                    '<i class="fa-solid fa-forward-step" aria-hidden="true"></i> Next video</button>' : "") +
+                '</div></div>';
+        }
+
+        /* ---------- Custom player (no YouTube title / logo) ---------- */
         function loadPlayer(frame, id) {
             if (!frame || frame.getAttribute("data-loaded") === "1") return;
             frame.setAttribute("data-loaded", "1");
-            var iframe = document.createElement("iframe");
-            iframe.src = "https://www.youtube-nocookie.com/embed/" + id +
-                "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
-            iframe.title = frame.getAttribute("data-title") || "JP Express video";
-            iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
-            iframe.setAttribute("allowfullscreen", "");
-            iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-            iframe.style.width = "100%";
-            iframe.style.height = "100%";
-            iframe.style.border = "0";
-            frame.innerHTML = "";
-            frame.appendChild(iframe);
+
+            /* file:// has no referrer, YouTube always rejects it (Error 153) */
+            if (location.protocol === "file:") { showFallback(frame, id, "file"); return; }
+
+            destroyPlayer();
+            frame.classList.add("is-custom", "is-loading");
+            frame.innerHTML =
+                '<div class="jp-yt-wrap"><div class="jp-yt-holder"></div></div>' +
+                '<button type="button" class="jp-shield" aria-label="Play or pause video"></button>' +
+                '<div class="jp-bigplay" aria-hidden="true"><i class="fa-solid fa-play"></i></div>' +
+                '<div class="jp-ctrl">' +
+                '<input class="jp-range" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">' +
+                '<div class="jp-ctrl-row">' +
+                '<div class="jp-ctrl-left">' +
+                '<button type="button" class="jp-cbtn" data-a="prev" aria-label="Previous video"><i class="fa-solid fa-backward-step"></i></button>' +
+                '<button type="button" class="jp-cbtn jp-cbtn--main" data-a="toggle" aria-label="Pause"><i class="fa-solid fa-pause"></i></button>' +
+                '<button type="button" class="jp-cbtn" data-a="next" aria-label="Next video"><i class="fa-solid fa-forward-step"></i></button>' +
+                '<span class="jp-time">0:00 / 0:00</span>' +
+                '</div>' +
+                '<div class="jp-ctrl-right">' +
+                '<button type="button" class="jp-cbtn" data-a="mute" aria-label="Mute or unmute"><i class="fa-solid fa-volume-high"></i></button>' +
+                '<button type="button" class="jp-cbtn" data-a="fs" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>' +
+                '</div></div></div>';
+
+            var range = frame.querySelector(".jp-range");
+            var timeEl = frame.querySelector(".jp-time");
+            var mainBtn = frame.querySelector('[data-a="toggle"]');
+            var muteIcon = frame.querySelector('[data-a="mute"] i');
+            var fsBtn = frame.querySelector('[data-a="fs"]');
+            var P = { yt: null, timer: 0, hide: 0 };
+            var dragging = false;
+            activePlayer = P;
+
+            if (!(frame.requestFullscreen || frame.webkitRequestFullscreen)) fsBtn.hidden = true;
+
+            function ready() { return P.yt && P.yt.getDuration && P.yt.getPlayerState; }
+
+            function setIcons(playing) {
+                mainBtn.querySelector("i").className = "fa-solid " + (playing ? "fa-pause" : "fa-play");
+                mainBtn.setAttribute("aria-label", playing ? "Pause" : "Play");
+                frame.classList.toggle("is-paused", !playing);
+            }
+
+            function tick() {
+                if (!ready()) return;
+                var d = P.yt.getDuration() || 0, c = P.yt.getCurrentTime() || 0;
+                if (!dragging) {
+                    var pct = d ? (c / d) * 100 : 0;
+                    range.value = Math.round(pct * 10);
+                    range.style.setProperty("--p", pct + "%");
+                }
+                timeEl.textContent = fmtTime(c) + " / " + fmtTime(d);
+            }
+
+            function showCtrl() {
+                frame.classList.add("show-ctrl");
+                clearTimeout(P.hide);
+                P.hide = setTimeout(function () { frame.classList.remove("show-ctrl"); }, 2600);
+            }
+
+            function toggle() {
+                if (!ready()) return;
+                var s = P.yt.getPlayerState();
+                if (s === 1 || s === 3) P.yt.pauseVideo(); else P.yt.playVideo();
+            }
+
+            /* tap / click on the video = play or pause */
+            frame.querySelector(".jp-shield").addEventListener("click", function () { toggle(); showCtrl(); });
+            frame.addEventListener("mousemove", showCtrl);
+            frame.addEventListener("touchstart", showCtrl, { passive: true });
+
+            /* control buttons */
+            frame.querySelector(".jp-ctrl").addEventListener("click", function (e) {
+                var b = e.target.closest("[data-a]");
+                if (!b) return;
+                var a = b.getAttribute("data-a");
+                if (a === "next") { go(1); return; }
+                if (a === "prev") { go(-1); return; }
+                if (a === "fs") { toggleFs(frame); return; }
+                if (!ready()) return;
+                if (a === "toggle") toggle();
+                if (a === "mute") {
+                    if (P.yt.isMuted()) P.yt.unMute(); else P.yt.mute();
+                    muteIcon.className = "fa-solid " + (P.yt.isMuted() ? "fa-volume-xmark" : "fa-volume-high");
+                }
+                showCtrl();
+            });
+
+            /* seek bar */
+            range.addEventListener("input", function () {
+                dragging = true;
+                var pct = range.value / 10;
+                range.style.setProperty("--p", pct + "%");
+                if (ready()) {
+                    var d = P.yt.getDuration() || 0;
+                    timeEl.textContent = fmtTime(d * pct / 100) + " / " + fmtTime(d);
+                }
+            });
+            range.addEventListener("change", function () {
+                if (ready()) P.yt.seekTo((P.yt.getDuration() || 0) * range.value / 1000, true);
+                dragging = false;
+            });
+
+            loadYT().then(function (YT) {
+                if (activePlayer !== P || !document.body.contains(frame)) return;
+
+                new YT.Player(frame.querySelector(".jp-yt-holder"), {
+                    videoId: id,
+                    width: "100%",
+                    height: "100%",
+                    playerVars: {
+                        autoplay: 1,
+                        controls: 0,
+                        disablekb: 1,
+                        fs: 0,
+                        rel: 0,
+                        playsinline: 1,
+                        modestbranding: 1,
+                        iv_load_policy: 3,
+                        origin: location.origin
+                    },
+                    events: {
+                        onReady: function (e) {
+                            P.yt = e.target;
+                            frame.classList.remove("is-loading");
+                            try {
+                                var f = e.target.getIframe();
+                                f.setAttribute("tabindex", "-1");
+                                f.title = frame.getAttribute("data-title") || "JP Express video";
+                                e.target.playVideo();
+                            } catch (err) { }
+                            P.timer = setInterval(tick, 250);
+                            tick();
+                            /* if the browser blocked autoplay, show the big play button */
+                            setTimeout(function () {
+                                if (ready()) {
+                                    var s = P.yt.getPlayerState();
+                                    if (s === -1 || s === 5) setIcons(false);
+                                }
+                            }, 1500);
+                        },
+                        onStateChange: function (e) {
+                            var s = e.data;
+                            if (s === 3) { frame.classList.add("is-loading"); return; }
+                            frame.classList.remove("is-loading");
+                            if (s === 1) { setIcons(true); showCtrl(); }
+                            else if (s === 2 || s === 5) { setIcons(false); }
+                            else if (s === 0) {
+                                setIcons(false);
+                                /* auto-play next video; on the last one, stay on the first frame */
+                                setTimeout(function () {
+                                    if (!go(1, true) && ready()) { P.yt.seekTo(0, true); P.yt.pauseVideo(); }
+                                }, 0);
+                            }
+                        },
+                        onError: function (e) { showFallback(frame, id, e.data); }
+                    }
+                });
+            }).catch(function () { showFallback(frame, id); });
         }
 
         /* ---------- Thumbnail + play button ---------- */
@@ -401,6 +635,7 @@
 
         /* ---------- Big player (featured / now playing) ---------- */
         function renderStage(v, autoplay) {
+            destroyPlayer();
             stageId = v.id;
             var label = autoplay ? "Now playing" : (v.featured ? "Featured" : "Latest");
             var icon = autoplay ? "play" : "star";
@@ -422,6 +657,8 @@
                 '<i class="fa-brands fa-youtube" aria-hidden="true"></i> Watch on YouTube</a>' +
                 '<button type="button" class="jp-vbtn jp-vbtn--ghost" data-copy="https://youtu.be/' + esc(v._id) + '">' +
                 '<i class="fa-solid fa-link" aria-hidden="true"></i><span>Copy link</span></button>' +
+                (ALL.length > 1 ? '<button type="button" class="jp-vbtn jp-vbtn--ghost" data-jp-next>' +
+                    '<i class="fa-solid fa-forward-step" aria-hidden="true"></i><span>Next video</span></button>' : "") +
                 '</div></div></div>';
 
             if (autoplay) loadPlayer(featuredEl.querySelector(".jp-video-frame"), v._id);
@@ -535,7 +772,8 @@
                 return;
             }
             var cp = e.target.closest("[data-copy]");
-            if (cp) copyLink(cp);
+            if (cp) { copyLink(cp); return; }
+            if (e.target.closest("[data-jp-next]")) go(1);
         });
 
         grid.addEventListener("click", function (e) {
