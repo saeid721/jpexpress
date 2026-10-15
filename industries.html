@@ -123,25 +123,32 @@
 <body>
   <header class="site-header" id="siteHeader">
 
+    <!-- Top Bar -->
     <div class="topbar" id="topBar">
       <div class="container-fluid d-flex justify-content-between align-items-center gap-3">
         <div class="topbar-left">
-          <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> +880 1681 637836</a>
-          <a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i>
-            WhatsApp</a>
-          <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com"><i class="fa-solid fa-envelope"></i>
-            info@jpex.com.bd</a>
+          <a href="tel:+8801681637836">
+            <i class="fa-solid fa-phone"></i> +880 1681 637836
+          </a>
+          <a href="https://wa.me/8801681637836" target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+          <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com">
+            <i class="fa-solid fa-envelope"></i> info@jpex.com.bd
+          </a>
         </div>
         <div class="topbar-right">
           <button class="lang-btn active" type="button">English</button>
           <span>|</span>
           <button class="lang-btn" type="button">বাংলা</button>
-          <a class="d-none d-md-inline" href="login.html"><i class="fa-solid fa-circle-user"></i> Customer Login <i
-              class="fa-solid fa-angle-right"></i></a>
+          <a class="d-none d-md-inline" href="login.html">
+            <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
+          </a>
         </div>
       </div>
     </div>
 
+    <!-- Main Navbar -->
     <nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
       <div class="container-fluid">
         <a class="navbar-brand p-0" href="index.html" aria-label="JP Express home">
@@ -149,9 +156,15 @@
         </a>
 
         <div class="d-flex align-items-center gap-2 ms-auto order-xl-3">
-          <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">Track Shipment</a>
-          <a href="quote.html" class="btn-header btn-header-red d-none d-lg-inline-flex">Get a Quote <i
-              class="fa-solid fa-arrow-right"></i></a>
+          <a href="book-shipment.html" class="btn-header btn-header-red d-none d-lg-inline-flex">
+            Book a Shipment
+          </a>
+          <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">
+            Track Shipment
+          </a>
+          <a href="quote.html" class="btn-header btn-header-red d-none d-lg-inline-flex">
+            Get a Quote <i class="fa-solid fa-arrow-right"></i>
+          </a>
           <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu">
             <i class="fa-solid fa-bars"></i>
@@ -159,72 +172,106 @@
         </div>
 
         <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item jp-dropdown">
-            <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">Services <i
-                class="fa-solid fa-chevron-down"></i></a>
+            <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">
+              Services <i class="fa-solid fa-chevron-down"></i>
+            </a>
+
             <div class="jp-dd-menu" role="menu" aria-label="Services">
-              <a class="jp-dd-link" href="services/international-courier.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-plane"></i></span><span class="jp-dd-txt"><strong>International
-                    Courier</strong><small>Documents &amp; parcels</small></span></a>
-              <a class="jp-dd-link" href="services/air-freight.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-plane-departure"></i></span><span class="jp-dd-txt"><strong>Air
-                    Freight</strong><small>Fast commercial cargo</small></span></a>
-              <a class="jp-dd-link" href="services/sea-freight.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-ship"></i></span><span class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL
-                    &amp; LCL bulk</small></span></a>
-              <a class="jp-dd-link" href="services/export-logistics.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-boxes-packing"></i></span><span class="jp-dd-txt"><strong>Export
-                    Logistics</strong><small>Docs &amp; support</small></span></a>
-              <a class="jp-dd-link" href="services/import-solutions.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-truck-ramp-box"></i></span><span class="jp-dd-txt"><strong>Import
-                    Solutions</strong><small>Sourcing &amp; customs</small></span></a>
+              <a class="jp-dd-link" href="services/international-courier.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span>
+                <span class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp; parcels
+                    worldwide</small></span>
+              </a>
+              <a class="jp-dd-link" href="services/air-freight.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-plane-departure"></i></span>
+                <span class="jp-dd-txt"><strong>Air Freight</strong><small>Fast cargo for commercial
+                    shipments</small></span>
+              </a>
+              <a class="jp-dd-link" href="services/sea-freight.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-ship"></i></span>
+                <span class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL &amp; LCL for bulk cargo</small></span>
+              </a>
+              <a class="jp-dd-link" href="services/export-logistics.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-boxes-packing"></i></span>
+                <span class="jp-dd-txt"><strong>Export Logistics</strong><small>Documentation &amp; export
+                    support</small></span>
+              </a>
+              <a class="jp-dd-link" href="services/import-solutions.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-truck-ramp-box"></i></span>
+                <span class="jp-dd-txt"><strong>Import Solutions</strong><small>Sourcing, customs &amp;
+                    delivery</small></span>
+              </a>
               <a class="jp-dd-all" href="services.html">View All Services <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </li>
+          <!-- <li class="nav-item"><a class="nav-link" href="countries.html">Destinations</a></li> -->
           <li class="nav-item jp-dropdown">
-            <a class="nav-link active jp-dd-trigger" href="industries.html" aria-haspopup="true">Industries <i
-                class="fa-solid fa-chevron-down"></i></a>
+            <a class="nav-link jp-dd-trigger" href="industries.html" aria-haspopup="true">
+              Industries <i class="fa-solid fa-chevron-down"></i>
+            </a>
+
             <div class="jp-dd-menu" role="menu" aria-label="Industries">
-              <a class="jp-dd-link" href="industries/garments-textiles.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-shirt"></i></span><span class="jp-dd-txt"><strong>Garments
-                    Textile</strong><small>Apparel &amp; RMG</small></span></a>
-              <a class="jp-dd-link" href="industries/jute-products.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-seedling"></i></span><span class="jp-dd-txt"><strong>Jute
-                    Products</strong><small>Eco-friendly fibre</small></span></a>
-              <a class="jp-dd-link" href="industries/leather-products.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-bag-shopping"></i></span><span class="jp-dd-txt"><strong>Leather
-                    Products</strong><small>Footwear &amp; bags</small></span></a>
-              <a class="jp-dd-link" href="industries/handicrafts.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-palette"></i></span><span
-                  class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade goods</small></span></a>
-              <a class="jp-dd-link" href="industries/e-commerce.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-cart-shopping"></i></span><span
-                  class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border sellers</small></span></a>
-              <a class="jp-dd-link" href="industries/manufacturing.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-industry"></i></span><span
-                  class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery &amp; cargo</small></span></a>
-              <a class="jp-dd-link" href="industries/buying-houses.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-handshake"></i></span><span class="jp-dd-txt"><strong>Buying
-                    Houses</strong><small>Samples &amp; orders</small></span></a>
-              <a class="jp-dd-link" href="industries/smes.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-store"></i></span><span class="jp-dd-txt"><strong>SMEs</strong><small>Growing
-                    businesses</small></span></a>
-              <a class="jp-dd-link" href="industries/corporate-businesses.html"><span class="jp-dd-ico"><i
-                    class="fa-solid fa-building"></i></span><span
-                  class="jp-dd-txt"><strong>Corporate</strong><small>Business accounts</small></span></a>
-            </div>
+              <a class="jp-dd-link" href="industries/garments-textiles.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-shirt"></i></span>
+                <span class="jp-dd-txt"><strong>Garments Textile</strong><small>Apparel, fabrics &amp; bulk RMG
+                    exports</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/jute-products.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-seedling"></i></span>
+                <span class="jp-dd-txt"><strong>Jute Products</strong><small>Eco-friendly fibre goods &amp;
+                    bags</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/leather-products.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-bag-shopping"></i></span>
+                <span class="jp-dd-txt"><strong>Leather Products</strong><small>Footwear, bags &amp; finished
+                    leather</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/handicrafts.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-palette"></i></span>
+                <span class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade &amp; fragile artisan
+                    goods</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/e-commerce.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-cart-shopping"></i></span>
+                <span class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border orders &amp; seller
+                    shipping</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/manufacturing.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-industry"></i></span>
+                <span class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery, parts &amp; factory
+                    cargo</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/buying-houses.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-handshake"></i></span>
+                <span class="jp-dd-txt"><strong>Buying Houses</strong><small>Samples, orders &amp;
+                    consolidation</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/smes.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-store"></i></span>
+                <span class="jp-dd-txt"><strong>SMEs</strong><small>Affordable export for growing
+                    businesses</small></span>
+              </a>
+              <a class="jp-dd-link" href="industries/corporate-businesses.html" role="menuitem">
+                <span class="jp-dd-ico"><i class="fa-solid fa-building"></i></span>
+                <span class="jp-dd-txt"><strong>Corporate Businesses</strong><small>Dedicated account &amp; bulk
+                    logistics</small></span>
+              </a>
           </li>
           <li class="nav-item"><a class="nav-link" href="business.html">Business</a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Price</a></li>
           <li class="nav-item"><a class="nav-link" href="offers.html">Offer</a></li>
-          <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
-          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li> -->
+          <!-- <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </div>
     </nav>
 
+    <!-- Mobile Offcanvas Menu -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
       <div class="offcanvas-header">
         <img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel">
@@ -232,68 +279,86 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav gap-1">
-          <li><a class="nav-link" href="index.html">Home</a></li>
+          <li><a class="nav-link active" href="index.html">Home</a></li>
           <li><a class="nav-link" href="about.html">About</a></li>
           <li class="jp-m-dd">
             <div class="jp-m-dd-row">
               <a class="nav-link" href="services.html">Services</a>
-              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-label="Toggle services submenu"><i
-                  class="fa-solid fa-chevron-down"></i></button>
+              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubServices"
+                aria-label="Toggle services submenu">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
             </div>
-            <div class="jp-m-sub">
+            <div class="jp-m-sub" id="jpSubServices">
               <ul>
                 <li><a class="jp-sub-link" href="services/international-courier.html"><i class="fa-solid fa-plane"></i>
                     International Courier</a></li>
                 <li><a class="jp-sub-link" href="services/air-freight.html"><i class="fa-solid fa-plane-departure"></i>
-                    Air Freight</a></li>
+                    Air
+                    Freight</a></li>
                 <li><a class="jp-sub-link" href="services/sea-freight.html"><i class="fa-solid fa-ship"></i> Sea
                     Freight</a></li>
                 <li><a class="jp-sub-link" href="services/export-logistics.html"><i
-                      class="fa-solid fa-boxes-packing"></i> Export Logistics</a></li>
+                      class="fa-solid fa-boxes-packing"></i> Export
+                    Logistics</a></li>
                 <li><a class="jp-sub-link" href="services/import-solutions.html"><i
-                      class="fa-solid fa-truck-ramp-box"></i> Import Solutions</a></li>
+                      class="fa-solid fa-truck-ramp-box"></i>
+                    Import Solutions</a></li>
               </ul>
             </div>
           </li>
+          <!-- <li><a class="nav-link" href="countries.html">Destinations</a></li> -->
           <li class="jp-m-dd">
             <div class="jp-m-dd-row">
-              <a class="nav-link active" href="industries.html">Industries</a>
-              <button type="button" class="jp-m-dd-toggle" aria-expanded="false"
-                aria-label="Toggle industries submenu"><i class="fa-solid fa-chevron-down"></i></button>
+              <a class="nav-link" href="industries.html">Industries</a>
+              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubServices"
+                aria-label="Toggle services submenu">
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
             </div>
-            <div class="jp-m-sub">
+            <div class="jp-m-sub" id="jpSubServices">
               <ul>
                 <li><a class="jp-sub-link" href="industries/garments-textiles.html"><i class="fa-solid fa-shirt"></i>
                     Garments Textile</a></li>
                 <li><a class="jp-sub-link" href="industries/jute-products.html"><i class="fa-solid fa-seedling"></i>
                     Jute Products</a></li>
                 <li><a class="jp-sub-link" href="industries/leather-products.html"><i
-                      class="fa-solid fa-bag-shopping"></i> Leather Products</a></li>
-                <li><a class="jp-sub-link" href="industries/handicrafts.html"><i class="fa-solid fa-palette"></i>
-                    Handicrafts</a></li>
+                      class="fa-solid fa-bag-shopping"></i>
+                    Leather Products</a></li>
                 <li><a class="jp-sub-link" href="industries/e-commerce.html"><i class="fa-solid fa-cart-shopping"></i>
                     E-commerce</a></li>
                 <li><a class="jp-sub-link" href="industries/manufacturing.html"><i class="fa-solid fa-industry"></i>
                     Manufacturing</a></li>
                 <li><a class="jp-sub-link" href="industries/buying-houses.html"><i class="fa-solid fa-handshake"></i>
                     Buying Houses</a></li>
-                <li><a class="jp-sub-link" href="industries/smes.html"><i class="fa-solid fa-store"></i> SMEs</a></li>
+                <li><a class="jp-sub-link" href="industries/smes.html"><i class="fa-solid fa-store"></i>
+                    SMEs</a></li>
                 <li><a class="jp-sub-link" href="industries/corporate-businesses.html"><i
-                      class="fa-solid fa-building"></i> Corporate</a></li>
+                      class="fa-solid fa-building"></i>
+                    Corporate Businesses</a></li>
               </ul>
             </div>
           </li>
+
           <li><a class="nav-link" href="business.html">Business</a></li>
           <li><a class="nav-link" href="offers.html">Offer</a></li>
           <li><a class="nav-link" href="media.html">Media</a></li>
           <li><a class="nav-link" href="blog.html">Blog</a></li>
+          <!-- <li><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
         <div class="d-grid gap-2 mt-4">
-          <a class="btn-header btn-header-red justify-content-center" href="quote.html" data-bs-dismiss="offcanvas">Get
-            a Quote</a>
+          <a class="btn-header btn-header-outline justify-content-center" href="book-shipment.html"
+            data-bs-dismiss="offcanvas">
+            Book a Shipment
+          </a>
           <a class="btn-header btn-header-outline justify-content-center" href="track-shipment.html"
-            data-bs-dismiss="offcanvas">Track Shipment</a>
+            data-bs-dismiss="offcanvas">
+            Track Shipment
+          </a>
+          <a class="btn-header btn-header-red justify-content-center" href="quote.html" data-bs-dismiss="offcanvas">
+            Get a Quote
+          </a>
         </div>
       </div>
     </div>

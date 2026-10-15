@@ -203,4 +203,39 @@
             if (s) s.checked = true;
         }
     })();
+
+    /* Prefill from URL: quote.html?mode=parcel&dest=USA&weight=2&service=express&item=...&city=...&pcs=2&l=30&w=20&h=10 (sizes in cm) */
+    (function prefill() {
+        var q = new URLSearchParams(window.location.search);
+        var m = q.get("mode");
+        if (m === "document") m = "parcel";
+        if (m) {
+            var r = form.querySelector('input[name="mode"][value="' + m + '"]');
+            if (r) r.checked = true;
+        }
+        function setVal(id, v) { var el = document.getElementById(id); if (el && v !== "" && v != null) el.value = v; }
+        function setUnit(id, unit) {
+            var el = document.getElementById(id);
+            if (!el) return false;
+            var keep = el.value;
+            el.value = unit;
+            if (el.value !== unit) { el.value = keep; return false; }
+            return true;
+        }
+        if (q.get("dest")) setVal("prcTo", q.get("dest").slice(0, 60));
+        if (q.get("weight")) { setVal("prcWeight", parseFloat(q.get("weight")) || ""); setUnit("prcWUnit", "kg"); }
+        setVal("prcItem", (q.get("item") || "").slice(0, 120));
+        setVal("prcCity", (q.get("city") || "").slice(0, 60));
+        var pcs = parseInt(q.get("pcs"), 10);
+        if (pcs > 0) setVal("prcPcs", Math.min(pcs, 999));
+        if (q.get("l") && q.get("w") && q.get("h") && setUnit("prcDUnit", "cm")) {
+            setVal("prcL", parseFloat(q.get("l")) || "");
+            setVal("prcW", parseFloat(q.get("w")) || "");
+            setVal("prcH", parseFloat(q.get("h")) || "");
+        }
+        if (q.get("service")) {
+            var s = form.querySelector('input[name="service"][value="' + q.get("service") + '"]');
+            if (s) s.checked = true;
+        }
+    })();
 })();

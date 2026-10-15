@@ -2076,9 +2076,11 @@
     sea: "Usually cheaper for large cargo, much longer transit."
   };
 
+  var PURPOSE = { personal: "Personal use", gift: "Gift", sample: "Sample", commercial: "Commercial / resale", other: "Other" };
+
   var $ = function (id) { return document.getElementById(id); };
   var form = $("prcForm");
-  if (!form) return;
+  if (!form || !$("prcServices")) return;   /* quote.html has its own prcForm: do not run the calculator there */
 
   var els = {
     from: $("prcFrom"), to: $("prcTo"), weight: $("prcWeight"), wUnit: $("prcWUnit"),
@@ -2087,10 +2089,13 @@
     courierWrap: $("prcCourierWrap"), courier: $("prcCourier"),
     item: $("prcItem"), qty: $("prcQty"), value: $("prcValue"), city: $("prcCity"), pickup: $("prcPickup"),
     hint: $("prcHint"), err: $("prcError"), live: $("prcLive"),
-    result: $("prcResult"), card: $("prcResultCard")
+    result: $("prcResult"), card: $("prcResultCard"),
+    purpose: $("prcPurpose"), special: $("prcSpecial"), pickupNote: $("prcPickupNote")
   };
   var placeholder = els.result.innerHTML;
   var calculated = false;
+  var lastText = "";
+  var liveTimer = 0;
 
   /* ---------------- helpers ---------------- */
   var NAMES = {};
@@ -2307,7 +2312,8 @@
       weightIn: num(els.weight), weight: num(els.weight) * wu, wUnitName: els.wUnit.value,
       l: num(els.l) * du, w: num(els.w) * du, h: num(els.h) * du, rawDims: [num(els.l), num(els.w), num(els.h)], dUnitName: els.dUnit.value,
       pcs: Math.max(parseInt(els.pcs.value, 10) || 1, 1),
-      item: els.item.value.trim(), qty: els.qty.value.trim(), value: els.value.value.trim(), pickup: els.pickup.checked
+      item: els.item.value.trim(), qty: els.qty.value.trim(), value: els.value.value.trim(), pickup: els.pickup.checked,
+      purpose: els.purpose ? els.purpose.value : "personal", special: !!(els.special && els.special.checked)
     };
     d.dest = canon(d.destRaw);
     return d;
@@ -2330,7 +2336,9 @@
     if (!d.destRaw) return { msg: "Choose a destination country, for example United States.", el: els.to };
     if (!(d.weightIn > 0)) return { msg: "Enter the shipment weight, for example 2.5 kg.", el: els.weight };
     if (d.weight < 0.01) return { msg: "That weight is too small. Enter at least 10 g.", el: els.weight };
+    if (d.weight > CFG.maxInputKg) return { msg: "That weight is very high. For cargo above " + CFG.maxInputKg.toLocaleString("en-US") + " kg, please request a freight quote.", el: els.weight };
     if (m.dims) {
+      if (d.rawDims.some(function (x) { return x < 0; })) return { msg: "Length, width and height must be positive numbers.", el: [els.l, els.w, els.h].filter(function (e) { return num(e) < 0; })[0] };
       var f = d.rawDims.filter(function (x) { return x > 0; }).length;
       var firstEmpty = [els.l, els.w, els.h].filter(function (e) { return !(num(e) > 0); })[0];
       if (f > 0 && f < 3) return { msg: "Enter length, width and height together, or leave all three empty.", el: firstEmpty };
@@ -2359,6 +2367,9 @@
     if (isCourier && w.cw > CFG.maxCourierKg) reasons.push("Courier shipments over " + CFG.maxCourierKg + " kg need a manual review.");
     var oversize = w.has && Math.max(d.l, d.w, d.h) > CFG.maxSideCm;
     if (oversize) reasons.push("Large dimensions need a manual review.");
+    if (d.purpose === "commercial" && !m.quote) reasons.push("Items for resale or business use are priced by quote. Choose Commercial, or request a quote.");
+    if (d.pcs > CFG.maxPieces) reasons.push("Shipments with more than " + CFG.maxPieces + " cartons need a manual review.");
+    if (d.special) reasons.push("Fragile, oversized or special-handling shipments need a manual review.");
 
     var options = [];
     if (!reasons.length && CFG.rates && CFG.rates[d.svc]) {
@@ -2409,6 +2420,9 @@
     if (d.item) lines.push("Item: " + d.item);
     if (d.qty) lines.push("Quantity: " + d.qty);
     if (d.value) lines.push("Approx. value: " + d.value);
+    if (d.pcs > 1 && !W.has) lines.push("Pieces: " + d.pcs);
+    if (d.purpose && d.purpose !== "personal") lines.push("Purpose: " + PURPOSE[d.purpose]);
+    if (d.special) lines.push("Special handling: Yes");
     if (d.pickup) lines.push("Pickup needed: Yes");
     lines.push("Calculator result: " + (r.best ? "Estimated " + money(r.best.total) : "Quote required"));
     return lines.join("\n");
@@ -2485,8 +2499,108 @@
       '<p class="prc-links"><a href="' + bizUrl + '">Regular or commercial shipper? Request business pricing</a><a href="track-shipment.html">Already shipped? Track your shipment</a></p></div>';
   }
 
+  function journey(priced) {
+    var s = priced ? ["Calculate", "Review estimate", "Confirm quote", "Book"] : ["Calculate", "Request quote", "Confirm quote", "Book"];
+    return '<ol class="prc-journey" aria-label="Your next steps">' + s.map(function (t, i) {
+      return "<li" + (i === 0 ? ' class="is-done"' : i === 1 ? ' class="is-now"' : "") + "><span>" +
+        (i === 0 ? '<i class="fa-solid fa-check" aria-hidden="true"></i>' : i + 1) + "</span>" + t + "</li>";
+    }).join("") + "</ol>";
+  }
+
+  function leadForm() {
+    return '<details class="prc-lead"><summary><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Get a detailed quote on WhatsApp</summary>' +
+      '<form class="prc-lead-form" novalidate>' +
+      '<div class="prc-lf"><label for="leadName">Your name</label><input id="leadName" name="leadName" autocomplete="name" maxlength="80" placeholder="Full name"></div>' +
+      '<div class="prc-lf"><label for="leadPhone">Phone / WhatsApp</label><input id="leadPhone" name="leadPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="+880 1XXX XXXXXX"></div>' +
+      '<div class="prc-lf"><label for="leadEmail">Email (optional)</label><input id="leadEmail" name="leadEmail" type="email" autocomplete="email" maxlength="100" placeholder="you@example.com"></div>' +
+      '<p class="prc-lead-err" role="alert" hidden></p>' +
+      '<button type="submit" class="btn-main btn-red">Send Quote Request <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>' +
+      '<p class="prc-note"><i class="fa-solid fa-lock" aria-hidden="true"></i><span>Your shipment details above are included. We use your contact only to reply about this quote.</span></p></form></details>';
+  }
+
+  function render(r) {
+    var d = r.d, priced = !!r.best, W = priced ? weights(d, r.best.courier) : r.w;
+    var cw = priced ? r.best.cw : r.w.cw, sea = d.svc === "sea";
+    var txt = summary(r);
+    lastText = txt;
+    var dest = esc(destName(d)) + (d.city ? " &middot; " + esc(d.city) : "");
+    var courierTxt = sea ? "" : priced ? COU[r.best.courier] : (d.courier === "all" ? "All Couriers" : COU[d.courier]);
+
+    var head = '<h3 class="prc-sr" id="prcResHead" tabindex="-1">' + (priced ? "Estimated shipping cost" : "Quote required") + "</h3>" +
+      '<div class="prc-chipline">' +
+      (priced ? '<span class="prc-badge is-est">Estimated</span>' : '<span class="prc-badge is-quote">Quote Required</span>') +
+      '<span class="prc-badge is-calc">Weight calculated</span></div>' +
+      (priced
+        ? '<div class="prc-price">' + money(r.best.total) + '</div><p class="prc-sub">Estimated shipping cost, not a final invoice. Your quote confirms the exact price.</p>'
+        : '<div class="prc-price prc-price--quote">Request a Quote</div><p class="prc-sub">' + esc(r.reasons[0]) + "</p>");
+
+    var warn = r.review
+      ? '<div class="prc-warn" role="alert"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>&ldquo;' + esc(r.review) + '&rdquo; may need extra checks. See <a href="resources.html">Restricted &amp; Prohibited Items</a> or contact us before booking.</span></div>'
+      : "";
+
+    var bars = "";
+    if (W.has && !sea) {
+      var max = Math.max(d.weight, W.vol) || 1;
+      bars = '<div class="prc-bars" aria-label="Actual versus volumetric weight">' + bar("Actual", d.weight, max, d.weight >= W.vol) + bar("Volumetric", W.vol, max, W.vol > d.weight) +
+        '<p class="prc-bars-note">The higher weight is billed. Divisor used: ' + W.div.toLocaleString("en-US") + ". Final rule is confirmed in your quote.</p></div>";
+    }
+
+    var rows = row("Service", esc(SVC[d.svc].label)) + (courierTxt ? row("Courier", esc(courierTxt)) : "") + row("Destination", dest) + row("Actual weight", kg(d.weight)) +
+      (W.has ? (sea ? row("Volume", r2(W.cbm) + " CBM") : row("Volumetric weight", kg(W.vol))) : "") +
+      (sea ? "" : row("Chargeable weight", kg(cw))) +
+      row("Estimated transit", priced && r.best.transit ? esc(r.best.transit) : "Confirmed in quote") +
+      row("Pricing status", priced ? "Estimated" : "Quote required");
+
+    var notes = '<p class="prc-note"><i class="fa-solid fa-clock" aria-hidden="true"></i><span>Transit time can change with customs, destination processing, holidays, remote areas, weather, carrier schedules and shipment documents.</span></p>' +
+      (d.pickup ? '<p class="prc-note"><i class="fa-solid fa-truck-pickup" aria-hidden="true"></i><span>Pickup requested. Our team confirms pickup availability and any pickup charge for your address.</span></p>' : "");
+
+    var breakdown = priced
+      ? '<div class="prc-break"><h4>Breakdown</h4>' + row("Base charge", money(r.best.base)) + row("Weight charge (" + kg(cw) + ")", money(r.best.weightCharge)) +
+      (r.best.adj > 0 ? row("Minimum charge adjustment", money(r.best.adj)) : "") +
+      (r.best.fuelPct ? row("Fuel surcharge (" + r.best.fuelPct + "%)", money(r.best.fuel)) : "") + row("Total (estimate)", money(r.best.total)) + "</div>"
+      : "";
+
+    var compare = "";
+    if (priced && r.options.length > 1) {
+      compare = '<div class="prc-break"><h4>Compare couriers</h4><ul class="prc-compare">' + r.options.map(function (o, i) {
+        return "<li><span><strong>" + esc(COU[o.courier]) + "</strong>" + (i === 0 ? ' <em>Lowest</em>' : "") + "<small>" + esc(o.transit || "Transit in quote") + "</small></span><b>" + money(o.total) + "</b></li>";
+      }).join("") + "</ul></div>";
+    }
+
+    var a = r.advice, fit = a.same
+      ? "Good fit: " + esc(SVC[a.rec].label) : "Better fit: " + esc(SVC[a.rec].label);
+    var adv = '<div class="prc-adv"><span class="prc-adv-tag">Service guide</span><strong>' + fit + "</strong><p>" + esc(a.why) + "</p>" +
+      '<p class="prc-adv-alt"><b>Alternative: ' + esc(SVC[a.alt].label) + ".</b> " + ALT_NOTE[a.alt] + "</p></div>";
+
+    var inc = '<details class="prc-inc"><summary>What is included and what may cost extra</summary><div class="prc-inc-grid"><div><h5>' +
+      (priced ? "This estimate covers" : "Your quote will confirm") + "</h5><ul><li>" +
+      (priced ? "Transport charges shown in the breakdown" : "Transport, pickup, delivery and tracking") + "</li><li>Applicable service surcharges</li></ul></div><div><h5>May be charged separately</h5><ul>" +
+      "<li>Customs duties and import taxes</li><li>Special packaging or handling</li><li>Remote-area charges and storage</li><li>Regulatory and destination-side fees</li>" +
+      (d.pickup ? "<li>Pickup charge for your address</li>" : "") + "</ul></div></div></details>";
+
+    var wa = "https://wa.me/" + JP_SITE_CONFIG.whatsapp + "?text=" + encodeURIComponent("Hello JP Express, I'd like a shipping quote.\n" + txt);
+    var enc = encodeURIComponent;
+    var qUrl = "quote.html?mode=" + (d.mode === "document" ? "parcel" : d.mode) + "&dest=" + enc(destName(d)) + "&weight=" + r2(d.weight) + "&service=" + d.svc +
+      (d.item ? "&item=" + enc(d.item.slice(0, 120)) : "") + (d.city ? "&city=" + enc(d.city) : "") + (d.pcs > 1 ? "&pcs=" + d.pcs : "") +
+      (W.has ? "&l=" + r2(d.l) + "&w=" + r2(d.w) + "&h=" + r2(d.h) : "") + "#quoteForm";
+    var bizUrl = "business.html?solution=" + (d.mode === "commercial" || d.mode === "freight" ? "export" : "account") + "#bizQuote";
+    var qLabel = d.svc === "sea" ? "Request Sea Freight Quote" : d.svc === "air" ? "Request Air Freight Quote" : d.mode === "commercial" ? "Request Export Quote" : "Request Detailed Quote";
+
+    var cta = '<div class="prc-cta"><a class="btn-main btn-red" href="' + qUrl + '">' + qLabel + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' +
+      '<a class="btn-main btn-dark-outline prc-wa" target="_blank" rel="noopener" href="' + wa + '"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>' +
+      '<a class="prc-call" href="tel:+8801681637836"><i class="fa-solid fa-phone" aria-hidden="true"></i> Call us</a></div>';
+
+    els.result.innerHTML = '<div class="prc-res">' + head + warn + cta + journey(priced) + '<div class="prc-kvs">' + rows + "</div>" + notes + bars + breakdown + compare + adv + inc +
+      '<p class="prc-fine"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Duties, taxes, customs charges and extra services are not included unless stated in your quote.' + (CFG.ratesNote ? " " + esc(CFG.ratesNote) : "") + "</p>" +
+      leadForm() +
+      '<p class="prc-links"><a href="' + bizUrl + '">Regular or commercial shipper? Request business pricing</a><a href="login.html">Ready to ship? Book with your customer account</a><a href="track-shipment.html">Already shipped? Track your shipment</a></p></div>';
+  }
+
   /* ---------------- live weight line ---------------- */
+  function syncPickup() { if (els.pickupNote) els.pickupNote.hidden = !els.pickup.checked; }
+
   function updateLive() {
+    syncPickup();
     var d = read(), m = MODES[d.mode];
     if (!(d.weight > 0)) { els.live.hidden = true; return; }
     var w = weights(d, d.courier), t;
@@ -2548,7 +2662,9 @@
   /* ---------------- events ---------------- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (run(true) && window.matchMedia("(max-width: 991px)").matches) {
+    var ok = run(true);
+    if (ok) { var rh = $("prcResHead"); if (rh) rh.focus({ preventScroll: true }); }
+    if (ok && window.matchMedia("(max-width: 991px)").matches) {
       els.card.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
     }
   });
@@ -2567,8 +2683,57 @@
   form.addEventListener("input", function (e) {
     if (e.target.getAttribute("aria-invalid")) { e.target.removeAttribute("aria-invalid"); els.err.hidden = true; }
     updateLive();
-    if (calculated) run(false);
+    if (calculated) {
+      clearTimeout(liveTimer);
+      liveTimer = setTimeout(function () { if (calculated) run(false); }, 250);
+    }
   });
+
+  /* ---------------- lead capture (inside the result) ---------------- */
+  els.result.addEventListener("submit", function (e) {
+    var f = e.target.closest ? e.target.closest(".prc-lead-form") : null;
+    if (!f) return;
+    e.preventDefault();
+    var n = f.elements.leadName.value.trim(), p = f.elements.leadPhone.value.trim(), em = f.elements.leadEmail.value.trim();
+    var err = f.querySelector(".prc-lead-err"), digits = p.replace(/\D/g, "");
+    Array.prototype.forEach.call(f.querySelectorAll("input"), function (i) { i.removeAttribute("aria-invalid"); });
+    var bad = n.length < 2 ? ["Enter your name so we know who to reply to.", f.elements.leadName]
+      : (!/^[+0-9\s().-]+$/.test(p) || digits.length < 7) ? ["Enter a valid phone or WhatsApp number, for example +880 1XXX XXXXXX.", f.elements.leadPhone]
+        : (em && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) ? ["Enter a valid email address, or leave it empty.", f.elements.leadEmail] : null;
+    if (bad) {
+      err.textContent = bad[0]; err.hidden = false;
+      bad[1].setAttribute("aria-invalid", "true"); bad[1].focus();
+      return;
+    }
+    err.hidden = true;
+    var text = "Hello JP Express, I'd like a detailed quote.\n" + lastText + "\nName: " + n + "\nPhone: " + p + (em ? "\nEmail: " + em : "");
+    window.open("https://wa.me/" + JP_SITE_CONFIG.whatsapp + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+  });
+
+  /* ---------------- rate card + examples (only when data.js has them) ---------------- */
+  (function dataSections() {
+    var sec = $("rates"), rc = $("prcRateCard"), ex = $("prcExamples");
+    if (!sec || !rc || !ex) return;
+    var cards = CFG.rateCard || [], exs = CFG.examples || [];
+    if (!cards.length && !exs.length) return;
+    if (cards.length) {
+      rc.innerHTML = '<table class="prc-tbl"><thead><tr><th>Country</th><th>Service</th><th>Weight</th><th>Rate</th><th>Conditions</th></tr></thead><tbody>' +
+        cards.map(function (c) {
+          return '<tr><td data-l="Country">' + esc(c.country) + '</td><td data-l="Service">' + esc(c.service) + '</td><td data-l="Weight">' + esc(c.weight) +
+            '</td><td data-l="Rate"><strong>' + esc(c.rate) + '</strong></td><td data-l="Conditions">' + esc(c.note || "") + "</td></tr>";
+        }).join("") + "</tbody></table>";
+      rc.hidden = false;
+    }
+    if (exs.length) {
+      ex.innerHTML = exs.map(function (x) {
+        return '<article class="prc-ex-card"><span class="prc-badge is-est">Illustrative / Example price</span><h3>' + esc(x.route) + "</h3><p>" +
+          esc(x.type) + " &middot; " + esc(x.weight) + " &middot; " + esc(x.service) + '</p><strong>' + esc(x.cost) + "</strong><small>" + esc(x.valid || "") + "</small></article>";
+      }).join("");
+      ex.hidden = false;
+    }
+    $("prcValidity").textContent = CFG.ratesNote || "";
+    sec.hidden = false;
+  })();
 
   /* ---------------- pieces stepper (- / +) ---------------- */
   var pcsBtns = form.querySelectorAll(".prc-num-btn");

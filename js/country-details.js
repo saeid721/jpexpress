@@ -160,7 +160,7 @@
         <p class="cd-note">Volumetric = L × W × H (cm) ÷ 5000. Final rules follow the service used. We confirm the exact price on request.</p>
         <div class="cd-actions">
           <a id="qWa" class="btn-main btn-red" target="_blank" rel="noopener" href="#"><i class="fa-brands fa-whatsapp"></i> Request quote on WhatsApp</a>
-          <a class="btn-main cd-ghost" href="quote.html?dest=${encodeURIComponent(d.n)}#calculator">Calculate shipping cost</a>
+          <a class="btn-main cd-ghost" href="pricing.html?dest=${encodeURIComponent(d.n)}#calculator">Calculate shipping cost</a>
         </div>
       </div>
     </div>

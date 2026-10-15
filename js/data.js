@@ -620,6 +620,8 @@ const JP_PRICING_CONFIG = {
   roundStep: 0,           // chargeable-weight rounding in kg (0 = none, 0.5 = round UP to next 0.5 kg)
   maxCourierKg: 70,       // above this, courier services need a manual quote
   maxSideCm: 120,         // any side above this (cm), manual quote
+  maxPieces: 5,           // more cartons than this need a manual quote (CONFIRM with JP Express)
+  maxInputKg: 50000,      // sanity limit for the weight field (typo guard)
 
   /* CONFIRM these divisors with JP Express / each carrier. Common industry values shown. */
   divisors: { express: 5000, economy: 5000, door: 5000, air: 6000 },
@@ -658,7 +660,15 @@ const JP_PRICING_CONFIG = {
        }
      }
   */
-  rates: null
+  rates: null,
+
+  /* OPTIONAL. These two sections appear on the page ONLY when you fill them.
+     Show rates only when they are current, the rules are clear and validity is shown
+     (set ratesNote above, e.g. "Rates effective 1 Nov 2026, valid for 30 days").
+     rateCard: [{ country: "United States", service: "Express Courier", weight: "Up to 0.5 kg", rate: "৳ 0", note: "Excludes duties and taxes" }]
+     examples: [{ route: "Bangladesh → United States", type: "Parcel", weight: "2 kg", service: "Express Courier", cost: "৳ 0", valid: "Valid until 30 Nov 2026" }] */
+  rateCard: [],
+  examples: []
 };
 
 const JP_PRICING_SERVICES = {
