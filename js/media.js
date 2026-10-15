@@ -641,8 +641,6 @@
             var icon = autoplay ? "play" : "star";
 
             var meta = [];
-            if (v.categoryLabel) meta.push('<li><i class="fa-solid fa-tag" aria-hidden="true"></i>' + esc(v.categoryLabel) + '</li>');
-            if (v.duration) meta.push('<li><i class="fa-regular fa-clock" aria-hidden="true"></i>' + esc(v.duration) + '</li>');
 
             featuredEl.innerHTML =
                 '<div class="jp-stage">' +
