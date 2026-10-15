@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en" id="top" class="page-news-detail template-jp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- 01. Primary SEO (updated dynamically by JS per slug) -->
+    <title>News | JP Express</title>
+    <meta name="description"
+        content="JP Express company news, milestones, service updates and announcements from Bangladesh.">
+    <meta name="author" content="JP Express">
+    <meta name="publisher" content="JP Express">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <meta name="theme-color" content="#2B3990">
+
+    <!-- 02. Canonical (JS updates per slug) -->
+    <link rel="canonical" href="https://www.jpex.com.bd/news-detail.html">
+    <link rel="alternate" hreflang="en" href="https://www.jpex.com.bd/news-detail.html">
+    <link rel="alternate" hreflang="x-default" href="https://www.jpex.com.bd/news-detail.html">
+
+    <!-- 03. Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+
+    <!-- 04. Open Graph (JS updates title/desc/image/url) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="JP Express">
+    <meta property="og:title" content="News | JP Express">
+    <meta property="og:description" content="JP Express company news and updates.">
+    <meta property="og:url" content="https://www.jpex.com.bd/news-detail.html">
+    <meta property="og:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="JP Express news">
+    <meta property="og:locale" content="en_BD">
+
+    <!-- 05. Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="News | JP Express">
+    <meta name="twitter:description" content="JP Express company news and updates.">
+    <meta name="twitter:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
+
+    <!-- 06. GEO -->
+    <meta name="geo.region" content="BD-13">
+    <meta name="geo.placename" content="Dhaka, Bangladesh">
+
+    <!-- 07. Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- 08. Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- 09. CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pages/media-center.css">
+</head>
+
+<body>
+    <!-- Reading progress bar -->
+    <div class="news-progress" id="newsProgress" aria-hidden="true"><span></span></div>
+
+    <header class="site-header" id="siteHeader">
+
+        <!-- Top Bar -->
+        <div class="topbar" id="topBar">
+            <div class="container-fluid d-flex justify-content-between align-items-center gap-3">
+                <div class="topbar-left">
+                    <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> +880 1681 637836</a>
+                    <a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i
+                            class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com"><i
+                            class="fa-solid fa-envelope"></i> info@jpex.com.bd</a>
+                </div>
+                <div class="topbar-right">
+                    <button class="lang-btn active" type="button">English</button>
+                    <span>|</span>
+                    <button class="lang-btn" type="button">বাংলা</button>
+                    <a class="d-none d-md-inline" href="login.html"><i class="fa-solid fa-circle-user"></i> Customer
+                        Login <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
+            <div class="container-fluid">
+                <a class="navbar-brand p-0" href="index.html" aria-label="JP Express home">
+                    <img src="assets/logo.png" alt="JP Express" class="brand-logo">
+                </a>
+                <div class="d-flex align-items-center gap-2 ms-auto order-xl-3">
+                    <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">Track
+                        Shipment</a>
+                    <a href="quote.html" class="btn-header btn-header-red d-none d-lg-inline-flex">Get a Quote <i
+                            class="fa-solid fa-arrow-right"></i></a>
+                    <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+                <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item jp-dropdown">
+                        <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">Services <i
+                                class="fa-solid fa-chevron-down"></i></a>
+                        <div class="jp-dd-menu" role="menu" aria-label="Services">
+                            <a class="jp-dd-link" href="services/international-courier.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span><span
+                                    class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp;
+                                        parcels worldwide</small></span></a>
+                            <a class="jp-dd-link" href="services/air-freight.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-plane-departure"></i></span><span
+                                    class="jp-dd-txt"><strong>Air Freight</strong><small>Fast cargo for commercial
+                                        shipments</small></span></a>
+                            <a class="jp-dd-link" href="services/sea-freight.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-ship"></i></span><span
+                                    class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL &amp; LCL for bulk
+                                        cargo</small></span></a>
+                            <a class="jp-dd-link" href="services/export-logistics.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-boxes-packing"></i></span><span
+                                    class="jp-dd-txt"><strong>Export Logistics</strong><small>Documentation &amp; export
+                                        support</small></span></a>
+                            <a class="jp-dd-link" href="services/import-solutions.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-truck-ramp-box"></i></span><span
+                                    class="jp-dd-txt"><strong>Import Solutions</strong><small>Sourcing, customs &amp;
+                                        delivery</small></span></a>
+                            <a class="jp-dd-all" href="services.html">View All Services <i
+                                    class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </li>
+                    <li class="nav-item jp-dropdown">
+                        <a class="nav-link jp-dd-trigger" href="industries.html" aria-haspopup="true">Industries <i
+                                class="fa-solid fa-chevron-down"></i></a>
+                        <div class="jp-dd-menu" role="menu" aria-label="Industries">
+                            <a class="jp-dd-link" href="industries/garments-textiles.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-shirt"></i></span><span
+                                    class="jp-dd-txt"><strong>Garments Textile</strong><small>Apparel, fabrics &amp;
+                                        bulk RMG exports</small></span></a>
+                            <a class="jp-dd-link" href="industries/jute-products.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-seedling"></i></span><span
+                                    class="jp-dd-txt"><strong>Jute Products</strong><small>Eco-friendly fibre goods
+                                        &amp; bags</small></span></a>
+                            <a class="jp-dd-link" href="industries/leather-products.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-bag-shopping"></i></span><span
+                                    class="jp-dd-txt"><strong>Leather Products</strong><small>Footwear, bags &amp;
+                                        finished leather</small></span></a>
+                            <a class="jp-dd-link" href="industries/handicrafts.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-palette"></i></span><span
+                                    class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade &amp; fragile artisan
+                                        goods</small></span></a>
+                            <a class="jp-dd-link" href="industries/e-commerce.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-cart-shopping"></i></span><span
+                                    class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border orders &amp; seller
+                                        shipping</small></span></a>
+                            <a class="jp-dd-link" href="industries/manufacturing.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-industry"></i></span><span
+                                    class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery, parts &amp;
+                                        factory cargo</small></span></a>
+                            <a class="jp-dd-link" href="industries/buying-houses.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-handshake"></i></span><span
+                                    class="jp-dd-txt"><strong>Buying Houses</strong><small>Samples, orders &amp;
+                                        consolidation</small></span></a>
+                            <a class="jp-dd-link" href="industries/smes.html" role="menuitem"><span class="jp-dd-ico"><i
+                                        class="fa-solid fa-store"></i></span><span
+                                    class="jp-dd-txt"><strong>SMEs</strong><small>Affordable export for growing
+                                        businesses</small></span></a>
+                            <a class="jp-dd-link" href="industries/corporate-businesses.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-building"></i></span><span
+                                    class="jp-dd-txt"><strong>Corporate Businesses</strong><small>Dedicated account
+                                        &amp; bulk logistics</small></span></a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="business.html">Business</a></li>
+                    <li class="nav-item"><a class="nav-link" href="offers.html">Offer</a></li>
+                    <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Mobile Offcanvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
+            <div class="offcanvas-header">
+                <img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel">
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav gap-1">
+                    <li><a class="nav-link" href="index.html">Home</a></li>
+                    <li><a class="nav-link" href="about.html">About</a></li>
+                    <li class="jp-m-dd">
+                        <div class="jp-m-dd-row">
+                            <a class="nav-link" href="services.html">Services</a>
+                            <button type="button" class="jp-m-dd-toggle" aria-expanded="false"
+                                aria-controls="jpSubServices" aria-label="Toggle services submenu"><i
+                                    class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+                        <div class="jp-m-sub" id="jpSubServices">
+                            <ul>
+                                <li><a class="jp-sub-link" href="services/international-courier.html"><i
+                                            class="fa-solid fa-plane"></i> International Courier</a></li>
+                                <li><a class="jp-sub-link" href="services/air-freight.html"><i
+                                            class="fa-solid fa-plane-departure"></i> Air Freight</a></li>
+                                <li><a class="jp-sub-link" href="services/sea-freight.html"><i
+                                            class="fa-solid fa-ship"></i> Sea Freight</a></li>
+                                <li><a class="jp-sub-link" href="services/export-logistics.html"><i
+                                            class="fa-solid fa-boxes-packing"></i> Export Logistics</a></li>
+                                <li><a class="jp-sub-link" href="services/import-solutions.html"><i
+                                            class="fa-solid fa-truck-ramp-box"></i> Import Solutions</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="jp-m-dd">
+                        <div class="jp-m-dd-row">
+                            <a class="nav-link" href="industries.html">Industries</a>
+                            <button type="button" class="jp-m-dd-toggle" aria-expanded="false"
+                                aria-controls="jpSubIndustries" aria-label="Toggle industries submenu"><i
+                                    class="fa-solid fa-chevron-down"></i></button>
+                        </div>
+                        <div class="jp-m-sub" id="jpSubIndustries">
+                            <ul>
+                                <li><a class="jp-sub-link" href="industries/garments-textiles.html"><i
+                                            class="fa-solid fa-shirt"></i> Garments Textile</a></li>
+                                <li><a class="jp-sub-link" href="industries/jute-products.html"><i
+                                            class="fa-solid fa-seedling"></i> Jute Products</a></li>
+                                <li><a class="jp-sub-link" href="industries/leather-products.html"><i
+                                            class="fa-solid fa-bag-shopping"></i> Leather Products</a></li>
+                                <li><a class="jp-sub-link" href="industries/handicrafts.html"><i
+                                            class="fa-solid fa-palette"></i> Handicrafts</a></li>
+                                <li><a class="jp-sub-link" href="industries/e-commerce.html"><i
+                                            class="fa-solid fa-cart-shopping"></i> E-commerce</a></li>
+                                <li><a class="jp-sub-link" href="industries/manufacturing.html"><i
+                                            class="fa-solid fa-industry"></i> Manufacturing</a></li>
+                                <li><a class="jp-sub-link" href="industries/buying-houses.html"><i
+                                            class="fa-solid fa-handshake"></i> Buying Houses</a></li>
+                                <li><a class="jp-sub-link" href="industries/smes.html"><i class="fa-solid fa-store"></i>
+                                        SMEs</a></li>
+                                <li><a class="jp-sub-link" href="industries/corporate-businesses.html"><i
+                                            class="fa-solid fa-building"></i> Corporate Businesses</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a class="nav-link" href="business.html">Business</a></li>
+                    <li><a class="nav-link" href="offers.html">Offer</a></li>
+                    <li><a class="nav-link" href="media.html">Media</a></li>
+                    <li><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-grid gap-2 mt-4">
+                    <a class="btn-header btn-header-red justify-content-center" href="quote.html"
+                        data-bs-dismiss="offcanvas">Get a Quote</a>
+                    <a class="btn-header btn-header-outline justify-content-center" href="track-shipment.html"
+                        data-bs-dismiss="offcanvas">Track Shipment</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============ MEDIA HERO ============ -->
+        <section class="hero page-hero media-hero" aria-labelledby="mediaTitle">
+            <div class="hero-bg"></div>
+            <div class="container-fluid position-relative">
+                <div class="hero-copy" data-reveal>
+                    <nav class="news-crumb" aria-label="Breadcrumb">
+                        <a href="index.html">Home</a>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        <a href="media.html">Media</a>
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                        <span aria-current="page" id="crumbTitle">News</span>
+                    </nav>
+                    <h1 id="title" class="news-h1">Loading…</h1>
+                    <p class="news-lede" id="lede"></p>
+                    <div class="news-meta-row">
+                        <span class="news-meta-item">
+                            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                            <time id="pubDate" datetime=""></time>
+                        </span>
+                        <span class="news-meta-item">
+                            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                            <span id="readTime">— min read</span>
+                        </span>
+                        <span class="news-meta-item">
+                            <i class="fa-regular fa-building" aria-hidden="true"></i>
+                            <span>JP Express Editorial</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ ARTICLE BODY ============ -->
+        <section class="news-body-wrap" aria-label="Article content">
+            <div class="container-fluid">
+                <div class="news-layout">
+
+                    <!-- MAIN -->
+                    <article class="news-main" id="article">
+                        <figure class="news-cover" id="coverFig" hidden>
+                            <img id="coverImg" src="" alt="" width="1200" height="675" loading="eager" decoding="async">
+                            <figcaption id="coverCap"></figcaption>
+                        </figure>
+
+                        <div class="news-prose" id="body"></div>
+
+                        <!-- Share / actions -->
+                        <div class="news-actions" id="articleActions" hidden>
+                            <div class="news-share" role="group" aria-label="Share this article">
+                                <span class="news-share-label">Share</span>
+                                <a class="news-share-btn wa" id="shareWa" target="_blank" rel="noopener"
+                                    aria-label="Share on WhatsApp">
+                                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                                </a>
+                                <a class="news-share-btn li" id="shareLi" target="_blank" rel="noopener"
+                                    aria-label="Share on LinkedIn">
+                                    <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+                                </a>
+                                <a class="news-share-btn fb" id="shareFb" target="_blank" rel="noopener"
+                                    aria-label="Share on Facebook">
+                                    <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                                </a>
+                                <button class="news-share-btn cp" id="shareCopy" type="button" aria-label="Copy link">
+                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <a class="news-back-btn" href="media.html#news">
+                                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Media
+                            </a>
+                        </div>
+
+                        <!-- Prev / Next -->
+                        <nav class="news-pn" id="pnNav" aria-label="More articles" hidden></nav>
+                    </article>
+
+                    <!-- SIDEBAR -->
+                    <aside class="news-side" aria-label="Related content">
+                        <div class="news-side-card" id="sideRelated" hidden>
+                            <h2 class="news-side-title"><i class="fa-solid fa-newspaper" aria-hidden="true"></i> Related
+                                News</h2>
+                            <ul class="news-side-list" id="relatedList"></ul>
+                        </div>
+
+                        <div class="news-side-card news-side-cta">
+                            <h2 class="news-side-title"><i class="fa-solid fa-headset" aria-hidden="true"></i> Need
+                                Help?</h2>
+                            <p>Talk to our team for shipping quotes, pickups or export documentation support.</p>
+                            <div class="news-side-actions">
+                                <a class="btn-main btn-red" href="quote.html">
+                                    <i class="fa-solid fa-calculator" aria-hidden="true"></i> Get a Quote
+                                </a>
+                                <a class="btn-main btn-dark-outline"
+                                    href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%20have%20a%20question%20about%20a%20news%20update."
+                                    target="_blank" rel="noopener">
+                                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ RELATED BOTTOM ============ -->
+        <section class="news-related-section" id="bottomRelated" hidden aria-labelledby="bottomRelatedT">
+            <div class="container-fluid">
+                <div class="jp-section-head center">
+                    <span class="jp-kicker">Keep Reading</span>
+                    <h2 id="bottomRelatedT">More from JP Express</h2>
+                    <p>Recent news, milestones and updates from our team.</p>
+                </div>
+                <div class="jp-news-grid" id="bottomGrid"></div>
+                <div class="news-bottom-cta">
+                    <a class="btn-main btn-red" href="media.html#news">
+                        <i class="fa-solid fa-newspaper" aria-hidden="true"></i> View All News
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======= FOOTER ========== -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row g-4 py-5">
+                <div class="col-lg-3">
+                    <img src="assets/logo.png" alt="JP Express" class="footer-logo">
+                    <p>International courier, export logistics and global shipping platform from Bangladesh.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/jpexpress" target="_blank" rel="noopener"
+                            aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/company/jpexpress" target="_blank" rel="noopener"
+                            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/@jpexpress" target="_blank" rel="noopener"
+                            aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                        <a href="https://www.instagram.com/jpexpress" target="_blank" rel="noopener"
+                            aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h3>About</h3>
+                    <a href="about.html">About Us</a>
+                    <a href="our-story.html">Our Story</a>
+                    <a href="leadership.html">Leadership</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h3>Services</h3>
+                    <a href="services/international-courier.html">International Courier</a>
+                    <a href="services/air-freight.html">Air Freight</a>
+                    <a href="services/sea-freight.html">Sea Freight</a>
+                    <a href="services/export-logistics.html">Export Logistics</a>
+                    <a href="services/import-solutions.html">Import Solutions</a>
+                    <a href="countries.html">Destinations</a>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h3>Resources</h3>
+                    <a href="resources.html">Resources</a>
+                    <a href="shipping-guides.html">Shipping Guides</a>
+                    <a href="offers.html">Offer</a>
+                    <a href="media.html">Media</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+                <div class="col-6 col-lg-3 footer-contact">
+                    <h3>Contact</h3>
+                    <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> Hotline: +8801681637836 (9am to
+                        11pm)</a>
+                    <a href="mailto:jpexpress09@gmail.com"><i class="fa-solid fa-envelope"></i> info@jpex.com.bd |
+                        jpexpress09@gmail.com</a>
+                    <a href="contact.html"><i class="fa-solid fa-location-dot"></i> House- B-125 (Ground Floor), Road-
+                        21, Mohakhali DOHS, Dhaka- 1206, Bangladesh.</a>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3">
+                <span>© 2026 JP Express. All rights reserved.</span>
+                <div class="footer-legal">
+                    <a href="terms-of-service.html">Terms of Service</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ FLOATING ACTIONS ============ -->
+    <div class="fab-side" id="fabSide" aria-label="Quick contact actions">
+        <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"
+                aria-hidden="true"></i></a>
+        <a href="quote.html" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote"><i
+                class="fa-solid fa-calculator" aria-hidden="true"></i></a>
+        <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment."
+            target="_blank" rel="noopener" class="fab-wa wa-link"
+            data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WhatsApp"
+            aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="tel:+8801681637836" class="fab-call" data-tip="Call us" aria-label="Call us"><i
+                class="fa-solid fa-phone" aria-hidden="true"></i></a>
+    </div>
+
+    <nav class="fab-bar" aria-label="Mobile quick actions">
+        <a href="index.html" class="bar-home"><i class="fa-solid fa-house" aria-hidden="true"></i>Home</a>
+        <a href="track-shipment.html"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>Track</a>
+        <a href="quote.html"><i class="fa-solid fa-calculator" aria-hidden="true"></i>Quote</a>
+        <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment."
+            target="_blank" rel="noopener" class="wa-link"
+            data-wa-text="Hi JP Express, I'd like to ask about a shipment." aria-label="Chat on WhatsApp"><i
+                class="fa-brands fa-whatsapp" aria-hidden="true"></i>WhatsApp</a>
+        <a href="login.html" class="bar-login" aria-label="Customer login"><i class="fa-solid fa-circle-user"
+                aria-hidden="true"></i>Login</a>
+    </nav>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/media.js"></script>
+</body>
+
+</html>
