@@ -1,11 +1,15 @@
 /* ===============================================================
-       OFFERS PAGE — PREMIUM PROMOTIONAL GALLERY
-       - Modern card grid with hover effects
-       - Category filters (Current, Business, Destination, Archived)
-       - Exact Facebook post links (new tab, validated)
-       - 100% responsive, mobile-first
-       - Matches JP Express branding (navy / orange)
-       =============================================================== */
+   JP EXPRESS — OFFERS PAGE STYLES
+   Page isolation: .page-offers
+   ---------------------------------------------------------------
+   • Only page-specific classes live here.
+   • All shared/base classes (hero, page-hero, hero-bg, hero-copy,
+     page-crumb, hero-kicker, accent, final-cta, final-cta-art,
+     cta-inner, cta-copy, cta-actions, btn-main, btn-white,
+     btn-white-outline, footer*, fab-side, fab-bar, container-fluid)
+     come from style.css — NOT duplicated here.
+   • No class from media-center.css is used on this page.
+   =============================================================== */
 
 /* --- Section --- */
 .page-offers .offer-section {
@@ -49,7 +53,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 28px;
+    margin: 0;
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .page-offers .offer-filter {
@@ -81,6 +87,103 @@
     margin-left: 6px;
     font-size: 11px;
     opacity: .7;
+}
+
+.page-offers .offer-filter[hidden] {
+    display: none !important;
+}
+
+.page-offers .offer-filter:focus-visible,
+.page-offers .offer-fb-btn:focus-visible,
+.page-offers .offer-reset:focus-visible,
+.page-offers .offer-search-clear:focus-visible {
+    outline: 3px solid #2b3990;
+    outline-offset: 3px;
+}
+
+/* --- Toolbar: filters + search --- */
+.page-offers .offer-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.page-offers .offer-toolbar[hidden] {
+    display: none !important;
+}
+
+.page-offers .offer-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex: 0 1 300px;
+    min-width: 220px;
+}
+
+.page-offers .offer-search>i {
+    position: absolute;
+    left: 16px;
+    font-size: 13px;
+    color: #94a3b8;
+    pointer-events: none;
+}
+
+.page-offers .offer-search input {
+    width: 100%;
+    height: 44px;
+    padding: 0 44px 0 40px;
+    border: 1.5px solid #dce6f2;
+    border-radius: 999px;
+    background: #fff;
+    color: #17204f;
+    font-size: 14px;
+    -webkit-appearance: none;
+    appearance: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.page-offers .offer-search input::placeholder {
+    color: #94a3b8;
+}
+
+.page-offers .offer-search input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.page-offers .offer-search input:focus {
+    outline: 0;
+    border-color: #2b3990;
+    box-shadow: 0 0 0 4px rgba(43, 57, 144, .12);
+}
+
+.page-offers .offer-search-clear {
+    position: absolute;
+    right: 6px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: #eef2f9;
+    color: #64748b;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.page-offers .offer-search-clear[hidden] {
+    display: none !important;
+}
+
+.page-offers .offer-status {
+    margin: 0 0 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #75849b;
+    min-height: 19px;
 }
 
 /* --- Card grid --- */
@@ -276,6 +379,78 @@
     font-size: 15px;
 }
 
+/* hidden cards/grid (display:flex/grid would otherwise override [hidden]) */
+.page-offers .offer-card[hidden],
+.page-offers .offer-grid[hidden] {
+    display: none !important;
+}
+
+/* category / destination label */
+.page-offers .offer-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #eef1fb;
+    color: #2b3990;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.page-offers .offer-tag i {
+    font-size: 10px;
+    color: #f26323;
+}
+
+/* "x days left" pill */
+.page-offers .offer-validity.is-soon {
+    background: #f26323;
+    color: #fff;
+}
+
+.page-offers .offer-validity.is-soon i {
+    color: #fff;
+}
+
+/* archived / expired offers */
+.page-offers .offer-card.is-archived .offer-image img {
+    filter: grayscale(.55) brightness(.96);
+}
+
+.page-offers .offer-card.is-archived .offer-badge {
+    background: rgba(43, 57, 144, .95);
+    box-shadow: 0 4px 12px rgba(43, 57, 144, .35);
+}
+
+.page-offers .offer-card.is-archived .offer-fb-btn {
+    background: #2b3990;
+}
+
+.page-offers .offer-card.is-archived .offer-fb-btn:hover {
+    background: #202b68;
+}
+
+.page-offers .offer-card:focus-within {
+    border-color: rgba(242, 99, 35, .55);
+    box-shadow: 0 22px 48px rgba(20, 30, 80, .14);
+}
+
+/* no sticky hover lift on touch screens */
+@media (hover: none) {
+    .page-offers .offer-card:hover {
+        transform: none;
+    }
+
+    .page-offers .offer-card:hover .offer-image img {
+        transform: none;
+    }
+}
+
 /* --- Empty state --- */
 .page-offers .offer-empty {
     text-align: center;
@@ -285,6 +460,10 @@
     background: #fff;
     color: #75849b;
     grid-column: 1 / -1;
+}
+
+.page-offers .offer-empty[hidden] {
+    display: none !important;
 }
 
 .page-offers .offer-empty i {
@@ -306,29 +485,44 @@
     margin: 0 0 16px;
 }
 
-/* --- Admin note (optional, can be removed) --- */
-.page-offers .offer-admin-note {
-    margin-top: 24px;
-    background: #fff;
-    border: 1px solid #e5e9f2;
-    padding: 15px 18px;
-    border-radius: 12px;
-    color: #596579;
-    font-size: 13px;
+.page-offers .offer-empty-actions {
     display: flex;
-    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
-.page-offers .offer-admin-note i {
-    color: #2b3990;
-    margin-top: 2px;
-    flex: 0 0 auto;
+.page-offers .offer-empty .offer-fb-btn {
+    width: auto;
+    margin-top: 0;
+    padding: 11px 20px;
 }
 
+.page-offers .offer-reset {
+    padding: 11px 20px;
+    border: 1.5px solid #2b3990;
+    border-radius: 10px;
+    background: #fff;
+    color: #2b3990;
+    font-size: 13.5px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.page-offers .offer-reset:hover {
+    background: #2b3990;
+    color: #fff;
+}
+
+.page-offers .offer-reset[hidden] {
+    display: none !important;
+}
+
+
 /* ===============================================================
-       RESPONSIVE
-       =============================================================== */
+   RESPONSIVE
+   =============================================================== */
 @media (max-width: 991px) {
     .page-offers .offer-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -363,14 +557,6 @@
         font-size: 18px;
     }
 
-    .page-offers .offer-hero {
-        padding: 34px 0;
-    }
-
-    .page-offers .offer-hero p {
-        font-size: 14px;
-    }
-
     .page-offers .offer-filter {
         padding: 7px 14px;
         font-size: 12.5px;
@@ -379,6 +565,7 @@
         align-items: center;
     }
 
+    /* one scrollable row + fade hint */
     .page-offers .offer-filters {
         flex-wrap: nowrap;
         overflow-x: auto;
@@ -394,21 +581,40 @@
         display: none;
     }
 
-    .page-offers .offer-final-actions {
+    /* search on top, full width; chips scroll below */
+    .page-offers .offer-toolbar {
         flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
     }
 
-    .page-offers .offer-final-actions .btn-main {
+    .page-offers .offer-filters {
+        flex: none;
         width: 100%;
-        justify-content: center;
+    }
+
+    .page-offers .offer-search {
+        order: -1;
+        flex: none;
+        width: 100%;
+        min-width: 0;
+    }
+
+    /* 16px stops iOS from zooming on focus */
+    .page-offers .offer-search input {
+        font-size: 16px;
+    }
+
+    .page-offers .offer-empty {
+        padding: 36px 18px;
+    }
+
+    .page-offers .offer-empty-actions>* {
+        flex: 1 1 100%;
     }
 }
 
 @media (max-width: 380px) {
-    .page-offers .offer-hero h1 {
-        font-size: 1.65rem;
-    }
-
     .page-offers .offer-copy h3 {
         font-size: 16.5px;
     }
@@ -426,8 +632,7 @@
 
     .page-offers .offer-card,
     .page-offers .offer-image img,
-    .page-offers .offer-fb-btn,
-    .page-offers .offer-cta {
+    .page-offers .offer-fb-btn {
         animation: none !important;
         transition: none !important;
     }

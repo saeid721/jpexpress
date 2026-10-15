@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="page-media-center template-jp">
+<html lang="en" class="template-jp">
 
 <head>
   <meta charset="utf-8">
@@ -115,7 +115,6 @@
 }
   </script>
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/pages/media-center.css">
   <link rel="stylesheet" href="css/pages/offers.css">
 </head>
 
@@ -382,20 +381,38 @@
             the full details.</p>
         </div>
 
-        <!-- Filters -->
-        <div class="offer-filters" role="group" aria-label="Filter offers by category">
-          <button class="offer-filter active" data-filter="all" aria-pressed="true">All Offers <b>6</b></button>
-          <button class="offer-filter" data-filter="current" aria-pressed="false">Current <b>4</b></button>
-          <button class="offer-filter" data-filter="business" aria-pressed="false">Business Shipping <b>2</b></button>
-          <button class="offer-filter" data-filter="destination" aria-pressed="false">Destination-Specific
-            <b>1</b></button>
-          <button class="offer-filter" data-filter="archived" aria-pressed="false">Archived <b>1</b></button>
+        <!-- Toolbar: filters + search -->
+        <div class="offer-toolbar" id="offerToolbar">
+          <div class="offer-filters" role="group" aria-label="Filter offers by category">
+            <button type="button" class="offer-filter active" data-filter="all" aria-pressed="true">All Offers
+              <b>0</b></button>
+            <button type="button" class="offer-filter" data-filter="current" aria-pressed="false">Current
+              <b>0</b></button>
+            <button type="button" class="offer-filter" data-filter="business" aria-pressed="false">Business Shipping
+              <b>0</b></button>
+            <button type="button" class="offer-filter" data-filter="destination"
+              aria-pressed="false">Destination-Specific <b>0</b></button>
+            <button type="button" class="offer-filter" data-filter="archived" aria-pressed="false">Archived
+              <b>0</b></button>
+          </div>
+
+          <div class="offer-search">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <input type="search" id="offerSearch" placeholder="Search offers…" autocomplete="off"
+              aria-label="Search offers">
+            <button type="button" class="offer-search-clear" id="offerSearchClear" aria-label="Clear search" hidden>
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
+
+        <p class="offer-status" id="offerStatus" role="status" aria-live="polite"></p>
 
         <!-- Grid -->
         <div class="offer-grid" id="offerGrid">
           <!-- Offer 1 -->
-          <article class="offer-card" data-category="current">
+          <article class="offer-card" data-category="general" data-status="published" data-end="2026-12-31"
+            data-priority="1" data-tag="International">
             <a class="offer-image" href="https://www.facebook.com/jpexpressbd/posts/101" target="_blank"
               rel="noopener noreferrer" aria-label="View International Shipping Updates offer on Facebook">
               <img src="assets/hero-banner2.jpg" alt="International shipping promotion artwork" loading="lazy">
@@ -414,7 +431,8 @@
           </article>
 
           <!-- Offer 2 -->
-          <article class="offer-card" data-category="business">
+          <article class="offer-card" data-category="business" data-status="published" data-priority="2"
+            data-tag="Business">
             <a class="offer-image" href="https://www.facebook.com/jpexpressbd/posts/102" target="_blank"
               rel="noopener noreferrer" aria-label="View Business Shipping Solutions offer on Facebook">
               <img src="assets/domestic-02.jpg" alt="Courier pickup and delivery service" loading="lazy">
@@ -432,7 +450,8 @@
           </article>
 
           <!-- Offer 3 -->
-          <article class="offer-card" data-category="destination">
+          <article class="offer-card" data-category="destination" data-status="published" data-end="2026-11-30"
+            data-priority="3" data-tag="UAE &amp; UK Routes">
             <a class="offer-image" href="https://www.facebook.com/jpexpressbd/posts/103" target="_blank"
               rel="noopener noreferrer" aria-label="View Freight and Export Announcements offer on Facebook">
               <img src="assets/container-ship.png" alt="Cargo vessel representing freight services" loading="lazy">
@@ -451,7 +470,8 @@
           </article>
 
           <!-- Offer 4 -->
-          <article class="offer-card" data-category="current">
+          <article class="offer-card" data-category="general" data-status="published" data-end="2027-01-15"
+            data-priority="4" data-tag="E-commerce">
             <a class="offer-image" href="https://www.facebook.com/jpexpressbd/posts/104" target="_blank"
               rel="noopener noreferrer" aria-label="View E-commerce Seller Promotion offer on Facebook">
               <img src="assets/hero-banner3.jpg" alt="E-commerce shipping promotion" loading="lazy">
@@ -470,7 +490,8 @@
           </article>
 
           <!-- Offer 5 -->
-          <article class="offer-card" data-category="current business">
+          <article class="offer-card" data-category="business" data-status="published" data-end="2027-02-28"
+            data-priority="5" data-tag="Corporate">
             <a class="offer-image" href="https://www.facebook.com/jpexpressbd/posts/105" target="_blank"
               rel="noopener noreferrer" aria-label="View Corporate Account Benefits offer on Facebook">
               <img src="assets/business-solution.jpg" alt="Corporate business shipping solution" loading="lazy">
@@ -489,7 +510,8 @@
           </article>
 
           <!-- Offer 6 -->
-          <article class="offer-card" data-category="archived">
+          <article class="offer-card" data-category="general" data-status="archived" data-priority="9"
+            data-tag="Seasonal">
             <a class="offer-image" href="https://www.facebook.com/jpexpressbd/posts/106" target="_blank"
               rel="noopener noreferrer" aria-label="View Eid Special Shipping offer on Facebook">
               <img src="assets/stroy.jpg" alt="Eid special shipping offer" loading="lazy">
@@ -510,18 +532,17 @@
 
         <!-- Empty state (hidden by default) -->
         <div class="offer-empty" id="offerEmpty" hidden>
-          <i class="fa-regular fa-face-frown"></i>
-          <strong>No offers found</strong>
-          <p>There are no offers in this category right now. Please check back later.</p>
+          <i class="fa-regular fa-face-frown" aria-hidden="true"></i>
+          <strong id="offerEmptyTitle">No offers found</strong>
+          <p id="offerEmptyText">There are no offers in this category right now. Please check back later.</p>
+          <div class="offer-empty-actions">
+            <button type="button" class="offer-reset" id="offerReset">Show all offers</button>
+            <a class="offer-fb-btn" href="https://www.facebook.com/jpexpressbd" target="_blank"
+              rel="noopener noreferrer">
+              <i class="fa-brands fa-facebook-f" aria-hidden="true"></i> Follow on Facebook
+            </a>
+          </div>
         </div>
-
-        <!-- Admin note (can be removed in production) -->
-        <p class="offer-admin-note">
-          <i class="fa-solid fa-circle-info"></i>
-          <span><strong>Publishing note:</strong> Replace each Facebook link with the exact post URL and update the
-            image, heading and description before publishing a specific promotion. Avoid displaying expired offers as
-            current.</span>
-        </p>
       </div>
     </section>
 
@@ -660,64 +681,253 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+
   <script>
     /* ===============================================================
-       OFFERS PAGE — FILTER LOGIC
-       Filters cards by category (all / current / business / destination / archived)
-       Shows an empty state if no cards match.
+       OFFERS PAGE — STATUS, FILTER & SEARCH LOGIC
+       • Auto-expiry by end date (Asia/Dhaka), scheduled/draft hidden
+       • Live offers first (by priority), expired/archived last
+       • Facebook URL validation (approved hosts, https only)
+       • Dynamic counts, search, deep-link (#business), empty states
        =============================================================== */
     (function () {
       'use strict';
 
+      const TZ = 'Asia/Dhaka';
+      const SOON_DAYS = 14;
+      const MIN_FOR_TOOLS = 4;
+      const FB_HOSTS = ['facebook.com', 'www.facebook.com', 'm.facebook.com', 'web.facebook.com', 'fb.com', 'www.fb.com', 'fb.watch'];
+      const FILTERS = ['all', 'current', 'business', 'destination', 'archived'];
+      const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const ISO = /^\d{4}-\d{2}-\d{2}$/;
+
       const grid = document.getElementById('offerGrid');
       const empty = document.getElementById('offerEmpty');
-      const filters = document.querySelectorAll('.offer-filter');
-      const cards = document.querySelectorAll('.offer-card');
+      const emptyTitle = document.getElementById('offerEmptyTitle');
+      const emptyText = document.getElementById('offerEmptyText');
+      const toolbar = document.getElementById('offerToolbar');
+      const buttons = Array.from(document.querySelectorAll('.offer-filter'));
+      const search = document.getElementById('offerSearch');
+      const clearBtn = document.getElementById('offerSearchClear');
+      const resetBtn = document.getElementById('offerReset');
+      const statusEl = document.getElementById('offerStatus');
 
-      if (!grid || !filters.length) return;
+      if (!grid || !buttons.length) return;
 
-      // Store all cards for filtering
-      const allCards = Array.from(cards);
+      /* ---------- helpers ---------- */
+      const dayNum = (iso) => {
+        if (!ISO.test(iso || '')) return null;
+        const p = iso.split('-');
+        return Date.UTC(+p[0], +p[1] - 1, +p[2]) / 864e5;
+      };
+      const fmt = (iso) => {
+        const p = iso.split('-');
+        return (+p[2]) + ' ' + MONTHS[+p[1] - 1] + ' ' + p[0];
+      };
+      const todayNum = () => {
+        let n = null;
+        try {
+          n = dayNum(new Intl.DateTimeFormat('en-CA', {
+            timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit'
+          }).format(new Date()));
+        } catch (e) { /* fallback below */ }
+        return n !== null ? n : Math.floor(Date.now() / 864e5);
+      };
+      const isFacebook = (url) => {
+        try {
+          const u = new URL(url);
+          return u.protocol === 'https:' && FB_HOSTS.indexOf(u.hostname.toLowerCase()) > -1;
+        } catch (e) { return false; }
+      };
 
-      function applyFilter(filter) {
-        let visibleCount = 0;
+      /* ---------- build offer model ---------- */
+      const today = todayNum();
 
-        allCards.forEach(card => {
-          const categories = (card.getAttribute('data-category') || '').split(' ');
-          const show = filter === 'all' || categories.includes(filter);
-          card.style.display = show ? '' : 'none';
-          if (show) visibleCount++;
-        });
+      const items = Array.from(grid.querySelectorAll('.offer-card')).map((card, i) => {
+        const d = card.dataset;
+        const link = card.querySelector('.offer-fb-btn');
+        const status = (d.status || 'published').toLowerCase();
+        const start = dayNum(d.start);
+        const end = dayNum(d.end);
+        let state = 'live';
+        let left = null;
 
-        // Show/hide empty state
-        if (visibleCount === 0) {
-          empty.hidden = false;
-          grid.style.display = 'none';
-        } else {
-          empty.hidden = true;
-          grid.style.display = 'grid';
-        }
+        if (status === 'draft' || !link || !isFacebook(link.href)) state = 'hidden';
+        else if (status === 'archived') state = 'archived';
+        else if (start !== null && start > today) state = 'hidden';      // scheduled
+        else if (end !== null && end < today) state = 'archived';        // expired
+        else if (end !== null) left = end - today;
 
-        // Update active state on buttons
-        filters.forEach(btn => {
-          const isActive = btn.getAttribute('data-filter') === filter;
-          btn.classList.toggle('active', isActive);
-          btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        });
-      }
-
-      // Attach click handlers
-      filters.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const filter = btn.getAttribute('data-filter');
-          applyFilter(filter);
-        });
+        return {
+          card, link, state, left, i,
+          endIso: d.end || '',
+          category: (d.category || '').toLowerCase(),
+          priority: parseInt(d.priority, 10) || 999,
+          text: card.textContent.toLowerCase().replace(/\s+/g, ' ')
+        };
       });
 
-      // Initialize with 'all'
-      applyFilter('all');
+      /* ---------- decorate cards ---------- */
+      items.forEach((it) => {
+        if (it.state === 'hidden') return;
+        const card = it.card;
+        const img = card.querySelector('.offer-image');
+        const badge = card.querySelector('.offer-badge');
+        const copy = card.querySelector('.offer-copy');
+
+        // CTA button is the single keyboard stop (image link stays clickable for mouse/touch)
+        if (img) { img.setAttribute('tabindex', '-1'); img.setAttribute('aria-hidden', 'true'); }
+        it.link.target = '_blank';
+        it.link.rel = 'noopener noreferrer';
+
+        // validity pill (generated from data so text and status always agree)
+        if (img) {
+          const old = img.querySelector('.offer-validity');
+          if (old) old.remove();
+
+          let html = '';
+          let cls = 'offer-validity';
+          if (it.state === 'archived') {
+            cls += ' is-expired';
+            html = '<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> Expired';
+          } else if (it.left !== null && it.left <= SOON_DAYS) {
+            cls += ' is-soon';
+            html = '<i class="fa-regular fa-clock" aria-hidden="true"></i> ' +
+              (it.left === 0 ? 'Ends today' : it.left + (it.left === 1 ? ' day left' : ' days left'));
+          } else if (it.endIso) {
+            html = '<i class="fa-regular fa-clock" aria-hidden="true"></i> Valid till ' + fmt(it.endIso);
+          }
+          if (html) {
+            const v = document.createElement('span');
+            v.className = cls;
+            v.innerHTML = html;
+            img.appendChild(v);
+          }
+        }
+
+        // archived look + honest wording
+        if (it.state === 'archived') {
+          card.classList.add('is-archived');
+          if (badge) badge.textContent = 'Archived';
+          it.link.innerHTML = '<i class="fa-brands fa-facebook-f" aria-hidden="true"></i> View Post on Facebook';
+        }
+
+        // optional category / destination label
+        if (copy && card.dataset.tag && !copy.querySelector('.offer-tag')) {
+          const tag = document.createElement('span');
+          tag.className = 'offer-tag';
+          tag.innerHTML = '<i class="fa-solid fa-tag" aria-hidden="true"></i>';
+          tag.appendChild(document.createTextNode(' ' + card.dataset.tag));
+          copy.insertBefore(tag, copy.firstChild);
+        }
+      });
+
+      /* ---------- order: live first (priority), archived last ---------- */
+      items
+        .filter((it) => it.state !== 'hidden')
+        .sort((a, b) => {
+          if (a.state !== b.state) return a.state === 'live' ? -1 : 1;
+          return (a.priority - b.priority) || (a.i - b.i);
+        })
+        .forEach((it) => grid.appendChild(it.card));
+
+      const eligible = items.filter((it) => it.state !== 'hidden');
+
+      /* ---------- filter / search ---------- */
+      const matches = (it, f) => {
+        if (f === 'all') return true;
+        if (f === 'current') return it.state === 'live';
+        if (f === 'archived') return it.state === 'archived';
+        return it.category.split(' ').indexOf(f) > -1;
+      };
+
+      // dynamic counts; hide filters that would be empty
+      buttons.forEach((b) => {
+        const f = b.dataset.filter;
+        const n = eligible.filter((it) => matches(it, f)).length;
+        const counter = b.querySelector('b');
+        if (counter) counter.textContent = n;
+        b.hidden = f !== 'all' && n === 0;
+      });
+      // spec: only show filters/search when there are enough offers
+      if (toolbar) toolbar.hidden = eligible.length < MIN_FOR_TOOLS;
+
+      const state = { filter: 'all', q: '' };
+
+      function render() {
+        const q = state.q.trim().toLowerCase();
+        let shown = 0;
+
+        items.forEach((it) => {
+          const ok = it.state !== 'hidden' && matches(it, state.filter) && (!q || it.text.indexOf(q) > -1);
+          it.card.hidden = !ok;
+          if (ok) shown++;
+        });
+
+        grid.hidden = shown === 0;
+        empty.hidden = shown !== 0;
+
+        if (shown === 0) {
+          if (q) {
+            emptyTitle.textContent = 'No matching offers';
+            emptyText.textContent = 'We couldn\u2019t find any offer for \u201C' + state.q.trim() + '\u201D. Try a different keyword.';
+          } else if (!eligible.length) {
+            emptyTitle.textContent = 'No current offers right now';
+            emptyText.textContent = 'New promotions are posted on our Facebook page. Follow us to be the first to know.';
+          } else {
+            emptyTitle.textContent = 'No offers in this category';
+            emptyText.textContent = 'There are no offers here right now. Try another category or view all offers.';
+          }
+          resetBtn.hidden = !eligible.length || (state.filter === 'all' && !q);
+        }
+
+        statusEl.textContent = shown
+          ? 'Showing ' + shown + (shown === 1 ? ' offer' : ' offers') + (q ? ' for \u201C' + state.q.trim() + '\u201D' : '')
+          : '';
+        clearBtn.hidden = !state.q;
+      }
+
+      function setFilter(f, fromUser) {
+        if (FILTERS.indexOf(f) < 0) f = 'all';
+        state.filter = f;
+        buttons.forEach((b) => {
+          const on = b.dataset.filter === f;
+          b.classList.toggle('active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          if (on && fromUser && b.scrollIntoView) {
+            b.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+          }
+        });
+        try {
+          history.replaceState(null, '', f === 'all' ? location.pathname + location.search : '#' + f);
+        } catch (e) { /* ignore */ }
+        render();
+      }
+
+      buttons.forEach((b) => b.addEventListener('click', () => setFilter(b.dataset.filter, true)));
+
+      let timer;
+      search.addEventListener('input', () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => { state.q = search.value; render(); }, 120);
+        clearBtn.hidden = !search.value;
+      });
+      search.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { search.value = ''; state.q = ''; render(); }
+      });
+      clearBtn.addEventListener('click', () => {
+        search.value = ''; state.q = ''; render(); search.focus();
+      });
+      resetBtn.addEventListener('click', () => {
+        search.value = ''; state.q = ''; setFilter('all', true);
+      });
+
+      // init (supports deep link like offers.html#business)
+      const hash = location.hash.replace('#', '');
+      setFilter(FILTERS.indexOf(hash) > -1 ? hash : 'all', false);
     })();
   </script>
+
 </body>
 
 </html>
