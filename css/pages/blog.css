@@ -2148,3 +2148,825 @@
     transform: none !important;
   }
 }
+
+
+/* ================================================================
+   9. COMPACT PREMIUM v4 — LISTING (smaller type, tighter spacing)
+   ================================================================ */
+
+/* ---------- Hero ---------- */
+.page-blog .hero.page-hero {
+  padding: 28px 0 26px;
+}
+
+.page-blog .page-crumb {
+  margin-bottom: 10px;
+  padding: 5px 12px;
+  font-size: 12px;
+}
+
+.page-blog .hero .hero-kicker {
+  margin-bottom: 6px;
+}
+
+.page-blog .hero.page-hero h1 {
+  margin-bottom: 8px;
+}
+
+.page-blog .hero .hero-copy p {
+  line-height: 1.5;
+}
+
+.page-blog .bl-search {
+  margin-top: 12px;
+  max-width: 480px;
+  border-radius: 12px;
+}
+
+.page-blog .bl-search input {
+  min-height: 46px;
+  font-size: 14px;
+}
+
+.page-blog .bl-pop {
+  margin-top: 10px;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.page-blog .bl-pop button {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+/* ---------- Sections ---------- */
+.page-blog .bl-sec {
+  padding: clamp(16px, 2.6vw, 28px) 0;
+}
+
+.page-blog .bl-head {
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.page-blog .bl-eyebrow {
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+
+.page-blog .bl-h {
+  margin-top: 2px;
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  line-height: 1.2;
+}
+
+.page-blog .bl-tools select {
+  min-height: 40px;
+  font-size: 13px;
+}
+
+/* ---------- Featured ---------- */
+.page-blog .bl-feat {
+  border-radius: 14px;
+}
+
+.page-blog .bl-feat-art {
+  min-height: 150px;
+  padding: 14px;
+}
+
+.page-blog .bl-feat-art span {
+  font-size: 10.5px;
+}
+
+.page-blog .bl-route {
+  font-size: 12px;
+}
+
+.page-blog .bl-feat-copy {
+  padding: clamp(14px, 2.4vw, 24px);
+}
+
+.page-blog .bl-feat-copy h2 {
+  margin: 8px 0 6px;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  line-height: 1.25;
+}
+
+.page-blog .bl-feat-copy p {
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.page-blog .bl-feat-copy .btn-main {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+.page-blog .bl-share {
+  margin-top: 12px;
+  gap: 6px;
+}
+
+.page-blog .bl-share a,
+.page-blog .bl-share button {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+}
+
+@media (min-width: 768px) {
+  .page-blog .bl-feat {
+    min-height: 280px;
+  }
+}
+
+/* ---------- Cards ---------- */
+.page-blog .bl-grid {
+  gap: 12px;
+}
+
+.page-blog .bl-art-img {
+  aspect-ratio: 16 / 8.5;
+}
+
+.page-blog .bl-body {
+  padding: 12px 14px 12px;
+}
+
+.page-blog .bl-meta {
+  gap: 2px 8px;
+  font-size: 11.5px;
+}
+
+.page-blog .bl-body h3 {
+  margin: 6px 0 4px;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.page-blog .bl-body p {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-line-clamp: 2;
+}
+
+.page-blog .bl-cf {
+  padding-top: 8px;
+}
+
+.page-blog .bl-cf .bl-link {
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.page-blog .bl-by {
+  font-size: 11.5px;
+}
+
+.page-blog .bl-new {
+  top: 8px;
+  left: 8px;
+  padding: 2px 8px;
+  font-size: 10px;
+}
+
+/* ---------- Load more / count ---------- */
+.page-blog .bl-foot {
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 12.5px;
+}
+
+.page-blog .bl-foot .btn-main {
+  min-height: 42px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+.page-blog .bl-empty {
+  padding: 22px 14px;
+}
+
+/* ---------- Related services ---------- */
+.page-blog .bl-svc {
+  gap: 10px;
+}
+
+.page-blog .bl-svc a {
+  gap: 12px;
+  padding: 12px 14px;
+  min-height: 60px;
+  border-radius: 12px;
+}
+
+.page-blog .bl-svc-ico {
+  flex-basis: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.page-blog .bl-svc strong {
+  font-size: 14px;
+}
+
+.page-blog .bl-svc small {
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+/* ---------- Country routes ---------- */
+.page-blog .bl-routes {
+  gap: 8px;
+}
+
+.page-blog .bl-routes a {
+  min-height: 46px;
+  padding: 8px 12px;
+  gap: 8px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.page-blog .bl-routes img {
+  width: 26px;
+  height: 26px;
+  flex-basis: 26px;
+}
+
+/* ---------- FAQ ---------- */
+.page-blog .home-section {
+  padding: clamp(16px, 2.6vw, 28px) 0;
+}
+
+.page-blog #blFaqLeft .accordion,
+.page-blog #blFaqRight .accordion {
+  gap: 8px;
+}
+
+.page-blog #blFaqLeft .accordion-button,
+.page-blog #blFaqRight .accordion-button {
+  padding: 11px 14px;
+  font-size: 13.5px;
+}
+
+.page-blog #blFaqLeft .accordion-body,
+.page-blog #blFaqRight .accordion-body {
+  padding: 0 14px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---------- Final CTA + Footer (blog pages) ---------- */
+.page-blog .final-cta,
+.page-blog-detail .final-cta {
+  padding: 20px 0;
+}
+
+.page-blog .cta-copy h2,
+.page-blog-detail .cta-copy h2 {
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  margin-bottom: 4px;
+}
+
+.page-blog .cta-copy p,
+.page-blog-detail .cta-copy p {
+  font-size: 13.5px;
+}
+
+.page-blog .footer .row.py-5,
+.page-blog-detail .footer .row.py-5 {
+  padding-top: 24px !important;
+  padding-bottom: 14px !important;
+}
+
+/* ---------- Mobile (listing) ---------- */
+@media (max-width: 767px) {
+
+  .page-blog .hero.page-hero {
+    padding: 18px 0 18px;
+  }
+
+  .page-blog .bl-sec,
+  .page-blog .home-section {
+    padding: 14px 0;
+  }
+
+  .page-blog .bl-head {
+    margin-bottom: 10px;
+  }
+
+  .page-blog .bl-h {
+    font-size: 1.15rem;
+  }
+
+  .page-blog .bl-search input {
+    min-height: 44px;
+  }
+
+  .page-blog .bl-feat-art {
+    min-height: 130px;
+  }
+
+  .page-blog .bl-feat-art>i {
+    font-size: 3rem;
+  }
+
+  .page-blog .bl-feat-copy {
+    padding: 14px;
+  }
+
+  .page-blog .bl-feat-copy h2 {
+    font-size: 1.1rem;
+  }
+
+  .page-blog .bl-feat-copy p {
+    font-size: 13px;
+  }
+
+  .page-blog .bl-feat-copy .btn-main {
+    width: 100%;
+  }
+
+  .page-blog .bl-grid {
+    gap: 10px;
+  }
+
+  .page-blog .bl-body {
+    padding: 10px 12px;
+  }
+
+  .page-blog .bl-body h3 {
+    font-size: 14.5px;
+  }
+
+  .page-blog .bl-svc {
+    gap: 8px;
+  }
+
+  .page-blog .bl-svc a {
+    padding: 10px 12px;
+    min-height: 54px;
+  }
+
+  .page-blog .bl-routes {
+    gap: 6px;
+  }
+
+  .page-blog .bl-routes a {
+    min-height: 42px;
+    padding: 6px 10px;
+    font-size: 12.5px;
+  }
+
+  .page-blog #blFaqLeft,
+  .page-blog #blFaqRight {
+    margin-bottom: 8px;
+  }
+
+  .page-blog #blFaqLeft .accordion-button,
+  .page-blog #blFaqRight .accordion-button {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .page-blog #blFaqLeft .accordion-body,
+  .page-blog #blFaqRight .accordion-body {
+    padding: 0 12px 10px;
+    font-size: 12.5px;
+  }
+
+  .page-blog .final-cta,
+  .page-blog-detail .final-cta {
+    padding: 18px 0 20px;
+  }
+}
+
+
+/* ================================================================
+   10. COMPACT PREMIUM v4 — BLOG DETAIL
+   ================================================================ */
+
+/* ---------- Hero (title wraps nicely, no overflow) ---------- */
+.page-blog-detail .hero.page-hero {
+  padding: 26px 0 24px;
+}
+
+html.page-blog-detail .hero.page-hero h1 {
+  font-size: clamp(1.2rem, 3.6vw, 2rem);
+  line-height: 1.22;
+  margin-bottom: 8px;
+  white-space: normal !important;
+  text-wrap: balance;
+}
+
+html.page-blog-detail .hero.page-hero .hero-copy p {
+  max-width: 720px;
+  font-size: clamp(.8rem, 1.1vw, .95rem);
+  line-height: 1.5;
+  white-space: normal !important;
+}
+
+.page-blog-detail .page-crumb {
+  margin-bottom: 10px;
+  padding: 5px 12px;
+  font-size: 12px;
+  max-width: 100%;
+}
+
+.page-blog-detail .page-crumb span {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-blog-detail .hero .hero-kicker {
+  margin-bottom: 6px;
+}
+
+.page-blog-detail .bd-meta-hero {
+  margin-top: 10px;
+  padding: 7px 14px;
+  gap: 6px 16px;
+  font-size: 12px;
+}
+
+/* ---------- Layout ---------- */
+.page-blog-detail .bd-sec {
+  padding: clamp(16px, 2.6vw, 28px) 0 clamp(24px, 3.6vw, 40px);
+}
+
+.page-blog-detail .bd-layout {
+  gap: 20px;
+}
+
+/* ---------- TOC ---------- */
+.page-blog-detail .bd-toc {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+}
+
+.page-blog-detail .bd-toc-title {
+  margin: 0 0 8px;
+  padding-bottom: 8px;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.page-blog-detail .bd-toc-title i {
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.page-blog-detail .bd-toc ul {
+  gap: 2px;
+}
+
+.page-blog-detail .bd-toc a {
+  padding: 5px 8px;
+  font-size: 13px;
+}
+
+.page-blog-detail .bd-toc li.bd-toc-sub a {
+  font-size: 12.5px;
+}
+
+/* ---------- Featured image ---------- */
+.page-blog-detail .bd-featured-img {
+  margin: 0 0 16px;
+  border-radius: 14px;
+}
+
+.page-blog-detail .bd-featured-img img {
+  aspect-ratio: 16 / 8;
+}
+
+/* ---------- Article text ---------- */
+.page-blog-detail .bd-content {
+  font-size: clamp(.92rem, 1vw, 1rem);
+  line-height: 1.68;
+}
+
+.page-blog-detail .bd-content>*+* {
+  margin-top: 12px;
+}
+
+.page-blog-detail .bd-content>p:first-child {
+  font-size: 1.03em;
+  line-height: 1.68;
+}
+
+.page-blog-detail .bd-content h2 {
+  margin: 22px 0 2px;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.25;
+  scroll-margin-top: 100px;
+}
+
+.page-blog-detail .bd-content h3 {
+  margin: 16px 0 0;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  scroll-margin-top: 100px;
+}
+
+.page-blog-detail .bd-content ul,
+.page-blog-detail .bd-content ol {
+  padding-left: 20px;
+}
+
+.page-blog-detail .bd-content li {
+  margin: 4px 0;
+}
+
+.page-blog-detail .bd-content blockquote {
+  margin: 16px 0;
+  padding: 14px 16px 14px 44px;
+  font-size: .98rem;
+  border-radius: 12px;
+}
+
+.page-blog-detail .bd-content table {
+  font-size: .9em;
+}
+
+.page-blog-detail .bd-content th,
+.page-blog-detail .bd-content td {
+  padding: 8px 10px;
+}
+
+/* ---------- In-article CTA ---------- */
+.page-blog-detail .bd-inline-cta {
+  gap: 10px;
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 14px;
+}
+
+.page-blog-detail .bd-content .bd-inline-cta strong {
+  font-size: .98rem;
+}
+
+.page-blog-detail .bd-ic-copy span {
+  margin-top: 2px;
+  font-size: .85rem;
+  line-height: 1.45;
+}
+
+.page-blog-detail .bd-content .bd-inline-cta .btn-main {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+/* ---------- Share / Author / Prev-Next ---------- */
+.page-blog-detail .bd-share {
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 16px;
+}
+
+.page-blog-detail .bd-share-label {
+  font-size: 11.5px;
+}
+
+.page-blog-detail .bd-share-btn {
+  width: 38px;
+  height: 38px;
+  font-size: 14px;
+}
+
+.page-blog-detail .bd-author {
+  gap: 12px;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.page-blog-detail .bd-author-av {
+  flex-basis: 42px;
+  width: 42px;
+  height: 42px;
+  font-size: 13px;
+}
+
+.page-blog-detail .bd-author strong {
+  font-size: 14px;
+}
+
+.page-blog-detail .bd-author p {
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.page-blog-detail .bd-nav {
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.page-blog-detail .bd-nav-item {
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.page-blog-detail .bd-nav-item small {
+  font-size: 10.5px;
+}
+
+.page-blog-detail .bd-nav-item strong {
+  font-size: 13.5px;
+}
+
+/* ---------- Sidebar ---------- */
+.page-blog-detail .bd-sidebar {
+  gap: 14px;
+}
+
+.page-blog-detail .bd-cta-card {
+  padding: 18px 16px;
+  border-radius: 14px;
+}
+
+.page-blog-detail .bd-cta-icon {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.page-blog-detail .bd-cta-card h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.page-blog-detail .bd-cta-card p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.page-blog-detail .bd-related {
+  padding: 14px;
+  border-radius: 14px;
+}
+
+.page-blog-detail .bd-related h3 {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  font-size: 14px;
+}
+
+.page-blog-detail .bd-related li a {
+  padding: 8px;
+  gap: 2px;
+}
+
+.page-blog-detail .bd-rel-title {
+  font-size: 13px;
+}
+
+.page-blog-detail .bd-rel-cat {
+  font-size: 10px;
+}
+
+.page-blog-detail .bd-rel-date {
+  font-size: 11px;
+}
+
+/* ---------- Mobile (detail) ---------- */
+@media (max-width: 767px) {
+
+  .page-blog-detail .hero.page-hero {
+    padding: 16px 0 16px;
+  }
+
+  html.page-blog-detail .hero.page-hero h1 {
+    font-size: clamp(1.05rem, 5vw, 1.3rem);
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  html.page-blog-detail .hero.page-hero .hero-copy p {
+    font-size: .8rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .page-blog-detail .page-crumb span {
+    max-width: 130px;
+  }
+
+  .page-blog-detail .bd-meta-hero {
+    gap: 4px 12px;
+    padding: 6px 12px;
+    font-size: 11.5px;
+    border-radius: 12px;
+  }
+
+  .page-blog-detail .bd-sec {
+    padding: 14px 0 22px;
+  }
+
+  .page-blog-detail .bd-layout {
+    gap: 16px;
+  }
+
+  .page-blog-detail .bd-toc {
+    padding: 10px 12px;
+    margin-bottom: 12px;
+  }
+
+  .page-blog-detail .bd-toc-title[role="button"] {
+    min-height: 40px;
+  }
+
+  .page-blog-detail .bd-featured-img {
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+
+  .page-blog-detail .bd-featured-img img {
+    aspect-ratio: 16 / 10;
+  }
+
+  .page-blog-detail .bd-content {
+    font-size: 14.5px;
+    line-height: 1.65;
+    padding: 0;
+  }
+
+  .page-blog-detail .bd-content>*+* {
+    margin-top: 10px;
+  }
+
+  .page-blog-detail .bd-content h2 {
+    margin: 18px 0 2px;
+    font-size: 1.1rem;
+    scroll-margin-top: 110px;
+  }
+
+  .page-blog-detail .bd-content h3 {
+    margin: 14px 0 0;
+    font-size: 1rem;
+    scroll-margin-top: 110px;
+  }
+
+  .page-blog-detail .bd-content ul,
+  .page-blog-detail .bd-content ol {
+    padding-left: 18px;
+  }
+
+  .page-blog-detail .bd-content blockquote {
+    padding: 12px 14px 12px 38px;
+  }
+
+  .page-blog-detail .bd-inline-cta {
+    padding: 14px;
+    margin: 16px 0;
+  }
+
+  .page-blog-detail .bd-share {
+    margin-top: 20px;
+    padding-top: 14px;
+  }
+
+  .page-blog-detail .bd-author {
+    padding: 12px;
+    margin-top: 14px;
+  }
+
+  .page-blog-detail .bd-nav {
+    gap: 8px;
+  }
+
+  .page-blog-detail .bd-sidebar {
+    gap: 12px;
+  }
+
+  .page-blog-detail .bd-related {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-blog-detail .bd-content {
+    font-size: 14px;
+  }
+
+  .page-blog .bl-body h3 {
+    font-size: 14px;
+  }
+}
