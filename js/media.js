@@ -656,10 +656,7 @@
                 '<a class="jp-vbtn jp-vbtn--solid" href="https://www.youtube.com/watch?v=' + esc(v._id) + '" target="_blank" rel="noopener">' +
                 '<i class="fa-brands fa-youtube" aria-hidden="true"></i> Watch on YouTube</a>' +
                 '<button type="button" class="jp-vbtn jp-vbtn--ghost" data-copy="https://youtu.be/' + esc(v._id) + '">' +
-                '<i class="fa-solid fa-link" aria-hidden="true"></i><span>Copy link</span></button>' +
-                (ALL.length > 1 ? '<button type="button" class="jp-vbtn jp-vbtn--ghost" data-jp-next>' +
-                    '<i class="fa-solid fa-forward-step" aria-hidden="true"></i><span>Next video</span></button>' : "") +
-                '</div></div></div>';
+                '<i class="fa-solid fa-link" aria-hidden="true"></i><span>Copy link</span></button>';
 
             if (autoplay) loadPlayer(featuredEl.querySelector(".jp-video-frame"), v._id);
         }
