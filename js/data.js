@@ -828,3 +828,152 @@ const JP_CONTACT_INTENTS = {
   support: { label: 'Shipment Support', hint: 'Already shipping with us? Add your tracking number so we can find your shipment.', ph: 'What do you need help with?', show: ['track'] }
 };
 const JP_CONTACT_FIELD_ORDER = ['company', 'ship', 'dest', 'weight', 'pickup', 'track'];
+
+
+
+/* =========================================================
+   DATA — replace these arrays with your Laravel API payload.
+   ========================================================= */
+var MEDIA_NEWS = [
+  {
+    id: "service-updates",
+    title: "JP Express service updates",
+    slug: "service-updates",
+    summary: "New routes, faster processing and improved shipment visibility for our customers.",
+    image: "assets/hero-banner2.jpg",
+    imageAlt: "JP Express service updates announcement",
+    date: "2026-08-20",
+    category: "services",
+    categoryLabel: "Services",
+    url: "news-detail.html?slug=service-updates"
+  },
+  {
+    id: "new-destination",
+    title: "New destination added: South Korea",
+    slug: "new-destination",
+    summary: "We have expanded our international courier network to South Korea with reliable transit times.",
+    image: "assets/hero-banner3.jpg",
+    imageAlt: "New destination South Korea shipping route",
+    date: "2026-08-15",
+    category: "announcements",
+    categoryLabel: "Announcements",
+    url: "news-detail.html?slug=new-destination"
+  },
+  {
+    id: "office-event",
+    title: "JP Express team training event",
+    slug: "office-event",
+    summary: "Our operations team completed a training program on international documentation and compliance.",
+    image: "assets/stroy.jpg",
+    imageAlt: "JP Express team training event",
+    date: "2026-08-10",
+    category: "events",
+    categoryLabel: "Events",
+    url: "news-detail.html?slug=office-event"
+  },
+  {
+    id: "customs-update",
+    title: "Updated customs documentation guidelines",
+    slug: "customs-update",
+    summary: "Important changes to export documentation requirements for selected destinations.",
+    image: "assets/business-solution.jpg",
+    imageAlt: "Updated customs documentation guidelines",
+    date: "2026-08-05",
+    category: "operations",
+    categoryLabel: "Operations",
+    url: "news-detail.html?slug=customs-update"
+  },
+  {
+    id: "partnership",
+    title: "New logistics partnership announced",
+    slug: "partnership",
+    summary: "We have partnered with a leading global carrier to improve transit times and service coverage.",
+    image: "assets/container-ship.png",
+    imageAlt: "New logistics partnership announcement",
+    date: "2026-07-28",
+    category: "announcements",
+    categoryLabel: "Announcements",
+    url: "news-detail.html?slug=partnership"
+  },
+  {
+    id: "eid-schedule",
+    title: "Eid holiday shipment schedule",
+    slug: "eid-schedule",
+    summary: "Adjusted pickup and delivery schedules during the Eid holiday period. Plan your shipments accordingly.",
+    image: "assets/domestic-02.jpg",
+    imageAlt: "Eid holiday shipment schedule announcement",
+    date: "2026-07-20",
+    category: "operations",
+    categoryLabel: "Operations",
+    url: "news-detail.html?slug=eid-schedule"
+  }
+];
+
+var MEDIA_GALLERY = [
+  { id: "g1", image: "assets/hero-banner2.jpg", alt: "JP Express office team meeting", caption: "Office & Team", category: "office", date: "2026-08-01" },
+  { id: "g2", image: "assets/hero-banner3.jpg", alt: "International courier shipment preparation", caption: "Shipment Operations", category: "operations", date: "2026-07-28" },
+  { id: "g3", image: "assets/stroy.jpg", alt: "JP Express warehouse and packaging area", caption: "Packaging & Warehouse", category: "warehouse", date: "2026-07-22" },
+  { id: "g4", image: "assets/business-solution.jpg", alt: "Company event and team gathering", caption: "Company Events", category: "events", date: "2026-07-15" },
+  { id: "g5", image: "assets/container-ship.png", alt: "Sea freight container loading operations", caption: "Shipment Operations", category: "operations", date: "2026-07-10" },
+  { id: "g6", image: "assets/domestic-02.jpg", alt: "JP Express office workspace", caption: "Office & Team", category: "office", date: "2026-07-02" },
+  { id: "g7", image: "assets/Airliner-Orbiting-a-Glowing-Earth.png", alt: "Air freight aircraft loading", caption: "Shipment Operations", category: "operations", date: "2026-06-25" },
+  { id: "g8", image: "assets/hero-banner.png", alt: "Packaging and labelling station", caption: "Packaging & Warehouse", category: "warehouse", date: "2026-06-18" }
+];
+
+var MEDIA_VIDEOS = [
+  {
+    id: "v1",
+    title: "JP Express: Who We Are",
+    description: "A short introduction to JP Express international courier and logistics services from Bangladesh.",
+    youtubeUrl: "https://www.youtube.com/watch?v=PASTE_REAL_ID_1",
+    category: "company",
+    categoryLabel: "Company",
+    duration: "2:30",
+    featured: true,
+    order: 1
+  },
+  {
+    id: "v2",
+    title: "How to Prepare an International Shipment",
+    description: "Step-by-step guidance on packaging, documentation and booking your shipment with JP Express.",
+    youtubeUrl: "https://www.youtube.com/watch?v=PASTE_REAL_ID_2",
+    category: "guides",
+    categoryLabel: "Shipping Guide",
+    duration: "4:10",
+    featured: false,
+    order: 2
+  },
+  {
+    id: "v3",
+    title: "Inside Our Logistics Operations",
+    description: "See how JP Express handles shipments from pickup to international dispatch.",
+    youtubeUrl: "https://www.youtube.com/watch?v=PASTE_REAL_ID_3",
+    category: "operations",
+    categoryLabel: "Operations",
+    duration: "3:15",
+    featured: false,
+    order: 3
+  },
+  {
+    id: "v4",
+    title: "Inside Our Logistics Operations",
+    description: "See how JP Express handles shipments from pickup to international dispatch.",
+    youtubeUrl: "https://www.youtube.com/watch?v=PASTE_REAL_ID_3",
+    category: "operations",
+    categoryLabel: "Operations",
+    duration: "3:15",
+    featured: false,
+    order: 3
+  },
+  {
+    id: "v5",
+    title: "Inside Our Logistics Operations",
+    description: "See how JP Express handles shipments from pickup to international dispatch.",
+    youtubeUrl: "https://www.youtube.com/watch?v=PASTE_REAL_ID_3",
+    category: "operations",
+    categoryLabel: "Operations",
+    duration: "3:15",
+    featured: false,
+    order: 3
+  }
+];

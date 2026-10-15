@@ -1,16 +1,5 @@
 /* =========================================================
-   JP EXPRESS - MEDIA PAGE LOGIC  (v2.0 — production)
-   News listing + Image gallery + Lightbox + YouTube videos
-   Requirements met:
-   - Only youtube.com / youtu.be / embed URLs accepted (host whitelist)
-   - Thumbnail-first click-to-load (no third-party JS until play)
-   - 16:9 responsive, no autoplay-with-sound, clear fallback
-   - Keyboard accessible lightbox (Esc, ←, →, focus trap)
-   - Category filter + keyword search + Load More
-   - URL state sync (?cat=, ?q=) for shareable links
-   - Dynamic JSON-LD ItemList for currently rendered articles
-   - Reduced-motion aware, lazy images below the fold
-   Load AFTER js/main.js and js/data.js
+   JP EXPRESS - MEDIA PAGE LOGIC
    ========================================================= */
 (function () {
     "use strict";
@@ -21,122 +10,6 @@
     var $ = function (s, r) { return (r || document).querySelector(s); };
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    /* =========================================================
-       DATA — replace these arrays with your Laravel API payload.
-       ========================================================= */
-    var MEDIA_NEWS = [
-        {
-            id: "service-updates",
-            title: "JP Express service updates",
-            slug: "service-updates",
-            summary: "New routes, faster processing and improved shipment visibility for our customers.",
-            image: "assets/hero-banner2.jpg",
-            imageAlt: "JP Express service updates announcement",
-            date: "2026-08-20",
-            category: "services",
-            categoryLabel: "Services",
-            url: "news-detail.html?slug=service-updates"
-        },
-        {
-            id: "new-destination",
-            title: "New destination added: South Korea",
-            slug: "new-destination",
-            summary: "We have expanded our international courier network to South Korea with reliable transit times.",
-            image: "assets/hero-banner3.jpg",
-            imageAlt: "New destination South Korea shipping route",
-            date: "2026-08-15",
-            category: "announcements",
-            categoryLabel: "Announcements",
-            url: "news-detail.html?slug=new-destination"
-        },
-        {
-            id: "office-event",
-            title: "JP Express team training event",
-            slug: "office-event",
-            summary: "Our operations team completed a training program on international documentation and compliance.",
-            image: "assets/stroy.jpg",
-            imageAlt: "JP Express team training event",
-            date: "2026-08-10",
-            category: "events",
-            categoryLabel: "Events",
-            url: "news-detail.html?slug=office-event"
-        },
-        {
-            id: "customs-update",
-            title: "Updated customs documentation guidelines",
-            slug: "customs-update",
-            summary: "Important changes to export documentation requirements for selected destinations.",
-            image: "assets/business-solution.jpg",
-            imageAlt: "Updated customs documentation guidelines",
-            date: "2026-08-05",
-            category: "operations",
-            categoryLabel: "Operations",
-            url: "news-detail.html?slug=customs-update"
-        },
-        {
-            id: "partnership",
-            title: "New logistics partnership announced",
-            slug: "partnership",
-            summary: "We have partnered with a leading global carrier to improve transit times and service coverage.",
-            image: "assets/container-ship.png",
-            imageAlt: "New logistics partnership announcement",
-            date: "2026-07-28",
-            category: "announcements",
-            categoryLabel: "Announcements",
-            url: "news-detail.html?slug=partnership"
-        },
-        {
-            id: "eid-schedule",
-            title: "Eid holiday shipment schedule",
-            slug: "eid-schedule",
-            summary: "Adjusted pickup and delivery schedules during the Eid holiday period. Plan your shipments accordingly.",
-            image: "assets/domestic-02.jpg",
-            imageAlt: "Eid holiday shipment schedule announcement",
-            date: "2026-07-20",
-            category: "operations",
-            categoryLabel: "Operations",
-            url: "news-detail.html?slug=eid-schedule"
-        }
-    ];
-
-    var MEDIA_GALLERY = [
-        { id: "g1", image: "assets/hero-banner2.jpg", alt: "JP Express office team meeting", caption: "Office & Team", category: "office", date: "2026-08-01" },
-        { id: "g2", image: "assets/hero-banner3.jpg", alt: "International courier shipment preparation", caption: "Shipment Operations", category: "operations", date: "2026-07-28" },
-        { id: "g3", image: "assets/stroy.jpg", alt: "JP Express warehouse and packaging area", caption: "Packaging & Warehouse", category: "warehouse", date: "2026-07-22" },
-        { id: "g4", image: "assets/business-solution.jpg", alt: "Company event and team gathering", caption: "Company Events", category: "events", date: "2026-07-15" },
-        { id: "g5", image: "assets/container-ship.png", alt: "Sea freight container loading operations", caption: "Shipment Operations", category: "operations", date: "2026-07-10" },
-        { id: "g6", image: "assets/domestic-02.jpg", alt: "JP Express office workspace", caption: "Office & Team", category: "office", date: "2026-07-02" },
-        { id: "g7", image: "assets/Airliner-Orbiting-a-Glowing-Earth.png", alt: "Air freight aircraft loading", caption: "Shipment Operations", category: "operations", date: "2026-06-25" },
-        { id: "g8", image: "assets/hero-banner.png", alt: "Packaging and labelling station", caption: "Packaging & Warehouse", category: "warehouse", date: "2026-06-18" }
-    ];
-
-    var MEDIA_VIDEOS = [
-        {
-            id: "v1",
-            title: "JP Express: Who We Are",
-            description: "A short introduction to JP Express international courier and logistics services from Bangladesh.",
-            youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            featured: true,
-            order: 1
-        },
-        {
-            id: "v2",
-            title: "How to Prepare an International Shipment",
-            description: "Step-by-step guidance on packaging, documentation and booking your shipment with JP Express.",
-            youtubeUrl: "https://youtu.be/dQw4w9WgXcQ",
-            featured: false,
-            order: 2
-        },
-        {
-            id: "v3",
-            title: "Inside Our Logistics Operations",
-            description: "See how JP Express handles shipments from pickup to international dispatch.",
-            youtubeUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            featured: false,
-            order: 3
-        }
-    ];
 
     /* =========================================================
        UTILITIES
@@ -199,14 +72,15 @@
         var clear = $("#newsClear");
         var filterBtns = $$("[data-jp-filter]");
 
-        var LIMIT = 6;
+        var LIMIT = window.matchMedia("(max-width: 767px)").matches ? 4 : 6;
         var shown = LIMIT;
         var state = { cat: "all", q: "" };
 
         /* Read URL state once so shared links work */
         (function () {
             var qs = new URLSearchParams(location.search);
-            if (qs.get("cat")) state.cat = qs.get("cat");
+            var CATS = ["all", "announcements", "services", "events", "operations"];
+            if (qs.get("cat") && CATS.indexOf(qs.get("cat")) > -1) state.cat = qs.get("cat");
             if (qs.get("q")) { state.q = qs.get("q").slice(0, 60); if (search) search.value = state.q; }
         })();
 
@@ -382,19 +256,28 @@
 
         function open(i) {
             if (!items.length) return;
+            var wasClosed = lb.hidden;
             current = (i + items.length) % items.length;
             var item = items[current];
             lbImg.src = item.image;
             lbImg.alt = item.alt;
-            lbCap.textContent = item.caption + (item.date ? " · " + formatDate(item.date) : "");
-            lb.hidden = false;
-            /* Force reflow so transition plays on first open */
-            void lb.offsetWidth;
-            lb.classList.add("is-open");
-            document.body.style.overflow = "hidden";
-            lastFocus = document.activeElement;
-            /* Focus the close button after paint */
-            requestAnimationFrame(function () { lbClose.focus(); });
+            lbCap.textContent = (current + 1) + " / " + items.length + "  ·  " + item.caption +
+                (item.date ? "  ·  " + formatDate(item.date) : "");
+
+            /* Preload neighbours so next/prev feels instant */
+            [1, -1].forEach(function (n) {
+                var p = items[(current + n + items.length) % items.length];
+                if (p) { new Image().src = p.image; }
+            });
+
+            if (wasClosed) {
+                lastFocus = document.activeElement;
+                lb.hidden = false;
+                void lb.offsetWidth; /* reflow so transition plays */
+                lb.classList.add("is-open");
+                document.body.style.overflow = "hidden";
+                requestAnimationFrame(function () { lbClose.focus(); });
+            }
         }
 
         function close() {
@@ -415,6 +298,19 @@
         lbClose.addEventListener("click", close);
         lbPrev.addEventListener("click", function () { step(-1); });
         lbNext.addEventListener("click", function () { step(1); });
+
+        /* Touch gestures: swipe ← → to navigate, swipe ↓ to close */
+        var tX = 0, tY = 0;
+        lb.addEventListener("touchstart", function (e) {
+            tX = e.changedTouches[0].clientX;
+            tY = e.changedTouches[0].clientY;
+        }, { passive: true });
+        lb.addEventListener("touchend", function (e) {
+            var dx = e.changedTouches[0].clientX - tX;
+            var dy = e.changedTouches[0].clientY - tY;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) step(dx < 0 ? 1 : -1);
+            else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.5) close();
+        }, { passive: true });
 
         lb.addEventListener("click", function (e) {
             if (e.target === lb) close();
@@ -447,12 +343,32 @@
     (function videos() {
         var featuredEl = $("#featuredVideo");
         var grid = $("#videoGrid");
-        if (!grid) return;
+        if (!grid || !featuredEl) return;
 
         var empty = $("#videoEmpty");
+        var countEl = $("#videoCount");
+        var bar = $(".jp-video-bar");
+        var stageId = "";
+        var cat = "all";
+        var filtersEl = null;
 
+        /* Keep only videos with a valid YouTube link, so a broken card never shows */
+        var ALL = MEDIA_VIDEOS.map(function (v) {
+            var o = {};
+            for (var k in v) o[k] = v[k];
+            o._id = youtubeId(v.youtubeUrl);
+            return o;
+        }).filter(function (v) {
+            return v._id;
+        }).sort(function (a, b) {
+            return (a.order || 0) - (b.order || 0);
+        });
+
+        featuredEl.setAttribute("aria-live", "polite");
+
+        /* ---------- Player: loads only after a click ---------- */
         function loadPlayer(frame, id) {
-            if (frame.getAttribute("data-loaded") === "1") return;
+            if (!frame || frame.getAttribute("data-loaded") === "1") return;
             frame.setAttribute("data-loaded", "1");
             var iframe = document.createElement("iframe");
             iframe.src = "https://www.youtube-nocookie.com/embed/" + id +
@@ -460,7 +376,6 @@
             iframe.title = frame.getAttribute("data-title") || "JP Express video";
             iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
             iframe.setAttribute("allowfullscreen", "");
-            iframe.setAttribute("loading", "lazy");
             iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
             iframe.style.width = "100%";
             iframe.style.height = "100%";
@@ -469,107 +384,203 @@
             frame.appendChild(iframe);
         }
 
-        function frameHTML(v) {
-            var id = youtubeId(v.youtubeUrl);
+        /* ---------- Thumbnail + play button ---------- */
+        function frameHTML(v, o) {
+            o = o || {};
             var title = esc(v.title || "JP Express video");
-
-            if (!id) {
-                return '<div class="jp-video-frame" role="img" aria-label="Video unavailable">' +
-                    '<div class="jp-video-fallback">' +
-                    '<i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>' +
-                    '<strong>Video unavailable</strong>' +
-                    '<small>This video cannot be embedded right now. Please check back later.</small>' +
-                    '</div></div>';
-            }
-
-            return '<div class="jp-video-frame" data-youtube-id="' + esc(id) + '" data-title="' + title + '">' +
-                '<img src="' + esc(youtubeThumb(id)) + '" alt="' + title + '" loading="lazy" decoding="async" width="640" height="360">' +
+            return '<div class="jp-video-frame" data-youtube-id="' + esc(v._id) + '" data-title="' + title + '">' +
+                '<img src="' + esc(youtubeThumb(v._id, o.hd)) + '" alt="" ' +
+                (o.hd ? 'data-yt-hd="' + esc(v._id) + '" ' : "") +
+                'loading="' + (o.eager ? "eager" : "lazy") + '" decoding="async" width="640" height="360">' +
+                (v.duration ? '<span class="jp-vdur">' + esc(v.duration) + '</span>' : "") +
                 '<button type="button" class="jp-play-btn" aria-label="Play video: ' + title + '">' +
                 '<i class="fa-solid fa-circle-play" aria-hidden="true"></i>' +
                 '<span class="visually-hidden">Play</span>' +
                 '</button></div>';
         }
 
+        /* ---------- Big player (featured / now playing) ---------- */
+        function renderStage(v, autoplay) {
+            stageId = v.id;
+            var label = autoplay ? "Now playing" : (v.featured ? "Featured" : "Latest");
+            var icon = autoplay ? "play" : "star";
+
+            var meta = [];
+            if (v.categoryLabel) meta.push('<li><i class="fa-solid fa-tag" aria-hidden="true"></i>' + esc(v.categoryLabel) + '</li>');
+            if (v.duration) meta.push('<li><i class="fa-regular fa-clock" aria-hidden="true"></i>' + esc(v.duration) + '</li>');
+
+            featuredEl.innerHTML =
+                '<div class="jp-stage">' +
+                '<div class="jp-stage-player">' + frameHTML(v, { hd: true, eager: true }) + '</div>' +
+                '<div class="jp-stage-info">' +
+                '<span class="jp-video-badge"><i class="fa-solid fa-' + icon + '" aria-hidden="true"></i> ' + label + '</span>' +
+                '<h3 class="jp-stage-title" tabindex="-1">' + esc(v.title) + '</h3>' +
+                (v.description ? '<p class="jp-stage-desc">' + esc(v.description) + '</p>' : "") +
+                (meta.length ? '<ul class="jp-stage-meta">' + meta.join("") + '</ul>' : "") +
+                '<div class="jp-stage-actions">' +
+                '<a class="jp-vbtn jp-vbtn--solid" href="https://www.youtube.com/watch?v=' + esc(v._id) + '" target="_blank" rel="noopener">' +
+                '<i class="fa-brands fa-youtube" aria-hidden="true"></i> Watch on YouTube</a>' +
+                '<button type="button" class="jp-vbtn jp-vbtn--ghost" data-copy="https://youtu.be/' + esc(v._id) + '">' +
+                '<i class="fa-solid fa-link" aria-hidden="true"></i><span>Copy link</span></button>' +
+                '</div></div></div>';
+
+            if (autoplay) loadPlayer(featuredEl.querySelector(".jp-video-frame"), v._id);
+        }
+
+        /* ---------- Grid cards ---------- */
         function card(v) {
-            return '<article class="jp-video-card">' +
+            return '<article class="jp-video-card jp-vcard" data-vid="' + esc(v.id) + '">' +
                 frameHTML(v) +
                 '<div class="jp-video-body">' +
+                (v.categoryLabel ? '<span class="jp-vcat">' + esc(v.categoryLabel) + '</span>' : "") +
                 '<h3 class="jp-video-title">' + esc(v.title) + '</h3>' +
                 (v.description ? '<p class="jp-video-desc">' + esc(v.description) + '</p>' : "") +
+                '<span class="jp-vwatch">Watch now <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>' +
                 '</div></article>';
         }
 
         function renderGrid() {
-            var list = MEDIA_VIDEOS.slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
-
-            if (!list.length) {
-                grid.innerHTML = "";
-                if (empty) empty.hidden = false;
-                if (featuredEl) featuredEl.innerHTML = "";
-                return;
-            }
-            if (empty) empty.hidden = true;
-
-            /* Featured video: first item flagged as featured, else first item */
-            var featured = list.filter(function (v) { return v.featured; })[0] || list[0];
-            if (featuredEl) {
-                featuredEl.innerHTML = '<div class="jp-video-card jp-video-card--featured">' +
-                    frameHTML(featured) +
-                    '<div class="jp-video-body">' +
-                    '<span class="jp-video-badge"><i class="fa-solid fa-star" aria-hidden="true"></i> Featured</span>' +
-                    '<h3 class="jp-video-title">' + esc(featured.title) + '</h3>' +
-                    (featured.description ? '<p class="jp-video-desc">' + esc(featured.description) + '</p>' : "") +
-                    '</div></div>';
-            }
-
-            /* Remaining videos in the grid */
-            var rest = list.filter(function (v) { return v !== featured; });
+            var rest = ALL.filter(function (v) {
+                return v.id !== stageId && (cat === "all" || v.category === cat);
+            });
             grid.innerHTML = rest.map(card).join("");
+            if (countEl) countEl.textContent = rest.length + (rest.length === 1 ? " video" : " videos");
+            if (bar) bar.hidden = ALL.length < 2;
+            if (filtersEl) {
+                $$("[data-vcat]", filtersEl).forEach(function (b) {
+                    var on = b.getAttribute("data-vcat") === cat;
+                    b.classList.toggle("active", on);
+                    b.setAttribute("aria-pressed", String(on));
+                });
+            }
         }
 
-        renderGrid();
+        /* ---------- Category chips (only when there are enough videos) ---------- */
+        function buildFilters() {
+            var map = {}, order = [];
+            ALL.forEach(function (v) {
+                if (v.category && !map[v.category]) {
+                    map[v.category] = v.categoryLabel || v.category;
+                    order.push(v.category);
+                }
+            });
+            if (ALL.length < 5 || order.length < 2 || !bar) return;
 
-        /* One delegated click handler for every play button */
-        document.addEventListener("click", function (e) {
-            var btn = e.target.closest(".jp-play-btn");
-            if (!btn) return;
-            var frame = btn.closest(".jp-video-frame");
-            if (!frame) return;
-            var id = frame.getAttribute("data-youtube-id");
-            if (id) loadPlayer(frame, id);
+            filtersEl = document.createElement("div");
+            filtersEl.className = "jp-video-filters";
+            filtersEl.setAttribute("role", "group");
+            filtersEl.setAttribute("aria-label", "Filter videos by category");
+            filtersEl.innerHTML =
+                '<button class="jp-filter active" type="button" data-vcat="all" aria-pressed="true">All</button>' +
+                order.map(function (k) {
+                    return '<button class="jp-filter" type="button" data-vcat="' + esc(k) + '" aria-pressed="false">' + esc(map[k]) + '</button>';
+                }).join("");
+            bar.insertAdjacentElement("afterend", filtersEl);
+
+            filtersEl.addEventListener("click", function (e) {
+                var b = e.target.closest("[data-vcat]");
+                if (!b) return;
+                cat = b.getAttribute("data-vcat");
+                renderGrid();
+            });
+        }
+
+        /* ---------- Move a grid video into the big player ---------- */
+        function select(id) {
+            var v = ALL.filter(function (x) { return x.id === id; })[0];
+            if (!v) return;
+            renderStage(v, true);
+            renderGrid();
+
+            var hh = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--jp-header-h")) || 70;
+            var top = featuredEl.getBoundingClientRect().top;
+            if (top < hh + 8) {
+                window.scrollBy({ top: top - hh - 16, behavior: reduced ? "auto" : "smooth" });
+            }
+            var t = featuredEl.querySelector(".jp-stage-title");
+            if (t) t.focus({ preventScroll: true });
+        }
+
+        /* ---------- Copy link ---------- */
+        function copyLink(btn) {
+            var text = btn.getAttribute("data-copy");
+            var label = btn.querySelector("span");
+            var old = label.textContent;
+            function done(ok) {
+                label.textContent = ok ? "Link copied" : "Copy failed";
+                btn.classList.toggle("is-done", ok);
+                setTimeout(function () { label.textContent = old; btn.classList.remove("is-done"); }, 1800);
+            }
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+            } else {
+                var ta = document.createElement("textarea");
+                ta.value = text;
+                ta.style.cssText = "position:fixed;opacity:0";
+                document.body.appendChild(ta);
+                ta.select();
+                var ok = false;
+                try { ok = document.execCommand("copy"); } catch (err) { }
+                document.body.removeChild(ta);
+                done(ok);
+            }
+        }
+
+        /* ---------- Events ---------- */
+        featuredEl.addEventListener("click", function (e) {
+            var play = e.target.closest(".jp-play-btn");
+            if (play) {
+                var frame = play.closest(".jp-video-frame");
+                if (frame) loadPlayer(frame, frame.getAttribute("data-youtube-id"));
+                return;
+            }
+            var cp = e.target.closest("[data-copy]");
+            if (cp) copyLink(cp);
         });
+
+        grid.addEventListener("click", function (e) {
+            var c = e.target.closest(".jp-vcard");
+            if (c) select(c.getAttribute("data-vid"));
+        });
+
+        /* If a max-quality thumbnail does not exist, fall back to the standard one */
+        document.addEventListener("error", function (e) {
+            var img = e.target;
+            if (img && img.tagName === "IMG" && img.hasAttribute("data-yt-hd") && !img.getAttribute("data-fb")) {
+                img.setAttribute("data-fb", "1");
+                img.src = youtubeThumb(img.getAttribute("data-yt-hd"), false);
+            }
+        }, true);
+
+        /* ---------- Init ---------- */
+        if (!ALL.length) {
+            featuredEl.innerHTML = "";
+            grid.innerHTML = "";
+            if (bar) bar.hidden = true;
+            if (empty) empty.hidden = false;
+            return;
+        }
+        if (empty) empty.hidden = true;
+
+        buildFilters();
+        renderStage(ALL.filter(function (v) { return v.featured; })[0] || ALL[0], false);
+        renderGrid();
     })();
 
 })();
 
 
-
-/* =========================================================
-   JP EXPRESS — NEWS DETAIL PAGE LOGIC  (v1.0 — premium)
-   Reads ?slug= from the URL and renders a full article.
-   Requirements met:
-   - Unique metadata (title, description, OG, Twitter, canonical)
-   - Structured data: NewsArticle + BreadcrumbList
-   - Share previews: WhatsApp, LinkedIn, Facebook, Copy link
-   - Reading time + progress bar (respects prefers-reduced-motion)
-   - Related articles (same category first, then latest)
-   - Prev / Next navigation
-   - Premium 404 / "not found" state with search + back CTA
-   - Returns to Media (breadcrumb + bottom CTA)
-   - Mobile-first, keyboard accessible
-   Load AFTER js/main.js
-   ========================================================= */
 (function () {
     "use strict";
+
+    /* Run ONLY on the news detail page (it has #article). Stops the Media page title being overwritten. */
+    if (!document.getElementById("article")) return;
 
     var $ = function (s, r) { return (r || document).querySelector(s); };
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* =========================================================
-       DATA — replace with Laravel API fetch when ready.
-       e.g. fetch('/api/media/news/' + slug).then(r => r.json())
-       ========================================================= */
+
     var MEDIA_NEWS = [
         {
             slug: "service-updates",
@@ -931,8 +942,8 @@
                 return b.date.localeCompare(a.date);
             });
 
-        // Sidebar shows 4 compact items
-        renderRelated(related.slice(0, 4), "sideRelated", "relatedList", true);
+        // Sidebar shows 3 compact items
+        renderRelated(related.slice(0, 3), "sideRelated", "relatedList", true);
 
         // Bottom grid shows exactly 4 cards (one full row on desktop)
         renderBottomRelated(related.slice(0, 4), item);
@@ -973,16 +984,21 @@
         var list = items.slice(0, 4);
 
         grid.innerHTML = list.map(function (n) {
-            return '<article class="jp-news-card">' +
-                '<a class="jp-news-media" href="news-detail.html?slug=' + encodeURIComponent(n.slug) + '" aria-label="' + esc(n.title) + '">' +
-                '<img class="jp-news-img" src="' + esc(n.image) + '" alt="' + esc(n.imageAlt || n.title) + '" loading="lazy" decoding="async" width="640" height="360">' +
+            var href = 'news-detail.html?slug=' + encodeURIComponent(n.slug);
+            return '<article class="jp-news-card" data-category="' + esc(n.category) + '">' +
+                '<a class="jp-news-media" href="' + href + '" tabindex="-1" aria-hidden="true">' +
+                '<img class="jp-news-img" src="' + esc(n.image) + '" alt="" loading="lazy" decoding="async" width="640" height="360">' +
                 '<span class="jp-news-chip">' + esc(n.categoryLabel) + '</span>' +
                 '</a>' +
                 '<div class="jp-news-body">' +
-                '<div class="jp-news-meta"><time datetime="' + esc(n.date) + '">' + esc(fmt(n.date)) + '</time></div>' +
-                '<h3 class="jp-news-title"><a href="news-detail.html?slug=' + encodeURIComponent(n.slug) + '">' + esc(n.title) + '</a></h3>' +
+                '<div class="jp-news-meta">' +
+                '<time datetime="' + esc(n.date) + '">' + esc(fmt(n.date)) + '</time>' +
+                '<span class="jp-news-dot" aria-hidden="true"></span>' +
+                '<span>' + readingTime(n.body) + ' min read</span>' +
+                '</div>' +
+                '<h3 class="jp-news-title"><a href="' + href + '">' + esc(n.title) + '</a></h3>' +
                 '<p class="jp-news-excerpt">' + esc(n.summary) + '</p>' +
-                '<a class="jp-news-link" href="news-detail.html?slug=' + encodeURIComponent(n.slug) + '">Read More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' +
+                '<span class="jp-news-link">Read More <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>' +
                 '</div></article>';
         }).join("");
         section.hidden = false;
