@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- 01. Primary SEO (Dynamically updated by JS) -->
+    <!-- 01. Primary SEO (updated by JS per slug) -->
     <title>Article | JP Express Blog</title>
     <meta name="description" content="Read the latest shipping and logistics insights from JP Express.">
     <meta name="author" content="JP Express">
@@ -18,13 +18,13 @@
     <meta name="coverage" content="Bangladesh to international destinations worldwide">
     <meta name="target" content="Individuals, exporters, businesses, e-commerce sellers and commercial shippers">
 
-    <!-- 02. Search Engine Instructions -->
+    <!-- 02. Robots -->
     <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="bingbot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="theme-color" content="#2B3990">
 
-    <!-- 03. Canonical & Language (Dynamically updated by JS) -->
+    <!-- 03. Canonical & Language -->
     <link rel="alternate" hreflang="en" href="https://www.jpex.com.bd/blog.html">
     <link rel="alternate" hreflang="x-default" href="https://www.jpex.com.bd/blog.html">
     <link rel="canonical" href="https://www.jpex.com.bd/blog.html">
@@ -33,7 +33,7 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
 
-    <!-- 05. Open Graph / Social Search (Dynamically updated by JS) -->
+    <!-- 05. Open Graph (JS updates) -->
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="JP Express">
     <meta property="og:title" content="Article | JP Express Blog">
@@ -58,7 +58,7 @@
     <meta name="geo.region" content="BD-13">
     <meta name="geo.placename" content="Dhaka, Bangladesh">
 
-    <!-- 08. Performance -->
+    <!-- 08. Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -70,75 +70,37 @@
     <!-- 10. CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-
-    <!-- 11. Structured Data (Dynamically updated by JS) -->
-    <script type="application/ld+json" id="ld-organization">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "JP Express",
-    "url": "https://www.jpex.com.bd/",
-    "logo": "https://www.jpex.com.bd/assets/logo.png",
-    "telephone": "+8801681637836",
-    "areaServed": "Worldwide"
-  }
-  </script>
-    <script type="application/ld+json" id="ld-article">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Article",
-    "description": "",
-    "image": "",
-    "datePublished": "",
-    "dateModified": "",
-    "author": {
-      "@type": "Organization",
-      "name": "JP Express"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "JP Express",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://www.jpex.com.bd/assets/logo.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://www.jpex.com.bd/blog.html"
-    }
-  }
-  </script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/pages/blog.css">
     <link rel="stylesheet" href="css/pages/blog-detail.css">
+
+    <!-- 11. Structured Data (per-article updates by JS) -->
+    <script type="application/ld+json" id="ld-organization">
+  {"@context":"https://schema.org","@type":"Organization","name":"JP Express","url":"https://www.jpex.com.bd/","logo":"https://www.jpex.com.bd/assets/logo.png","telephone":"+8801681637836","areaServed":"Worldwide"}
+  </script>
+    <script type="application/ld+json" id="ld-article">
+  {"@context":"https://schema.org","@type":"BlogPosting","headline":"","description":"","image":"","datePublished":"","dateModified":"","author":{"@type":"Organization","name":"JP Express"},"publisher":{"@type":"Organization","name":"JP Express","logo":{"@type":"ImageObject","url":"https://www.jpex.com.bd/assets/logo.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":""}}
+  </script>
 </head>
 
 <body>
     <header class="site-header" id="siteHeader">
-
         <!-- Top Bar -->
         <div class="topbar" id="topBar">
             <div class="container-fluid d-flex justify-content-between align-items-center gap-3">
                 <div class="topbar-left">
-                    <a href="tel:+8801681637836">
-                        <i class="fa-solid fa-phone"></i> +880 1681 637836
-                    </a>
-                    <a href="https://wa.me/8801681637836" target="_blank" rel="noopener">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp
-                    </a>
-                    <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com">
-                        <i class="fa-solid fa-envelope"></i> info@jpex.com.bd
-                    </a>
+                    <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> +880 1681 637836</a>
+                    <a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i
+                            class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                    <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com"><i
+                            class="fa-solid fa-envelope"></i> info@jpex.com.bd</a>
                 </div>
                 <div class="topbar-right">
                     <button class="lang-btn active" type="button">English</button>
                     <span>|</span>
                     <button class="lang-btn" type="button">বাংলা</button>
-                    <a class="d-none d-md-inline" href="login.html">
-                        <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
-                    </a>
+                    <a class="d-none d-md-inline" href="login.html"><i class="fa-solid fa-circle-user"></i> Customer
+                        Login <i class="fa-solid fa-angle-right"></i></a>
                 </div>
             </div>
         </div>
@@ -149,118 +111,87 @@
                 <a class="navbar-brand p-0" href="index.html" aria-label="JP Express home">
                     <img src="assets/logo.png" alt="JP Express" class="brand-logo">
                 </a>
-
                 <div class="d-flex align-items-center gap-2 ms-auto order-xl-3">
-                    <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">
-                        Track Shipment
-                    </a>
-                    <a href="quote.html" class="btn-header btn-header-red d-none d-lg-inline-flex">
-                        Get a Quote <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                    <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">Track
+                        Shipment</a>
+                    <a href="quote.html" class="btn-header btn-header-red d-none d-lg-inline-flex">Get a Quote <i
+                            class="fa-solid fa-arrow-right"></i></a>
                     <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+                        data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu"><i
+                            class="fa-solid fa-bars"></i></button>
                 </div>
-
                 <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item jp-dropdown">
-                        <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">
-                            Services <i class="fa-solid fa-chevron-down"></i>
-                        </a>
-
+                        <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">Services <i
+                                class="fa-solid fa-chevron-down"></i></a>
                         <div class="jp-dd-menu" role="menu" aria-label="Services">
-                            <a class="jp-dd-link" href="services/international-courier.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span>
-                                <span class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp;
-                                        parcels
-                                        worldwide</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="services/air-freight.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-plane-departure"></i></span>
-                                <span class="jp-dd-txt"><strong>Air Freight</strong><small>Fast cargo for commercial
-                                        shipments</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="services/sea-freight.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-ship"></i></span>
-                                <span class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL &amp; LCL for bulk
-                                        cargo</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="services/export-logistics.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-boxes-packing"></i></span>
-                                <span class="jp-dd-txt"><strong>Export Logistics</strong><small>Documentation &amp;
-                                        export
-                                        support</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="services/import-solutions.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-truck-ramp-box"></i></span>
-                                <span class="jp-dd-txt"><strong>Import Solutions</strong><small>Sourcing, customs &amp;
-                                        delivery</small></span>
-                            </a>
+                            <a class="jp-dd-link" href="services/international-courier.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span><span
+                                    class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp;
+                                        parcels worldwide</small></span></a>
+                            <a class="jp-dd-link" href="services/air-freight.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-plane-departure"></i></span><span
+                                    class="jp-dd-txt"><strong>Air Freight</strong><small>Fast cargo for commercial
+                                        shipments</small></span></a>
+                            <a class="jp-dd-link" href="services/sea-freight.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-ship"></i></span><span
+                                    class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL &amp; LCL for bulk
+                                        cargo</small></span></a>
+                            <a class="jp-dd-link" href="services/export-logistics.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-boxes-packing"></i></span><span
+                                    class="jp-dd-txt"><strong>Export Logistics</strong><small>Documentation &amp; export
+                                        support</small></span></a>
+                            <a class="jp-dd-link" href="services/import-solutions.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-truck-ramp-box"></i></span><span
+                                    class="jp-dd-txt"><strong>Import Solutions</strong><small>Sourcing, customs &amp;
+                                        delivery</small></span></a>
                             <a class="jp-dd-all" href="services.html">View All Services <i
                                     class="fa-solid fa-arrow-right"></i></a>
                         </div>
                     </li>
                     <li class="nav-item jp-dropdown">
-                        <a class="nav-link jp-dd-trigger" href="industries.html" aria-haspopup="true">
-                            Industries <i class="fa-solid fa-chevron-down"></i>
-                        </a>
-
+                        <a class="nav-link jp-dd-trigger" href="industries.html" aria-haspopup="true">Industries <i
+                                class="fa-solid fa-chevron-down"></i></a>
                         <div class="jp-dd-menu" role="menu" aria-label="Industries">
-                            <a class="jp-dd-link" href="industries/garments-textiles.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-shirt"></i></span>
-                                <span class="jp-dd-txt"><strong>Garments Textile</strong><small>Apparel, fabrics &amp;
-                                        bulk RMG
-                                        exports</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/jute-products.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-seedling"></i></span>
-                                <span class="jp-dd-txt"><strong>Jute Products</strong><small>Eco-friendly fibre goods
-                                        &amp;
-                                        bags</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/leather-products.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-bag-shopping"></i></span>
-                                <span class="jp-dd-txt"><strong>Leather Products</strong><small>Footwear, bags &amp;
-                                        finished
-                                        leather</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/handicrafts.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-palette"></i></span>
-                                <span class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade &amp; fragile
-                                        artisan
-                                        goods</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/e-commerce.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-cart-shopping"></i></span>
-                                <span class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border orders &amp;
-                                        seller
-                                        shipping</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/manufacturing.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-industry"></i></span>
-                                <span class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery, parts &amp;
-                                        factory
-                                        cargo</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/buying-houses.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-handshake"></i></span>
-                                <span class="jp-dd-txt"><strong>Buying Houses</strong><small>Samples, orders &amp;
-                                        consolidation</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/smes.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-store"></i></span>
-                                <span class="jp-dd-txt"><strong>SMEs</strong><small>Affordable export for growing
-                                        businesses</small></span>
-                            </a>
-                            <a class="jp-dd-link" href="industries/corporate-businesses.html" role="menuitem">
-                                <span class="jp-dd-ico"><i class="fa-solid fa-building"></i></span>
-                                <span class="jp-dd-txt"><strong>Corporate Businesses</strong><small>Dedicated account
-                                        &amp; bulk
-                                        logistics</small></span>
-                            </a>
+                            <a class="jp-dd-link" href="industries/garments-textiles.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-shirt"></i></span><span
+                                    class="jp-dd-txt"><strong>Garments Textile</strong><small>Apparel, fabrics &amp;
+                                        bulk RMG exports</small></span></a>
+                            <a class="jp-dd-link" href="industries/jute-products.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-seedling"></i></span><span
+                                    class="jp-dd-txt"><strong>Jute Products</strong><small>Eco-friendly fibre goods
+                                        &amp; bags</small></span></a>
+                            <a class="jp-dd-link" href="industries/leather-products.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-bag-shopping"></i></span><span
+                                    class="jp-dd-txt"><strong>Leather Products</strong><small>Footwear, bags &amp;
+                                        finished leather</small></span></a>
+                            <a class="jp-dd-link" href="industries/handicrafts.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-palette"></i></span><span
+                                    class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade &amp; fragile artisan
+                                        goods</small></span></a>
+                            <a class="jp-dd-link" href="industries/e-commerce.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-cart-shopping"></i></span><span
+                                    class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border orders &amp; seller
+                                        shipping</small></span></a>
+                            <a class="jp-dd-link" href="industries/manufacturing.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-industry"></i></span><span
+                                    class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery, parts &amp;
+                                        factory cargo</small></span></a>
+                            <a class="jp-dd-link" href="industries/buying-houses.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-handshake"></i></span><span
+                                    class="jp-dd-txt"><strong>Buying Houses</strong><small>Samples, orders &amp;
+                                        consolidation</small></span></a>
+                            <a class="jp-dd-link" href="industries/smes.html" role="menuitem"><span class="jp-dd-ico"><i
+                                        class="fa-solid fa-store"></i></span><span
+                                    class="jp-dd-txt"><strong>SMEs</strong><small>Affordable export for growing
+                                        businesses</small></span></a>
+                            <a class="jp-dd-link" href="industries/corporate-businesses.html" role="menuitem"><span
+                                    class="jp-dd-ico"><i class="fa-solid fa-building"></i></span><span
+                                    class="jp-dd-txt"><strong>Corporate Businesses</strong><small>Dedicated account
+                                        &amp; bulk logistics</small></span></a>
+                        </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="business.html">Business</a></li>
                     <li class="nav-item"><a class="nav-link" href="offers.html">Offer</a></li>
@@ -271,7 +202,7 @@
             </div>
         </nav>
 
-        <!-- Mobile Offcanvas Menu -->
+        <!-- Mobile Offcanvas -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
             <div class="offcanvas-header">
                 <img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel">
@@ -285,27 +216,21 @@
                         <div class="jp-m-dd-row">
                             <a class="nav-link" href="services.html">Services</a>
                             <button type="button" class="jp-m-dd-toggle" aria-expanded="false"
-                                aria-controls="jpSubServices" aria-label="Toggle services submenu">
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </button>
+                                aria-controls="jpSubServices" aria-label="Toggle services submenu"><i
+                                    class="fa-solid fa-chevron-down"></i></button>
                         </div>
                         <div class="jp-m-sub" id="jpSubServices">
                             <ul>
                                 <li><a class="jp-sub-link" href="services/international-courier.html"><i
-                                            class="fa-solid fa-plane"></i>
-                                        International Courier</a></li>
+                                            class="fa-solid fa-plane"></i> International Courier</a></li>
                                 <li><a class="jp-sub-link" href="services/air-freight.html"><i
-                                            class="fa-solid fa-plane-departure"></i>
-                                        Air Freight</a></li>
+                                            class="fa-solid fa-plane-departure"></i> Air Freight</a></li>
                                 <li><a class="jp-sub-link" href="services/sea-freight.html"><i
-                                            class="fa-solid fa-ship"></i> Sea
-                                        Freight</a></li>
+                                            class="fa-solid fa-ship"></i> Sea Freight</a></li>
                                 <li><a class="jp-sub-link" href="services/export-logistics.html"><i
-                                            class="fa-solid fa-boxes-packing"></i> Export
-                                        Logistics</a></li>
+                                            class="fa-solid fa-boxes-packing"></i> Export Logistics</a></li>
                                 <li><a class="jp-sub-link" href="services/import-solutions.html"><i
-                                            class="fa-solid fa-truck-ramp-box"></i>
-                                        Import Solutions</a></li>
+                                            class="fa-solid fa-truck-ramp-box"></i> Import Solutions</a></li>
                             </ul>
                         </div>
                     </li>
@@ -313,42 +238,32 @@
                         <div class="jp-m-dd-row">
                             <a class="nav-link" href="industries.html">Industries</a>
                             <button type="button" class="jp-m-dd-toggle" aria-expanded="false"
-                                aria-controls="jpSubIndustries" aria-label="Toggle industries submenu">
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </button>
+                                aria-controls="jpSubIndustries" aria-label="Toggle industries submenu"><i
+                                    class="fa-solid fa-chevron-down"></i></button>
                         </div>
                         <div class="jp-m-sub" id="jpSubIndustries">
                             <ul>
                                 <li><a class="jp-sub-link" href="industries/garments-textiles.html"><i
-                                            class="fa-solid fa-shirt"></i>
-                                        Garments Textile</a></li>
+                                            class="fa-solid fa-shirt"></i> Garments Textile</a></li>
                                 <li><a class="jp-sub-link" href="industries/jute-products.html"><i
-                                            class="fa-solid fa-seedling"></i>
-                                        Jute Products</a></li>
+                                            class="fa-solid fa-seedling"></i> Jute Products</a></li>
                                 <li><a class="jp-sub-link" href="industries/leather-products.html"><i
-                                            class="fa-solid fa-bag-shopping"></i>
-                                        Leather Products</a></li>
+                                            class="fa-solid fa-bag-shopping"></i> Leather Products</a></li>
                                 <li><a class="jp-sub-link" href="industries/handicrafts.html"><i
-                                            class="fa-solid fa-palette"></i>
-                                        Handicrafts</a></li>
+                                            class="fa-solid fa-palette"></i> Handicrafts</a></li>
                                 <li><a class="jp-sub-link" href="industries/e-commerce.html"><i
-                                            class="fa-solid fa-cart-shopping"></i>
-                                        E-commerce</a></li>
+                                            class="fa-solid fa-cart-shopping"></i> E-commerce</a></li>
                                 <li><a class="jp-sub-link" href="industries/manufacturing.html"><i
-                                            class="fa-solid fa-industry"></i>
-                                        Manufacturing</a></li>
+                                            class="fa-solid fa-industry"></i> Manufacturing</a></li>
                                 <li><a class="jp-sub-link" href="industries/buying-houses.html"><i
-                                            class="fa-solid fa-handshake"></i>
-                                        Buying Houses</a></li>
+                                            class="fa-solid fa-handshake"></i> Buying Houses</a></li>
                                 <li><a class="jp-sub-link" href="industries/smes.html"><i class="fa-solid fa-store"></i>
                                         SMEs</a></li>
                                 <li><a class="jp-sub-link" href="industries/corporate-businesses.html"><i
-                                            class="fa-solid fa-building"></i>
-                                        Corporate Businesses</a></li>
+                                            class="fa-solid fa-building"></i> Corporate Businesses</a></li>
                             </ul>
                         </div>
                     </li>
-
                     <li><a class="nav-link" href="business.html">Business</a></li>
                     <li><a class="nav-link" href="offers.html">Offer</a></li>
                     <li><a class="nav-link" href="media.html">Media</a></li>
@@ -357,20 +272,16 @@
                 </ul>
                 <div class="d-grid gap-2 mt-4">
                     <a class="btn-header btn-header-red justify-content-center" href="quote.html"
-                        data-bs-dismiss="offcanvas">
-                        Get a Quote
-                    </a>
+                        data-bs-dismiss="offcanvas">Get a Quote</a>
                     <a class="btn-header btn-header-outline justify-content-center" href="track-shipment.html"
-                        data-bs-dismiss="offcanvas">
-                        Track Shipment
-                    </a>
+                        data-bs-dismiss="offcanvas">Track Shipment</a>
                 </div>
             </div>
         </div>
     </header>
 
     <main id="main">
-        <!-- HERO (Dynamic) -->
+        <!-- HERO -->
         <section class="hero page-hero" aria-labelledby="bdTitle">
             <div class="hero-bg"></div>
             <div class="container-fluid position-relative">
@@ -378,12 +289,11 @@
                     <nav class="page-crumb" aria-label="Breadcrumb">
                         <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                         <a href="blog.html">Blog</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-                        <span aria-current="page" id="bdCrumbCat">Article</span>
+                        <span aria-current="page" id="bdCrumbTitle">Article</span>
                     </nav>
                     <div class="hero-kicker"><span>JP EXPRESS</span> KNOWLEDGE CENTER</div>
-                    <h1 id="bdTitle">Loading article…</h1>
-                    <p id="bdExcerpt">Please wait while we load the article.</p>
-
+                    <h1 id="bdTitle">Article</h1>
+                    <p id="bdExcerpt"></p>
                     <div class="bd-meta-hero">
                         <span><i class="fa-regular fa-calendar" aria-hidden="true"></i> <time id="bdDate"></time></span>
                         <span><i class="fa-regular fa-clock" aria-hidden="true"></i> <span id="bdReadTime"></span> min
@@ -394,20 +304,19 @@
             </div>
         </section>
 
-        <!-- BODY (Dynamic) -->
+        <!-- BODY -->
         <section class="bd-sec" id="bdBodySec">
             <div class="container-fluid bl-wrap">
                 <div class="bd-layout" id="bdLayout">
-                    <!-- Main Content -->
                     <article class="bd-article" id="bdContent" aria-labelledby="bdTitle">
-                        <!-- Table of Contents (Dynamic) -->
-                        <div class="bd-toc" id="bdToc" hidden>
+                        <!-- TOC -->
+                        <nav class="bd-toc" id="bdToc" hidden aria-label="On this page">
                             <h2 class="bd-toc-title"><i class="fa-solid fa-list-ul" aria-hidden="true"></i> On this page
                             </h2>
                             <ul id="bdTocList"></ul>
-                        </div>
+                        </nav>
 
-                        <!-- Content will be injected here -->
+                        <!-- Content gets injected here -->
                         <div class="bd-placeholder">
                             <div class="bd-skeleton"></div>
                             <div class="bd-skeleton"></div>
@@ -428,16 +337,12 @@
                                     id="bdShareFb" aria-label="Share on Facebook"><i class="fa-brands fa-facebook-f"
                                         aria-hidden="true"></i></a>
                                 <button type="button" class="bd-share-btn bd-share-copy" id="bdShareCopy"
-                                    aria-label="Copy link">
-                                    <i class="fa-solid fa-link" aria-hidden="true"></i>
-                                </button>
+                                    aria-label="Copy link"><i class="fa-solid fa-link" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </article>
 
-                    <!-- Sidebar -->
-                    <aside class="bd-sidebar" id="bdSidebar">
-                        <!-- CTA Card -->
+                    <aside class="bd-sidebar" id="bdSidebar" aria-label="Related content">
                         <div class="bd-cta-card">
                             <div class="bd-cta-icon"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></div>
                             <h3>Need to ship?</h3>
@@ -448,24 +353,22 @@
                                     class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
 
-                        <!-- Related Articles -->
                         <div class="bd-related" id="bdRelated" hidden>
                             <h3>Related articles</h3>
                             <ul id="bdRelatedList"></ul>
                         </div>
 
-                        <!-- Country Guides -->
                         <div class="bd-related">
                             <h3>Country guides</h3>
                             <ul class="bd-country-list">
                                 <li><a href="country.html?c=usa"><img src="https://flagcdn.com/w40/us.png" width="20"
-                                            height="20" alt=""> United States</a></li>
+                                            height="20" alt="" loading="lazy"> United States</a></li>
                                 <li><a href="country.html?c=uk"><img src="https://flagcdn.com/w40/gb.png" width="20"
-                                            height="20" alt=""> United Kingdom</a></li>
+                                            height="20" alt="" loading="lazy"> United Kingdom</a></li>
                                 <li><a href="country.html?c=uae"><img src="https://flagcdn.com/w40/ae.png" width="20"
-                                            height="20" alt=""> UAE</a></li>
+                                            height="20" alt="" loading="lazy"> UAE</a></li>
                                 <li><a href="country.html?c=canada"><img src="https://flagcdn.com/w40/ca.png" width="20"
-                                            height="20" alt=""> Canada</a></li>
+                                            height="20" alt="" loading="lazy"> Canada</a></li>
                                 <li><a href="countries.html">All destinations <i class="fa-solid fa-arrow-right"
                                             aria-hidden="true"></i></a></li>
                             </ul>
@@ -494,21 +397,21 @@
                         <h2>Have a route in mind?</h2>
                         <p>Use what you learned, then get a quote for your next shipment.</p>
                     </div>
-                    <div class="cta-actions"><a class="btn-main btn-white" href="quote.html">Get a Quote</a><a
-                            class="btn-main btn-white-outline" target="_blank" rel="noopener"
+                    <div class="cta-actions">
+                        <a class="btn-main btn-white" href="quote.html">Get a Quote</a>
+                        <a class="btn-main btn-white-outline" target="_blank" rel="noopener"
                             href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment.">Ask
-                            the Team</a></div>
+                            the Team</a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ======= FOOTER ========== -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="container-fluid">
             <div class="row g-4 py-5">
-
-                <!-- Brand Column -->
                 <div class="col-lg-3">
                     <img src="assets/logo.png" alt="JP Express" class="footer-logo">
                     <p>International courier, export logistics and global shipping platform from Bangladesh.</p>
@@ -519,8 +422,6 @@
                         <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                     </div>
                 </div>
-
-                <!-- About Links -->
                 <div class="col-6 col-lg-2">
                     <h3>About</h3>
                     <a href="about.html">About Us</a>
@@ -529,8 +430,6 @@
                     <a href="careers.html">Careers</a>
                     <a href="contact.html">Contact</a>
                 </div>
-
-                <!-- Services Links -->
                 <div class="col-6 col-lg-2">
                     <h3>Services</h3>
                     <a href="services/international-courier.html">International Courier</a>
@@ -540,8 +439,6 @@
                     <a href="services/import-solutions.html">Import Solutions</a>
                     <a href="countries.html">Destinations</a>
                 </div>
-
-                <!-- Resources Links -->
                 <div class="col-6 col-lg-2">
                     <h3>Resources</h3>
                     <a href="resources.html">Resources</a>
@@ -551,26 +448,16 @@
                     <a href="blog.html">Blog</a>
                     <a href="faq.html">FAQ</a>
                 </div>
-
-                <!-- Contact Info -->
                 <div class="col-6 col-lg-3 footer-contact">
                     <h3>Contact</h3>
-                    <a href="tel:+8801681637836">
-                        <i class="fa-solid fa-phone"></i> Hotline: +8801681637836 (9am to 11pm)
-                    </a>
-                    <a href="mailto:jpexpress09@gmail.com">
-                        <i class="fa-solid fa-envelope"></i> info@jpex.com.bd | jpexpress09@gmail.com
-                    </a>
-                    <a href="contact.html">
-                        <i class="fa-solid fa-location-dot"></i> House- B-125 (Ground Floor), Road- 21, Mohakhali DOHS,
-                        Dhaka- 1206,
-                        Bangladesh.
-                    </a>
+                    <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> Hotline: +8801681637836 (9am to
+                        11pm)</a>
+                    <a href="mailto:jpexpress09@gmail.com"><i class="fa-solid fa-envelope"></i> info@jpex.com.bd |
+                        jpexpress09@gmail.com</a>
+                    <a href="contact.html"><i class="fa-solid fa-location-dot"></i> House- B-125 (Ground Floor), Road-
+                        21, Mohakhali DOHS, Dhaka- 1206, Bangladesh.</a>
                 </div>
-
             </div>
-
-            <!-- Footer Bottom -->
             <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3">
                 <span>© 2026 JP Express. All rights reserved.</span>
                 <div class="footer-legal">
@@ -582,23 +469,18 @@
         </div>
     </footer>
 
-    <!-- ============ FLOATING ACTIONS ============ -->
+    <!-- FLOATING ACTIONS -->
     <div class="fab-side" id="fabSide" aria-label="Quick contact actions">
-        <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top">
-            <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-        </a>
-        <a href="quote.html" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote">
-            <i class="fa-solid fa-calculator" aria-hidden="true"></i>
-        </a>
+        <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"
+                aria-hidden="true"></i></a>
+        <a href="quote.html" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote"><i
+                class="fa-solid fa-calculator" aria-hidden="true"></i></a>
         <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment."
             target="_blank" rel="noopener" class="fab-wa wa-link"
             data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WhatsApp"
-            aria-label="Chat on WhatsApp">
-            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-        </a>
-        <a href="tel:+8801681637836" class="fab-call" data-tip="Call us" aria-label="Call us">
-            <i class="fa-solid fa-phone" aria-hidden="true"></i>
-        </a>
+            aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="tel:+8801681637836" class="fab-call" data-tip="Call us" aria-label="Call us"><i
+                class="fa-solid fa-phone" aria-hidden="true"></i></a>
     </div>
 
     <nav class="fab-bar" aria-label="Mobile quick actions">
@@ -613,212 +495,244 @@
                 class="fa-solid fa-circle-user"></i>Login</a>
     </nav>
 
-    <!-- ============ SCRIPTS ============ -->
+    <!-- SCRIPTS — blog-data.js MUST load before the inline script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/data.js"></script>
+    <script src="js/blog-data.js"></script>
     <script src="js/main.js"></script>
     <script>
         /* =========================================================
-           BLOG DETAIL PAGE LOGIC
-           Reads the ?slug= parameter, finds the article in BLOG_POSTS,
-           injects the content, and enhances it with TOC, share links,
-           related articles, and SEO metadata.
+           BLOG DETAIL PAGE LOGIC — SELF-CONTAINED
            ========================================================= */
         (function () {
             'use strict';
 
             var $ = function (id) { return document.getElementById(id); };
             var qs = new URLSearchParams(window.location.search);
-            var slug = qs.get('slug') || qs.get('article') || '';
-            var post = null;
+            var slug = (qs.get('slug') || qs.get('article') || '').toLowerCase().trim();
 
-            /* Find the article in the global BLOG_POSTS array (from data.js) */
-            if (typeof BLOG_POSTS !== 'undefined' && Array.isArray(BLOG_POSTS) && slug) {
-                post = BLOG_POSTS.find(function (p) {
-                    /* Match by slug in href or by a generated slug from the title */
-                    var hrefSlug = (p.h || '').split('/').pop().replace('.html', '');
-                    var titleSlug = (p.t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                    return hrefSlug === slug || titleSlug === slug;
-                });
-            }
-
-            /* ---------- Not Found ---------- */
-            if (!post) {
-                $('bdBodySec').innerHTML = '<div class="container-fluid bl-wrap">' +
-                    '<div class="bd-empty"><div class="bd-empty-icon"><i class="fa-solid fa-file-circle-question" aria-hidden="true"></i></div>' +
-                    '<h2>Article not found</h2><p>We couldn\'t find the article you\'re looking for. It may have been moved or removed.</p>' +
-                    '<div class="bd-empty-actions"><a href="blog.html" class="btn-main btn-red">Back to Blog</a>' +
-                    '<a href="contact.html" class="btn-main btn-dark-outline">Contact Support</a></div></div></div>';
-                document.title = 'Article Not Found | JP Express';
+            // 1) Guard: blog data must be present
+            if (typeof BLOG_POSTS === 'undefined' || !Array.isArray(BLOG_POSTS)) {
+                showNotFound();
+                document.title = 'Blog Unavailable | JP Express';
                 return;
             }
 
-            /* ---------- Article Data (with fallbacks) ---------- */
+            // 2) Find by explicit slug (blog-data.js defines it)
+            var post = null;
+            for (var i = 0; i < BLOG_POSTS.length; i++) {
+                var p = BLOG_POSTS[i];
+                if ((p.slug || '').toLowerCase() === slug) { post = p; break; }
+                // Fallback: match by slugified title
+                if (!post) {
+                    var titleSlug = (p.t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    if (titleSlug === slug) post = p;
+                }
+            }
+
+            if (!post) { showNotFound(); document.title = 'Article Not Found | JP Express'; return; }
+
+            // 3) Data with fallbacks
             var catLabel = (typeof BLOG_CATS !== 'undefined' && BLOG_CATS[post.c]) ? BLOG_CATS[post.c] : 'Article';
             var dateStr = post.d ? new Date(post.d + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
             var readTime = post.r || 5;
             var content = post.content || post.fx || post.x || '<p>Full article content coming soon.</p>';
             var featuredImage = post.image || 'assets/hero-banner2.jpg';
             var imageAlt = post.t || 'JP Express article';
+            var pageUrl = window.location.href.split('#')[0];
+            var absoluteUrl = 'https://www.jpex.com.bd/blog-detail.html?slug=' + encodeURIComponent(post.slug);
+            var absoluteImage = featuredImage.indexOf('http') === 0 ? featuredImage : 'https://www.jpex.com.bd/' + featuredImage;
 
-            /* ---------- Update Static Elements ---------- */
+            // 4) Update visible elements
             document.title = post.t + ' | JP Express Blog';
             $('bdTitle').textContent = post.t;
             $('bdExcerpt').textContent = post.x || post.fx || '';
-            $('bdCrumbCat').textContent = catLabel;
+            $('bdCrumbTitle').textContent = post.t;
             $('bdDate').textContent = dateStr;
+            $('bdDate').setAttribute('datetime', post.d || '');
             $('bdReadTime').textContent = readTime;
             $('bdCategoryPill').textContent = catLabel;
-            $('bdCategoryPill').className = 'bd-cat-pill t-' + (post.k || 'navy');
 
-            /* ---------- Update Meta Tags ---------- */
-            var meta = function (sel, attr, val) {
+            // 5) Meta tags
+            var setMeta = function (sel, attr, val) {
                 var el = document.querySelector(sel);
                 if (el) el.setAttribute(attr, val);
             };
-            var pageUrl = window.location.href;
-            meta('meta[name="description"]', 'content', post.x || post.fx || '');
-            meta('link[rel="canonical"]', 'href', pageUrl);
-            meta('meta[property="og:title"]', 'content', post.t);
-            meta('meta[property="og:description"]', 'content', post.x || post.fx || '');
-            meta('meta[property="og:url"]', 'content', pageUrl);
-            meta('meta[property="og:image"]', 'content', 'https://www.jpex.com.bd/' + featuredImage);
-            meta('meta[property="og:type"]', 'content', 'article');
-            meta('meta[name="twitter:title"]', 'content', post.t);
-            meta('meta[name="twitter:description"]', 'content', post.x || post.fx || '');
-            meta('meta[name="twitter:image"]', 'content', 'https://www.jpex.com.bd/' + featuredImage);
+            setMeta('meta[name="description"]', 'content', post.x || post.fx || '');
+            setMeta('link[rel="canonical"]', 'href', absoluteUrl);
+            setMeta('meta[property="og:title"]', 'content', post.t);
+            setMeta('meta[property="og:description"]', 'content', post.x || post.fx || '');
+            setMeta('meta[property="og:url"]', 'content', absoluteUrl);
+            setMeta('meta[property="og:image"]', 'content', absoluteImage);
+            setMeta('meta[property="og:image:alt"]', 'content', imageAlt);
+            setMeta('meta[property="og:type"]', 'content', 'article');
+            setMeta('meta[name="twitter:title"]', 'content', post.t);
+            setMeta('meta[name="twitter:description"]', 'content', post.x || post.fx || '');
+            setMeta('meta[name="twitter:image"]', 'content', absoluteImage);
 
-            /* ---------- Update JSON-LD ---------- */
-            var ldArticle = $('ld-article');
-            if (ldArticle) {
-                var ldData = {
+            // 6) JSON-LD BlogPosting
+            var ld = document.getElementById('ld-article');
+            if (ld) {
+                ld.textContent = JSON.stringify({
                     '@context': 'https://schema.org',
                     '@type': 'BlogPosting',
                     'headline': post.t,
                     'description': post.x || post.fx || '',
-                    'image': 'https://www.jpex.com.bd/' + featuredImage,
+                    'image': [absoluteImage],
                     'datePublished': post.d,
                     'dateModified': post.d,
+                    'articleSection': catLabel,
                     'author': { '@type': 'Organization', 'name': 'JP Express' },
                     'publisher': {
                         '@type': 'Organization',
                         'name': 'JP Express',
                         'logo': { '@type': 'ImageObject', 'url': 'https://www.jpex.com.bd/assets/logo.png' }
                     },
-                    'mainEntityOfPage': { '@type': 'WebPage', '@id': pageUrl }
-                };
-                ldArticle.textContent = JSON.stringify(ldData);
+                    'mainEntityOfPage': { '@type': 'WebPage', '@id': absoluteUrl }
+                });
             }
 
-            /* ---------- Inject Featured Image & Content ---------- */
+            // 7) Build article HTML
             var contentEl = $('bdContent');
             var placeholder = contentEl.querySelector('.bd-placeholder');
             if (placeholder) placeholder.remove();
 
-            /* Build the article body with a featured image and the content */
-            var articleHtml = '<figure class="bd-featured-img"><img src="' + featuredImage + '" alt="' + imageAlt + '" loading="lazy" width="1200" height="675"></figure>';
+            var bodyHtml = '<figure class="bd-featured-img"><img src="' + featuredImage + '" alt="' + imageAlt + '" loading="lazy" width="1200" height="675"></figure>';
 
-            /* If the content is just a string, wrap it in paragraphs. Otherwise assume it's HTML. */
+            // Wrap plain text into paragraphs (blog-data.js uses HTML, but be safe)
             if (typeof content === 'string' && !content.trim().startsWith('<')) {
                 content = content.split(/\n\n+/).map(function (p) { return '<p>' + p.trim() + '</p>'; }).join('');
             }
-            articleHtml += '<div class="bd-content">' + content + '</div>';
+            bodyHtml += '<div class="bd-content">' + content + '</div>';
 
-            /* Add a placeholder for the TOC (inserted before content) */
-            var tocPlaceholder = $('bdToc');
-            if (tocPlaceholder) {
-                tocPlaceholder.insertAdjacentHTML('beforebegin', articleHtml);
-                tocPlaceholder.removeAttribute('hidden');
+            // Insert BEFORE the TOC so the TOC sits at top of article
+            var tocEl = $('bdToc');
+            if (tocEl) {
+                tocEl.insertAdjacentHTML('beforebegin', bodyHtml);
             } else {
-                contentEl.insertAdjacentHTML('afterbegin', articleHtml);
+                contentEl.insertAdjacentHTML('afterbegin', bodyHtml);
             }
 
-            /* ---------- Generate Table of Contents ---------- */
+            // 8) Build Table of Contents
             var contentDiv = contentEl.querySelector('.bd-content');
             if (contentDiv) {
                 var headings = contentDiv.querySelectorAll('h2, h3');
                 var tocList = $('bdTocList');
-                if (headings.length > 1 && tocList) {
-                    headings.forEach(function (h, i) {
-                        if (!h.id) h.id = 'section-' + i;
+                if (headings.length > 1 && tocList && tocEl) {
+                    headings.forEach(function (h, idx) {
+                        if (!h.id) {
+                            h.id = (h.textContent || 'section').toLowerCase()
+                                .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || ('section-' + idx);
+                        }
                         var li = document.createElement('li');
-                        li.className = h.tagName === 'H3' ? 'bd-toc-sub' : '';
+                        if (h.tagName === 'H3') li.className = 'bd-toc-sub';
                         var a = document.createElement('a');
                         a.href = '#' + h.id;
                         a.textContent = h.textContent;
                         li.appendChild(a);
                         tocList.appendChild(li);
                     });
-                } else if (tocList) {
-                    $('bdToc').hidden = true;
+                    tocEl.removeAttribute('hidden');
+                } else if (tocEl) {
+                    tocEl.hidden = true;
                 }
             }
 
-            /* ---------- Show Share Buttons ---------- */
+            // 9) Share links
             var shareWrap = $('bdShare');
             if (shareWrap) {
                 shareWrap.removeAttribute('hidden');
-                var shareUrl = encodeURIComponent(pageUrl);
-                var shareText = encodeURIComponent(post.t + ' — Read on JP Express Blog');
-                $('bdShareWa').href = 'https://wa.me/?text=' + shareText + '%20' + shareUrl;
-                $('bdShareLi').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl;
-                $('bdShareFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl;
+                var encUrl = encodeURIComponent(absoluteUrl);
+                var encText = encodeURIComponent(post.t + ' — Read on JP Express Blog');
+                $('bdShareWa').href = 'https://wa.me/?text=' + encText + '%20' + encUrl;
+                $('bdShareLi').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encUrl;
+                $('bdShareFb').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encUrl;
             }
 
-            /* ---------- Copy Link ---------- */
+            // 10) Copy link
             var copyBtn = $('bdShareCopy');
-            if (copyBtn && navigator.clipboard) {
+            if (copyBtn) {
                 copyBtn.addEventListener('click', function () {
-                    navigator.clipboard.writeText(pageUrl).then(function () {
+                    var done = function () {
                         var icon = copyBtn.querySelector('i');
+                        var old = icon.className;
                         icon.className = 'fa-solid fa-check';
-                        setTimeout(function () { icon.className = 'fa-solid fa-link'; }, 1500);
-                    });
+                        copyBtn.classList.add('is-done');
+                        setTimeout(function () {
+                            icon.className = old;
+                            copyBtn.classList.remove('is-done');
+                        }, 1500);
+                    };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(absoluteUrl).then(done, function () { });
+                    } else {
+                        var ta = document.createElement('textarea');
+                        ta.value = absoluteUrl;
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try { document.execCommand('copy'); done(); } catch (e) { }
+                        document.body.removeChild(ta);
+                    }
                 });
             }
 
-            /* ---------- Related Articles ---------- */
+            // 11) Related articles
             var relatedWrap = $('bdRelated');
             var relatedList = $('bdRelatedList');
-            if (relatedWrap && relatedList && typeof BLOG_POSTS !== 'undefined') {
+            if (relatedWrap && relatedList) {
                 var related = BLOG_POSTS.filter(function (p) {
-                    return p !== post && (p.c === post.c || (p.k === post.k && p.c !== post.c));
+                    return p.slug !== post.slug && (p.c === post.c || p.k === post.k);
                 }).slice(0, 3);
-
-                if (related.length === 0) {
-                    related = BLOG_POSTS.filter(function (p) { return p !== post; }).slice(0, 3);
+                if (related.length < 3) {
+                    BLOG_POSTS.forEach(function (p) {
+                        if (related.length >= 3) return;
+                        if (p.slug === post.slug) return;
+                        if (related.indexOf(p) === -1) related.push(p);
+                    });
                 }
-
-                if (related.length > 0) {
+                if (related.length) {
                     relatedWrap.removeAttribute('hidden');
                     relatedList.innerHTML = related.map(function (p) {
-                        var relDate = p.d ? new Date(p.d + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
-                        var relCat = (typeof BLOG_CATS !== 'undefined' && BLOG_CATS[p.c]) ? BLOG_CATS[p.c] : 'Article';
-                        var relHref = p.h || 'blog.html';
-                        return '<li><a href="' + relHref + '">' +
-                            '<span class="bd-rel-cat">' + relCat + '</span>' +
+                        var rDate = p.d ? new Date(p.d + 'T00:00:00').toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+                        var rCat = (typeof BLOG_CATS !== 'undefined' && BLOG_CATS[p.c]) ? BLOG_CATS[p.c] : 'Article';
+                        var rUrl = 'blog-detail.html?slug=' + encodeURIComponent(p.slug);
+                        return '<li><a href="' + rUrl + '">' +
+                            '<span class="bd-rel-cat">' + rCat + '</span>' +
                             '<span class="bd-rel-title">' + p.t + '</span>' +
-                            '<span class="bd-rel-date">' + relDate + '</span>' +
+                            '<span class="bd-rel-date">' + rDate + '</span>' +
                             '</a></li>';
                     }).join('');
                 }
             }
 
-            /* ---------- Smooth scroll for TOC links ---------- */
-            document.querySelectorAll('.bd-toc a[href^="#"]').forEach(function (a) {
+            // 12) Smooth TOC scroll
+            contentEl.querySelectorAll('.bd-toc a[href^="#"]').forEach(function (a) {
                 a.addEventListener('click', function (e) {
-                    e.preventDefault();
                     var target = document.querySelector(a.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        history.replaceState(null, '', a.getAttribute('href'));
-                    }
+                    if (!target) return;
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    history.replaceState(null, '', a.getAttribute('href'));
                 });
             });
 
-            /* ---------- Add reveal class to content for animation ---------- */
-            if (contentDiv) {
-                contentDiv.setAttribute('data-reveal', '');
+            // 13) Reveal content
+            if (contentDiv) contentDiv.setAttribute('data-reveal', '');
+
+            /* ----------------- Helpers ----------------- */
+            function showNotFound() {
+                var bodySec = $('bdBodySec');
+                if (bodySec) {
+                    bodySec.innerHTML = '<div class="container-fluid bl-wrap">' +
+                        '<div class="bd-empty"><div class="bd-empty-icon"><i class="fa-solid fa-file-circle-question" aria-hidden="true"></i></div>' +
+                        '<h2>Article not found</h2><p>We couldn\'t find the article you\'re looking for. It may have been moved or removed.</p>' +
+                        '<div class="bd-empty-actions"><a href="blog.html" class="btn-main btn-red">Back to Blog</a>' +
+                        '<a href="contact.html" class="btn-main btn-dark-outline">Contact Support</a></div></div></div>';
+                }
+                var titleEl = $('bdTitle');
+                if (titleEl) titleEl.textContent = 'Article not found';
+                var exEl = $('bdExcerpt');
+                if (exEl) exEl.textContent = 'The article you requested is not available.';
             }
         })();
     </script>
