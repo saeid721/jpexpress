@@ -1,15 +1,14 @@
 <!doctype html>
-<html lang="en" class="page-our-story template-jp">
+<html lang="en" id="top" class="page-our-story template-jp">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- 01. Primary SEO -->
-
   <title>Our Story | JP Express</title>
   <meta name="description"
-    content="Discover the JP Express story, mission, vision and approach to international shipping from Bangladesh.">
+    content="Discover the story of JP Express: our mission, vision, and the team connecting Bangladesh with the world through international courier and logistics.">
   <meta name="author" content="JP Express">
   <meta name="publisher" content="JP Express">
   <meta name="application-name" content="JP Express">
@@ -39,7 +38,7 @@
   <meta property="og:site_name" content="JP Express">
   <meta property="og:title" content="Our Story | JP Express">
   <meta property="og:description"
-    content="Discover the JP Express story, mission, vision and approach to international shipping from Bangladesh.">
+    content="Discover the story of JP Express: our mission, vision, and the team connecting Bangladesh with the world through international courier and logistics.">
   <meta property="og:url" content="https://www.jpex.com.bd/our-story.html">
   <meta property="og:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -47,15 +46,15 @@
   <meta property="og:locale" content="en_BD">
   <meta property="og:image:secure_url" content="https://www.jpex.com.bd/assets/og-image.jpg">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:alt" content="JP Express - Our Story | JP Express services from Bangladesh">
+  <meta property="og:image:alt" content="JP Express - Our Story">
 
   <!-- 06. X / Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Our Story | JP Express">
   <meta name="twitter:description"
-    content="Discover the JP Express story, mission, vision and approach to international shipping from Bangladesh.">
+    content="Discover the story of JP Express: our mission, vision, and the team connecting Bangladesh with the world through international courier and logistics.">
   <meta name="twitter:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
-  <meta name="twitter:image:alt" content="JP Express - Our Story | JP Express services from Bangladesh">
+  <meta name="twitter:image:alt" content="JP Express - Our Story">
 
   <!-- 07. GEO -->
   <meta name="geo.region" content="BD-13">
@@ -86,31 +85,42 @@
       "url": "https://www.jpex.com.bd/",
       "logo": "https://www.jpex.com.bd/assets/logo.png",
       "telephone": "+8801681637836",
-      "email": "jpexpress09@gmail.com"
+      "email": "jpexpress09@gmail.com",
+      "description": "JP Express provides international courier, air freight, sea freight, export logistics, import support, customs clearance and shipment tracking from Bangladesh.",
+      "areaServed": { "@type": "Place", "name": "Worldwide" },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "House-B-125, Road-21, Mohakhali DOHS",
+        "addressLocality": "Dhaka",
+        "postalCode": "1206",
+        "addressCountry": "BD"
+      }
     },
     {
       "@type": "WebSite",
       "@id": "https://www.jpex.com.bd/#website",
       "url": "https://www.jpex.com.bd/",
       "name": "JP Express",
-      "publisher": {
-        "@id": "https://www.jpex.com.bd/#organization"
-      },
+      "publisher": { "@id": "https://www.jpex.com.bd/#organization" },
       "inLanguage": "en-BD"
     },
     {
-      "@type": "WebPage",
+      "@type": "AboutPage",
       "@id": "https://www.jpex.com.bd/our-story.html#webpage",
       "url": "https://www.jpex.com.bd/our-story.html",
       "name": "Our Story | JP Express",
-      "description": "Discover the JP Express story, mission, vision and approach to international shipping from Bangladesh.",
-      "isPartOf": {
-        "@id": "https://www.jpex.com.bd/#website"
-      },
-      "about": {
-        "@id": "https://www.jpex.com.bd/#organization"
-      },
+      "description": "Discover the story of JP Express: our mission, vision, and the team connecting Bangladesh with the world through international courier and logistics.",
+      "isPartOf": { "@id": "https://www.jpex.com.bd/#website" },
+      "about": { "@id": "https://www.jpex.com.bd/#organization" },
       "inLanguage": "en-BD"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.jpex.com.bd/" },
+        { "@type": "ListItem", "position": 2, "name": "About", "item": "https://www.jpex.com.bd/about.html" },
+        { "@type": "ListItem", "position": 3, "name": "Our Story", "item": "https://www.jpex.com.bd/our-story.html" }
+      ]
     }
   ]
 }
@@ -172,7 +182,7 @@
         </div>
 
         <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item jp-dropdown">
             <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">
@@ -263,9 +273,6 @@
           <li class="nav-item"><a class="nav-link" href="business.html">Business</a></li>
           <li class="nav-item"><a class="nav-link" href="pricing.html">Price</a></li>
           <li class="nav-item"><a class="nav-link" href="offers.html">Offer</a></li>
-          <!-- <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
-          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li> -->
-          <!-- <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -279,7 +286,7 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav gap-1">
-          <li><a class="nav-link active" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="index.html">Home</a></li>
           <li><a class="nav-link" href="about.html">About</a></li>
           <li class="jp-m-dd">
             <div class="jp-m-dd-row">
@@ -307,16 +314,15 @@
               </ul>
             </div>
           </li>
-          <!-- <li><a class="nav-link" href="countries.html">Destinations</a></li> -->
           <li class="jp-m-dd">
             <div class="jp-m-dd-row">
               <a class="nav-link" href="industries.html">Industries</a>
-              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubServices"
-                aria-label="Toggle services submenu">
+              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubIndustries"
+                aria-label="Toggle industries submenu">
                 <i class="fa-solid fa-chevron-down"></i>
               </button>
             </div>
-            <div class="jp-m-sub" id="jpSubServices">
+            <div class="jp-m-sub" id="jpSubIndustries">
               <ul>
                 <li><a class="jp-sub-link" href="industries/garments-textiles.html"><i class="fa-solid fa-shirt"></i>
                     Garments Textile</a></li>
@@ -339,12 +345,8 @@
               </ul>
             </div>
           </li>
-
           <li><a class="nav-link" href="business.html">Business</a></li>
           <li><a class="nav-link" href="offers.html">Offer</a></li>
-          <li><a class="nav-link" href="media.html">Media</a></li>
-          <li><a class="nav-link" href="blog.html">Blog</a></li>
-          <!-- <li><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
         <div class="d-grid gap-2 mt-4">
@@ -366,112 +368,250 @@
 
   <main id="main">
 
-    <!-- HERO -->
-    <section class="hero page-hero" aria-labelledby="aboutTitle">
+    <!-- Hero -->
+    <section class="hero page-hero" aria-labelledby="osTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
         <div class="hero-copy" data-reveal>
           <nav class="page-crumb" aria-label="Breadcrumb">
-            <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
-              aria-current="page">Our Story</span>
+            <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <a href="about.html">About</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <span aria-current="page">Our Story</span>
           </nav>
-          <div class="hero-kicker"><span>ABOUT</span> JP EXPRESS</div>
-          <h1 id="aboutTitle">Built in Bangladesh, <span class="accent">Global</span></h1>
-          <p>See how JP Express helps people and businesses send documents, parcels and cargo across borders safely.</p>
+          <div class="hero-kicker"><span>OUR</span> STORY</div>
+          <h1 id="osTitle">Built in Bangladesh, <span class="accent">Global by Design</span></h1>
+          <p>We exist to make international shipping simple, reliable, and transparent for people and businesses in
+            Bangladesh.</p>
         </div>
       </div>
     </section>
-    <section class="jp-section">
-      <div class="container-xl">
-        <div class="jp-split jp-reveal" data-jp-reveal>
-          <div class="jp-split-copy">
-            <div class="jp-section-head">
-              <div class="jp-kicker">Our story</div>
-              <h2>A shipping partner shaped around real customer needs.</h2>
-              <p>International shipping can feel complicated when pricing, documents, customs and delivery updates are
-                spread across different touchpoints. JP Express brings those needs into one customer journey—from
-                enquiry and pickup through shipping and support.</p>
+
+    <div class="our-story-page">
+
+      <!-- Company Introduction -->
+      <section class="story-section story-intro" aria-labelledby="introTitle">
+        <div class="container-xl">
+          <div class="story-split">
+            <div class="story-copy" data-reveal>
+              <span class="story-label">Who We Are</span>
+              <h2 id="introTitle">A logistics partner built for modern global trade.</h2>
+              <p>JP Express is a Bangladesh-based international courier and logistics company. We help individuals,
+                families, online sellers, and exporters send documents, parcels, samples, and commercial cargo across
+                the world. Our goal is to remove the friction from international shipping by providing clear
+                information, reliable service, and accessible support.</p>
+              <p>From our base in Dhaka, we coordinate the entire journey—from pickup and documentation to customs
+                support and final delivery—so our customers can focus on what matters most to them.</p>
             </div>
-            <div class="jp-callout"><strong>Our operating principle</strong><span>Reliable shipping, honest
-                communication and support that stays useful when customers need answers.</span></div>
-          </div>
-          <div class="jp-split-media"><img class="jp-photo" src="assets/stroy.jpg"
-              alt="JP Express logistics and international shipping"></div>
-        </div>
-      </div>
-    </section>
-    <section class="jp-section alt">
-      <div class="container-xl">
-        <div class="jp-section-head">
-          <div class="jp-kicker">Direction</div>
-          <h2>What guides JP Express</h2>
-          <p>The brand is designed around clarity: make the next step obvious, explain what matters, and keep
-            customer-facing information aligned with the actual service.</p>
-        </div>
-        <div class="jp-grid jp-grid-3">
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-bullseye"></i></div>
-            <h3>Mission</h3>
-            <p>Make international shipping from Bangladesh simpler, clearer and more transparent for individuals and
-              businesses.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-earth-asia"></i></div>
-            <h3>Vision</h3>
-            <p>Become a trusted gateway connecting people and businesses in Bangladesh with global destinations through
-              professional logistics.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-handshake"></i></div>
-            <h3>Values</h3>
-            <p>Reliability, transparency, customer focus and compliance shape how we communicate and serve.</p>
+            <div class="story-media" data-reveal="right">
+              <img src="assets/stroy.jpg" alt="JP Express logistics and international shipping operations"
+                class="story-img" width="600" height="450" loading="lazy">
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="jp-section">
-      <div class="container-xl">
-        <div class="jp-section-head">
-          <div class="jp-kicker">How we work</div>
-          <h2>One connected customer journey</h2>
-          <p>Every service should lead customers naturally to the information and action they need next.</p>
+      </section>
+
+      <!-- Origin & Timeline -->
+      <section class="story-section story-timeline-section" aria-labelledby="timelineTitle">
+        <div class="container-xl">
+          <div class="story-center-head" data-reveal>
+            <span class="story-label">Our Journey</span>
+            <h2 id="timelineTitle">Milestones in motion.</h2>
+          </div>
+          <div class="story-timeline">
+            <div class="timeline-item" data-reveal>
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Beginning</span>
+                <h3>Started with international courier.</h3>
+                <p>We began by focusing on what customers needed most: a reliable way to send documents and parcels
+                  abroad from Bangladesh.</p>
+              </div>
+            </div>
+            <div class="timeline-item" data-reveal>
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Growth</span>
+                <h3>Expanded into freight and export.</h3>
+                <p>As our customers' needs grew, we added air freight, sea freight, and export logistics services to
+                  support larger and more complex shipments.</p>
+              </div>
+            </div>
+            <div class="timeline-item" data-reveal>
+              <div class="timeline-dot"></div>
+              <div class="timeline-content">
+                <span class="timeline-date">Today</span>
+                <h3>One partner for the entire journey.</h3>
+                <p>Today, JP Express offers a complete suite of logistics solutions, from documentation and customs
+                  support to shipment tracking, all under one roof.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="jp-grid jp-grid-4">
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-comments"></i></div>
-            <h3>Understand</h3>
-            <p>Start by understanding the shipment, destination and customer objective.</p>
+      </section>
+
+      <!-- Mission, Vision & Values -->
+      <section class="story-section story-mv" aria-labelledby="mvTitle">
+        <div class="container-xl">
+          <div class="story-center-head" data-reveal>
+            <span class="story-label">Our Direction</span>
+            <h2 id="mvTitle">What guides us.</h2>
           </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-file-circle-check"></i></div>
-            <h3>Prepare</h3>
-            <p>Make documentation, service choices and next steps easier to understand.</p>
+          <div class="mv-grid">
+            <article class="mv-card" data-reveal>
+              <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+              <h3>Mission</h3>
+              <p>To make international shipping from Bangladesh simple, secure, and transparent for every individual
+                and business, with dependable service from pickup to delivery.</p>
+            </article>
+            <article class="mv-card" data-reveal="right">
+              <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
+              <h3>Vision</h3>
+              <p>To be a trusted gateway connecting Bangladeshi businesses and people to the world through
+                professional, customer-focused logistics.</p>
+            </article>
           </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-route"></i></div>
-            <h3>Move</h3>
-            <p>Coordinate the selected shipping solution with clear shipment visibility.</p>
-          </div>
-          <div class="jp-card jp-reveal" data-jp-reveal>
-            <div class="jp-icon"><i class="fa-solid fa-headset"></i></div>
-            <h3>Support</h3>
-            <p>Keep help accessible for quotes, tracking and shipment questions.</p>
+          <div class="values-grid">
+            <div class="value-item" data-reveal><i class="fa-solid fa-shield-halved"></i>
+              <h4>Reliability</h4>
+              <p>Careful handling and dependable service on every shipment.</p>
+            </div>
+            <div class="value-item" data-reveal style="--delay: 0.1s"><i class="fa-solid fa-eye"></i>
+              <h4>Transparency</h4>
+              <p>Clear information on services, documents, and shipment status.</p>
+            </div>
+            <div class="value-item" data-reveal style="--delay: 0.2s"><i class="fa-solid fa-handshake"></i>
+              <h4>Customer Focus</h4>
+              <p>Support that listens and helps you choose the right option.</p>
+            </div>
+            <div class="value-item" data-reveal style="--delay: 0.3s"><i class="fa-solid fa-clipboard-check"></i>
+              <h4>Compliance</h4>
+              <p>Proper documentation and respect for shipping regulations.</p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="jp-section alt">
-      <div class="container-xl">
-        <div class="jp-cta jp-reveal" data-jp-reveal>
-          <h2>Want to ship with a team that keeps things clear?</h2>
-          <p>Tell us what you need to send, where it is going and what matters most. Our team can guide you toward the
-            appropriate next step.</p>
-          <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="quote.html">Request a Quote <i
-                class="fa-solid fa-arrow-right"></i></a><a class="jp-btn jp-btn-ghost" href="contact.html">Contact JP
-              Express</a></div>
+      </section>
+
+      <!-- How JP Express Works -->
+      <section class="story-section story-process" aria-labelledby="processTitle">
+        <div class="container-xl">
+          <div class="story-center-head" data-reveal>
+            <span class="story-label">How it works</span>
+            <h2 id="processTitle">A simple, connected journey.</h2>
+          </div>
+          <ol class="process-list">
+            <li data-reveal>
+              <div class="process-icon"><i class="fa-solid fa-comments"></i></div>
+              <div class="process-content">
+                <h3>Share Your Requirement</h3>
+                <p>Tell us what you need to ship, where it's going, and your timeline. We'll help you understand the
+                  available options.</p>
+              </div>
+            </li>
+            <li data-reveal>
+              <div class="process-icon"><i class="fa-solid fa-file-invoice"></i></div>
+              <div class="process-content">
+                <h3>Confirm Service & Quote</h3>
+                <p>We provide a clear quote based on your shipment details. Once you confirm, we'll guide you through
+                  the required documents.</p>
+              </div>
+            </li>
+            <li data-reveal>
+              <div class="process-icon"><i class="fa-solid fa-truck-pickup"></i></div>
+              <div class="process-content">
+                <h3>Arrange Pickup or Drop-off</h3>
+                <p>Schedule a convenient pickup from your location or drop off your shipment at our facility. We'll
+                  handle the rest.</p>
+              </div>
+            </li>
+            <li data-reveal>
+              <div class="process-icon"><i class="fa-solid fa-location-crosshairs"></i></div>
+              <div class="process-content">
+                <h3>Track & Receive Updates</h3>
+                <p>Follow your shipment's journey with our tracking tools and receive updates from dispatch to
+                  delivery.</p>
+              </div>
+            </li>
+          </ol>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <!-- Customer Promise & Proof -->
+      <section class="story-section story-promise" aria-labelledby="promiseTitle">
+        <div class="container-xl">
+          <div class="story-split reverse">
+            <div class="story-media" data-reveal="left">
+              <img src="assets/container-ship.png" alt="JP Express shipment operations" class="story-img" width="600"
+                height="450" loading="lazy">
+            </div>
+            <div class="story-copy" data-reveal>
+              <span class="story-label">Our Promise</span>
+              <h2 id="promiseTitle">Clarity and support, at every step.</h2>
+              <p>We believe that reliable shipping starts with clear communication. Our commitment is to provide you
+                with accurate information about your shipment's journey, from the moment it's booked until it's safely
+                delivered.</p>
+              <ul class="promise-list">
+                <li><i class="fa-solid fa-check-circle"></i>Practical service principles focused on clear
+                  communication.</li>
+                <li><i class="fa-solid fa-check-circle"></i>Shipment visibility and status updates you can depend on.
+                </li>
+                <li><i class="fa-solid fa-check-circle"></i>Accessible support to answer your questions and help you
+                  plan.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- People & Capabilities -->
+      <section class="story-section story-people" aria-labelledby="peopleTitle">
+        <div class="container-xl">
+          <div class="story-center-head" data-reveal>
+            <span class="story-label">Our People</span>
+            <h2 id="peopleTitle">The team behind your shipment.</h2>
+            <p>Our departments work together to ensure your shipment is handled with care and expertise at every stage.
+            </p>
+          </div>
+          <div class="people-grid">
+            <div class="person-card" data-reveal>
+              <div class="person-icon"><i class="fa-solid fa-headset"></i></div>
+              <h3>Customer Support</h3>
+              <p>Your first point of contact for quotes, tracking, and general inquiries.</p>
+            </div>
+            <div class="person-card" data-reveal style="--delay: 0.1s">
+              <div class="person-icon"><i class="fa-solid fa-truck-fast"></i></div>
+              <h3>Operations Team</h3>
+              <p>Coordinates pickup, handling, and the movement of your shipment.</p>
+            </div>
+            <div class="person-card" data-reveal style="--delay: 0.2s">
+              <div class="person-icon"><i class="fa-solid fa-file-shield"></i></div>
+              <h3>Documentation & Customs</h3>
+              <p>Supports the paperwork and compliance information needed for your shipment.</p>
+            </div>
+            <div class="person-card" data-reveal style="--delay: 0.3s">
+              <div class="person-icon"><i class="fa-solid fa-briefcase"></i></div>
+              <h3>Business & Export Desk</h3>
+              <p>Provides dedicated support for exporters and commercial shippers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Closing CTA -->
+      <section class="story-section story-cta-section" aria-labelledby="ctaTitle">
+        <div class="container-xl">
+          <div class="story-cta" data-reveal="zoom">
+            <h2 id="ctaTitle">Ready to plan your shipment?</h2>
+            <p>Share your shipment details with our team. We'll help you find the right service and provide a clear
+              quote.</p>
+            <div class="story-cta-actions">
+              <a class="btn-main btn-red" href="quote.html">Get a Quote <i class="fa-solid fa-arrow-right"></i></a>
+              <a class="btn-main btn-dark-outline" href="services.html">Explore Services</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
   </main>
 
   <!-- ======= FOOTER ========== -->

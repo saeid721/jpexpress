@@ -6,10 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- 01. Primary SEO -->
-
   <title>Shipping Guides | JP Express</title>
   <meta name="description"
-    content="Practical international shipping, export, customs and packaging guides from JP Express.">
+    content="Practical step-by-step shipping guides for parcels, documents, packaging, customs, restricted items and business shipping from Bangladesh. Prepare every shipment with confidence.">
   <meta name="author" content="JP Express">
   <meta name="publisher" content="JP Express">
   <meta name="application-name" content="JP Express">
@@ -34,12 +33,12 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/favicon.png">
 
-  <!-- 05. Open Graph / Social Search -->
+  <!-- 05. Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="JP Express">
   <meta property="og:title" content="Shipping Guides | JP Express">
   <meta property="og:description"
-    content="Practical international shipping, export, customs and packaging guides from JP Express.">
+    content="Practical step-by-step shipping guides for parcels, documents, packaging, customs, restricted items and business shipping from Bangladesh.">
   <meta property="og:url" content="https://www.jpex.com.bd/shipping-guides.html">
   <meta property="og:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -47,15 +46,15 @@
   <meta property="og:locale" content="en_BD">
   <meta property="og:image:secure_url" content="https://www.jpex.com.bd/assets/og-image.jpg">
   <meta property="og:image:type" content="image/jpeg">
-  <meta property="og:image:alt" content="JP Express - Shipping Guides | JP Express services from Bangladesh">
+  <meta property="og:image:alt" content="JP Express - Shipping Guides">
 
   <!-- 06. X / Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Shipping Guides | JP Express">
   <meta name="twitter:description"
-    content="Practical international shipping, export, customs and packaging guides from JP Express.">
+    content="Practical step-by-step shipping guides for parcels, documents, packaging, customs, restricted items and business shipping from Bangladesh.">
   <meta name="twitter:image" content="https://www.jpex.com.bd/assets/og-image.jpg">
-  <meta name="twitter:image:alt" content="JP Express - Shipping Guides | JP Express services from Bangladesh">
+  <meta name="twitter:image:alt" content="JP Express - Shipping Guides">
 
   <!-- 07. GEO -->
   <meta name="geo.region" content="BD-13">
@@ -74,49 +73,52 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
-  <!-- 11. Structured Data -->
+  <!-- 11. Structured Data — Article schema (safe default; HowTo NOT used because guide
+       content is not yet approved by management per outline §10) -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.jpex.com.bd/#organization",
-      "name": "JP Express",
-      "url": "https://www.jpex.com.bd/",
-      "logo": "https://www.jpex.com.bd/assets/logo.png",
-      "telephone": "+8801681637836",
-      "email": "jpexpress09@gmail.com"
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.jpex.com.bd/#website",
-      "url": "https://www.jpex.com.bd/",
-      "name": "JP Express",
-      "publisher": {
-        "@id": "https://www.jpex.com.bd/#organization"
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.jpex.com.bd/#organization",
+        "name": "JP Express",
+        "url": "https://www.jpex.com.bd/",
+        "logo": "https://www.jpex.com.bd/assets/logo.png",
+        "telephone": "+8801681637836",
+        "email": "jpexpress09@gmail.com"
       },
-      "inLanguage": "en-BD"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://www.jpex.com.bd/shipping-guides.html#webpage",
-      "url": "https://www.jpex.com.bd/shipping-guides.html",
-      "name": "Shipping Guides | JP Express",
-      "description": "Practical international shipping, export, customs and packaging guides from JP Express.",
-      "isPartOf": {
-        "@id": "https://www.jpex.com.bd/#website"
+      {
+        "@type": "WebSite",
+        "@id": "https://www.jpex.com.bd/#website",
+        "url": "https://www.jpex.com.bd/",
+        "name": "JP Express",
+        "publisher": { "@id": "https://www.jpex.com.bd/#organization" },
+        "inLanguage": "en-BD"
       },
-      "about": {
-        "@id": "https://www.jpex.com.bd/#organization"
+      {
+        "@type": "CollectionPage",
+        "@id": "https://www.jpex.com.bd/shipping-guides.html#webpage",
+        "url": "https://www.jpex.com.bd/shipping-guides.html",
+        "name": "Shipping Guides | JP Express",
+        "description": "Practical step-by-step shipping guides for parcels, documents, packaging, customs, restricted items and business shipping from Bangladesh.",
+        "isPartOf": { "@id": "https://www.jpex.com.bd/#website" },
+        "about": { "@id": "https://www.jpex.com.bd/#organization" },
+        "inLanguage": "en-BD"
       },
-      "inLanguage": "en-BD"
-    }
-  ]
-}
-</script>
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.jpex.com.bd/" },
+          { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://www.jpex.com.bd/resources.html" },
+          { "@type": "ListItem", "position": 3, "name": "Shipping Guides", "item": "https://www.jpex.com.bd/shipping-guides.html" }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="css/pages/shipping-guides.css">
 </head>
 
 <body>
@@ -126,151 +128,109 @@
     <div class="topbar" id="topBar">
       <div class="container-fluid d-flex justify-content-between align-items-center gap-3">
         <div class="topbar-left">
-          <a href="tel:+8801681637836">
-            <i class="fa-solid fa-phone"></i> +880 1681 637836
-          </a>
-          <a href="https://wa.me/8801681637836" target="_blank" rel="noopener">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
-          </a>
-          <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com">
-            <i class="fa-solid fa-envelope"></i> info@jpex.com.bd
-          </a>
+          <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> +880 1681 637836</a>
+          <a href="https://wa.me/8801681637836" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i>
+            WhatsApp</a>
+          <a class="d-none d-sm-inline" href="mailto:jpexpress09@gmail.com"><i class="fa-solid fa-envelope"></i>
+            info@jpex.com.bd</a>
         </div>
         <div class="topbar-right">
           <button class="lang-btn active" type="button">English</button>
           <span>|</span>
           <button class="lang-btn" type="button">বাংলা</button>
-          <a class="d-none d-md-inline" href="login.html">
-            <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
-          </a>
+          <a class="d-none d-md-inline" href="login.html"><i class="fa-solid fa-circle-user"></i> Customer Login <i
+              class="fa-solid fa-angle-right"></i></a>
         </div>
       </div>
     </div>
 
-    <!-- Main Navbar -->
+    <!-- Main Navbar (unchanged — copy verbatim from your existing file) -->
     <nav class="navbar navbar-expand-xl jp-navbar" aria-label="Main navigation">
       <div class="container-fluid">
         <a class="navbar-brand p-0" href="index.html" aria-label="JP Express home">
           <img src="assets/logo.png" alt="JP Express" class="brand-logo">
         </a>
-
         <div class="d-flex align-items-center gap-2 ms-auto order-xl-3">
-          <a href="book-shipment.html" class="btn-header btn-header-red d-none d-lg-inline-flex">
-            Book a Shipment
-          </a>
-          <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">
-            Track Shipment
-          </a>
-          <a href="quote.html" class="btn-header btn-header-red d-none d-lg-inline-flex">
-            Get a Quote <i class="fa-solid fa-arrow-right"></i>
-          </a>
+          <a href="book-shipment.html" class="btn-header btn-header-red d-none d-lg-inline-flex">Book a Shipment</a>
+          <a href="track-shipment.html" class="btn-header btn-header-outline d-none d-sm-inline-flex">Track Shipment</a>
+          <a href="quote.html" class="btn-header btn-header-red d-none d-lg-inline-flex">Get a Quote <i
+              class="fa-solid fa-arrow-right"></i></a>
           <button class="navbar-toggler border-0 shadow-none ms-1" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#jpMenu" aria-controls="jpMenu" aria-label="Open menu">
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
-
         <ul class="navbar-nav mx-auto d-none d-xl-flex align-items-center gap-1">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item jp-dropdown">
-            <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">
-              Services <i class="fa-solid fa-chevron-down"></i>
-            </a>
-
+            <a class="nav-link jp-dd-trigger" href="services.html" aria-haspopup="true">Services <i
+                class="fa-solid fa-chevron-down"></i></a>
             <div class="jp-dd-menu" role="menu" aria-label="Services">
-              <a class="jp-dd-link" href="services/international-courier.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span>
-                <span class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp; parcels
-                    worldwide</small></span>
-              </a>
-              <a class="jp-dd-link" href="services/air-freight.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-plane-departure"></i></span>
-                <span class="jp-dd-txt"><strong>Air Freight</strong><small>Fast cargo for commercial
-                    shipments</small></span>
-              </a>
-              <a class="jp-dd-link" href="services/sea-freight.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-ship"></i></span>
-                <span class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL &amp; LCL for bulk cargo</small></span>
-              </a>
-              <a class="jp-dd-link" href="services/export-logistics.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-boxes-packing"></i></span>
-                <span class="jp-dd-txt"><strong>Export Logistics</strong><small>Documentation &amp; export
-                    support</small></span>
-              </a>
-              <a class="jp-dd-link" href="services/import-solutions.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-truck-ramp-box"></i></span>
-                <span class="jp-dd-txt"><strong>Import Solutions</strong><small>Sourcing, customs &amp;
-                    delivery</small></span>
-              </a>
+              <a class="jp-dd-link" href="services/international-courier.html" role="menuitem"><span
+                  class="jp-dd-ico"><i class="fa-solid fa-plane"></i></span><span
+                  class="jp-dd-txt"><strong>International Courier</strong><small>Documents &amp; parcels
+                    worldwide</small></span></a>
+              <a class="jp-dd-link" href="services/air-freight.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-plane-departure"></i></span><span class="jp-dd-txt"><strong>Air
+                    Freight</strong><small>Fast cargo for commercial shipments</small></span></a>
+              <a class="jp-dd-link" href="services/sea-freight.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-ship"></i></span><span class="jp-dd-txt"><strong>Sea Freight</strong><small>FCL
+                    &amp; LCL for bulk cargo</small></span></a>
+              <a class="jp-dd-link" href="services/export-logistics.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-boxes-packing"></i></span><span class="jp-dd-txt"><strong>Export
+                    Logistics</strong><small>Documentation &amp; export support</small></span></a>
+              <a class="jp-dd-link" href="services/import-solutions.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-truck-ramp-box"></i></span><span class="jp-dd-txt"><strong>Import
+                    Solutions</strong><small>Sourcing, customs &amp; delivery</small></span></a>
               <a class="jp-dd-all" href="services.html">View All Services <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </li>
-          <!-- <li class="nav-item"><a class="nav-link" href="countries.html">Destinations</a></li> -->
           <li class="nav-item jp-dropdown">
-            <a class="nav-link jp-dd-trigger" href="industries.html" aria-haspopup="true">
-              Industries <i class="fa-solid fa-chevron-down"></i>
-            </a>
-
+            <a class="nav-link jp-dd-trigger" href="industries.html" aria-haspopup="true">Industries <i
+                class="fa-solid fa-chevron-down"></i></a>
             <div class="jp-dd-menu" role="menu" aria-label="Industries">
-              <a class="jp-dd-link" href="industries/garments-textiles.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-shirt"></i></span>
-                <span class="jp-dd-txt"><strong>Garments Textile</strong><small>Apparel, fabrics &amp; bulk RMG
-                    exports</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/jute-products.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-seedling"></i></span>
-                <span class="jp-dd-txt"><strong>Jute Products</strong><small>Eco-friendly fibre goods &amp;
-                    bags</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/leather-products.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-bag-shopping"></i></span>
-                <span class="jp-dd-txt"><strong>Leather Products</strong><small>Footwear, bags &amp; finished
-                    leather</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/handicrafts.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-palette"></i></span>
-                <span class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade &amp; fragile artisan
-                    goods</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/e-commerce.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-cart-shopping"></i></span>
-                <span class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border orders &amp; seller
-                    shipping</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/manufacturing.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-industry"></i></span>
-                <span class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery, parts &amp; factory
-                    cargo</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/buying-houses.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-handshake"></i></span>
-                <span class="jp-dd-txt"><strong>Buying Houses</strong><small>Samples, orders &amp;
-                    consolidation</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/smes.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-store"></i></span>
-                <span class="jp-dd-txt"><strong>SMEs</strong><small>Affordable export for growing
-                    businesses</small></span>
-              </a>
-              <a class="jp-dd-link" href="industries/corporate-businesses.html" role="menuitem">
-                <span class="jp-dd-ico"><i class="fa-solid fa-building"></i></span>
-                <span class="jp-dd-txt"><strong>Corporate Businesses</strong><small>Dedicated account &amp; bulk
-                    logistics</small></span>
-              </a>
+              <a class="jp-dd-link" href="industries/garments-textiles.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-shirt"></i></span><span class="jp-dd-txt"><strong>Garments
+                    Textile</strong><small>Apparel, fabrics &amp; bulk RMG exports</small></span></a>
+              <a class="jp-dd-link" href="industries/jute-products.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-seedling"></i></span><span class="jp-dd-txt"><strong>Jute
+                    Products</strong><small>Eco-friendly fibre goods &amp; bags</small></span></a>
+              <a class="jp-dd-link" href="industries/leather-products.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-bag-shopping"></i></span><span class="jp-dd-txt"><strong>Leather
+                    Products</strong><small>Footwear, bags &amp; finished leather</small></span></a>
+              <a class="jp-dd-link" href="industries/handicrafts.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-palette"></i></span><span
+                  class="jp-dd-txt"><strong>Handicrafts</strong><small>Handmade &amp; fragile artisan
+                    goods</small></span></a>
+              <a class="jp-dd-link" href="industries/e-commerce.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-cart-shopping"></i></span><span
+                  class="jp-dd-txt"><strong>E-commerce</strong><small>Cross-border orders &amp; seller
+                    shipping</small></span></a>
+              <a class="jp-dd-link" href="industries/manufacturing.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-industry"></i></span><span
+                  class="jp-dd-txt"><strong>Manufacturing</strong><small>Machinery, parts &amp; factory
+                    cargo</small></span></a>
+              <a class="jp-dd-link" href="industries/buying-houses.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-handshake"></i></span><span class="jp-dd-txt"><strong>Buying
+                    Houses</strong><small>Samples, orders &amp; consolidation</small></span></a>
+              <a class="jp-dd-link" href="industries/smes.html" role="menuitem"><span class="jp-dd-ico"><i
+                    class="fa-solid fa-store"></i></span><span class="jp-dd-txt"><strong>SMEs</strong><small>Affordable
+                    export for growing businesses</small></span></a>
+              <a class="jp-dd-link" href="industries/corporate-businesses.html" role="menuitem"><span
+                  class="jp-dd-ico"><i class="fa-solid fa-building"></i></span><span class="jp-dd-txt"><strong>Corporate
+                    Businesses</strong><small>Dedicated account &amp; bulk logistics</small></span></a>
+            </div>
           </li>
           <li class="nav-item"><a class="nav-link" href="business.html">Business</a></li>
           <li class="nav-item"><a class="nav-link" href="pricing.html">Price</a></li>
           <li class="nav-item"><a class="nav-link" href="offers.html">Offer</a></li>
-          <!-- <li class="nav-item"><a class="nav-link" href="media.html">Media</a></li>
-          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li> -->
-          <!-- <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </div>
     </nav>
 
-    <!-- Mobile Offcanvas Menu -->
+    <!-- Mobile Offcanvas (unchanged — copy verbatim from your existing file) -->
     <div class="offcanvas offcanvas-end" tabindex="-1" id="jpMenu" aria-labelledby="jpMenuLabel">
       <div class="offcanvas-header">
         <img src="assets/logo.png" alt="JP Express" class="brand-logo" id="jpMenuLabel">
@@ -278,86 +238,69 @@
       </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav gap-1">
-          <li><a class="nav-link active" href="index.html">Home</a></li>
+          <li><a class="nav-link" href="index.html">Home</a></li>
           <li><a class="nav-link" href="about.html">About</a></li>
           <li class="jp-m-dd">
             <div class="jp-m-dd-row">
               <a class="nav-link" href="services.html">Services</a>
               <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubServices"
-                aria-label="Toggle services submenu">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
+                aria-label="Toggle services submenu"><i class="fa-solid fa-chevron-down"></i></button>
             </div>
             <div class="jp-m-sub" id="jpSubServices">
               <ul>
                 <li><a class="jp-sub-link" href="services/international-courier.html"><i class="fa-solid fa-plane"></i>
                     International Courier</a></li>
                 <li><a class="jp-sub-link" href="services/air-freight.html"><i class="fa-solid fa-plane-departure"></i>
-                    Air
-                    Freight</a></li>
+                    Air Freight</a></li>
                 <li><a class="jp-sub-link" href="services/sea-freight.html"><i class="fa-solid fa-ship"></i> Sea
                     Freight</a></li>
                 <li><a class="jp-sub-link" href="services/export-logistics.html"><i
-                      class="fa-solid fa-boxes-packing"></i> Export
-                    Logistics</a></li>
+                      class="fa-solid fa-boxes-packing"></i> Export Logistics</a></li>
                 <li><a class="jp-sub-link" href="services/import-solutions.html"><i
-                      class="fa-solid fa-truck-ramp-box"></i>
-                    Import Solutions</a></li>
+                      class="fa-solid fa-truck-ramp-box"></i> Import Solutions</a></li>
               </ul>
             </div>
           </li>
-          <!-- <li><a class="nav-link" href="countries.html">Destinations</a></li> -->
           <li class="jp-m-dd">
             <div class="jp-m-dd-row">
               <a class="nav-link" href="industries.html">Industries</a>
-              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubServices"
-                aria-label="Toggle services submenu">
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
+              <button type="button" class="jp-m-dd-toggle" aria-expanded="false" aria-controls="jpSubIndustries"
+                aria-label="Toggle industries submenu"><i class="fa-solid fa-chevron-down"></i></button>
             </div>
-            <div class="jp-m-sub" id="jpSubServices">
+            <div class="jp-m-sub" id="jpSubIndustries">
               <ul>
                 <li><a class="jp-sub-link" href="industries/garments-textiles.html"><i class="fa-solid fa-shirt"></i>
                     Garments Textile</a></li>
                 <li><a class="jp-sub-link" href="industries/jute-products.html"><i class="fa-solid fa-seedling"></i>
                     Jute Products</a></li>
                 <li><a class="jp-sub-link" href="industries/leather-products.html"><i
-                      class="fa-solid fa-bag-shopping"></i>
-                    Leather Products</a></li>
+                      class="fa-solid fa-bag-shopping"></i> Leather Products</a></li>
                 <li><a class="jp-sub-link" href="industries/e-commerce.html"><i class="fa-solid fa-cart-shopping"></i>
                     E-commerce</a></li>
                 <li><a class="jp-sub-link" href="industries/manufacturing.html"><i class="fa-solid fa-industry"></i>
                     Manufacturing</a></li>
                 <li><a class="jp-sub-link" href="industries/buying-houses.html"><i class="fa-solid fa-handshake"></i>
                     Buying Houses</a></li>
-                <li><a class="jp-sub-link" href="industries/smes.html"><i class="fa-solid fa-store"></i>
-                    SMEs</a></li>
+                <li><a class="jp-sub-link" href="industries/smes.html"><i class="fa-solid fa-store"></i> SMEs</a></li>
                 <li><a class="jp-sub-link" href="industries/corporate-businesses.html"><i
-                      class="fa-solid fa-building"></i>
-                    Corporate Businesses</a></li>
+                      class="fa-solid fa-building"></i> Corporate Businesses</a></li>
               </ul>
             </div>
           </li>
-
           <li><a class="nav-link" href="business.html">Business</a></li>
           <li><a class="nav-link" href="offers.html">Offer</a></li>
           <li><a class="nav-link" href="media.html">Media</a></li>
           <li><a class="nav-link" href="blog.html">Blog</a></li>
-          <!-- <li><a class="nav-link" href="resources.html">Resources</a></li> -->
+          <li><a class="nav-link active" href="shipping-guides.html">Shipping Guides</a></li>
           <li><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
         <div class="d-grid gap-2 mt-4">
           <a class="btn-header btn-header-outline justify-content-center" href="book-shipment.html"
-            data-bs-dismiss="offcanvas">
-            Book a Shipment
-          </a>
+            data-bs-dismiss="offcanvas">Book a Shipment</a>
           <a class="btn-header btn-header-outline justify-content-center" href="track-shipment.html"
-            data-bs-dismiss="offcanvas">
-            Track Shipment
-          </a>
-          <a class="btn-header btn-header-red justify-content-center" href="quote.html" data-bs-dismiss="offcanvas">
-            Get a Quote
-          </a>
+            data-bs-dismiss="offcanvas">Track Shipment</a>
+          <a class="btn-header btn-header-red justify-content-center" href="quote.html" data-bs-dismiss="offcanvas">Get
+            a Quote</a>
         </div>
       </div>
     </div>
@@ -365,124 +308,370 @@
 
   <main id="main">
 
-    <!-- HERO -->
-    <section class="hero page-hero" aria-labelledby="guidesTitle">
+    <!-- ============================================================
+         §3 HERO — Headline + subhead + PRIMARY (Get a Quote)
+         + SECONDARY (Track Shipment) CTAs. Authentic imagery via bg.
+         ============================================================ -->
+    <section class="hero page-hero sg-hero" aria-labelledby="guidesTitle">
       <div class="hero-bg"></div>
       <div class="container-fluid position-relative">
         <div class="hero-copy" data-reveal>
           <nav class="page-crumb" aria-label="Breadcrumb">
-            <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span
-              aria-current="page">Shipping Guides</span>
+            <a href="index.html">Home</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <a href="resources.html">Resources</a><i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <span aria-current="page">Shipping Guides</span>
           </nav>
           <div class="hero-kicker"><span>SHIPPING GUIDES</span> PRACTICAL SUPPORT</div>
           <h1 id="guidesTitle">Practical <span class="accent">Shipping Guides</span></h1>
-          <p>Practical guides on packaging, customs, documents and pricing to help you prepare every shipment well.</p>
+          <p>Step-by-step guidance to help you prepare a shipment and understand what comes next.</p>
         </div>
       </div>
     </section>
-    <section class="jp-section">
+
+    <!-- ============================================================
+         §4 START-HERE JOURNEY — 6 linked steps
+         ============================================================ -->
+    <section class="sg-journey" aria-labelledby="journeyTitle">
       <div class="container-xl">
-        <div class="jp-search"><i class="fa-solid fa-magnifying-glass"></i><input data-jp-search type="search"
-            placeholder="Search shipping guides..." aria-label="Search shipping guides"></div>
-        <div class="jp-filterbar"><button class="jp-filter active" data-jp-filter="all">All Guides</button><button
-            class="jp-filter" data-jp-filter="shipping">Shipping</button><button class="jp-filter"
-            data-jp-filter="export">Export</button><button class="jp-filter"
-            data-jp-filter="customs">Customs</button><button class="jp-filter"
-            data-jp-filter="packaging">Packaging</button><button class="jp-filter"
-            data-jp-filter="pricing">Pricing</button></div>
-        <div class="jp-grid jp-grid-3">
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="shipping">
-            <div class="jp-icon"><i class="fa-solid fa-globe"></i></div>
-            <h3>International Shipping</h3>
-            <p>How to prepare a shipment from Bangladesh, choose a service and understand the customer journey.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="shipping">
-            <div class="jp-icon"><i class="fa-solid fa-box"></i></div>
-            <h3>Parcel Shipping</h3>
-            <p>Practical considerations for personal parcels, samples and international packages.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="shipping">
-            <div class="jp-icon"><i class="fa-solid fa-file-lines"></i></div>
-            <h3>Document Shipping</h3>
-            <p>What to think about when sending documents internationally and preparing shipment information.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="shipping">
-            <div class="jp-icon"><i class="fa-solid fa-building"></i></div>
-            <h3>Business Shipping</h3>
-            <p>Guidance for e-commerce, SMEs and commercial shipments that need repeatable logistics.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="export">
-            <div class="jp-icon"><i class="fa-solid fa-file-circle-check"></i></div>
-            <h3>Export Documentation</h3>
-            <p>Understand common export-document concepts and what information may be requested.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="customs">
-            <div class="jp-icon"><i class="fa-solid fa-landmark"></i></div>
-            <h3>Customs Information</h3>
-            <p>Learn the role of customs information, declarations and destination requirements.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="packaging">
-            <div class="jp-icon"><i class="fa-solid fa-box-open"></i></div>
-            <h3>Packaging Guide</h3>
-            <p>Packaging principles that help protect documents, parcels and commercial shipments in transit.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="customs">
-            <div class="jp-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-            <h3>Restricted Items</h3>
-            <p>Understand why some products require special handling, restrictions or may not be accepted.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="pricing">
-            <div class="jp-icon"><i class="fa-solid fa-calculator"></i></div>
-            <h3>Shipping Cost Guide</h3>
-            <p>Understand chargeable weight, dimensions and the factors that can affect a shipment quote.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
-          <article class="jp-card jp-reveal" data-jp-reveal data-jp-item data-category="shipping">
-            <div class="jp-icon"><i class="fa-solid fa-clock"></i></div>
-            <h3>Transit Time Guide</h3>
-            <p>Understand why delivery time varies by destination, service, customs and shipment characteristics.</p><a
-              class="jp-service-link mt-3" href="contact.html"><span>Need help with this topic?</span><i
-                class="fa-solid fa-arrow-right"></i></a>
-          </article>
+        <div class="sg-section-head" data-reveal>
+          <span class="eyebrow">START HERE</span>
+          <h2 id="journeyTitle">How Shipping with JP Express Works</h2>
+          <p>Follow these steps in order. Each links to a detailed guide or service page.</p>
         </div>
+        <ol class="sg-steps" data-reveal>
+          <li>
+            <a href="#cat-shipping" class="sg-step">
+              <span class="sg-step-num">1</span>
+              <span class="sg-step-ico"><i class="fa-solid fa-globe" aria-hidden="true"></i></span>
+              <span class="sg-step-body"><strong>Check service &amp; destination</strong><small>Confirm we ship to your
+                  destination and choose a service.</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="#cat-restricted" class="sg-step">
+              <span class="sg-step-num">2</span>
+              <span class="sg-step-ico"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span>
+              <span class="sg-step-body"><strong>Confirm item eligibility</strong><small>Check whether your item is
+                  allowed or restricted.</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="#cat-packaging" class="sg-step">
+              <span class="sg-step-num">3</span>
+              <span class="sg-step-ico"><i class="fa-solid fa-box-open" aria-hidden="true"></i></span>
+              <span class="sg-step-body"><strong>Pack &amp; label</strong><small>Package securely and label
+                  correctly.</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="#cat-documents" class="sg-step">
+              <span class="sg-step-num">4</span>
+              <span class="sg-step-ico"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></span>
+              <span class="sg-step-body"><strong>Prepare documents</strong><small>Gather required information and
+                  paperwork.</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="#cat-shipping" class="sg-step">
+              <span class="sg-step-num">5</span>
+              <span class="sg-step-ico"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i></span>
+              <span class="sg-step-body"><strong>Book or arrange handover</strong><small>Schedule pickup or
+                  drop-off.</small></span>
+            </a>
+          </li>
+          <li>
+            <a href="track-shipment.html" class="sg-step">
+              <span class="sg-step-num">6</span>
+              <span class="sg-step-ico"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+              <span class="sg-step-body"><strong>Track progress</strong><small>Follow your shipment until
+                  delivery.</small></span>
+            </a>
+          </li>
+        </ol>
       </div>
     </section>
-    <section class="jp-section alt">
+
+    <!-- ============================================================
+         §5 + §7 GUIDE CATEGORIES + SEARCH + CHECKLIST
+         Only approved categories are shown (outline §5).
+         ============================================================ -->
+    <section class="sg-library" aria-labelledby="libraryTitle">
       <div class="container-xl">
-        <div class="jp-cta jp-reveal" data-jp-reveal>
-          <h2>Can't find the answer you need?</h2>
-          <p>Shipping requirements can depend on the item, destination and service. Contact JP Express for
-            shipment-specific guidance.</p>
-          <div class="jp-hero-actions"><a class="jp-btn jp-btn-primary" href="contact.html">Ask JP Express</a><a
-              class="jp-btn jp-btn-ghost" href="faq.html">Browse FAQs</a></div>
+        <div class="sg-section-head" data-reveal>
+          <span class="eyebrow">GUIDE LIBRARY</span>
+          <h2 id="libraryTitle">Browse Guides by Category</h2>
+        </div>
+
+        <!-- 7 approved categories -->
+        <div class="sg-grid" data-sg-grid>
+
+          <!-- Cat 1 -->
+          <article class="sg-cat-card" data-sg-item data-category="how-to-send" id="cat-shipping" tabindex="0"
+            role="button" aria-labelledby="cat1Title">
+            <span class="sg-cat-ico" aria-hidden="true"><i class="fa-solid fa-paper-plane"></i></span>
+            <h3 id="cat1Title">How to Send a Parcel</h3>
+            <p>Step-by-step from booking to delivery for first-time senders.</p>
+            <span class="sg-cat-tag">Start here</span>
+            <span class="sg-cat-open">Open guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </article>
+
+          <!-- Cat 2 -->
+          <article class="sg-cat-card" data-sg-item data-category="packaging" id="cat-packaging" tabindex="0"
+            role="button" aria-labelledby="cat2Title">
+            <span class="sg-cat-ico" aria-hidden="true"><i class="fa-solid fa-box-open"></i></span>
+            <h3 id="cat2Title">Packaging &amp; Labeling</h3>
+            <p>Protect your shipment and label it correctly to avoid delays.</p>
+            <span class="sg-cat-tag">Popular</span>
+            <span class="sg-cat-open">Open guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </article>
+
+          <!-- Cat 3 -->
+          <article class="sg-cat-card" data-sg-item data-category="documents" id="cat-documents" tabindex="0"
+            role="button" aria-labelledby="cat3Title">
+            <span class="sg-cat-ico" aria-hidden="true"><i class="fa-solid fa-file-lines"></i></span>
+            <h3 id="cat3Title">Shipping Documents</h3>
+            <p>What paperwork to prepare and why it matters.</p>
+            <span class="sg-cat-open">Open guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </article>
+
+          <!-- Cat 4 -->
+          <article class="sg-cat-card" data-sg-item data-category="customs" id="cat-customs" tabindex="0" role="button"
+            aria-labelledby="cat4Title">
+            <span class="sg-cat-ico" aria-hidden="true"><i class="fa-solid fa-landmark"></i></span>
+            <h3 id="cat4Title">Customs Basics</h3>
+            <p>Understand declarations, duties and clearance — no guarantees.</p>
+            <span class="sg-cat-open">Open guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </article>
+
+          <!-- Cat 5 -->
+          <article class="sg-cat-card" data-sg-item data-category="restricted" id="cat-restricted" tabindex="0"
+            role="button" aria-labelledby="cat5Title">
+            <span class="sg-cat-ico" aria-hidden="true"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <h3 id="cat5Title">Restricted &amp; Prohibited Items</h3>
+            <p>Check what can and cannot be shipped before you book.</p>
+            <span class="sg-cat-tag">Important</span>
+            <span class="sg-cat-open">Open guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </article>
+
+          <!-- Cat 6 -->
+          <article class="sg-cat-card" data-sg-item data-category="international" id="cat-international" tabindex="0"
+            role="button" aria-labelledby="cat6Title">
+            <span class="sg-cat-ico" aria-hidden="true"><i class="fa-solid fa-earth-asia"></i></span>
+            <h3 id="cat6Title">International Shipping Tips</h3>
+            <p>Practical advice for smoother cross-border shipments.</p>
+            <span class="sg-cat-open">Open guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </article>
+
+          <!-- Cat 7 -->
+          <article class="sg-cat-card" data-sg-item data-category="business" id="cat-business" tabindex="0"
+            role="button" aria-labelledby="cat7Title">
+            <span class="sg-cat-ico" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
+            <h3 id="cat7Title">Business Shipping</h3>
+            <p>Guidance for e-commerce, SMEs and commercial shippers.</p>
+            <span class="sg-cat-open">Open guide <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          </article>
+
+        </div>
+
+        <p class="sg-empty" data-sg-empty hidden>
+          <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+          No guides match your search. <a href="contact.html">Ask our team directly</a>.
+        </p>
+        <p class="sg-count" data-sg-count aria-live="polite"></p>
+
+        <!-- §7 Reusable shipment checklist — interactive, explicitly informational -->
+        <div class="sg-checklist" data-reveal>
+          <div class="sg-checklist-head">
+            <div>
+              <span class="eyebrow">PREPARATION CHECKLIST</span>
+              <h2>Before You Book</h2>
+              <p>Tick each item to confirm you've prepared it.</p>
+            </div>
+            <div class="sg-checklist-progress" aria-live="polite">
+              <span data-sg-progress>0 of 6 prepared</span>
+              <span class="sg-progress-bar"><span data-sg-progress-bar style="width:0%"></span></span>
+            </div>
+          </div>
+          <ul class="sg-checklist-list">
+            <li><label><input type="checkbox" data-sg-check><span><strong>Recipient name, address &amp;
+                    contact</strong><small>Full details including phone number.</small></span></label></li>
+            <li><label><input type="checkbox" data-sg-check><span><strong>Accurate item
+                    description</strong><small>What's inside, clearly described.</small></span></label></li>
+            <li><label><input type="checkbox" data-sg-check><span><strong>Weight &amp; dimensions</strong><small>If
+                    required for your service.</small></span></label></li>
+            <li><label><input type="checkbox" data-sg-check><span><strong>Suitable packaging</strong><small>Box,
+                    cushioning and sealing.</small></span></label></li>
+            <li><label><input type="checkbox" data-sg-check><span><strong>Required documents</strong><small>Invoice, ID,
+                    export forms if needed.</small></span></label></li>
+            <li><label><input type="checkbox" data-sg-check><span><strong>Item eligibility
+                    confirmed</strong><small>Checked restricted items list.</small></span></label></li>
+          </ul>
+          <p class="sg-checklist-note">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            This checklist is informational only. Completing it does <strong>not</strong> submit a booking or request a
+            pickup.
+          </p>
+          <div class="sg-checklist-actions">
+            <a class="btn-main btn-red" href="quote.html">Get a Quote <i class="fa-solid fa-arrow-right"></i></a>
+            <a class="btn-main sg-btn-ghost" href="contact.html">Contact Support</a>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- ============================================================
+         §8 FAQ + SUPPORT ESCALATION
+         ============================================================ -->
+    <section class="sg-faq-section" aria-labelledby="faqTitle">
+      <div class="container-xl">
+        <div class="sg-section-head" data-reveal>
+          <span class="eyebrow">GUIDE FAQ</span>
+          <h2 id="faqTitle">Common Questions About These Guides</h2>
+          <p>Uncertain about eligibility, documents, destination coverage or a specific shipment? Contact support.</p>
+        </div>
+        <div class="row g-2 g-lg-3">
+          <div class="col-lg-6">
+            <div class="accordion" id="sgFaqLeft">
+              <div class="accordion-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#sgf1" aria-expanded="true" aria-controls="sgf1">Are these
+                    guides official JP
+                    Express policy?</button></h3>
+                <div id="sgf1" class="accordion-collapse collapse" data-bs-parent="#sgFaqLeft">
+                  <div class="accordion-body">These guides are practical preparation guidance. Operational details,
+                    rates and policies are confirmed by JP Express when you book or request a quote. Always confirm
+                    current requirements with our team.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#sgf2" aria-expanded="true" aria-controls="sgf2">Do these
+                    guides guarantee customs clearance?</button></h3>
+                <div id="sgf2" class="accordion-collapse collapse" data-bs-parent="#sgFaqLeft">
+                  <div class="accordion-body">No. Customs decisions are made by destination authorities. Our guides
+                    explain common requirements, but we cannot guarantee clearance or duty outcomes. Confirm specific
+                    cases with our support team.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#sgf3" aria-expanded="false" aria-controls="sgf3">How do I
+                    know if my item is restricted?</button></h3>
+                <div id="sgf3" class="accordion-collapse collapse" data-bs-parent="#sgFaqLeft">
+                  <div class="accordion-body">Open the Restricted &amp; Prohibited Items guide. If you are unsure,
+                    contact support with your item description and destination before booking.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="accordion" id="sgFaqRight">
+              <div class="accordion-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#sgf4" aria-expanded="false" aria-controls="sgf4">Can I
+                    book a pickup from these pages?</button></h3>
+                <div id="sgf4" class="accordion-collapse collapse" data-bs-parent="#sgFaqRight">
+                  <div class="accordion-body">Pickup can be requested via a quote or contact form. The preparation
+                    checklist here does not submit a booking. Use Get a Quote or Contact Support to arrange pickup.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#sgf5" aria-expanded="false" aria-controls="sgf5">Do you
+                    ship to my country?</button></h3>
+                <div id="sgf6" class="accordion-collapse collapse" data-bs-parent="#sgFaqRight">
+                  <div class="accordion-body">Check the Destinations page, or contact support with your destination.
+                    Coverage and service options depend on current routes.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h3 class="accordion-header"><button class="accordion-button collapsed" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#sgf6b" aria-expanded="false" aria-controls="sgf6b">Who do
+                    I contact for rates, insurance or claims?</button></h3>
+                <div id="sgf6b" class="accordion-collapse collapse" data-bs-parent="#sgFaqRight">
+                  <div class="accordion-body">Rates, estimates, customs, insurance, liability and claims answers require
+                    approved policy. Contact our support team directly so we can give you accurate information.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sg-faq-cta" data-reveal>
+          <p>Still unsure? Our team can help with shipment-specific guidance.</p>
+          <div class="sg-faq-actions">
+            <a class="btn-main btn-red" href="contact.html">Contact Support</a>
+            <a class="btn-main sg-btn-ghost" href="faq.html">Browse Full FAQ</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         RELATED RESOURCES + FINAL CTA
+         ============================================================ -->
+    <section class="sg-related" aria-labelledby="relatedTitle">
+      <div class="container-xl">
+        <div class="sg-section-head" data-reveal>
+          <span class="eyebrow">EXPLORE MORE</span>
+          <h2 id="relatedTitle">Related Resources</h2>
+        </div>
+        <div class="sg-related-grid" data-reveal>
+          <a class="sg-related-card" href="countries.html"><i class="fa-solid fa-earth-americas"
+              aria-hidden="true"></i><strong>Destinations</strong><small>Countries we ship to</small></a>
+          <a class="sg-related-card" href="pricing.html"><i class="fa-solid fa-calculator"
+              aria-hidden="true"></i><strong>Pricing</strong><small>Estimate shipping cost</small></a>
+          <a class="sg-related-card" href="faq.html"><i class="fa-solid fa-circle-question"
+              aria-hidden="true"></i><strong>FAQ</strong><small>Common questions</small></a>
+          <a class="sg-related-card" href="resources.html"><i class="fa-solid fa-book"
+              aria-hidden="true"></i><strong>Resources</strong><small>All guides &amp; downloads</small></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="ctaTitle">
+      <div class="container-fluid">
+        <div class="cta-inner">
+          <div class="cta-copy">
+            <h2 id="ctaTitle">Ready to Ship?</h2>
+            <p>Get a quote or talk to our team about your shipment.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn-main btn-white" href="quote.html">Get a Quote <i class="fa-solid fa-arrow-right"></i></a>
+            <a class="btn-main btn-white-outline" href="contact.html">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <!-- ======= FOOTER ========== -->
+  <!-- ============================================================
+       GUIDE DETAIL PANEL — modal dialog, keyboard accessible
+       (§6 individual guide template)
+       ============================================================ -->
+  <div class="sg-modal" id="sgModal" hidden role="dialog" aria-modal="true" aria-labelledby="sgModalTitle">
+    <div class="sg-modal-backdrop" data-sg-close></div>
+    <div class="sg-modal-panel" role="document">
+      <div class="sg-modal-head">
+        <div>
+          <span class="sg-modal-kicker" id="sgModalKicker">GUIDE</span>
+          <h2 id="sgModalTitle" tabindex="-1">Guide title</h2>
+          <p class="sg-modal-summary" id="sgModalSummary"></p>
+        </div>
+        <button type="button" class="sg-modal-close" data-sg-close aria-label="Close guide"><i class="fa-solid fa-xmark"
+            aria-hidden="true"></i></button>
+      </div>
+      <div class="sg-modal-body" id="sgModalBody">
+        <!-- Injected by JS: audience, steps, checklist, mistakes, related, CTA -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer — copy verbatim from your existing file -->
   <footer class="footer">
     <div class="container-fluid">
       <div class="row g-4 py-5">
-
-        <!-- Brand Column -->
         <div class="col-lg-3">
           <img src="assets/logo.png" alt="JP Express" class="footer-logo">
           <p>International courier, export logistics and global shipping platform from Bangladesh.</p>
@@ -493,8 +682,6 @@
             <a href="#" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
           </div>
         </div>
-
-        <!-- About Links -->
         <div class="col-6 col-lg-2">
           <h3>About</h3>
           <a href="about.html">About Us</a>
@@ -503,8 +690,6 @@
           <a href="careers.html">Careers</a>
           <a href="contact.html">Contact</a>
         </div>
-
-        <!-- Services Links -->
         <div class="col-6 col-lg-2">
           <h3>Services</h3>
           <a href="services/international-courier.html">International Courier</a>
@@ -514,8 +699,6 @@
           <a href="services/import-solutions.html">Import Solutions</a>
           <a href="countries.html">Destinations</a>
         </div>
-
-        <!-- Resources Links -->
         <div class="col-6 col-lg-2">
           <h3>Resources</h3>
           <a href="resources.html">Resources</a>
@@ -525,25 +708,15 @@
           <a href="blog.html">Blog</a>
           <a href="faq.html">FAQ</a>
         </div>
-
-        <!-- Contact Info -->
         <div class="col-6 col-lg-3 footer-contact">
           <h3>Contact</h3>
-          <a href="tel:+8801681637836">
-            <i class="fa-solid fa-phone"></i> Hotline: +8801681637836 (9am to 11pm)
-          </a>
-          <a href="mailto:jpexpress09@gmail.com">
-            <i class="fa-solid fa-envelope"></i> info@jpex.com.bd | jpexpress09@gmail.com
-          </a>
-          <a href="contact.html">
-            <i class="fa-solid fa-location-dot"></i> House- B-125 (Ground Floor), Road- 21, Mohakhali DOHS, Dhaka- 1206,
-            Bangladesh.
-          </a>
+          <a href="tel:+8801681637836"><i class="fa-solid fa-phone"></i> Hotline: +8801681637836 (9am to 11pm)</a>
+          <a href="mailto:jpexpress09@gmail.com"><i class="fa-solid fa-envelope"></i> info@jpex.com.bd |
+            jpexpress09@gmail.com</a>
+          <a href="contact.html"><i class="fa-solid fa-location-dot"></i> House- B-125 (Ground Floor), Road- 21,
+            Mohakhali DOHS, Dhaka- 1206, Bangladesh.</a>
         </div>
-
       </div>
-
-      <!-- Footer Bottom -->
       <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3">
         <span>© 2026 JP Express. All rights reserved.</span>
         <div class="footer-legal">
@@ -555,24 +728,19 @@
     </div>
   </footer>
 
-  <!-- ============ FLOATING ACTIONS ============ -->
+  <!-- Floating actions -->
   <div class="fab-side" id="fabSide" aria-label="Quick contact actions">
-    <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top">
-      <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-    </a>
-    <a href="quote.html" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote">
-      <i class="fa-solid fa-calculator" aria-hidden="true"></i>
-    </a>
+    <a href="#top" class="fab-top" data-tip="Back to top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"
+        aria-hidden="true"></i></a>
+    <a href="quote.html" class="fab-quote" data-tip="Get a quote" aria-label="Get a quote"><i
+        class="fa-solid fa-calculator" aria-hidden="true"></i></a>
     <a href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20ask%20about%20a%20shipment."
       target="_blank" rel="noopener" class="fab-wa wa-link"
-      data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WhatsApp" aria-label="Chat on WhatsApp">
-      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
-    </a>
-    <a href="tel:+8801681637836" class="fab-call" data-tip="Call us" aria-label="Call us">
-      <i class="fa-solid fa-phone" aria-hidden="true"></i>
-    </a>
+      data-wa-text="Hi JP Express, I'd like to ask about a shipment." data-tip="WhatsApp"
+      aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+    <a href="tel:+8801681637836" class="fab-call" data-tip="Call us" aria-label="Call us"><i class="fa-solid fa-phone"
+        aria-hidden="true"></i></a>
   </div>
-
   <nav class="fab-bar" aria-label="Mobile quick actions">
     <a href="index.html" class="bar-home"><i class="fa-solid fa-house"></i>Home</a>
     <a href="track-shipment.html"><i class="fa-solid fa-location-dot"></i>Track</a>
@@ -583,10 +751,10 @@
     <a href="login.html" class="bar-login" aria-label="Customer login"><i class="fa-solid fa-circle-user"></i>Login</a>
   </nav>
 
-  <!-- ============ SCRIPTS ============ -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/pages/shipping-guides.js"></script>
 </body>
 
 </html>
