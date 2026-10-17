@@ -7,8 +7,9 @@
    BASE LAYOUT & SECTIONS
    =============================================================== */
 .page-careers .jp-section {
-  padding: 48px 0;
+  padding: 40px 0;
   background: #fff;
+  scroll-margin-top: 80px;
 }
 
 .page-careers .jp-section.alt {
@@ -46,7 +47,7 @@
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   color: var(--jp-heading-color);
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
   line-height: 1.18;
   letter-spacing: -.025em;
   margin: 0 0 10px;
@@ -132,42 +133,49 @@
 .page-careers .jp-card {
   background: #fff;
   border: 1px solid #e3ebf5;
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 6px 22px rgba(27, 37, 89, .05);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 4px 16px rgba(27, 37, 89, .05);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
 .page-careers .jp-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 38px rgba(27, 37, 89, .11);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(27, 37, 89, .1);
   border-color: #f0c4ad;
 }
 
 .page-careers .jp-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  background: #fff2ed;
+  background: linear-gradient(135deg, #fff2ed, #ffe3d6);
   color: var(--jp-orange);
-  font-size: 19px;
-  margin-bottom: 14px;
+  font-size: 17px;
+  margin-bottom: 10px;
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.page-careers .jp-card:hover .jp-icon {
+  background: var(--jp-orange);
+  color: #fff;
+  transform: scale(1.06);
 }
 
 .page-careers .jp-card h3 {
   font-family: "Plus Jakarta Sans", sans-serif;
   color: var(--jp-heading-color);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
-  margin: 0 0 8px;
+  margin: 0 0 5px;
 }
 
 .page-careers .jp-card p {
   color: var(--jp-muted);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 13.5px;
+  line-height: 1.55;
   margin: 0;
 }
 
@@ -178,7 +186,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 6px;
 }
 
 .page-careers .career-search {
@@ -214,12 +222,16 @@
 }
 
 .page-careers .career-filters select {
-  height: 48px;
-  padding: 0 14px;
+  height: 44px;
+  padding: 0 38px 0 14px;
   border: 1px solid #e3ebf5;
   border-radius: 12px;
-  background: #fff;
-  font-size: 14.5px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%2364748b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+  -webkit-appearance: none;
+  appearance: none;
+  min-width: 0;
+  text-overflow: ellipsis;
+  font-size: 14px;
   color: var(--jp-ink);
   outline: none;
   cursor: pointer;
@@ -233,8 +245,23 @@
 
 @media (max-width: 767px) {
   .page-careers .career-filters {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .page-careers .career-search {
+    grid-column: 1 / -1;
+  }
+
+  .page-careers .career-search input,
+  .page-careers .career-filters select {
+    font-size: 16px;
+  }
+
+  .page-careers .career-filters select {
+    padding: 0 30px 0 12px;
+    background-position: right 10px center;
   }
 }
 
@@ -307,18 +334,13 @@
   margin: 0 0 14px;
 }
 
-.page-careers .job-apply {
-  display: inline-flex;
-  align-items: center;
+.page-careers .jp-btn.job-apply {
+  min-height: 38px;
+  padding: 7px 14px;
   gap: 6px;
-  font-size: 13.5px;
-  font-weight: 800;
-  color: var(--jp-navy);
-  padding: 8px 16px;
-  border: 1.5px solid var(--jp-navy);
+  font-size: 13px;
+  border-width: 1.5px;
   border-radius: 10px;
-  background: transparent;
-  transition: background .2s ease, color .2s ease, transform .2s ease;
 }
 
 .page-careers .job-apply:hover {
@@ -345,7 +367,8 @@
 
 .page-careers .jp-empty i {
   color: #c4d0e0;
-  margin-bottom: 14px;
+  font-size: 28px;
+  margin-bottom: 8px !important;
 }
 
 .page-careers .jp-empty h3 {
@@ -475,7 +498,30 @@
 @media (max-width: 575px) {
   .page-careers .process-steps {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 10px;
+  }
+
+  .page-careers .process-step {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    column-gap: 12px;
+    align-items: start;
+    text-align: left;
+    padding: 14px;
+  }
+
+  .page-careers .step-num {
+    position: static;
+    transform: none;
+    grid-row: 1 / span 2;
+  }
+
+  .page-careers .process-step h3 {
+    margin: 0 0 2px;
+  }
+
+  .page-careers .process-step p {
+    grid-column: 2;
   }
 }
 
@@ -507,6 +553,16 @@
 
 .page-careers .form-group.full-width {
   grid-column: 1 / -1;
+}
+
+
+/* full-width field gulor moddhe gap */
+.page-careers #careerForm>.form-group {
+  margin-bottom: 12px;
+}
+
+.page-careers #careerForm>.form-group.checkbox-group {
+  margin-bottom: 8px;
 }
 
 .page-careers .form-group label {
@@ -575,6 +631,24 @@
 .page-careers .form-group input[type="file"]:hover {
   border-color: var(--jp-orange);
   background: #fff8f4;
+}
+
+
+.page-careers .form-group input[type="file"]::file-selector-button {
+  margin-right: 10px;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--jp-navy);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+.page-careers .form-group input[type="file"]::file-selector-button:hover {
+  background: var(--jp-orange);
 }
 
 .page-careers .file-hint {
@@ -675,111 +749,12 @@
   .page-careers .form-submit .jp-btn {
     width: 100%;
   }
-}
 
-/* ===============================================================
-   FAQ ACCORDION
-   =============================================================== */
-.page-careers .jp-faq {
-  max-width: 840px;
-  margin: 0 auto;
-  display: grid;
-  gap: 10px;
-}
-
-.page-careers .jp-accordion-item {
-  background: #fff;
-  border: 1px solid #e3ebf5;
-  border-radius: 14px;
-  overflow: hidden;
-  transition: border-color .2s ease, box-shadow .2s ease;
-}
-
-.page-careers .jp-accordion-item:hover {
-  border-color: #f0c4ad;
-  box-shadow: 0 6px 18px rgba(27, 37, 89, .06);
-}
-
-.page-careers .jp-accordion-item.open {
-  border-color: var(--jp-orange);
-  box-shadow: 0 8px 22px rgba(242, 99, 35, .1);
-}
-
-.page-careers .jp-accordion-btn {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 16px 20px;
-  background: transparent;
-  border: 0;
-  text-align: left;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  color: var(--jp-heading-color);
-  cursor: pointer;
-  transition: color .2s ease;
-}
-
-.page-careers .jp-accordion-item.open .jp-accordion-btn {
-  color: var(--jp-orange);
-}
-
-.page-careers .jp-accordion-btn i {
-  flex: 0 0 auto;
-  font-size: 13px;
-  color: var(--jp-navy);
-  transition: transform .3s ease, color .2s ease;
-}
-
-.page-careers .jp-accordion-item.open .jp-accordion-btn i {
-  transform: rotate(180deg);
-  color: var(--jp-orange);
-}
-
-.page-careers .jp-accordion-panel {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .35s ease, padding .35s ease;
-  padding: 0 20px;
-}
-
-.page-careers .jp-accordion-item.open .jp-accordion-panel {
-  max-height: 400px;
-  padding: 0 20px 18px;
-}
-
-.page-careers .jp-accordion-panel p {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--jp-muted);
-  margin: 0;
-}
-
-.page-careers .jp-accordion-panel a {
-  color: var(--jp-orange);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.page-careers .jp-accordion-panel a:hover {
-  color: #dc541b;
-}
-
-@media (max-width: 575px) {
-  .page-careers .jp-accordion-btn {
-    padding: 14px 16px;
-    font-size: 14px;
-  }
-
-  .page-careers .jp-accordion-item.open .jp-accordion-panel {
-    padding: 0 16px 16px;
-  }
-
-  .page-careers .jp-accordion-panel p {
-    font-size: 13.5px;
+  .page-careers .form-group input[type="text"],
+  .page-careers .form-group input[type="email"],
+  .page-careers .form-group input[type="tel"],
+  .page-careers .form-group textarea {
+    font-size: 16px;
   }
 }
 
@@ -880,5 +855,253 @@
 
   .page-careers .job-card-header h3 {
     font-size: 14.5px;
+  }
+}
+
+
+/* ===============================================================
+   COMPACT SPACING — hero, FAQ, CTA, tablet & mobile
+   =============================================================== */
+
+/* Hero */
+.page-careers .hero.page-hero {
+  padding: 30px 0;
+}
+
+/* FAQ */
+.page-careers .accordion {
+  gap: 8px;
+}
+
+.page-careers .accordion-button {
+  padding: 13px 18px;
+  font-size: 14.5px;
+}
+
+.page-careers .accordion-body {
+  padding: 0 18px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Final CTA */
+.page-careers .final-cta {
+  padding: 24px 0;
+}
+
+.page-careers .cta-copy h2 {
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  .page-careers .jp-section {
+    padding: 32px 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .page-careers .hero.page-hero {
+    padding: 24px 0 22px;
+  }
+
+  .page-careers .page-crumb {
+    margin-bottom: 10px;
+  }
+
+  .page-careers .jp-section {
+    padding: 22px 0;
+    scroll-margin-top: 70px;
+  }
+
+  .page-careers .jp-section-head {
+    margin-bottom: 16px;
+  }
+
+  .page-careers .jp-kicker {
+    font-size: 10.5px;
+    margin-bottom: 4px;
+  }
+
+  .page-careers .jp-section-head h2 {
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  .page-careers .jp-section-head p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .page-careers .jp-grid {
+    gap: 10px;
+  }
+
+  .page-careers .jp-card {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .page-careers .jp-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+    border-radius: 11px;
+    margin-bottom: 8px;
+  }
+
+  .page-careers .jp-card h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .page-careers .jp-card p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .page-careers .job-card {
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+  }
+
+  .page-careers .job-card-header h3 {
+    font-size: 15px;
+  }
+
+  .page-careers .job-meta {
+    font-size: 12px;
+    gap: 3px 12px;
+    margin-bottom: 6px;
+  }
+
+  .page-careers .job-summary {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .page-careers .jp-btn.job-apply {
+    width: 100%;
+  }
+
+  .page-careers .jp-empty {
+    padding: 22px 14px;
+    border-radius: 14px;
+  }
+
+  .page-careers .jp-empty h3 {
+    font-size: 15.5px;
+  }
+
+  .page-careers .jp-empty p {
+    font-size: 13px;
+  }
+
+  /* FAQ */
+  .page-careers .accordion-button {
+    padding: 12px 14px;
+    font-size: 13.5px;
+  }
+
+  .page-careers .accordion-body {
+    padding: 0 14px 12px;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  /* Final CTA */
+  .page-careers .final-cta {
+    padding: 20px 0 22px;
+  }
+
+  .page-careers .cta-inner {
+    gap: 12px;
+  }
+
+  .page-careers .cta-copy h2 {
+    font-size: clamp(1.2rem, 5.4vw, 1.4rem);
+  }
+
+  .page-careers .cta-copy p {
+    font-size: 13px;
+  }
+
+  .page-careers .final-cta .btn-main {
+    min-height: 42px;
+    font-size: 13.5px;
+  }
+}
+
+/* Small mobile: icon left, text right (compact card) */
+@media (max-width: 575px) {
+  .page-careers .jp-card {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    column-gap: 12px;
+    align-items: start;
+  }
+
+  .page-careers .jp-icon {
+    grid-row: 1 / span 2;
+    margin-bottom: 0;
+  }
+
+  .page-careers .jp-card h3 {
+    margin: 0 0 2px;
+  }
+
+  .page-careers .jp-card p {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-careers .career-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .page-careers .jp-section-head h2 {
+    font-size: clamp(1.1rem, 5.2vw, 1.25rem);
+  }
+
+  .page-careers .jp-card {
+    padding: 12px;
+    grid-template-columns: 34px 1fr;
+    column-gap: 10px;
+  }
+
+  .page-careers .jp-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .page-careers .job-card {
+    padding: 12px;
+  }
+
+  .page-careers .job-card-header h3 {
+    font-size: 14.5px;
+  }
+
+  .page-careers .application-form {
+    padding: 16px 12px;
+  }
+}
+
+/* Touch device: hover e card uthe jabe na */
+@media (hover: none) {
+
+  .page-careers .jp-card:hover,
+  .page-careers .job-card:hover,
+  .page-careers .process-step:hover {
+    transform: none;
+  }
+
+  .page-careers .jp-card:hover .jp-icon {
+    transform: none;
   }
 }
