@@ -3950,14 +3950,130 @@
 
 
 
-/* ---------- LEADERSHIP PAGE: staggered card reveal ---------- */
+/* ---------- LEADERSHIP PAGE: profile rules + staggered card reveal ---------- */
 (function leadershipPage() {
   "use strict";
 
   if (!document.documentElement.classList.contains("page-leadership")) return;
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  document.querySelectorAll(".leadership-team-grid, .leadership-process-grid").forEach(function (grid) {
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* initials for the image fallback ("Md. Masud Parvez" -> "MP") */
+  function initials(name) {
+    return name
+      .replace(/^(md\.?|mr\.?|mrs\.?|ms\.?|dr\.?)\s+/i, "")
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(function (w) { return w.charAt(0).toUpperCase(); })
+      .join("");
+  }
+
+  /* approved links must be https, and social links must match their own network */
+  var SOCIAL_HOSTS = {
+    linkedin: ["linkedin.com"],
+    facebook: ["facebook.com", "fb.com"],
+    x: ["x.com", "twitter.com"],
+    instagram: ["instagram.com"]
+  };
+
+  function isHttps(href) {
+    href = (href || "").trim();
+    if (!/^https:\/\//i.test(href)) return false;
+    try { return !!new URL(href).hostname; } catch (e) { return false; }
+  }
+
+  function validSocial(a) {
+    var href = (a.getAttribute("href") || "").trim();
+    if (!isHttps(href)) return false;
+    var host = new URL(href).hostname.replace(/^www\./, "");
+    return (SOCIAL_HOSTS[a.getAttribute("data-network")] || []).some(function (h) {
+      return host === h || host.slice(-(h.length + 1)) === "." + h;
+    });
+  }
+
+  /* ---------- 1. Profile rules (status + sort order, like the CMS) ---------- */
+  var teamGrid = document.querySelector(".leadership-team-grid");
+  if (teamGrid) {
+    var cards = Array.prototype.slice.call(teamGrid.querySelectorAll(".leadership-team-card"));
+
+    /* unpublished / draft profiles never appear on the public page */
+    cards = cards.filter(function (card) {
+      var status = (card.getAttribute("data-status") || "published").toLowerCase();
+      if (status === "published") return true;
+      card.remove();
+      return false;
+    });
+
+    /* data-order controls the position (no number = after the numbered ones) */
+    cards.sort(function (a, b) {
+      var ao = parseInt(a.getAttribute("data-order"), 10);
+      var bo = parseInt(b.getAttribute("data-order"), 10);
+      return (isNaN(ao) ? 9999 : ao) - (isNaN(bo) ? 9999 : bo);
+    });
+
+    cards.forEach(function (card, i) {
+      teamGrid.appendChild(card);
+
+      /* keep the 01, 02, 03 badges in sync after filtering / sorting */
+      var badge = card.querySelector(".leadership-team-index");
+      if (badge) badge.textContent = (i < 9 ? "0" : "") + (i + 1);
+
+      /* optional fields: only real approved https links are published */
+      card.querySelectorAll(".leadership-team-link").forEach(function (a) {
+        if (!isHttps(a.getAttribute("href"))) a.remove();
+      });
+
+      /* social icons: keep only links that match their own network */
+      var social = card.querySelector(".leadership-social");
+      if (social) {
+        social.querySelectorAll(".leadership-social-link").forEach(function (a) {
+          if (validSocial(a)) {
+            a.setAttribute("target", "_blank");
+            a.setAttribute("rel", "noopener noreferrer");
+          } else {
+            /* keep the icon visible, but never jump to top or open a dead link */
+            a.classList.add("is-pending");
+            a.setAttribute("aria-disabled", "true");
+            a.setAttribute("tabindex", "-1");
+            a.addEventListener("click", function (e) { e.preventDefault(); });
+          }
+        });
+      }
+      card.querySelectorAll(".leadership-team-quote, .leadership-team-experience").forEach(function (el) {
+        if (!el.textContent.trim()) el.remove();
+      });
+
+      /* image safety: initials instead of a broken image icon */
+      var box = card.querySelector(".leadership-team-image");
+      var img = box && box.querySelector("img");
+      if (img) {
+        var showInitials = function () {
+          if (box.querySelector(".leadership-team-initials")) return;
+          var title = card.querySelector("h3");
+          var badgeEl = document.createElement("span");
+          badgeEl.className = "leadership-team-initials";
+          badgeEl.setAttribute("aria-hidden", "true");
+          badgeEl.textContent = initials(title ? title.textContent : "");
+          img.style.display = "none";
+          box.insertBefore(badgeEl, img);
+        };
+        img.addEventListener("error", showInitials);
+        if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) showInitials();
+      }
+    });
+
+    /* nothing published = no empty section on the live page */
+    if (!cards.length) {
+      var teamSection = teamGrid.closest(".leadership-team-section");
+      if (teamSection) teamSection.hidden = true;
+    }
+  }
+
+  /* ---------- 2. Staggered card reveal ---------- */
+  if (reduced) return;
+
+  document.querySelectorAll(".leadership-team-grid, .leadership-process-grid, .leadership-related-grid").forEach(function (grid) {
     Array.prototype.forEach.call(grid.children, function (el, i) {
       el.style.setProperty("--d", (i * 90) + "ms");
 
