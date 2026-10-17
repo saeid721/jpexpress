@@ -4,30 +4,39 @@
    Premium, mobile-first, fully responsive.
    =============================================================== */
 
+/* ===============================================================
+   01. HERO
+   =============================================================== */
 .page-shipping-guides .sg-hero .hero-copy {
-    max-width: 780px;
+    max-width: 820px;
 }
 
-.sg-hero-actions {
+.sg-hero-trust {
+    list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 22px;
+    justify-content: center;
+    gap: 8px 18px;
+    margin: 18px 0 0;
+    padding: 0;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .85);
 }
 
-.sg-hero-actions .btn-main {
-    min-height: 48px;
-    padding: 0 22px;
-    font-size: 15.5px;
-    border-radius: 8px;
+.sg-hero-trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
 }
 
-.sg-hero-actions .btn-dark-outline {
-    background: rgba(255, 255, 255, .1);
-    border-color: rgba(255, 255, 255, .55);
+.sg-hero-trust i {
+    color: var(--jp-orange-light, #FFB08A);
 }
 
-/* Section shared head */
+/* ===============================================================
+   02. SECTION HEADINGS
+   =============================================================== */
 .sg-section-head {
     max-width: 720px;
     margin-bottom: 28px;
@@ -50,7 +59,17 @@
     line-height: 1.55;
 }
 
-/* ---------- §4 Journey ---------- */
+.sg-section-head--flex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* ===============================================================
+   03. §4 JOURNEY
+   =============================================================== */
 .sg-journey {
     background: var(--jp-white);
     padding: clamp(36px, 6vw, 64px) 0;
@@ -143,106 +162,12 @@
     color: var(--jp-text-muted, #64748b);
 }
 
-/* ---------- §5 Library ---------- */
+/* ===============================================================
+   04. §5 LIBRARY
+   =============================================================== */
 .sg-library {
     padding: clamp(36px, 6vw, 64px) 0;
     background: var(--jp-bg-light, #f8fbfe);
-}
-
-.sg-search-wrap {
-    margin-bottom: 24px;
-}
-
-.jp-search {
-    position: relative;
-    margin-bottom: 16px;
-}
-
-.jp-search>i {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9aa8bb;
-    pointer-events: none;
-}
-
-.jp-search input {
-    width: 100%;
-    height: 48px;
-    padding: 0 46px;
-    font-size: 16px;
-    border: 1.5px solid var(--jp-border-muted, #e1e9f2);
-    border-radius: 12px;
-    background: #fff;
-    color: var(--jp-heading-color, #1B2559);
-    outline: 0;
-    -webkit-appearance: none;
-    appearance: none;
-    transition: border-color .2s ease, box-shadow .2s ease;
-}
-
-.jp-search input:focus {
-    border-color: var(--jp-orange, #F26323);
-    box-shadow: 0 0 0 4px rgba(242, 99, 35, .14);
-}
-
-.sg-search-clear {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--jp-text-muted, #64748b);
-    cursor: pointer;
-}
-
-.sg-search-clear:hover {
-    background: #eef2f7;
-    color: var(--jp-navy, #2B3990);
-}
-
-.sg-filterbar {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-}
-
-.sg-filterbar::-webkit-scrollbar {
-    display: none;
-}
-
-.sg-filter {
-    flex: 0 0 auto;
-    min-height: 40px;
-    padding: 8px 16px;
-    border-radius: 999px;
-    border: 1.5px solid var(--jp-border-muted, #e1e9f2);
-    background: #fff;
-    color: var(--jp-text-muted, #64748b);
-    font-size: 13.5px;
-    font-weight: 700;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background .2s ease, color .2s ease, border-color .2s ease;
-}
-
-.sg-filter:hover {
-    color: var(--jp-navy, #2B3990);
-    border-color: var(--jp-navy, #2B3990);
-}
-
-.sg-filter.is-active {
-    background: var(--jp-navy, #2B3990);
-    border-color: var(--jp-navy, #2B3990);
-    color: #fff;
 }
 
 /* Category cards */
@@ -305,6 +230,14 @@
     flex: 1;
 }
 
+.sg-cat-meta {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: flex;
+    gap: 6px;
+}
+
 .sg-cat-tag {
     align-self: flex-start;
     padding: 3px 10px;
@@ -331,43 +264,14 @@
     transition: transform .2s ease;
 }
 
-.sg-cat-card:hover .sg-cat-open i {
+.sg-cat-card:hover .sg-cat-open i,
+.sg-cat-card:focus-visible .sg-cat-open i {
     transform: translateX(4px);
 }
 
-.sg-empty {
-    margin-top: 22px;
-    padding: 22px;
-    text-align: center;
-    background: #fff;
-    border: 1px dashed var(--jp-border-hover-2, #c7d8ec);
-    border-radius: 14px;
-    color: var(--jp-text-muted, #64748b);
-    font-size: 14px;
-}
-
-.sg-empty i {
-    color: var(--jp-orange, #F26323);
-    margin-right: 6px;
-}
-
-.sg-empty a {
-    color: var(--jp-orange, #F26323);
-    font-weight: 800;
-}
-
-.sg-count {
-    margin: 12px 0 0;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--jp-text-muted, #64748b);
-}
-
-.sg-count:empty {
-    display: none;
-}
-
-/* ---------- §7 Checklist ---------- */
+/* ===============================================================
+   05. §7 CHECKLIST
+   =============================================================== */
 .sg-checklist {
     margin-top: 40px;
     padding: clamp(20px, 3vw, 30px);
@@ -510,7 +414,7 @@
 
 .sg-btn-ghost {
     background: #fff;
-    border-color: var(--jp-navy, #2B3990);
+    border: 1.5px solid var(--jp-navy, #2B3990);
     color: var(--jp-navy, #2B3990);
 }
 
@@ -519,7 +423,9 @@
     color: #fff;
 }
 
-/* ---------- §8 FAQ ---------- */
+/* ===============================================================
+   06. §8 FAQ + SUPPORT CTA
+   =============================================================== */
 .sg-faq-section {
     padding: clamp(36px, 6vw, 64px) 0;
     background: #fff;
@@ -568,7 +474,9 @@
     color: var(--jp-navy, #2B3990);
 }
 
-/* ---------- Related ---------- */
+/* ===============================================================
+   07. RELATED
+   =============================================================== */
 .sg-related {
     padding: clamp(30px, 5vw, 52px) 0;
     background: var(--jp-bg-light, #f8fbfe);
@@ -617,7 +525,9 @@
     color: var(--jp-text-muted, #64748b);
 }
 
-/* ---------- Modal (§6) ---------- */
+/* ===============================================================
+   08. §6 MODAL
+   =============================================================== */
 .sg-modal[hidden] {
     display: none;
 }
@@ -831,7 +741,7 @@ body.sg-modal-open {
 }
 
 /* ===============================================================
-   RESPONSIVE — mobile-first from here down
+   09. RESPONSIVE — mobile-first
    =============================================================== */
 @media (max-width: 1199px) {
     .sg-steps {
@@ -866,16 +776,10 @@ body.sg-modal-open {
         margin: 0 auto 8px;
     }
 
-    .sg-hero-actions {
-        gap: 8px;
-        margin-top: 14px;
-    }
-
-    .sg-hero-actions .btn-main {
-        flex: 1 1 calc(50% - 4px);
-        min-height: 44px;
-        font-size: 14.5px;
-        padding: 0 10px;
+    .sg-hero-trust {
+        font-size: 11.5px;
+        gap: 6px 14px;
+        margin-top: 12px;
     }
 
     .sg-journey,
@@ -898,6 +802,10 @@ body.sg-modal-open {
     .sg-section-head p {
         font-size: 13.5px;
         line-height: 1.45;
+    }
+
+    .sg-section-head--flex {
+        display: block;
     }
 
     .sg-steps {
@@ -932,33 +840,6 @@ body.sg-modal-open {
         font-size: 12px;
     }
 
-    .jp-search {
-        margin-bottom: 10px;
-    }
-
-    .jp-search input {
-        height: 44px;
-        font-size: 16px;
-        padding: 0 42px;
-        border-radius: 10px;
-    }
-
-    .jp-search>i {
-        left: 14px;
-        font-size: 13px;
-    }
-
-    .sg-filterbar {
-        gap: 6px;
-        padding-bottom: 4px;
-    }
-
-    .sg-filter {
-        padding: 6px 12px;
-        min-height: 36px;
-        font-size: 12.5px;
-    }
-
     .sg-grid {
         grid-template-columns: 1fr;
         gap: 10px;
@@ -987,6 +868,10 @@ body.sg-modal-open {
         border-radius: 11px;
     }
 
+    .sg-cat-meta {
+        display: none;
+    }
+
     .sg-cat-card h3 {
         grid-column: 2;
         grid-row: 1;
@@ -998,11 +883,6 @@ body.sg-modal-open {
     .sg-cat-card p {
         font-size: 12.5px;
         line-height: 1.45;
-    }
-
-    .sg-cat-tag {
-        padding: 2px 8px;
-        font-size: 10px;
     }
 
     .sg-cat-open {
@@ -1071,6 +951,7 @@ body.sg-modal-open {
         min-height: 42px;
         font-size: 14px;
         padding: 0 10px;
+        justify-content: center;
     }
 
     .sg-faq-section .accordion-button {
@@ -1101,6 +982,7 @@ body.sg-modal-open {
         flex: 1 1 calc(50% - 5px);
         min-height: 42px;
         font-size: 14px;
+        justify-content: center;
     }
 
     .sg-related-grid {
@@ -1126,7 +1008,7 @@ body.sg-modal-open {
         font-size: 12px;
     }
 
-    /* Modal becomes near-fullscreen on mobile */
+    /* Modal becomes near-fullscreen sheet on mobile */
     .sg-modal {
         padding: 0;
         place-items: end center;
@@ -1178,14 +1060,11 @@ body.sg-modal-open {
         min-height: 42px;
         padding: 0 10px;
         font-size: 13.5px;
+        justify-content: center;
     }
 }
 
 @media (max-width: 380px) {
-    .sg-hero-actions .btn-main {
-        flex-basis: 100%;
-    }
-
     .sg-cat-card {
         grid-template-columns: 36px minmax(0, 1fr);
     }

@@ -1,6 +1,6 @@
 /* =========================================================
    JP EXPRESS — SHIPPING GUIDES PAGE LOGIC
-   §5 filter, §6 guide template + modal, §7 checklist,
+   §6 guide template + modal, §7 checklist,
    §10 a11y (keyboard, ARIA, focus trap), §12 wireframe flow.
    ========================================================= */
 (function () {
@@ -230,53 +230,6 @@
     };
 
     /* ---------------------------------------------------------
-       §5 FILTER + SEARCH
-       --------------------------------------------------------- */
-    const grid = $("[data-sg-grid]");
-    const searchInput = $("[data-sg-search]");
-    const clearBtn = $("[data-sg-clear]");
-    const filterBtns = $$("[data-sg-filter]");
-    const items = $$("[data-sg-item]");
-    const emptyEl = $("[data-sg-empty]");
-    const countEl = $("[data-sg-count]");
-    let activeFilter = "all";
-
-    function applyFilters() {
-        const q = (searchInput.value || "").trim().toLowerCase();
-        let visible = 0;
-        items.forEach((el) => {
-            const cat = el.getAttribute("data-category");
-            const text = (el.textContent || "").toLowerCase();
-            const matchCat = activeFilter === "all" || cat === activeFilter;
-            const matchText = !q || text.includes(q);
-            const show = matchCat && matchText;
-            el.hidden = !show;
-            if (show) visible++;
-        });
-        emptyEl.hidden = visible !== 0;
-        countEl.textContent = visible ? `Showing ${visible} of ${items.length} guides` : "";
-        clearBtn.hidden = !q;
-    }
-
-    searchInput.addEventListener("input", applyFilters);
-    clearBtn.addEventListener("click", () => {
-        searchInput.value = "";
-        applyFilters();
-        searchInput.focus();
-    });
-    filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            activeFilter = btn.getAttribute("data-sg-filter");
-            filterBtns.forEach((b) => {
-                const on = b === btn;
-                b.classList.toggle("is-active", on);
-                b.setAttribute("aria-pressed", on);
-            });
-            applyFilters();
-        });
-    });
-
-    /* ---------------------------------------------------------
        §6 GUIDE MODAL — focus trap, ESC, restore focus
        --------------------------------------------------------- */
     const modal = $("#sgModal");
@@ -284,6 +237,7 @@
     const modalKicker = $("#sgModalKicker");
     const modalSummary = $("#sgModalSummary");
     const modalBody = $("#sgModalBody");
+    const items = $$("[data-sg-item]");
     let lastFocus = null;
 
     const esc = (s) =>
@@ -337,7 +291,7 @@
         document.body.classList.add("sg-modal-open");
         modalTitle.focus();
 
-        // related links inside modal just scroll to category and close
+        // Related links inside modal just scroll to category and close
         $$("[data-sg-related]", modalBody).forEach((a) => {
             a.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -405,6 +359,4 @@
         checks.forEach((c) => c.addEventListener("change", update));
         update();
     }
-
-    applyFilters();
 })();
