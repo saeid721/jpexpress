@@ -3404,10 +3404,6 @@
 })();
 
 /* =========================================================
-   PAGE: resources.html
-   RESOURCES PAGE LOGIC
-   ========================================================= */
-/* =========================================================
    CONSOLIDATED MODULE: resources.js
    Resources page: sticky section nav, guide search + topic filter,
    destination quick guide (from COUNTRY_DATA), download center,
@@ -3420,7 +3416,6 @@
   var $ = function (id) { return document.getElementById(id); };
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var behavior = reduced ? "auto" : "smooth";
-
 
   /* ---------- Settings: set `file` to a real path to turn a request into a download ---------- */
   function esc(s) {
@@ -3451,10 +3446,13 @@
     var spy = new IntersectionObserver(function (entries) {
       if (Date.now() < lockUntil) return;
       entries.forEach(function (en) {
-        if (en.isIntersecting) setActive(links.filter(function (l) { return l.getAttribute("href") === "#" + en.target.id; })[0]);
+        if (en.isIntersecting) {
+          var activeLink = links.find(function (l) { return l.getAttribute("href") === "#" + en.target.id; });
+          if (activeLink) setActive(activeLink);
+        }
       });
     }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
-    sections.forEach(function (s) { spy.observe(s); });
+    sections.forEach(function (s) { if (s) spy.observe(s); });
   }
   links.forEach(function (l) {
     l.addEventListener("click", function () { lockUntil = Date.now() + 900; setActive(l); });

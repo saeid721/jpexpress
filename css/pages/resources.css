@@ -1,21 +1,62 @@
 /* ===============================================================
    JP EXPRESS: RESOURCES PAGE STYLES
    Loads AFTER css/style.css. Isolated with html.page-resources.
-   Uses the shared --jp-* design tokens only.
    =============================================================== */
 
+/* ================================================================
+   01. PAGE TOKENS & RESETS
+   ================================================================ */
+.page-resources {
+  --res-surface: var(--jp-white);
+  --res-surface-alt: var(--jp-bg-light);
+  --res-border: var(--jp-border-muted);
+  --res-radius: 16px;
+  --res-radius-sm: 12px;
+  --res-shadow: 0 8px 30px rgba(27, 37, 89, .06);
+  --res-shadow-hover: 0 16px 40px rgba(27, 37, 89, .12);
+}
+
 .page-resources .home-section.res-plain {
-  background: var(--jp-white);
+  background: var(--res-surface);
 }
 
 .page-resources .home-section.res-alt {
-  background: var(--jp-bg-light);
+  background: var(--res-surface-alt);
 }
 
 .page-resources [hidden] {
   display: none !important;
 }
 
+/* ================================================================
+   02. HERO
+   ================================================================ */
+.page-resources .res-hero-trust {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+  margin: 18px 0 0;
+  padding: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .85);
+}
+
+.page-resources .res-hero-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.page-resources .res-hero-trust i {
+  color: var(--jp-orange-light, #FFB08A);
+}
+
+/* ================================================================
+   03. SECTION HEADINGS
+   ================================================================ */
 .page-resources .res-head {
   text-align: center;
   max-width: 720px;
@@ -27,28 +68,40 @@
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   color: var(--jp-heading-color);
-  font-size: clamp(1.45rem, 3.4vw, 2rem);
-  line-height: 1.15;
+  font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+  line-height: 1.18;
+  letter-spacing: -.02em;
   margin: 4px 0 0;
 }
 
 .page-resources .res-head p {
   margin: 8px auto 0;
-  font-size: 15px;
+  font-size: 14.5px;
   color: var(--jp-text-muted);
+}
+
+/* ================================================================
+   04. TRUST STRIP
+   ================================================================ */
+.page-resources .res-trust {
+  position: relative;
+  z-index: 3;
+  border-bottom: 1px solid var(--jp-border-light);
 }
 
 .page-resources .res-trust .trust-item strong {
   font-size: clamp(17px, 2.4vw, 22px);
 }
 
-/* Sticky "on this page" nav */
+/* ================================================================
+   05. STICKY CATEGORY NAV
+   ================================================================ */
 .page-resources .res-catnav {
   position: sticky;
   top: var(--jp-header-h, 86px);
   z-index: 20;
-  background: var(--jp-white);
-  border-bottom: 1px solid var(--jp-border-muted);
+  background: var(--res-surface);
+  border-bottom: 1px solid var(--res-border);
   box-shadow: 0 6px 16px rgba(20, 30, 90, .06);
 }
 
@@ -78,7 +131,7 @@
   font-weight: 700;
   color: var(--jp-text-muted);
   background: var(--jp-bg-light);
-  border: 1.5px solid var(--jp-border-muted);
+  border: 1.5px solid var(--res-border);
   transition: all .2s ease;
 }
 
@@ -93,32 +146,38 @@
   color: var(--jp-white);
 }
 
+.page-resources .res-catlink i {
+  font-size: 13px;
+}
+
 .page-resources .res-cat {
   scroll-margin-top: calc(var(--jp-header-h, 86px) + 64px);
 }
 
-/* Finder */
+/* ================================================================
+   06. GUIDE FINDER
+   ================================================================ */
 .page-resources .res-finder {
   max-width: 980px;
-  margin: 0 auto 18px;
-  padding: clamp(14px, 2.2vw, 20px);
-  background: var(--jp-white);
-  border: 1px solid var(--jp-border-muted);
-  border-radius: 18px;
-  box-shadow: var(--jp-shadow-lg);
+  margin: 0 auto 22px;
+  padding: clamp(16px, 2.2vw, 24px);
+  background: var(--res-surface);
+  border: 1px solid var(--res-border);
+  border-radius: var(--res-radius);
+  box-shadow: var(--res-shadow);
 }
 
 .page-resources .res-finder h2 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-size: clamp(1.25rem, 3vw, 1.55rem);
   color: var(--jp-heading-color);
   margin: 0 0 4px;
 }
 
 .page-resources .res-finder>p:not(.res-count) {
   margin: 0 0 12px;
-  font-size: 14.5px;
+  font-size: 14px;
   color: var(--jp-text-muted);
 }
 
@@ -142,8 +201,8 @@
   font-size: 16px;
   color: var(--jp-ink);
   background: var(--jp-bg-light);
-  border: 1.5px solid var(--jp-border-muted);
-  border-radius: 14px;
+  border: 1.5px solid var(--res-border);
+  border-radius: var(--res-radius-sm);
   outline: 0;
   -webkit-appearance: none;
   appearance: none;
@@ -171,6 +230,8 @@
   border-radius: 50%;
   background: transparent;
   color: var(--jp-text-subtle);
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
 }
 
 .page-resources .res-clear:hover {
@@ -191,8 +252,9 @@
   font-size: 13px;
   font-weight: 700;
   color: var(--jp-navy);
-  background: var(--jp-white);
-  border: 1.5px solid var(--jp-border-muted);
+  background: var(--res-surface);
+  border: 1.5px solid var(--res-border);
+  cursor: pointer;
   transition: all .2s ease;
 }
 
@@ -219,25 +281,27 @@
   display: none;
 }
 
-/* Guide library (native <details>) */
+/* ================================================================
+   07. GUIDE LIBRARY (native <details>)
+   ================================================================ */
 .page-resources .res-guides {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
   align-items: start;
 }
 
 .page-resources .res-guide {
-  background: var(--jp-white);
-  border: 1px solid var(--jp-border-muted);
-  border-radius: 16px;
+  background: var(--res-surface);
+  border: 1px solid var(--res-border);
+  border-radius: var(--res-radius);
   transition: box-shadow .25s ease, border-color .25s ease;
   overflow: hidden;
 }
 
 .page-resources .res-guide:hover,
 .page-resources .res-guide[open] {
-  box-shadow: var(--jp-shadow-lg);
+  box-shadow: var(--res-shadow-hover);
   border-color: rgba(242, 99, 35, .4);
 }
 
@@ -262,16 +326,12 @@
   font-weight: 600;
   line-height: 1;
   color: var(--jp-navy);
+  transition: transform .2s ease;
 }
 
 .page-resources .res-guide[open] summary::after {
   content: "\2212";
   color: var(--jp-orange);
-}
-
-.page-resources .res-guide summary:focus-visible {
-  outline: 3px solid rgba(242, 99, 35, .45);
-  outline-offset: -3px;
 }
 
 .page-resources .res-g-ico {
@@ -346,9 +406,9 @@
   margin: 8px auto 0;
   padding: 28px 20px;
   text-align: center;
-  background: var(--jp-white);
+  background: var(--res-surface);
   border: 1px dashed var(--jp-border-hover-2);
-  border-radius: 16px;
+  border-radius: var(--res-radius);
 }
 
 .page-resources .res-empty>i {
@@ -370,7 +430,9 @@
   color: var(--jp-text-muted);
 }
 
-/* Section heads */
+/* ================================================================
+   08. SECTION HEADS
+   ================================================================ */
 .page-resources .res-cat-head {
   display: flex;
   align-items: flex-start;
@@ -397,19 +459,21 @@
   max-width: 62ch;
 }
 
-/* Do / Don't */
+/* ================================================================
+   09. PACKAGING DOS & DON'TS
+   ================================================================ */
 .page-resources .res-dodont {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 14px;
+  gap: 16px;
 }
 
 .page-resources .res-do,
 .page-resources .res-dont {
   padding: clamp(20px, 3vw, 28px);
-  border-radius: 16px;
-  border: 1px solid var(--jp-border-muted);
-  background: var(--jp-white);
+  border-radius: var(--res-radius);
+  border: 1px solid var(--res-border);
+  background: var(--res-surface);
 }
 
 .page-resources .res-do {
@@ -453,7 +517,7 @@
   display: flex;
   gap: 10px;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--jp-ink);
 }
 
@@ -467,27 +531,29 @@
   margin-top: 3px;
 }
 
-/* Restricted */
+/* ================================================================
+   10. RESTRICTED ITEMS
+   ================================================================ */
 .page-resources .res-restrict {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .page-resources .res-restrict li {
   padding: 20px;
-  background: var(--jp-white);
-  border: 1px solid var(--jp-border-muted);
-  border-radius: 16px;
+  background: var(--res-surface);
+  border: 1px solid var(--res-border);
+  border-radius: var(--res-radius);
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .page-resources .res-restrict li:hover {
   transform: translateY(-3px);
-  box-shadow: var(--jp-shadow-lg);
+  box-shadow: var(--res-shadow-hover);
 }
 
 .page-resources .res-restrict i {
@@ -513,14 +579,14 @@
 }
 
 .page-resources .res-note {
-  margin-top: 18px;
+  margin-top: 22px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 14px;
-  padding: 18px 20px;
-  border-radius: 16px;
+  gap: 16px;
+  padding: 20px;
+  border-radius: var(--res-radius);
   color: var(--jp-white);
   background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
 }
@@ -537,14 +603,16 @@
   flex: 0 0 auto;
 }
 
-/* Destination table */
+/* ================================================================
+   11. DESTINATION TABLE
+   ================================================================ */
 .page-resources .res-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .page-resources .res-toolbar .res-search {
@@ -558,11 +626,11 @@
 }
 
 .page-resources .res-table-wrap {
-  background: var(--jp-white);
-  border: 1px solid var(--jp-border-muted);
-  border-radius: 16px;
+  background: var(--res-surface);
+  border: 1px solid var(--res-border);
+  border-radius: var(--res-radius);
   overflow: hidden;
-  box-shadow: var(--jp-shadow-lg);
+  box-shadow: var(--res-shadow);
 }
 
 .page-resources .res-table {
@@ -621,14 +689,16 @@
   color: var(--jp-text-muted);
 }
 
-/* Tools, downloads, articles */
+/* ================================================================
+   12. TOOLS, DOWNLOADS & ARTICLES CARDS
+   ================================================================ */
 .page-resources .res-cards {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 
 .page-resources .res-card {
@@ -637,16 +707,16 @@
   gap: 12px;
   height: 100%;
   padding: 22px;
-  background: var(--jp-white);
-  border: 1px solid var(--jp-border-muted);
-  border-radius: 16px;
+  background: var(--res-surface);
+  border: 1px solid var(--res-border);
+  border-radius: var(--res-radius);
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
 .page-resources a.res-card:hover,
 .page-resources .res-cards li:hover>.res-card {
   transform: translateY(-4px);
-  box-shadow: var(--jp-shadow-lg);
+  box-shadow: var(--res-shadow-hover);
   border-color: rgba(242, 99, 35, .4);
 }
 
@@ -707,145 +777,9 @@
   border-color: var(--jp-navy);
 }
 
-/* Breakpoints */
-@media (min-width: 768px) {
-  .page-resources .res-dodont {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 767px) {
-  .page-resources .res-catlink {
-    padding: 8px 14px;
-    font-size: 13px;
-  }
-
-  .page-resources .res-crumb {
-    justify-content: center;
-  }
-
-  .page-resources .res-chips {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .page-resources .res-chips::-webkit-scrollbar {
-    display: none;
-  }
-
-  .page-resources .res-chip {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-
-  .page-resources .res-table-wrap {
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    overflow: visible;
-  }
-
-  .page-resources .res-table thead {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-  }
-
-  .page-resources .res-table,
-  .page-resources .res-table tbody,
-  .page-resources .res-table tr,
-  .page-resources .res-table td {
-    display: block;
-    width: 100%;
-  }
-
-  .page-resources .res-table tr {
-    margin-bottom: 12px;
-    padding: 6px 16px;
-    background: var(--jp-white);
-    border: 1px solid var(--jp-border-muted);
-    border-radius: 14px;
-  }
-
-  .page-resources .res-table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 0;
-    text-align: right;
-  }
-
-  .page-resources .res-table td::before {
-    content: attr(data-label);
-    font-size: 11.5px;
-    font-weight: 800;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--jp-orange);
-    text-align: left;
-  }
-
-  .page-resources .res-table td:last-child::before {
-    content: none;
-  }
-
-  .page-resources .res-table td:last-child {
-    justify-content: flex-end;
-  }
-}
-
-@media (max-width: 575px) {
-  .page-resources .res-head {
-    text-align: left;
-    margin-bottom: 20px;
-  }
-
-  .page-resources .res-cat-head {
-    gap: 12px;
-    margin-bottom: 18px;
-  }
-
-  .page-resources .res-cat-ico {
-    flex-basis: 44px;
-    height: 44px;
-    font-size: 18px;
-    border-radius: 12px;
-  }
-
-  .page-resources .res-guide summary {
-    padding: 16px;
-    gap: 12px;
-  }
-
-  .page-resources .res-g-body {
-    padding: 0 16px 16px;
-  }
-
-  .page-resources .res-note .btn-main {
-    width: 100%;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  .page-resources .res-guide,
-  .page-resources .res-card,
-  .page-resources .res-restrict li,
-  .page-resources .res-g-link i {
-    transition: none;
-  }
-}
-
-
-/* ===============================================================
-   FAQ: Two-column layout (matches Contact page style)
-   =============================================================== */
+/* ================================================================
+   13. FAQ TWO-COLUMN EQUAL HEIGHT
+   ================================================================ */
 .page-resources #resFaqLeft .accordion,
 .page-resources #resFaqRight .accordion {
   display: flex;
@@ -872,49 +806,27 @@
   align-items: center;
 }
 
-/* Mobile: single column, tighter spacing */
-@media (max-width: 991.98px) {
-
-  .page-resources #resFaqLeft,
-  .page-resources #resFaqRight {
-    margin-bottom: 12px;
+/* ================================================================
+   14. RESPONSIVE (DESKTOP & TABLET)
+   ================================================================ */
+@media (min-width: 768px) {
+  .page-resources .res-dodont {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Small screens: even tighter gaps */
-@media (max-width: 575px) {
-
-  .page-resources #resFaqLeft .accordion-item,
-  .page-resources #resFaqRight .accordion-item {
-    border-radius: 10px !important;
-  }
-
-  .page-resources #resFaqLeft .accordion-button,
-  .page-resources #resFaqRight .accordion-button {
-    padding: 14px 16px;
-    font-size: 14px;
-  }
-
-  .page-resources #resFaqLeft .accordion-body,
-  .page-resources #resFaqRight .accordion-body {
-    padding: 0 16px 16px;
-    font-size: 13.5px;
+@media (min-width: 992px) {
+  .page-resources .res-guides {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   }
 }
 
-/* Equal height fix for premium look */
-.page-resources #resFaqLeft .accordion-item:last-child,
-.page-resources #resFaqRight .accordion-item:last-child {
-  margin-bottom: 0;
-}
-
-
-/* ===============================================================
-   RESOURCES: MOBILE COMPACT (matches Home page mobile sizing)
-   =============================================================== */
+/* ================================================================
+   15. MOBILE COMPACT (<= 767px)
+   ================================================================ */
 @media (max-width: 767px) {
 
-  /* ---------- Section spacing ---------- */
+  /* Section spacing */
   .page-resources .home-section,
   .page-resources .home-section.res-plain,
   .page-resources .home-section.res-alt {
@@ -926,7 +838,7 @@
     scroll-margin-top: calc(var(--jp-header-h, 64px) + 52px);
   }
 
-  /* ---------- Section headings ---------- */
+  /* Section headings */
   .page-resources .res-head {
     max-width: 100%;
     margin: 0 0 10px;
@@ -947,7 +859,7 @@
     line-height: 1.45;
   }
 
-  /* icon + title on one line, description below */
+  /* Category head */
   .page-resources .res-cat-head {
     display: grid;
     grid-template-columns: 38px minmax(0, 1fr);
@@ -987,7 +899,7 @@
     line-height: 1.45;
   }
 
-  /* ---------- Sticky section nav ---------- */
+  /* Sticky nav */
   .page-resources .res-catnav-inner {
     gap: 6px;
     padding: 8px 0;
@@ -999,11 +911,11 @@
     font-size: 12.5px;
   }
 
-  /* ---------- Finder box ---------- */
+  /* Finder */
   .page-resources .res-finder {
     margin: 0 auto 12px;
     padding: 14px;
-    border-radius: 12px;
+    border-radius: var(--res-radius-sm);
     box-shadow: 0 6px 16px rgba(30, 42, 107, .1);
   }
 
@@ -1053,13 +965,13 @@
     font-size: 12px;
   }
 
-  /* ---------- Guide library ---------- */
+  /* Guide library */
   .page-resources .res-guides {
     gap: 8px;
   }
 
   .page-resources .res-guide {
-    border-radius: 12px;
+    border-radius: var(--res-radius-sm);
   }
 
   .page-resources .res-guide summary {
@@ -1113,7 +1025,7 @@
   .page-resources .res-empty {
     margin-top: 4px;
     padding: 18px 14px;
-    border-radius: 12px;
+    border-radius: var(--res-radius-sm);
   }
 
   .page-resources .res-empty>i {
@@ -1131,7 +1043,7 @@
     line-height: 1.45;
   }
 
-  /* ---------- Do / Don't ---------- */
+  /* Do / Don't */
   .page-resources .res-dodont {
     gap: 8px;
   }
@@ -1139,7 +1051,7 @@
   .page-resources .res-do,
   .page-resources .res-dont {
     padding: 14px;
-    border-radius: 12px;
+    border-radius: var(--res-radius-sm);
   }
 
   .page-resources .res-do h3,
@@ -1161,7 +1073,7 @@
     line-height: 1.45;
   }
 
-  /* ---------- Restricted items (icon left, text right) ---------- */
+  /* Restricted items */
   .page-resources .res-restrict {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1174,7 +1086,7 @@
     row-gap: 2px;
     align-items: center;
     padding: 12px 14px;
-    border-radius: 12px;
+    border-radius: var(--res-radius-sm);
   }
 
   .page-resources .res-restrict i {
@@ -1205,7 +1117,7 @@
     gap: 10px;
     margin-top: 10px;
     padding: 14px;
-    border-radius: 12px;
+    border-radius: var(--res-radius-sm);
   }
 
   .page-resources .res-note p {
@@ -1220,7 +1132,7 @@
     font-size: 14.5px;
   }
 
-  /* ---------- Destination table (stacked cards) ---------- */
+  /* Destination table */
   .page-resources .res-toolbar {
     gap: 8px;
     margin-bottom: 10px;
@@ -1236,20 +1148,62 @@
     line-height: 1.4;
   }
 
+  .page-resources .res-table-wrap {
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .page-resources .res-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .page-resources .res-table,
+  .page-resources .res-table tbody,
+  .page-resources .res-table tr,
+  .page-resources .res-table td {
+    display: block;
+    width: 100%;
+  }
+
   .page-resources .res-table tr {
     margin-bottom: 8px;
     padding: 4px 12px;
-    border-radius: 12px;
+    background: var(--res-surface);
+    border: 1px solid var(--res-border);
+    border-radius: var(--res-radius-sm);
   }
 
   .page-resources .res-table td {
-    gap: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
     padding: 7px 0;
-    font-size: 13px;
+    text-align: right;
   }
 
   .page-resources .res-table td::before {
+    content: attr(data-label);
     font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--jp-orange);
+    text-align: left;
+  }
+
+  .page-resources .res-table td:last-child::before {
+    content: none;
+  }
+
+  .page-resources .res-table td:last-child {
+    justify-content: flex-end;
   }
 
   .page-resources .res-dest {
@@ -1261,12 +1215,7 @@
     height: 24px;
   }
 
-  .page-resources .res-table-empty {
-    padding: 18px 12px;
-    font-size: 13px;
-  }
-
-  /* ---------- Tools, downloads, articles ---------- */
+  /* Cards */
   .page-resources .res-cards {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1280,15 +1229,13 @@
     align-content: start;
     align-items: center;
     padding: 12px;
-    border-radius: 12px;
+    border-radius: var(--res-radius-sm);
   }
 
-  /* everything spans the full width below the icon + title row */
   .page-resources .res-card>* {
     grid-column: 1 / -1;
   }
 
-  /* icon + title on the same line */
   .page-resources .res-card>.res-ico {
     grid-column: 1;
     grid-row: 1;
@@ -1330,7 +1277,7 @@
     font-size: 13.5px;
   }
 
-  /* ---------- FAQ ---------- */
+  /* FAQ */
   .page-resources #resFaqLeft,
   .page-resources #resFaqRight {
     margin-bottom: 8px;
@@ -1350,7 +1297,9 @@
   }
 }
 
-/* ---------- Very small phones (same breakpoint as Home) ---------- */
+/* ================================================================
+   16. VERY SMALL PHONES (<= 380px)
+   ================================================================ */
 @media (max-width: 380px) {
 
   .page-resources .res-head h2,
@@ -1419,5 +1368,25 @@
     width: 34px;
     height: 34px;
     font-size: 15px;
+  }
+}
+
+/* ================================================================
+   17. REDUCED MOTION
+   ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+
+  .page-resources .res-guide,
+  .page-resources .res-card,
+  .page-resources .res-restrict li,
+  .page-resources .res-g-link i {
+    transition: none !important;
+  }
+
+  .page-resources .res-guide:hover,
+  .page-resources .res-card:hover,
+  .page-resources .res-restrict li:hover {
+    transform: none !important;
+    box-shadow: none !important;
   }
 }
