@@ -411,7 +411,7 @@
     const slug = (location.pathname.split('/').pop() || 'index').replace(/\.html$/i, '').toLowerCase();
 
     document.querySelectorAll('.jp-dd-link, .jp-sub-link').forEach(a => {
-      const on = (a.getAttribute('href') || '').replace(/\.html$/i, '').toLowerCase() === slug;
+      const on = (a.getAttribute('href') || '').split(/[?#]/)[0].split('/').pop().replace(/\.html$/i, '').toLowerCase() === slug;
       a.classList.toggle('active', on);
       if (on) a.setAttribute('aria-current', 'page');
     });
@@ -3970,4 +3970,206 @@
       el.addEventListener("transitionend", settle);
     });
   });
+})();
+
+
+/* =========================================================
+   PAGE: international-courier.html
+   MODULE: international-courier.js
+   ========================================================= */
+(function () {
+  "use strict";
+
+  if (!document.documentElement.classList.contains("page-international-courier")) return;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- 0. Anchor scroll helper (safe with <base href>) ---------- */
+  function scrollToId(id) {
+    var isTop = id === "top";
+    var target = isTop ? document.body : $(id);
+    if (!target) return false;
+
+    var nav = document.querySelector(".jp-navbar");
+    var tabs = document.querySelector(".ic-nav");
+    var offset = (nav ? nav.offsetHeight : 70) + (tabs ? tabs.offsetHeight : 54) + 12;
+    var y = isTop ? 0 : target.getBoundingClientRect().top + window.pageYOffset - offset;
+
+    window.scrollTo({ top: Math.max(0, y), behavior: reduced ? "auto" : "smooth" });
+
+    /* keep the hash in the URL without <base> breaking it */
+    if (window.history && history.replaceState) {
+      history.replaceState(null, "", location.pathname + location.search + "#" + id);
+    }
+    /* accessibility: move focus to the section heading */
+    if (!isTop) {
+      target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+    }
+    return true;
+  }
+
+  /* ---------- 1. On-page nav: active state + keep chip visible ---------- */
+  (function onPageNav() {
+    var inner = document.querySelector(".ic-nav-inner");
+    var links = Array.prototype.slice.call(document.querySelectorAll(".ic-navlink"));
+    if (!inner || !links.length) return;
+
+    var map = [];
+    links.forEach(function (l) {
+      var target = $(l.getAttribute("href").slice(1));
+      var sec = target && target.closest("section");
+      if (sec) map.push({ link: l, sec: sec });
+    });
+
+    var lock = 0;
+
+    function setActive(link) {
+      links.forEach(function (l) {
+        var on = l === link;
+        l.classList.toggle("active", on);
+        if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+      });
+      if (inner.scrollWidth > inner.clientWidth) {
+        inner.scrollTo({
+          left: Math.max(0, link.offsetLeft - (inner.clientWidth - link.offsetWidth) / 2),
+          behavior: reduced ? "auto" : "smooth"
+        });
+      }
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (Date.now() < lock) return;
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var m = map.filter(function (x) { return x.sec === e.target; })[0];
+          if (m) setActive(m.link);
+        });
+      }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+      map.forEach(function (m) { io.observe(m.sec); });
+    }
+
+    links.forEach(function (l) {
+      l.addEventListener("click", function (e) {
+        var id = (l.getAttribute("href") || "").slice(1);
+        if (!id || !$(id)) return;
+        e.preventDefault();
+        lock = Date.now() + 900;
+        setActive(l);
+        scrollToId(id);
+      });
+    });
+  })();
+
+  /* ---------- 1b. Other in-page anchors (Quick answers, Back to top) ---------- */
+  (function otherAnchors() {
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a || a.classList.contains("ic-navlink")) return;
+      var id = (a.getAttribute("href") || "").slice(1);
+      if (!id || (id !== "top" && !$(id))) return;
+      e.preventDefault();
+      scrollToId(id);
+    });
+  })();
+
+  /* ---------- 2. Quick weight check (actual vs volumetric) ---------- */
+  (function weightCheck() {
+    var form = $("icCalcForm");
+    if (!form) return;
+
+    var CFG = (typeof JP_PRICING_CONFIG !== "undefined") ? JP_PRICING_CONFIG : {};
+    var WA = (typeof JP_SITE_CONFIG !== "undefined" && JP_SITE_CONFIG.whatsapp) || "8801681637836";
+    var SVC = { express: "Express Courier", economy: "Economy Courier", door: "Door-to-Door Delivery" };
+
+    var dest = $("icDest"), svc = $("icSvc"), kg = $("icKg");
+    var L = $("icL"), W = $("icW"), H = $("icH");
+    var out = $("icOut"), note = $("icNote"), quote = $("icQuote"), wa = $("icWa");
+
+    (CFG.destinations || []).forEach(function (n) {
+      var o = document.createElement("option");
+      o.value = n;
+      o.textContent = n;
+      dest.appendChild(o);
+    });
+
+    function num(el) { var v = parseFloat(el.value); return isNaN(v) || v < 0 ? 0 : v; }
+    function r2(x) { return Math.round(x * 100) / 100; }
+    function fmt(x) { return r2(x).toLocaleString("en-US", { maximumFractionDigits: 2 }) + " kg"; }
+
+    function update() {
+      var w = num(kg), l = num(L), wd = num(W), h = num(H), s = svc.value;
+      var hasDims = l > 0 && wd > 0 && h > 0;
+      var partial = (l > 0 || wd > 0 || h > 0) && !hasDims;
+      var div = (CFG.divisors && CFG.divisors[s]) || 5000;
+      var vol = hasDims ? (l * wd * h) / div : 0;
+      var cw = Math.max(w, vol);
+      if (CFG.roundStep > 0) cw = Math.ceil(cw / CFG.roundStep - 1e-9) * CFG.roundStep;
+
+      if (!(w > 0) && !(vol > 0)) {
+        out.textContent = "—";
+        note.textContent = partial
+          ? "Enter length, width and height together, or leave all three empty."
+          : "Enter the weight to begin.";
+      } else {
+        out.textContent = fmt(cw);
+        if (partial) {
+          note.textContent = "Enter length, width and height together to check volumetric weight.";
+        } else if (hasDims) {
+          note.textContent = vol > w
+            ? "Billed on volumetric weight (" + fmt(vol) + ") because it is higher than actual weight (" + fmt(w) + ")."
+            : "Billed on actual weight (" + fmt(w) + "). Volumetric weight is " + fmt(vol) + ".";
+        } else {
+          note.textContent = "Add the size to check volumetric weight. The higher of the two is billed.";
+        }
+        if (cw > (CFG.maxCourierKg || 70)) {
+          note.textContent += " Above " + (CFG.maxCourierKg || 70) + " kg usually needs a freight or manual quote.";
+        }
+      }
+
+      var q = "quote.html?mode=parcel&service=" + encodeURIComponent(s);
+      if (dest.value) q += "&dest=" + encodeURIComponent(dest.value);
+      if (w > 0) q += "&weight=" + r2(w);
+      if (hasDims) q += "&l=" + r2(l) + "&w=" + r2(wd) + "&h=" + r2(h);
+      quote.setAttribute("href", q + "#calculator");
+
+      var lines = [
+        "Hi JP Express, I'd like a quote for international courier.",
+        "Route: Bangladesh to " + (dest.value || "not selected"),
+        "Service: " + SVC[s],
+        "Actual weight: " + (w > 0 ? fmt(w) : "not provided"),
+        "Size: " + (hasDims ? l + " x " + wd + " x " + h + " cm" : "not provided"),
+        "Chargeable weight: " + (w > 0 || vol > 0 ? fmt(cw) : "n/a")
+      ];
+      wa.setAttribute("href", "https://wa.me/" + WA + "?text=" + encodeURIComponent(lines.join("\n")));
+    }
+
+    form.addEventListener("input", update);
+    form.addEventListener("change", update);
+    form.addEventListener("submit", function (e) { e.preventDefault(); });
+    update();
+  })();
+
+  /* ---------- 3. Destination cards: show Express estimate from data.js ---------- */
+  (function destinationEstimates() {
+    if (typeof COUNTRY_DATA === "undefined") return;
+    Array.prototype.forEach.call(document.querySelectorAll(".jp-dest-card"), function (a) {
+      var m = /[?&]c=([a-z]+)/i.exec(a.getAttribute("href") || "");
+      var d = m && COUNTRY_DATA[m[1].toLowerCase()];
+      var meta = a.querySelector(".jp-dest-meta");
+      if (d && d.t && meta) meta.textContent = "Express est. " + d.t;
+    });
+  })();
+
+
+  /* ---------- 4. Open directly on a #hash ---------- */
+  (function openOnHash() {
+    var id = (location.hash || "").slice(1);
+    if (!id) return;
+    window.addEventListener("load", function () {
+      setTimeout(function () { scrollToId(id); }, 250);
+    });
+  })();
 })();
