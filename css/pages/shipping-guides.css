@@ -16,10 +16,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px 18px;
-    margin: 18px 0 0;
+    gap: 6px 14px;
+    margin: 12px 0 0;
     padding: 0;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 600;
     color: rgba(255, 255, 255, .85);
 }
@@ -45,18 +45,18 @@
 .sg-section-head h2 {
     font-family: "Plus Jakarta Sans", sans-serif;
     font-weight: 800;
-    font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
     line-height: 1.18;
     letter-spacing: -.02em;
     color: var(--jp-heading-color, #1B2559);
-    margin: 4px 0 8px;
+    margin: 2px 0 4px;
 }
 
 .sg-section-head p {
     margin: 0;
     color: var(--jp-text-muted, #64748b);
-    font-size: 15px;
-    line-height: 1.55;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .sg-section-head--flex {
@@ -72,7 +72,7 @@
    =============================================================== */
 .sg-journey {
     background: var(--jp-white);
-    padding: clamp(36px, 6vw, 64px) 0;
+    padding: clamp(22px, 3.5vw, 36px) 0;
     border-bottom: 1px solid var(--jp-border-light, #eef2f7);
 }
 
@@ -82,16 +82,16 @@
     padding: 0;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 10px;
     counter-reset: sg-step;
 }
 
 .sg-step {
     display: grid;
-    grid-template-columns: 44px 44px minmax(0, 1fr);
+    grid-template-columns: 30px 38px minmax(0, 1fr);
     align-items: center;
-    gap: 10px 12px;
-    padding: 16px;
+    gap: 8px 10px;
+    padding: 10px 12px;
     background: var(--jp-white);
     border: 1px solid var(--jp-border-muted, #e1e9f2);
     border-radius: 14px;
@@ -115,8 +115,8 @@
 
 .sg-step-num {
     grid-column: 1;
-    width: 36px;
-    height: 36px;
+    width: 30px;
+    height: 30px;
     display: grid;
     place-items: center;
     border-radius: 50%;
@@ -129,8 +129,8 @@
 
 .sg-step-ico {
     grid-column: 2;
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
     display: grid;
     place-items: center;
     border-radius: 11px;
@@ -166,7 +166,7 @@
    04. §5 LIBRARY
    =============================================================== */
 .sg-library {
-    padding: clamp(36px, 6vw, 64px) 0;
+    padding: clamp(22px, 3.5vw, 36px) 0;
     background: var(--jp-bg-light, #f8fbfe);
 }
 
@@ -181,8 +181,9 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 22px;
+    gap: 6px;
+    padding: 16px;
+    scroll-margin-top: 96px;
     background: #fff;
     border: 1px solid var(--jp-border-muted, #e1e9f2);
     border-radius: 16px;
@@ -203,8 +204,8 @@
 }
 
 .sg-cat-ico {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
     display: grid;
     place-items: center;
     border-radius: 13px;
@@ -224,16 +225,16 @@
 
 .sg-cat-card p {
     margin: 0;
-    font-size: 13.5px;
-    line-height: 1.55;
+    font-size: 13px;
+    line-height: 1.45;
     color: var(--jp-text-muted, #64748b);
     flex: 1;
 }
 
 .sg-cat-meta {
     position: absolute;
-    top: 18px;
-    right: 18px;
+    top: 14px;
+    right: 14px;
     display: flex;
     gap: 6px;
 }
@@ -273,8 +274,8 @@
    05. §7 CHECKLIST
    =============================================================== */
 .sg-checklist {
-    margin-top: 40px;
-    padding: clamp(20px, 3vw, 30px);
+    margin-top: 22px;
+    padding: clamp(14px, 2.2vw, 20px);
     background: #fff;
     border: 1px solid var(--jp-border-muted, #e1e9f2);
     border-radius: 18px;
@@ -286,16 +287,16 @@
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 14px;
-    margin-bottom: 18px;
+    gap: 10px;
+    margin-bottom: 12px;
 }
 
 .sg-checklist-head h2 {
     font-family: "Plus Jakarta Sans", sans-serif;
-    font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
     font-weight: 800;
     color: var(--jp-heading-color, #1B2559);
-    margin: 4px 0 4px;
+    margin: 2px 0;
 }
 
 .sg-checklist-head p {
@@ -331,18 +332,18 @@
 
 .sg-checklist-list {
     list-style: none;
-    margin: 0 0 16px;
+    margin: 0 0 12px;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: 8px;
 }
 
 .sg-checklist-list label {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 12px 14px;
+    gap: 10px;
+    padding: 9px 12px;
     border: 1px solid var(--jp-border-muted, #e1e9f2);
     border-radius: 12px;
     background: #fff;
@@ -353,6 +354,15 @@
 .sg-checklist-list label:hover {
     border-color: var(--jp-orange, #F26323);
     background: #fff8f4;
+}
+
+.sg-checklist-list label:has(input:checked) {
+    border-color: #1da86b;
+    background: #eef8f3;
+}
+
+.sg-checklist-list label:has(input:checked) strong {
+    color: #146d48;
 }
 
 .sg-checklist-list input {
@@ -384,12 +394,12 @@
     display: flex;
     align-items: flex-start;
     gap: 8px;
-    margin: 0 0 16px;
-    padding: 10px 14px;
+    margin: 0 0 12px;
+    padding: 8px 12px;
     background: #f5f8ff;
     border: 1px solid #dfe8f2;
     border-radius: 10px;
-    font-size: 13px;
+    font-size: 12.5px;
     line-height: 1.5;
     color: #45516b;
 }
@@ -406,9 +416,9 @@
 }
 
 .sg-checklist-actions .btn-main {
-    min-height: 46px;
-    padding: 0 20px;
-    font-size: 15px;
+    min-height: 42px;
+    padding: 0 18px;
+    font-size: 14px;
     border-radius: 8px;
 }
 
@@ -427,18 +437,33 @@
    06. §8 FAQ + SUPPORT CTA
    =============================================================== */
 .sg-faq-section {
-    padding: clamp(36px, 6vw, 64px) 0;
+    padding: clamp(22px, 3.5vw, 36px) 0;
     background: #fff;
 }
 
+.sg-faq-section .accordion {
+    gap: 8px;
+}
+
+.sg-faq-section .accordion-button {
+    padding: 11px 16px;
+    font-size: 14px;
+}
+
+.sg-faq-section .accordion-body {
+    padding: 0 16px 12px;
+    font-size: 13.5px;
+    line-height: 1.5;
+}
+
 .sg-faq-cta {
-    margin-top: 22px;
-    padding: 20px;
+    margin-top: 14px;
+    padding: 14px 18px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 14px;
+    gap: 10px;
     border-radius: 14px;
     background: linear-gradient(135deg, var(--jp-navy-dark, #1E2A6B), var(--jp-navy, #2B3990));
     color: #fff;
@@ -458,9 +483,9 @@
 }
 
 .sg-faq-actions .btn-main {
-    min-height: 44px;
-    padding: 0 18px;
-    font-size: 14px;
+    min-height: 40px;
+    padding: 0 16px;
+    font-size: 13.5px;
 }
 
 .sg-faq-actions .sg-btn-ghost {
@@ -478,7 +503,7 @@
    07. RELATED
    =============================================================== */
 .sg-related {
-    padding: clamp(30px, 5vw, 52px) 0;
+    padding: clamp(20px, 3vw, 32px) 0;
     background: var(--jp-bg-light, #f8fbfe);
 }
 
@@ -492,8 +517,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
-    padding: 18px;
+    gap: 3px;
+    padding: 13px 14px;
     background: #fff;
     border: 1px solid var(--jp-border-muted, #e1e9f2);
     border-radius: 14px;
@@ -555,7 +580,8 @@ body.sg-modal-open {
 
 .sg-modal-panel {
     position: relative;
-    width: min(720px, 100%);
+    width: min(680px, 100%);
+    overscroll-behavior: contain;
     max-height: calc(100vh - 32px);
     overflow-y: auto;
     background: #fff;
@@ -583,8 +609,8 @@ body.sg-modal-open {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 14px;
-    padding: 20px 22px 16px;
+    gap: 12px;
+    padding: 14px 18px 12px;
     background: linear-gradient(135deg, var(--jp-navy-dark, #1E2A6B), var(--jp-navy, #2B3990));
     color: #fff;
     border-radius: 18px 18px 0 0;
@@ -599,9 +625,9 @@ body.sg-modal-open {
 }
 
 .sg-modal-head h2 {
-    margin: 4px 0 6px;
+    margin: 2px 0 4px;
     font-family: "Plus Jakarta Sans", sans-serif;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-size: clamp(1.1rem, 2.6vw, 1.3rem);
     font-weight: 800;
     line-height: 1.2;
 }
@@ -618,9 +644,9 @@ body.sg-modal-open {
 }
 
 .sg-modal-close {
-    flex: 0 0 40px;
-    width: 40px;
-    height: 40px;
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
     border: 1px solid rgba(255, 255, 255, .3);
     border-radius: 50%;
     background: rgba(255, 255, 255, .1);
@@ -636,7 +662,7 @@ body.sg-modal-open {
 }
 
 .sg-modal-body {
-    padding: 20px 22px 22px;
+    padding: 14px 18px 18px;
 }
 
 .sg-modal-block {
@@ -647,9 +673,9 @@ body.sg-modal-open {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 0 0 8px;
+    margin: 0 0 5px;
     font-family: "Plus Jakarta Sans", sans-serif;
-    font-size: 14.5px;
+    font-size: 14px;
     font-weight: 800;
     color: var(--jp-navy, #2B3990);
 }
@@ -1101,5 +1127,301 @@ body.sg-modal-open {
     .sg-modal-backdrop {
         transition: none !important;
         animation: none !important;
+    }
+}
+
+/* ===============================================================
+   10. MOBILE COMPACT OVERRIDES (final, keep at end of file)
+   =============================================================== */
+@media (max-width: 767px) {
+
+    html.page-shipping-guides .container-xl {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    html.page-shipping-guides .hero.sg-hero {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .sg-hero-trust {
+        font-size: 11px;
+        gap: 4px 10px;
+        margin-top: 8px;
+    }
+
+    .sg-journey,
+    .sg-library,
+    .sg-faq-section,
+    .sg-related {
+        padding: 16px 0;
+    }
+
+    .sg-section-head {
+        margin-bottom: 10px;
+    }
+
+    .sg-section-head h2 {
+        font-size: clamp(1.1rem, 5vw, 1.3rem);
+        margin: 0 0 2px;
+    }
+
+    .sg-section-head p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    /* Journey: 2 columns, compact tiles */
+    .sg-steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    .sg-step {
+        grid-template-columns: 26px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        gap: 4px 8px;
+        padding: 8px 10px;
+        border-radius: 10px;
+        align-items: start;
+    }
+
+    .sg-step-num {
+        grid-column: 1;
+        grid-row: 1;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+    .sg-step-ico {
+        display: none;
+    }
+
+    .sg-step-body {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .sg-step-body strong {
+        font-size: 13px;
+        line-height: 1.2;
+    }
+
+    .sg-step-body small {
+        font-size: 11.5px;
+        line-height: 1.3;
+    }
+
+    /* Library cards */
+    .sg-grid {
+        gap: 6px;
+    }
+
+    .sg-cat-card {
+        grid-template-columns: 36px minmax(0, 1fr);
+        column-gap: 10px;
+        row-gap: 3px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        scroll-margin-top: 80px;
+    }
+
+    .sg-cat-ico {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    .sg-cat-card h3 {
+        font-size: 14px;
+    }
+
+    .sg-cat-card p {
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .sg-cat-open {
+        font-size: 12px;
+    }
+
+    /* Checklist */
+    .sg-checklist {
+        margin-top: 14px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .sg-checklist-head {
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+
+    .sg-checklist-head h2 {
+        font-size: 1.1rem;
+    }
+
+    .sg-checklist-head p {
+        font-size: 12.5px;
+    }
+
+    .sg-checklist-list {
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+
+    .sg-checklist-list label {
+        padding: 8px 10px;
+        gap: 8px;
+        border-radius: 9px;
+    }
+
+    .sg-checklist-list strong {
+        font-size: 13px;
+    }
+
+    .sg-checklist-list small {
+        font-size: 11.5px;
+    }
+
+    .sg-checklist-note {
+        font-size: 11.5px;
+        padding: 6px 10px;
+        margin-bottom: 8px;
+    }
+
+    .sg-checklist-actions {
+        gap: 6px;
+    }
+
+    .sg-checklist-actions .btn-main {
+        min-height: 40px;
+        font-size: 13.5px;
+    }
+
+    /* FAQ */
+    .sg-faq-section .accordion {
+        gap: 6px;
+    }
+
+    .sg-faq-section .accordion-button {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .sg-faq-section .accordion-body {
+        padding: 0 12px 10px;
+        font-size: 12.5px;
+    }
+
+    .sg-faq-cta {
+        margin-top: 10px;
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .sg-faq-cta p {
+        font-size: 12.5px;
+    }
+
+    .sg-faq-actions {
+        gap: 6px;
+    }
+
+    .sg-faq-actions .btn-main {
+        min-height: 38px;
+        font-size: 13px;
+    }
+
+    /* Related */
+    .sg-related-grid {
+        gap: 6px;
+    }
+
+    .sg-related-card {
+        padding: 10px;
+        gap: 2px;
+        border-radius: 10px;
+    }
+
+    .sg-related-card i {
+        font-size: 16px;
+    }
+
+    .sg-related-card strong {
+        font-size: 13px;
+    }
+
+    .sg-related-card small {
+        font-size: 11.5px;
+    }
+
+    /* Modal bottom sheet */
+    .sg-modal-panel {
+        max-height: 90vh;
+    }
+
+    .sg-modal-head {
+        padding: 12px 14px 10px;
+    }
+
+    .sg-modal-head h2 {
+        font-size: 1.1rem;
+    }
+
+    .sg-modal-summary {
+        font-size: 12.5px;
+    }
+
+    .sg-modal-body {
+        padding: 12px 14px calc(16px + env(safe-area-inset-bottom));
+    }
+
+    .sg-modal-block {
+        margin-bottom: 10px;
+    }
+
+    .sg-modal-block h3 {
+        font-size: 13px;
+    }
+
+    .sg-modal-block p,
+    .sg-modal-block ul,
+    .sg-modal-block ol {
+        font-size: 12.5px;
+    }
+
+    .sg-modal-related a {
+        padding: 6px 11px;
+        font-size: 12px;
+    }
+
+    .sg-modal-cta .btn-main {
+        min-height: 40px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .sg-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .sg-cat-card {
+        grid-template-columns: 32px minmax(0, 1fr);
+    }
+
+    .sg-cat-ico {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .sg-related-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
