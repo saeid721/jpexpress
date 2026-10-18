@@ -184,9 +184,12 @@
           </a>
         </div>
         <div class="topbar-right">
-          <button class="lang-btn active" type="button">English</button>
-          <span>|</span>
-          <button class="lang-btn" type="button">বাংলা</button>
+          <button class="lang-switch jp-lang-trigger" type="button" aria-haspopup="dialog" aria-expanded="false"
+            aria-label="Change language">
+            <i class="fa-solid fa-globe" aria-hidden="true"></i>
+            <span class="lang-cur notranslate" translate="no">English</span>
+            <i class="fa-solid fa-chevron-down lang-caret" aria-hidden="true"></i>
+          </button>
           <a class="d-none d-md-inline" href="login.html">
             <i class="fa-solid fa-circle-user"></i> Customer Login <i class="fa-solid fa-angle-right"></i>
           </a>
@@ -393,6 +396,13 @@
           <!-- <li><a class="nav-link" href="resources.html">Resources</a></li> -->
           <li><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
+        <button class="lang-switch lang-switch--menu jp-lang-trigger" type="button" aria-haspopup="dialog"
+          aria-expanded="false" aria-label="Change language">
+          <span class="lang-menu-l"><i class="fa-solid fa-globe" aria-hidden="true"></i> Language</span>
+          <span class="lang-menu-r"><b class="lang-cur notranslate" translate="no">English</b>
+            <i class="fa-solid fa-chevron-down lang-caret" aria-hidden="true"></i></span>
+        </button>
+
         <div class="d-grid gap-2 mt-4">
           <a class="btn-header btn-header-outline justify-content-center" href="book-shipment.html"
             data-bs-dismiss="offcanvas">
