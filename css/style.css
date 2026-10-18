@@ -5986,3 +5986,327 @@ html.template-jp body {
     font-size: 13px;
   }
 }
+
+/* ===============================================================
+   LANGUAGE SWITCHER (Google Translate + custom UI)
+   =============================================================== */
+
+/* ---- Hide Google's default UI ---- */
+body>.skiptranslate,
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-tooltip {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+#google_translate_element {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* ---- Trigger button (top bar) ---- */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 26px;
+  padding: 0 11px 0 9px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  color: var(--jp-white);
+  font: 600 13px/1 Inter, system-ui, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease;
+}
+
+.lang-switch:hover,
+.lang-switch[aria-expanded="true"] {
+  background: rgba(255, 255, 255, .18);
+  border-color: rgba(255, 255, 255, .55);
+}
+
+.lang-switch .fa-globe {
+  font-size: 13px;
+  color: var(--jp-orange-accent);
+}
+
+.lang-switch .lang-caret {
+  font-size: 9px;
+  opacity: .8;
+  transition: transform .2s ease;
+}
+
+.lang-switch[aria-expanded="true"] .lang-caret {
+  transform: rotate(180deg);
+}
+
+/* ---- Trigger button (mobile menu) ---- */
+.lang-switch--menu {
+  width: 100%;
+  height: 46px;
+  margin-top: 14px;
+  padding: 0 14px;
+  justify-content: space-between;
+  border-radius: 12px;
+  border-color: var(--jp-border-muted);
+  background: var(--jp-bg-soft);
+  color: var(--jp-navy);
+  font-size: 14px;
+}
+
+.lang-switch--menu:hover,
+.lang-switch--menu[aria-expanded="true"] {
+  background: #fff6f1;
+  border-color: var(--jp-orange);
+}
+
+.lang-switch--menu .fa-globe {
+  color: var(--jp-red);
+  margin-right: 6px;
+}
+
+.lang-menu-r {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-menu-r b {
+  font-weight: 700;
+  color: var(--jp-red);
+}
+
+/* ---- Panel + backdrop ---- */
+.jp-lang-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1190;
+  background: rgba(15, 23, 70, .5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s;
+}
+
+.jp-lang-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.jp-lang-panel {
+  position: fixed;
+  z-index: 1200;
+  width: 360px;
+  max-width: calc(100vw - 24px);
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(30, 42, 107, .24);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px) scale(.98);
+  transform-origin: top right;
+  transition: opacity .22s ease, transform .22s ease, visibility .22s;
+}
+
+.jp-lang-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.jp-lang-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 16px 8px;
+}
+
+.jp-lang-head strong {
+  display: block;
+  font: 800 16px/1.2 "Plus Jakarta Sans", sans-serif;
+  color: var(--jp-navy);
+}
+
+.jp-lang-head small {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--jp-text-muted);
+}
+
+.jp-lang-close {
+  display: none;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--jp-bg-muted);
+  color: var(--jp-navy);
+  cursor: pointer;
+}
+
+.jp-lang-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px 12px 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  max-height: min(58vh, 420px);
+  overflow-y: auto;
+}
+
+.jp-lang-opt {
+  width: 100%;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 12px;
+  background: var(--jp-white);
+  color: var(--jp-navy);
+  font: 600 14px/1.2 Inter, system-ui, sans-serif;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.jp-lang-opt img {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.jp-lang-opt span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jp-lang-opt .fa-check {
+  display: none;
+  font-size: 12px;
+  color: var(--jp-red);
+}
+
+.jp-lang-opt:hover {
+  border-color: var(--jp-orange);
+  background: var(--jp-bg-soft);
+  transform: translateY(-1px);
+}
+
+.jp-lang-opt.is-active {
+  border-color: var(--jp-red);
+  background: #fff6f1;
+  color: var(--jp-red);
+}
+
+.jp-lang-opt.is-active .fa-check {
+  display: block;
+}
+
+.jp-lang-note {
+  margin: 0;
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--jp-border-light);
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--jp-text-muted);
+}
+
+.jp-lang-note i {
+  margin-right: 4px;
+  color: var(--jp-navy);
+}
+
+/* ---- Desktop: no dim backdrop ---- */
+@media (min-width: 768px) {
+  .jp-lang-backdrop {
+    background: transparent;
+  }
+}
+
+/* ---- Mobile: bottom sheet ---- */
+@media (max-width: 767px) {
+  .jp-lang-panel {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
+    max-width: none;
+    border: 0;
+    border-radius: 22px 22px 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    transform: translateY(100%);
+    transform-origin: bottom center;
+  }
+
+  .jp-lang-panel.open {
+    transform: none;
+  }
+
+  .jp-lang-panel::before {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 4px;
+    margin: 10px auto 0;
+    border-radius: 4px;
+    background: var(--jp-border-hover);
+  }
+
+  .jp-lang-head {
+    padding-top: 10px;
+  }
+
+  .jp-lang-close {
+    display: grid;
+  }
+
+  .jp-lang-list {
+    max-height: 56vh;
+  }
+
+  .lang-switch {
+    height: 24px;
+    padding: 0 9px 0 8px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .jp-lang-opt {
+    font-size: 13px;
+    padding: 8px;
+    gap: 8px;
+  }
+}

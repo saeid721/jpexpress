@@ -4652,3 +4652,191 @@
     });
   })();
 })();
+
+
+
+/* =========================================================
+   LANGUAGE SWITCHER: one button, Google Translate engine
+   ========================================================= */
+(function jpLanguageSwitcher() {
+  "use strict";
+
+  var LANGS = [
+    { c: "en", n: "English", f: "gb" },
+    { c: "bn", n: "বাংলা", f: "bd" },
+    { c: "hi", n: "हिन्दी", f: "in" },
+    { c: "ar", n: "العربية", f: "sa" },
+    { c: "zh-CN", n: "中文", f: "cn" },
+    { c: "fr", n: "Français", f: "fr" },
+    { c: "de", n: "Deutsch", f: "de" },
+    { c: "es", n: "Español", f: "es" },
+    { c: "it", n: "Italiano", f: "it" },
+    { c: "ru", n: "Русский", f: "ru" },
+    { c: "tr", n: "Türkçe", f: "tr" },
+    { c: "ms", n: "Bahasa Melayu", f: "my" }
+  ];
+
+  var triggers = document.querySelectorAll(".jp-lang-trigger");
+  if (!triggers.length) return;
+
+  /* ---------- helpers ---------- */
+  function byCode(c) {
+    return LANGS.filter(function (l) { return l.c === c; })[0] || LANGS[0];
+  }
+  function getLang() {
+    var m = document.cookie.match(/(?:^|;\s*)googtrans=\/[^\/]*\/([^;]+)/);
+    var c = m ? decodeURIComponent(m[1]) : "en";
+    return LANGS.some(function (l) { return l.c === c; }) ? c : "en";
+  }
+  function setCookie(c) {
+    var val = c === "en" ? "" : "/en/" + c;
+    var tail = c === "en" ? "; expires=Thu, 01 Jan 1970 00:00:00 GMT" : "; max-age=31536000";
+    document.cookie = "googtrans=" + val + "; path=/" + tail;
+    var h = location.hostname.replace(/^www\./, "");
+    if (h.indexOf(".") > -1) document.cookie = "googtrans=" + val + "; path=/; domain=." + h + tail;
+  }
+
+  /* ---------- Google Translate loader (lazy) ---------- */
+  var ready = false, loading = false, queue = [];
+  function loadGoogle(cb) {
+    if (ready) { if (cb) cb(); return; }
+    if (cb) queue.push(cb);
+    if (loading) return;
+    loading = true;
+
+    var box = document.createElement("div");
+    box.id = "google_translate_element";
+    box.className = "notranslate";
+    box.setAttribute("aria-hidden", "true");
+    document.body.appendChild(box);
+
+    window.jpGtInit = function () {
+      new google.translate.TranslateElement({
+        pageLanguage: "en",
+        includedLanguages: LANGS.filter(function (l) { return l.c !== "en"; }).map(function (l) { return l.c; }).join(","),
+        autoDisplay: false
+      }, "google_translate_element");
+      ready = true;
+      queue.splice(0).forEach(function (f) { f(); });
+    };
+
+    var s = document.createElement("script");
+    s.src = "https://translate.google.com/translate_a/element.js?cb=jpGtInit";
+    s.async = true;
+    s.onerror = function () { loading = false; };
+    document.head.appendChild(s);
+  }
+
+  function applyCombo(code, tries) {
+    var sel = document.querySelector("select.goog-te-combo");
+    if (sel && sel.querySelector('option[value="' + code + '"]')) {
+      sel.value = code;
+      sel.dispatchEvent(new Event("change"));
+      return;
+    }
+    if ((tries || 0) > 50) { location.reload(); return; } /* fallback: cookie is already set */
+    setTimeout(function () { applyCombo(code, (tries || 0) + 1); }, 100);
+  }
+
+  /* ---------- UI: backdrop + panel (built once) ---------- */
+  var backdrop = document.createElement("div");
+  backdrop.className = "jp-lang-backdrop";
+
+  var panel = document.createElement("div");
+  panel.className = "jp-lang-panel";
+  panel.setAttribute("role", "dialog");
+  panel.setAttribute("aria-label", "Select language");
+  panel.innerHTML =
+    '<div class="jp-lang-head"><div><strong>Select Language</strong>' +
+    '<small>Translate the whole website instantly</small></div>' +
+    '<button type="button" class="jp-lang-close" aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></div>' +
+    '<ul class="jp-lang-list notranslate" translate="no">' +
+    LANGS.map(function (l) {
+      return '<li><button type="button" class="jp-lang-opt" data-lang="' + l.c + '">' +
+        '<img src="https://flagcdn.com/w40/' + l.f + '.png" alt="" width="22" height="22" loading="lazy">' +
+        "<span>" + l.n + '</span><i class="fa-solid fa-check" aria-hidden="true"></i></button></li>';
+    }).join("") +
+    '</ul><p class="jp-lang-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>' +
+    "Automatic translation by Google. English is the original language.</p>";
+
+  document.body.appendChild(backdrop);
+  document.body.appendChild(panel);
+
+  var openTrig = null;
+  var isMobile = function () { return window.innerWidth < 768; };
+
+  function paint(code) {
+    var l = byCode(code);
+    Array.prototype.forEach.call(document.querySelectorAll(".lang-cur"), function (el) { el.textContent = l.n; });
+    Array.prototype.forEach.call(panel.querySelectorAll(".jp-lang-opt"), function (b) {
+      var on = b.getAttribute("data-lang") === code;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-current", on ? "true" : "false");
+    });
+  }
+
+  function place(t) {
+    if (isMobile()) { panel.style.top = ""; panel.style.left = ""; return; }
+    var r = t.getBoundingClientRect(), w = panel.offsetWidth || 360;
+    panel.style.top = (r.bottom + 10) + "px";
+    panel.style.left = Math.max(12, Math.min(r.right - w, window.innerWidth - w - 12)) + "px";
+  }
+
+  function open(t) {
+    openTrig = t;
+    place(t);
+    panel.classList.add("open");
+    backdrop.classList.add("open");
+    t.setAttribute("aria-expanded", "true");
+    if (isMobile()) document.body.style.overflow = "hidden";
+    var act = panel.querySelector(".jp-lang-opt.is-active");
+    if (act) act.focus({ preventScroll: true });
+  }
+
+  function close(returnFocus) {
+    panel.classList.remove("open");
+    backdrop.classList.remove("open");
+    document.body.style.overflow = "";
+    if (openTrig) {
+      openTrig.setAttribute("aria-expanded", "false");
+      if (returnFocus) openTrig.focus({ preventScroll: true });
+    }
+    openTrig = null;
+  }
+
+  function setLang(code) {
+    var cur = getLang();
+    close(true);
+    if (code === cur) return;
+    setCookie(code);
+    if (code === "en") { location.reload(); return; }
+    paint(code);
+    loadGoogle(function () { applyCombo(code); });
+  }
+
+  /* ---------- events ---------- */
+  Array.prototype.forEach.call(triggers, function (t) {
+    t.addEventListener("click", function () {
+      if (panel.classList.contains("open") && openTrig === t) close(true);
+      else open(t);
+    });
+  });
+  backdrop.addEventListener("click", function () { close(false); });
+  panel.querySelector(".jp-lang-close").addEventListener("click", function () { close(true); });
+  panel.addEventListener("click", function (e) {
+    var b = e.target.closest(".jp-lang-opt");
+    if (b) setLang(b.getAttribute("data-lang"));
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && panel.classList.contains("open")) close(true);
+  });
+  window.addEventListener("resize", function () { if (panel.classList.contains("open")) close(false); });
+  window.addEventListener("scroll", function () {
+    if (panel.classList.contains("open") && !isMobile()) close(false);
+  }, { passive: true });
+
+  /* ---------- init ---------- */
+  var current = getLang();
+  paint(current);
+  if (current !== "en") loadGoogle();
+})();
