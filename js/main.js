@@ -4200,6 +4200,158 @@
     if (body) body.appendChild(buildSocial(card, title ? title.textContent.trim() : ""));
   });
 
+  /* ---------- Profile popup (Board + Executives) ---------- */
+  var rootEl = document.documentElement;
+  var lmTrigger = null;
+
+  var dlg = document.createElement("dialog");
+  dlg.className = "leadership-modal";
+  dlg.setAttribute("aria-labelledby", "lmName");
+  dlg.innerHTML =
+    '<div class="leadership-modal-panel">' +
+    '<button type="button" class="leadership-modal-close" aria-label="Close profile">' +
+    '<i class="fa-solid fa-xmark" aria-hidden="true"></i></button>' +
+    '<div class="leadership-modal-photo"><img alt="" width="480" height="504"></div>' +
+    '<div class="leadership-modal-body">' +
+    '<span class="leadership-modal-role"></span>' +
+    '<h3 id="lmName"></h3>' +
+    '<span class="leadership-modal-exp" hidden><i class="fa-solid fa-award" aria-hidden="true"></i><b></b></span>' +
+    '<div class="leadership-modal-text"></div>' +
+    '<div class="leadership-modal-tags" hidden></div>' +
+    '<ul class="leadership-modal-contact" hidden></ul>' +
+    '<div class="leadership-modal-social" hidden></div>' +
+    '<a class="leadership-btn leadership-btn-primary leadership-modal-cta" href="contact.html">' +
+    'Contact JP Express <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' +
+    '</div>' +
+    '</div>';
+  document.body.appendChild(dlg);
+
+  var lmPhoto = dlg.querySelector(".leadership-modal-photo");
+  var lmImg = lmPhoto.querySelector("img");
+  var lmBody = dlg.querySelector(".leadership-modal-body");
+  var lmRole = dlg.querySelector(".leadership-modal-role");
+  var lmName = dlg.querySelector("#lmName");
+  var lmExp = dlg.querySelector(".leadership-modal-exp");
+  var lmText = dlg.querySelector(".leadership-modal-text");
+  var lmSocial = dlg.querySelector(".leadership-modal-social");
+  var lmTags = dlg.querySelector(".leadership-modal-tags");
+  var lmContact = dlg.querySelector(".leadership-modal-contact");
+
+  function lmInitials(name) {
+    if (lmPhoto.querySelector(".leadership-team-initials")) return;
+    var tile = document.createElement("span");
+    tile.className = "leadership-team-initials";
+    tile.setAttribute("aria-hidden", "true");
+    tile.textContent = initials(name || "");
+    lmImg.style.display = "none";
+    lmPhoto.insertBefore(tile, lmImg);
+  }
+
+  function closeProfile() {
+    if (dlg.open) dlg.close();
+  }
+
+  function openProfile(card, trigger) {
+    var h3 = card.querySelector("h3");
+    var role = card.querySelector(".leadership-person-role");
+    var bio = card.querySelector(".leadership-person-bio");
+    var img = card.querySelector(".leadership-person-photo img");
+    var name = h3 ? h3.textContent.trim() : "";
+    var roleText = role ? role.textContent.trim() : "";
+    var src = img ? img.getAttribute("src") : "";
+
+    lmTrigger = trigger || null;
+    lmName.textContent = name;
+    lmRole.textContent = roleText;
+
+    /* photo (initials if the image is missing or broken) */
+    var oldTile = lmPhoto.querySelector(".leadership-team-initials");
+    if (oldTile) oldTile.remove();
+    lmImg.style.display = "";
+    lmImg.onerror = function () { lmInitials(name); };
+    lmImg.alt = name + (roleText ? ", " + roleText : "");
+    if (src) lmImg.src = src; else lmInitials(name);
+
+    /* optional: data-experience="15+ years in logistics" */
+    var exp = (card.getAttribute("data-experience") || "").trim();
+    lmExp.hidden = !exp;
+    lmExp.querySelector("b").textContent = exp;
+
+    /* full bio: data-bio-full="Paragraph 1||Paragraph 2" (falls back to the card bio) */
+    var paras = (card.getAttribute("data-bio-full") || "")
+      .split("||")
+      .map(function (p) { return p.trim(); })
+      .filter(Boolean);
+    if (!paras.length && bio) paras = [bio.textContent.trim()];
+    lmText.innerHTML = "";
+    paras.forEach(function (p) {
+      var el = document.createElement("p");
+      el.textContent = p;
+      lmText.appendChild(el);
+    });
+
+    /* expertise chips: data-expertise="Air Freight, Customs, Export" */
+    var tags = (card.getAttribute("data-expertise") || "")
+      .split(",")
+      .map(function (t) { return t.trim(); })
+      .filter(Boolean);
+    lmTags.innerHTML = "";
+    tags.forEach(function (t) {
+      var chip = document.createElement("span");
+      chip.textContent = t;
+      lmTags.appendChild(chip);
+    });
+    lmTags.hidden = !tags.length;
+
+    /* contact rows: data-email / data-phone (only valid values are shown) */
+    function addContact(icon, text, href) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      var i = document.createElement("i");
+      var s = document.createElement("span");
+      i.className = "fa-solid " + icon;
+      i.setAttribute("aria-hidden", "true");
+      s.textContent = text;
+      a.setAttribute("href", href);
+      a.appendChild(i);
+      a.appendChild(s);
+      li.appendChild(a);
+      lmContact.appendChild(li);
+    }
+    lmContact.innerHTML = "";
+    var email = (card.getAttribute("data-email") || "").trim();
+    var phone = (card.getAttribute("data-phone") || "").trim();
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) addContact("fa-envelope", email, "mailto:" + email);
+    if (/^[+0-9\s().-]{7,20}$/.test(phone)) addContact("fa-phone", phone, "tel:" + phone.replace(/[^\d+]/g, ""));
+    lmContact.hidden = !lmContact.children.length;
+
+    /* social links: only approved (real) links are shown in the popup */
+    lmSocial.innerHTML = "";
+    var ul = buildSocial(card, name);
+    ul.querySelectorAll(".is-pending").forEach(function (a) { a.parentNode.remove(); });
+    var hasSocial = ul.children.length > 0;
+    if (hasSocial) lmSocial.appendChild(ul);
+    lmSocial.hidden = !hasSocial;
+
+    rootEl.classList.add("leadership-modal-open");
+    if (typeof dlg.showModal === "function") dlg.showModal();
+    else dlg.setAttribute("open", "");
+    lmBody.scrollTop = 0;
+  }
+
+  dlg.querySelector(".leadership-modal-close").addEventListener("click", closeProfile);
+
+  /* click on the dark backdrop closes the popup */
+  dlg.addEventListener("click", function (e) {
+    if (e.target === dlg) closeProfile();
+  });
+
+  /* fires for Esc, close button and backdrop */
+  dlg.addEventListener("close", function () {
+    rootEl.classList.remove("leadership-modal-open");
+    if (lmTrigger && lmTrigger.focus) lmTrigger.focus({ preventScroll: true });
+  });
+
   /* ---------- 1. MD message ---------- */
   var mdFrame = document.querySelector(".leadership-md-frame");
   var mdName = document.querySelector(".leadership-md-sign strong");
@@ -4232,21 +4384,37 @@
       var h3 = card.querySelector("h3");
       guardImage(card.querySelector(".leadership-person-photo"), h3 ? h3.textContent : "");
 
-      /* "Read full profile" shows only when the bio is really cut off */
-      var bio = card.querySelector(".leadership-person-bio");
-      var btn = card.querySelector(".leadership-person-more");
-      if (bio && btn) {
-        var label = btn.querySelector("span");
-        measureFns.push(function () {
-          if (card.classList.contains("is-open")) { btn.hidden = false; return; }
-          btn.hidden = !(bio.scrollHeight > bio.clientHeight + 1);
-        });
-        btn.addEventListener("click", function () {
-          var open = card.classList.toggle("is-open");
-          btn.setAttribute("aria-expanded", open ? "true" : "false");
-          if (label) label.textContent = open ? "Show less" : "Read full profile";
-        });
+      /* no button: whole card opens the popup, "View profile" label sits on the photo */
+      var oldBtn = card.querySelector(".leadership-person-more");
+      if (oldBtn) oldBtn.remove();
+
+      var personName = h3 ? h3.textContent.trim() : "team member";
+      var photoBox = card.querySelector(".leadership-person-photo");
+      if (photoBox && !photoBox.querySelector(".leadership-person-view")) {
+        var viewTag = document.createElement("span");
+        viewTag.className = "leadership-person-view";
+        viewTag.setAttribute("aria-hidden", "true");
+        viewTag.textContent = "View profile";
+        photoBox.appendChild(viewTag);
       }
+
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("role", "button");
+      card.setAttribute("aria-haspopup", "dialog");
+      card.setAttribute("aria-label", "View profile of " + personName);
+
+      /* click anywhere on the card (social icon links are ignored) */
+      card.addEventListener("click", function (e) {
+        if (e.target.closest("a")) return;
+        openProfile(card, card);
+      });
+      card.addEventListener("keydown", function (e) {
+        if (e.target !== card) return;
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openProfile(card, card);
+        }
+      });
 
       /* staggered reveal (same pattern as the other leadership cards) */
       if (!reduced) {
