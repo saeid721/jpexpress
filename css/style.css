@@ -3293,8 +3293,17 @@ html.template-jp,
 html.template-jp body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
   max-width: 100%;
+}
+
+/* html e overflow nai: body overflow viewport e propagate hoy, sticky header kaj kore */
+html.template-jp {
+  overflow-x: visible;
+}
+
+/* clip = horizontal scroll bondho, kintu scroll container toiri kore na (sticky safe) */
+html.template-jp body {
+  overflow-x: clip;
 }
 
 html.template-jp {
