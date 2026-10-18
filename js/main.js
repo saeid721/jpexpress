@@ -4089,6 +4089,201 @@
 })();
 
 
+
+
+/* ---------- LEADERSHIP PAGE: MD message + Board + Executives ---------- */
+(function leadershipPeople() {
+  "use strict";
+
+  if (!document.documentElement.classList.contains("page-leadership")) return;
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* "Md. Masud Parvez" -> "MP" */
+  function initials(name) {
+    return name
+      .replace(/^(md\.?|mr\.?|mrs\.?|ms\.?|dr\.?)\s+/i, "")
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map(function (w) { return w.charAt(0).toUpperCase(); })
+      .join("");
+  }
+
+  /* broken or missing photo -> initials tile instead of a broken icon */
+  function guardImage(box, name) {
+    var img = box && box.querySelector("img");
+    if (!img) return;
+    function showInitials() {
+      if (box.querySelector(".leadership-team-initials")) return;
+      var tile = document.createElement("span");
+      tile.className = "leadership-team-initials";
+      tile.setAttribute("aria-hidden", "true");
+      tile.textContent = initials(name || "");
+      img.style.display = "none";
+      box.insertBefore(tile, img);
+    }
+    img.addEventListener("error", showInitials);
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) showInitials();
+  }
+
+  /* ---------- 0. Social icons (from data-linkedin / data-facebook / data-x / data-instagram) ---------- */
+  var NETWORKS = [
+    { key: "linkedin", label: "LinkedIn", icon: "fa-brands fa-linkedin-in", hosts: ["linkedin.com"] },
+    { key: "facebook", label: "Facebook", icon: "fa-brands fa-facebook-f", hosts: ["facebook.com", "fb.com"] },
+    { key: "x", label: "X", icon: "fa-brands fa-x-twitter", hosts: ["x.com", "twitter.com"] },
+    { key: "instagram", label: "Instagram", icon: "fa-brands fa-instagram", hosts: ["instagram.com"] }
+  ];
+
+  /* only https links that belong to the matching network are accepted */
+  function validSocialUrl(href, hosts) {
+    href = (href || "").trim();
+    if (!/^https:\/\//i.test(href)) return false;
+    try {
+      var host = new URL(href).hostname.replace(/^www\./, "").toLowerCase();
+      return hosts.some(function (h) {
+        return host === h || host.slice(-(h.length + 1)) === "." + h;
+      });
+    } catch (e) { return false; }
+  }
+
+  function buildSocial(source, name) {
+    var ul = document.createElement("ul");
+    ul.className = "leadership-social";
+    ul.setAttribute("aria-label", name + " social profiles");
+
+    NETWORKS.forEach(function (n) {
+      var href = source.getAttribute("data-" + n.key) || "";
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      var ic = document.createElement("i");
+
+      a.className = "leadership-social-link";
+      a.setAttribute("data-network", n.key);
+      a.setAttribute("data-label", n.label);
+      a.setAttribute("aria-label", name + " on " + n.label);
+      ic.className = n.icon;
+      ic.setAttribute("aria-hidden", "true");
+      a.appendChild(ic);
+
+      if (validSocialUrl(href, n.hosts)) {
+        a.setAttribute("href", href.trim());
+        a.setAttribute("target", "_blank");
+        a.setAttribute("rel", "noopener noreferrer");
+      } else {
+        /* no approved URL yet: icon stays visible, but never jumps to top or opens a dead link */
+        a.setAttribute("href", "#");
+        a.classList.add("is-pending");
+        a.setAttribute("aria-disabled", "true");
+        a.setAttribute("tabindex", "-1");
+        a.addEventListener("click", function (e) { e.preventDefault(); });
+      }
+
+      li.appendChild(a);
+      ul.appendChild(li);
+    });
+    return ul;
+  }
+
+  /* MD card: icons sit next to the signature */
+  var mdCard = document.querySelector(".leadership-md");
+  var mdSign = mdCard && mdCard.querySelector(".leadership-md-sign");
+  if (mdSign) {
+    var mdStrong = mdSign.querySelector("strong");
+    mdSign.appendChild(buildSocial(mdCard, mdStrong ? mdStrong.textContent.trim() : ""));
+  }
+
+  /* Board + Executive cards: icons sit at the bottom of every card */
+  document.querySelectorAll(".leadership-person").forEach(function (card) {
+    var body = card.querySelector(".leadership-person-body");
+    var title = card.querySelector("h3");
+    if (body) body.appendChild(buildSocial(card, title ? title.textContent.trim() : ""));
+  });
+
+  /* ---------- 1. MD message ---------- */
+  var mdFrame = document.querySelector(".leadership-md-frame");
+  var mdName = document.querySelector(".leadership-md-sign strong");
+  if (mdFrame) guardImage(mdFrame, mdName ? mdName.textContent : "");
+
+  /* ---------- 2. Board + Executives ---------- */
+  var measureFns = [];
+
+  document.querySelectorAll(".leadership-people-grid").forEach(function (grid) {
+    var cards = Array.prototype.slice.call(grid.querySelectorAll(".leadership-person"));
+
+    /* draft profiles never appear on the public page */
+    cards = cards.filter(function (card) {
+      var status = (card.getAttribute("data-status") || "published").toLowerCase();
+      if (status === "published") return true;
+      card.remove();
+      return false;
+    });
+
+    /* data-order controls the position */
+    cards.sort(function (a, b) {
+      var ao = parseInt(a.getAttribute("data-order"), 10);
+      var bo = parseInt(b.getAttribute("data-order"), 10);
+      return (isNaN(ao) ? 9999 : ao) - (isNaN(bo) ? 9999 : bo);
+    });
+
+    cards.forEach(function (card, i) {
+      grid.appendChild(card);
+
+      var h3 = card.querySelector("h3");
+      guardImage(card.querySelector(".leadership-person-photo"), h3 ? h3.textContent : "");
+
+      /* "Read full profile" shows only when the bio is really cut off */
+      var bio = card.querySelector(".leadership-person-bio");
+      var btn = card.querySelector(".leadership-person-more");
+      if (bio && btn) {
+        var label = btn.querySelector("span");
+        measureFns.push(function () {
+          if (card.classList.contains("is-open")) { btn.hidden = false; return; }
+          btn.hidden = !(bio.scrollHeight > bio.clientHeight + 1);
+        });
+        btn.addEventListener("click", function () {
+          var open = card.classList.toggle("is-open");
+          btn.setAttribute("aria-expanded", open ? "true" : "false");
+          if (label) label.textContent = open ? "Show less" : "Read full profile";
+        });
+      }
+
+      /* staggered reveal (same pattern as the other leadership cards) */
+      if (!reduced) {
+        card.style.setProperty("--d", (i * 90) + "ms");
+        var settle = function (e) {
+          if (e.propertyName !== "opacity") return;
+          card.style.removeProperty("--d");
+          card.classList.add("is-settled");
+          card.removeEventListener("transitionend", settle);
+        };
+        card.addEventListener("transitionend", settle);
+      }
+    });
+
+    /* nothing published = no empty section */
+    if (!cards.length) {
+      var sec = grid.closest(".leadership-people-section");
+      if (sec) sec.hidden = true;
+    }
+  });
+
+  function measureAll() { measureFns.forEach(function (fn) { fn(); }); }
+
+  var ticking = false;
+  function schedule() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; measureAll(); });
+  }
+
+  measureAll();
+  window.addEventListener("load", measureAll);
+  window.addEventListener("resize", schedule);
+  window.addEventListener("orientationchange", schedule);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureAll);
+})();
+
 /* =========================================================
    PAGE: international-courier.html
    MODULE: international-courier.js
