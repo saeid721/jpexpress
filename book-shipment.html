@@ -480,6 +480,61 @@
                                     </div>
                                 </div>
 
+                                <!-- Route: From + Destination -->
+                                <div class="bs-route">
+                                    <div class="bs-route-grid">
+
+                                        <!-- From -->
+                                        <div class="bs-field" data-field="origin">
+                                            <label class="bs-label" for="bsFrom">From country <b>*</b></label>
+                                            <div class="bs-combo">
+                                                <span class="bs-combo-flag" aria-hidden="true"><img
+                                                        src="https://flagcdn.com/w40/bd.png" alt="" width="24"
+                                                        height="24"></span>
+                                                <input id="bsFrom" name="origin" class="bs-combo-input" type="text"
+                                                    role="combobox" aria-expanded="false" aria-controls="bsFromList"
+                                                    aria-autocomplete="list" autocomplete="off"
+                                                    placeholder="Select origin" value="Bangladesh" required>
+                                                <button type="button" class="bs-combo-clear"
+                                                    aria-label="Clear origin country" tabindex="-1"><i
+                                                        class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                                                <button type="button" class="bs-combo-toggle"
+                                                    aria-label="Show origin countries" tabindex="-1"><i
+                                                        class="fa-solid fa-chevron-down"
+                                                        aria-hidden="true"></i></button>
+                                                <div class="bs-combo-list" id="bsFromList" role="listbox"
+                                                    aria-label="Origin countries" hidden></div>
+                                            </div>
+                                            <span class="bs-err"></span>
+                                        </div>
+
+                                        <!-- Destination -->
+                                        <div class="bs-field" data-field="destination">
+                                            <label class="bs-label" for="bsDestination">Destination country
+                                                <b>*</b></label>
+                                            <div class="bs-combo">
+                                                <span class="bs-combo-flag" aria-hidden="true"><i
+                                                        class="fa-solid fa-earth-asia"></i></span>
+                                                <input id="bsDestination" class="bs-combo-input" type="text"
+                                                    role="combobox" aria-expanded="false"
+                                                    aria-controls="bsDestinationList" aria-autocomplete="list"
+                                                    autocomplete="off" placeholder="Search country" required>
+                                                <button type="button" class="bs-combo-clear"
+                                                    aria-label="Clear destination" tabindex="-1"><i
+                                                        class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                                                <button type="button" class="bs-combo-toggle"
+                                                    aria-label="Show destinations" tabindex="-1"><i
+                                                        class="fa-solid fa-chevron-down"
+                                                        aria-hidden="true"></i></button>
+                                                <div class="bs-combo-list" id="bsDestinationList" role="listbox"
+                                                    aria-label="Destination countries" hidden></div>
+                                            </div>
+                                            <span class="bs-err"></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                                 <!-- Service + Shipment type (same line) -->
                                 <div class="bs-grid-2 bs-pair">
                                     <div class="bs-field" data-field="service">
@@ -567,61 +622,6 @@
                                     </p>
                                 </div>
 
-                                <!-- Route: From + Destination -->
-                                <div class="bs-route">
-                                    <div class="bs-route-grid">
-
-                                        <!-- From -->
-                                        <div class="bs-field" data-field="origin">
-                                            <label class="bs-label" for="bsFrom">From country <b>*</b></label>
-                                            <div class="bs-combo">
-                                                <span class="bs-combo-flag" aria-hidden="true"><img
-                                                        src="https://flagcdn.com/w40/bd.png" alt="" width="24"
-                                                        height="24"></span>
-                                                <input id="bsFrom" name="origin" class="bs-combo-input" type="text"
-                                                    role="combobox" aria-expanded="false" aria-controls="bsFromList"
-                                                    aria-autocomplete="list" autocomplete="off"
-                                                    placeholder="Select origin" value="Bangladesh" required>
-                                                <button type="button" class="bs-combo-clear"
-                                                    aria-label="Clear origin country" tabindex="-1"><i
-                                                        class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                                                <button type="button" class="bs-combo-toggle"
-                                                    aria-label="Show origin countries" tabindex="-1"><i
-                                                        class="fa-solid fa-chevron-down"
-                                                        aria-hidden="true"></i></button>
-                                                <div class="bs-combo-list" id="bsFromList" role="listbox"
-                                                    aria-label="Origin countries" hidden></div>
-                                            </div>
-                                            <span class="bs-err"></span>
-                                        </div>
-
-                                        <!-- Destination -->
-                                        <div class="bs-field" data-field="destination">
-                                            <label class="bs-label" for="bsDestination">Destination country
-                                                <b>*</b></label>
-                                            <div class="bs-combo">
-                                                <span class="bs-combo-flag" aria-hidden="true"><i
-                                                        class="fa-solid fa-earth-asia"></i></span>
-                                                <input id="bsDestination" class="bs-combo-input" type="text"
-                                                    role="combobox" aria-expanded="false"
-                                                    aria-controls="bsDestinationList" aria-autocomplete="list"
-                                                    autocomplete="off" placeholder="Search country" required>
-                                                <button type="button" class="bs-combo-clear"
-                                                    aria-label="Clear destination" tabindex="-1"><i
-                                                        class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                                                <button type="button" class="bs-combo-toggle"
-                                                    aria-label="Show destinations" tabindex="-1"><i
-                                                        class="fa-solid fa-chevron-down"
-                                                        aria-hidden="true"></i></button>
-                                                <div class="bs-combo-list" id="bsDestinationList" role="listbox"
-                                                    aria-label="Destination countries" hidden></div>
-                                            </div>
-                                            <span class="bs-err"></span>
-                                        </div>
-
-                                    </div>
-                                </div>
-
                                 <!-- Origin note (filled by JS, shown only if origin is not Bangladesh) -->
                                 <p class="bs-hint bs-hint--svc" id="bsFromHint" hidden>
                                     <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
@@ -666,26 +666,59 @@
                                     </div>
                                 </div>
 
-                                <!-- Dimensions -->
-                                <div class="bs-dims">
+                                <!-- Dimensions (quick sizes depend on shipment type) -->
+                                <div class="bs-dims" id="bsDims">
                                     <div class="bs-dims-head">
-                                        <span class="bs-label mb-0">Size per piece <small>(optional, helps
-                                                estimate)</small></span>
+                                        <div class="bs-dims-title">
+                                            <span class="bs-dims-ico" id="bsDimIco"><i class="fa-solid fa-box-open"
+                                                    aria-hidden="true"></i></span>
+                                            <div>
+                                                <span class="bs-label mb-0">Size per piece
+                                                    <small>(optional)</small></span>
+                                                <small class="bs-dims-sub">Pick a quick size or enter your own</small>
+                                            </div>
+                                        </div>
                                         <select id="bsDUnit" class="bs-mini" aria-label="Size unit">
                                             <option value="cm">cm</option>
                                             <option value="in">inch</option>
                                         </select>
                                     </div>
+
                                     <div class="bs-dim-row">
-                                        <div class="bs-field"><label for="bsL">Length</label><input id="bsL"
-                                                type="number" inputmode="decimal" min="0" step="any" placeholder="L">
+                                        <div class="bs-field">
+                                            <label for="bsL">Length</label>
+                                            <div class="bs-dim-in"><input id="bsL" type="number" inputmode="decimal"
+                                                    min="0" step="any" placeholder="L"><i
+                                                    class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
                                         </div>
-                                        <div class="bs-field"><label for="bsW">Width</label><input id="bsW"
-                                                type="number" inputmode="decimal" min="0" step="any" placeholder="W">
+                                        <span class="bs-dim-x" aria-hidden="true">×</span>
+                                        <div class="bs-field">
+                                            <label for="bsW">Width</label>
+                                            <div class="bs-dim-in"><input id="bsW" type="number" inputmode="decimal"
+                                                    min="0" step="any" placeholder="W"><i
+                                                    class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
                                         </div>
-                                        <div class="bs-field"><label for="bsH">Height</label><input id="bsH"
-                                                type="number" inputmode="decimal" min="0" step="any" placeholder="H">
+                                        <span class="bs-dim-x" aria-hidden="true">×</span>
+                                        <div class="bs-field">
+                                            <label for="bsH">Height</label>
+                                            <div class="bs-dim-in"><input id="bsH" type="number" inputmode="decimal"
+                                                    min="0" step="any" placeholder="H"><i
+                                                    class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
                                         </div>
+                                    </div>
+
+                                    <p class="bs-vol" id="bsVol" aria-live="polite" hidden>
+                                        <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+                                        <span></span>
+                                    </p>
+
+                                    <div class="bs-sizes">
+                                        <div class="bs-sizes-head">
+                                            <b>Not sure about the sizes?</b>
+                                            <span class="bs-sizes-tag" id="bsSizesTag" hidden></span>
+                                        </div>
+                                        <div class="bs-size-grid" id="bsSizeGrid" role="radiogroup"
+                                            aria-label="Quick sizes"></div>
                                     </div>
                                 </div>
 
@@ -1564,6 +1597,165 @@
             $('bsService').addEventListener('change', syncCourier);
             syncCourier();
 
+            /* ---------- Quick sizes (depend on shipment type) ---------- */
+            var SIZE_SETS = {
+                _default: [
+                    { n: 'A4 Envelope', d: [32, 24, 1], i: 'fa-envelope' },
+                    { n: 'One or two books', d: [23, 14, 4], i: 'fa-book' },
+                    { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+                    { n: 'Moving box', d: [75, 35, 35], i: 'fa-boxes-stacked' }
+                ],
+                'Documents': [
+                    { n: 'A4 Envelope', d: [32, 24, 1], i: 'fa-envelope' },
+                    { n: 'Large Envelope', d: [40, 30, 2], i: 'fa-file-lines' },
+                    { n: 'Document Folder', d: [35, 26, 5], i: 'fa-folder-open' },
+                    { n: 'Document Box', d: [36, 26, 12], i: 'fa-box-open' }
+                ],
+                'Personal parcel': [
+                    { n: 'One or two books', d: [23, 14, 4], i: 'fa-book' },
+                    { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+                    { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+                    { n: 'Moving box', d: [75, 35, 35], i: 'fa-boxes-stacked' }
+                ],
+                'Gift': [
+                    { n: 'One or two books', d: [23, 14, 4], i: 'fa-book' },
+                    { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+                    { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+                    { n: 'Moving box', d: [75, 35, 35], i: 'fa-boxes-stacked' }
+                ],
+                'Product sample': [
+                    { n: 'Small pack', d: [20, 15, 10], i: 'fa-box-open' },
+                    { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+                    { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+                    { n: 'Large carton', d: [60, 40, 40], i: 'fa-boxes-stacked' }
+                ],
+                'E-commerce order': [
+                    { n: 'Poly mailer', d: [30, 25, 5], i: 'fa-bag-shopping' },
+                    { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+                    { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+                    { n: 'Large carton', d: [60, 40, 40], i: 'fa-boxes-stacked' }
+                ],
+                'Commercial cargo': [
+                    { n: 'Small carton', d: [50, 40, 40], i: 'fa-box' },
+                    { n: 'Standard carton', d: [60, 40, 40], i: 'fa-box' },
+                    { n: 'Large carton', d: [70, 50, 50], i: 'fa-boxes-stacked' },
+                    { n: 'Pallet', d: [120, 80, 100], i: 'fa-pallet' }
+                ]
+            };
+
+            var sizeGrid = $('bsSizeGrid'), sizeTag = $('bsSizesTag'), dimIco = $('bsDimIco'),
+                volEl = $('bsVol'), unitSel = $('bsDUnit'),
+                dimInputs = [$('bsL'), $('bsW'), $('bsH')],
+                prevUnit = unitSel.value,
+                W_KG = { kg: 1, g: 0.001, lb: 0.45359237 };
+
+            function unitF(u) { return (u || unitSel.value) === 'in' ? 2.54 : 1; }
+            function r1(n) { return Math.round(n * 10) / 10; }
+            function r2(n) { return Math.round(n * 100) / 100; }
+            function dimVals() { return dimInputs.map(function (e) { return parseFloat(e.value) || 0; }); }
+            function curSet() { return SIZE_SETS[$('bsType').value] || SIZE_SETS._default; }
+            function showDim(cm) { return unitSel.value === 'in' ? r1(cm / 2.54) : cm; }
+
+            /* "32 × 24 × 1 cm" or '' (used by Review + WhatsApp) */
+            function sizeText() {
+                var a = dimVals();
+                return (a[0] > 0 && a[1] > 0 && a[2] > 0) ? a.join(' × ') + ' ' + unitSel.value : '';
+            }
+
+            function renderSizes() {
+                var set = curSet(), t = $('bsType').value;
+                sizeTag.textContent = t ? 'For ' + t : '';
+                sizeTag.hidden = !t;
+                sizeGrid.innerHTML = set.map(function (s, i) {
+                    return '<button type="button" class="bs-size" role="radio" aria-checked="false" data-i="' + i + '">' +
+                        '<span class="bs-size-ico"><i class="fa-solid ' + s.i + '" aria-hidden="true"></i></span>' +
+                        '<span class="bs-size-txt"><b>' + esc(s.n) + '</b><small>' +
+                        s.d.map(showDim).join(' × ') + ' ' + unitSel.value + '</small></span></button>';
+                }).join('');
+                syncSizes();
+            }
+
+            /* highlights matching card, shows ticks, icon and volumetric weight */
+            function syncSizes() {
+                var v = dimVals(), f = unitF(), set = curSet(), hit = -1;
+
+                dimInputs.forEach(function (e, k) {
+                    e.closest('.bs-dim-in').classList.toggle('is-ok', v[k] > 0);
+                });
+
+                var all = v[0] > 0 && v[1] > 0 && v[2] > 0;
+                if (all) {
+                    set.forEach(function (s, i) {
+                        if (hit < 0 && s.d.every(function (n, k) { return Math.abs(n - v[k] * f) < 0.1; })) hit = i;
+                    });
+                }
+
+                Array.prototype.forEach.call(sizeGrid.children, function (b, i) {
+                    var on = i === hit;
+                    b.classList.toggle('is-sel', on);
+                    b.setAttribute('aria-checked', on ? 'true' : 'false');
+                });
+
+                var ic = hit > -1 ? set[hit].i : (all ? 'fa-box' : 'fa-box-open');
+                var icon = dimIco.firstChild;
+                if (icon && icon.className.indexOf(ic) < 0) {
+                    icon.className = 'fa-solid ' + ic;
+                    dimIco.classList.remove('pop'); void dimIco.offsetWidth; dimIco.classList.add('pop');
+                }
+
+                if (all) {
+                    var pcs = parseInt($('bsPieces').value, 10) || 1;
+                    var vol = (v[0] * f) * (v[1] * f) * (v[2] * f) * pcs / 5000;
+                    var wt = (parseFloat($('bsWeight').value) || 0) * (W_KG[$('bsWUnit').value] || 1);
+                    var txt = 'Volumetric weight ≈ <b>' + r2(vol) + ' kg</b>';
+                    if (wt > 0) txt += ' · Chargeable ≈ <b>' + r2(Math.max(wt, vol)) + ' kg</b>';
+                    volEl.querySelector('span').innerHTML = txt;
+                    volEl.hidden = false;
+                } else {
+                    volEl.hidden = true;
+                }
+                return hit;
+            }
+
+            function setDims(arr) {
+                dimInputs.forEach(function (e, k) {
+                    e.value = arr ? showDim(arr[k]) : '';
+                    e.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+                syncSizes();
+            }
+
+            sizeGrid.addEventListener('click', function (e) {
+                var b = e.target.closest('.bs-size');
+                if (!b) return;
+                var i = parseInt(b.getAttribute('data-i'), 10);
+                /* click the selected card again = clear */
+                setDims(b.classList.contains('is-sel') ? null : curSet()[i].d);
+            });
+
+            dimInputs.forEach(function (e) { e.addEventListener('input', syncSizes); });
+            $('bsWeight').addEventListener('input', syncSizes);
+            $('bsPieces').addEventListener('input', syncSizes);
+            $('bsWUnit').addEventListener('change', syncSizes);
+            $('bsType').addEventListener('change', renderSizes);
+
+            /* cm <-> inch: convert what is already typed */
+            unitSel.addEventListener('change', function () {
+                var from = unitF(prevUnit), to = unitF();
+                dimInputs.forEach(function (e) {
+                    var n = parseFloat(e.value);
+                    if (n > 0) e.value = r1(n * from / to);
+                });
+                prevUnit = unitSel.value;
+                renderSizes();
+            });
+
+            form.addEventListener('reset', function () {
+                setTimeout(function () { prevUnit = unitSel.value; renderSizes(); }, 0);
+            });
+
+            renderSizes();
+
             /* ---------- Step navigation ---------- */
             function showStep(n) {
                 currentStep = Math.max(1, Math.min(TOTAL_STEPS, n));
@@ -1709,6 +1901,7 @@
                             ['Courier', courier],
                             ['Shipment type', val($('bsType'))],
                             ['Contents', val($('bsContents'))],
+                            ['Size per piece', sizeText()],
                             ['Declared value', declared],
                             ['Extras', extras.join(', ')]
                         ]
@@ -1884,6 +2077,7 @@
                         'Weight: ' + ($('bsWeight').value || '—') + ' ' + $('bsWUnit').value,
                         'Pieces: ' + ($('bsPieces').value || '1'),
                         'Contents: ' + ($('bsContents').value.trim() || '—'),
+                        'Size per piece: ' + (sizeText() || '—'),
                         'Sender: ' + ($('bsSenderName').value.trim() || '—'),
                         'Sender phone: ' + ($('bsSenderPhone').value.trim() || '—'),
                         'Pickup address: ' + ($('bsSenderAddress').value.trim() || '—'),
