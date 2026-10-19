@@ -899,8 +899,22 @@
 }
 
 .page-quote .prc-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0 0 20px;
-  padding-left: 2px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--jp-text-muted-dark);
+  background: var(--jp-bg-soft);
+  border-left: 3px solid var(--jp-orange);
+  border-radius: 10px;
+}
+
+.page-quote .prc-hint:empty {
+  display: none;
 }
 
 /* input + unit */
@@ -2290,36 +2304,130 @@
   color: var(--jp-navy);
 }
 
-/* Mode cards — bigger, more descriptive */
+/* Mode cards — icon + text on the SAME line (premium) */
 .page-quote .prc-mode span {
-  flex-direction: column;
-  align-items: flex-start;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  min-height: 60px;
+  padding: 10px 14px;
   text-align: left;
-  gap: 4px;
-  padding: 14px 16px;
-  min-height: 88px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(30, 42, 107, .04);
+  transition: background .2s ease, border-color .2s ease, color .2s ease,
+    box-shadow .2s ease, transform .2s ease;
 }
 
 .page-quote .prc-mode span i {
-  font-size: 16px;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 15px;
   color: var(--jp-orange);
-  margin-bottom: 2px;
+  background: rgba(242, 99, 35, .1);
+  transition: background .2s ease, color .2s ease, transform .2s ease;
 }
 
-.page-quote .prc-mode span b {
-  font-size: 14px;
-  line-height: 1.25;
+/* selected state */
+.page-quote .prc-mode input:checked+span {
+  background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+  border-color: var(--jp-navy);
+  color: var(--jp-white);
+  box-shadow: 0 10px 22px rgba(43, 57, 144, .28);
 }
 
-.page-quote .prc-mode span small {
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--jp-text-muted);
+.page-quote .prc-mode input:checked+span i {
+  color: var(--jp-white);
+  background: var(--jp-orange);
 }
 
-.page-quote .prc-mode input:checked+span small {
-  color: var(--jp-text-light-blue-2);
+/* small tick badge on selected card */
+.page-quote .prc-mode span::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 10px;
+  color: var(--jp-white);
+  background: var(--jp-green);
+  border: 2px solid var(--jp-white);
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+
+.page-quote .prc-mode input:checked+span::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* hover only on devices that really hover (no sticky hover on phones) */
+@media (hover: hover) {
+  .page-quote .prc-mode:hover span {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(30, 42, 107, .10);
+  }
+}
+
+/* small laptops: form column is narrow, so use 2 x 2 */
+@media (min-width: 992px) and (max-width: 1279px) {
+  .page-quote .prc-modes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* phones: 2 x 2, compact */
+@media (max-width: 575px) {
+  .page-quote .prc-mode span {
+    min-height: 54px;
+    padding: 8px 10px;
+    gap: 8px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .page-quote .prc-mode span i {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 9px;
+  }
+}
+
+/* very small phones (320px) */
+@media (max-width: 359px) {
+  .page-quote .prc-mode span {
+    padding: 8px;
+    gap: 6px;
+    font-size: 12.5px;
+  }
+
+  .page-quote .prc-mode span i {
+    flex-basis: 28px;
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
 }
 
 /* Inline CTA link */
@@ -2592,11 +2700,6 @@
     font-size: 11.5px;
   }
 
-  .page-quote .prc-mode span {
-    padding: 12px 13px;
-    min-height: 80px;
-  }
-
   .page-quote .prc-review-row {
     font-size: 13px;
   }
@@ -2604,4 +2707,56 @@
   .page-quote .prc-success-meta {
     grid-template-columns: 1fr;
   }
+}
+
+
+/* ===============================================================
+   ITEM DETAILS: Quantity | Approx. value | City in ONE line (desktop)
+   =============================================================== */
+
+/* long placeholders / values never break the layout */
+.page-quote .prc-more-body .prc-field input {
+  text-overflow: ellipsis;
+}
+
+/* 576px - 767px: 2 columns, City takes the full row below */
+@media (min-width: 576px) {
+  .page-quote .prc-more-body .prc-city {
+    grid-column: 1 / -1;
+  }
+}
+
+/* tablet (768-991px) and large desktop (1280px+): all 3 in one line */
+@media (min-width: 768px) and (max-width: 991px),
+(min-width: 1280px) {
+  .page-quote .prc-more-body {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .page-quote .prc-more-body .prc-city {
+    grid-column: auto;
+  }
+
+  .page-quote .prc-more-body .prc-field input {
+    font-size: 15px;
+  }
+}
+
+/* pickup checkbox: premium tappable card */
+.page-quote .prc-more-body .prc-check {
+  min-height: 48px;
+  padding: 12px 14px;
+  background: var(--jp-white);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.page-quote .prc-more-body .prc-check:hover {
+  border-color: var(--jp-orange);
+}
+
+.page-quote .prc-more-body .prc-check:has(input:checked) {
+  background: #fff6f1;
+  border-color: var(--jp-orange);
 }

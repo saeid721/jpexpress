@@ -480,63 +480,110 @@
                                     </div>
                                 </div>
 
-                                <!-- Service -->
-                                <div class="bs-field" data-field="service">
-                                    <label class="bs-label" for="bsService">Shipping service <b>*</b></label>
-                                    <select id="bsService" name="service" class="form-select" required>
-                                        <option value="">Select a service</option>
-                                        <option value="express">Express Courier — fastest, urgent shipments</option>
-                                        <option value="economy">Economy Courier — non-urgent, lower cost</option>
-                                        <option value="door">Door-to-Door — pickup to delivery</option>
-                                        <option value="air">Air Freight — commercial cargo by air</option>
-                                        <option value="sea">Sea Freight — large cargo by sea</option>
-                                    </select>
-                                    <span class="bs-err"></span>
-                                </div>
-
-                                <!-- Shipment type -->
-                                <div class="bs-field" data-field="type">
-                                    <label class="bs-label" for="bsType">Shipment type <b>*</b></label>
-                                    <select id="bsType" name="type" class="form-select" required>
-                                        <option value="">Select type</option>
-                                        <option>Documents</option>
-                                        <option>Personal parcel</option>
-                                        <option>Gift</option>
-                                        <option>Product sample</option>
-                                        <option>E-commerce order</option>
-                                        <option>Commercial cargo</option>
-                                    </select>
-                                    <span class="bs-err"></span>
-                                </div>
-
-                                <!-- Destination -->
-                                <div class="bs-field" data-field="destination">
-                                    <label class="bs-label" for="bsDestination">Destination country <b>*</b></label>
-                                    <div class="bs-combo">
-                                        <span class="bs-combo-flag" aria-hidden="true"><i
-                                                class="fa-solid fa-earth-asia"></i></span>
-                                        <input id="bsDestination" class="bs-combo-input" type="text" role="combobox"
-                                            aria-expanded="false" aria-controls="bsDestinationList"
-                                            aria-autocomplete="list" autocomplete="off"
-                                            placeholder="Search or select destination" required>
-                                        <button type="button" class="bs-combo-clear" aria-label="Clear destination"
-                                            tabindex="-1"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-                                        <button type="button" class="bs-combo-toggle" aria-label="Show destinations"
-                                            tabindex="-1"><i class="fa-solid fa-chevron-down"
-                                                aria-hidden="true"></i></button>
-                                        <div class="bs-combo-list" id="bsDestinationList" role="listbox"
-                                            aria-label="Destination countries" hidden></div>
+                                <!-- Service + Shipment type (same line) -->
+                                <div class="bs-grid-2 bs-pair">
+                                    <div class="bs-field" data-field="service">
+                                        <label class="bs-label" for="bsService">Shipping service <b>*</b></label>
+                                        <select id="bsService" name="service" class="form-select" required>
+                                            <option value="">Select a service</option>
+                                            <option value="express">Express Courier</option>
+                                            <option value="economy">Economy Courier</option>
+                                            <option value="door">Door-to-Door</option>
+                                            <option value="air">Air Freight</option>
+                                            <option value="sea">Sea Freight</option>
+                                        </select>
+                                        <span class="bs-err"></span>
                                     </div>
-                                    <span class="bs-err"></span>
+
+                                    <div class="bs-field" data-field="type">
+                                        <label class="bs-label" for="bsType">Shipment type <b>*</b></label>
+                                        <select id="bsType" name="type" class="form-select" required>
+                                            <option value="">Select type</option>
+                                            <option>Documents</option>
+                                            <option>Personal parcel</option>
+                                            <option>Gift</option>
+                                            <option>Product sample</option>
+                                            <option>E-commerce order</option>
+                                            <option>Commercial cargo</option>
+                                        </select>
+                                        <span class="bs-err"></span>
+                                    </div>
                                 </div>
 
-                                <!-- City / postal -->
-                                <div class="bs-field" data-field="city">
-                                    <label class="bs-label" for="bsCity">City / postal code
-                                        <small>(optional)</small></label>
-                                    <input id="bsCity" class="form-control" type="text"
-                                        placeholder="e.g. New York or 10001" maxlength="80">
+                                <!-- Service description (filled by JS) -->
+                                <p class="bs-hint bs-hint--svc" id="bsSvcHint" hidden>
+                                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                                    <span></span>
+                                </p>
+
+                                <!-- Route: From + Destination + City / postal -->
+                                <div class="bs-route">
+                                    <div class="bs-route-grid">
+
+                                        <!-- From -->
+                                        <div class="bs-field" data-field="origin">
+                                            <label class="bs-label" for="bsFrom">From country <b>*</b></label>
+                                            <div class="bs-combo">
+                                                <span class="bs-combo-flag" aria-hidden="true"><img
+                                                        src="https://flagcdn.com/w40/bd.png" alt="" width="24"
+                                                        height="24"></span>
+                                                <input id="bsFrom" name="origin" class="bs-combo-input" type="text"
+                                                    role="combobox" aria-expanded="false" aria-controls="bsFromList"
+                                                    aria-autocomplete="list" autocomplete="off"
+                                                    placeholder="Select origin" value="Bangladesh" required>
+                                                <button type="button" class="bs-combo-clear"
+                                                    aria-label="Clear origin country" tabindex="-1"><i
+                                                        class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                                                <button type="button" class="bs-combo-toggle"
+                                                    aria-label="Show origin countries" tabindex="-1"><i
+                                                        class="fa-solid fa-chevron-down"
+                                                        aria-hidden="true"></i></button>
+                                                <div class="bs-combo-list" id="bsFromList" role="listbox"
+                                                    aria-label="Origin countries" hidden></div>
+                                            </div>
+                                            <span class="bs-err"></span>
+                                        </div>
+
+                                        <!-- Destination -->
+                                        <div class="bs-field" data-field="destination">
+                                            <label class="bs-label" for="bsDestination">Destination country
+                                                <b>*</b></label>
+                                            <div class="bs-combo">
+                                                <span class="bs-combo-flag" aria-hidden="true"><i
+                                                        class="fa-solid fa-earth-asia"></i></span>
+                                                <input id="bsDestination" class="bs-combo-input" type="text"
+                                                    role="combobox" aria-expanded="false"
+                                                    aria-controls="bsDestinationList" aria-autocomplete="list"
+                                                    autocomplete="off" placeholder="Search country" required>
+                                                <button type="button" class="bs-combo-clear"
+                                                    aria-label="Clear destination" tabindex="-1"><i
+                                                        class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                                                <button type="button" class="bs-combo-toggle"
+                                                    aria-label="Show destinations" tabindex="-1"><i
+                                                        class="fa-solid fa-chevron-down"
+                                                        aria-hidden="true"></i></button>
+                                                <div class="bs-combo-list" id="bsDestinationList" role="listbox"
+                                                    aria-label="Destination countries" hidden></div>
+                                            </div>
+                                            <span class="bs-err"></span>
+                                        </div>
+
+                                        <!-- City / postal -->
+                                        <div class="bs-field bs-route-city" data-field="city">
+                                            <label class="bs-label" for="bsCity">City / postal code
+                                                <small>(optional)</small></label>
+                                            <input id="bsCity" class="form-control" type="text"
+                                                placeholder="e.g. New York or 10001" maxlength="80">
+                                        </div>
+
+                                    </div>
                                 </div>
+
+                                <!-- Origin note (filled by JS, shown only if origin is not Bangladesh) -->
+                                <p class="bs-hint bs-hint--svc" id="bsFromHint" hidden>
+                                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                                    <span></span>
+                                </p>
 
                                 <!-- Weight + pieces -->
                                 <div class="bs-grid-2">
@@ -818,6 +865,7 @@
                                 <h3><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Booking Summary</h3>
                                 <ul class="bs-summary-list" id="bsSummaryList">
                                     <li><span>Service</span><strong id="sumService">—</strong></li>
+                                    <li><span>From</span><strong id="sumFrom">—</strong></li>
                                     <li><span>Destination</span><strong id="sumDestination">—</strong></li>
                                     <li><span>Weight</span><strong id="sumWeight">—</strong></li>
                                     <li><span>Pickup</span><strong id="sumPickup">—</strong></li>
@@ -1038,6 +1086,7 @@
                 review: $('bsReview'),
                 summary: {
                     service: $('sumService'),
+                    from: $('sumFrom'),
                     destination: $('sumDestination'),
                     weight: $('sumWeight'),
                     pickup: $('sumPickup'),
@@ -1076,8 +1125,9 @@
 
             function renderDestList(query) {
                 var q = (query || '').trim().toLowerCase();
+                var fromVal = ($('bsFrom') ? $('bsFrom').value : '').trim().toLowerCase();
                 var shown = COUNTRIES.filter(function (n) {
-                    return !q || n.toLowerCase().indexOf(q) > -1;
+                    return n.toLowerCase() !== fromVal && (!q || n.toLowerCase().indexOf(q) > -1);
                 });
                 destOptions = shown;
                 destList.innerHTML = shown.length ? shown.map(function (n, i) {
@@ -1184,6 +1234,178 @@
                 if (!destCombo.contains(e.target)) closeDestList();
             });
 
+            /* ---------- From country (searchable combo, default Bangladesh) ---------- */
+            var ORIGIN_DEFAULT = 'Bangladesh';
+            var ORIGINS = [ORIGIN_DEFAULT].concat(COUNTRIES.filter(function (n) {
+                return n.toLowerCase() !== ORIGIN_DEFAULT.toLowerCase();
+            }));
+            var fromInput = $('bsFrom');
+            var fromCombo = fromInput.closest('.bs-combo');
+            var fromList = $('bsFromList');
+            var fromFlag = fromCombo.querySelector('.bs-combo-flag');
+            var fromClear = fromCombo.querySelector('.bs-combo-clear');
+            var fromToggle = fromCombo.querySelector('.bs-combo-toggle');
+            var fromHint = $('bsFromHint');
+            var fromOptions = [];
+            var fromActive = -1;
+            var fromCommitted = ORIGIN_DEFAULT;
+
+            function originFlag(name) {
+                if (name === ORIGIN_DEFAULT) {
+                    return '<img src="https://flagcdn.com/w40/bd.png" alt="" width="24" height="24">';
+                }
+                return flagHtml(name);
+            }
+
+            function matchOrigin(text) {
+                var t = String(text || '').trim().toLowerCase();
+                for (var i = 0; i < ORIGINS.length; i++) {
+                    if (ORIGINS[i].toLowerCase() === t) return ORIGINS[i];
+                }
+                return '';
+            }
+
+            function renderFromList(query) {
+                var q = (query || '').trim().toLowerCase();
+                var other = destInput.value.trim().toLowerCase();
+                var cur = fromInput.value.trim().toLowerCase();
+                fromOptions = ORIGINS.filter(function (n) {
+                    var low = n.toLowerCase();
+                    return low !== other && (!q || low.indexOf(q) > -1);
+                });
+                fromList.innerHTML = fromOptions.length ? fromOptions.map(function (n, i) {
+                    var sel = n.toLowerCase() === cur;
+                    return '<div class="bs-combo-opt' + (sel ? ' is-sel' : '') + '" role="option" id="bsFromOpt' + i + '" data-i="' + i + '" aria-selected="' + sel + '">' +
+                        originFlag(n) + '<span>' + esc(n) + '</span><i class="fa-solid fa-check" aria-hidden="true"></i></div>';
+                }).join('') : '<div class="bs-combo-empty"><i class="fa-solid fa-earth-asia" aria-hidden="true"></i><p>No country found for &ldquo;' + esc((query || '').trim()) + '&rdquo;.</p><a href="contact.html?intent=quote#inquiry">Ask us if we can ship from there</a></div>';
+                fromActive = -1;
+                fromInput.removeAttribute('aria-activedescendant');
+            }
+
+            function openFromList(all) {
+                renderFromList(all ? '' : fromInput.value);
+                fromList.hidden = false;
+                fromCombo.classList.add('is-open');
+                fromInput.setAttribute('aria-expanded', 'true');
+                var s = fromList.querySelector('.is-sel');
+                fromList.scrollTop = s ? Math.max(0, s.offsetTop - 56) : 0;
+            }
+
+            function closeFromList() {
+                fromList.hidden = true;
+                fromActive = -1;
+                fromCombo.classList.remove('is-open');
+                fromInput.setAttribute('aria-expanded', 'false');
+                fromInput.removeAttribute('aria-activedescendant');
+            }
+
+            function setFromActive(i) {
+                var nodes = fromList.querySelectorAll('.bs-combo-opt');
+                if (!nodes.length) return;
+                fromActive = (i + nodes.length) % nodes.length;
+                Array.prototype.forEach.call(nodes, function (n, k) {
+                    n.classList.toggle('is-active', k === fromActive);
+                    n.setAttribute('aria-selected', k === fromActive ? 'true' : 'false');
+                });
+                fromInput.setAttribute('aria-activedescendant', 'bsFromOpt' + fromActive);
+                var node = nodes[fromActive];
+                var top = node.offsetTop;
+                var bot = top + node.offsetHeight;
+                if (top < fromList.scrollTop) fromList.scrollTop = top - 6;
+                else if (bot > fromList.scrollTop + fromList.clientHeight) fromList.scrollTop = bot - fromList.clientHeight + 6;
+            }
+
+            function updateFromHint() {
+                var name = matchOrigin(fromInput.value);
+                var show = !!name && name !== ORIGIN_DEFAULT;
+                fromHint.hidden = !show;
+                if (show) {
+                    fromHint.querySelector('span').textContent =
+                        'Pickup outside Bangladesh is confirmed by our team after you book.';
+                }
+            }
+
+            function commitFrom(name) {
+                fromCommitted = name || ORIGIN_DEFAULT;
+                fromInput.value = fromCommitted;
+                fromFlag.innerHTML = originFlag(fromCommitted);
+                fromCombo.classList.add('has-text');
+                setErr('origin', '');
+                updateFromHint();
+                updateSummary();
+            }
+
+            function syncFrom() {
+                commitFrom(matchOrigin(fromInput.value) || ORIGIN_DEFAULT);
+                closeFromList();
+            }
+
+            fromInput.addEventListener('focus', function () {
+                if (fromList.hidden) { openFromList(true); fromInput.select(); }
+            });
+            fromInput.addEventListener('click', function () {
+                if (fromList.hidden) openFromList(true);
+            });
+            fromInput.addEventListener('input', function () {
+                fromCombo.classList.toggle('has-text', !!fromInput.value);
+                if (fromList.hidden) openFromList(false);
+                else renderFromList(fromInput.value);
+            });
+            fromInput.addEventListener('keydown', function (e) {
+                var k = e.key;
+                if (k === 'ArrowDown' || k === 'ArrowUp') {
+                    e.preventDefault();
+                    if (fromList.hidden) openFromList(true);
+                    setFromActive(fromActive < 0 ? (k === 'ArrowDown' ? 0 : -1) : fromActive + (k === 'ArrowDown' ? 1 : -1));
+                } else if (k === 'Enter') {
+                    if (fromList.hidden) return;
+                    e.preventDefault();
+                    var n = fromActive > -1 ? fromOptions[fromActive] : (fromOptions.length === 1 ? fromOptions[0] : '');
+                    if (n) { commitFrom(n); closeFromList(); }
+                } else if (k === 'Escape') {
+                    if (!fromList.hidden) { e.preventDefault(); commitFrom(fromCommitted); closeFromList(); }
+                }
+            });
+            /* typed text that is not a real country snaps back to the last valid origin */
+            fromInput.addEventListener('blur', function () {
+                var n = matchOrigin(fromInput.value);
+                if (!n && !fromList.hidden && fromOptions.length === 1 && fromInput.value.trim()) n = fromOptions[0];
+                if (n && n.toLowerCase() === destInput.value.trim().toLowerCase()) n = '';
+                commitFrom(n || fromCommitted || ORIGIN_DEFAULT);
+                closeFromList();
+            });
+
+            fromClear.addEventListener('mousedown', function (e) { e.preventDefault(); });
+            fromClear.addEventListener('click', function () {
+                fromInput.value = '';
+                fromCombo.classList.remove('has-text');
+                fromFlag.innerHTML = '<i class="fa-solid fa-earth-asia" aria-hidden="true"></i>';
+                fromInput.focus();
+                openFromList(true);
+            });
+            fromToggle.addEventListener('mousedown', function (e) { e.preventDefault(); });
+            fromToggle.addEventListener('click', function () {
+                if (fromList.hidden) { fromInput.focus(); openFromList(true); }
+                else closeFromList();
+            });
+            fromList.addEventListener('mousedown', function (e) { e.preventDefault(); });
+            fromList.addEventListener('click', function (e) {
+                var o = e.target.closest('.bs-combo-opt');
+                if (!o) return;
+                commitFrom(fromOptions[parseInt(o.getAttribute('data-i'), 10)]);
+                closeFromList();
+                if (window.matchMedia('(max-width: 767px)').matches) fromInput.blur();
+            });
+            fromList.addEventListener('mouseover', function (e) {
+                var o = e.target.closest('.bs-combo-opt');
+                if (o) setFromActive(parseInt(o.getAttribute('data-i'), 10));
+            });
+            document.addEventListener('click', function (e) {
+                if (!fromCombo.contains(e.target)) closeFromList();
+            });
+
+            syncFrom();
+
             /* ---------- Pieces stepper ---------- */
             var piecesInput = $('bsPieces');
             var numBtns = document.querySelectorAll('.bs-num-btn');
@@ -1226,6 +1448,7 @@
                 var s = els.summary;
                 var svc = $('bsService');
                 s.service.textContent = svc.value ? svc.options[svc.selectedIndex].text : '—';
+                if (s.from) s.from.textContent = ($('bsFrom').value || '').trim() || '—';
                 s.destination.textContent = destInput.value.trim() || '—';
                 var w = parseFloat($('bsWeight').value) || 0;
                 var wu = $('bsWUnit').value;
@@ -1240,6 +1463,25 @@
                 el.addEventListener('input', updateSummary);
                 el.addEventListener('change', updateSummary);
             });
+
+            /* ---------- Service description under the row ---------- */
+            var SVC_HINTS = {
+                express: 'Fastest option, best for urgent documents and parcels.',
+                economy: 'Lower cost with a longer transit time. Best for non-urgent shipments.',
+                door: 'We pick up from your address and deliver to the recipient.',
+                air: 'Commercial cargo by air. Faster than sea, priced by chargeable weight.',
+                sea: 'Large or heavy cargo by sea. Lowest cost, longest transit.'
+            };
+            var svcHint = $('bsSvcHint');
+
+            function updateSvcHint() {
+                if (!svcHint) return;
+                var text = SVC_HINTS[$('bsService').value] || '';
+                svcHint.querySelector('span').textContent = text;
+                svcHint.hidden = !text;
+            }
+            $('bsService').addEventListener('change', updateSvcHint);
+            updateSvcHint();
 
             /* ---------- Step navigation ---------- */
             function showStep(n) {
@@ -1308,7 +1550,9 @@
                 if (step === 1) {
                     if (!$('bsService').value) fail('service', 'Please select a shipping service.', $('bsService'));
                     if (!$('bsType').value) fail('type', 'Please select a shipment type.', $('bsType'));
+                    if (!matchOrigin($('bsFrom').value)) fail('origin', 'Please choose the origin country.', $('bsFrom'));
                     if (!destInput.value.trim()) fail('destination', 'Please choose a destination country.', destInput);
+                    else if ($('bsFrom').value.trim().toLowerCase() === destInput.value.trim().toLowerCase()) fail('destination', 'Origin and destination must be different countries.', destInput);
                     var w = parseFloat($('bsWeight').value);
                     if (!(w > 0)) fail('weight', 'Enter the shipment weight, e.g. 2.5.', $('bsWeight'));
                     else if (w < 0.01) fail('weight', 'That weight is too small. Enter at least 10 g.', $('bsWeight'));
@@ -1360,6 +1604,7 @@
                 var rows = [
                     ['Shipping service', svc.value ? svc.options[svc.selectedIndex].text : '—'],
                     ['Shipment type', $('bsType').value || '—'],
+                    ['From', $('bsFrom').value.trim() || '—'],
                     ['Destination', destInput.value.trim() || '—'],
                     ['City / postal', $('bsCity').value.trim() || '—'],
                     ['Weight', ($('bsWeight').value || '—') + ' ' + $('bsWUnit').value],
@@ -1486,6 +1731,7 @@
                         'Hi JP Express, I would like to book a shipment.',
                         'Service: ' + ($('bsService').value ? $('bsService').options[$('bsService').selectedIndex].text : '—'),
                         'Type: ' + ($('bsType').value || '—'),
+                        'From: ' + ($('bsFrom').value.trim() || '—'),
                         'Destination: ' + (destInput.value.trim() || '—'),
                         'Weight: ' + ($('bsWeight').value || '—') + ' ' + $('bsWUnit').value,
                         'Pieces: ' + ($('bsPieces').value || '1'),
@@ -1522,7 +1768,9 @@
                     clearErr('receiverAddress'); clearErr('receiverCity'); clearErr('receiverCountry');
                     $('bsConsentErr').textContent = '';
                     els.status.hidden = true;
+                    syncFrom();
                     updateSummary();
+                    updateSvcHint();
                 }, 0);
             });
 

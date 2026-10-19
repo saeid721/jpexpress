@@ -1484,3 +1484,101 @@
         animation: none;
     }
 }
+
+/* ===============================================================
+   PAIRED ROWS: Service + Type, Destination + City (same line)
+   =============================================================== */
+
+/* stacked on phones: keep the same 14px rhythm as other fields */
+.page-book-shipment .bs-pair {
+    row-gap: 0;
+}
+
+/* long text never breaks a half-width dropdown */
+.page-book-shipment .bs-form .form-select {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* country list stays readable even in a half-width column */
+.page-book-shipment .bs-pair .bs-combo-list {
+    min-width: min(260px, 100%);
+}
+
+/* service description line */
+.page-book-shipment .bs-hint[hidden] {
+    display: none;
+}
+
+.page-book-shipment .bs-hint--svc {
+    align-items: center;
+    margin: -4px 0 14px;
+    padding: 9px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--jp-text-muted-dark);
+    background: var(--jp-bg-soft);
+    border-left: 3px solid var(--jp-orange);
+    border-radius: 10px;
+}
+
+.page-book-shipment .bs-hint--svc i {
+    margin-top: 0;
+}
+
+/* ===============================================================
+   ROUTE ROW: From | Destination | City (adapts to the form width)
+   =============================================================== */
+.page-book-shipment .bs-route {
+    container: bs-route / inline-size;
+    position: relative;
+    z-index: 2;
+}
+
+.page-book-shipment .bs-route-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0 14px;
+}
+
+/* country list stays readable inside a narrow column */
+.page-book-shipment .bs-route-grid .bs-combo-list {
+    min-width: min(260px, 100%);
+}
+
+/* medium width: From + Destination on one line, City below */
+@container bs-route (min-width: 520px) {
+    .page-book-shipment .bs-route-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-route-grid .bs-route-city {
+        grid-column: 1 / -1;
+    }
+}
+
+/* wide: all three on one line */
+@container bs-route (min-width: 780px) {
+    .page-book-shipment .bs-route-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-route-grid .bs-route-city {
+        grid-column: auto;
+    }
+}
+
+/* very old browsers without container queries */
+@supports not (container-type: inline-size) {
+    @media (min-width: 576px) {
+        .page-book-shipment .bs-route-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .page-book-shipment .bs-route-grid .bs-route-city {
+            grid-column: 1 / -1;
+        }
+    }
+}
