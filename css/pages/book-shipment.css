@@ -1529,7 +1529,7 @@
 }
 
 /* ===============================================================
-   ROUTE ROW: From | Destination | City (adapts to the form width)
+   ROUTE ROW: From | Destination (adapts to the form width)
    =============================================================== */
 .page-book-shipment .bs-route {
     container: bs-route / inline-size;
@@ -1548,25 +1548,10 @@
     min-width: min(260px, 100%);
 }
 
-/* medium width: From + Destination on one line, City below */
-@container bs-route (min-width: 520px) {
+/* From + Destination: 2 columns from 480px, 1 column on small phones */
+@container bs-route (min-width: 480px) {
     .page-book-shipment .bs-route-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .page-book-shipment .bs-route-grid .bs-route-city {
-        grid-column: 1 / -1;
-    }
-}
-
-/* wide: all three on one line */
-@container bs-route (min-width: 780px) {
-    .page-book-shipment .bs-route-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .page-book-shipment .bs-route-grid .bs-route-city {
-        grid-column: auto;
     }
 }
 
@@ -1576,9 +1561,832 @@
         .page-book-shipment .bs-route-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
+    }
+}
 
-        .page-book-shipment .bs-route-grid .bs-route-city {
+
+/* ===============================================================
+   COURIER SELECTOR: premium radio chips (2 cols mobile, 4 cols 576px+)
+   =============================================================== */
+.page-book-shipment .bs-courier {
+    margin: 0 0 16px;
+    padding: 14px;
+    background: var(--jp-bg-light);
+    border: 1px dashed var(--jp-border-hover-2);
+    border-radius: 14px;
+    animation: bsCourierIn .25s ease;
+}
+
+.page-book-shipment .bs-courier[hidden] {
+    display: none;
+}
+
+@keyframes bsCourierIn {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.page-book-shipment .bs-courier .bs-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.page-book-shipment .bs-courier .bs-label i {
+    color: var(--jp-orange);
+}
+
+.page-book-shipment .bs-courier .bs-hint {
+    margin-top: 10px;
+}
+
+.page-book-shipment .bs-courier-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.page-book-shipment .bs-courier-opt {
+    position: relative;
+    display: block;
+    margin: 0;
+    min-width: 0;
+    cursor: pointer;
+}
+
+/* "All Couriers" takes the full row on phones */
+.page-book-shipment .bs-courier-opt:first-child {
+    grid-column: 1 / -1;
+}
+
+.page-book-shipment .bs-courier-opt input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.page-book-shipment .bs-courier-opt>span {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+    padding: 8px 10px;
+    background: var(--jp-white);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(30, 42, 107, .04);
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.page-book-shipment .bs-courier-ico {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    font-style: normal;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    color: var(--jp-orange);
+    background: rgba(242, 99, 35, .1);
+    transition: background .2s ease, color .2s ease;
+}
+
+.page-book-shipment .bs-courier-ico i {
+    font-size: 14px;
+}
+
+.page-book-shipment .bs-courier-txt {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.page-book-shipment .bs-courier-txt b {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--jp-navy);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.page-book-shipment .bs-courier-txt small {
+    margin-top: 2px;
+    font-size: 11.5px;
+    color: var(--jp-text-muted);
+}
+
+/* selected */
+.page-book-shipment .bs-courier-opt input:checked+span {
+    background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+    border-color: var(--jp-navy);
+    box-shadow: 0 8px 18px rgba(43, 57, 144, .25);
+}
+
+.page-book-shipment .bs-courier-opt input:checked+span .bs-courier-ico {
+    color: var(--jp-white);
+    background: var(--jp-orange);
+}
+
+.page-book-shipment .bs-courier-opt input:checked+span .bs-courier-txt b {
+    color: var(--jp-white);
+}
+
+.page-book-shipment .bs-courier-opt input:checked+span .bs-courier-txt small {
+    color: var(--jp-text-light-blue-2);
+}
+
+.page-book-shipment .bs-courier-opt input:focus-visible+span {
+    outline: 3px solid rgba(242, 99, 35, .45);
+    outline-offset: 2px;
+}
+
+/* hover only on real hover devices (no sticky hover on phones) */
+@media (hover: hover) {
+    .page-book-shipment .bs-courier-opt:hover>span {
+        border-color: var(--jp-orange);
+        transform: translateY(-1px);
+    }
+
+    .page-book-shipment .bs-courier-opt input:checked+span {
+        transform: none;
+    }
+}
+
+/* tablet + desktop: 4 per row */
+@media (min-width: 576px) {
+    .page-book-shipment .bs-courier-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-courier-opt:first-child {
+        grid-column: auto;
+    }
+
+    .page-book-shipment .bs-courier-opt:first-child .bs-courier-txt small {
+        display: none;
+    }
+}
+
+/* phones: compact */
+@media (max-width: 767px) {
+    .page-book-shipment .bs-courier {
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 12px;
+    }
+
+    .page-book-shipment .bs-courier-opt>span {
+        min-height: 48px;
+        padding: 7px 9px;
+        gap: 8px;
+        border-radius: 10px;
+    }
+
+    .page-book-shipment .bs-courier-ico {
+        flex-basis: 30px;
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+        border-radius: 9px;
+    }
+}
+
+/* very small phones (320px) */
+@media (max-width: 380px) {
+    .page-book-shipment .bs-courier-txt b {
+        font-size: 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-book-shipment .bs-courier {
+        animation: none;
+    }
+
+    .page-book-shipment .bs-courier-opt>span,
+    .page-book-shipment .bs-courier-ico {
+        transition: none;
+    }
+}
+
+
+/* ===============================================================
+   PICKUP ROW: City | Date | Time
+   Desktop = 3 in one line, Tablet = 2 + time below, Mobile = 1 column
+   (adapts to the form width using a container query)
+   =============================================================== */
+.page-book-shipment .bs-pickup {
+    container: bs-pickup / inline-size;
+}
+
+.page-book-shipment .bs-pickup-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0 14px;
+}
+
+.page-book-shipment .bs-pickup-grid .bs-field {
+    min-width: 0;
+}
+
+/* labels never wrap or push the inputs out of line */
+.page-book-shipment .bs-pickup-grid .bs-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* long city text / date value never breaks the layout */
+.page-book-shipment .bs-pickup-grid .form-control,
+.page-book-shipment .bs-pickup-grid .form-select {
+    text-overflow: ellipsis;
+}
+
+/* date input: same height + clean look on iOS / Android */
+.page-book-shipment .bs-pickup-grid input[type="date"] {
+    display: block;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.page-book-shipment .bs-pickup-grid input[type="date"]::-webkit-date-and-time-value {
+    text-align: left;
+}
+
+.page-book-shipment .bs-pickup-grid input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: .7;
+}
+
+.page-book-shipment .bs-pickup-grid input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* medium width: City + Date on one line, Time below (full width) */
+@container bs-pickup (min-width: 480px) {
+    .page-book-shipment .bs-pickup-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-pickup-grid .bs-pickup-time {
+        grid-column: 1 / -1;
+    }
+}
+
+/* wide (desktop): City + Date + Time on ONE line */
+@container bs-pickup (min-width: 700px) {
+    .page-book-shipment .bs-pickup-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-pickup-grid .bs-pickup-time {
+        grid-column: auto;
+    }
+}
+
+/* old browsers without container queries */
+@supports not (container-type: inline-size) {
+    @media (min-width: 576px) {
+        .page-book-shipment .bs-pickup-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .page-book-shipment .bs-pickup-grid .bs-pickup-time {
             grid-column: 1 / -1;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .page-book-shipment .bs-pickup-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .page-book-shipment .bs-pickup-grid .bs-pickup-time {
+            grid-column: auto;
+        }
+    }
+}
+
+
+/* ===============================================================
+   RECEIVER ROW: Country | City / town | Postal / ZIP
+   Desktop = 3 in one line, Tablet = 2 + postal below, Mobile = 1 column
+   (adapts to the form width using a container query)
+   =============================================================== */
+.page-book-shipment .bs-recv {
+    container: bs-recv / inline-size;
+}
+
+.page-book-shipment .bs-recv-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0 14px;
+}
+
+.page-book-shipment .bs-recv-grid .bs-field {
+    min-width: 0;
+}
+
+/* labels never wrap or push inputs out of line */
+.page-book-shipment .bs-recv-grid .bs-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* long country / city text never breaks the layout */
+.page-book-shipment .bs-recv-grid .form-control {
+    text-overflow: ellipsis;
+}
+
+/* medium width: Country + City on one line, Postal below (full width) */
+@container bs-recv (min-width: 480px) {
+    .page-book-shipment .bs-recv-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-recv-grid .bs-recv-postal {
+        grid-column: 1 / -1;
+    }
+}
+
+/* wide (desktop): Country + City + Postal on ONE line */
+@container bs-recv (min-width: 700px) {
+    .page-book-shipment .bs-recv-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-recv-grid .bs-recv-postal {
+        grid-column: auto;
+    }
+}
+
+/* old browsers without container queries */
+@supports not (container-type: inline-size) {
+    @media (min-width: 576px) {
+        .page-book-shipment .bs-recv-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .page-book-shipment .bs-recv-grid .bs-recv-postal {
+            grid-column: 1 / -1;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .page-book-shipment .bs-recv-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .page-book-shipment .bs-recv-grid .bs-recv-postal {
+            grid-column: auto;
+        }
+    }
+}
+
+
+/* ===============================================================
+   REVIEW STEP: route card + grouped detail cards
+   (fixes letter-by-letter wrapping of values)
+   =============================================================== */
+.page-book-shipment .bs-review {
+    display: grid;
+    gap: 12px;
+    padding: 0;
+    margin-bottom: 18px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+}
+
+/* ----- route card ----- */
+.page-book-shipment .bs-rv-route {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 10px 12px;
+    padding: 18px;
+    color: var(--jp-white);
+    background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+    border-radius: 16px;
+    box-shadow: 0 14px 30px rgba(43, 57, 144, .25);
+}
+
+.page-book-shipment .bs-rv-route::before {
+    content: "";
+    position: absolute;
+    right: -40px;
+    top: -50px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: rgba(242, 99, 35, .22);
+    pointer-events: none;
+}
+
+.page-book-shipment .bs-rv-pt {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.page-book-shipment .bs-rv-pt--to {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.page-book-shipment .bs-rv-flag {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .14);
+    font-size: 16px;
+}
+
+.page-book-shipment .bs-rv-flag img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.page-book-shipment .bs-rv-pt>div {
+    min-width: 0;
+}
+
+.page-book-shipment .bs-rv-pt small {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--jp-orange-light);
+}
+
+.page-book-shipment .bs-rv-pt b {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.25;
+    overflow-wrap: break-word;
+}
+
+.page-book-shipment .bs-rv-arrow {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 13px;
+    color: var(--jp-white);
+    background: var(--jp-orange);
+    box-shadow: 0 6px 14px rgba(242, 99, 35, .4);
+}
+
+.page-book-shipment .bs-rv-chips {
+    position: relative;
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, .14);
+}
+
+.page-book-shipment .bs-rv-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--jp-white);
+    background: rgba(255, 255, 255, .12);
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 999px;
+}
+
+.page-book-shipment .bs-rv-chip i {
+    font-size: 11px;
+    color: var(--jp-orange-accent);
+}
+
+/* ----- detail cards ----- */
+.page-book-shipment .bs-rv-card {
+    background: var(--jp-white);
+    border: 1px solid var(--jp-border-muted);
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(30, 42, 107, .05);
+    overflow: hidden;
+}
+
+.page-book-shipment .bs-rv-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--jp-bg-light);
+    border-bottom: 1px solid var(--jp-border-muted);
+}
+
+.page-book-shipment .bs-rv-head h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--jp-navy);
+}
+
+.page-book-shipment .bs-rv-head h4 i {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    font-size: 13px;
+    color: var(--jp-orange);
+    background: rgba(242, 99, 35, .1);
+}
+
+.page-book-shipment .bs-rv-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 0 14px;
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--jp-navy);
+    background: var(--jp-white);
+    border: 1.5px solid var(--jp-border-muted);
+    border-radius: 999px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color .2s ease, color .2s ease, background .2s ease;
+}
+
+.page-book-shipment .bs-rv-edit i {
+    font-size: 11px;
+}
+
+.page-book-shipment .bs-rv-edit:hover {
+    color: var(--jp-orange);
+    border-color: var(--jp-orange);
+    background: #fff6f1;
+}
+
+.page-book-shipment .bs-rv-edit:focus-visible {
+    outline: 3px solid rgba(242, 99, 35, .45);
+    outline-offset: 2px;
+}
+
+.page-book-shipment .bs-rv-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 11px 14px;
+    border-top: 1px solid var(--jp-border-light);
+    font-size: 13.5px;
+}
+
+.page-book-shipment .bs-rv-row:first-child {
+    border-top: 0;
+}
+
+.page-book-shipment .bs-rv-row>span {
+    flex: 0 0 34%;
+    max-width: 160px;
+    font-weight: 600;
+    color: var(--jp-text-muted);
+}
+
+.page-book-shipment .bs-rv-row>strong {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: right;
+    font-weight: 700;
+    line-height: 1.45;
+    color: var(--jp-navy);
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+.page-book-shipment .bs-rv-empty {
+    font-style: normal;
+    font-weight: 500;
+    color: var(--jp-text-subtle);
+}
+
+/* ----- tablet / desktop: two small cards side by side is NOT used,
+         keeping one column so long addresses always have room ----- */
+
+/* ----- phones ----- */
+@media (max-width: 575px) {
+    .page-book-shipment .bs-rv-route {
+        padding: 14px;
+        gap: 8px 8px;
+        border-radius: 14px;
+    }
+
+    .page-book-shipment .bs-rv-flag {
+        flex-basis: 28px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .page-book-shipment .bs-rv-flag img {
+        width: 28px;
+        height: 28px;
+    }
+
+    .page-book-shipment .bs-rv-pt {
+        gap: 8px;
+    }
+
+    .page-book-shipment .bs-rv-pt b {
+        font-size: 13.5px;
+    }
+
+    .page-book-shipment .bs-rv-arrow {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+    }
+
+    .page-book-shipment .bs-rv-chip {
+        padding: 4px 9px;
+        font-size: 12px;
+    }
+
+    .page-book-shipment .bs-rv-head {
+        padding: 10px 12px;
+    }
+
+    .page-book-shipment .bs-rv-head h4 {
+        font-size: 14px;
+    }
+
+    /* label on top, value below (left aligned) */
+    .page-book-shipment .bs-rv-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        padding: 10px 12px;
+    }
+
+    .page-book-shipment .bs-rv-row>span {
+        flex: none;
+        max-width: none;
+        font-size: 11.5px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+    }
+
+    .page-book-shipment .bs-rv-row>strong {
+        flex: none;
+        text-align: left;
+        font-size: 14px;
+    }
+}
+
+/* very small phones: stack the route vertically */
+@media (max-width: 359px) {
+    .page-book-shipment .bs-rv-route {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .page-book-shipment .bs-rv-pt--to {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .page-book-shipment .bs-rv-arrow {
+        transform: rotate(90deg);
+        justify-self: start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-book-shipment .bs-rv-edit {
+        transition: none;
+    }
+}
+
+
+/* ===============================================================
+   WEIGHT ROW: Weight | Pieces | Declared value
+   Desktop = 3 in one line, Tablet = 2 + value below, Mobile = 1 column
+   (adapts to the form width using a container query)
+   =============================================================== */
+.page-book-shipment .bs-wpv {
+    container: bs-wpv / inline-size;
+}
+
+.page-book-shipment .bs-wpv-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0 14px;
+}
+
+.page-book-shipment .bs-wpv-grid .bs-field {
+    min-width: 0;
+}
+
+/* labels never wrap or push inputs out of line */
+.page-book-shipment .bs-wpv-grid .bs-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* hide browser number arrows on declared value (cleaner, same height as others) */
+.page-book-shipment .bs-wpv-grid .bs-wpv-value input::-webkit-outer-spin-button,
+.page-book-shipment .bs-wpv-grid .bs-wpv-value input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.page-book-shipment .bs-wpv-grid .bs-wpv-value input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* medium width: Weight + Pieces on one line, Declared value below (full width) */
+@container bs-wpv (min-width: 480px) {
+    .page-book-shipment .bs-wpv-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-wpv-grid .bs-wpv-value {
+        grid-column: 1 / -1;
+    }
+}
+
+/* wide (desktop): Weight + Pieces + Declared value on ONE line */
+@container bs-wpv (min-width: 700px) {
+    .page-book-shipment .bs-wpv-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .page-book-shipment .bs-wpv-grid .bs-wpv-value {
+        grid-column: auto;
+    }
+}
+
+/* old browsers without container queries */
+@supports not (container-type: inline-size) {
+    @media (min-width: 576px) {
+        .page-book-shipment .bs-wpv-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .page-book-shipment .bs-wpv-grid .bs-wpv-value {
+            grid-column: 1 / -1;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .page-book-shipment .bs-wpv-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .page-book-shipment .bs-wpv-grid .bs-wpv-value {
+            grid-column: auto;
         }
     }
 }

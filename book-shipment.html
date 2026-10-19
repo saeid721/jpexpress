@@ -510,13 +510,64 @@
                                     </div>
                                 </div>
 
-                                <!-- Service description (filled by JS) -->
                                 <p class="bs-hint bs-hint--svc" id="bsSvcHint" hidden>
                                     <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
                                     <span></span>
                                 </p>
 
-                                <!-- Route: From + Destination + City / postal -->
+                                <!-- Courier (hidden for Sea Freight / until a service is chosen) -->
+                                <div class="bs-field bs-courier" id="bsCourierWrap" data-field="courier" hidden>
+                                    <span class="bs-label" id="bsCourierLbl">
+                                        <i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+                                        Preferred courier <small>(optional)</small>
+                                    </span>
+                                    <div class="bs-courier-grid" role="radiogroup" aria-labelledby="bsCourierLbl">
+                                        <label class="bs-courier-opt">
+                                            <input type="radio" name="courier" value="all" checked>
+                                            <span>
+                                                <em class="bs-courier-ico"><i class="fa-solid fa-layer-group"
+                                                        aria-hidden="true"></i></em>
+                                                <span class="bs-courier-txt"><b>All Couriers</b><small>Best available
+                                                        rate</small></span>
+                                            </span>
+                                        </label>
+                                        <label class="bs-courier-opt">
+                                            <input type="radio" name="courier" value="dhl">
+                                            <span><em class="bs-courier-ico">DH</em><span
+                                                    class="bs-courier-txt"><b>DHL</b></span></span>
+                                        </label>
+                                        <label class="bs-courier-opt">
+                                            <input type="radio" name="courier" value="fedex">
+                                            <span><em class="bs-courier-ico">FX</em><span
+                                                    class="bs-courier-txt"><b>FedEx</b></span></span>
+                                        </label>
+                                        <label class="bs-courier-opt">
+                                            <input type="radio" name="courier" value="ups">
+                                            <span><em class="bs-courier-ico">UP</em><span
+                                                    class="bs-courier-txt"><b>UPS</b></span></span>
+                                        </label>
+                                        <label class="bs-courier-opt">
+                                            <input type="radio" name="courier" value="aramex">
+                                            <span><em class="bs-courier-ico">AR</em><span
+                                                    class="bs-courier-txt"><b>Aramex</b></span></span>
+                                        </label>
+                                        <label class="bs-courier-opt">
+                                            <input type="radio" name="courier" value="jpex">
+                                            <span><em class="bs-courier-ico">JP</em><span
+                                                    class="bs-courier-txt"><b>JPEX</b></span></span>
+                                        </label>
+                                        <label class="bs-courier-opt">
+                                            <input type="radio" name="courier" value="gpo">
+                                            <span><em class="bs-courier-ico">GP</em><span
+                                                    class="bs-courier-txt"><b>GPO</b></span></span>
+                                        </label>
+                                    </div>
+                                    <p class="bs-hint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                                        Final courier is confirmed by our team based on destination and availability.
+                                    </p>
+                                </div>
+
+                                <!-- Route: From + Destination -->
                                 <div class="bs-route">
                                     <div class="bs-route-grid">
 
@@ -568,14 +619,6 @@
                                             <span class="bs-err"></span>
                                         </div>
 
-                                        <!-- City / postal -->
-                                        <div class="bs-field bs-route-city" data-field="city">
-                                            <label class="bs-label" for="bsCity">City / postal code
-                                                <small>(optional)</small></label>
-                                            <input id="bsCity" class="form-control" type="text"
-                                                placeholder="e.g. New York or 10001" maxlength="80">
-                                        </div>
-
                                     </div>
                                 </div>
 
@@ -585,30 +628,40 @@
                                     <span></span>
                                 </p>
 
-                                <!-- Weight + pieces -->
-                                <div class="bs-grid-2">
-                                    <div class="bs-field" data-field="weight">
-                                        <label class="bs-label" for="bsWeight">Weight <b>*</b></label>
-                                        <div class="bs-input-group">
-                                            <input id="bsWeight" type="number" inputmode="decimal" min="0" step="any"
-                                                placeholder="e.g. 2.5" required>
-                                            <select id="bsWUnit" aria-label="Weight unit">
-                                                <option value="kg">kg</option>
-                                                <option value="g">g</option>
-                                                <option value="lb">lb</option>
-                                            </select>
+                                <!-- Weight + pieces + declared value -->
+                                <div class="bs-wpv">
+                                    <div class="bs-wpv-grid">
+                                        <div class="bs-field" data-field="weight">
+                                            <label class="bs-label" for="bsWeight">Weight <b>*</b></label>
+                                            <div class="bs-input-group">
+                                                <input id="bsWeight" type="number" inputmode="decimal" min="0"
+                                                    step="any" placeholder="e.g. 2.5" required>
+                                                <select id="bsWUnit" aria-label="Weight unit">
+                                                    <option value="kg">kg</option>
+                                                    <option value="g">g</option>
+                                                    <option value="lb">lb</option>
+                                                </select>
+                                            </div>
+                                            <span class="bs-err"></span>
                                         </div>
-                                        <span class="bs-err"></span>
-                                    </div>
-                                    <div class="bs-field" data-field="pieces">
-                                        <label class="bs-label" for="bsPieces">Pieces</label>
-                                        <div class="bs-num">
-                                            <button type="button" class="bs-num-btn" data-step="-1"
-                                                aria-label="Decrease pieces"><i class="fa-solid fa-minus"></i></button>
-                                            <input id="bsPieces" type="number" inputmode="numeric" min="1" max="999"
-                                                step="1" value="1">
-                                            <button type="button" class="bs-num-btn" data-step="1"
-                                                aria-label="Increase pieces"><i class="fa-solid fa-plus"></i></button>
+                                        <div class="bs-field" data-field="pieces">
+                                            <label class="bs-label" for="bsPieces">Pieces</label>
+                                            <div class="bs-num">
+                                                <button type="button" class="bs-num-btn" data-step="-1"
+                                                    aria-label="Decrease pieces"><i
+                                                        class="fa-solid fa-minus"></i></button>
+                                                <input id="bsPieces" type="number" inputmode="numeric" min="1" max="999"
+                                                    step="1" value="1">
+                                                <button type="button" class="bs-num-btn" data-step="1"
+                                                    aria-label="Increase pieces"><i
+                                                        class="fa-solid fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="bs-field bs-wpv-value" data-field="value">
+                                            <label class="bs-label" for="bsValue">Declared value
+                                                <small>(optional)</small></label>
+                                            <input id="bsValue" class="form-control" type="number" inputmode="decimal"
+                                                min="0" step="any" placeholder="e.g. 5000">
                                         </div>
                                     </div>
                                 </div>
@@ -645,13 +698,6 @@
                                     <p class="bs-hint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>
                                         Accurate
                                         descriptions help with customs clearance and avoid delays.</p>
-                                </div>
-
-                                <div class="bs-field" data-field="value">
-                                    <label class="bs-label" for="bsValue">Declared value
-                                        <small>(optional)</small></label>
-                                    <input id="bsValue" class="form-control" type="number" inputmode="decimal" min="0"
-                                        step="any" placeholder="e.g. 5000">
                                 </div>
 
                                 <!-- Optional extras -->
@@ -709,29 +755,31 @@
                                     <span class="bs-err"></span>
                                 </div>
 
-                                <div class="bs-grid-2">
-                                    <div class="bs-field" data-field="senderCity">
-                                        <label class="bs-label" for="bsSenderCity">City / area <b>*</b></label>
-                                        <input id="bsSenderCity" class="form-control" type="text"
-                                            placeholder="e.g. Mohakhali, Dhaka" required>
-                                        <span class="bs-err"></span>
+                                <div class="bs-pickup">
+                                    <div class="bs-pickup-grid">
+                                        <div class="bs-field" data-field="senderCity">
+                                            <label class="bs-label" for="bsSenderCity">City / area <b>*</b></label>
+                                            <input id="bsSenderCity" class="form-control" type="text"
+                                                placeholder="e.g. Mohakhali, Dhaka" autocomplete="address-level2"
+                                                required>
+                                            <span class="bs-err"></span>
+                                        </div>
+                                        <div class="bs-field" data-field="pickupDate">
+                                            <label class="bs-label" for="bsPickupDate">Pickup date
+                                                <b>*</b></label>
+                                            <input id="bsPickupDate" class="form-control" type="date" required>
+                                            <span class="bs-err"></span>
+                                        </div>
+                                        <div class="bs-field bs-pickup-time" data-field="pickupTime">
+                                            <label class="bs-label" for="bsPickupTime">Pickup time</label>
+                                            <select id="bsPickupTime" class="form-select">
+                                                <option value="anytime">Any time</option>
+                                                <option value="morning">Morning (9 AM – 12 PM)</option>
+                                                <option value="afternoon">Afternoon (12 PM – 4 PM)</option>
+                                                <option value="evening">Evening (4 PM – 8 PM)</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="bs-field" data-field="pickupDate">
-                                        <label class="bs-label" for="bsPickupDate">Preferred pickup date
-                                            <b>*</b></label>
-                                        <input id="bsPickupDate" class="form-control" type="date" required>
-                                        <span class="bs-err"></span>
-                                    </div>
-                                </div>
-
-                                <div class="bs-field" data-field="pickupTime">
-                                    <label class="bs-label" for="bsPickupTime">Preferred pickup time</label>
-                                    <select id="bsPickupTime" class="form-select">
-                                        <option value="anytime">Any time</option>
-                                        <option value="morning">Morning (9 AM – 12 PM)</option>
-                                        <option value="afternoon">Afternoon (12 PM – 4 PM)</option>
-                                        <option value="evening">Evening (4 PM – 8 PM)</option>
-                                    </select>
                                 </div>
                             </fieldset>
 
@@ -778,24 +826,28 @@
                                     <span class="bs-err"></span>
                                 </div>
 
-                                <div class="bs-grid-2">
-                                    <div class="bs-field" data-field="receiverCity">
-                                        <label class="bs-label" for="bsReceiverCity">City / town <b>*</b></label>
-                                        <input id="bsReceiverCity" class="form-control" type="text" required>
-                                        <span class="bs-err"></span>
+                                <div class="bs-recv">
+                                    <div class="bs-recv-grid">
+                                        <div class="bs-field" data-field="receiverCountry">
+                                            <label class="bs-label" for="bsReceiverCountry">Country <b>*</b></label>
+                                            <input id="bsReceiverCountry" class="form-control" type="text"
+                                                autocomplete="country-name" placeholder="Auto-filled from destination"
+                                                required>
+                                            <span class="bs-err"></span>
+                                        </div>
+                                        <div class="bs-field" data-field="receiverCity">
+                                            <label class="bs-label" for="bsReceiverCity">City / town <b>*</b></label>
+                                            <input id="bsReceiverCity" class="form-control" type="text"
+                                                autocomplete="off" placeholder="e.g. Vienna" required>
+                                            <span class="bs-err"></span>
+                                        </div>
+                                        <div class="bs-field bs-recv-postal" data-field="receiverPostal">
+                                            <label class="bs-label" for="bsReceiverPostal">Postal / ZIP
+                                                <small>(optional)</small></label>
+                                            <input id="bsReceiverPostal" class="form-control" type="text" maxlength="20"
+                                                autocomplete="off" placeholder="e.g. 1010">
+                                        </div>
                                     </div>
-                                    <div class="bs-field" data-field="receiverPostal">
-                                        <label class="bs-label" for="bsReceiverPostal">Postal / ZIP code <small>(if
-                                                applicable)</small></label>
-                                        <input id="bsReceiverPostal" class="form-control" type="text" maxlength="20">
-                                    </div>
-                                </div>
-
-                                <div class="bs-field" data-field="receiverCountry">
-                                    <label class="bs-label" for="bsReceiverCountry">Country <b>*</b></label>
-                                    <input id="bsReceiverCountry" class="form-control" type="text" required
-                                        placeholder="Auto-filled from destination">
-                                    <span class="bs-err"></span>
                                 </div>
                             </fieldset>
 
@@ -865,6 +917,7 @@
                                 <h3><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Booking Summary</h3>
                                 <ul class="bs-summary-list" id="bsSummaryList">
                                     <li><span>Service</span><strong id="sumService">—</strong></li>
+                                    <li><span>Courier</span><strong id="sumCourier">—</strong></li>
                                     <li><span>From</span><strong id="sumFrom">—</strong></li>
                                     <li><span>Destination</span><strong id="sumDestination">—</strong></li>
                                     <li><span>Weight</span><strong id="sumWeight">—</strong></li>
@@ -1086,6 +1139,7 @@
                 review: $('bsReview'),
                 summary: {
                     service: $('sumService'),
+                    courier: $('sumCourier'),
                     from: $('sumFrom'),
                     destination: $('sumDestination'),
                     weight: $('sumWeight'),
@@ -1448,6 +1502,7 @@
                 var s = els.summary;
                 var svc = $('bsService');
                 s.service.textContent = svc.value ? svc.options[svc.selectedIndex].text : '—';
+                if (s.courier) s.courier.textContent = courierLabel() || '—';
                 if (s.from) s.from.textContent = ($('bsFrom').value || '').trim() || '—';
                 s.destination.textContent = destInput.value.trim() || '—';
                 var w = parseFloat($('bsWeight').value) || 0;
@@ -1482,6 +1537,32 @@
             }
             $('bsService').addEventListener('change', updateSvcHint);
             updateSvcHint();
+
+            /* ---------- Courier selector ---------- */
+            var COURIER_NAMES = {
+                all: 'All Couriers', dhl: 'DHL', fedex: 'FedEx',
+                ups: 'UPS', aramex: 'Aramex', jpex: 'JPEX', gpo: 'GPO'
+            };
+            var courierWrap = $('bsCourierWrap');
+
+            function courierLabel() {
+                var r = form.querySelector('input[name="courier"]:checked');
+                if (!r || r.disabled) return '';
+                return (COURIER_NAMES || {})[r.value] || '';
+            }
+
+            /* show only when a non-sea service is chosen; disabled inputs are not submitted */
+            function syncCourier() {
+                var svc = $('bsService').value;
+                var show = !!svc && svc !== 'sea';
+                courierWrap.hidden = !show;
+                Array.prototype.forEach.call(courierWrap.querySelectorAll('input'), function (i) {
+                    i.disabled = !show;
+                });
+                updateSummary();
+            }
+            $('bsService').addEventListener('change', syncCourier);
+            syncCourier();
 
             /* ---------- Step navigation ---------- */
             function showStep(n) {
@@ -1600,33 +1681,99 @@
 
             /* ---------- Review builder ---------- */
             function buildReview() {
+                function val(el) { return String(el && el.value != null ? el.value : '').trim(); }
+                function cell(t) {
+                    return t ? esc(t) : '<em class="bs-rv-empty">Not provided</em>';
+                }
+
                 var svc = $('bsService');
-                var rows = [
-                    ['Shipping service', svc.value ? svc.options[svc.selectedIndex].text : '—'],
-                    ['Shipment type', $('bsType').value || '—'],
-                    ['From', $('bsFrom').value.trim() || '—'],
-                    ['Destination', destInput.value.trim() || '—'],
-                    ['City / postal', $('bsCity').value.trim() || '—'],
-                    ['Weight', ($('bsWeight').value || '—') + ' ' + $('bsWUnit').value],
-                    ['Pieces', $('bsPieces').value || '1'],
-                    ['Contents', $('bsContents').value.trim() || '—'],
-                    ['Declared value', $('bsValue').value ? $('bsValue').value : '—'],
-                    ['Sender', $('bsSenderName').value.trim() || '—'],
-                    ['Sender phone', $('bsSenderPhone').value.trim() || '—'],
-                    ['Pickup address', $('bsSenderAddress').value.trim() || '—'],
-                    ['Pickup city', $('bsSenderCity').value.trim() || '—'],
-                    ['Pickup date', $('bsPickupDate').value || '—'],
-                    ['Pickup time', $('bsPickupTime').options[$('bsPickupTime').selectedIndex].text],
-                    ['Recipient', $('bsReceiverName').value.trim() || '—'],
-                    ['Recipient phone', $('bsReceiverPhone').value.trim() || '—'],
-                    ['Delivery address', $('bsReceiverAddress').value.trim() || '—'],
-                    ['Country', $('bsReceiverCountry').value.trim() || '—']
+                var svcText = svc.value ? svc.options[svc.selectedIndex].text : '';
+                var courier = courierLabel();
+                var fromName = val($('bsFrom'));
+                var toName = val(destInput);
+                var weight = val($('bsWeight'));
+                var wUnit = $('bsWUnit').value;
+                var pieces = val($('bsPieces')) || '1';
+                var timeSel = $('bsPickupTime');
+                var timeText = timeSel.options[timeSel.selectedIndex].text;
+                var declared = val($('bsValue'));
+                var extras = [];
+                if ($('bsInsurance').checked) extras.push('Cargo insurance');
+                if ($('bsFragile').checked) extras.push('Fragile');
+
+                var groups = [
+                    {
+                        step: 1, icon: 'fa-box-open', title: 'Shipment',
+                        rows: [
+                            ['Service', svcText],
+                            ['Courier', courier],
+                            ['Shipment type', val($('bsType'))],
+                            ['Contents', val($('bsContents'))],
+                            ['Declared value', declared],
+                            ['Extras', extras.join(', ')]
+                        ]
+                    },
+                    {
+                        step: 2, icon: 'fa-truck-pickup', title: 'Sender & pickup',
+                        rows: [
+                            ['Name', val($('bsSenderName'))],
+                            ['Phone', val($('bsSenderPhone'))],
+                            ['Email', val($('bsSenderEmail'))],
+                            ['Pickup address', val($('bsSenderAddress'))],
+                            ['City / area', val($('bsSenderCity'))],
+                            ['Pickup date', val($('bsPickupDate'))],
+                            ['Pickup time', timeText]
+                        ]
+                    },
+                    {
+                        step: 3, icon: 'fa-location-dot', title: 'Receiver',
+                        rows: [
+                            ['Name', val($('bsReceiverName'))],
+                            ['Phone', val($('bsReceiverPhone'))],
+                            ['Email', val($('bsReceiverEmail'))],
+                            ['Delivery address', val($('bsReceiverAddress'))],
+                            ['City / town', val($('bsReceiverCity'))],
+                            ['Postal / ZIP', val($('bsReceiverPostal'))],
+                            ['Country', val($('bsReceiverCountry'))]
+                        ]
+                    }
                 ];
 
-                els.review.innerHTML = rows.map(function (r) {
-                    return '<div class="bs-review-row"><span>' + esc(r[0]) + '</span><strong>' + esc(r[1]) + '</strong></div>';
+                var chips = [];
+                if (svcText) chips.push('<span class="bs-rv-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i>' + esc(svcText) + '</span>');
+                if (courier) chips.push('<span class="bs-rv-chip"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i>' + esc(courier) + '</span>');
+                chips.push('<span class="bs-rv-chip"><i class="fa-solid fa-weight-hanging" aria-hidden="true"></i>' + (weight ? esc(weight + ' ' + wUnit) : 'No weight') + '</span>');
+                chips.push('<span class="bs-rv-chip"><i class="fa-solid fa-cubes" aria-hidden="true"></i>' + esc(pieces) + (pieces === '1' ? ' piece' : ' pieces') + '</span>');
+
+                var route =
+                    '<div class="bs-rv-route">' +
+                    '<div class="bs-rv-pt"><span class="bs-rv-flag">' + (fromName ? originFlag(fromName) : '<i class="fa-solid fa-earth-asia" aria-hidden="true"></i>') + '</span>' +
+                    '<div><small>From</small><b>' + esc(fromName || '—') + '</b></div></div>' +
+                    '<span class="bs-rv-arrow" aria-hidden="true"><i class="fa-solid fa-plane"></i></span>' +
+                    '<div class="bs-rv-pt bs-rv-pt--to"><span class="bs-rv-flag">' + (toName ? flagHtml(toName) : '<i class="fa-solid fa-earth-asia" aria-hidden="true"></i>') + '</span>' +
+                    '<div><small>To</small><b>' + esc(toName || '—') + '</b></div></div>' +
+                    '<div class="bs-rv-chips">' + chips.join('') + '</div>' +
+                    '</div>';
+
+                var cards = groups.map(function (g) {
+                    return '<section class="bs-rv-card" aria-label="' + esc(g.title) + '">' +
+                        '<header class="bs-rv-head"><h4><i class="fa-solid ' + g.icon + '" aria-hidden="true"></i>' + esc(g.title) + '</h4>' +
+                        '<button type="button" class="bs-rv-edit" data-goto="' + g.step + '" aria-label="Edit ' + esc(g.title) + '">' +
+                        '<i class="fa-solid fa-pen" aria-hidden="true"></i> Edit</button></header>' +
+                        '<div class="bs-rv-body">' + g.rows.map(function (r) {
+                            if (r[0] === 'Extras' && !r[1]) return '';
+                            return '<div class="bs-rv-row"><span>' + esc(r[0]) + '</span><strong>' + cell(r[1]) + '</strong></div>';
+                        }).join('') + '</div></section>';
                 }).join('');
+
+                els.review.innerHTML = route + cards;
             }
+
+            /* Edit buttons in the review jump back to that step */
+            els.review.addEventListener('click', function (e) {
+                var b = e.target.closest('[data-goto]');
+                if (b) showStep(parseInt(b.getAttribute('data-goto'), 10));
+            });
 
             /* ---------- Status ---------- */
             function showStatus(type, title, body) {
@@ -1730,6 +1877,7 @@
                     var lines = [
                         'Hi JP Express, I would like to book a shipment.',
                         'Service: ' + ($('bsService').value ? $('bsService').options[$('bsService').selectedIndex].text : '—'),
+                        'Courier: ' + (courierLabel() || '—'),
                         'Type: ' + ($('bsType').value || '—'),
                         'From: ' + ($('bsFrom').value.trim() || '—'),
                         'Destination: ' + (destInput.value.trim() || '—'),
@@ -1769,8 +1917,9 @@
                     $('bsConsentErr').textContent = '';
                     els.status.hidden = true;
                     syncFrom();
-                    updateSummary();
                     updateSvcHint();
+                    syncCourier();
+                    updateSummary();
                 }, 0);
             });
 
