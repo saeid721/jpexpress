@@ -628,44 +628,6 @@
                                     <span></span>
                                 </p>
 
-                                <!-- Weight + pieces + declared value -->
-                                <div class="bs-wpv">
-                                    <div class="bs-wpv-grid">
-                                        <div class="bs-field" data-field="weight">
-                                            <label class="bs-label" for="bsWeight">Weight <b>*</b></label>
-                                            <div class="bs-input-group">
-                                                <input id="bsWeight" type="number" inputmode="decimal" min="0"
-                                                    step="any" placeholder="e.g. 2.5" required>
-                                                <select id="bsWUnit" aria-label="Weight unit">
-                                                    <option value="kg">kg</option>
-                                                    <option value="g">g</option>
-                                                    <option value="lb">lb</option>
-                                                </select>
-                                            </div>
-                                            <span class="bs-err"></span>
-                                        </div>
-                                        <div class="bs-field" data-field="pieces">
-                                            <label class="bs-label" for="bsPieces">Pieces</label>
-                                            <div class="bs-num">
-                                                <button type="button" class="bs-num-btn" data-step="-1"
-                                                    aria-label="Decrease pieces"><i
-                                                        class="fa-solid fa-minus"></i></button>
-                                                <input id="bsPieces" type="number" inputmode="numeric" min="1" max="999"
-                                                    step="1" value="1">
-                                                <button type="button" class="bs-num-btn" data-step="1"
-                                                    aria-label="Increase pieces"><i
-                                                        class="fa-solid fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="bs-field bs-wpv-value" data-field="value">
-                                            <label class="bs-label" for="bsValue">Declared value
-                                                <small>(optional)</small></label>
-                                            <input id="bsValue" class="form-control" type="number" inputmode="decimal"
-                                                min="0" step="any" placeholder="e.g. 5000">
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!-- Dimensions (quick sizes depend on shipment type) -->
                                 <div class="bs-dims" id="bsDims">
                                     <div class="bs-dims-head">
@@ -719,6 +681,44 @@
                                         </div>
                                         <div class="bs-size-grid" id="bsSizeGrid" role="radiogroup"
                                             aria-label="Quick sizes"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Weight + pieces + declared value -->
+                                <div class="bs-wpv">
+                                    <div class="bs-wpv-grid">
+                                        <div class="bs-field" data-field="weight">
+                                            <label class="bs-label" for="bsWeight">Weight <b>*</b></label>
+                                            <div class="bs-input-group">
+                                                <input id="bsWeight" type="number" inputmode="decimal" min="0"
+                                                    step="any" placeholder="e.g. 2.5" required>
+                                                <select id="bsWUnit" aria-label="Weight unit">
+                                                    <option value="kg">kg</option>
+                                                    <option value="g">g</option>
+                                                    <option value="lb">lb</option>
+                                                </select>
+                                            </div>
+                                            <span class="bs-err"></span>
+                                        </div>
+                                        <div class="bs-field" data-field="pieces">
+                                            <label class="bs-label" for="bsPieces">Pieces</label>
+                                            <div class="bs-num">
+                                                <button type="button" class="bs-num-btn" data-step="-1"
+                                                    aria-label="Decrease pieces"><i
+                                                        class="fa-solid fa-minus"></i></button>
+                                                <input id="bsPieces" type="number" inputmode="numeric" min="1" max="999"
+                                                    step="1" value="1">
+                                                <button type="button" class="bs-num-btn" data-step="1"
+                                                    aria-label="Increase pieces"><i
+                                                        class="fa-solid fa-plus"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="bs-field bs-wpv-value" data-field="value">
+                                            <label class="bs-label" for="bsValue">Declared value
+                                                <small>(optional)</small></label>
+                                            <input id="bsValue" class="form-control" type="number" inputmode="decimal"
+                                                min="0" step="any" placeholder="e.g. 5000">
+                                        </div>
                                     </div>
                                 </div>
 
