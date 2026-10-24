@@ -535,6 +535,9 @@
                                     </div>
                                 </div>
 
+                                <!-- Country delivery stats (fills when a destination is chosen) -->
+                                <div class="bs-route-stats" id="bsRouteStats" aria-live="polite" hidden></div>
+
                                 <!-- Service + Shipment type (same line) -->
                                 <div class="bs-grid-2 bs-pair">
                                     <div class="bs-field" data-field="service">
@@ -1198,6 +1201,16 @@
             var destOptions = [];
             var destActive = -1;
 
+            var routeStats = $('bsRouteStats');
+            function renderRouteStats() {
+                if (!routeStats || !window.JPCountryStats) return;
+                var h = window.JPCountryStats.html(destInput.value, {
+                    note: 'Your booking joins an active route. We process and deliver parcels to this country every week.'
+                });
+                routeStats.innerHTML = h;
+                routeStats.hidden = !h;
+            }
+
             function flagHtml(name) {
                 if (flagMap[name]) {
                     return '<img src="https://flagcdn.com/w40/' + flagMap[name] + '.png" alt="" width="24" height="24" loading="lazy">';
@@ -1264,6 +1277,7 @@
                 destCombo.classList.toggle('has-text', !!name);
                 var rc = $('bsReceiverCountry');
                 if (name && rc) rc.value = name;
+                renderRouteStats();
                 updateSummary();
             }
 
@@ -1278,6 +1292,7 @@
                 destCombo.classList.toggle('has-text', !!destInput.value);
                 if (destList.hidden) openDestList();
                 else renderDestList(destInput.value);
+                renderRouteStats();
                 updateSummary();
             });
             destInput.addEventListener('keydown', function (e) {

@@ -2330,3 +2330,223 @@ html.page-track-shipment .hero.page-hero h1 {
     text-align: left;
   }
 }
+
+/* ===============================================================
+   COUNTRY DELIVERY STATS (shared: track-shipment + book-shipment)
+   =============================================================== */
+.jcs {
+  container: jcs / inline-size;
+  margin-top: 14px;
+  padding: clamp(14px, 3.5vw, 20px);
+  background: linear-gradient(180deg, var(--jp-white), var(--jp-bg-soft));
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 18px;
+  box-shadow: var(--jp-shadow-sm);
+  animation: jcsIn .35s ease both;
+}
+
+.jcs-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.jcs-head img {
+  flex: none;
+  width: 44px;
+  height: 30px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px var(--jp-border-muted), 0 2px 6px rgba(27, 37, 89, .12);
+}
+
+.jcs-title {
+  flex: 1 1 150px;
+  min-width: 0;
+}
+
+.jcs-title strong {
+  display: block;
+  font: 800 clamp(.95rem, 3.8vw, 1.05rem)/1.25 "Plus Jakarta Sans", sans-serif;
+  color: var(--jp-navy);
+}
+
+.jcs-title small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--jp-text-muted);
+}
+
+.jcs-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--jp-green);
+  background: rgba(29, 168, 107, .1);
+}
+
+.jcs-live i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: jcsPulse 1.8s ease-in-out infinite;
+}
+
+.jcs-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.jcs-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 12px;
+  align-items: center;
+  min-width: 0;
+  padding: 10px 14px 10px 10px;
+  text-align: left;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 14px;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+@media (hover: hover) {
+  .jcs-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--jp-blue-light);
+    box-shadow: var(--jp-shadow-sm);
+  }
+}
+
+.jcs-item i {
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin: 0;
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--jp-navy);
+  background: rgba(43, 57, 144, .08);
+}
+
+.jcs-item.is-go i {
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+.jcs-item.is-ok i {
+  color: var(--jp-green);
+  background: rgba(29, 168, 107, .1);
+}
+
+.jcs-item b {
+  grid-column: 2;
+  align-self: end;
+  display: block;
+  font: 800 1.2rem/1.1 "Plus Jakarta Sans", sans-serif;
+  color: var(--jp-navy);
+}
+
+.jcs-item span {
+  grid-column: 2;
+  align-self: start;
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.25;
+  color: var(--jp-text-muted);
+}
+
+/* wide card (track result on desktop, booking form on tablet/desktop): cards side by side */
+@container jcs (min-width: 560px) {
+  .jcs-grid {
+    grid-template-columns: repeat(var(--jcs-cols, 3), minmax(0, 1fr));
+  }
+
+  .jcs-item {
+    padding: 12px;
+    column-gap: 10px;
+  }
+
+  .jcs-item i {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .jcs-item b {
+    font-size: 1.3rem;
+  }
+
+  .jcs-item span {
+    font-size: 11.5px;
+  }
+}
+
+.jcs-line {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--jp-ink);
+}
+
+.jcs-line strong {
+  color: var(--jp-navy);
+}
+
+.jcs-note {
+  margin: 4px 0 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--jp-text-muted);
+}
+
+/* space below the card on the booking form */
+.bs-route-stats:not([hidden]) {
+  margin-bottom: 18px;
+}
+
+@media (max-width: 359px) {
+  .jcs-live {
+    display: none;
+  }
+}
+
+@keyframes jcsIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes jcsPulse {
+  50% {
+    opacity: .35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .jcs,
+  .jcs-live i {
+    animation: none;
+  }
+}
