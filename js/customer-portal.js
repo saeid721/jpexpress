@@ -1654,3 +1654,137 @@
     route = VIEWS[start] ? start : 'dashboard';
     render();
 })();
+
+
+
+
+
+/* =====================================================================
+   DELIVERY RECORD CARD — "Our delivery record on this route"
+   Auto-inserts under the shipment summary on the Track screen.
+   Data: JP_DELIVERY_HISTORY (js/data.js)
+   ===================================================================== */
+(function () {
+    "use strict";
+
+    var ALIAS = {
+        usa: "united states", us: "united states", america: "united states", "united states of america": "united states",
+        uk: "united kingdom", england: "united kingdom", britain: "united kingdom", "great britain": "united kingdom",
+        uae: "united arab emirates", emirates: "united arab emirates",
+        ksa: "saudi arabia", korea: "south korea"
+    };
+
+    function esc(s) {
+        return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+    }
+    function norm(s) { return String(s || "").toLowerCase().replace(/[^a-z ]+/g, " ").replace(/\s+/g, " ").trim(); }
+    function fmt(n) { return Number(n).toLocaleString("en-US"); }
+
+    /* 310 -> "300+", 150 -> "150+", 9 -> "9" (never overstates) */
+    function floorPlus(n) {
+        var step = n >= 1000 ? 100 : n >= 100 ? 50 : n >= 20 ? 10 : 1;
+        return fmt(Math.floor(n / step) * step) + (step > 1 ? "+" : "");
+    }
+
+    function history() {
+        var h = typeof JP_DELIVERY_HISTORY !== "undefined" ? JP_DELIVERY_HISTORY : null;
+        return h && Array.isArray(h.countries) ? h : null;
+    }
+
+    /* "Dubai, UAE" / "New York, USA" -> country row */
+    function find(text) {
+        var H = history();
+        if (!H || !text) return null;
+        var parts = String(text).split(",").map(norm).filter(Boolean), hit = null;
+        for (var i = parts.length - 1; i >= 0 && !hit; i--) {
+            var key = ALIAS[parts[i]] || parts[i];
+            for (var k = 0; k < H.countries.length; k++) {
+                if (norm(H.countries[k].n) === key) { hit = H.countries[k]; break; }
+            }
+        }
+        return hit;
+    }
+
+    function lastDelivery(code) {
+        var H = history(), list = (H && H.recent) || [];
+        for (var i = 0; i < list.length; i++) if (list[i].c === code) return list[i].date || "";
+        return "";
+    }
+
+    function html(text, opts) {
+        opts = opts || {};
+        var c = find(text);
+        if (!c) return "";
+
+        var delivered = Number(c.count) || 0, proc = Number(c.processing) || 0;
+        var last = lastDelivery(c.c), items = [];
+        if (proc > 0) items.push(["is-go", "fa-truck-fast", fmt(proc), "Processing now"]);
+        if (delivered > 0) items.push(["is-ok", "fa-circle-check", floorPlus(delivered), "Delivered"]);
+        if (last) items.push(["", "fa-calendar-check", last.split(" ").slice(0, 2).join(" "), "Last delivery"]);
+        if (!items.length) return "";
+
+        var line = [];
+        if (proc > 0) line.push(fmt(proc) + (proc === 1 ? " parcel" : " parcels") + " processing");
+        if (delivered > 0) line.push(floorPlus(delivered) + " delivered");
+
+        var note = opts.reassure
+            ? "Your shipment needs attention, but this route is active. We regularly clear and deliver parcels to " + c.n + "."
+            : "Parcels to " + c.n + " are processed and delivered every week.";
+
+        return '<div class="jcs" role="status">' +
+            '<div class="jcs-head"><img src="https://flagcdn.com/w80/' + esc(c.c) + '.png" width="42" height="29" alt="" loading="lazy">' +
+            '<div class="jcs-title"><strong>Bangladesh \u2192 ' + esc(c.n) + '</strong><small>Our delivery record on this route</small></div>' +
+            '<span class="jcs-live"><i aria-hidden="true"></i>' + (proc > 0 ? "Active route" : "Proven route") + '</span></div>' +
+            '<div class="jcs-grid" style="--jcs-cols:' + items.length + '">' + items.map(function (x) {
+                return '<div class="jcs-item ' + x[0] + '"><i class="fa-solid ' + x[1] + '" aria-hidden="true"></i><b>' + esc(x[2]) + '</b><span>' + x[3] + '</span></div>';
+            }).join("") + '</div>' +
+            '<p class="jcs-line"><strong>' + esc(c.n) + ':</strong> ' + line.join(" \u00b7 ") + '</p>' +
+            '<p class="jcs-note">' + esc(note) + '</p></div>';
+    }
+
+    /* read "Destination" from the Shipment details list on the result */
+    function destFrom(root) {
+        var rows = root.querySelectorAll(".pt-kv li");
+        for (var i = 0; i < rows.length; i++) {
+            var label = rows[i].querySelector("span"), val = rows[i].querySelector("strong");
+            if (label && val && /destination/i.test(label.textContent)) return val.textContent.trim();
+        }
+        return "";
+    }
+
+    var host = document.getElementById("view"), raf = 0;
+    if (!host) return;
+
+    function sync() {
+        raf = 0;
+        var sum = host.querySelector(".pt-main .pt-summary");
+        var old = host.querySelector(".jcs");
+        if (!sum) { if (old) old.remove(); return; }
+
+        var dest = destFrom(host), bad = sum.classList.contains("is-bad");
+        var key = dest + "|" + bad;
+
+        /* already correct -> do nothing (prevents loops) */
+        if (old && old.getAttribute("data-key") === key && old.previousElementSibling === sum) return;
+        if (old) old.remove();
+
+        var markup = html(dest, { reassure: bad });
+        if (!markup) return;
+        var tmp = document.createElement("div");
+        tmp.innerHTML = markup;
+        var el = tmp.firstChild;
+        el.setAttribute("data-key", key);
+        sum.insertAdjacentElement("afterend", el);
+    }
+
+    function schedule() { if (!raf) raf = requestAnimationFrame(sync); }
+
+    new MutationObserver(schedule).observe(host, { childList: true, subtree: true });
+    window.addEventListener("hashchange", schedule);
+    schedule();
+
+    /* optional: use it manually inside your own render code */
+    window.JPPortalDelivery = { find: find, html: html };
+})();
