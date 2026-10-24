@@ -4100,9 +4100,9 @@
       ? '<strong>' + esc(d.eta) + '</strong><small>Estimated, not guaranteed</small>'
       : "<strong>Not available</strong><small>Please contact JP Express for the latest delivery update.</small>";
 
-    var main = '<article class="trk-card trk-summary"><div class="trk-top"><div><span class="trk-lbl">Tracking number</span>' +
-      '<div class="trk-id"><strong id="trkId">' + esc(d.id) + '</strong><button type="button" class="trk-copy" data-copy="' + esc(d.id) + '" aria-label="Copy tracking number">' + icon("fa-copy") + "<span>Copy</span></button></div></div>" +
+    var main = '<article class="trk-card trk-summary"><div class="trk-top"><span class="trk-lbl">Tracking number</span>' +
       statusBadge(d.status) + "</div>" +
+      '<div class="trk-id"><strong id="trkId">' + esc(d.id) + '</strong><button type="button" class="trk-copy" data-copy="' + esc(d.id) + '" aria-label="Copy tracking number">' + icon("fa-copy") + "<span>Copy</span></button></div>" +
       (explain ? '<p class="trk-explain">' + esc(explain) + "</p>" : "") +
       '<div class="trk-facts"><div><span class="trk-lbl">Estimated delivery</span>' + etaText + "</div>" +
       "<div><span class=\"trk-lbl\">Last updated</span><strong>" + esc(d.updated || (top ? (top.date + (top.time ? ", " + top.time : "")) : "Not available")) + "</strong></div></div>" +

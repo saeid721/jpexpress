@@ -825,8 +825,9 @@
 
         /* summary: number, status, estimate, 6-step progress */
         var summary = '<article class="pt-card pt-summary' + (bad ? ' is-bad' : done ? ' is-done' : '') + '">' +
-            '<div class="d-top"><div><span class="lbl">Tracking number</span><div class="d-id"><strong>' + esc(s.id) + '</strong>' +
-            '<button type="button" class="copy" data-action="copy" data-text="' + esc(s.id) + '"><i class="fa-regular fa-copy"></i> Copy</button></div></div>' + badge(s.status) + '</div>' +
+            '<div class="pt-top"><span class="lbl">Tracking number</span>' + badge(s.status) + '</div>' +
+            '<div class="pt-idrow"><strong>' + esc(s.id) + '</strong>' +
+            '<button type="button" class="copy" data-action="copy" data-text="' + esc(s.id) + '"><i class="fa-regular fa-copy"></i> Copy</button></div>' +
             '<p class="pt-explain">' + esc(explain) + '</p>' +
             '<div class="pt-facts"><div><span class="lbl">' + (done ? 'Delivered' : 'Estimated delivery') + '</span><strong>' + esc(s.eta) + '</strong>' + (done ? '' : '<small>Estimated, not guaranteed</small>') + '</div>' +
             '<div><span class="lbl">Last updated</span><strong>' + esc(top ? evWhen(top) : 'Not available') + '</strong></div></div>' +

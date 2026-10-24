@@ -2940,6 +2940,62 @@ button.stat.tone-red:hover {
   color: var(--muted);
 }
 
+/* Tracking card top row: label left, status badge always top-right */
+.pt-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.pt-top .lbl {
+  margin: 0;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.pt-top .badge {
+  flex: none;
+  margin-left: auto;
+  max-width: 100%;
+}
+
+/* Tracking ID + Copy button row */
+.pt-idrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-bottom: 12px;
+}
+
+.pt-idrow strong {
+  font: 800 clamp(1.1rem, 4.6vw, 1.4rem) var(--f-head);
+  color: var(--navy);
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+
+/* Small phones: slightly tighter badge so it never wraps */
+@media (max-width: 380px) {
+  .pt-top {
+    gap: 8px;
+  }
+
+  .pt-top .lbl {
+    font-size: 10px;
+    letter-spacing: .06em;
+  }
+
+  .pt-top .badge {
+    padding: 4px 9px;
+    font-size: 11px;
+    gap: 5px;
+  }
+}
+
 .pt-facts {
   display: grid;
   grid-template-columns: 1fr;
@@ -3306,6 +3362,72 @@ button.stat.tone-red:hover {
     animation: none;
   }
 }
+
+
+@media (max-width: 639px) {
+
+  /* two equal columns, thin divider in the middle */
+  .pt-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding: 12px 0;
+    align-items: start;
+  }
+
+  .pt-facts>div {
+    min-width: 0;
+    padding: 0 12px;
+  }
+
+  .pt-facts>div+div {
+    border-left: 1px solid var(--line);
+  }
+
+  /* label */
+  .pt-facts .lbl {
+    margin-bottom: 3px;
+    font-size: 10px;
+    letter-spacing: .06em;
+    line-height: 1.3;
+  }
+
+  /* value (date) */
+  .pt-facts strong {
+    font-size: 13.5px;
+    line-height: 1.3;
+    letter-spacing: -.01em;
+    overflow-wrap: anywhere;
+  }
+
+  /* helper text under the date */
+  .pt-facts small {
+    margin-top: 3px;
+    font-size: 11px;
+    line-height: 1.35;
+  }
+}
+
+/* very small phones (≤380px): slightly tighter so dates never wrap badly */
+@media (max-width: 380px) {
+
+  .pt-facts>div {
+    padding: 0 9px;
+  }
+
+  .pt-facts .lbl {
+    font-size: 9.5px;
+    letter-spacing: .04em;
+  }
+
+  .pt-facts strong {
+    font-size: 12.5px;
+  }
+
+  .pt-facts small {
+    font-size: 10.5px;
+  }
+}
+
 
 /* =====================================================================
    23. CREATE SHIPMENT WIZARD

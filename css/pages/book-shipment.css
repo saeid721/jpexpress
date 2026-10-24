@@ -2993,3 +2993,235 @@
         animation: none;
     }
 }
+
+
+
+
+
+/* ===============================================================
+   MOBILE ONLY: single-row Delivered stepper + delivery record tiles
+   (≤767px) — placed last so it overrides the earlier mobile rules
+   =============================================================== */
+@media (max-width: 767px) {
+
+    /* ---------- 1. Shipment progress: 6 steps in ONE row ---------- */
+    .page-track-shipment .trk-steps {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        margin-top: 18px;
+        padding: 0 2px;
+    }
+
+    .page-track-shipment .trk-steps li {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 7px;
+        padding: 0;
+    }
+
+    /* connector line runs horizontally between dots */
+    .page-track-shipment .trk-steps li::after {
+        left: calc(50% + 16px);
+        right: calc(-50% + 16px);
+        top: 12px;
+        bottom: auto;
+        width: auto;
+        height: 2px;
+    }
+
+    .page-track-shipment .trk-dot {
+        flex: 0 0 26px;
+        width: 26px;
+        height: 26px;
+        font-size: 11px;
+    }
+
+    .page-track-shipment .trk-steps li.current .trk-dot {
+        box-shadow: 0 0 0 4px rgba(242, 99, 35, .2);
+    }
+
+    .page-track-shipment .trk-step-l {
+        max-width: 100%;
+        font-size: 10.5px;
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -.01em;
+    }
+
+    .page-track-shipment .trk-steps li.done .trk-step-l {
+        font-weight: 800;
+    }
+
+    /* ---------- 2. Delivery record: 3 tiles in ONE row ---------- */
+    .jcs {
+        padding: 14px 12px;
+        border-radius: 16px;
+    }
+
+    .jcs-grid {
+        grid-template-columns: repeat(var(--jcs-cols, 3), minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .jcs-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2px;
+        padding: 10px 4px 9px;
+        text-align: center;
+        border-radius: 12px;
+    }
+
+    .jcs-item i {
+        grid-row: auto;
+        width: 30px;
+        height: 30px;
+        margin: 0 0 4px;
+        border-radius: 9px;
+        font-size: 13px;
+    }
+
+    .jcs-item b {
+        grid-column: auto;
+        align-self: auto;
+        font-size: 1.05rem;
+        line-height: 1.1;
+    }
+
+    .jcs-item span {
+        grid-column: auto;
+        align-self: auto;
+        margin-top: 0;
+        font-size: 10.5px;
+        line-height: 1.25;
+    }
+
+    .jcs-line {
+        margin-top: 10px;
+        font-size: 12.5px;
+    }
+
+    .jcs-note {
+        font-size: 12px;
+    }
+}
+
+/* very small phones (≤380px): tighter so nothing wraps badly */
+@media (max-width: 380px) {
+
+    .page-track-shipment .trk-step-l {
+        font-size: 9.5px;
+    }
+
+    .page-track-shipment .trk-dot {
+        flex-basis: 24px;
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+
+    .page-track-shipment .trk-steps li::after {
+        left: calc(50% + 14px);
+        right: calc(-50% + 14px);
+        top: 11px;
+    }
+
+    .jcs {
+        padding: 12px 10px;
+    }
+
+    .jcs-grid {
+        gap: 6px;
+    }
+
+    .jcs-item {
+        padding: 9px 3px 8px;
+    }
+
+    .jcs-item i {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .jcs-item b {
+        font-size: 1rem;
+    }
+
+    .jcs-item span {
+        font-size: 9.5px;
+    }
+}
+
+
+
+/* ===============================================================
+   MOBILE ONLY: Estimated delivery (left) + Last updated (right)
+   (≤575px) — placed last so it overrides the single-column default
+   =============================================================== */
+@media (max-width: 575px) {
+
+    /* two equal columns, thin divider in the middle */
+    .page-track-shipment .trk-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0;
+        padding: 12px 0;
+        align-items: start;
+    }
+
+    .page-track-shipment .trk-facts>div {
+        min-width: 0;
+        padding: 0 12px;
+    }
+
+    .page-track-shipment .trk-facts>div+div {
+        border-left: 1px solid var(--jp-border-muted);
+    }
+
+    /* label */
+    .page-track-shipment .trk-facts .trk-lbl {
+        margin-bottom: 3px;
+        font-size: 10px;
+        letter-spacing: .06em;
+        line-height: 1.3;
+    }
+
+    /* value (date) */
+    .page-track-shipment .trk-facts strong {
+        font-size: 13.5px;
+        line-height: 1.3;
+        letter-spacing: -.01em;
+        overflow-wrap: anywhere;
+    }
+
+    /* small helper text under the date */
+    .page-track-shipment .trk-facts small {
+        margin-top: 3px;
+        font-size: 11px;
+        line-height: 1.35;
+    }
+}
+
+/* very small phones (≤380px): a little tighter so dates never wrap badly */
+@media (max-width: 380px) {
+
+    .page-track-shipment .trk-facts>div {
+        padding: 0 9px;
+    }
+
+    .page-track-shipment .trk-facts .trk-lbl {
+        font-size: 9.5px;
+        letter-spacing: .04em;
+    }
+
+    .page-track-shipment .trk-facts strong {
+        font-size: 12.5px;
+    }
+
+    .page-track-shipment .trk-facts small {
+        font-size: 10.5px;
+    }
+}
