@@ -2212,9 +2212,6 @@
     color: var(--jp-text-subtle);
 }
 
-/* ----- tablet / desktop: two small cards side by side is NOT used,
-         keeping one column so long addresses always have room ----- */
-
 /* ----- phones ----- */
 @media (max-width: 575px) {
     .page-book-shipment .bs-rv-route {

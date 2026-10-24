@@ -112,12 +112,6 @@
 }
 
 /* Used only by: contact */
-.page-contact .cnt-ch-body {
-  flex: 1;
-  min-width: 0;
-}
-
-/* Used only by: contact */
 .page-contact .cnt-channel h3 {
   margin: 0 0 6px;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -132,29 +126,6 @@
   font-size: 14px;
   line-height: 1.5;
   color: var(--jp-text-light);
-}
-
-/* Used only by: contact */
-.page-contact .cnt-val {
-  display: block;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 15.5px;
-  font-weight: 800;
-  color: var(--jp-navy);
-  word-break: break-word;
-}
-
-/* Used only by: contact */
-.page-contact .cnt-val.sub {
-  margin-top: 2px;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--jp-text-muted-dark);
-}
-
-/* Used only by: contact */
-.page-contact .cnt-val:hover {
-  color: var(--jp-red);
 }
 
 /* Used only by: contact */
@@ -943,11 +914,6 @@
   }
 
   /* Used only by: contact */
-  .page-contact .cnt-ch-body {
-    grid-column: 2;
-  }
-
-  /* Used only by: contact */
   .page-contact .cnt-channel h3 {
     font-size: 16px;
     margin-bottom: 3px;
@@ -1567,10 +1533,6 @@
   font-size: 13px;
   line-height: 1.45;
   margin: 0 0 6px;
-}
-
-.page-contact .cnt-val {
-  font-size: 14px;
 }
 
 .page-contact .cnt-cta {

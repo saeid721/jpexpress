@@ -1443,12 +1443,6 @@
   border-color: var(--jp-orange);
 }
 
-@media (max-width: 575px) {
-  .page-track-shipment .trk-samples button {
-    flex: 1 1 calc(50% - 8px);
-  }
-}
-
 /* ===============================================================
    COMPACT HERO — Track Shipment (less space, smaller card)
    =============================================================== */
@@ -2044,7 +2038,6 @@ html.page-track-shipment .hero.page-hero h1 {
 .page-track-shipment .trk-recent li:hover {
   border-color: var(--jp-orange);
   box-shadow: var(--jp-shadow-md);
-  transform: translateY(-2px);
 }
 
 /* country chips: gentle hover */
@@ -2190,10 +2183,6 @@ html.page-track-shipment .hero.page-hero h1 {
   gap: 10px;
   padding: 7px 10px;
   border-radius: 11px;
-}
-
-.page-track-shipment .trk-recent li:hover {
-  transform: none;
 }
 
 .page-track-shipment .trk-recent img {
