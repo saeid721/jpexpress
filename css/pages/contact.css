@@ -1051,3 +1051,1096 @@
   }
 
 }
+
+/* =========================================================
+   MORE LOCATIONS (branches / warehouses)
+   ========================================================= */
+
+/* ---------- Coming Soon state ---------- */
+.page-contact .loc-soon {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.page-contact .loc-soon-main {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(20px, 3.4vw, 34px);
+  border-radius: 16px;
+  color: var(--jp-white);
+  background: linear-gradient(160deg, #2B3990, #1E2A6B);
+  box-shadow: var(--jp-shadow-lg);
+}
+
+.page-contact .loc-soon-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(320px 220px at 100% 0%, rgba(242, 99, 35, .34), transparent 70%);
+  pointer-events: none;
+}
+
+.page-contact .loc-soon-main>* {
+  position: relative;
+}
+
+.page-contact .loc-soon-main h3 {
+  margin: 14px 0 8px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(1.25rem, 2.6vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.page-contact .loc-soon-main p {
+  margin: 0 0 20px;
+  max-width: 520px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-contact .loc-soon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page-contact .loc-soon-actions .btn-main {
+  min-height: 46px;
+  padding: 0 20px;
+  font-size: 15px;
+  border-radius: 8px;
+  flex: 1 1 190px;
+}
+
+.page-contact .loc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: rgba(255, 138, 87, .2);
+  color: var(--jp-orange-light);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.page-contact .loc-pill.sm {
+  margin-left: auto;
+  padding: 4px 9px;
+  font-size: 10.5px;
+  background: #fff1ea;
+  color: var(--jp-red);
+}
+
+.page-contact .loc-slots {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  align-content: center;
+}
+
+.page-contact .loc-slots li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--jp-white);
+  border: 1px dashed #c9d6ea;
+  border-radius: 14px;
+  transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.page-contact .loc-slots li:hover {
+  border-color: var(--jp-orange);
+  transform: translateY(-2px);
+  box-shadow: var(--jp-shadow-md);
+}
+
+.page-contact .loc-slot-ico {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(242, 99, 35, .1);
+  color: var(--jp-red);
+  font-size: 18px;
+}
+
+.page-contact .loc-slot-txt {
+  flex: 1;
+  min-width: 0;
+}
+
+.page-contact .loc-slot-txt b {
+  display: block;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--jp-navy);
+}
+
+.page-contact .loc-slot-txt small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: var(--jp-text-muted-4);
+}
+
+.page-contact .loc-slots em {
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border-radius: 100px;
+  background: var(--jp-bg-muted);
+  color: var(--jp-text-muted-dark);
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Live state: filter bar ---------- */
+.page-contact .loc-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.page-contact .loc-tabs {
+  display: flex;
+  gap: 8px;
+  min-width: 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.page-contact .loc-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.page-contact .loc-tab {
+  flex: 0 0 auto;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid #dbe5f0;
+  border-radius: 100px;
+  background: var(--jp-white);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--jp-navy);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .2s, border-color .2s, color .2s;
+}
+
+.page-contact .loc-tab b {
+  margin-left: 4px;
+  font-size: 12px;
+  opacity: .65;
+}
+
+.page-contact .loc-tab:hover {
+  border-color: var(--jp-orange);
+}
+
+.page-contact .loc-tab.active {
+  background: var(--jp-navy);
+  border-color: var(--jp-navy);
+  color: var(--jp-white);
+}
+
+.page-contact .loc-count {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jp-text-muted-dark);
+}
+
+/* ---------- Live state: cards ---------- */
+.page-contact .loc-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.page-contact .loc-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 18px;
+  background: var(--jp-white);
+  border: 1px solid #e3ebf5;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(43, 57, 144, .06);
+  animation: pgUp .45s ease both;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.page-contact .loc-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--jp-shadow-lg);
+  border-color: #f6b99c;
+}
+
+.page-contact .loc-card.is-soon {
+  background: var(--jp-bg-light);
+  border-style: dashed;
+}
+
+.page-contact .loc-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.page-contact .loc-ico {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--jp-navy);
+  color: var(--jp-white);
+  font-size: 16px;
+}
+
+.page-contact .loc-type {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jp-red);
+}
+
+.page-contact .loc-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--jp-success-bg);
+  color: var(--jp-success-text);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.page-contact .loc-open .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--jp-green);
+}
+
+.page-contact .loc-card h3 {
+  margin: 0 0 4px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--jp-navy);
+}
+
+.page-contact .loc-place {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--jp-text-muted-dark);
+}
+
+.page-contact .loc-place img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-contact .loc-info {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.page-contact .loc-info li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 9px 0;
+  border-top: 1px dashed var(--jp-line);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--jp-text-muted-dark);
+  word-break: break-word;
+}
+
+.page-contact .loc-info li>i {
+  width: 16px;
+  margin-top: 3px;
+  text-align: center;
+  color: var(--jp-red);
+  font-size: 13px;
+}
+
+.page-contact .loc-info a {
+  font-weight: 700;
+  color: var(--jp-navy);
+}
+
+.page-contact .loc-info a:hover {
+  color: var(--jp-red);
+}
+
+.page-contact .loc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.page-contact .loc-actions .btn-main {
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  flex: 1 1 110px;
+}
+
+.page-contact .loc-actions .loc-copy {
+  flex: 0 0 44px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.page-contact .loc-actions .loc-copy.is-done {
+  background: var(--jp-green);
+  border-color: var(--jp-green);
+  color: var(--jp-white);
+}
+
+.page-contact .loc-opening {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--jp-text-muted-dark);
+}
+
+/* ---------- Breakpoints ---------- */
+@media (min-width: 576px) {
+  .page-contact .loc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) {
+  .page-contact .loc-soon {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 24px;
+  }
+
+  .page-contact .loc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-contact .loc-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .page-contact .loc-count {
+    align-self: flex-end;
+  }
+
+  .page-contact .loc-soon-actions .btn-main {
+    flex-basis: 100%;
+  }
+
+  .page-contact .loc-slots li {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .page-contact .loc-slot-ico {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-contact .loc-slots li {
+    flex-wrap: wrap;
+  }
+
+  .page-contact .loc-slots em {
+    margin-left: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-contact .loc-card {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   COMPACT LAYOUT: all sections EXCEPT #faq
+   Paste at the very END of contact.css
+   ========================================================= */
+
+/* ---------- Section spacing + headings ---------- */
+.page-contact .cnt-section:not(#faq) {
+  padding: clamp(20px, 3.6vw, 40px) 0;
+}
+
+.page-contact .cnt-section:not(#faq) .section-heading {
+  margin-bottom: 12px;
+}
+
+.page-contact .cnt-section:not(#faq) .section-heading h2 {
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.2;
+  margin: 0 0 3px;
+}
+
+.page-contact .cnt-section:not(#faq) .section-heading p {
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.page-contact .cnt-section:not(#faq) .section-heading .eyebrow {
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+/* ---------- 1. Contact channels ---------- */
+.page-contact .cnt-channels {
+  gap: 10px;
+}
+
+.page-contact .cnt-channel {
+  gap: 8px;
+  padding: 14px 14px 12px;
+  border-radius: 10px;
+}
+
+.page-contact .cnt-ico {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  font-size: 17px;
+}
+
+.page-contact .cnt-channel h3 {
+  font-size: 16px;
+  margin: 0 0 3px;
+}
+
+.page-contact .cnt-channel p {
+  font-size: 13px;
+  line-height: 1.45;
+  margin: 0 0 6px;
+}
+
+.page-contact .cnt-val {
+  font-size: 14px;
+}
+
+.page-contact .cnt-cta {
+  padding-top: 8px;
+  font-size: 13px;
+}
+
+/* ---------- 2. Inquiry form ---------- */
+.page-contact .cnt-layout {
+  gap: 14px;
+}
+
+.page-contact .cnt-form-card {
+  padding: clamp(12px, 2.2vw, 20px);
+  border-radius: 12px;
+}
+
+.page-contact .cnt-intent-set {
+  margin: 0 0 12px;
+}
+
+.page-contact .cnt-intent-set legend {
+  margin: 0 0 8px;
+  font-size: 12px;
+}
+
+.page-contact .cnt-intents {
+  gap: 6px;
+}
+
+.page-contact .cnt-chip {
+  gap: 6px;
+  padding: 7px 12px;
+  font-size: 12.5px;
+}
+
+.page-contact .cnt-chip i {
+  font-size: 12px;
+}
+
+.page-contact .cnt-hint {
+  margin: 8px 0 0;
+  padding: 7px 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.page-contact .cnt-form .row {
+  --bs-gutter-x: .75rem;
+  --bs-gutter-y: .6rem;
+}
+
+.page-contact .cnt-field label {
+  margin: 0 0 3px;
+  font-size: 12px;
+}
+
+.page-contact .cnt-form .form-control,
+.page-contact .cnt-form .form-select {
+  min-height: 40px;
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+.page-contact .cnt-form textarea.form-control {
+  min-height: 0;
+}
+
+.page-contact .cnt-err {
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.page-contact .cnt-consent {
+  font-size: 12.5px !important;
+  gap: 8px;
+}
+
+.page-contact .cnt-actions {
+  margin-top: 14px;
+  gap: 8px;
+}
+
+.page-contact .cnt-actions .btn-main {
+  min-height: 44px;
+  font-size: 15px;
+}
+
+.page-contact .cnt-status {
+  margin-top: 12px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+/* ---------- 3. Sidebar (support hours + quick links) ---------- */
+.page-contact .cnt-side {
+  gap: 12px;
+}
+
+.page-contact .cnt-live {
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.page-contact .cnt-badge {
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  font-size: 10.5px;
+}
+
+.page-contact .cnt-live h3 {
+  margin: 0 0 4px;
+  font-size: 17px;
+}
+
+.page-contact .cnt-live p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.page-contact .cnt-hours {
+  margin: 0 0 10px;
+}
+
+.page-contact .cnt-hours li {
+  gap: 8px;
+  padding: 7px 0;
+  font-size: 12.5px;
+}
+
+.page-contact .cnt-live-actions {
+  gap: 8px;
+}
+
+.page-contact .cnt-live-actions .btn-main {
+  min-height: 40px;
+  font-size: 14px;
+}
+
+.page-contact .cnt-quick {
+  padding: 12px 14px;
+  border-radius: 12px;
+}
+
+.page-contact .cnt-quick h3 {
+  margin: 0 0 2px;
+  font-size: 15px;
+}
+
+.page-contact .cnt-row {
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.page-contact .cnt-row .r-ico {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.page-contact .cnt-row b {
+  font-size: 13.5px;
+}
+
+.page-contact .cnt-row small {
+  font-size: 11.5px;
+}
+
+/* ---------- 4. Visit office + map ---------- */
+.page-contact .cnt-visit {
+  gap: 12px;
+}
+
+.page-contact .cnt-office {
+  padding: clamp(12px, 2vw, 18px);
+  border-radius: 12px;
+}
+
+.page-contact .cnt-office h3 {
+  margin: 0 0 6px;
+  font-size: 17px;
+}
+
+.page-contact .cnt-info {
+  margin: 0 0 10px;
+}
+
+.page-contact .cnt-info li {
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.page-contact .cnt-info li>i {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  font-size: 12px;
+}
+
+.page-contact .cnt-office-actions {
+  gap: 8px;
+}
+
+.page-contact .cnt-office-actions .btn-main {
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+.page-contact .cnt-follow {
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.page-contact .cnt-follow span {
+  font-size: 12px;
+}
+
+.page-contact .cnt-follow a {
+  width: 32px;
+  height: 32px;
+  font-size: 13px;
+}
+
+.page-contact .cnt-map {
+  min-height: 240px;
+  border-radius: 12px;
+}
+
+.page-contact .cnt-map-open {
+  padding: 7px 11px;
+  font-size: 12px;
+}
+
+/* ---------- 5. More locations ---------- */
+.page-contact .loc-soon {
+  gap: 10px;
+}
+
+.page-contact .loc-soon-main {
+  padding: clamp(14px, 2.4vw, 20px);
+  border-radius: 12px;
+}
+
+.page-contact .loc-soon-main h3 {
+  margin: 8px 0 4px;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+.page-contact .loc-soon-main p {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.page-contact .loc-soon-actions {
+  gap: 8px;
+}
+
+.page-contact .loc-soon-actions .btn-main {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+.page-contact .loc-pill {
+  padding: 5px 10px;
+  font-size: 10.5px;
+}
+
+.page-contact .loc-slots {
+  gap: 8px;
+}
+
+.page-contact .loc-slots li {
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.page-contact .loc-slot-ico {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.page-contact .loc-slot-txt b {
+  font-size: 14px;
+}
+
+.page-contact .loc-slot-txt small {
+  font-size: 11.5px;
+}
+
+.page-contact .loc-slots em {
+  padding: 3px 8px;
+  font-size: 10px;
+}
+
+/* Live state (when locations go live) */
+.page-contact .loc-bar {
+  margin-bottom: 10px;
+}
+
+.page-contact .loc-tab {
+  min-height: 34px;
+  padding: 0 14px;
+  font-size: 13px;
+}
+
+.page-contact .loc-grid {
+  gap: 10px;
+}
+
+.page-contact .loc-card {
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.page-contact .loc-card-top {
+  margin-bottom: 8px;
+}
+
+.page-contact .loc-ico {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  font-size: 14px;
+}
+
+.page-contact .loc-card h3 {
+  font-size: 16px;
+}
+
+.page-contact .loc-place {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.page-contact .loc-info {
+  margin: 0 0 10px;
+}
+
+.page-contact .loc-info li {
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.page-contact .loc-actions .btn-main {
+  min-height: 38px;
+  font-size: 13px;
+}
+
+.page-contact .loc-actions .loc-copy {
+  flex: 0 0 38px;
+}
+
+@media (min-width: 992px) {
+  .page-contact .cnt-layout {
+    gap: 18px;
+  }
+
+  .page-contact .cnt-visit {
+    gap: 18px;
+  }
+
+  .page-contact .loc-soon {
+    gap: 16px;
+  }
+
+  .page-contact .loc-grid {
+    gap: 12px;
+  }
+}
+
+/* ---------- Mobile (≤767px): must come LAST in the block ---------- */
+@media (max-width: 767px) {
+  .page-contact .cnt-section:not(#faq) .section-heading {
+    margin-bottom: 10px;
+  }
+
+  .page-contact .cnt-channel {
+    grid-template-columns: 38px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+    padding: 12px;
+  }
+
+  .page-contact .cnt-ico {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+
+  .page-contact .cnt-channel h3 {
+    font-size: 15px;
+  }
+
+  .page-contact .cnt-channel p {
+    font-size: 12.5px;
+    margin-bottom: 4px;
+  }
+
+  .page-contact .cnt-form .form-control,
+  .page-contact .cnt-form .form-select {
+    font-size: 16px;
+    min-height: 42px;
+  }
+
+  .page-contact .cnt-live {
+    padding: 14px;
+  }
+
+  .page-contact .cnt-office {
+    padding: 12px;
+  }
+
+  .page-contact .cnt-map {
+    min-height: 210px;
+  }
+
+  .page-contact .loc-slot-ico {
+    width: 34px;
+    height: 34px;
+    flex-basis: 34px;
+    font-size: 14px;
+  }
+
+  .page-contact .loc-slots li {
+    padding: 9px 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-contact .cnt-chip {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .page-contact .loc-slots em {
+    margin-left: 44px;
+  }
+}
+
+
+
+/* =========================================================
+   CONTACT CHANNELS: icon + title same line, clickable card
+   Paste at the very END of contact.css
+   ========================================================= */
+.page-contact .cnt-channel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.page-contact .cnt-ch-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.page-contact .cnt-ch-head .cnt-ico {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 12px;
+  font-size: 18px;
+  box-shadow: 0 6px 14px rgba(43, 57, 144, .18);
+  transition: transform .25s ease;
+}
+
+.page-contact .cnt-ch-head h3 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.page-contact .cnt-channel p {
+  flex: 1;
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.page-contact .cnt-cta {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* whole card clickable (no extra JS) */
+.page-contact .cnt-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.page-contact .cnt-channel:hover .cnt-ico {
+  transform: scale(1.07) rotate(-4deg);
+}
+
+.page-contact .cnt-channel:hover .cnt-cta i {
+  transform: translateX(3px);
+}
+
+.page-contact .cnt-channel:focus-within {
+  border-color: #f6b99c;
+  box-shadow: 0 0 0 3px rgba(242, 99, 35, .16);
+}
+
+.page-contact .cnt-cta:focus-visible {
+  outline: none;
+}
+
+@media (max-width: 767px) {
+  .page-contact .cnt-channel {
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .page-contact .cnt-ch-head {
+    gap: 10px;
+  }
+
+  .page-contact .cnt-ch-head .cnt-ico {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    font-size: 16px;
+  }
+
+  .page-contact .cnt-ch-head h3 {
+    font-size: 16px;
+  }
+
+  .page-contact .cnt-channel p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page-contact .cnt-ch-head h3 {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .page-contact .cnt-ch-head .cnt-ico,
+  .page-contact .cnt-cta i {
+    transition: none;
+  }
+
+  .page-contact .cnt-channel:hover .cnt-ico {
+    transform: none;
+  }
+}

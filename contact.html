@@ -449,45 +449,41 @@
         <div class="cnt-channels">
           <div data-reveal>
             <article class="cnt-channel c-call">
-              <span class="cnt-ico"><i class="fa-solid fa-comments"></i></span>
-              <div class="cnt-ch-body">
+              <div class="cnt-ch-head">
+                <span class="cnt-ico"><i class="fa-solid fa-comments"></i></span>
                 <h3>General Enquiries</h3>
-                <p>Questions about JP Express, available services, destinations, and general company information.</p>
-                <a class="cnt-val" href="#inquiry">Send an Enquiry</a>
               </div>
+              <p>Questions about JP Express, available services, destinations, and general company information.</p>
               <a class="cnt-cta" href="#inquiry">Send Enquiry <i class="fa-solid fa-arrow-right"></i></a>
             </article>
           </div>
           <div data-reveal style="--d:80ms">
             <article class="cnt-channel c-wa">
-              <span class="cnt-ico"><i class="fa-solid fa-box-open"></i></span>
-              <div class="cnt-ch-body">
+              <div class="cnt-ch-head">
+                <span class="cnt-ico"><i class="fa-solid fa-box-open"></i></span>
                 <h3>Shipment Support</h3>
-                <p>Tracking assistance, shipment delays, delivery questions, and booking-related support.</p>
-                <a class="cnt-val" href="#inquiry">Get Shipment Help</a>
               </div>
+              <p>Tracking assistance, shipment delays, delivery questions, and booking-related support.</p>
               <a class="cnt-cta" href="#inquiry">Get Help <i class="fa-solid fa-arrow-right"></i></a>
             </article>
           </div>
           <div data-reveal style="--d:160ms">
             <article class="cnt-channel c-mail">
-              <span class="cnt-ico"><i class="fa-solid fa-calculator"></i></span>
-              <div class="cnt-ch-body">
+              <div class="cnt-ch-head">
+                <span class="cnt-ico"><i class="fa-solid fa-calculator"></i></span>
                 <h3>Shipping Quotations</h3>
-                <p>For international courier, parcel, freight, export, or import pricing enquiries.</p>
-                <a class="cnt-val" href="quote.html">Request a Quote</a>
               </div>
+              <p>For international courier, parcel, freight, export, or import pricing enquiries.</p>
               <a class="cnt-cta" href="quote.html">Get a Quote <i class="fa-solid fa-arrow-right"></i></a>
             </article>
           </div>
           <div data-reveal style="--d:240ms">
             <article class="cnt-channel c-visit">
-              <span class="cnt-ico"><i class="fa-solid fa-building"></i></span>
-              <div class="cnt-ch-body">
+              <div class="cnt-ch-head">
+                <span class="cnt-ico"><i class="fa-solid fa-building"></i></span>
                 <h3>Business Enquiries</h3>
-                <p>For exporters, manufacturers, SMEs, e-commerce businesses, and recurring shipment requirements.</p>
-                <a class="cnt-val" href="business.html">Discuss Business Shipping</a>
               </div>
+              <p>For exporters, manufacturers, SMEs, e-commerce businesses, and recurring shipment requirements.</p>
               <a class="cnt-cta" href="business.html">Business Shipping <i class="fa-solid fa-arrow-right"></i></a>
             </article>
           </div>
@@ -501,7 +497,7 @@
         <div class="section-heading">
           <div>
             <span class="eyebrow">SEND AN INQUIRY</span>
-            <h2 id="formTitle">How Can We Help You?</h2>
+            <h2 id="formTitle">Send Us Your Inquiry</h2>
             <p>Select your request type and fill in the details. Only the fields you need are shown.</p>
           </div>
         </div>
@@ -590,7 +586,7 @@
                 </div>
                 <div class="col-12 cnt-field" data-f="message">
                   <label for="fMsg">Message <b>*</b></label>
-                  <textarea class="form-control" id="fMsg" name="message" rows="4" placeholder="Tell us how we can help"
+                  <textarea class="form-control" id="fMsg" name="message" rows="3" placeholder="Tell us how we can help"
                     required></textarea>
                   <span class="cnt-err" id="eMsg"></span>
                 </div>
@@ -653,9 +649,9 @@
                       class="fa-solid fa-magnifying-glass-location"></i></span><span class="r-txt"><b>Track
                       Shipment</b><small>Check status with your tracking number</small></span><i
                     class="fa-solid fa-arrow-right"></i></a>
-                <a class="cnt-row" href="pricing.html"><span class="r-ico"><i class="fa-solid fa-tags"></i></span><span
-                    class="r-txt"><b>Pricing</b><small>See how shipping is priced</small></span><i
-                    class="fa-solid fa-arrow-right"></i></a>
+                <a class="cnt-row" href="book-shipment.html"><span class="r-ico"><i
+                      class="fa-solid fa-tags"></i></span><span class="r-txt"><b>Book a Shipment</b><small>Get an
+                      indicative price</small></span><i class="fa-solid fa-arrow-right"></i></a>
               </div>
             </div>
           </aside>
@@ -713,8 +709,60 @@
       </div>
     </section>
 
+    <!-- ============ MORE LOCATIONS (branches / warehouses) ============ -->
+    <section class="cnt-section alt" id="locations" aria-labelledby="locTitle">
+      <div class="container-fluid">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">BRANCHES &amp; WAREHOUSES</span>
+            <h2 id="locTitle">More JP Express Locations</h2>
+            <p>Branch offices across Bangladesh and warehouses abroad will be listed here as our network grows.</p>
+          </div>
+        </div>
+
+        <div id="cntLocRoot" data-reveal>
+          <!-- Default state (works without JS). Replaced automatically when locations go live. -->
+          <div class="loc-soon">
+            <div class="loc-soon-main">
+              <span class="loc-pill"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Coming Soon</span>
+              <h3>New locations are on the way</h3>
+              <p>We are expanding with branch offices across Bangladesh and warehouses overseas. Need service in
+                another city or country? Tell us and we will prioritise it.</p>
+              <div class="loc-soon-actions">
+                <a class="btn-main btn-red wa-link"
+                  href="https://wa.me/8801681637836?text=Hi%20JP%20Express%2C%20I%27d%20like%20to%20know%20about%20a%20branch%20or%20warehouse%20near%20me."
+                  target="_blank" rel="noopener"
+                  data-wa-text="Hi JP Express, I'd like to know about a branch or warehouse near me.">
+                  <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Ask About a Location</a>
+                <a class="btn-main btn-white-outline" href="#inquiry">Send Inquiry</a>
+              </div>
+            </div>
+
+            <ul class="loc-slots" aria-label="Planned locations">
+              <li>
+                <span class="loc-slot-ico"><i class="fa-solid fa-building" aria-hidden="true"></i></span>
+                <span class="loc-slot-txt"><b>Branch Offices</b><small>Major cities across Bangladesh</small></span>
+                <em>Coming Soon</em>
+              </li>
+              <li>
+                <span class="loc-slot-ico"><i class="fa-solid fa-warehouse" aria-hidden="true"></i></span>
+                <span class="loc-slot-txt"><b>Warehouses</b><small>Collection and consolidation hubs</small></span>
+                <em>Coming Soon</em>
+              </li>
+              <li>
+                <span class="loc-slot-ico"><i class="fa-solid fa-earth-asia" aria-hidden="true"></i></span>
+                <span class="loc-slot-txt"><b>International Offices</b><small>Partner offices and overseas
+                    warehouses</small></span>
+                <em>Coming Soon</em>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ FAQ ============ -->
-    <section class="cnt-section alt" id="faq" aria-labelledby="cfaqTitle">
+    <section class="cnt-section" id="faq" aria-labelledby="cfaqTitle">
       <div class="container-fluid">
         <div class="section-heading">
           <div>

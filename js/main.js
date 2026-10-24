@@ -2984,6 +2984,128 @@
   updateHours();
   setInterval(updateHours, 60000);
 
+  /* ---------- More locations (branches / warehouses) ---------- */
+  (function locations() {
+    var root = $('#cntLocRoot'), sec = $('#locations');
+    if (!root || !sec || typeof JP_CONTACT_LOCATIONS === 'undefined') return;
+
+    var CFG = JP_CONTACT_LOCATIONS;
+    var TYPES = {
+      branch: { label: 'Branch Office', icon: 'fa-building' },
+      warehouse: { label: 'Warehouse', icon: 'fa-warehouse' },
+      office: { label: 'Office', icon: 'fa-briefcase' }
+    };
+    var items = [], scope = 'all';
+
+    function s(v) { return v == null ? '' : String(v); }
+    function flagImg(code) {
+      return /^[a-z]{2}$/i.test(s(code))
+        ? '<img src="https://flagcdn.com/w40/' + s(code).toLowerCase() + '.png" width="20" height="20" alt="" loading="lazy">'
+        : '<i class="fa-solid fa-location-dot" aria-hidden="true"></i>';
+    }
+
+    function card(i) {
+      var t = TYPES[i.type] || TYPES.office, soon = i.status === 'soon';
+      var tel = s(i.phone).replace(/[^\d+]/g, '');
+      var lat = parseFloat(i.lat), lng = parseFloat(i.lng);
+      var dir = (!isNaN(lat) && !isNaN(lng))
+        ? 'https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng
+        : 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s(i.address));
+      var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s(i.email));
+
+      var rows = '<li><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>' + esc(i.address) + '</span></li>' +
+        (tel ? '<li><i class="fa-solid fa-phone" aria-hidden="true"></i><a href="tel:' + esc(tel) + '">' + esc(i.phone) + '</a></li>' : '') +
+        (emailOk ? '<li><i class="fa-solid fa-envelope" aria-hidden="true"></i><a href="mailto:' + esc(i.email) + '">' + esc(i.email) + '</a></li>' : '') +
+        (i.hours ? '<li><i class="fa-solid fa-clock" aria-hidden="true"></i><span>' + esc(i.hours) + '</span></li>' : '');
+
+      var actions = soon
+        ? '<span class="loc-opening"><i class="fa-solid fa-hourglass-half" aria-hidden="true"></i> Opening soon</span>'
+        : '<a class="btn-main btn-red" href="' + dir + '" target="_blank" rel="noopener"><i class="fa-solid fa-route" aria-hidden="true"></i> Directions</a>' +
+        (tel ? '<a class="btn-main cnt-btn-ghost" href="tel:' + esc(tel) + '"><i class="fa-solid fa-phone" aria-hidden="true"></i> Call</a>' : '') +
+        '<button type="button" class="btn-main cnt-btn-ghost loc-copy" data-copy="' + esc(i.address) + '" aria-label="Copy address of ' + esc(i.name) + '"><i class="fa-solid fa-copy" aria-hidden="true"></i></button>';
+
+      return '<article class="loc-card' + (soon ? ' is-soon' : '') + '">' +
+        '<div class="loc-card-top"><span class="loc-ico"><i class="fa-solid ' + t.icon + '" aria-hidden="true"></i></span>' +
+        '<span class="loc-type">' + t.label + '</span>' +
+        (soon ? '<span class="loc-pill sm">Soon</span>' : '<span class="loc-open"><span class="dot"></span>Open</span>') + '</div>' +
+        '<h3>' + esc(i.name) + '</h3>' +
+        '<p class="loc-place">' + flagImg(i.flag) + '<span>' + esc([i.city, i.country].filter(Boolean).join(', ')) + '</span></p>' +
+        '<ul class="loc-info">' + rows + '</ul>' +
+        '<div class="loc-actions">' + actions + '</div></article>';
+    }
+
+    function draw() {
+      var list = items.filter(function (i) { return scope === 'all' || i.scope === scope; });
+      var grid = $('#locGrid', root), count = $('#locCount', root);
+      grid.innerHTML = list.map(card).join('');
+      if (count) count.textContent = list.length + (list.length === 1 ? ' location' : ' locations');
+      $$('.loc-tab', root).forEach(function (b) {
+        var on = b.getAttribute('data-s') === scope;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on);
+      });
+    }
+
+    function render(data) {
+      var mode = data && data.status;
+      if (mode === 'hidden') { sec.hidden = true; return; }
+      sec.hidden = false;
+
+      items = (data.items || []).filter(function (i) { return i && i.name && i.address && i.published !== false; });
+      if (mode !== 'live' || !items.length) return;      /* keep the Coming Soon markup */
+
+      var bd = items.filter(function (i) { return i.scope === 'bd'; }).length;
+      var intl = items.length - bd;
+      var tabs = (bd && intl)
+        ? '<div class="loc-tabs" role="group" aria-label="Filter locations">' +
+        '<button type="button" class="loc-tab active" data-s="all" aria-pressed="true">All <b>' + items.length + '</b></button>' +
+        '<button type="button" class="loc-tab" data-s="bd" aria-pressed="false">Bangladesh <b>' + bd + '</b></button>' +
+        '<button type="button" class="loc-tab" data-s="intl" aria-pressed="false">International <b>' + intl + '</b></button></div>'
+        : '';
+
+      root.innerHTML = '<div class="loc-bar">' + tabs + '<span class="loc-count" id="locCount" aria-live="polite"></span></div>' +
+        '<div class="loc-grid" id="locGrid"></div>';
+      scope = 'all';
+      draw();
+    }
+
+    root.addEventListener('click', function (e) {
+      var tab = e.target.closest('.loc-tab');
+      if (tab) { scope = tab.getAttribute('data-s'); draw(); return; }
+
+      var cp = e.target.closest('.loc-copy');
+      if (!cp) return;
+      var text = cp.getAttribute('data-copy') || '', old = cp.innerHTML;
+      function done(ok) {
+        cp.innerHTML = ok ? '<i class="fa-solid fa-check" aria-hidden="true"></i>' : '<i class="fa-solid fa-xmark" aria-hidden="true"></i>';
+        cp.classList.toggle('is-done', ok);
+        setTimeout(function () { cp.innerHTML = old; cp.classList.remove('is-done'); }, 1800);
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.style.cssText = 'position:fixed;opacity:0';
+        document.body.appendChild(ta); ta.select();
+        var ok = false; try { ok = document.execCommand('copy'); } catch (err) { }
+        document.body.removeChild(ta); done(ok);
+      }
+    });
+
+    /* Admin panel (Laravel JSON) or the local list in data.js */
+    if (CFG.endpoint) {
+      fetch(CFG.endpoint, { headers: { 'Accept': 'application/json' }, credentials: 'same-origin' })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(function (j) {
+          var arr = Array.isArray(j);
+          render({ status: (!arr && j.status) || 'live', items: arr ? j : j.items });
+        })
+        .catch(function () { render(CFG); });
+    } else {
+      render(CFG);
+    }
+  })();
+
   /* ---------- Form ---------- */
   var form = $('#cntForm');
   if (!form) return;

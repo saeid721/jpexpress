@@ -842,6 +842,41 @@ const JP_CONTACT_INTENTS = {
 };
 const JP_CONTACT_FIELD_ORDER = ['company', 'ship', 'dest', 'weight', 'pickup', 'track'];
 
+/* ---------- CONTACT: more locations (branches / warehouses) ----------
+   status   : 'soon'   = show "Coming Soon" (current)
+              'live'   = show the locations below
+              'hidden' = remove the whole section
+   endpoint : Laravel JSON route, e.g. '/api/locations'. When set, the admin panel
+              controls everything. Leave '' to use the items list below.
+   Laravel JSON format: { "status": "live", "items": [ ...same fields as below... ] }
+   item fields:
+     type    : 'branch' | 'warehouse' | 'office'
+     scope   : 'bd' (inside Bangladesh) | 'intl' (outside Bangladesh)
+     status  : 'open' | 'soon'   (a single location can also be "Opening Soon")
+     flag    : 2-letter country code, e.g. 'bd', 'ae', 'gb'
+     lat/lng : optional, makes the Directions button exact
+*/
+const JP_CONTACT_LOCATIONS = {
+  status: 'soon',
+  endpoint: '',
+  items: [
+    /* Example (copy, edit, then set status: 'live' above):
+    {
+      type: 'branch', scope: 'bd', status: 'open',
+      name: 'Chattogram Branch', city: 'Chattogram', country: 'Bangladesh', flag: 'bd',
+      address: 'Full street address here',
+      phone: '+880 1XXX XXXXXX', email: 'ctg@jpex.com.bd',
+      hours: '9:00 AM – 8:00 PM', lat: 22.3569, lng: 91.7832
+    },
+    {
+      type: 'warehouse', scope: 'intl', status: 'soon',
+      name: 'Dubai Warehouse', city: 'Dubai', country: 'United Arab Emirates', flag: 'ae',
+      address: 'Warehouse address here', phone: '', email: '', hours: ''
+    }
+    */
+  ]
+};
+
 
 
 /* =========================================================
