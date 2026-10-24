@@ -108,6 +108,82 @@
         Freight: { label: 'Freight', icon: 'fa-plane-departure', services: ['air', 'sea'], dims: true, quote: true, hint: 'Larger cargo is priced by quote.' }
     };
 
+    /* ---- Booking-form parity (same options as book-shipment.html) ---- */
+    var KINDS = {
+        Documents: ['Documents'],
+        Parcel: ['Personal parcel', 'Gift', 'E-commerce order'],
+        Commercial: ['Product sample', 'E-commerce order', 'Commercial cargo'],
+        Freight: ['Commercial cargo']
+    };
+    var KIND_MODE = {
+        'Documents': 'Documents',
+        'Personal parcel': 'Parcel',
+        'Gift': 'Parcel',
+        'E-commerce order': 'Parcel',
+        'Product sample': 'Commercial',
+        'Commercial cargo': 'Commercial'
+    };
+    var KIND_LIST = Object.keys(KIND_MODE);
+
+    var SIZE_SETS = {
+        _default: [
+            { n: 'A4 Envelope', d: [32, 24, 1], i: 'fa-envelope' },
+            { n: 'One or two books', d: [23, 14, 4], i: 'fa-book' },
+            { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+            { n: 'Moving box', d: [75, 35, 35], i: 'fa-boxes-stacked' }
+        ],
+        'Documents': [
+            { n: 'A4 Envelope', d: [32, 24, 1], i: 'fa-envelope' },
+            { n: 'Large Envelope', d: [40, 30, 2], i: 'fa-file-lines' },
+            { n: 'Document Folder', d: [35, 26, 5], i: 'fa-folder-open' },
+            { n: 'Document Box', d: [36, 26, 12], i: 'fa-box-open' }
+        ],
+        'Personal parcel': [
+            { n: 'One or two books', d: [23, 14, 4], i: 'fa-book' },
+            { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+            { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+            { n: 'Moving box', d: [75, 35, 35], i: 'fa-boxes-stacked' }
+        ],
+        'Gift': [
+            { n: 'One or two books', d: [23, 14, 4], i: 'fa-book' },
+            { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+            { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+            { n: 'Moving box', d: [75, 35, 35], i: 'fa-boxes-stacked' }
+        ],
+        'Product sample': [
+            { n: 'Small pack', d: [20, 15, 10], i: 'fa-box-open' },
+            { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+            { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+            { n: 'Large carton', d: [60, 40, 40], i: 'fa-boxes-stacked' }
+        ],
+        'E-commerce order': [
+            { n: 'Poly mailer', d: [30, 25, 5], i: 'fa-bag-shopping' },
+            { n: 'Shoe box', d: [35, 20, 15], i: 'fa-shoe-prints' },
+            { n: 'Medium box', d: [45, 30, 25], i: 'fa-box' },
+            { n: 'Large carton', d: [60, 40, 40], i: 'fa-boxes-stacked' }
+        ],
+        'Commercial cargo': [
+            { n: 'Small carton', d: [50, 40, 40], i: 'fa-box' },
+            { n: 'Standard carton', d: [60, 40, 40], i: 'fa-box' },
+            { n: 'Large carton', d: [70, 50, 50], i: 'fa-boxes-stacked' },
+            { n: 'Pallet', d: [120, 80, 100], i: 'fa-pallet' }
+        ]
+    };
+    var SVC_HINTS = {
+        express: 'Fastest option, best for urgent documents and parcels.',
+        economy: 'Lower cost with a longer transit time. Best for non-urgent shipments.',
+        door: 'We pick up from your address and deliver to the recipient.',
+        air: 'Commercial cargo by air. Faster than sea, priced by chargeable weight.',
+        sea: 'Large or heavy cargo by sea. Lowest cost, longest transit.'
+    };
+    var CBADGE = { dhl: 'DH', fedex: 'FX', ups: 'UP', aramex: 'AR', jpex: 'JP', gpo: 'GP' };
+    var PTIMES = [
+        { v: 'anytime', l: 'Any time' },
+        { v: 'morning', l: 'Morning (9 AM – 12 PM)' },
+        { v: 'afternoon', l: 'Afternoon (12 PM – 4 PM)' },
+        { v: 'evening', l: 'Evening (4 PM – 8 PM)' }
+    ];
+
     /* ---------- Seed (sample) data ---------- */
     function ev(list) { return list.map(function (a) { return { t: a[0], title: a[1], loc: a[2] }; }); }
     function seed() {
@@ -879,8 +955,78 @@
     function defContact(list) { var d = list.filter(function (c) { return c.def; })[0] || list[0]; return d ? d.id : ''; }
     function newWiz(base) {
         var a = A();
-        return Object.assign({ step: 1, sender: defContact(a.senders), receiver: defContact(a.receivers), type: 'Parcel', weight: '', unit: 'kg', dUnit: 'cm', l: '', w: '', h: '', pcs: 1, desc: '', qty: '', value: '', pickup: false, courier: 'all', service: 'express', agree: false }, base || {});
+        var w = Object.assign({ step: 1, sender: defContact(a.senders), receiver: defContact(a.receivers), type: 'Parcel', kind: 'Personal parcel', weight: '', unit: 'kg', dUnit: 'cm', l: '', w: '', h: '', pcs: 1, desc: '', qty: '', value: '', insure: false, fragile: false, pickup: false, pdate: todayISO(), ptime: 'anytime', courier: 'all', service: 'express', updates: false, agree: false }, base || {});
+        if (base && base.type && !base.kind) w.kind = '';
+        return w;
     }
+
+    /* ---------- Booking-form parity helpers ---------- */
+    function todayISO() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+    function r1(n) { return Math.round(n * 10) / 10; }
+    function svcFor(kind) {
+        var base = MODES[KIND_MODE[kind] || 'Parcel'].services;
+        return KIND_MODE[kind] === 'Parcel' ? base.concat(['air', 'sea']) : base;
+    }
+    function modeOf(kind, service) {
+        var b = KIND_MODE[kind] || 'Parcel';
+        return MODES[b].services.indexOf(service) > -1 ? b : 'Commercial';
+    }
+    function syncMode() {
+        if (!KIND_MODE[wiz.kind]) wiz.kind = wiz.type === 'Documents' ? 'Documents' : (wiz.type === 'Commercial' || wiz.type === 'Freight') ? 'Commercial cargo' : 'Personal parcel';
+        var list = svcFor(wiz.kind);
+        if (list.indexOf(wiz.service) < 0) wiz.service = list[0];
+        wiz.type = modeOf(wiz.kind, wiz.service);
+    }
+    function fixKind() { syncMode(); }
+    function flagImg(name) {
+        var c = (typeof JP_PRICING_FLAGS !== 'undefined') && JP_PRICING_FLAGS[name];
+        return c ? '<img src="https://flagcdn.com/w40/' + c + '.png" alt="" width="34" height="34" loading="lazy">' : '<i class="fa-solid fa-earth-asia" aria-hidden="true"></i>';
+    }
+    function countryStat(name) {
+        var list = (typeof JP_DELIVERY_HISTORY !== 'undefined' && JP_DELIVERY_HISTORY.countries) || [];
+        var k = String(name || '').toLowerCase().trim();
+        if (k === 'uae') k = 'united arab emirates';
+        for (var i = 0; i < list.length; i++) { if (list[i].n.toLowerCase() === k) return list[i]; }
+        return null;
+    }
+    function routeCard(sn, rc, cls) {
+        return '<div class="wz-rt' + (cls ? ' ' + cls : '') + '">' +
+            '<div class="wz-rt-pt"><span class="wz-flag">' + flagImg(sn.country) + '</span><span><small>From</small><b>' + esc(sn.city) + ', ' + esc(sn.country) + '</b></span></div>' +
+            '<span class="wz-rt-arrow" aria-hidden="true"><i class="fa-solid fa-plane"></i></span>' +
+            '<div class="wz-rt-pt to"><span class="wz-flag">' + flagImg(rc.country) + '</span><span><small>To</small><b>' + esc(rc.city) + ', ' + esc(rc.country) + '</b></span></div></div>';
+    }
+    function routeBoxHtml() {
+        var a = A(), sn = byId(a.senders, wiz.sender), rc = byId(a.receivers, wiz.receiver);
+        if (!sn || !rc) return '';
+        var st = countryStat(rc.country), out = routeCard(sn, rc);
+        if (st) out += '<div class="wz-stats"><div class="wz-stat"><strong>' + st.processing + '</strong><span>parcels processing to ' + esc(rc.country) + '</span></div>' +
+            '<div class="wz-stat"><strong>' + st.count + '+</strong><span>parcels delivered</span></div></div>' +
+            '<p class="note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Your booking joins an active route. We process and deliver parcels to this country every week.</p>';
+        if (sn.country !== 'Bangladesh') out += '<p class="note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Pickup outside Bangladesh is confirmed by our team after you book.</p>';
+        return out;
+    }
+    function curSizes() { return SIZE_SETS[wiz.kind] || SIZE_SETS._default; }
+    function sizeHit() {
+        var du = D_UNIT[wiz.dUnit] || 1, v = ['l', 'w', 'h'].map(function (k) { return parseFloat(wiz[k]) || 0; }), hit = -1;
+        if (v[0] > 0 && v[1] > 0 && v[2] > 0) curSizes().forEach(function (s, i) { if (hit < 0 && s.d.every(function (n, k) { return Math.abs(n - v[k] * du) < 0.1; })) hit = i; });
+        return hit;
+    }
+    function sizesBoxHtml() {
+        var du = D_UNIT[wiz.dUnit] || 1, hit = sizeHit();
+        return '<div class="wz-sizes-head"><b>Not sure about the sizes?</b><span class="wz-tag">For ' + esc(wiz.kind) + '</span></div><div class="wz-size-grid" role="group" aria-label="Quick sizes">' +
+            curSizes().map(function (s, i) {
+                return '<button type="button" class="wz-size' + (i === hit ? ' is-sel' : '') + '" data-action="pickSize" data-i="' + i + '" aria-pressed="' + (i === hit) + '">' +
+                    '<span class="wz-size-ico"><i class="fa-solid ' + s.i + '" aria-hidden="true"></i></span>' +
+                    '<span class="wz-size-txt"><b>' + esc(s.n) + '</b><small>' + s.d.map(function (n) { return r1(n / du); }).join(' × ') + ' ' + wiz.dUnit + '</small></span></button>';
+            }).join('') + '</div>';
+    }
+    function wizSizesSync() {
+        var g = $('#wzSizes'); if (!g) return;
+        var hit = sizeHit();
+        $$('.wz-size', g).forEach(function (b, i) { b.classList.toggle('is-sel', i === hit); b.setAttribute('aria-pressed', i === hit ? 'true' : 'false'); });
+        ['l', 'w', 'h'].forEach(function (k) { var i = $('#f_' + k), f = i && i.closest('.fld'); if (f) f.classList.toggle('is-ok', parseFloat(i.value) > 0); });
+    }
+
     /* ---------- Calculator engine (mirrors quote page) ---------- */
     function r2(n) { return Math.round(n * 100) / 100; }
     function kgTxt(n) { return r2(n).toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' kg'; }
@@ -897,10 +1043,7 @@
         }
         return '';
     }
-    function fixService() {
-        var m = MODES[wiz.type] || MODES.Parcel;
-        if (m.services.indexOf(wiz.service) < 0) wiz.service = m.services[0];
-    }
+    function fixService() { syncMode(); }
     function calcW(w, courier) {
         var m = MODES[w.type] || MODES.Parcel, wu = W_UNIT[w.unit] || 1, du = D_UNIT[w.dUnit] || 1;
         var actual = (parseFloat(w.weight) || 0) * wu;
@@ -963,6 +1106,7 @@
         var el = $('#wzLive'); if (!el) return;
         readWiz();
         var h = wizLiveHtml(); el.innerHTML = h; el.hidden = !h;
+        wizSizesSync();
     }
 
     /* result box (step 3) */
@@ -982,6 +1126,7 @@
     function wizInfo() {
         var b = $('#wzSvcInfo'); if (b) b.innerHTML = svcInfoHtml();
         var cw = $('#wzCourier'); if (cw) cw.hidden = wiz.service === 'sea';
+        var hs = $('#wzSvcHint span'); if (hs) hs.textContent = SVC_HINTS[wiz.service] || '';
     }
     var WSTEPS = ['Contacts', 'Package', 'Service', 'Review'];
     function stepsBar() {
@@ -1007,62 +1152,102 @@
             body = '<h3 class="sub-h first">Who is sending?</h3>' + contactCards(a.senders, 'sender', wiz.sender) +
                 (can('contacts') ? '<button class="link-btn add" data-action="addContact" data-type="sender" data-wiz="1"><i class="fa-solid fa-plus"></i> Add new sender</button>' : '') +
                 '<h3 class="sub-h">Who is receiving?</h3>' + contactCards(a.receivers, 'receiver', wiz.receiver) +
-                (can('contacts') ? '<button class="link-btn add" data-action="addContact" data-type="receiver" data-wiz="1"><i class="fa-solid fa-plus"></i> Add new receiver</button>' : '');
+                (can('contacts') ? '<button class="link-btn add" data-action="addContact" data-type="receiver" data-wiz="1"><i class="fa-solid fa-plus"></i> Add new receiver</button>' : '') +
+                '<div id="wzRoute">' + routeBoxHtml() + '</div>';
         } else if (wiz.step === 2) {
+            fixKind();
             var m = MODES[wiz.type] || MODES.Parcel, live = wizLiveHtml();
             var dim = function (label, k) {
-                return '<div class="fld" data-f="' + k + '"><label for="f_' + k + '">' + label + '</label><input id="f_' + k + '" name="' + k + '" type="number" inputmode="decimal" step="any" min="0" placeholder="' + k.toUpperCase() + '" value="' + esc(wiz[k]) + '"><small class="err" role="alert"></small></div>';
+                return '<div class="fld' + (parseFloat(wiz[k]) > 0 ? ' is-ok' : '') + '" data-f="' + k + '"><label for="f_' + k + '">' + label + '</label><input id="f_' + k + '" name="' + k + '" type="number" inputmode="decimal" step="any" min="0" placeholder="' + k.toUpperCase() + '" value="' + esc(wiz[k]) + '"><small class="err" role="alert"></small></div>';
             };
             var opts = function (list, cur) {
                 return list.map(function (u) { return '<option value="' + u + '"' + (cur === u ? ' selected' : '') + '>' + (u === 'in' ? 'inch' : u) + '</option>'; }).join('');
             };
             body = '<h3 class="sub-h first">What are you shipping?</h3>' +
-                '<div class="seg four" role="radiogroup" aria-label="Shipment type">' + Object.keys(MODES).map(function (k) {
-                    return '<label><input type="radio" name="type" value="' + k + '"' + (wiz.type === k ? ' checked' : '') + '><span><i class="fa-solid ' + MODES[k].icon + '"></i>' + MODES[k].label + '</span></label>';
-                }).join('') + '</div><p class="wz-hint">' + esc(m.hint) + '</p>' +
+                '<div class="wz-pair">' +
+                field('Shipping service', 'service', { type: 'select', options: svcFor(wiz.kind).map(function (k) { return { v: k, l: SERVICES[k].name }; }), value: wiz.service, req: 1 }) +
+                field('Shipment type', 'kind', { type: 'select', options: KIND_LIST, value: wiz.kind, req: 1 }) +
+                '</div>' +
+                '<p class="wz-svc-hint" id="wzSvcHint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>' + esc(SVC_HINTS[wiz.service] || '') + '</span></p>' +
 
                 '<h3 class="sub-h">How heavy' + (m.dims ? ' and how big' : '') + '?</h3>' +
+                '<div class="wz-wpv">' +
                 '<div class="fld" data-f="weight"><label for="f_weight">Total weight <i class="req">*</i></label><div class="wz-ig"><input id="f_weight" name="weight" type="number" inputmode="decimal" step="any" min="0" placeholder="e.g. 2.5" value="' + esc(wiz.weight) + '"><select id="f_unit" name="unit" aria-label="Weight unit">' + opts(['kg', 'g', 'lb'], wiz.unit) + '</select></div><small class="err" role="alert"></small></div>' +
+                '<div class="fld" data-f="pcs"><label for="f_pcs">Pieces</label><div class="wz-num"><button type="button" class="wz-num-btn" data-action="pcs" data-step="-1" aria-label="Decrease pieces"><i class="fa-solid fa-minus"></i></button><input id="f_pcs" name="pcs" type="number" inputmode="numeric" min="1" max="999" value="' + esc(wiz.pcs) + '"><button type="button" class="wz-num-btn" data-action="pcs" data-step="1" aria-label="Increase pieces"><i class="fa-solid fa-plus"></i></button></div><small class="err" role="alert"></small></div>' +
+                field('Declared value (৳)', 'value', { value: wiz.value, type: 'number', inputmode: 'decimal', min: 0, ph: 'Optional' }) +
+                '</div>' +
 
-                (m.dims ? '<div class="wz-dims"><div class="wz-dims-head"><b>Size per piece</b><select id="f_dUnit" name="dUnit" class="wz-mini" aria-label="Size unit">' + opts(['cm', 'in'], wiz.dUnit) + '</select></div>' +
-                    '<div class="wz-dim-row">' + dim('Length', 'l') + dim('Width', 'w') + dim('Height', 'h') +
-                    '<div class="fld" data-f="pcs"><label for="f_pcs">Pieces</label><div class="wz-num"><button type="button" class="wz-num-btn" data-action="pcs" data-step="-1" aria-label="Decrease pieces"><i class="fa-solid fa-minus"></i></button><input id="f_pcs" name="pcs" type="number" inputmode="numeric" min="1" max="999" value="' + esc(wiz.pcs) + '"><button type="button" class="wz-num-btn" data-action="pcs" data-step="1" aria-label="Increase pieces"><i class="fa-solid fa-plus"></i></button></div><small class="err" role="alert"></small></div></div>' +
+                (m.dims ? '<div class="wz-dims"><div class="wz-dims-head"><b>Size per piece <small>(optional)</small></b><select id="f_dUnit" name="dUnit" class="wz-mini" aria-label="Size unit">' + opts(['cm', 'in'], wiz.dUnit) + '</select></div>' +
+                    '<div class="wz-dim-row">' + dim('Length', 'l') + dim('Width', 'w') + dim('Height', 'h') + '</div>' +
+                    '<div class="wz-sizes" id="wzSizes">' + sizesBoxHtml() + '</div>' +
                     '<p class="note"><i class="fa-solid fa-circle-info"></i> Bulky parcels are priced on the space they take. Size is optional, but needed to check volumetric weight (sea freight needs it).</p></div>' : '') +
 
                 '<div class="wz-live" id="wzLive" aria-live="polite"' + (live ? '' : ' hidden') + '>' + live + '</div>' +
 
                 '<div class="form-grid wz-gap">' + field('What is inside?', 'desc', { value: wiz.desc, ph: 'e.g. clothes and gifts', max: 120, span: 1, req: 1 }) + '</div>' +
 
-                '<details class="wz-more"' + (wiz.qty || wiz.value || wiz.pickup ? ' open' : '') + '><summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Add item details <small>(optional, improves accuracy)</small></summary><div class="wz-more-body form-grid">' +
-                field('Quantity', 'qty', { value: wiz.qty, type: 'number', inputmode: 'numeric', min: 1, ph: 'e.g. 20' }) +
-                field('Approx. value (৳)', 'value', { value: wiz.value, type: 'number', inputmode: 'decimal', min: 0, ph: 'Optional' }) +
-                '<label class="check wz-span"><input type="checkbox" name="pickup" id="f_pickup"' + (wiz.pickup ? ' checked' : '') + '><span>I need pickup from the sender address</span></label></div></details>';
+                '<div class="wz-extras">' +
+                '<label class="check"><input type="checkbox" name="insure"' + (wiz.insure ? ' checked' : '') + '><span>Add cargo insurance (extra protection)</span></label>' +
+                '<label class="check"><input type="checkbox" name="fragile"' + (wiz.fragile ? ' checked' : '') + '><span>Fragile item — handle with care</span></label></div>' +
+
+                '<details class="wz-more"' + (wiz.qty || wiz.pickup ? ' open' : '') + '><summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Add item details <small>(optional, improves accuracy)</small></summary><div class="wz-more-body form-grid">' +
+                field('Quantity', 'qty', { value: wiz.qty, type: 'number', inputmode: 'numeric', min: 1, ph: 'e.g. 20', span: 1 }) +
+                '<label class="check wz-span"><input type="checkbox" name="pickup" id="f_pickup"' + (wiz.pickup ? ' checked' : '') + '><span>I need pickup from the sender address</span></label>' +
+                '<div class="wz-when" id="wzWhen"' + (wiz.pickup ? '' : ' hidden') + '>' +
+                field('Pickup date', 'pdate', { type: 'date', value: wiz.pdate, min: todayISO() }) +
+                field('Pickup time', 'ptime', { type: 'select', options: PTIMES, value: wiz.ptime }) + '</div></div></details>';
 
         } else if (wiz.step === 3) {
             fixService();
-            var svcs = MODES[wiz.type].services;
+            var svcs = svcFor(wiz.kind);
             body = '<div id="wzSvcInfo">' + svcInfoHtml() + '</div><h3 class="sub-h">Choose a service</h3>' +
                 '<div class="pick svc" role="radiogroup" aria-label="Service" data-n="' + svcs.length + '">' + svcs.map(function (k) {
-                    var s = SERVICES[k], q = calcQuote(Object.assign({}, wiz, { service: k, courier: 'all' })), sea = k === 'sea';
+                    var s = SERVICES[k], q = calcQuote(Object.assign({}, wiz, { service: k, courier: 'all', type: modeOf(wiz.kind, k) })), sea = k === 'sea';
                     return '<label class="pickc"><input type="radio" name="service" value="' + k + '"' + (wiz.service === k ? ' checked' : '') + '><span><b><i class="fa-solid ' + s.icon + '"></i> ' + esc(s.name) + '</b><small>' + esc(s.note) + '</small><small>' +
                         (sea ? (q.c.has ? r2(q.c.cbm) + ' CBM' : 'Size needed') : kgTxt(q.c.cw) + ' chargeable') + ' · ' + esc(s.eta) + '</small></span>' +
                         '<strong class="price">' + (q.best ? money(q.best.total) : 'Quote') + '</strong><i class="fa-solid fa-circle-check"></i></label>';
                 }).join('') + '</div>' +
-                '<div class="fld wz-courier" id="wzCourier" data-f="courier"' + (wiz.service === 'sea' ? ' hidden' : '') + '><label for="f_courier"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Courier</label><select id="f_courier" name="courier">' +
-                Object.keys(COURIERS).map(function (k) { return '<option value="' + k + '"' + ((wiz.courier || 'all') === k ? ' selected' : '') + '>' + esc(COURIERS[k]) + '</option>'; }).join('') + '</select></div>' +
+                '<p class="wz-svc-hint" id="wzSvcHint"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>' + esc(SVC_HINTS[wiz.service] || '') + '</span></p>' +
+                '<div class="wz-courier" id="wzCourier"' + (wiz.service === 'sea' ? ' hidden' : '') + '><span class="wz-lbl"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Preferred courier <small>(optional)</small></span>' +
+                '<div class="wz-cour-grid" role="radiogroup" aria-label="Preferred courier">' +
+                Object.keys(COURIERS).map(function (k) {
+                    var all = k === 'all';
+                    return '<label class="wz-cour"><input type="radio" name="courier" value="' + k + '"' + ((wiz.courier || 'all') === k ? ' checked' : '') + '><span><em>' + (all ? '<i class="fa-solid fa-layer-group" aria-hidden="true"></i>' : CBADGE[k]) + '</em><span class="wz-ct"><b>' + esc(COURIERS[k]) + '</b>' + (all ? '<small>Best available rate</small>' : '') + '</span></span></label>';
+                }).join('') + '</div>' +
+                '<p class="note"><i class="fa-solid fa-circle-info"></i> Final courier is confirmed by our team based on destination and availability.</p></div>' +
                 '<p class="note"><i class="fa-solid fa-circle-info"></i> Estimate from the details you entered. Duties, taxes and surcharges at the destination are usually separate. Your confirmed quote is the final price.</p>';
 
         } else {
             var sn = byId(a.senders, wiz.sender), rc = byId(a.receivers, wiz.receiver), sv = SERVICES[wiz.service];
             var res = calcQuote(wiz), sea = wiz.service === 'sea', cw = res.best ? res.best.cw : res.c.cw;
+            var pt = PTIMES.filter(function (p) { return p.v === wiz.ptime; })[0];
+            var det = [];
+            if (res.c.has) det.push('Size per piece: ' + [wiz.l, wiz.w, wiz.h].join(' × ') + ' ' + wiz.dUnit);
+            if (parseFloat(wiz.value) > 0) det.push('Declared value: ' + money(wiz.value));
+            if (wiz.insure) det.push('Cargo insurance added');
+            if (wiz.fragile) det.push('Fragile — handle with care');
+            if (wiz.pickup) det.push('Pickup: ' + (wiz.pdate || '—') + ' · ' + (pt ? pt.l : 'Any time'));
+            var rvc = function (lbl, st, inner) {
+                return '<div class="rv"><div class="wz-rvh"><span class="lbl">' + lbl + '</span><button type="button" class="wz-edit" data-action="wizGoto" data-step="' + st + '" aria-label="Edit ' + lbl + '"><i class="fa-solid fa-pen" aria-hidden="true"></i> Edit</button></div>' + inner + '</div>';
+            };
+            var chips = '<span class="wz-chip"><i class="fa-solid fa-bolt" aria-hidden="true"></i>' + esc(sv.name) + '</span>' +
+                (!sea && wiz.courier && wiz.courier !== 'all' ? '<span class="wz-chip"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i>' + esc(COURIERS[wiz.courier]) + '</span>' : '') +
+                '<span class="wz-chip"><i class="fa-solid fa-weight-hanging" aria-hidden="true"></i>' + kgTxt(res.c.actual) + '</span>' +
+                '<span class="wz-chip"><i class="fa-solid fa-cubes" aria-hidden="true"></i>' + res.c.pcs + (res.c.pcs === 1 ? ' piece' : ' pieces') + '</span>';
             body = (res.hit ? '<div class="alert warn" role="alert"><i class="fa-solid fa-triangle-exclamation"></i><span>“' + esc(res.hit) + '” may need extra checks. Please contact JP Express before booking.</span></div>' : '') +
-                '<div class="review"><div class="rv"><span class="lbl">Sender</span><b>' + esc(sn.name) + '</b><small>' + esc(sn.addr) + ', ' + esc(sn.city) + '</small></div><div class="rv"><span class="lbl">Receiver</span><b>' + esc(rc.name) + '</b><small>' + esc(rc.addr) + ', ' + esc(rc.city) + ', ' + esc(rc.country) + '</small></div>' +
-                '<div class="rv"><span class="lbl">Package</span><b>' + esc(wiz.type) + ' · ' + (sea ? (res.c.has ? r2(res.c.cbm) + ' CBM' : 'By volume') : kgTxt(cw) + ' chargeable') + '</b><small>' + esc(wiz.desc) + (res.c.has && res.c.pcs > 1 ? ' · ' + res.c.pcs + ' pieces' : '') + (wiz.qty ? ' · Qty ' + esc(wiz.qty) : '') + '</small></div>' +
-                '<div class="rv"><span class="lbl">Service</span><b>' + esc(sv.name) + (!sea && wiz.courier && wiz.courier !== 'all' ? ' · ' + esc(COURIERS[wiz.courier]) : '') + '</b><small>' + esc(sv.eta) + (wiz.pickup ? ' · Pickup requested' : '') + '</small></div></div>' +
+                routeCard(sn, rc, 'dark') + '<div class="wz-chips">' + chips + '</div>' +
+                '<div class="review">' +
+                rvc('Sender', 1, '<b>' + esc(sn.name) + '</b><small>' + esc(sn.addr) + ', ' + esc(sn.city) + '</small>') +
+                rvc('Receiver', 1, '<b>' + esc(rc.name) + '</b><small>' + esc(rc.addr) + ', ' + esc(rc.city) + ', ' + esc(rc.country) + '</small>') +
+                rvc('Package', 2, '<b>' + esc(wiz.kind || wiz.type) + ' · ' + (sea ? (res.c.has ? r2(res.c.cbm) + ' CBM' : 'By volume') : kgTxt(cw) + ' chargeable') + '</b><small>' + esc(wiz.desc) + (res.c.has && res.c.pcs > 1 ? ' · ' + res.c.pcs + ' pieces' : '') + (wiz.qty ? ' · Qty ' + esc(wiz.qty) : '') + '</small>') +
+                (det.length ? rvc('Extras & pickup', 2, det.map(function (d, i) { return i ? '<small>' + esc(d) + '</small>' : '<b>' + esc(d) + '</b>'; }).join('')) : '') +
+                rvc('Service', 3, '<b>' + esc(sv.name) + (!sea && wiz.courier && wiz.courier !== 'all' ? ' · ' + esc(COURIERS[wiz.courier]) : '') + '</b><small>' + esc(sv.eta) + (wiz.pickup ? ' · Pickup requested' : '') + '</small>') +
+                '</div>' +
                 (res.best
                     ? '<div class="total"><span>Estimated shipping cost</span><strong>' + money(res.best.total) + '</strong></div>'
                     : '<div class="total wz-pending"><span>Price</span><strong>Quote required</strong></div><p class="note"><i class="fa-solid fa-circle-info"></i> ' + esc(res.reasons[0]) + ' We confirm the exact price before pickup.</p>') +
-                '<label class="check"><input type="checkbox" id="wAgree"' + (wiz.agree ? ' checked' : '') + '><span>I confirm these details are correct and the shipment has no restricted or prohibited items. <a href="shipping-guides.html" target="_blank" rel="noopener">See restricted items</a></span></label><small class="err block" id="agreeErr" role="alert"></small>';
+                '<label class="check"><input type="checkbox" id="wAgree"' + (wiz.agree ? ' checked' : '') + '><span>I confirm these details are correct and the shipment has no restricted or prohibited items. <a href="shipping-guides.html" target="_blank" rel="noopener">See restricted items</a></span></label><small class="err block" id="agreeErr" role="alert"></small>' +
+                '<label class="check"><input type="checkbox" id="wUpdates"' + (wiz.updates ? ' checked' : '') + '><span>Send me shipping updates and offers</span></label>';
         }
         var last = wiz.step === 4;
         return pageHead('NEW SHIPMENT', 'Create a shipment', 'Account: ' + A().name) + '<section class="panel wiz">' + stepsBar() + '<form id="wizForm" novalidate>' + body + '</form>' +
@@ -1073,13 +1258,14 @@
         var f = $('#wizForm'); if (!f) return;
         if (wiz.step === 1) { var s = $('input[name=sender]:checked', f), r = $('input[name=receiver]:checked', f); if (s) wiz.sender = s.value; if (r) wiz.receiver = r.value; }
         if (wiz.step === 2) {
-            var d = formData(f), t = $('input[name=type]:checked', f);
-            if (t) wiz.type = t.value;
-            ['weight', 'unit', 'dUnit', 'l', 'w', 'h', 'pcs', 'desc', 'qty', 'value', 'pickup'].forEach(function (k) { if (d[k] != null) wiz[k] = d[k]; });
+            var d = formData(f);
+            ['kind', 'service', 'weight', 'unit', 'dUnit', 'l', 'w', 'h', 'pcs', 'desc', 'qty', 'value', 'insure', 'fragile', 'pickup', 'pdate', 'ptime'].forEach(function (k) { if (d[k] != null) wiz[k] = d[k]; });
+            syncMode();
         }
         if (wiz.step === 3) {
             var sv = $('input[name=service]:checked', f); if (sv) wiz.service = sv.value;
-            var co = $('[name=courier]', f); if (co) wiz.courier = co.value;
+            var co = $('[name=courier]:checked', f); if (co) wiz.courier = co.value;
+            syncMode();
         }
     }
     function wizValidate() {
@@ -1095,9 +1281,11 @@
                     var e = filled > 0 && filled < 3 && !(parseFloat(wiz[k]) > 0) ? 'Required' : '';
                     setErr(f, k, e); if (e) bad = true;
                 });
-                var pcs = Number(wiz.pcs), pm = pcs >= 1 && pcs <= 999 && pcs % 1 === 0 ? '' : '1–999';
-                setErr(f, 'pcs', pm); if (pm) bad = true;
             }
+            var pcs = Number(wiz.pcs), pm = pcs >= 1 && pcs <= 999 && pcs % 1 === 0 ? '' : '1–999';
+            setErr(f, 'pcs', pm); if (pm) bad = true;
+            var pdm = wiz.pickup && (!wiz.pdate || wiz.pdate < todayISO()) ? 'Choose today or a later date.' : '';
+            setErr(f, 'pdate', pdm); if (pdm) bad = true;
             var dm = String(wiz.desc).length < 2 ? 'Tell us what is inside.' : '';
             setErr(f, 'desc', dm); if (dm) bad = true;
             if (bad) { var fb = firstBad(f); if (fb) fb.focus(); return false; }
@@ -1113,7 +1301,7 @@
         var a = A(), rc = byId(a.receivers, wiz.receiver), sn = byId(a.senders, wiz.sender);
         var n = a.shipments.length, id = 'JPX-' + (a.kind === 'business' ? 3013 + n : 2050 + n) + '-' + Math.floor(1000 + Math.random() * 9000);
         var res = calcQuote(wiz), c = res.c;
-        var s = { id: id, from: sn.city, to: rc.city, toCountry: rc.country, weight: r2(c.actual), chargeable: r2(res.best ? res.best.cw : c.cw), kind: wiz.type, service: wiz.service, courier: wiz.courier || 'all', status: 'booked', date: dateOnly(), eta: 'Pickup pending', desc: wiz.desc, sender: sn.id, receiver: rc.id, by: A().user.name, events: ev([[nowStamp(), 'Booking confirmed', sn.city + ', BD'], [nowStamp(), 'Pickup request received', sn.city + ', BD']]) };
+        var s = { id: id, from: sn.city, to: rc.city, toCountry: rc.country, weight: r2(c.actual), chargeable: r2(res.best ? res.best.cw : c.cw), kind: wiz.type, service: wiz.service, courier: wiz.courier || 'all', subtype: wiz.kind, pieces: c.pcs, declared: wiz.value || '', insurance: !!wiz.insure, fragile: !!wiz.fragile, pickupDate: wiz.pickup ? wiz.pdate : '', pickupTime: wiz.pickup ? wiz.ptime : '', status: 'booked', date: dateOnly(), eta: 'Pickup pending', desc: wiz.desc, sender: sn.id, receiver: rc.id, by: A().user.name, events: ev([[nowStamp(), 'Booking confirmed', sn.city + ', BD'], [nowStamp(), 'Pickup request received', sn.city + ', BD']]) };
         a.shipments.unshift(s);
         if (res.best && (can('billing.view') || a.kind === 'personal')) a.invoices.unshift({ id: 'INV-2026-' + (430 + a.invoices.length), ship: id, amount: Math.round(res.best.total), status: 'unpaid', date: dateOnly(), due: 'In 10 days' });
         a.notifications.unshift({ id: uid('n'), icon: 'fa-box', tone: 'info', title: 'Booking confirmed', text: id + ' is booked. We will contact you to arrange pickup.', time: 'Just now', ship: id, unread: true });
@@ -1122,6 +1310,7 @@
     function wizNext() { if (!wizValidate()) return; wiz.step++; render(); }
     function wizConfirm() {
         readWiz(); var ag = $('#wAgree'); wiz.agree = ag && ag.checked;
+        var up = $('#wUpdates'); wiz.updates = !!(up && up.checked);
         if (!wiz.agree) { $('#agreeErr').textContent = 'Please confirm to continue.'; $('#wAgree').focus(); return; }
         var s = makeShipment(), inv = A().invoices.some(function (i) { return i.ship === s.id; }); save(); sync('shipments', s); wiz = null; updateChrome();
         openModal({
@@ -1163,7 +1352,7 @@
     function requote(id) { var q = byId(A().quotes, id); if (!q) return; wiz = newWiz({ sender: q.sender, receiver: q.receiver, type: q.kind, weight: q.weight, desc: q.desc, service: q.service, step: 2 }); go('create'); }
     function repeatShip(id) {
         var s = findShip(id); if (!s) return; closeModal();
-        wiz = newWiz({ sender: s.sender, receiver: s.receiver, type: s.kind, weight: s.weight, desc: s.desc, service: s.service, step: 2 });
+        wiz = newWiz({ sender: s.sender, receiver: s.receiver, type: s.kind, kind: s.subtype, weight: s.weight, desc: s.desc, service: s.service, step: 2 });
         toast('Details copied. Review and adjust before booking.'); go('create');
     }
 
@@ -1566,6 +1755,13 @@
         repeat: function (el) { repeatShip(el.dataset.id); },
         supportFor: function (el) { closeModal(); if (!can('support')) { toast('Your role cannot contact support.', 'bad'); return; } ticketModal(el.dataset.id); },
         wizNext: wizNext, wizConfirm: wizConfirm, wizQuote: wizQuote,
+        wizGoto: function (el) { readWiz(); wiz.step = parseInt(el.dataset.step, 10) || 1; render(); window.scrollTo(0, 0); },
+        pickSize: function (el) {
+            readWiz();
+            var s = curSizes()[parseInt(el.dataset.i, 10)], du = D_UNIT[wiz.dUnit] || 1, on = el.classList.contains('is-sel');
+            ['l', 'w', 'h'].forEach(function (k, j) { var i = $('#f_' + k); if (i) i.value = on ? '' : r1(s.d[j] / du); });
+            wizLive();
+        },
         wizBack: function () { readWiz(); wiz.step = Math.max(1, wiz.step - 1); render(); window.scrollTo(0, 0); },
         wizCancel: function () { wiz = null; go('dashboard'); },
         pcs: function (el) { var i = $('#f_pcs'); if (!i) return; i.value = Math.min(999, Math.max(1, (parseInt(i.value, 10) || 1) + parseInt(el.dataset.step, 10))); wizLive(); },
@@ -1630,7 +1826,14 @@
         if (t.closest('#nForm')) { var u = A().user; u.prefs = u.prefs || {}; u.prefs[t.name] = t.checked; save(); sync('prefs', u.prefs); toast('Preferences saved.', 'ok'); }
         if (t.closest('#secForm')) { A().user.twofa = t.checked; save(); toast('Two-step verification ' + (t.checked ? 'on' : 'off') + ' (demo).'); }
         if (t.closest('#wizForm') && wiz && wiz.step === 3 && (t.name === 'service' || t.name === 'courier')) { readWiz(); wizInfo(); }
-        if (t.closest('#wizForm') && wiz && wiz.step === 2 && t.name === 'type') { readWiz(); fixService(); render(); }
+        if (t.closest('#wizForm') && wiz && wiz.step === 2 && (t.name === 'kind' || t.name === 'service')) { var sy = window.scrollY; readWiz(); render(); window.scrollTo(0, sy); }
+        if (t.closest('#wizForm') && wiz && wiz.step === 1 && (t.name === 'sender' || t.name === 'receiver')) { readWiz(); var rb = $('#wzRoute'); if (rb) rb.innerHTML = routeBoxHtml(); }
+        if (t.closest('#wizForm') && wiz && wiz.step === 2 && t.name === 'dUnit') {
+            var pu = D_UNIT[wiz.dUnit] || 1; readWiz(); var nu = D_UNIT[wiz.dUnit] || 1;
+            ['l', 'w', 'h'].forEach(function (k) { var i = $('#f_' + k), n = parseFloat(i && i.value); if (n > 0) i.value = r1(n * pu / nu); });
+            var sg = $('#wzSizes'); if (sg) sg.innerHTML = sizesBoxHtml(); wizLive();
+        }
+        if (t.id === 'f_pickup' && t.closest('#wizForm')) { var wn = $('#wzWhen'); if (wn) wn.hidden = !t.checked; }
     });
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && e.target.closest && e.target.closest('#wizForm') && e.target.tagName !== 'TEXTAREA') { e.preventDefault(); if (wiz && wiz.step < 4) wizNext(); }

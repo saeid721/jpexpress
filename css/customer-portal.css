@@ -2719,6 +2719,528 @@ button.stat.tone-red:hover {
   color: var(--bad);
 }
 
+/* =====================================================================
+   CREATE SHIPMENT — BOOKING-FORM PARITY
+   ===================================================================== */
+
+/* route card (step 1 + review) */
+.wz-rt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px;
+  background: linear-gradient(135deg, #f8f9ff, #fff);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+}
+
+.wz-rt-pt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.wz-rt-pt.to {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.wz-rt-pt>span:last-child {
+  min-width: 0;
+}
+
+.wz-rt-pt small {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.wz-rt-pt b {
+  display: block;
+  font-size: 14px;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wz-flag {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--tint);
+  color: var(--navy);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--line);
+}
+
+.wz-flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wz-rt-arrow {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 13px;
+  color: #fff;
+  background: var(--orange);
+}
+
+.wz-rt.dark {
+  margin: 0 0 10px;
+  border-color: transparent;
+  background: linear-gradient(120deg, var(--navy-d), var(--navy));
+}
+
+.wz-rt.dark small {
+  color: #c9d1ff;
+}
+
+.wz-rt.dark b {
+  color: #fff;
+}
+
+.wz-rt.dark .wz-flag {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, .35);
+}
+
+@media (max-width: 479px) {
+  .wz-rt {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .wz-rt-pt.to {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .wz-rt-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+}
+
+/* country stats */
+.wz-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.wz-stat {
+  flex: 1 1 150px;
+  display: grid;
+  gap: 2px;
+  padding: 10px 14px;
+  border: 1px solid #cfd6f3;
+  border-radius: 12px;
+  background: var(--tint);
+}
+
+.wz-stat strong {
+  font: 800 20px/1.2 var(--f-head);
+  color: var(--navy);
+}
+
+.wz-stat span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* weight / pieces / declared value */
+.wz-wpv {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.wz-wpv>.fld:first-child {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 640px) {
+  .wz-wpv {
+    grid-template-columns: 1.4fr 1fr 1fr;
+  }
+
+  .wz-wpv>.fld:first-child {
+    grid-column: auto;
+  }
+}
+
+/* dimension tick */
+.wz-dim-row .fld.is-ok input {
+  border-color: var(--ok);
+}
+
+/* quick sizes */
+.wz-sizes {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed #c5cdee;
+}
+
+.wz-sizes-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.wz-tag {
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--navy);
+  background: var(--tint);
+}
+
+.wz-size-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+@media (min-width: 640px) {
+  .wz-size-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.wz-size {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 8px 10px;
+  text-align: left;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color .18s, background .18s, box-shadow .18s, transform .15s;
+}
+
+.wz-size:hover {
+  border-color: var(--navy);
+}
+
+.wz-size:active {
+  transform: scale(.97);
+}
+
+.wz-size.is-sel {
+  border-color: var(--navy);
+  background: var(--tint);
+  box-shadow: 0 0 0 3px rgba(43, 57, 144, .1);
+}
+
+.wz-size-ico {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  color: var(--orange);
+  background: var(--tint);
+}
+
+.wz-size.is-sel .wz-size-ico {
+  color: #fff;
+  background: var(--navy);
+}
+
+.wz-size-txt {
+  display: grid;
+  min-width: 0;
+}
+
+.wz-size-txt b {
+  font-size: 12.5px;
+  line-height: 1.25;
+  color: var(--ink);
+}
+
+.wz-size-txt small {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* insurance / fragile */
+.wz-extras {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 14px;
+  background: #fafbff;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+}
+
+.wz-extras .check {
+  align-items: center;
+  margin-top: 0;
+}
+
+/* pickup date / time */
+.wz-when {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.wz-when[hidden] {
+  display: none;
+}
+
+@media (max-width: 479px) {
+  .wz-when {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* service hint */
+.wz-svc-hint {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.wz-svc-hint i {
+  margin-top: 3px;
+  color: var(--orange);
+}
+
+/* courier cards */
+.wz-courier .wz-lbl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.wz-courier .wz-lbl i {
+  color: var(--orange);
+}
+
+.wz-courier .wz-lbl small {
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.wz-cour-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.wz-cour-grid .wz-cour:first-child {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 640px) {
+  .wz-cour-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .wz-cour-grid .wz-cour:first-child {
+    grid-column: span 2;
+  }
+}
+
+.wz-cour {
+  position: relative;
+  display: block;
+}
+
+.wz-cour input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.wz-cour>span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  transition: border-color .18s, background .18s, box-shadow .18s;
+}
+
+.wz-cour em {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  font: 800 11px var(--f-head);
+  font-style: normal;
+  color: var(--navy);
+  background: var(--tint);
+}
+
+.wz-ct {
+  display: grid;
+  min-width: 0;
+}
+
+.wz-ct b {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.wz-ct small {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.wz-cour:hover>span {
+  border-color: var(--navy);
+}
+
+.wz-cour input:checked+span {
+  border-color: var(--navy);
+  background: var(--tint);
+  box-shadow: 0 0 0 3px rgba(43, 57, 144, .1);
+}
+
+.wz-cour input:checked+span em {
+  color: #fff;
+  background: var(--navy);
+}
+
+.wz-cour input:focus-visible+span {
+  outline: 3px solid rgba(242, 99, 35, .4);
+  outline-offset: 2px;
+}
+
+/* review */
+.wz-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.wz-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--tint);
+  border: 1px solid #cfd6f3;
+}
+
+.wz-chip i {
+  color: var(--orange);
+}
+
+.wz-rvh {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.wz-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--navy);
+  background: #fff;
+  cursor: pointer;
+  transition: border-color .18s, color .18s;
+}
+
+.wz-edit:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.wz-edit i {
+  font-size: 11px;
+}
+
+@media (max-width: 639px) {
+
+  .wz-size,
+  .wz-cour>span {
+    min-height: 56px;
+  }
+}
+
+
+/* =====================================================================
+   CREATE SHIPMENT — SERVICE + SHIPMENT TYPE (same line)
+   ===================================================================== */
+.wz-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.wz-pair .fld select {
+  padding-right: 36px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+@media (max-width: 399px) {
+  .wz-pair {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* =====================================================================
    22. TRACK PAGE
@@ -3840,13 +4362,12 @@ select.wz-mini {
 
 .wz-dim-row {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
 @media (min-width: 640px) {
   .wz-dim-row {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 12px;
   }
 }
