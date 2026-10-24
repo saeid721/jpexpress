@@ -198,10 +198,10 @@ body.lock {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 0;
   width: 100%;
   min-width: 0;
-  padding-right: 52px;
+  padding-right: 56px;
   /* mobile drawer: close button er jonno jayga */
 }
 
@@ -215,12 +215,19 @@ body.lock {
   object-position: left center;
 }
 
-.sb-close {
+.sb-head .sb-close {
   display: grid;
   position: absolute;
-  top: 0;
+  top: 50%;
   right: 0;
+  transform: translateY(calc(-50% - 7px));
   z-index: 2;
+  width: 40px;
+  height: 40px;
+}
+
+.sb-head .sb-close:active {
+  transform: translateY(calc(-50% - 7px)) scale(.94);
 }
 
 .acct-switch {
@@ -751,9 +758,9 @@ body.lock {
   left: 0;
   right: 0;
   bottom: 0;
-  display: grid;
-  grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr));
-  align-items: end;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
   height: calc(var(--bar) + var(--sab));
   padding: 0 4px var(--sab);
   background: rgba(255, 255, 255, .97);
@@ -764,11 +771,14 @@ body.lock {
 
 .tabbar a,
 .tabbar button {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   height: var(--bar);
   background: none;
   border: 0;
@@ -790,6 +800,8 @@ body.lock {
   content: "";
   position: absolute;
   top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 28px;
   height: 3px;
   border-radius: 0 0 4px 4px;
@@ -797,7 +809,10 @@ body.lock {
 }
 
 .tabbar .tab-main {
-  align-self: start;
+  align-self: stretch;
+  justify-content: flex-end;
+  padding-bottom: 7px;
+  color: var(--orange);
 }
 
 .tabbar .tab-main i {
@@ -805,7 +820,9 @@ body.lock {
   place-items: center;
   width: 46px;
   height: 46px;
-  margin-top: -16px;
+  margin-top: 0;
+  margin-bottom: 1px;
+  transform: translateY(-14px);
   border-radius: 50%;
   background: linear-gradient(135deg, var(--orange), #ff8a57);
   color: #fff;
@@ -3952,7 +3969,7 @@ button.stat.tone-red:hover {
     z-index: 50;
   }
 
-  .sb-close,
+  .sb-head .sb-close,
   .menu-btn,
   .tabbar,
   .scrim {
@@ -6153,4 +6170,47 @@ select.wz-mini {
   .track-form .btn-track {
     width: 100%;
   }
+}
+
+
+/* Bottom bar: label alignment + tap feedback */
+.tabbar a span,
+.tabbar button span {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.1;
+  letter-spacing: .01em;
+}
+
+.tabbar a:active:not(.tab-main),
+.tabbar button:active {
+  color: var(--navy);
+}
+
+.tabbar a:active:not(.tab-main) i,
+.tabbar button:active i {
+  transform: scale(.92);
+}
+
+.tabbar i {
+  transition: transform .15s;
+}
+
+.tabbar .tab-main:active i {
+  transform: translateY(-14px) scale(.94);
+}
+
+/* "Booking" tab: label on the same baseline as the other tabs */
+.tabbar .tab-main span {
+  margin-top: -10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+}
+
+.tabbar .tab-main.on span {
+  color: var(--orange-d);
 }
