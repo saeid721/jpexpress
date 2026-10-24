@@ -3918,7 +3918,7 @@
     var pod = d.pod ? '<article class="trk-card"><h3 class="trk-h">' + icon("fa-circle-check") + " Proof of delivery</h3><ul class=\"trk-kv\">" + kv("Delivered", d.pod.on) + kv("Location", d.pod.location) + kv("Received by", d.pod.by) + "</ul></article>" : "";
     var help = '<article class="trk-card trk-help"><h3 class="trk-h">' + icon("fa-headset") + " Need help?</h3><p>Share your tracking number with our team and we will check for you.</p><div class=\"trk-actions\">" + supportBtns(d.id) + "</div></article>";
 
-    return '<div class="trk-grid"><div class="trk-main">' + main + '</div><aside class="trk-side">' + info + pod + nextSteps(d) + help + "</aside></div>";
+    return '<div class="trk-grid"><div class="trk-main">' + main + '</div><aside class="trk-side">' + info + pod + nextSteps(d) + histCard() + help + "</aside></div>";
   }
 
   function multiView(list) {
@@ -3930,6 +3930,86 @@
         '<td data-label="">' + (r.state === "ok" ? '<button type="button" class="trk-view" data-view="' + esc(r.id) + '">View</button>' : "") + "</td></tr>";
     }).join("");
     return '<article class="trk-card"><h3 class="trk-h">' + icon("fa-list") + " " + list.length + ' shipments</h3><div class="trk-table-wrap"><table class="trk-table"><thead><tr><th>Tracking number</th><th>Status</th><th>Destination</th><th>Latest update</th><th>Est. delivery</th><th><span class="visually-hidden">Action</span></th></tr></thead><tbody>' + rows + "</tbody></table></div></article>";
+  }
+  /* ---------------- delivery history ---------------- */
+  function histData() {
+    var h = typeof JP_DELIVERY_HISTORY !== "undefined" ? JP_DELIVERY_HISTORY : null;
+    if (!h || !Array.isArray(h.countries) || !h.countries.length) return null;
+    var total = h.countries.reduce(function (s, x) { return s + (Number(x.count) || 0); }, 0);
+    return { h: h, total: total, n: h.countries.length };
+  }
+  function fmtN(n) { return Number(n).toLocaleString("en-US"); }
+  function flagImg(code) {
+    return '<img src="https://flagcdn.com/w80/' + esc(code) + '.png" width="40" height="40" alt="" loading="lazy">';
+  }
+
+  /* small trust card shown in the result sidebar */
+  function histCard() {
+    var D = histData();
+    if (!D) return "";
+    return '<article class="trk-card trk-trust"><h3 class="trk-h">' + icon("fa-shield-halved") + " Our delivery record</h3>" +
+      "<p>JP Express has delivered <strong>" + fmtN(D.total) + "+</strong> shipments to <strong>" + D.n +
+      " countries</strong>. Your shipment is one of many we handle every week.</p>" +
+      '<a class="trk-trust-link" href="#history">View delivery history ' + icon("fa-arrow-right") + "</a></article>";
+  }
+
+  /* full history section (stats + countries + latest deliveries) */
+  function renderHistory() {
+    var box = $("trkHistory"), sec = $("history"), D = histData();
+    if (!box || !D) { if (sec) sec.hidden = true; return; }
+
+    var h = D.h, LIMIT = 5, recent = Array.isArray(h.recent) ? h.recent.slice(0, LIMIT) : [];
+
+    var stats = [
+      ["fa-earth-asia", D.n, "Countries delivered"],
+      ["fa-box-open", fmtN(D.total) + "+", "Shipments delivered"]
+    ];
+    if (h.last30) stats.push(["fa-calendar-check", fmtN(h.last30), "Delivered in last 30 days"]);
+
+    var CLIMIT = 24, MOBILE_SHOW = 12;
+    var shownC = h.countries.slice()
+      .sort(function (a, b) { return (b.count || 0) - (a.count || 0); })
+      .slice(0, CLIMIT);
+
+    var countries = shownC.map(function (c, i) {
+      return '<li' + (i >= MOBILE_SHOW ? ' class="is-extra"' : '') + '>' +
+        '<img src="https://flagcdn.com/w80/' + esc(c.c) + '.png" width="24" height="24" alt="" loading="lazy">' +
+        esc(c.n) + (c.count ? " <b>" + fmtN(c.count) + "</b>" : "") + "</li>";
+    }).join("");
+
+    var list = recent.map(function (r, i) {
+      return "<li>" + flagImg(r.c) +
+        '<span class="trk-rec-main"><strong>Bangladesh \u2192 ' + esc(r.n) + "</strong><small>" +
+        esc(r.id) + (r.service ? " \u00b7 " + esc(r.service) : "") + (r.city ? " \u00b7 " + esc(r.city) : "") + "</small></span>" +
+        '<span class="trk-rec-end"><em>' + icon("fa-circle-check") + " Delivered</em><small>" + esc(r.date) + "</small></span></li>";
+    }).join("");
+
+    box.innerHTML =
+      '<div class="trk-hstats">' + stats.map(function (s) {
+        return '<div class="trk-hstat">' + icon(s[0]) + "<b>" + s[1] + "</b><span>" + s[2] + "</span></div>";
+      }).join("") + "</div>" +
+      '<div class="trk-hgrid">' +
+      '<div class="trk-hbox"><h3>' + icon("fa-earth-asia") + " Countries we have delivered to</h3>" +
+      '<ul class="trk-ctry" id="trkCtry">' + countries + "</ul>" +
+      (shownC.length > MOBILE_SHOW
+        ? '<button type="button" class="trk-more trk-ctry-toggle" id="trkCtryToggle" aria-expanded="false" aria-controls="trkCtry"><span>Show all ' + shownC.length + ' countries</span>' + icon("fa-chevron-down") + "</button>"
+        : "") +
+      '<p class="trk-hnote trk-ctry-note">' + shownC.length + " destinations, ranked by completed deliveries.</p></div>" +
+      (recent.length
+        ? '<div class="trk-hbox"><h3>' + icon("fa-clock-rotate-left") + " Latest completed deliveries</h3>" +
+        '<ul class="trk-recent" id="trkRecent">' + list + "</ul>" +
+        '<p class="trk-hnote">Tracking numbers are partly hidden to protect customer privacy.</p></div>'
+        : "") +
+      "</div>";
+
+    var ctryList = $("trkCtry"), ctryBtn = $("trkCtryToggle");
+    if (ctryList && ctryBtn) {
+      ctryBtn.addEventListener("click", function () {
+        var open = ctryList.classList.toggle("is-open");
+        ctryBtn.setAttribute("aria-expanded", String(open));
+        ctryBtn.querySelector("span").textContent = open ? "Show fewer countries" : "Show all " + shownC.length + " countries";
+      });
+    }
   }
 
   /* ---------------- flow ---------------- */
@@ -4014,6 +4094,7 @@
   if (DEMO && els.demo) els.demo.hidden = false;
   var initial = (params.get("tracking") || "").trim();
   setView(V.empty());
+  renderHistory();
   if (initial) { els.input.value = initial.toUpperCase(); track(initial); }
 })();
 

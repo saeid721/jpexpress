@@ -1271,7 +1271,6 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -1622,5 +1621,723 @@ html.page-track-shipment .hero.page-hero h1 {
   .page-track-shipment .trk-samples button {
     flex: 0 0 auto;
     white-space: nowrap;
+  }
+}
+
+
+
+
+/* ===============================================================
+   DELIVERY HISTORY (track record)
+   =============================================================== */
+.page-track-shipment .trk-hist-sec {
+  border-top: 1px solid var(--jp-border-light);
+}
+
+/* ---------- Stats (3 cards, always one row, even on phones) ---------- */
+.page-track-shipment .trk-hstats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto 18px;
+}
+
+.page-track-shipment .trk-hstat {
+  padding: 16px 8px;
+  text-align: center;
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  box-shadow: var(--jp-shadow-sm);
+}
+
+.page-track-shipment .trk-hstat i {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 8px;
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+}
+
+.page-track-shipment .trk-hstat b {
+  display: block;
+  font: 800 clamp(1.15rem, 4.6vw, 1.7rem)/1.1 "Plus Jakarta Sans", sans-serif;
+  color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-hstat span {
+  display: block;
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.3;
+  color: var(--jp-text-muted);
+}
+
+/* ---------- Two boxes: countries + latest deliveries ---------- */
+.page-track-shipment .trk-hgrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.page-track-shipment .trk-hbox {
+  min-width: 0;
+  padding: clamp(16px, 3vw, 22px);
+  background: var(--jp-white);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 16px;
+  box-shadow: var(--jp-shadow-sm);
+}
+
+.page-track-shipment .trk-hbox h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-hbox h3>i {
+  color: var(--jp-orange);
+}
+
+/* country chips */
+.page-track-shipment .trk-ctry {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-track-shipment .trk-ctry li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 5px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--jp-navy);
+  background: var(--jp-bg-light);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 999px;
+}
+
+.page-track-shipment .trk-ctry img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-track-shipment .trk-ctry b {
+  min-width: 20px;
+  padding: 1px 7px;
+  font-size: 11px;
+  text-align: center;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+  border-radius: 999px;
+}
+
+/* recent deliveries */
+.page-track-shipment .trk-recent {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.page-track-shipment .trk-recent li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  background: var(--jp-bg-light);
+  border: 1px solid var(--jp-border-muted);
+  border-radius: 14px;
+}
+
+.page-track-shipment .trk-recent li[hidden] {
+  display: none;
+}
+
+.page-track-shipment .trk-recent img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 1px rgba(30, 42, 107, .15);
+}
+
+.page-track-shipment .trk-rec-main {
+  min-width: 0;
+}
+
+.page-track-shipment .trk-rec-main strong {
+  display: block;
+  font-size: 14.5px;
+  line-height: 1.3;
+  color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-rec-main small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--jp-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.page-track-shipment .trk-rec-end {
+  display: grid;
+  justify-items: end;
+  gap: 4px;
+  text-align: right;
+}
+
+.page-track-shipment .trk-rec-end em {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  font-style: normal;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #067647;
+  background: #ECFDF3;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.page-track-shipment .trk-rec-end small {
+  font-size: 12px;
+  color: var(--jp-text-subtle);
+  white-space: nowrap;
+}
+
+/* show more / less */
+.page-track-shipment .trk-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  background: transparent;
+  border: 1.5px solid var(--jp-border-hover-2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.page-track-shipment .trk-more:hover,
+.page-track-shipment .trk-more:focus-visible {
+  color: var(--jp-white);
+  background: var(--jp-navy);
+  border-color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-more i {
+  font-size: 12px;
+  transition: transform .2s ease;
+}
+
+.page-track-shipment .trk-more[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.page-track-shipment .trk-hnote {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--jp-text-subtle);
+  text-align: center;
+}
+
+/* ---------- Trust card inside the result sidebar ---------- */
+.page-track-shipment .trk-trust {
+  border-left: 4px solid var(--jp-orange);
+}
+
+.page-track-shipment .trk-trust p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--jp-text-muted);
+}
+
+.page-track-shipment .trk-trust strong {
+  color: var(--jp-navy);
+}
+
+.page-track-shipment .trk-trust-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--jp-orange);
+}
+
+.page-track-shipment .trk-trust-link:hover {
+  text-decoration: underline;
+}
+
+.page-track-shipment .trk-trust-link i {
+  font-size: 11px;
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 992px) {
+  .page-track-shipment .trk-hgrid {
+    grid-template-columns: 1fr 1.25fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 479px) {
+  .page-track-shipment .trk-hstats {
+    gap: 8px;
+  }
+
+  .page-track-shipment .trk-hstat {
+    padding: 12px 6px;
+    border-radius: 14px;
+  }
+
+  .page-track-shipment .trk-hstat i {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+  }
+
+  .page-track-shipment .trk-hstat span {
+    font-size: 10.5px;
+  }
+
+  .page-track-shipment .trk-recent li {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 4px 10px;
+  }
+
+  .page-track-shipment .trk-recent img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .page-track-shipment .trk-rec-end {
+    grid-column: 2;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    justify-items: start;
+    align-items: center;
+    text-align: left;
+  }
+}
+
+
+/* ===============================================================
+   DELIVERY HISTORY: equal-height cards + 24 country list
+   =============================================================== */
+.page-track-shipment .trk-hgrid {
+  align-items: stretch;
+}
+
+.page-track-shipment .trk-hbox {
+  display: flex;
+  flex-direction: column;
+}
+
+/* countries: fill the card, chips start from the top */
+.page-track-shipment .trk-ctry {
+  flex: 1 1 auto;
+  align-content: flex-start;
+}
+
+/* recent deliveries: rows share the extra height evenly */
+.page-track-shipment .trk-recent {
+  flex: 1 1 auto;
+  grid-auto-rows: 1fr;
+}
+
+/* footer note sits at the bottom of the countries card */
+.page-track-shipment .trk-ctry-note {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* "Show all" button: mobile only */
+.page-track-shipment .trk-ctry-toggle {
+  display: none;
+}
+
+@media (max-width: 575px) {
+  .page-track-shipment .trk-ctry:not(.is-open) li.is-extra {
+    display: none;
+  }
+
+  .page-track-shipment .trk-ctry-toggle {
+    display: flex;
+  }
+
+  .page-track-shipment .trk-ctry-note {
+    margin-top: 10px;
+    padding-top: 0;
+  }
+}
+
+/* ===============================================================
+   DELIVERY HISTORY: entrance animation
+   (cards are built by JS, so they use CSS animation instead of data-reveal)
+   =============================================================== */
+.page-track-shipment .trk-hstat,
+.page-track-shipment .trk-hbox {
+  animation: pgUp .55s ease both;
+}
+
+.page-track-shipment .trk-hstat:nth-child(1) {
+  animation-delay: .05s;
+}
+
+.page-track-shipment .trk-hstat:nth-child(2) {
+  animation-delay: .15s;
+}
+
+.page-track-shipment .trk-hstat:nth-child(3) {
+  animation-delay: .25s;
+}
+
+.page-track-shipment .trk-hbox:nth-child(1) {
+  animation-delay: .3s;
+}
+
+.page-track-shipment .trk-hbox:nth-child(2) {
+  animation-delay: .4s;
+}
+
+/* recent delivery rows: soft hover on desktop */
+.page-track-shipment .trk-recent li {
+  transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.page-track-shipment .trk-recent li:hover {
+  border-color: var(--jp-orange);
+  box-shadow: var(--jp-shadow-md);
+  transform: translateY(-2px);
+}
+
+/* country chips: gentle hover */
+.page-track-shipment .trk-ctry li {
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.page-track-shipment .trk-ctry li:hover {
+  background: var(--jp-white);
+  border-color: var(--jp-orange);
+}
+
+/* very small phones: country chips a bit tighter */
+@media (max-width: 479px) {
+  .page-track-shipment .trk-ctry {
+    gap: 6px;
+  }
+
+  .page-track-shipment .trk-ctry li {
+    font-size: 12.5px;
+    padding: 4px 10px 4px 4px;
+  }
+}
+
+
+
+
+/* ===============================================================
+   DELIVERY HISTORY: COMPACT (smaller fonts, padding and gaps)
+   =============================================================== */
+
+/* ---------- Section spacing + heading ---------- */
+.page-track-shipment .trk-hist-sec {
+  padding: 26px 0 30px;
+}
+
+.page-track-shipment .trk-hist-sec .trk-head {
+  margin-bottom: 16px;
+}
+
+.page-track-shipment .trk-hist-sec .trk-head .eyebrow {
+  font-size: 11px;
+  letter-spacing: .12em;
+}
+
+.page-track-shipment .trk-hist-sec .trk-head h2 {
+  margin-top: 2px;
+  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+}
+
+.page-track-shipment .trk-hist-sec .trk-head p {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ---------- Stat cards: icon left, number + label right ---------- */
+.page-track-shipment .trk-hstats {
+  gap: 10px;
+  max-width: 760px;
+  margin-bottom: 12px;
+}
+
+.page-track-shipment .trk-hstat {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  text-align: left;
+  border-radius: 12px;
+}
+
+.page-track-shipment .trk-hstat i {
+  grid-row: 1 / span 2;
+  width: 34px;
+  height: 34px;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.page-track-shipment .trk-hstat b {
+  align-self: end;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  line-height: 1.1;
+}
+
+.page-track-shipment .trk-hstat span {
+  align-self: start;
+  margin-top: 1px;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+/* ---------- Two boxes ---------- */
+.page-track-shipment .trk-hgrid {
+  gap: 12px;
+  max-width: 1000px;
+}
+
+.page-track-shipment .trk-hbox {
+  padding: 14px 16px;
+  border-radius: 14px;
+}
+
+.page-track-shipment .trk-hbox h3 {
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: .95rem;
+}
+
+/* country chips */
+.page-track-shipment .trk-ctry {
+  gap: 6px;
+}
+
+.page-track-shipment .trk-ctry li {
+  gap: 6px;
+  padding: 3px 10px 3px 3px;
+  font-size: 12px;
+}
+
+.page-track-shipment .trk-ctry img {
+  width: 20px;
+  height: 20px;
+}
+
+.page-track-shipment .trk-ctry b {
+  min-width: 18px;
+  padding: 0 6px;
+  font-size: 10.5px;
+  line-height: 1.6;
+}
+
+/* recent deliveries (5 rows) */
+.page-track-shipment .trk-recent {
+  gap: 7px;
+}
+
+.page-track-shipment .trk-recent li {
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 11px;
+}
+
+.page-track-shipment .trk-recent li:hover {
+  transform: none;
+}
+
+.page-track-shipment .trk-recent img {
+  width: 32px;
+  height: 32px;
+}
+
+.page-track-shipment .trk-rec-main strong {
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.page-track-shipment .trk-rec-main small {
+  margin-top: 1px;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+.page-track-shipment .trk-rec-end {
+  gap: 2px;
+}
+
+.page-track-shipment .trk-rec-end em {
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 10.5px;
+}
+
+.page-track-shipment .trk-rec-end small {
+  font-size: 11px;
+}
+
+.page-track-shipment .trk-hnote {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+/* ---------- Sidebar trust card (inside result) ---------- */
+.page-track-shipment .trk-trust p {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.page-track-shipment .trk-trust-link {
+  font-size: 13px;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 575px) {
+  .page-track-shipment .trk-hist-sec {
+    padding: 20px 0 24px;
+  }
+
+  .page-track-shipment .trk-hist-sec .trk-head {
+    margin-bottom: 12px;
+  }
+
+  .page-track-shipment .trk-hist-sec .trk-head p {
+    font-size: 12.5px;
+  }
+
+  /* 3 small stat cards in one row, stacked content */
+  .page-track-shipment .trk-hstats {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .page-track-shipment .trk-hstat {
+    display: block;
+    padding: 9px 4px;
+    text-align: center;
+    border-radius: 11px;
+  }
+
+  .page-track-shipment .trk-hstat i {
+    width: 28px;
+    height: 28px;
+    margin: 0 auto 4px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+
+  .page-track-shipment .trk-hstat b {
+    font-size: 1.05rem;
+  }
+
+  .page-track-shipment .trk-hstat span {
+    font-size: 9.5px;
+  }
+
+  .page-track-shipment .trk-hbox {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
+  .page-track-shipment .trk-hbox h3 {
+    margin-bottom: 8px;
+    font-size: .9rem;
+  }
+
+  .page-track-shipment .trk-ctry {
+    gap: 5px;
+  }
+
+  .page-track-shipment .trk-ctry li {
+    padding: 3px 9px 3px 3px;
+    font-size: 11.5px;
+  }
+
+  .page-track-shipment .trk-ctry img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .page-track-shipment .trk-recent {
+    gap: 6px;
+  }
+
+  .page-track-shipment .trk-recent li {
+    grid-template-columns: 30px minmax(0, 1fr);
+    gap: 2px 9px;
+    padding: 8px 10px;
+  }
+
+  .page-track-shipment .trk-recent img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .page-track-shipment .trk-rec-main strong {
+    font-size: 12.5px;
+  }
+
+  .page-track-shipment .trk-rec-main small {
+    font-size: 11px;
+  }
+
+  .page-track-shipment .trk-rec-end {
+    grid-column: 2;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    justify-items: start;
+    align-items: center;
+    text-align: left;
   }
 }

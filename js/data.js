@@ -751,6 +751,52 @@ const JP_TRACKING_EXPLAIN = [
 ];
 
 
+/* ---------- DELIVERY HISTORY: used by track-shipment.html ----------
+   IMPORTANT: Replace with REAL numbers before going live.
+   countries[].count = delivered shipments to that country.
+   recent[] = latest delivered shipments (mask the tracking number).
+*/
+const JP_DELIVERY_HISTORY = {
+  last30: 126,
+  countries: [
+    { n: "United States", c: "us", count: 420 },
+    { n: "United Kingdom", c: "gb", count: 310 },
+    { n: "Canada", c: "ca", count: 145 },
+    { n: "Australia", c: "au", count: 96 },
+    { n: "United Arab Emirates", c: "ae", count: 188 },
+    { n: "Saudi Arabia", c: "sa", count: 74 },
+    { n: "Germany", c: "de", count: 88 },
+    { n: "France", c: "fr", count: 52 },
+    { n: "Italy", c: "it", count: 61 },
+    { n: "Japan", c: "jp", count: 33 },
+    { n: "Singapore", c: "sg", count: 29 },
+    { n: "Malaysia", c: "my", count: 41 },
+    { n: "South Korea", c: "kr", count: 27 },
+    { n: "Netherlands", c: "nl", count: 24 },
+    { n: "Qatar", c: "qa", count: 22 },
+    { n: "Kuwait", c: "kw", count: 19 },
+    { n: "Spain", c: "es", count: 17 },
+    { n: "Sweden", c: "se", count: 15 },
+    { n: "Belgium", c: "be", count: 14 },
+    { n: "Oman", c: "om", count: 12 },
+    { n: "New Zealand", c: "nz", count: 11 },
+    { n: "Ireland", c: "ie", count: 9 },
+    { n: "Switzerland", c: "ch", count: 8 },
+    { n: "Bahrain", c: "bh", count: 7 }
+  ],
+  recent: [
+    { id: "JPE••••6789", n: "United States", c: "us", city: "New York", service: "International Courier", date: "22 Oct 2026" },
+    { id: "JPE••••4410", n: "United Kingdom", c: "gb", city: "London", service: "Air Freight", date: "21 Oct 2026" },
+    { id: "JPE••••9027", n: "United Arab Emirates", c: "ae", city: "Dubai", service: "International Courier", date: "21 Oct 2026" },
+    { id: "JPE••••3358", n: "Canada", c: "ca", city: "Toronto", service: "International Courier", date: "20 Oct 2026" },
+    { id: "JPE••••1176", n: "Germany", c: "de", city: "Berlin", service: "Commercial Export", date: "19 Oct 2026" },
+    { id: "JPE••••8842", n: "Australia", c: "au", city: "Sydney", service: "International Courier", date: "18 Oct 2026" },
+    { id: "JPE••••2269", n: "Italy", c: "it", city: "Milan", service: "Air Freight", date: "17 Oct 2026" },
+    { id: "JPE••••7731", n: "Malaysia", c: "my", city: "Kuala Lumpur", service: "International Courier", date: "16 Oct 2026" }
+  ]
+};
+
+
 /* ---------- BUSINESS: used by business.html ---------- */
 const JP_BUSINESS_CONFIG = {
   /* Laravel route that stores the quote request, e.g. '/business-quote'.
