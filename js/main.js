@@ -2080,19 +2080,38 @@
 
   var $ = function (id) { return document.getElementById(id); };
   var form = $("prcForm");
-  if (!form || !$("prcServices")) return;   /* quote.html has its own prcForm: do not run the calculator there */
+  if (!form || !$("prcService")) return;   /* quote.html has its own prcForm: do not run the calculator there */
 
   var els = {
     from: $("prcFrom"), to: $("prcTo"), weight: $("prcWeight"), wUnit: $("prcWUnit"),
     l: $("prcL"), w: $("prcW"), h: $("prcH"), dUnit: $("prcDUnit"), pcs: $("prcPcs"),
-    dims: $("prcDims"), dimsNote: $("prcDimsNote"), svcBox: $("prcServices"),
-    courierWrap: $("prcCourierWrap"), courier: $("prcCourier"),
-    item: $("prcItem"), qty: $("prcQty"), value: $("prcValue"), city: $("prcCity"), pickup: $("prcPickup"),
-    hint: $("prcHint"), err: $("prcError"), live: $("prcLive"),
+    dims: $("prcDims"), dimsNote: $("prcDimsNote"),
+    courierWrap: $("prcCourierWrap"),
+    service: $("prcService"), type: $("prcType"), svcHint: $("prcSvcHint"),
+    sizeGrid: $("prcSizeGrid"), sizeTag: $("prcSizesTag"), dimIco: $("prcDimIco"),
+    value: $("prcValue"), city: $("prcCity"), pickup: $("prcPickup"),
+    err: $("prcError"), live: $("prcLive"),
     result: $("prcResult"), card: $("prcResultCard"),
     purpose: $("prcPurpose"), special: $("prcSpecial"), pickupNote: $("prcPickupNote")
   };
   var placeholder = els.result.innerHTML;
+
+  /* Shipment type -> calculator mode + purpose (same options as Book a Shipment) */
+  var TYPE_MAP = {
+    "Documents": { mode: "document", purpose: "personal" },
+    "Personal parcel": { mode: "parcel", purpose: "personal" },
+    "Gift": { mode: "parcel", purpose: "gift" },
+    "Product sample": { mode: "parcel", purpose: "sample" },
+    "E-commerce order": { mode: "parcel", purpose: "commercial" },
+    "Commercial cargo": { mode: "commercial", purpose: "commercial" }
+  };
+  var SVC_HINTS = {
+    express: "Fastest option, best for urgent documents and parcels.",
+    economy: "Lower cost with a longer transit time. Best for non-urgent shipments.",
+    door: "We pick up from your address and deliver to the recipient.",
+    air: "Commercial cargo by air. Faster than sea, priced by chargeable weight.",
+    sea: "Large or heavy cargo by sea. Lowest cost, longest transit."
+  };
   var calculated = false;
   var lastText = "";
   var liveTimer = 0;
@@ -2294,8 +2313,17 @@
   function kg(n) { return r2(n).toLocaleString("en-US", { maximumFractionDigits: 2 }) + " kg"; }
   function money(n) { return CFG.currency + " " + Math.round(n).toLocaleString("en-US"); }
   function num(el) { var v = parseFloat(el.value); return isNaN(v) ? 0 : v; }
-  function mode() { return form.elements.mode.value; }
-  function svc() { var r = form.querySelector('input[name="service"]:checked'); return r ? r.value : ""; }
+  function svc() { return els.service.value || ""; }
+  function mode() {
+    var s = svc();
+    if (s === "air" || s === "sea") return "freight";
+    var t = TYPE_MAP[els.type.value];
+    return t ? t.mode : "parcel";
+  }
+  function courierVal() {
+    var r = form.querySelector('input[name="courier"]:checked');
+    return r && !r.disabled ? r.value : "all";
+  }
   function canon(s) {
     var k = String(s || "").toLowerCase().replace(/\s+/g, " ").trim();
     return NAMES[k] ? k : (CFG.aliases[k] || k);
@@ -2307,13 +2335,13 @@
   function read() {
     var wu = W_UNIT[els.wUnit.value] || 1, du = D_UNIT[els.dUnit.value] || 1;
     var d = {
-      mode: mode(), svc: svc(), courier: els.courier.value || "all",
+      mode: mode(), svc: svc(), type: els.type.value, courier: courierVal(),
       fromRaw: els.from.value.trim(), destRaw: els.to.value.trim(), city: els.city.value.trim(),
       weightIn: num(els.weight), weight: num(els.weight) * wu, wUnitName: els.wUnit.value,
       l: num(els.l) * du, w: num(els.w) * du, h: num(els.h) * du, rawDims: [num(els.l), num(els.w), num(els.h)], dUnitName: els.dUnit.value,
       pcs: Math.max(parseInt(els.pcs.value, 10) || 1, 1),
-      item: els.item.value.trim(), qty: els.qty.value.trim(), value: els.value.value.trim(), pickup: els.pickup.checked,
-      purpose: els.purpose ? els.purpose.value : "personal", special: !!(els.special && els.special.checked)
+      item: "", qty: "", value: els.value.value.trim(), pickup: els.pickup.checked,
+      purpose: (TYPE_MAP[els.type.value] || {}).purpose || "personal", special: false
     };
     d.dest = canon(d.destRaw);
     return d;
@@ -2321,7 +2349,7 @@
 
   function weights(d, courier) {
     var m = MODES[d.mode];
-    var has = m.dims && d.l > 0 && d.w > 0 && d.h > 0;
+    var has = d.l > 0 && d.w > 0 && d.h > 0;
     var cm3 = has ? d.l * d.w * d.h * d.pcs : 0;
     var div = (CFG.courierDivisors && CFG.courierDivisors[courier]) || CFG.divisors[d.svc];
     var vol = has && div ? cm3 / div : 0;
@@ -2332,18 +2360,17 @@
 
   /* ---------------- validation (says how to fix it) ---------------- */
   function validate(d) {
-    var m = MODES[d.mode];
     if (!d.destRaw) return { msg: "Choose a destination country, for example United States.", el: els.to };
+    if (!d.svc) return { msg: "Select a shipping service.", el: els.service };
+    if (!d.type) return { msg: "Select the shipment type.", el: els.type };
     if (!(d.weightIn > 0)) return { msg: "Enter the shipment weight, for example 2.5 kg.", el: els.weight };
     if (d.weight < 0.01) return { msg: "That weight is too small. Enter at least 10 g.", el: els.weight };
     if (d.weight > CFG.maxInputKg) return { msg: "That weight is very high. For cargo above " + CFG.maxInputKg.toLocaleString("en-US") + " kg, please request a freight quote.", el: els.weight };
-    if (m.dims) {
-      if (d.rawDims.some(function (x) { return x < 0; })) return { msg: "Length, width and height must be positive numbers.", el: [els.l, els.w, els.h].filter(function (e) { return num(e) < 0; })[0] };
-      var f = d.rawDims.filter(function (x) { return x > 0; }).length;
-      var firstEmpty = [els.l, els.w, els.h].filter(function (e) { return !(num(e) > 0); })[0];
-      if (f > 0 && f < 3) return { msg: "Enter length, width and height together, or leave all three empty.", el: firstEmpty };
-      if (d.svc === "sea" && f < 3) return { msg: "Sea freight is priced by volume (CBM). Enter length, width and height.", el: els.l };
-    }
+    if (d.rawDims.some(function (x) { return x < 0; })) return { msg: "Length, width and height must be positive numbers.", el: [els.l, els.w, els.h].filter(function (e) { return num(e) < 0; })[0] };
+    var f = d.rawDims.filter(function (x) { return x > 0; }).length;
+    var firstEmpty = [els.l, els.w, els.h].filter(function (e) { return !(num(e) > 0); })[0];
+    if (f > 0 && f < 3) return { msg: "Enter length, width and height together, or leave all three empty.", el: firstEmpty };
+    if (d.svc === "sea" && f < 3) return { msg: "Sea freight is priced by volume (CBM). Enter length, width and height.", el: els.l };
     return null;
   }
 
@@ -2410,7 +2437,7 @@
   function summary(r) {
     var d = r.d, W = r.best ? weights(d, r.best.courier) : r.w;
     var lines = [
-      "Shipment: " + MODES[d.mode].label,
+      "Shipment: " + (d.type || MODES[d.mode].label),
       "Service: " + SVC[d.svc].label + (d.svc !== "sea" && d.courier !== "all" ? " (" + COU[d.courier] + ")" : ""),
       "Route: " + fromName(d) + " to " + destName(d) + (d.city ? " (" + d.city + ")" : ""),
       "Actual weight: " + kg(d.weight)
@@ -2588,7 +2615,7 @@
 
     var cta = '<div class="prc-cta"><a class="btn-main btn-red" href="' + qUrl + '">' + qLabel + ' <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>' +
       '<a class="btn-main btn-dark-outline prc-wa" target="_blank" rel="noopener" href="' + wa + '"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</a>' +
-      '<a class="prc-call" href="tel:+8801681637836"><i class="fa-solid fa-phone" aria-hidden="true"></i> Call us</a></div>';
+      '<a class="prc-call" href="tel:+8801681637836" aria-label="Call us"><i class="fa-solid fa-phone" aria-hidden="true"></i><span class="prc-call-t">Call us</span></a></div>';
 
     els.result.innerHTML = '<div class="prc-res">' + head + warn + cta + journey(priced) + '<div class="prc-kvs">' + rows + "</div>" + notes + bars + breakdown + compare + adv + inc +
       '<p class="prc-fine"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Duties, taxes, customs charges and extra services are not included unless stated in your quote.' + (CFG.ratesNote ? " " + esc(CFG.ratesNote) : "") + "</p>" +
@@ -2606,30 +2633,145 @@
     var w = weights(d, d.courier), t;
     if (w.has && d.svc === "sea") t = "Volume so far: <b>" + r2(w.cbm) + " CBM</b>";
     else if (w.has) t = "Chargeable weight so far: <b>" + kg(w.cw) + "</b> (" + (w.vol > d.weight ? "volumetric" : "actual") + " weight is higher)";
-    else t = "Actual weight: <b>" + kg(d.weight) + "</b>" + (m.dims && d.svc !== "sea" ? ". Add size to check volumetric weight." : "");
+    else t = "Actual weight: <b>" + kg(d.weight) + "</b>" + (d.svc !== "sea" ? ". Add size to check volumetric weight." : "");
     els.live.innerHTML = '<i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span>' + t + "</span>";
     els.live.hidden = false;
   }
 
   /* ---------------- mode / service handling ---------------- */
-  function renderServices() {
-    var m = MODES[mode()], cur = svc();
-    if (m.services.indexOf(cur) < 0) cur = m.services[0];
-    els.svcBox.innerHTML = m.services.map(function (k) {
-      var s = SVC[k];
-      return '<label class="prc-svc-opt"><input type="radio" name="service" value="' + k + '"' + (k === cur ? " checked" : "") + '><span><i class="fa-solid ' + s.icon + '" aria-hidden="true"></i><b>' + s.label + "</b><small>" + s.note + "</small></span></label>";
-    }).join("");
-  }
+  /* ---------------- service hint + courier visibility ---------------- */
   function syncService() {
-    var m = MODES[mode()], sea = svc() === "sea";
-    els.dims.hidden = !m.dims;
-    els.courierWrap.hidden = sea;
-    els.dimsNote.textContent = sea ? "Required for sea freight, we price by volume (CBM)." : "Optional, but needed to check volumetric weight.";
+    var s = svc(), showCourier = !!s && s !== "sea";
+    els.courierWrap.hidden = !showCourier;
+    Array.prototype.forEach.call(els.courierWrap.querySelectorAll("input"), function (i) { i.disabled = !showCourier; });
+    var text = SVC_HINTS[s] || "";
+    els.svcHint.querySelector("span").textContent = text;
+    els.svcHint.hidden = !text;
+    els.dimsNote.textContent = s === "sea" ? "Required for sea freight, we price by volume (CBM)." : "Optional, but needed to check volumetric weight.";
   }
+
+  /* ---------------- quick sizes (depend on shipment type) ---------------- */
+  var SIZE_SETS = {
+    _default: [
+      { n: "A4 Envelope", d: [32, 24, 1], i: "fa-envelope" },
+      { n: "One or two books", d: [23, 14, 4], i: "fa-book" },
+      { n: "Shoe box", d: [35, 20, 15], i: "fa-shoe-prints" },
+      { n: "Moving box", d: [75, 35, 35], i: "fa-boxes-stacked" }
+    ],
+    "Documents": [
+      { n: "A4 Envelope", d: [32, 24, 1], i: "fa-envelope" },
+      { n: "Large Envelope", d: [40, 30, 2], i: "fa-file-lines" },
+      { n: "Document Folder", d: [35, 26, 5], i: "fa-folder-open" },
+      { n: "Document Box", d: [36, 26, 12], i: "fa-box-open" }
+    ],
+    "Personal parcel": [
+      { n: "One or two books", d: [23, 14, 4], i: "fa-book" },
+      { n: "Shoe box", d: [35, 20, 15], i: "fa-shoe-prints" },
+      { n: "Medium box", d: [45, 30, 25], i: "fa-box" },
+      { n: "Moving box", d: [75, 35, 35], i: "fa-boxes-stacked" }
+    ],
+    "Gift": [
+      { n: "One or two books", d: [23, 14, 4], i: "fa-book" },
+      { n: "Shoe box", d: [35, 20, 15], i: "fa-shoe-prints" },
+      { n: "Medium box", d: [45, 30, 25], i: "fa-box" },
+      { n: "Moving box", d: [75, 35, 35], i: "fa-boxes-stacked" }
+    ],
+    "Product sample": [
+      { n: "Small pack", d: [20, 15, 10], i: "fa-box-open" },
+      { n: "Shoe box", d: [35, 20, 15], i: "fa-shoe-prints" },
+      { n: "Medium box", d: [45, 30, 25], i: "fa-box" },
+      { n: "Large carton", d: [60, 40, 40], i: "fa-boxes-stacked" }
+    ],
+    "E-commerce order": [
+      { n: "Poly mailer", d: [30, 25, 5], i: "fa-bag-shopping" },
+      { n: "Shoe box", d: [35, 20, 15], i: "fa-shoe-prints" },
+      { n: "Medium box", d: [45, 30, 25], i: "fa-box" },
+      { n: "Large carton", d: [60, 40, 40], i: "fa-boxes-stacked" }
+    ],
+    "Commercial cargo": [
+      { n: "Small carton", d: [50, 40, 40], i: "fa-box" },
+      { n: "Standard carton", d: [60, 40, 40], i: "fa-box" },
+      { n: "Large carton", d: [70, 50, 50], i: "fa-boxes-stacked" },
+      { n: "Pallet", d: [120, 80, 100], i: "fa-pallet" }
+    ]
+  };
+
+  var dimInputs = [els.l, els.w, els.h], prevUnit = els.dUnit.value;
+
+  function unitF(u) { return (u || els.dUnit.value) === "in" ? 2.54 : 1; }
+  function r1(n) { return Math.round(n * 10) / 10; }
+  function dimVals() { return dimInputs.map(function (e) { return parseFloat(e.value) || 0; }); }
+  function curSet() { return SIZE_SETS[els.type.value] || SIZE_SETS._default; }
+  function showDim(cm) { return els.dUnit.value === "in" ? r1(cm / 2.54) : cm; }
+
+  function renderSizes() {
+    var set = curSet(), t = els.type.value;
+    els.sizeTag.textContent = t ? "For " + t : "";
+    els.sizeTag.hidden = !t;
+    els.sizeGrid.innerHTML = set.map(function (s, i) {
+      return '<button type="button" class="prc-size" role="radio" aria-checked="false" data-i="' + i + '">' +
+        '<span class="prc-size-ico"><i class="fa-solid ' + s.i + '" aria-hidden="true"></i></span>' +
+        '<span class="prc-size-txt"><b>' + esc(s.n) + "</b><small>" +
+        s.d.map(showDim).join(" × ") + " " + els.dUnit.value + "</small></span></button>";
+    }).join("");
+    syncSizes();
+  }
+
+  /* highlights the matching card, shows ticks and swaps the icon */
+  function syncSizes() {
+    var v = dimVals(), f = unitF(), set = curSet(), hit = -1;
+    dimInputs.forEach(function (e, k) {
+      e.closest(".prc-dim-in").classList.toggle("is-ok", v[k] > 0);
+    });
+    var all = v[0] > 0 && v[1] > 0 && v[2] > 0;
+    if (all) {
+      set.forEach(function (s, i) {
+        if (hit < 0 && s.d.every(function (n, k) { return Math.abs(n - v[k] * f) < 0.1; })) hit = i;
+      });
+    }
+    Array.prototype.forEach.call(els.sizeGrid.children, function (b, i) {
+      var on = i === hit;
+      b.classList.toggle("is-sel", on);
+      b.setAttribute("aria-checked", on ? "true" : "false");
+    });
+    var ic = hit > -1 ? set[hit].i : (all ? "fa-box" : "fa-box-open");
+    var icon = els.dimIco.querySelector("i");
+    if (icon && icon.className.indexOf(ic) < 0) {
+      icon.className = "fa-solid " + ic;
+      els.dimIco.classList.remove("pop"); void els.dimIco.offsetWidth; els.dimIco.classList.add("pop");
+    }
+  }
+
+  function setDims(arr) {
+    dimInputs.forEach(function (e, k) {
+      e.value = arr ? showDim(arr[k]) : "";
+      e.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    syncSizes();
+  }
+
+  els.sizeGrid.addEventListener("click", function (e) {
+    var b = e.target.closest(".prc-size");
+    if (!b) return;
+    /* click the selected card again = clear */
+    setDims(b.classList.contains("is-sel") ? null : curSet()[parseInt(b.getAttribute("data-i"), 10)].d);
+  });
+  dimInputs.forEach(function (e) { e.addEventListener("input", syncSizes); });
+
+  /* cm <-> inch: convert what is already typed */
+  els.dUnit.addEventListener("change", function () {
+    var from = unitF(prevUnit), to = unitF();
+    dimInputs.forEach(function (e) {
+      var n = parseFloat(e.value);
+      if (n > 0) e.value = r1(n * from / to);
+    });
+    prevUnit = els.dUnit.value;
+    renderSizes();
+  });
+
   function applyMode() {
-    renderServices();
-    els.hint.textContent = MODES[mode()].hint;
     syncService();
+    renderSizes();
     showError("");
     updateLive();
     if (calculated) run(false);
@@ -2676,8 +2818,7 @@
     }, 0);
   });
   form.addEventListener("change", function (e) {
-    if (e.target.name === "mode") applyMode();
-    else if (e.target.name === "service") { syncService(); updateLive(); if (calculated) run(false); }
+    if (e.target.id === "prcService" || e.target.id === "prcType") applyMode();
     else { updateLive(); if (calculated) run(false); }
   });
   form.addEventListener("input", function (e) {
@@ -2770,20 +2911,33 @@
   form.addEventListener("reset", function () { setTimeout(clampPcs, 0); });
   clampPcs();
 
-  /* ---------------- init (+ prefill: quote.html?dest=USA&mode=parcel&weight=2&service=express) ---------------- */
+  /* ---------------- init (+ prefill: quote.html?dest=USA&type=Gift&weight=2&service=express) ---------------- */
   (function init() {
     var q = new URLSearchParams(window.location.search);
-    var m = q.get("mode"), radio = m && form.querySelector('input[name="mode"][value="' + m + '"]');
-    if (radio) radio.checked = true;
-    renderServices();
-    var s = q.get("service"), sr = s && form.querySelector('input[name="service"][value="' + s + '"]');
-    if (sr) sr.checked = true;
+    var typeByMode = { document: "Documents", parcel: "Personal parcel", commercial: "Commercial cargo", freight: "Commercial cargo" };
+
+    function setSelect(sel, v) {
+      if (!v) return;
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value === v || sel.options[i].text === v) { sel.value = sel.options[i].value; return; }
+      }
+    }
+
+    var m = q.get("mode");
+    setSelect(els.type, q.get("type") || typeByMode[m]);
+    setSelect(els.service, q.get("service") || (m === "freight" ? "air" : ""));
     if (q.get("dest")) els.to.value = q.get("dest").slice(0, 60);
     if (q.get("weight") && parseFloat(q.get("weight")) > 0) els.weight.value = parseFloat(q.get("weight"));
-    var c = q.get("courier"); if (c && COU[c.toLowerCase()]) els.courier.value = c.toLowerCase();
-    els.hint.textContent = MODES[mode()].hint;
-    csFrom.sync(); csTo.sync(); syncService(); updateLive();
-    if (q.get("dest") && q.get("weight")) run(false);
+
+    csFrom.sync(); csTo.sync();
+    applyMode();
+
+    var c = (q.get("courier") || "").toLowerCase();
+    var cr = c && COU[c] && form.querySelector('input[name="courier"][value="' + c + '"]');
+    if (cr && !cr.disabled) cr.checked = true;
+    updateLive();
+
+    if (q.get("dest") && q.get("weight") && svc() && els.type.value) run(false);
   })();
 })();
 

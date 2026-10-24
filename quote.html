@@ -487,53 +487,91 @@
                 </div>
               </div>
 
-              <!-- 2. Shipment type -->
-              <fieldset class="prc-modes">
-                <legend><b>2</b> What are you shipping?</legend>
-                <label class="prc-mode"><input type="radio" name="mode" value="document" checked><span><i
-                      class="fa-solid fa-file-lines" aria-hidden="true"></i>Document</span></label>
-                <label class="prc-mode"><input type="radio" name="mode" value="parcel"><span><i
-                      class="fa-solid fa-box-open" aria-hidden="true"></i>Parcel</span></label>
-                <label class="prc-mode"><input type="radio" name="mode" value="commercial"><span><i
-                      class="fa-solid fa-boxes-stacked" aria-hidden="true"></i>Commercial</span></label>
-                <label class="prc-mode"><input type="radio" name="mode" value="freight"><span><i
-                      class="fa-solid fa-plane-departure" aria-hidden="true"></i>Freight</span></label>
-              </fieldset>
-              <p class="prc-hint" id="prcHint"></p>
-
-              <!-- 3. Weight and size -->
+              <!-- 2. Service + shipment type -->
               <div class="prc-block">
-                <h3 class="prc-step"><b>3</b> How heavy and how big?</h3>
-                <div class="prc-field">
-                  <label for="prcWeight">Total weight</label>
-                  <div class="prc-ig">
-                    <input id="prcWeight" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 2.5"
-                      required>
-                    <select id="prcWUnit" aria-label="Weight unit">
-                      <option value="kg">kg</option>
-                      <option value="g">g</option>
-                      <option value="lb">lb</option>
+                <h3 class="prc-step"><b>2</b> What are you shipping?</h3>
+
+                <div class="prc-pair">
+                  <div class="prc-field">
+                    <label for="prcService">Shipping service</label>
+                    <select id="prcService" name="service" required>
+                      <option value="">Select a service</option>
+                      <option value="express">Express Courier</option>
+                      <option value="economy">Economy Courier</option>
+                      <option value="door">Door-to-Door</option>
+                      <option value="air">Air Freight</option>
+                      <option value="sea">Sea Freight</option>
+                    </select>
+                  </div>
+                  <div class="prc-field">
+                    <label for="prcType">Shipment type</label>
+                    <select id="prcType" required>
+                      <option value="">Select type</option>
+                      <option>Documents</option>
+                      <option>Personal parcel</option>
+                      <option>Gift</option>
+                      <option>Product sample</option>
+                      <option>E-commerce order</option>
+                      <option>Commercial cargo</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="prc-dims" id="prcDims" hidden>
-                  <div class="prc-dims-head">
-                    <span class="prc-dims-label">Size per piece</span>
-                    <select id="prcDUnit" class="prc-mini" aria-label="Size unit">
-                      <option value="cm">cm</option>
-                      <option value="in">inch</option>
-                    </select>
+                <p class="prc-svc-hint" id="prcSvcHint" hidden>
+                  <i class="fa-solid fa-circle-info" aria-hidden="true"></i><span></span>
+                </p>
+
+                <!-- Courier chips (hidden for Sea Freight / until a service is chosen) -->
+                <div class="prc-courier" id="prcCourierWrap" hidden>
+                  <span class="prc-lbl" id="prcCourierLbl"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i>
+                    Preferred courier <small>(optional)</small></span>
+                  <div class="prc-courier-grid" role="radiogroup" aria-labelledby="prcCourierLbl">
+                    <label class="prc-courier-opt"><input type="radio" name="courier" value="all" checked>
+                      <span><em class="prc-courier-ico"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></em>
+                        <span class="prc-courier-txt"><b>All Couriers</b><small>Best available
+                            rate</small></span></span></label>
+                    <label class="prc-courier-opt"><input type="radio" name="courier" value="dhl">
+                      <span><em class="prc-courier-ico">DH</em><span
+                          class="prc-courier-txt"><b>DHL</b></span></span></label>
+                    <label class="prc-courier-opt"><input type="radio" name="courier" value="fedex">
+                      <span><em class="prc-courier-ico">FX</em><span
+                          class="prc-courier-txt"><b>FedEx</b></span></span></label>
+                    <label class="prc-courier-opt"><input type="radio" name="courier" value="ups">
+                      <span><em class="prc-courier-ico">UP</em><span
+                          class="prc-courier-txt"><b>UPS</b></span></span></label>
+                    <label class="prc-courier-opt"><input type="radio" name="courier" value="aramex">
+                      <span><em class="prc-courier-ico">AR</em><span
+                          class="prc-courier-txt"><b>Aramex</b></span></span></label>
+                    <label class="prc-courier-opt"><input type="radio" name="courier" value="jpex">
+                      <span><em class="prc-courier-ico">JP</em><span
+                          class="prc-courier-txt"><b>JPEX</b></span></span></label>
+                    <label class="prc-courier-opt"><input type="radio" name="courier" value="gpo">
+                      <span><em class="prc-courier-ico">GP</em><span
+                          class="prc-courier-txt"><b>GPO</b></span></span></label>
                   </div>
-                  <div class="prc-dim-row">
-                    <div class="prc-field"><label for="prcL">Length</label><input id="prcL" type="number"
-                        inputmode="decimal" min="0" step="any" placeholder="L"></div>
-                    <div class="prc-field"><label for="prcW">Width</label><input id="prcW" type="number"
-                        inputmode="decimal" min="0" step="any" placeholder="W"></div>
-                    <div class="prc-field"><label for="prcH">Height</label><input id="prcH" type="number"
-                        inputmode="decimal" min="0" step="any" placeholder="H"></div>
-                    <div class="prc-field prc-pcs">
-                      <label for="prcPcs">Number of pieces</label>
+                </div>
+              </div>
+
+              <!-- 3. Weight, pieces, value, size -->
+              <div class="prc-block">
+                <h3 class="prc-step"><b>3</b> How heavy and how big?</h3>
+
+                <div class="prc-wpv">
+                  <div class="prc-wpv-grid">
+                    <div class="prc-field">
+                      <label for="prcWeight">Weight</label>
+                      <div class="prc-ig">
+                        <input id="prcWeight" type="number" inputmode="decimal" min="0" step="any"
+                          placeholder="e.g. 2.5" required>
+                        <select id="prcWUnit" aria-label="Weight unit">
+                          <option value="kg">kg</option>
+                          <option value="g">g</option>
+                          <option value="lb">lb</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="prc-field">
+                      <label for="prcPcs">Pieces</label>
                       <div class="prc-num">
                         <button type="button" class="prc-num-btn" data-step="-1" aria-label="Decrease pieces"><i
                             class="fa-solid fa-minus" aria-hidden="true"></i></button>
@@ -542,7 +580,54 @@
                             class="fa-solid fa-plus" aria-hidden="true"></i></button>
                       </div>
                     </div>
+                    <div class="prc-field prc-wpv-value">
+                      <label for="prcValue">Declared value <small>(optional)</small></label>
+                      <input id="prcValue" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 5000">
+                    </div>
                   </div>
+                </div>
+
+                <div class="prc-dims" id="prcDims">
+                  <div class="prc-dims-head">
+                    <div class="prc-dims-title">
+                      <span class="prc-dim-ico" id="prcDimIco"><i class="fa-solid fa-box-open"
+                          aria-hidden="true"></i></span>
+                      <div>
+                        <span class="prc-dims-label">Size per piece <small>(optional)</small></span>
+                        <small class="prc-dims-sub">Pick a quick size or enter your own</small>
+                      </div>
+                    </div>
+                    <select id="prcDUnit" class="prc-mini" aria-label="Size unit">
+                      <option value="cm">cm</option>
+                      <option value="in">inch</option>
+                    </select>
+                  </div>
+
+                  <div class="prc-dim-row">
+                    <div class="prc-field"><label for="prcL">Length</label>
+                      <div class="prc-dim-in"><input id="prcL" type="number" inputmode="decimal" min="0" step="any"
+                          placeholder="L"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+                    </div>
+                    <span class="prc-dim-x" aria-hidden="true">×</span>
+                    <div class="prc-field"><label for="prcW">Width</label>
+                      <div class="prc-dim-in"><input id="prcW" type="number" inputmode="decimal" min="0" step="any"
+                          placeholder="W"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+                    </div>
+                    <span class="prc-dim-x" aria-hidden="true">×</span>
+                    <div class="prc-field"><label for="prcH">Height</label>
+                      <div class="prc-dim-in"><input id="prcH" type="number" inputmode="decimal" min="0" step="any"
+                          placeholder="H"><i class="fa-solid fa-circle-check" aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+
+                  <div class="prc-sizes">
+                    <div class="prc-sizes-head">
+                      <b>Not sure about the sizes?</b>
+                      <span class="prc-sizes-tag" id="prcSizesTag" hidden></span>
+                    </div>
+                    <div class="prc-size-grid" id="prcSizeGrid" role="radiogroup" aria-label="Quick sizes"></div>
+                  </div>
+
                   <p class="prc-why"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>
                     <span>Bulky parcels are priced on the space they take, not only their weight. <span
                         id="prcDimsNote"></span></span>
@@ -552,37 +637,13 @@
                 <div class="prc-live" id="prcLive" aria-live="polite" hidden></div>
               </div>
 
-              <!-- 4. Service -->
-              <div class="prc-block">
-                <h3 class="prc-step"><b>4</b> Which service?</h3>
-                <div class="prc-svc" id="prcServices" role="radiogroup" aria-label="Service"></div>
-
-                <div class="prc-field prc-courier" id="prcCourierWrap">
-                  <label for="prcCourier"><i class="fa-solid fa-truck-fast" aria-hidden="true"></i> Courier</label>
-                  <select id="prcCourier">
-                    <option value="all">All Couriers</option>
-                    <option value="dhl">DHL</option>
-                    <option value="fedex">FedEx</option>
-                    <option value="ups">UPS</option>
-                    <option value="aramex">Aramex</option>
-                    <option value="jpex">JPEX</option>
-                    <option value="gpo">GPO</option>
-                  </select>
-                </div>
-              </div>
-
-              <!-- Optional details (progressive disclosure) -->
+              <!-- Optional pickup details -->
               <details class="prc-more">
-                <summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Add item details <small>(optional,
-                    improves accuracy)</small></summary>
+                <summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> Add pickup details
+                  <small>(optional)</small>
+                </summary>
                 <div class="prc-more-body">
-                  <div class="prc-field prc-wide"><label for="prcItem">What is inside?</label><input id="prcItem"
-                      placeholder="e.g. cotton t-shirts" maxlength="120"></div>
-                  <div class="prc-field"><label for="prcQty">Quantity</label><input id="prcQty" type="number"
-                      inputmode="numeric" min="1" placeholder="e.g. 20"></div>
-                  <div class="prc-field"><label for="prcValue">Approx. value (৳)</label><input id="prcValue"
-                      type="number" inputmode="decimal" min="0" placeholder="e.g. 15000"></div>
-                  <div class="prc-field prc-city"><label for="prcCity">City / postal code</label><input id="prcCity"
+                  <div class="prc-field prc-wide"><label for="prcCity">City / postal code</label><input id="prcCity"
                       placeholder="e.g. New York" maxlength="60"></div>
                   <label class="prc-check prc-wide"><input type="checkbox" id="prcPickup"> I need pickup from my
                     address</label>

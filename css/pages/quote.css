@@ -2760,3 +2760,897 @@
   background: #fff6f1;
   border-color: var(--jp-orange);
 }
+
+
+
+
+/* ===============================================================
+   QUOTE PAGE: SHIPMENT STEP (same options as Book a Shipment)
+   =============================================================== */
+
+/* service + type */
+.page-quote .prc-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 576px) {
+  .page-quote .prc-pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.page-quote .prc-pair .prc-field select {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-quote .prc-svc-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--jp-text-muted-dark);
+  background: var(--jp-bg-soft);
+  border-left: 3px solid var(--jp-orange);
+  border-radius: 10px;
+}
+
+.page-quote .prc-svc-hint i {
+  color: var(--jp-orange);
+}
+
+/* courier chips */
+.page-quote .prc-courier {
+  container: prc-courier / inline-size;
+  margin-top: 14px;
+  padding: 14px;
+  background: var(--jp-bg-light);
+  border: 1px dashed var(--jp-border-hover-2);
+  border-radius: 14px;
+}
+
+.page-quote .prc-lbl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--jp-navy);
+}
+
+.page-quote .prc-lbl i {
+  color: var(--jp-orange);
+}
+
+.page-quote .prc-lbl small {
+  font-weight: 500;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-courier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.page-quote .prc-courier-opt {
+  position: relative;
+  display: block;
+  margin: 0;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.page-quote .prc-courier-opt:first-child {
+  grid-column: 1 / -1;
+}
+
+.page-quote .prc-courier-opt input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.page-quote .prc-courier-opt>span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 8px 10px;
+  background: var(--jp-white);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(30, 42, 107, .04);
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.page-quote .prc-courier-ico {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  font-style: normal;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+  transition: background .2s ease, color .2s ease;
+}
+
+.page-quote .prc-courier-ico i {
+  font-size: 14px;
+}
+
+.page-quote .prc-courier-txt {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.page-quote .prc-courier-txt b {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-quote .prc-courier-txt small {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-courier-opt input:checked+span {
+  background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+  border-color: var(--jp-navy);
+  box-shadow: 0 8px 18px rgba(43, 57, 144, .25);
+}
+
+.page-quote .prc-courier-opt input:checked+span .prc-courier-ico {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+}
+
+.page-quote .prc-courier-opt input:checked+span .prc-courier-txt b {
+  color: var(--jp-white);
+}
+
+.page-quote .prc-courier-opt input:checked+span .prc-courier-txt small {
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-courier-opt input:focus-visible+span {
+  outline: 3px solid rgba(242, 99, 35, .45);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .page-quote .prc-courier-opt:hover>span {
+    border-color: var(--jp-orange);
+  }
+}
+
+@container prc-courier (min-width: 480px) {
+  .page-quote .prc-courier-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .page-quote .prc-courier-opt:first-child {
+    grid-column: auto;
+  }
+
+  .page-quote .prc-courier-opt:first-child .prc-courier-txt small {
+    display: none;
+  }
+}
+
+/* weight | pieces | declared value */
+.page-quote .prc-wpv {
+  container: prc-wpv / inline-size;
+}
+
+.page-quote .prc-wpv-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.page-quote .prc-wpv-grid .prc-field {
+  min-width: 0;
+}
+
+.page-quote .prc-wpv-grid .prc-field label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-quote .prc-wpv-grid .prc-wpv-value input::-webkit-outer-spin-button,
+.page-quote .prc-wpv-grid .prc-wpv-value input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.page-quote .prc-wpv-grid .prc-wpv-value input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+@container prc-wpv (min-width: 440px) {
+  .page-quote .prc-wpv-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .page-quote .prc-wpv-grid .prc-wpv-value {
+    grid-column: 1 / -1;
+  }
+}
+
+@container prc-wpv (min-width: 580px) {
+  .page-quote .prc-wpv-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .page-quote .prc-wpv-grid .prc-wpv-value {
+    grid-column: auto;
+  }
+}
+
+/* size per piece */
+.page-quote .prc-dims {
+  container: prc-dims / inline-size;
+  padding: 16px;
+}
+
+.page-quote .prc-dims-head {
+  margin-bottom: 14px;
+}
+
+.page-quote .prc-dims-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.page-quote .prc-dims-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-dims-label small {
+  font-weight: 500;
+  color: var(--jp-text-muted);
+}
+
+.page-quote .prc-dim-ico {
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  font-size: 22px;
+  color: var(--jp-white);
+  background: linear-gradient(150deg, var(--jp-navy-dark), var(--jp-navy));
+  box-shadow: 0 10px 22px rgba(43, 57, 144, .25), inset 0 -3px 0 rgba(242, 99, 35, .9);
+}
+
+.page-quote .prc-dim-ico.pop {
+  animation: prcIcoPop .35s ease;
+}
+
+@keyframes prcIcoPop {
+  0% {
+    transform: scale(.8) rotate(-6deg);
+    opacity: .5;
+  }
+
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.page-quote .prc-dims .prc-dim-row {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: end;
+  gap: 8px;
+}
+
+.page-quote .prc-dim-x {
+  align-self: end;
+  padding-bottom: 14px;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--jp-navy);
+}
+
+.page-quote .prc-dim-in {
+  position: relative;
+}
+
+.page-quote .prc-dim-in input {
+  padding-right: 34px;
+}
+
+.page-quote .prc-dim-in>i {
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  font-size: 15px;
+  color: var(--jp-green);
+  opacity: 0;
+  transform: translateY(-50%) scale(.4);
+  transition: opacity .2s ease, transform .2s ease;
+  pointer-events: none;
+}
+
+.page-quote .prc-dim-in.is-ok>i {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.page-quote .prc-dim-in.is-ok input {
+  border-color: rgba(29, 168, 107, .55);
+}
+
+/* quick sizes */
+.page-quote .prc-sizes {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--jp-border-muted);
+}
+
+.page-quote .prc-sizes-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  margin-bottom: 10px;
+}
+
+.page-quote .prc-sizes-head b {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--jp-navy);
+}
+
+.page-quote .prc-sizes-tag {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+  border-radius: 999px;
+}
+
+.page-quote .prc-size-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.page-quote .prc-size {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 62px;
+  padding: 8px 10px;
+  text-align: left;
+  font-family: inherit;
+  background: var(--jp-white);
+  border: 1.5px solid var(--jp-border-muted);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(30, 42, 107, .04);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.page-quote .prc-size-ico {
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 11px;
+  font-size: 16px;
+  color: var(--jp-orange);
+  background: rgba(242, 99, 35, .1);
+  transition: background .2s ease, color .2s ease;
+}
+
+.page-quote .prc-size-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.25;
+}
+
+.page-quote .prc-size-txt b {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--jp-navy);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow-wrap: anywhere;
+}
+
+.page-quote .prc-size-txt small {
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: var(--jp-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.page-quote .prc-size.is-sel {
+  background: #fff6f1;
+  border-color: var(--jp-orange);
+  box-shadow: 0 8px 18px rgba(242, 99, 35, .16);
+}
+
+.page-quote .prc-size.is-sel .prc-size-ico {
+  color: var(--jp-white);
+  background: var(--jp-orange);
+}
+
+.page-quote .prc-size.is-sel::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  color: var(--jp-white);
+  background: var(--jp-orange);
+  border: 2px solid var(--jp-white);
+  border-radius: 50%;
+}
+
+.page-quote .prc-size:focus-visible {
+  outline: 3px solid rgba(242, 99, 35, .45);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .page-quote .prc-size:hover {
+    border-color: var(--jp-orange);
+    transform: translateY(-1px);
+  }
+}
+
+@container prc-dims (min-width: 640px) {
+  .page-quote .prc-size-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575px) {
+  .page-quote .prc-dims {
+    padding: 12px;
+  }
+
+  .page-quote .prc-dim-ico {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+    font-size: 19px;
+    border-radius: 13px;
+  }
+
+  .page-quote .prc-dims .prc-dim-row {
+    gap: 5px;
+  }
+
+  .page-quote .prc-dim-x {
+    font-size: 13px;
+    padding-bottom: 13px;
+  }
+
+  .page-quote .prc-dim-in input {
+    padding-right: 26px;
+  }
+
+  .page-quote .prc-dim-in>i {
+    right: 8px;
+    font-size: 13px;
+  }
+
+  .page-quote .prc-size {
+    min-height: 56px;
+    padding: 7px 8px;
+    gap: 8px;
+  }
+
+  .page-quote .prc-size-ico {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+
+  .page-quote .prc-size-txt b {
+    font-size: 12.5px;
+  }
+
+  .page-quote .prc-size-txt small {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .page-quote .prc-dim-ico.pop,
+  .page-quote .prc-size,
+  .page-quote .prc-dim-in>i,
+  .page-quote .prc-courier-opt>span {
+    animation: none;
+    transition: none;
+  }
+}
+
+
+
+
+
+/* ===============================================================
+   QUOTE RESULT: CTA row (Request / WhatsApp / Call) on ONE line
+   Adapts to the result card width (container query)
+   =============================================================== */
+.page-quote .prc-result-card {
+  container: prc-result / inline-size;
+}
+
+/* hidden heading for screen readers only */
+.page-quote .prc-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* default (narrow card): Request on top, WhatsApp + Call side by side */
+.page-quote .prc-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px;
+  margin: 0;
+}
+
+.page-quote .prc-cta .btn-main {
+  flex: 1 1 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 0 14px;
+  font-size: 14px;
+  white-space: nowrap;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.page-quote .prc-cta .prc-wa {
+  flex: 1 1 0;
+}
+
+.page-quote .prc-cta .prc-call {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 50px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--jp-white);
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, .35);
+  border-radius: 12px;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.page-quote .prc-cta .prc-call:hover,
+.page-quote .prc-cta .prc-call:focus-visible {
+  color: var(--jp-white);
+  background: rgba(242, 99, 35, .2);
+  border-color: var(--jp-orange);
+}
+
+.page-quote .prc-cta .prc-call:focus-visible {
+  outline: 3px solid rgba(242, 99, 35, .45);
+  outline-offset: 2px;
+}
+
+/* card 400px+ : all 3 buttons on ONE line (Call = icon button) */
+@container prc-result (min-width: 400px) {
+  .page-quote .prc-cta {
+    flex-wrap: nowrap;
+  }
+
+  .page-quote .prc-cta .btn-main {
+    flex: 1 1 auto;
+  }
+
+  .page-quote .prc-cta .prc-wa {
+    flex: 0 0 auto;
+  }
+
+  .page-quote .prc-cta .prc-call {
+    flex: 0 0 50px;
+    padding: 0;
+  }
+
+  .page-quote .prc-call-t {
+    display: none;
+  }
+}
+
+/* card 440px+ : Call button shows its text too */
+@container prc-result (min-width: 440px) {
+  .page-quote .prc-cta .prc-call {
+    flex: 0 0 auto;
+    padding: 0 16px;
+  }
+
+  .page-quote .prc-call-t {
+    display: inline;
+  }
+}
+
+
+/* ===============================================================
+   QUOTE RESULT: 4-step progress (Calculate > Request > Confirm > Book)
+   =============================================================== */
+.page-quote .prc-journey {
+  list-style: none;
+  margin: 0;
+  padding: 4px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.page-quote .prc-journey li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--jp-text-light-blue-2);
+}
+
+/* connector line between circles */
+.page-quote .prc-journey li::before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: calc(-50% + 8px);
+  right: calc(50% + 14px);
+  height: 2px;
+  background: rgba(255, 255, 255, .18);
+}
+
+.page-quote .prc-journey li:first-child::before {
+  display: none;
+}
+
+.page-quote .prc-journey li>span {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--jp-white);
+  background: rgba(255, 255, 255, .12);
+  border: 1.5px solid rgba(255, 255, 255, .25);
+  border-radius: 50%;
+}
+
+.page-quote .prc-journey li.is-done,
+.page-quote .prc-journey li.is-now {
+  color: var(--jp-white);
+}
+
+.page-quote .prc-journey li.is-done::before,
+.page-quote .prc-journey li.is-now::before {
+  background: var(--jp-orange);
+}
+
+.page-quote .prc-journey li.is-done>span {
+  background: var(--jp-green);
+  border-color: var(--jp-green);
+}
+
+.page-quote .prc-journey li.is-now>span {
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .25);
+}
+
+@media (max-width: 575px) {
+  .page-quote .prc-journey li {
+    font-size: 11px;
+  }
+}
+
+
+/* ===============================================================
+   QUOTE RESULT: notes + WhatsApp lead form (were unstyled)
+   =============================================================== */
+.page-quote .prc-note {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--jp-text-light-blue-2);
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 10px;
+}
+
+.page-quote .prc-note i {
+  margin-top: 2px;
+  color: var(--jp-orange-light);
+}
+
+.page-quote .prc-lead {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 12px;
+}
+
+.page-quote .prc-lead>summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+  padding: 10px 14px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.page-quote .prc-lead>summary::-webkit-details-marker {
+  display: none;
+}
+
+.page-quote .prc-lead>summary i {
+  color: #7EE7A8;
+  font-size: 17px;
+}
+
+.page-quote .prc-lead>summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.page-quote .prc-lead[open]>summary::after {
+  content: "\2212";
+  color: var(--jp-orange-light);
+}
+
+.page-quote .prc-lead-form {
+  display: grid;
+  gap: 12px;
+  padding: 4px 14px 14px;
+}
+
+.page-quote .prc-lf label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--jp-text-light-blue-2);
+}
+
+.page-quote .prc-lf input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--jp-ink);
+  background: var(--jp-white);
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  outline: 0;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.page-quote .prc-lf input:focus {
+  border-color: var(--jp-orange);
+  box-shadow: 0 0 0 4px rgba(242, 99, 35, .25);
+}
+
+.page-quote .prc-lf input[aria-invalid="true"] {
+  border-color: #B42318;
+}
+
+.page-quote .prc-lead-err {
+  margin: 0;
+  padding: 9px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #7A1F14;
+  background: #FEF3F2;
+  border: 1px solid #FECDCA;
+  border-radius: 10px;
+}
+
+.page-quote .prc-lead-form .btn-main {
+  width: 100%;
+  min-height: 50px;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .page-quote .prc-cta .prc-call,
+  .page-quote .prc-lf input {
+    transition: none;
+  }
+}
