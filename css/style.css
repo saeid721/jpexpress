@@ -1672,6 +1672,7 @@ button:focus-visible,
   align-items: center;
 }
 
+/* ---------- Footer legal links (restored) ---------- */
 .footer .footer-legal a {
   display: inline-block;
   padding: 0 14px;
@@ -1694,6 +1695,35 @@ button:focus-visible,
 .footer .footer-legal a:focus-visible {
   color: var(--jp-white);
   transform: none;
+}
+
+/* ---------- Footer: "Developed by STIT BD" (one line + hover underline) ---------- */
+.footer .footer-dev {
+  display: inline-flex !important;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+.footer .footer-dev a {
+  display: inline-block !important;
+  padding: 0 0 2px !important;
+  font-size: inherit;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none !important;
+  transform: none !important;
+  transition: color .2s ease, border-color .2s ease;
+}
+
+.footer .footer-dev a:hover,
+.footer .footer-dev a:focus-visible,
+.footer .footer-dev a:active {
+  color: var(--jp-orange-accent);
+  border-bottom-color: var(--jp-orange-accent);
+  transform: none !important;
 }
 
 .fab-bar {
@@ -3171,6 +3201,11 @@ button:focus-visible,
     padding: 2px 8px;
     font-size: 12px;
   }
+
+  .footer-dev {
+    font-size: 12px;
+  }
+
 
 }
 
