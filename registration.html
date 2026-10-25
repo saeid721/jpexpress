@@ -640,8 +640,10 @@
                                             <input class="form-check-input" type="checkbox" id="agreeTerms" name="terms"
                                                 value="1" required>
                                             <label class="form-check-label terms-text" for="agreeTerms">
-                                                I agree to the <a href="terms-of-service.html">Terms of Service</a> and
-                                                <a href="privacy-policy.html">Privacy Policy</a>.
+                                                I agree to the <a href="#" data-legal-open="terms">Terms &amp;
+                                                    Conditions</a>
+                                                and
+                                                <a href="#" data-legal-open="privacy">Privacy Policy</a>.
                                             </label>
                                         </div>
                                         <small class="auth-err" role="alert"></small>
@@ -667,6 +669,234 @@
             </div>
         </div>
     </main>
+
+    <!-- ============ TERMS & PRIVACY MODAL ============ -->
+    <div class="auth-modal" id="legalModal" aria-hidden="true">
+        <div class="auth-modal__backdrop" data-modal-close></div>
+
+        <div class="auth-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle">
+            <header class="auth-modal__head">
+                <div class="auth-modal__head-left">
+                    <span class="auth-modal__ico" aria-hidden="true">
+                        <i class="fa-solid fa-file-shield"></i>
+                    </span>
+                    <div>
+                        <h2 id="legalModalTitle">Terms &amp; Conditions</h2>
+                        <p id="legalModalSub">JP Express Account Opening Agreement</p>
+                    </div>
+                </div>
+
+                <button type="button" class="auth-modal__close" data-modal-close aria-label="Close">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </header>
+
+            <div class="auth-modal__tabs" role="tablist" aria-label="Legal documents">
+                <button type="button" role="tab" class="is-active" data-legal-tab="terms" aria-selected="true"
+                    aria-controls="legalTerms">
+                    <i class="fa-solid fa-file-contract" aria-hidden="true"></i>
+                    Terms &amp; Conditions
+                </button>
+                <button type="button" role="tab" data-legal-tab="privacy" aria-selected="false"
+                    aria-controls="legalPrivacy">
+                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                    Privacy Policy
+                </button>
+            </div>
+
+            <div class="auth-modal__body" id="legalModalBody">
+                <!-- Terms panel -->
+                <div class="legal-panel is-active" id="legalTerms" role="tabpanel">
+                    <h3>Welcome to JP Express</h3>
+                    <p>We're delighted to have you join JP Express, your trusted global courier service in Bangladesh.
+                        These Terms of Use serve as your guide to using our services effectively and responsibly,
+                        ensuring a smooth and reliable experience when using our website, www.jpex.com.bd, our mobile
+                        apps, tracking system, and more (collectively referred to as the "Applications"). These terms
+                        are designed to protect your interests and ours.</p>
+
+                    <h3>Agreeing to the Terms</h3>
+                    <p>Before you dive into the world of express deliveries with us, we kindly request you to read and
+                        understand these terms. By using our Applications, you agree to comply with the rules and
+                        guidelines outlined here. Please be aware that these terms may undergo changes from time to
+                        time, so it's crucial to stay informed. Your continued use of the Applications signifies your
+                        acceptance of any updates we make. We grant you a limited, non-exclusive, non-transferable
+                        license to access and use our services, on the condition that you adhere to these terms.</p>
+
+                    <h3>Creating Your Account</h3>
+                    <p>To make the most of your JP Express experience, you'll need to create an account. During the
+                        registration process, please provide accurate and up-to-date information, including your Name,
+                        Company, Email, Birthday, Recent Photo, NID Card Number, Location, Social Media Link, Contact
+                        Number, and WhatsApp Number.</p>
+
+                    <h3>Who Can Use JP Express</h3>
+                    <p>To ensure the safety and responsibility of all users, you must be at least 18 years old and
+                        capable of understanding and agreeing to these terms to use our services.</p>
+
+                    <h3>Respecting Our Content</h3>
+                    <p>Our website and Applications contain valuable content, and we hold all rights to it. You must not
+                        copy, distribute, or use our content for any purpose other than personal, non-commercial use
+                        without obtaining explicit permission from JP Express.</p>
+
+                    <h3>Responsible Use</h3>
+                    <p>We encourage you to maintain a respectful and responsible approach while using our Applications.
+                        Unauthorized access to data or accounts is prohibited, and sending viruses or spam is not
+                        tolerated. Our aim is to simplify your experience, so let's work together to keep it that way.
+                    </p>
+
+                    <h3>Protecting JP Express</h3>
+                    <p>If your actions lead to legal issues or cause harm to JP Express, you'll be responsible for
+                        resolving the situation. Our priority is trust and safety.</p>
+
+                    <h3>Straight Talk — No Guarantees</h3>
+                    <p>We provide information and services "as is." While we strive for excellence, we cannot guarantee
+                        perfection. Please exercise your best judgment and discretion.</p>
+
+                    <h3>Communication with Us</h3>
+                    <p>We will communicate with you through email or by posting updates on our website to keep you
+                        well-informed and engaged in the process.</p>
+
+                    <h3>Your Comments and Feedback</h3>
+                    <p>Your feedback and suggestions are highly valued. Any submissions you make become the property of
+                        JP Express, and we reserve the right to use them as we see fit.</p>
+
+                    <h3>When Things Go Wrong</h3>
+                    <p>If, unfortunately, things do go wrong, please understand that we cannot be held responsible for
+                        any damage to your computer or loss of data. Responsibility is a core value for us.</p>
+
+                    <h3>Ending Our Relationship</h3>
+                    <p>We hope it never comes to this, but if you ever wish to discontinue your association with JP
+                        Express, you have the liberty to do so. Similarly, we may decide to discontinue our services or
+                        terminate your access if it is deemed necessary.</p>
+
+                    <h3>Legal Stuff</h3>
+                    <p>In the event of legal disputes, we will follow the laws of Bangladesh to reach an equitable
+                        resolution. As a global courier service based in Bangladesh, this ensures fair and consistent
+                        legal practices.</p>
+
+                    <h3>Breaking the Rules</h3>
+                    <p>Should you fail to comply with these terms, we may provide you with a warning or, in more serious
+                        cases, terminate our agreement. Our intent is to maintain a harmonious and rule-abiding
+                        community.</p>
+
+                    <h3>Watch Out for Frauds</h3>
+                    <p>To report any delivery-related issues, please only use our official website. Be vigilant of
+                        individuals impersonating JP Express employees and requesting extra payments. We want to
+                        emphasize that we will never engage in such practices.</p>
+
+                    <h3>Return Shipments</h3>
+                    <p>It is essential to note that you are responsible for covering the costs of return shipments from
+                        the outbound location. In the event that a parcel returns to Bangladesh, additional charges may
+                        be applicable. We strongly recommend discussing this with the recipient before sending the
+                        parcel.</p>
+
+                    <h3>JP Express Traveler's Agreement</h3>
+                    <p><b>1. Parcel Handling and Responsibility:</b> Travelers engaging in parcel transportation on
+                        behalf of JP Express are responsible for handling parcels with the utmost care and ensuring the
+                        security of the contents.</p>
+                    <p><b>2. Safety Guidelines:</b> Travelers must adhere to safety guidelines provided by JP Express
+                        for handling parcels during travel, including proper packaging, secure storage, and precautions
+                        against damage.</p>
+                    <p><b>3. Inspection and Verification:</b> Prior to accepting parcels, travelers are required to
+                        inspect and verify the condition of each item. Any discrepancies or damages must be reported to
+                        JP Express immediately.</p>
+                    <p><b>4. Liability for Damage or Loss:</b> Travelers accept full liability for any damage or loss
+                        incurred to parcels during transit. In the event of damage or loss, travelers are obligated to
+                        compensate JP Express for the full value of the affected items.</p>
+                    <p><b>5. Compensation Calculation:</b> Compensation for damaged or lost items will be calculated
+                        based on the declared value of the parcel. Travelers are required to provide accurate
+                        information for proper valuation.</p>
+                    <p><b>6. Reporting Incidents:</b> Travelers must promptly report any incidents of damage, loss, or
+                        tampering with parcels to JP Express. Failure to report such incidents in a timely manner may
+                        result in penalties.</p>
+                    <p><b>7. Compliance with Customs Regulations:</b> Travelers are responsible for complying with
+                        customs regulations of both the departure and destination countries. Any fines or penalties
+                        incurred due to non-compliance will be the responsibility of the traveler.</p>
+                    <p><b>8. Proper Documentation:</b> Travelers are required to maintain accurate and complete
+                        documentation for each parcel, including shipping labels, customs forms, and any other relevant
+                        paperwork provided by JP Express.</p>
+                    <p><b>9. Security Measures:</b> Travelers must implement adequate security measures to safeguard
+                        parcels against theft or unauthorized access during their journey.</p>
+                    <p><b>10. Parcel Tracking:</b> Travelers are encouraged to utilize JP Express tracking services to
+                        monitor the status of parcels in real time. This aids in maintaining transparency and ensuring
+                        timely delivery.</p>
+                    <p><b>11. Insurance Coverage:</b> JP Express highly recommends that travelers obtain insurance
+                        coverage for parcels they transport. Travelers should discuss insurance options with JP Express
+                        representatives for enhanced protection.</p>
+                    <p><b>12. Termination of Agreement:</b> Non-compliance with these terms and conditions may result in
+                        the termination of the agreement between the traveler and JP Express. Any ongoing compensation
+                        claims will remain the responsibility of the traveler.</p>
+                </div>
+
+                <!-- Privacy panel -->
+                <div class="legal-panel" id="legalPrivacy" role="tabpanel" hidden>
+                    <h3>Privacy Policy</h3>
+                    <p>JP Express respects your privacy and is committed to protecting your personal data. This policy
+                        explains what information we collect, why we collect it, and how we keep it safe.</p>
+
+                    <h3>1. Information We Collect</h3>
+                    <p>When you create an account or use our services, we collect: full name, company name, email, phone
+                        and WhatsApp number, birthday, recent photo, NID card number, location, and social media link.
+                        We also collect shipment details and device/browser information for security and analytics.</p>
+
+                    <h3>2. How We Use Your Information</h3>
+                    <p>We use your information to create and manage your account, process shipments, provide tracking
+                        and support, verify identity as required by customs and legal authorities, send service updates,
+                        and improve our services.</p>
+
+                    <h3>3. Sharing of Information</h3>
+                    <p>We may share your information with courier partners, airlines, customs authorities, and payment
+                        providers strictly to fulfil your shipment. We do not sell your personal data to third parties.
+                    </p>
+
+                    <h3>4. Data Security</h3>
+                    <p>We use industry-standard security measures, including encrypted connections and access controls,
+                        to protect your data. However, no transmission over the internet is 100% secure, and you use our
+                        services at your own risk.</p>
+
+                    <h3>5. Data Retention</h3>
+                    <p>We keep your data for as long as your account is active or as required by law. You can request
+                        deletion of your account data by contacting our support team.</p>
+
+                    <h3>6. Your Rights</h3>
+                    <p>You have the right to access, correct, or request deletion of your personal information. You may
+                        also opt out of marketing communications at any time.</p>
+
+                    <h3>7. Cookies &amp; Tracking</h3>
+                    <p>Our website uses cookies to keep you signed in, remember preferences, and understand how visitors
+                        use our site. You can disable cookies in your browser settings, but some features may stop
+                        working.</p>
+
+                    <h3>8. Third-Party Links</h3>
+                    <p>Our services may contain links to third-party websites. We are not responsible for their privacy
+                        practices, and we encourage you to read their policies.</p>
+
+                    <h3>9. Children's Privacy</h3>
+                    <p>Our services are intended for users 18 years and older. We do not knowingly collect data from
+                        minors.</p>
+
+                    <h3>10. Updates to This Policy</h3>
+                    <p>We may update this Privacy Policy from time to time. Material changes will be notified on this
+                        page or via email.</p>
+
+                    <h3>11. Contact Us</h3>
+                    <p>For any privacy-related questions, email us at <a
+                            href="mailto:jpexpress09@gmail.com">jpexpress09@gmail.com</a> or call <a
+                            href="tel:+8801681637836">+880 1681 637836</a>.</p>
+                </div>
+            </div>
+
+            <footer class="auth-modal__foot">
+                <button type="button" class="auth-modal__btn ghost" data-modal-close>
+                    Close
+                </button>
+                <button type="button" class="auth-modal__btn primary" data-modal-accept>
+                    <i class="fa-solid fa-check" aria-hidden="true"></i>
+                    I Accept
+                </button>
+            </footer>
+        </div>
+    </div>
+    <!-- ============ /TERMS & PRIVACY MODAL ============ -->
 
     <!-- ======= FOOTER ========== -->
     <footer class="footer">
@@ -745,7 +975,7 @@
             <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between gap-2 py-3">
                 <span>© 2026 JP Express. All rights reserved.</span>
                 <div class="footer-legal">
-                    <a href="terms-of-service.html">Terms of Service</a>
+                    <a href="terms-of-service.html">Terms & Conditions</a>
                     <a href="privacy-policy.html">Privacy Policy</a>
                     <a href="sitemap.html">Sitemap</a>
                 </div>

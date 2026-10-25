@@ -858,3 +858,128 @@
         })();
     })();
 })();
+
+
+/* =========================================================
+   LEGAL MODAL — Terms & Privacy popup
+   ========================================================= */
+(function () {
+    'use strict';
+
+    const modal = document.getElementById('legalModal');
+    if (!modal) return;
+
+    const dialog = modal.querySelector('.auth-modal__dialog');
+    const panels = modal.querySelectorAll('.legal-panel');
+    const tabBtns = modal.querySelectorAll('[data-legal-tab]');
+    const acceptBtn = modal.querySelector('[data-modal-accept]');
+    const titleEl = document.getElementById('legalModalTitle');
+    const subEl = document.getElementById('legalModalSub');
+
+    const META = {
+        terms: { title: 'Terms & Conditions', sub: 'JP Express Account Opening Agreement' },
+        privacy: { title: 'Privacy Policy', sub: 'How we collect, use & protect your data' }
+    };
+
+    let lastFocused = null;
+
+    function switchTab(name) {
+        tabBtns.forEach(function (b) {
+            const on = b.getAttribute('data-legal-tab') === name;
+            b.classList.toggle('is-active', on);
+            b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        panels.forEach(function (p) {
+            const on = p.id === 'legal' + name.charAt(0).toUpperCase() + name.slice(1);
+            p.hidden = !on;
+            p.classList.toggle('is-active', on);
+        });
+        if (META[name]) {
+            titleEl.textContent = META[name].title;
+            subEl.textContent = META[name].sub;
+        }
+        // scroll body to top when switching
+        modal.querySelector('.auth-modal__body').scrollTop = 0;
+    }
+
+    function open(tabName) {
+        lastFocused = document.activeElement;
+        if (tabName) switchTab(tabName);
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('auth-modal-open');
+        // focus first tab button (visible inside dialog)
+        setTimeout(function () {
+            const first = modal.querySelector('.auth-modal__tabs button.is-active') ||
+                modal.querySelector('.auth-modal__close');
+            if (first) first.focus({ preventScroll: true });
+        }, 60);
+    }
+
+    function close() {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('auth-modal-open');
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+            lastFocused.focus({ preventScroll: true });
+        }
+    }
+
+    // Open via links/buttons with data-legal-open="terms|privacy"
+    document.addEventListener('click', function (e) {
+        const trigger = e.target.closest('[data-legal-open]');
+        if (trigger) {
+            e.preventDefault();
+            open(trigger.getAttribute('data-legal-open'));
+            return;
+        }
+        // close triggers
+        if (e.target.closest('[data-modal-close]')) {
+            e.preventDefault();
+            close();
+        }
+    });
+
+    // Tab clicks
+    tabBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            switchTab(btn.getAttribute('data-legal-tab'));
+        });
+    });
+
+    // "I Accept" — closes AND (optionally) ticks the agree checkbox
+    if (acceptBtn) {
+        acceptBtn.addEventListener('click', function () {
+            const cb = document.getElementById('agreeTerms');
+            if (cb && !cb.checked) {
+                cb.checked = true;
+                cb.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            close();
+        });
+    }
+
+    // Esc to close
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+            close();
+        }
+        // basic focus trap
+        if (e.key === 'Tab' && modal.classList.contains('is-open')) {
+            const focusables = dialog.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const list = Array.prototype.filter.call(focusables, function (el) {
+                return !el.disabled && el.offsetParent !== null;
+            });
+            if (!list.length) return;
+            const first = list[0];
+            const last = list[list.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault(); last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault(); first.focus();
+            }
+        }
+    });
+})();
