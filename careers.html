@@ -791,7 +791,35 @@
           </div>
         </div>
       </div>
-    </section>
+
+      <!-- ============ JOB DETAILS MODAL ============ -->
+      <div class="career-modal" id="jobModal" aria-hidden="true">
+        <div class="career-modal-backdrop" data-close-modal></div>
+
+        <div class="career-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="jobModalTitle">
+          <header class="career-modal-header">
+            <div class="career-modal-title-group">
+              <span class="career-modal-badge" id="jobModalType">Full-time</span>
+              <h2 id="jobModalTitle">Job Title</h2>
+              <p class="career-modal-subtitle" id="jobModalDept">Department</p>
+            </div>
+            <button type="button" class="career-modal-close" data-close-modal aria-label="Close details">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+          </header>
+
+          <div class="career-modal-body" id="jobModalBody">
+            <!-- Content will be populated by JS -->
+          </div>
+
+          <footer class="career-modal-footer">
+            <button type="button" class="jp-btn jp-btn-outline" data-close-modal>Close</button>
+            <a href="#talent" class="jp-btn jp-btn-primary" id="jobModalApplyBtn">Apply for this Position <i
+                class="fa-solid fa-arrow-right"></i></a>
+          </footer>
+        </div>
+      </div>
+      <!-- ============ /JOB DETAILS MODAL ============ -->
 
   </main>
 
@@ -938,14 +966,186 @@
       const typeFilter = document.getElementById('typeFilter');
 
       // Sample job data (in production, this would come from an API or data.js)
+      // 1. Expanded Job Data
       const jobs = [
-        { title: 'Operations Executive', dept: 'operations', type: 'full-time', location: 'Dhaka', deadline: '2026-06-30', summary: 'Coordinate daily courier and freight operations.' },
-        { title: 'Customer Support Officer', dept: 'customer-care', type: 'full-time', location: 'Dhaka', deadline: '2026-07-15', summary: 'Handle customer inquiries, quotes and shipment tracking.' },
-        { title: 'Sales Executive', dept: 'sales', type: 'full-time', location: 'Dhaka', deadline: '2026-07-01', summary: 'Develop business relationships and drive commercial growth.' },
-        { title: 'Documentation Assistant', dept: 'documentation', type: 'full-time', location: 'Dhaka', deadline: '2026-06-20', summary: 'Prepare and manage shipping and export documentation.' },
-        { title: 'Marketing Intern', dept: 'sales', type: 'internship', location: 'Dhaka', deadline: '2026-07-10', summary: 'Support digital marketing and content creation.' }
+        {
+          id: 'ops-exec-01',
+          title: 'Operations Executive',
+          dept: 'operations',
+          type: 'full-time',
+          location: 'Dhaka',
+          deadline: '2026-06-30',
+          summary: 'Coordinate daily courier and freight operations.',
+          responsibilities: [
+            'Oversee daily courier, freight, and logistics activities.',
+            'Coordinate with drivers, warehouse staff, and customs agents.',
+            'Ensure shipments are processed within the required timeframe.',
+            'Resolve operational bottlenecks and report to management.'
+          ],
+          requirements: [
+            'Bachelor\'s degree in any discipline (Business/Logistics preferred).',
+            '2+ years of experience in courier or freight forwarding operations.',
+            'Strong communication and problem-solving skills.',
+            'Proficient in MS Office and logistics software.'
+          ]
+        },
+        {
+          id: 'cs-officer-02',
+          title: 'Customer Support Officer',
+          dept: 'customer-care',
+          type: 'full-time',
+          location: 'Dhaka',
+          deadline: '2026-07-15',
+          summary: 'Handle customer inquiries, quotes and shipment tracking.',
+          responsibilities: [
+            'Respond to customer inquiries via phone, email, and WhatsApp.',
+            'Provide accurate quotes and shipment status updates.',
+            'Resolve customer complaints promptly and professionally.',
+            'Maintain accurate records of customer interactions.'
+          ],
+          requirements: [
+            'Bachelor\'s degree.',
+            'Excellent verbal and written communication skills.',
+            '1+ year of experience in customer service (call center experience is a plus).',
+            'Ability to work in a fast-paced environment.'
+          ]
+        },
+        {
+          id: 'sales-exec-03',
+          title: 'Sales Executive',
+          dept: 'sales',
+          type: 'full-time',
+          location: 'Dhaka',
+          deadline: '2026-07-01',
+          summary: 'Develop business relationships and drive commercial growth.',
+          responsibilities: [
+            'Identify and acquire new business clients (SMEs, E-commerce, Exporters).',
+            'Maintain relationships with existing corporate clients.',
+            'Achieve monthly and quarterly sales targets.',
+            'Provide market feedback to the management team.'
+          ],
+          requirements: [
+            'Bachelor\'s degree in Business or related field.',
+            '2+ years of B2B sales experience.',
+            'Strong negotiation and relationship-building skills.',
+            'Self-motivated and target-driven.'
+          ]
+        },
+        {
+          id: 'doc-assist-04',
+          title: 'Documentation Assistant',
+          dept: 'documentation',
+          type: 'full-time',
+          location: 'Dhaka',
+          deadline: '2026-06-20',
+          summary: 'Prepare and manage shipping and export documentation.',
+          responsibilities: [
+            'Prepare customs clearance documents, invoices, and packing lists.',
+            'Verify the accuracy of export/import documentation.',
+            'Coordinate with customs brokers and regulatory bodies.',
+            'Maintain digital and physical filing systems.'
+          ],
+          requirements: [
+            'Bachelor\'s degree.',
+            'Knowledge of export/import documentation and customs procedures.',
+            'High attention to detail and accuracy.',
+            'Proficiency in MS Excel and Word.'
+          ]
+        },
+        {
+          id: 'mkt-intern-05',
+          title: 'Marketing Intern',
+          dept: 'sales',
+          type: 'internship',
+          location: 'Dhaka',
+          deadline: '2026-07-10',
+          summary: 'Support digital marketing and content creation.',
+          responsibilities: [
+            'Assist in creating content for social media and the website.',
+            'Help manage digital campaigns and track analytics.',
+            'Conduct market research on competitors.',
+            'Support the marketing team with administrative tasks.'
+          ],
+          requirements: [
+            'Currently pursuing a degree in Marketing, Communications, or related field.',
+            'Basic understanding of social media platforms and digital marketing.',
+            'Creative mindset and willingness to learn.',
+            'Good written communication skills.'
+          ]
+        }
       ];
 
+      // 2. Modal Logic variables
+      const jobModal = document.getElementById('jobModal');
+      const jobModalTitle = document.getElementById('jobModalTitle');
+      const jobModalType = document.getElementById('jobModalType');
+      const jobModalDept = document.getElementById('jobModalDept');
+      const jobModalBody = document.getElementById('jobModalBody');
+      const jobModalApplyBtn = document.getElementById('jobModalApplyBtn');
+      const closeBtns = jobModal.querySelectorAll('[data-close-modal]');
+      let lastFocusedElement;
+
+      function openJobModal(jobId) {
+        const job = jobs.find(j => j.id === jobId);
+        if (!job) return;
+
+        // Store the element that triggered the modal for accessibility
+        lastFocusedElement = document.activeElement;
+
+        // Populate Header
+        jobModalTitle.textContent = job.title;
+        jobModalType.textContent = job.type.replace('-', ' ');
+        jobModalDept.innerHTML = `<i class="fa-solid fa-building"></i> ${job.dept.replace('-', ' ')} | <i class="fa-solid fa-location-dot"></i> ${job.location}`;
+
+        // Populate Body
+        jobModalBody.innerHTML = `
+          <h3>About the Role</h3>
+          <p>${job.summary}</p>
+          
+          <h3>Key Responsibilities</h3>
+          <ul>${job.responsibilities.map(r => `<li>${r}</li>`).join('')}</ul>
+          
+          <h3>Requirements</h3>
+          <ul>${job.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+        `;
+
+        // Setup Apply Button
+        jobModalApplyBtn.onclick = function () {
+          closeJobModal();
+          // Scroll to the form and prefill the position
+          const posInput = document.getElementById('position');
+          if (posInput) posInput.value = job.title;
+        };
+
+        // Show Modal
+        jobModal.classList.add('is-open');
+        jobModal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('career-modal-open');
+
+        // Focus the close button
+        setTimeout(() => {
+          jobModal.querySelector('.career-modal-close').focus();
+        }, 100);
+      }
+
+      function closeJobModal() {
+        jobModal.classList.remove('is-open');
+        jobModal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('career-modal-open');
+        if (lastFocusedElement) {
+          lastFocusedElement.focus();
+        }
+      }
+
+      // Add event listeners for closing
+      closeBtns.forEach(btn => btn.addEventListener('click', closeJobModal));
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && jobModal.classList.contains('is-open')) {
+          closeJobModal();
+        }
+      });
+
+      // 3. Updated Render Function
       function renderJobs(filteredJobs) {
         if (filteredJobs.length === 0) {
           jobList.innerHTML = '';
@@ -965,7 +1165,7 @@
               <span><i class="fa-regular fa-calendar"></i> Apply by ${job.deadline}</span>
             </div>
             <p class="job-summary">${job.summary}</p>
-            <a href="#talent" class="jp-btn jp-btn-outline job-apply">Apply Now <i class="fa-solid fa-arrow-right"></i></a>
+            <button type="button" class="jp-btn jp-btn-outline job-apply" data-job-id="${job.id}">View Details <i class="fa-solid fa-arrow-right"></i></button>
           </div>
         `).join('');
 
@@ -983,6 +1183,17 @@
           }, { threshold: 0.1 });
           document.querySelectorAll('.job-card').forEach(el => io.observe(el));
         }
+      }
+
+      // Event delegation for "View Details" buttons
+      if (jobList) {
+        jobList.addEventListener('click', function (e) {
+          const btn = e.target.closest('.job-apply');
+          if (btn) {
+            const jobId = btn.getAttribute('data-job-id');
+            openJobModal(jobId);
+          }
+        });
       }
 
       function filterJobs() {

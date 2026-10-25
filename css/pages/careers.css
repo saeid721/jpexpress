@@ -1105,3 +1105,241 @@
     transform: none;
   }
 }
+
+
+/* ===============================================================
+   JOB DETAILS MODAL
+   =============================================================== */
+.career-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+
+.career-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.career-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 70, .6);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.career-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  max-height: min(88vh, 800px);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(15, 23, 70, .4);
+  transform: translateY(14px) scale(.98);
+  transition: transform .28s cubic-bezier(.22, .61, .36, 1);
+  overflow: hidden;
+}
+
+.career-modal.is-open .career-modal-dialog {
+  transform: none;
+}
+
+/* Header */
+.career-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 24px 20px;
+  background: linear-gradient(135deg, #fff8f5 0%, #ffffff 100%);
+  border-bottom: 1px solid #f0ebe8;
+}
+
+.career-modal-title-group {
+  min-width: 0;
+}
+
+.career-modal-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  background: #fff2ed;
+  color: var(--jp-orange);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: capitalize;
+  letter-spacing: .03em;
+}
+
+.career-modal-title-group h2 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  margin: 0 0 4px;
+  line-height: 1.2;
+}
+
+.career-modal-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--jp-muted);
+  margin: 0;
+}
+
+.career-modal-close {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e3ebf5;
+  background: #fff;
+  color: var(--jp-text-muted);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.career-modal-close:hover {
+  background: var(--jp-orange);
+  border-color: var(--jp-orange);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Body Content */
+.career-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 24px;
+  overscroll-behavior: contain;
+}
+
+.career-modal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.career-modal-body::-webkit-scrollbar-thumb {
+  background: #cbd9ea;
+  border-radius: 6px;
+}
+
+.career-modal-body h3 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--jp-heading-color);
+  margin: 0 0 8px;
+}
+
+.career-modal-body p {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--jp-text-muted-dark);
+  margin: 0 0 16px;
+}
+
+.career-modal-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+}
+
+.career-modal-body ul li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--jp-text-muted-dark);
+  margin-bottom: 8px;
+}
+
+.career-modal-body ul li::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  top: 2px;
+  font-size: 12px;
+  color: var(--jp-orange);
+}
+
+/* Footer */
+.career-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid #f0ebe8;
+  background: #fafbfc;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+  .career-modal {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .career-modal-dialog {
+    max-width: 100%;
+    max-height: 90vh;
+    border-radius: 22px 22px 0 0;
+    transform: translateY(100%);
+  }
+
+  .career-modal.is-open .career-modal-dialog {
+    transform: none;
+  }
+
+  .career-modal-dialog::before {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 4px;
+    margin: 10px auto 0;
+    border-radius: 4px;
+    background: #e3ebf5;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .career-modal-header {
+    padding: 28px 20px 16px;
+  }
+
+  .career-modal-body {
+    padding: 20px;
+  }
+
+  .career-modal-footer {
+    padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+    flex-direction: column-reverse;
+  }
+
+  .career-modal-footer .jp-btn {
+    width: 100%;
+  }
+}
+
+body.career-modal-open {
+  overflow: hidden;
+}
